@@ -1,0 +1,13 @@
+# c
+
+*.o
+
+# build
+
+bin
+lib
+
+# emacs
+*~
+*#*
+.#*
