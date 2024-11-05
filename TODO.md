@@ -1,2 +1,3 @@
-[examples] diff-list.inet
+[examples] list.test.inet
+[examples] diff-list.test.inet
 setup c project with makefile

@@ -1,0 +1,20 @@
++ null cons append "list.inet"
+
+; Concatenation of lists is performed in linear time
+; with respect to its first argument.
+; Constant time concatenation is possible
+; with difference-lists: the idea consists in
+; plugging the front of the second argument
+; at the back of the first one.
+
+* diff front -- back value!
+* diff-append target! rest -- result
+* diff-open target! new-back -- old-back
+
+! (diff)-(diff-append)
+  (diff)-front diff result-(diff-append)
+  (diff-append)-rest diff-open back-(diff)
+
+! (diff)-(diff-open)
+  (diff)-back new-back-(diff-open)
+  (diff)-front old-back-(diff-open)
