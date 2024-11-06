@@ -1,4 +1,3 @@
-setup mod
 worker has:
 - mod
 - port_stack
