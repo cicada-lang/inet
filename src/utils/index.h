@@ -6,3 +6,5 @@
 #include "string.h"
 #include "list.h"
 #include "file.h"
+
+void test_utils(void);

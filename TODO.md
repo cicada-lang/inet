@@ -1,4 +1,3 @@
-copy command_runner/ from xvm -- support self-test
 port_t
 node_definition_t
 rule_t
