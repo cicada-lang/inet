@@ -1,6 +1,4 @@
-node_t
 port_t
-half_edge_t
 node_definition_t
 rule_t
 
