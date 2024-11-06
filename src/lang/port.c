@@ -9,5 +9,5 @@ struct _port_t {
     id_t node_id;
     port_t *prev;
     port_t *next;
-    bool is_principal;
+    size_t index;
 };
