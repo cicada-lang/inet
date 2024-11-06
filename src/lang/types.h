@@ -5,5 +5,6 @@ typedef int32_t node_id_t;
 typedef enum { positive_sign, negative_sign } sign_t;
 
 typedef struct _port_t port_t;
+typedef struct _node_t node_t;
 typedef struct _node_definition_t node_definition_t;
 typedef struct _port_definition_t port_definition_t;
