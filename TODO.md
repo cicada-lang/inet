@@ -1,6 +1,5 @@
-worker -- has active_edges
-mod -- has node_definition_list
-rule -- 如何设计 rule 这种 "double names as key" 的 kv store？
+rule -- how to design "double names as key" kv store？
+worker -- has `active_edge_queue` should we use queue?
 
 # design
 
