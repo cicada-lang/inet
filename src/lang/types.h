@@ -2,6 +2,7 @@
 
 typedef uint8_t byte_t;
 typedef int32_t node_id_t;
+typedef int32_t port_index_t;
 typedef enum { positive_sign, negative_sign } sign_t;
 
 typedef struct _port_t port_t;
