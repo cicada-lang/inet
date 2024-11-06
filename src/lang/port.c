@@ -6,7 +6,7 @@
 
 struct _port_t {
     node_definition_t *node_definition;
-    id_t node_id;
+    node_id_t node_id;
     port_t *prev;
     port_t *next;
     size_t index;
