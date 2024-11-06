@@ -10,3 +10,4 @@ typedef struct _node_t node_t;
 typedef struct _node_definition_t node_definition_t;
 typedef struct _port_definition_t port_definition_t;
 typedef struct _mod_t mod_t;
+typedef struct _worker_t worker_t;

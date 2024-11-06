@@ -1,7 +1,5 @@
-worker has:
-- mod
-- port_stack
-- active_edges
+worker -- has port_stack
+worker -- has active_edges
 mod -- mod_t -- has node_definition_list
 - 一个 mod 是一个 compilation unit
 - 构造 net 的时候需要用到 mod，但是运行的时候不需要用到 mod，是这样吗？

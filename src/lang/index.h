@@ -6,3 +6,4 @@
 #include "node.h"
 #include "port.h"
 #include "mod.h"
+#include "worker.h"
