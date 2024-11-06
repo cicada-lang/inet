@@ -1,14 +1,14 @@
 #include "index.h"
 
-typedef struct _node_t node_t;
+typedef struct node_t node_t;
 
-struct _node_t {
+struct node_t {
     node_t *prev;
     node_t *next;
     void *item;
 };
 
-struct _list_t {
+struct list_t {
     node_t *first;
     node_t *last;
     node_t *cursor;

@@ -1,6 +1,6 @@
 #include "index.h"
 
-struct _command_runner_t {
+struct command_runner_t {
     const char *name;
     const char *version;
     const char *description;
