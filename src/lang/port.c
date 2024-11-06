@@ -5,7 +5,7 @@
 // that have the same `node_id`.
 
 struct _port_t {
-    // node_definition_t definition;
+    node_definition_t *node_definition;
     id_t node_id;
     port_t *prev;
     port_t *next;
