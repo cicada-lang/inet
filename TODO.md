@@ -1,4 +1,5 @@
-port_t
+sign_t
+port_t -- has sign
 node_definition_t
 rule_t
 
