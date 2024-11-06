@@ -1,5 +1,3 @@
-worker -- has `active_edge_list`
-
 rule -- has compiled byte code
 
 mod -- has rule_list
