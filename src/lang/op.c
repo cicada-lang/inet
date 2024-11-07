@@ -7,7 +7,6 @@ struct op_exe_t {
     const program_spec_t *program_spec;
 };
 
-
 struct op_app_t {
     const op_tag_t tag;
     const node_spec_t *node_spec;
