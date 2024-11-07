@@ -1,8 +1,5 @@
-`frame_t` -- has current nodes
-`op_fpt_t` -- fix structure
-
+`frame_t` -- has current free port -- can be referenced by `op_fpt_t`
 `stack_t` -- like `list`, be a generic data structure
-
 `op_run`
 `worker_interact`
 `worker_run`
