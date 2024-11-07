@@ -2,7 +2,7 @@
 
 ## Development
 
-```
+```shell
 make all      # compile src/ files to lib/ and bin/
 make run      # compile and run the command-line program
 make test     # compile and run test
