@@ -6,7 +6,7 @@ typedef int32_t port_index_t;
 
 typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum { OP_EXE, OP_APP, OP_CON, OP_FPT } op_tag_t;
-typedef enum { PROGRAM_DEFINITION, NODE_DEFINITION } spec_tag_t;
+typedef enum { PROGRAM_SPEC, NODE_SPEC } spec_tag_t;
 
 typedef struct node_t node_t;
 typedef struct port_t port_t;
