@@ -5,7 +5,8 @@
 // but in this inet every value is port, let's be pure.
 
 struct worker_t {
-    mod_t *mod;
+    const mod_t *mod;
     list_t *active_edge_list;
     stack_t *port_stack;
+    stack_t *frame_stack;
 };
