@@ -8,8 +8,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include "libraries/allocate/index.h"
-#include "libraries/string/index.h"
-#include "libraries/list/index.h"
-#include "libraries/file/index.h"
-#include "libraries/stack/index.h"
+#include "libs/allocate/index.h"
+#include "libs/string/index.h"
+#include "libs/list/index.h"
+#include "libs/file/index.h"
+#include "libs/stack/index.h"
