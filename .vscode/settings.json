@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.cic": "scheme",
+    "index.h": "c",
+    "dependencies.h": "c",
+    "types.h": "c",
+    "worker.h": "c",
+    "program.h": "c"
+  }
+}

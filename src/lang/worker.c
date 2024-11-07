@@ -7,5 +7,5 @@
 struct worker_t {
     mod_t *mod;
     list_t *active_edge_list;
-    port_stack_t *port_stack;
+    stack_t *port_stack;
 };

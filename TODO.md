@@ -1,9 +1,11 @@
+move `utils/list.[h|c]` to `libraries/list/`
+utils should not include utils/index.h
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
 `op_exe_t` -- has `program_definition_t`
-setup `stack_t` in utils and remove `port_stack_t`
 `stack_t` -- like `list`, be a generic data structure
-`frame_t`
+`frame_t` -- as current nodes
+`op_fpt_t` -- fix structure
 `worker_t` -- has `frame_stack`
 `rule_t` -- has `program_t`
 `mod_t` -- has `rule_list`
