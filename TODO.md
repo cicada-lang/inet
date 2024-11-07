@@ -1,7 +1,3 @@
-`frame_t` -- has `first_free_port_group` and `second_free_port_group`
-
-- The free ports in a frame can be referenced by `op_fpt_t`.
-
 `stack_t` -- like `list`, be a generic data structure
 
 `op_run`
