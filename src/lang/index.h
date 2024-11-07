@@ -9,3 +9,5 @@
 #include "mod.h"
 #include "worker.h"
 #include "port_stack.h"
+#include "op.h"
+#include "program.h"

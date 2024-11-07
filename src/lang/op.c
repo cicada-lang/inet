@@ -1,11 +1,6 @@
 #include "index.h"
 
-typedef enum {
-    OP_EXE,
-    OP_APP,
-    OP_CON,
-    OP_FPT,
-} op_tag_t;
+typedef enum { OP_EXE, OP_APP, OP_CON, OP_FPT } op_tag_t;
 
 struct op_t { op_tag_t *tag; };
 struct op_exe_t { op_tag_t *tag; };

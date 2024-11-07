@@ -1,7 +1,7 @@
-`program_t` -- has `op_list` -- let's do NOT optimize!
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
 `op_exe_t` -- has `program_definition_t`
+setup `stack_t` in utils and remove `port_stack_t`
 `stack_t` -- like `list`, be a generic data structure
 `frame_t`
 `worker_t` -- has `frame_stack`

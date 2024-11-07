@@ -18,3 +18,4 @@ typedef struct op_exe_t op_exe_t;
 typedef struct op_app_t op_app_t;
 typedef struct op_con_t op_con_t;
 typedef struct op_fpt_t op_fpt_t;
+typedef struct program_t program_t;
