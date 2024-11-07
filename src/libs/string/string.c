@@ -1,5 +1,15 @@
 #include "index.h"
 
+void
+string_destroy(char **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        char *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
 char*
 string_clone(const char *s) {
     size_t length = strlen(s);

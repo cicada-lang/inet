@@ -1,5 +1,6 @@
 #pragma once
 
+void string_destroy(char **self_pointer);
 char *string_clone(const char *s);
 char *string_empty(void);
 bool string_equal(const char *left, const char *right);
