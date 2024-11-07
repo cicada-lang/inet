@@ -1,4 +1,5 @@
-move `utils/list.[h|c]` to `libraries/list/`
+move `utils/file.[h|c]` to `libraries/file/`
+move `utils/stack.[h|c]` to `libraries/stack/`
 utils should not include utils/index.h
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
