@@ -1,5 +1,15 @@
-`frame_t` -- has current free port -- can be referenced by `op_fpt_t`
+`free_port_group_t`
+
+- A `port_t` is a free port
+  if it is not linked to a node
+  and it's `port_index` is -1.
+
+`frame_t` -- has `first_free_port_group` and `second_free_port_group`
+
+- The free ports in a frame can be referenced by `op_fpt_t`.
+
 `stack_t` -- like `list`, be a generic data structure
+
 `op_run`
 `worker_interact`
 `worker_run`
