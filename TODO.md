@@ -1,27 +1,28 @@
-operation -- dynamic tagged union
+ambr _create _new
 
-| word        | operation             | comment                                                |
-|-------------|-----------------------|--------------------------------------------------------|
-| name        | `apply_program`       | maybe need a return stack (worker need a return stack) |
-| name        | `apply_node`          | input claim free ports, output create new free ports   |
-| (node)-port | `get_free_port`       | push a free port to the stack                          |
-| port-(node) | `reconnect_free_port` | (node)-port @connect                                   |
-| @connect    | `connect`             |                                                        |
+`definition_t` as -- dynamic tagged union
+`program_definition_t` v.s. `node_definition_t`
 
-the above feels like a little forth already!
+`op_run`
 
-program -- has `operation_list` -- let's do NOT optimize!
+`program_t` -- has `operation_list` -- let's do NOT optimize!
 
-rule -- has compiled byte code
+`stack_t` -- like `list`, be a generic data structure
 
-mod -- has rule_list
+`frame_t`
+
+`worker_t` -- has `frame_stack`
+
+`rule_t` -- has `program_t`
+
+`mod_t` -- has `rule_list`
 
 - how to design "double names as key" kv store？
   use list first, optimize only when needed.
 
-worker_interact
+`worker_interact`
 
-worker_run
+`worker_run`
 
 test -- build mod by hand and run by worker
 
