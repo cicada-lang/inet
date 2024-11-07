@@ -2,7 +2,7 @@
 `program_definition_t` v.s. `node_definition_t`
 `op_exe_t` -- has `program_definition_t`
 `stack_t` -- like `list`, be a generic data structure
-`frame_t` -- as current nodes
+`frame_t` -- has current nodes
 `op_fpt_t` -- fix structure
 `worker_t` -- has `frame_stack`
 `rule_t` -- has `program_t`
