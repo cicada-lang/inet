@@ -3,7 +3,7 @@
 #include "../dependencies.h"
 #include "types.h"
 #include "allocate.h"
-#include "string.h"
+#include "../libraries/string/index.h"
 #include "list.h"
 #include "file.h"
 
