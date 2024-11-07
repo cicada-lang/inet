@@ -1,25 +1,19 @@
+every ops in types.h
+`program_t` -- has `op_list` -- let's do NOT optimize!
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
-
-`op_run`
-
-`program_t` -- has `operation_list` -- let's do NOT optimize!
-
+`op_exe_t` -- has `program_definition_t`
 `stack_t` -- like `list`, be a generic data structure
-
 `frame_t`
-
 `worker_t` -- has `frame_stack`
-
 `rule_t` -- has `program_t`
-
 `mod_t` -- has `rule_list`
 
 - how to design "double names as key" kv store？
   use list first, optimize only when needed.
 
+`op_run`
 `worker_interact`
-
 `worker_run`
 
 test -- build mod by hand and run by worker
