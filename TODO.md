@@ -1,4 +1,13 @@
-`stack_t` -- like `list`, be a generic data structure
+`list_item_destroy_t` instead of `list_item_free_t`
+`list_t` can store primitive (non-pointer) data
+
+`stack_t` -- `stack_new`
+`stack_t` -- `stack_destroy`
+`stack_t` -- `stack_pop`
+`stack_t` -- `stack_push`
+`stack_t` -- `stack_is_empty`
+
+`stack_test`
 
 `op_run`
 `worker_interact`

@@ -2,10 +2,6 @@
 
 // double linked list, with a private cursor.
 
-typedef void (list_item_free_t)(void *item);
-
-typedef struct list_t list_t;
-
 list_t *list_new(void);
 void list_destroy(list_t **self_pointer, list_item_free_t *item_free);
 void list_purge(list_t *self, list_item_free_t *item_free);
@@ -35,5 +31,3 @@ void *list_pop(list_t *self);
 
 void list_unshift(list_t *self, void *item);
 void *list_shift(list_t *self);
-
-void list_test(void);

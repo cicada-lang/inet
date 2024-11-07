@@ -1,3 +1,5 @@
 #pragma once
 
-typedef struct stack_t stack_t;
+#include "dependencies.h"
+#include "types.h"
+#include "stack.h"
