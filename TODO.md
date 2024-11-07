@@ -1,4 +1,7 @@
 `list_item_destroy_t` instead of `list_item_free_t`
+
+- use `string_destroy` to test with string
+
 `list_t` can store primitive (non-pointer) data
 
 `stack_t` -- `stack_new`
