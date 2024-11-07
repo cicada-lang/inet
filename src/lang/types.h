@@ -13,3 +13,8 @@ typedef struct port_definition_t port_definition_t;
 typedef struct mod_t mod_t;
 typedef struct port_stack_t port_stack_t;
 typedef struct worker_t worker_t;
+typedef struct op_t op_t;
+typedef struct op_exe_t op_exe_t;
+typedef struct op_app_t op_app_t;
+typedef struct op_con_t op_con_t;
+typedef struct op_fpt_t op_fpt_t;

@@ -1,4 +1,3 @@
-every ops in types.h
 `program_t` -- has `op_list` -- let's do NOT optimize!
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
