@@ -1,4 +1,3 @@
-move `utils/file.[h|c]` to `libraries/file/`
 move `utils/stack.[h|c]` to `libraries/stack/`
 utils should not include utils/index.h
 `definition_t` as -- dynamic tagged union
