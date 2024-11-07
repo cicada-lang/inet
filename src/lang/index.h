@@ -10,3 +10,5 @@
 #include "op.h"
 #include "program.h"
 #include "definition.h"
+#include "node_definition.h"
+#include "program_definition.h"
