@@ -1,20 +1,23 @@
-`list_t` can store primitive (non-pointer) data
-`list_set_item_destructor`
+[list] `list_set_item_destructor`
+[list] `list_t` can store primitive (non-pointer) data
+[list] `string_list_test` & `int_list_test`
 
-`stack_t` -- `stack_new`
-`stack_t` -- `stack_destroy`
-`stack_t` -- `stack_purge`
-`stack_t` -- `stack_pop`
-`stack_t` -- `stack_push`
-`stack_t` -- `stack_is_empty`
+# stack
 
-`stack_test`
+[stack] `stack_new`
+[stack] `stack_destroy`
+[stack] `stack_purge`
+[stack] `stack_pop`
+[stack] `stack_push`
+[stack] `stack_is_empty`
+[stack] `stack_test`
 
-`op_run`
-`worker_interact`
-`worker_run`
+# lang
 
-test -- build mod by hand and run by worker
+[lang] `op_run`
+[lang] `worker_interact`
+[lang] `worker_run`
+[lang] test -- build mod by hand and run by worker
 
 # design
 
