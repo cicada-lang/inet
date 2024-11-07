@@ -1,6 +1,4 @@
 [list] `list_set_item_destructor`
-[list] `list_t` can store primitive (non-pointer) data
-[list] `string_list_test` & `int_list_test`
 
 # stack
 
