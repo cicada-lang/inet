@@ -9,3 +9,4 @@
 #include "worker.h"
 #include "op.h"
 #include "program.h"
+#include "definition.h"
