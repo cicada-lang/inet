@@ -1,4 +1,3 @@
-utils should not include utils/index.h
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
 `op_exe_t` -- has `program_definition_t`

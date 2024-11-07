@@ -1,5 +1,4 @@
 #include "index.h"
-#include "../utils/index.h"
 
 static int run(char **args);
 
@@ -17,7 +16,7 @@ run(char **args) {
 
     printf("<self-test>\n");
 
-    test_utils();
+    list_test();
 
     printf("</self-test>\n");
     printf("\n");
