@@ -6,4 +6,5 @@
 
 struct mod_t {
     list_t *definition_list;
+    list_t *rule_list;
 };
