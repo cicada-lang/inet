@@ -5,7 +5,6 @@
 #include "../libraries/string/index.h"
 #include "../libraries/list/index.h"
 #include "../libraries/file/index.h"
+#include "../libraries/stack/index.h"
 
 void test_utils(void);
-
-typedef struct stack_t stack_t;
