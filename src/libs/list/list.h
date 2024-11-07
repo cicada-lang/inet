@@ -3,8 +3,8 @@
 // double linked list, with a private cursor.
 
 list_t *list_new(void);
-void list_destroy(list_t **self_pointer, list_item_destroy_t *item_free);
-void list_purge(list_t *self, list_item_destroy_t *item_free);
+void list_destroy(list_t **self_pointer, list_item_destructor_t *item_destructor);
+void list_purge(list_t *self, list_item_destructor_t *item_destructor);
 
 size_t list_lenght(const list_t *self);
 bool list_is_empty(const list_t *self);

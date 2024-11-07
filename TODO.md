@@ -1,7 +1,9 @@
 `list_t` can store primitive (non-pointer) data
+`list_set_item_destructor`
 
 `stack_t` -- `stack_new`
 `stack_t` -- `stack_destroy`
+`stack_t` -- `stack_purge`
 `stack_t` -- `stack_pop`
 `stack_t` -- `stack_push`
 `stack_t` -- `stack_is_empty`

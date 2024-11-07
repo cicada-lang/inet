@@ -25,7 +25,7 @@ command_runner_destroy(command_runner_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         command_runner_t *self = *self_pointer;
-        list_destroy(&self->command_list, (list_item_destroy_t *) command_destroy);
+        list_destroy(&self->command_list, (list_item_destructor_t *) command_destroy);
         free(self);
         *self_pointer = NULL;
     }
