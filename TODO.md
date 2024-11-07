@@ -1,5 +1,3 @@
-`program_t`
-`program_definition_t` has `program`
 `op_exe_t` -- has `program_definition_t`
 `stack_t` -- like `list`, be a generic data structure
 `frame_t` -- has current nodes
