@@ -1,4 +1,3 @@
-`mod_t` has `definition_list` instead of `node_definition_list`
 `program_definition_t` v.s. `node_definition_t`
 `op_exe_t` -- has `program_definition_t`
 `stack_t` -- like `list`, be a generic data structure
