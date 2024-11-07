@@ -1,6 +1,4 @@
-move `utils/allocate.[h|c]` to `libraries/allocate/`
 move `utils/list.[h|c]` to `libraries/list/`
-rename `string_` to `str_`
 utils should not include utils/index.h
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
