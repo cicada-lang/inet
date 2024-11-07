@@ -1,5 +1,3 @@
-ambr _create _new
-
 `definition_t` as -- dynamic tagged union
 `program_definition_t` v.s. `node_definition_t`
 

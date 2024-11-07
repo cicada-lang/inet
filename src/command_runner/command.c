@@ -1,7 +1,7 @@
 #include "index.h"
 
 command_t *
-command_create(const char *name) {
+command_new(const char *name) {
     command_t *self = allocate(sizeof(command_t));
     self->name = name;
     self->description = NULL;

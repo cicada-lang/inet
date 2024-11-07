@@ -16,7 +16,7 @@ struct list_t {
 };
 
 list_t *
-list_create(void) {
+list_new(void) {
     list_t *self = allocate(sizeof(list_t));
     return self;
 }
@@ -257,7 +257,7 @@ void
 list_test(void) {
     printf("<list>");
 
-    list_t *list = list_create();
+    list_t *list = list_new();
     assert(list);
     assert(list_lenght(list) == 0);
 

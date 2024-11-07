@@ -2,7 +2,7 @@
 
 // double linked list, with a private cursor.
 
-list_t *list_create(void);
+list_t *list_new(void);
 void list_destroy(list_t **self_pointer, list_item_free_t *item_free);
 void list_purge(list_t *self, list_item_free_t *item_free);
 

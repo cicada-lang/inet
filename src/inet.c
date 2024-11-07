@@ -4,7 +4,7 @@
 
 int
 main(int argc, char *argv[]) {
-    command_runner_t *runner = command_runner_create(
+    command_runner_t *runner = command_runner_new(
         "inet", X_VERSION, argc, argv);
 
     command_runner_mount(runner, self_test_command);

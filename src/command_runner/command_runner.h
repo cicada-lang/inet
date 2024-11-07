@@ -1,6 +1,6 @@
 #pragma once
 
-command_runner_t *command_runner_create(const char *name, const char *version, int argc, char **argv);
+command_runner_t *command_runner_new(const char *name, const char *version, int argc, char **argv);
 void command_runner_destroy(command_runner_t **self_pointer);
 
 void command_runner_add_command(const command_runner_t *self, command_t *command);

@@ -10,13 +10,13 @@ struct command_runner_t {
 };
 
 command_runner_t *
-command_runner_create(const char *name, const char *version, int argc, char **argv) {
+command_runner_new(const char *name, const char *version, int argc, char **argv) {
     command_runner_t *self = allocate(sizeof(command_runner_t));
     self->name = name;
     self->version = version;
     self->argc = argc;
     self->argv = argv;
-    self->command_list = list_create();
+    self->command_list = list_new();
     return self;
 }
 
