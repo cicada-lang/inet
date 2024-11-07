@@ -20,6 +20,7 @@ typedef struct op_app_t op_app_t;
 typedef struct op_con_t op_con_t;
 typedef struct op_fpt_t op_fpt_t;
 typedef struct program_t program_t;
+typedef struct rule_t rule_t;
 typedef struct definition_t definition_t;
 typedef struct node_definition_t node_definition_t;
 typedef struct port_definition_t port_definition_t;
