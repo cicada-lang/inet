@@ -3,10 +3,10 @@
 [stack] `stack_new`
 [stack] `stack_destroy`
 [stack] `stack_purge`
+[stack] `stack_length`
+[stack] `stack_is_empty`
 [stack] `stack_pop`
 [stack] `stack_push`
-[stack] `stack_is_empty`
-[stack] `stack_test`
 
 # lang
 
