@@ -1,5 +1,3 @@
-give `command_runner/` a better name
-
 # stack
 
 [stack] `stack_new`

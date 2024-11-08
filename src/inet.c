@@ -5,14 +5,14 @@
 
 int
 main(int argc, char *argv[]) {
-    command_runner_t *runner = command_runner_new(
+    commander_t *commander = commander_new(
         "inet", INET_VERSION, argc, argv);
 
-    command_runner_mount(runner, self_test_command);
-    command_runner_mount(runner, default_help_command);
-    command_runner_mount(runner, default_version_command);
+    commander_mount(commander, self_test_command);
+    commander_mount(commander, default_help_command);
+    commander_mount(commander, default_version_command);
 
-    int status_code = command_runner_run(runner);
-    command_runner_destroy(&runner);
+    int status_code = commander_run(commander);
+    commander_destroy(&commander);
     return status_code;
 }

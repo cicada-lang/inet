@@ -1,6 +1,6 @@
 #include "index.h"
 
-struct command_runner_t {
+struct commander_t {
     const char *name;
     const char *version;
     const char *description;
@@ -9,9 +9,9 @@ struct command_runner_t {
     list_t *command_list;
 };
 
-command_runner_t *
-command_runner_new(const char *name, const char *version, int argc, char **argv) {
-    command_runner_t *self = allocate(sizeof(command_runner_t));
+commander_t *
+commander_new(const char *name, const char *version, int argc, char **argv) {
+    commander_t *self = allocate(sizeof(commander_t));
     self->name = name;
     self->version = version;
     self->argc = argc;
@@ -21,10 +21,10 @@ command_runner_new(const char *name, const char *version, int argc, char **argv)
 }
 
 void
-command_runner_destroy(command_runner_t **self_pointer) {
+commander_destroy(commander_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        command_runner_t *self = *self_pointer;
+        commander_t *self = *self_pointer;
         list_set_item_destructor(self->command_list, (list_item_destructor_t *) command_destroy);
         list_destroy(&self->command_list);
         free(self);
@@ -32,22 +32,22 @@ command_runner_destroy(command_runner_t **self_pointer) {
     }
 }
 
-const char *command_runner_version(const command_runner_t *self) {
+const char *commander_version(const commander_t *self) {
     return self->version;
 }
 
 void
-command_runner_add_command(const command_runner_t *self, command_t *command) {
+commander_add_command(const commander_t *self, command_t *command) {
     list_push(self->command_list, command);
 }
 
 void
-command_runner_mount(const command_runner_t *self, command_plugin_t *plugin) {
+commander_mount(const commander_t *self, command_plugin_t *plugin) {
     (*plugin)(self);
 }
 
 static const command_t *
-command_runner_default_command(const command_runner_t *self) {
+commander_default_command(const commander_t *self) {
     command_t *command = list_start(self->command_list);
     while (command) {
         if (strcmp(command->name, "default") == 0)
@@ -60,7 +60,7 @@ command_runner_default_command(const command_runner_t *self) {
 }
 
 void
-command_runner_help(const command_runner_t *self) {
+commander_help(const commander_t *self) {
     printf("%s %s\n", self->name, self->version);
     printf("\n");
 
@@ -76,12 +76,12 @@ command_runner_help(const command_runner_t *self) {
 }
 
 static int
-command_runner_run_command(const command_runner_t *self, const command_t *command) {
+commander_run_command(const commander_t *self, const command_t *command) {
     assert(command);
 
     char **args = self->argv + 1;
-    if (command->run_with_runner)
-        return (*command->run_with_runner)(args, self);
+    if (command->run_with_commander)
+        return (*command->run_with_commander)(args, self);
     if (command->run)
         return (*command->run)(args);
 
@@ -90,15 +90,15 @@ command_runner_run_command(const command_runner_t *self, const command_t *comman
 }
 
 int
-command_runner_run(const command_runner_t *self) {
+commander_run(const commander_t *self) {
     char *name = self->argv[1];
 
     if (!name) {
-        const command_t *default_command = command_runner_default_command(self);
+        const command_t *default_command = commander_default_command(self);
         if (default_command) {
-            return command_runner_run_command(self, default_command);
+            return commander_run_command(self, default_command);
         } else {
-            command_runner_help(self);
+            commander_help(self);
             return 0;
         }
     }
@@ -106,7 +106,7 @@ command_runner_run(const command_runner_t *self) {
     command_t *command = list_start(self->command_list);
     while (command) {
         if (strcmp(command->name, name) == 0)
-            return command_runner_run_command(self, command);
+            return commander_run_command(self, command);
         command = list_next(self->command_list);
     }
 

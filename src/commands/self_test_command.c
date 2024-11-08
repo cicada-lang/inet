@@ -3,11 +3,11 @@
 static int run(char **args);
 
 void
-self_test_command(const command_runner_t *runner) {
+self_test_command(const commander_t *commander) {
     command_t *command = command_new("self-test");
     command->description = "run self test";
     command->run = run;
-    command_runner_add_command(runner, command);
+    commander_add_command(commander, command);
 }
 
 int
