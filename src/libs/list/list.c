@@ -44,9 +44,8 @@ list_purge(list_t *self) {
     node_t *node = self->first;
     while (node) {
         node_t *next = node->next;
-        if (self->item_destructor)
-            (self->item_destructor)(&node->item);
-
+        assert(self->item_destructor);
+        (self->item_destructor)(&node->item);
         free(node);
         node = next;
     }

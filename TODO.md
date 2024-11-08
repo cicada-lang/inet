@@ -1,4 +1,4 @@
-move command_runner/ to libs/
+move `command_runner/` to `libs/`
 
 # stack
 
