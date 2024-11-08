@@ -145,10 +145,12 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        list_purge(list, (list_item_destructor_t *) string_destroy);
+        list_set_item_destructor(list, (list_item_destructor_t *) string_destroy);
+
+        list_purge(list);
         assert(list_lenght(list) == 0);
 
-        list_destroy(&list, (list_item_destructor_t *) string_destroy);
+        list_destroy(&list);
 
         assert(list == NULL);
     }
