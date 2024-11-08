@@ -32,6 +32,10 @@ command_runner_destroy(command_runner_t **self_pointer) {
     }
 }
 
+const char *command_runner_version(const command_runner_t *self) {
+    return self->version;
+}
+
 void
 command_runner_add_command(const command_runner_t *self, command_t *command) {
     list_push(self->command_list, command);

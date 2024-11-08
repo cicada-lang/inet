@@ -1,4 +1,4 @@
-move `command_runner/` to `libs/`
+give `command_runner/` a better name
 
 # stack
 

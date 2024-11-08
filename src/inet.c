@@ -1,6 +1,7 @@
-#include "command_runner/index.h"
+#include "deps.h"
 #include "commands/index.h"
 #include "lang/index.h"
+#include "version.h"
 
 int
 main(int argc, char *argv[]) {

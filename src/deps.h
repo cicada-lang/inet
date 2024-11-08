@@ -14,3 +14,4 @@
 #include "libs/list/index.h"
 #include "libs/file/index.h"
 #include "libs/stack/index.h"
+#include "libs/command_runner/index.h"
