@@ -1,6 +1,6 @@
 # stack
 
-[stack] `stack_new`
+[stack] `stack_size`
 [stack] `stack_destroy`
 [stack] `stack_purge`
 [stack] `stack_length`
