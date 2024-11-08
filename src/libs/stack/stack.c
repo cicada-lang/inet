@@ -15,3 +15,8 @@ stack_new(size_t size) {
     self->items = allocate_array(size, sizeof(item_t));
     return self;
 }
+
+size_t
+stack_size(const stack_t *self) {
+    return self->size;
+}

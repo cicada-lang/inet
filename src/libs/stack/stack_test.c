@@ -6,7 +6,8 @@ stack_test(void) {
 
     stack_t *stack = stack_new(100);
     assert(stack);
-    // assert(stack_lenght(stack) == 0);
+    assert(stack_size(stack) == 100);
+    // assert(stack_length(stack) == 0);
 
     printf("</stack>\n");
 }

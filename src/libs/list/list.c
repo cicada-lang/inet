@@ -23,11 +23,6 @@ list_new(void) {
 }
 
 void
-list_set_item_destructor(list_t *self, list_item_destructor_t *item_destructor) {
-    self->item_destructor = item_destructor;
-}
-
-void
 list_destroy(list_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -54,6 +49,11 @@ list_purge(list_t *self) {
     self->last = NULL;
     self->cursor = NULL;
     self->length = 0;
+}
+
+void
+list_set_item_destructor(list_t *self, list_item_destructor_t *item_destructor) {
+    self->item_destructor = item_destructor;
 }
 
 size_t
