@@ -8,6 +8,7 @@ stack_test(void) {
     assert(stack);
     assert(stack_size(stack) == 100);
     assert(stack_length(stack) == 0);
+    assert(stack_is_empty(stack));
 
     printf("</stack>\n");
 }

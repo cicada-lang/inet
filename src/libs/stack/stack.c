@@ -26,3 +26,8 @@ size_t
 stack_length(const stack_t *self) {
     return self->cursor;
 }
+
+bool
+stack_is_empty(const stack_t *self) {
+    return self->cursor == 0;
+}
