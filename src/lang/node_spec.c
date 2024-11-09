@@ -47,3 +47,18 @@ const char *
 node_spec_name(node_spec_t *self) {
     return self->name;
 }
+
+size_t
+node_spec_input_arity(node_spec_t *self) {
+    return self->input_arity;
+}
+
+size_t
+node_spec_output_arity(node_spec_t *self) {
+    return self->output_arity;
+}
+
+size_t
+node_spec_arity(node_spec_t *self) {
+    return self->arity;
+}

@@ -1,7 +1,3 @@
-`node_spec_input_arity`
-`node_spec_output_arity`
-`node_spec_arity`
-
 `node_spec_set_port_spec`
 `node_spec_get_port_spec`
 
