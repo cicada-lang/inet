@@ -1,9 +1,26 @@
-# lang
+extract `port_spec.c`
 
-[lang] `op_run`
-[lang] `worker_interact`
-[lang] `worker_run`
-[lang] test -- build mod by hand and run by worker
+`port_spec_new`
+`port_spec_destroy`
+
+`node_spec_new`
+`node_spec_destroy`
+
+`node_spec_name`
+`node_spec_input_arity`
+`node_spec_output_arity`
+
+`node_gen_id`
+`node_new`
+
+`port_new`
+`port_set_opposite`
+
+`op_run`
+`worker_interact`
+`worker_run`
+
+test -- build mod by hand and run by worker
 
 # design
 
