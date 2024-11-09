@@ -8,7 +8,7 @@ allocate(size_t size) {
 }
 
 void *
-allocate_array(size_t size, size_t unit_size) {
+allocate_many(size_t size, size_t unit_size) {
     void *array = calloc(size, unit_size);
     assert(array);
     return array;
@@ -16,5 +16,5 @@ allocate_array(size_t size, size_t unit_size) {
 
 void *
 allocate_pointer_array(size_t size) {
-    return allocate_array(size, sizeof(void *));
+    return allocate_many(size, sizeof(void *));
 }

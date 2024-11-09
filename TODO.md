@@ -1,4 +1,3 @@
-ambr allocate_array allocate_many
 drop _array postfix
 
 `frame_collect_free_ports` -- make ports free
