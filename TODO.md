@@ -1,4 +1,7 @@
-`frame_collect_free_ports`
+ambr allocate_array allocate_many
+drop _array postfix
+
+`frame_collect_free_ports` -- make ports free
 `frame_get_free_port`
 
 `worker_interact` -- take one `active_edge` from `active_edge_list`
