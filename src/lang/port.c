@@ -24,3 +24,10 @@ port_is_principal(port_t *self) {
     port_spec_t *port_spec = self->node->spec->port_specs[self->index];
     return port_spec->is_principal;
 }
+
+void
+port_set_free(port_t *self) {
+    self->node = NULL;
+    self->index = -1;
+    self->opposite_port = NULL;
+}
