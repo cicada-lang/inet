@@ -32,14 +32,6 @@ free_port_group_new(const node_spec_t *node_spec) {
     return self;
 }
 
-frame_t *
-frame_new(const program_t *program) {
-    frame_t *self = allocate(sizeof(frame_t));
-    self->program_counter = 0;
-    self->program = program;
-    return self;
-}
-
 static void
 free_port_group_destroy(free_port_group_t **self_pointer) {
     assert(self_pointer);
@@ -49,6 +41,14 @@ free_port_group_destroy(free_port_group_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
+}
+
+frame_t *
+frame_new(const program_t *program) {
+    frame_t *self = allocate(sizeof(frame_t));
+    self->program_counter = 0;
+    self->program = program;
+    return self;
 }
 
 void
@@ -61,4 +61,21 @@ frame_destroy(frame_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
+}
+
+void
+frame_set_active_edge(frame_t *self, edge_t *active_edge) {
+    port_t *first_port = active_edge->first_port;
+    port_t *second_port = active_edge->second_port;
+    edge_destroy(&active_edge);
+
+    (void)self;    
+    (void)first_port;
+    (void)second_port;    
+
+    // node_t *first_node = port_node(first_port);
+    // node_t *second_node = port_node(second_port);
+
+
+
 }

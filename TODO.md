@@ -1,4 +1,8 @@
-`frame_t` API about `free_port_group_t`
+make `node_t` open
+make `port_t` open
+
+`frame_set_active_edge`
+`frame_get_free_port`
 
 `worker_interact` -- take one `active_edge` from `active_edge_list`
 `worker_step`
