@@ -5,7 +5,7 @@
 struct node_t {
     const node_spec_t *spec;
     node_id_t id;
-    const port_t **port_array;
+    port_t **port_array;
 };
 
 // TODO The following function is not thread safe.
