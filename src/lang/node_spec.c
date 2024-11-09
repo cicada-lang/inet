@@ -44,28 +44,28 @@ node_spec_destroy(node_spec_t **self_pointer) {
 }
 
 const char *
-node_spec_name(node_spec_t *self) {
+node_spec_name(const node_spec_t *self) {
     return self->name;
 }
 
 size_t
-node_spec_input_arity(node_spec_t *self) {
+node_spec_input_arity(const node_spec_t *self) {
     return self->input_arity;
 }
 
 size_t
-node_spec_output_arity(node_spec_t *self) {
+node_spec_output_arity(const node_spec_t *self) {
     return self->output_arity;
 }
 
 size_t
-node_spec_arity(node_spec_t *self) {
+node_spec_arity(const node_spec_t *self) {
     return self->arity;
 }
 
 void
 node_spec_set_port_spec(
-    node_spec_t *self,
+    const node_spec_t *self,
     size_t index,
     port_spec_t *port_spec
 ) {
@@ -73,6 +73,6 @@ node_spec_set_port_spec(
 }
 
 const port_spec_t *
-node_spec_get_port_spec(node_spec_t *self, size_t index) {
+node_spec_get_port_spec(const node_spec_t *self, size_t index) {
     return self->port_spec_array[index];
 }
