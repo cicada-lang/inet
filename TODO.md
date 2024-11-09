@@ -1,6 +1,8 @@
-`frame_new` -- fix `first_free_port_group` and `second_free_port_group`
+`frame_first_free_port_group`
+`frame_econd_free_port_group`
 
-`frame_destroy`
+`frame_set_first_free_port_group`
+`frame_set_econd_free_port_group`
 
 `worker_new` -- setup `frame_destroy`
 
