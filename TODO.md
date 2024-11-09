@@ -1,4 +1,3 @@
-`rule_new`
 `rule_destroy`
 
 `program_spec_new`
