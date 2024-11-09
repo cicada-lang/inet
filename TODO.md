@@ -1,5 +1,3 @@
-`mod_destroy` -- setup `spec_destroy`
-
 `worker_interact` -- take one `active_edge` from `active_edge_list`
 `worker_step`
 `worker_run` -- finish `frame_stack`
