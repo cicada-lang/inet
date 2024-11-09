@@ -1,4 +1,3 @@
-`port_spec_new`
 `port_spec_destroy`
 
 `node_spec_new`
