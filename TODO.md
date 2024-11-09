@@ -1,4 +1,3 @@
-`worker_new`
 `worker_destroy`
 
 `program_new`
@@ -6,6 +5,8 @@
 
 `frame_new`
 `frame_destroy`
+
+`worker_new` -- setup `frame_destroy`
 
 `rule_new`
 `rule_destroy`
