@@ -20,7 +20,6 @@ run(char **args) {
     stack_test();
 
     printf("</self-test>\n");
-    printf("\n");
-
+    
     return 0;
 }
