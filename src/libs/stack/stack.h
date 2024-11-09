@@ -13,4 +13,4 @@ size_t stack_length(const stack_t *self);
 bool stack_is_empty(const stack_t *self);
 
 void *stack_pop(stack_t *self);
-// void stack_push(stack_t *self, void *item);
+void stack_push(stack_t *self, void *item);

@@ -62,7 +62,13 @@ stack_is_empty(const stack_t *self) {
 
 void *
 stack_pop(stack_t *self) {
-    item_t item = self->items[self->cursor];
     self->cursor--;
+    item_t item = self->items[self->cursor];
     return item;
+}
+
+void
+stack_push(stack_t *self, void *item) {
+    self->items[self->cursor] = item;
+    self->cursor++;
 }
