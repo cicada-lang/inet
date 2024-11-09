@@ -42,3 +42,8 @@ node_spec_destroy(node_spec_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+const char *
+node_spec_name(node_spec_t *self) {
+    return self->name;
+}

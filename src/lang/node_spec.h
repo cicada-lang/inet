@@ -5,3 +5,5 @@ node_spec_t *node_spec_new(
     size_t input_arity,
     size_t output_arity);
 void node_spec_destroy(node_spec_t **self_pointer);
+
+const char *node_spec_name(node_spec_t *self);
