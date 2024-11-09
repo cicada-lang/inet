@@ -29,3 +29,4 @@ rule_destroy(rule_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+

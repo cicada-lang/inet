@@ -26,3 +26,8 @@ program_spec_destroy(program_spec_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+const char *
+program_spec_name(program_spec_t *self) {
+    return self->name;
+}
