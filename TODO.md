@@ -1,4 +1,3 @@
-`node_spec_new`
 `node_spec_destroy`
 
 `node_spec_name`
