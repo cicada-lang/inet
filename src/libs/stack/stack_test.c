@@ -42,11 +42,10 @@ stack_test(void) {
 
     stack_purge(stack);
     assert(stack_length(stack) == 0);
-    // assert(cheese == NULL);
-    // assert(bread == NULL);
-    // assert(wine == NULL);
+    assert(stack_is_empty(stack));
 
     stack_destroy(&stack);
+    assert(stack == NULL);
 
     printf("</stack>\n");
 }

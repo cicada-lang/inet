@@ -1,6 +1,4 @@
-# stack
-
-[stack] `stack_test` fix test about `stack_purge`
+`string_test`
 
 # lang
 

@@ -16,6 +16,7 @@ run(char **args) {
 
     printf("<self-test>\n");
 
+    string_test();
     list_test();
     stack_test();
 

@@ -151,7 +151,6 @@ list_test(void) {
         assert(list_lenght(list) == 0);
 
         list_destroy(&list);
-
         assert(list == NULL);
     }
 
