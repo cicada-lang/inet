@@ -1,8 +1,12 @@
-`program_spec_new`
 `program_spec_destroy`
 
 `program_spec_name`
 `program_spec_program`
+
+`op_exe_new`
+`op_app_new`
+`op_con_new`
+`op_fpt_new`
 
 `op_destroy`
 
