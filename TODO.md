@@ -1,5 +1,3 @@
-`program_new` -- setup `op_destroy`
-
 `spec_destroy`
 `mod_destroy` -- setup `spec_destroy`
 

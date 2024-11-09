@@ -8,7 +8,7 @@ program_t *
 program_new(void) {
     program_t *self = allocate(sizeof(program_t));
     self->op_list = list_new();
-    // TODO setup op_destroy
+    list_set_item_destructor(self->op_list, (list_item_destructor_t *) op_destroy);
     return self;
 }
 
