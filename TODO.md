@@ -1,4 +1,3 @@
-`edge_destroy`
 `edge_first_port`
 `edge_second_port`
 `edge_set_first_port`
