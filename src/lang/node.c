@@ -3,7 +3,7 @@
 struct node_t {
     const node_spec_t *spec;
     node_id_t id;
-    port_t **port_array;
+    const port_t **port_array;
 };
 
 // TODO The following function is not thread safe.
@@ -30,14 +30,6 @@ node_destroy(node_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_t *self = *self_pointer;
-        size_t arity = node_spec_arity(self->spec);
-        for (size_t i = 0; i < arity; i++) {
-            port_t *port = self->port_array[i];
-            if (port) {
-                // port_destroy(&port_spec);
-            }
-        }
-
         free(self->port_array);
         free(self);
         *self_pointer = NULL;
