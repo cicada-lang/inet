@@ -1,8 +1,18 @@
-merge `port_spec` into `node_spec`
+rename `string_clone` to `string_dup`
+fix string methods naming
+
+`port_spec_t` should own the name string
 
 `node_spec_name`
 `node_spec_input_arity`
 `node_spec_output_arity`
+`node_spec_arity`
+
+`port_spec_name`
+`port_spec_is_principal`
+
+`node_spec_set_port_spec`
+`node_spec_get_port_spec`
 
 `node_gen_id`
 `node_new`
@@ -15,6 +25,10 @@ merge `port_spec` into `node_spec`
 `worker_run`
 
 test -- build mod by hand and run by worker
+
+# learn
+
+re-read scalable-c and make mimors to remember
 
 # design
 

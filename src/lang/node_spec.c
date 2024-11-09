@@ -2,7 +2,7 @@
 
 struct node_spec_t {
     spec_tag_t tag;
-    const char *name;
+    char *name;
     size_t input_arity;
     size_t output_arity;
     size_t arity;
@@ -17,7 +17,7 @@ node_spec_new(
 ) {
     node_spec_t *self = allocate(sizeof(node_spec_t));
     self->tag = NODE_SPEC;
-    self->name = name;
+    self->name = string_clone(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;
     self->arity = input_arity + output_arity;
