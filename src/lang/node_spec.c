@@ -5,6 +5,7 @@ struct node_spec_t {
     const char *name;
     size_t input_arity;
     size_t output_arity;
+    size_t arity;
     port_spec_t *port_spec_array;
 };
 
@@ -19,7 +20,18 @@ node_spec_new(
     self->name = name;
     self->input_arity = input_arity;
     self->output_arity = output_arity;
-    size_t arity = input_arity + output_arity;
-    self->port_spec_array = allocate_array(arity, sizeof(port_spec_t *));
+    self->arity = input_arity + output_arity;
+    // self->port_spec_array
     return self;
+}
+
+void
+node_spec_destroy(node_spec_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        node_spec_t *self = *self_pointer;
+        // TODO self->port_spec_array
+        free(self);
+        *self_pointer = NULL;
+    }
 }

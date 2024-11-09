@@ -52,7 +52,10 @@ list_purge(list_t *self) {
 }
 
 void
-list_set_item_destructor(list_t *self, list_item_destructor_t *item_destructor) {
+list_set_item_destructor(
+    list_t *self,
+    list_item_destructor_t *item_destructor
+) {
     self->item_destructor = item_destructor;
 }
 

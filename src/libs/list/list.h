@@ -8,8 +8,7 @@ void list_purge(list_t *self);
 
 void list_set_item_destructor(
     list_t *self,
-    list_item_destructor_t *item_destructor
-);
+    list_item_destructor_t *item_destructor);
 size_t list_lenght(const list_t *self);
 bool list_is_empty(const list_t *self);
 bool list_has(const list_t *self, void *item);

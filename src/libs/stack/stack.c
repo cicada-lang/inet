@@ -41,7 +41,10 @@ stack_destroy(stack_t **self_pointer) {
 
 
 void
-stack_set_item_destructor(stack_t *self, stack_item_destructor_t *item_destructor) {
+stack_set_item_destructor(
+    stack_t *self,
+    stack_item_destructor_t *item_destructor
+) {
     self->item_destructor = item_destructor;
 }
 

@@ -10,5 +10,7 @@ main(int argc, char *argv[]) {
     commander_mount(commander, default_help_command);
     commander_mount(commander, default_version_command);
 
-    return commander_run(commander);
+    int status = commander_run(commander);
+    commander_destroy(&commander);
+    return status;
 }
