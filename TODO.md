@@ -1,4 +1,3 @@
-`spec_destroy`
 `mod_destroy` -- setup `spec_destroy`
 
 `worker_interact` -- take one `active_edge` from `active_edge_list`
