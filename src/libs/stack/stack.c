@@ -6,6 +6,7 @@ struct stack_t {
     size_t size;
     size_t cursor;
     item_t *items;
+    stack_item_destructor_t *item_destructor;
 };
 
 stack_t *
@@ -15,6 +16,16 @@ stack_new(size_t size) {
     self->cursor = 0;
     self->items = allocate_array(size, sizeof(item_t));
     return self;
+}
+
+void
+stack_purge(stack_t *self) {
+    assert(self);
+    while(!stack_is_empty(self)) {
+        // item_t item = stack_pop();
+        assert(self->item_destructor);
+        // self->item_destructor(&item);
+    }
 }
 
 size_t

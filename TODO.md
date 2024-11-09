@@ -1,10 +1,10 @@
 # stack
 
-[stack] `stack_purge`
 [stack] `stack_destroy`
 [stack] `stack_set_item_destructor`
 [stack] `stack_pop`
 [stack] `stack_push`
+[stack] `stack_purge` -- call `stack_pop`
 
 # lang
 

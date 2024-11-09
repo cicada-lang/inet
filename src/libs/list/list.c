@@ -40,7 +40,7 @@ list_purge(list_t *self) {
     while (node) {
         node_t *next = node->next;
         assert(self->item_destructor);
-        (self->item_destructor)(&node->item);
+        self->item_destructor(&node->item);
         free(node);
         node = next;
     }
