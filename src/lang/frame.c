@@ -62,43 +62,33 @@ frame_destroy(frame_t **self_pointer) {
     }
 }
 
+static free_port_group_t *
+collect_free_ports_from_node(node_t *node) {
+    free_port_group_t *free_port_group = free_port_group_new(node->spec);
+    for (size_t i = 0; i < node->spec->arity; i++) {
+        if (port_is_principal(node->ports[i])) {
+            free_port_group->ports[i] = NULL;
+        } else {
+            port_t *port = node->ports[i];
+            port_free_from_node(port);
+            free_port_group->ports[i] = port;
+        }
+    }
+
+    node_destroy(&node);
+    return free_port_group;
+}
+
 void
 frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
     port_t *first_port = active_pair->first_port;
     port_t *second_port = active_pair->second_port;
 
-    active_pair_destroy(&active_pair);
-
-    node_t *first_node = first_port->node;
-    node_t *second_node = second_port->node;
-
-    self->first_free_port_group = free_port_group_new(first_node->spec);
-    for (size_t i = 0; i < first_node->spec->arity; i++) {
-        if (port_is_principal(first_node->ports[i])) {
-            assert(first_node->ports[i] == first_port);
-            self->first_free_port_group->ports[i] = NULL;
-        } else {
-            port_t *port = first_node->ports[i];
-            port_free_from_node(port);
-            self->first_free_port_group->ports[i] = port;
-        }
-    }
-
-    self->second_free_port_group = free_port_group_new(second_node->spec);
-    for (size_t i = 0; i < second_node->spec->arity; i++) {
-        if (port_is_principal(second_node->ports[i])) {
-            assert(first_node->ports[i] == second_port);
-            self->second_free_port_group->ports[i] = NULL;
-        } else {
-            port_t *port = second_node->ports[i];
-            port_free_from_node(port);
-            self->second_free_port_group->ports[i] = port;
-        }
-    }
-
-    node_destroy(&first_node);
-    node_destroy(&second_node);
+    self->first_free_port_group = collect_free_ports_from_node(first_port->node);
+    self->second_free_port_group = collect_free_ports_from_node(second_port->node);
 
     port_destroy(&first_port);
     port_destroy(&second_port);
+
+    active_pair_destroy(&active_pair);
 }
