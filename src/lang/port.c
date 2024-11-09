@@ -1,13 +1,5 @@
 #include "index.h"
 
-// `port_t` does NOT own `node` and `opposite_port`.
-
-struct port_t {
-    node_t *node;
-    port_index_t index;
-    port_t *opposite_port;
-};
-
 port_t *
 port_new(void) {
     port_t *self = allocate(sizeof(port_t));
@@ -25,34 +17,4 @@ port_destroy(port_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
-}
-
-node_t *
-port_node(port_t *self) {
-    return self->node;
-}
-
-void
-port_set_node(port_t *self, node_t *node) {
-    self->node = node;
-}
-
-port_index_t
-port_index(port_t *self) {
-    return self->index;
-}
-
-void
-port_set_index(port_t *self, port_index_t index) {
-    self->index = index;
-}
-
-port_t *
-port_opposite_port(port_t *self) {
-    return self->opposite_port;
-}
-
-void
-port_set_opposite_port(port_t *self, port_t *port) {
-    self->opposite_port = port;
 }

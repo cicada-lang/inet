@@ -1,5 +1,3 @@
-make `port_t` open
-
 `frame_set_active_edge`
 `frame_get_free_port`
 

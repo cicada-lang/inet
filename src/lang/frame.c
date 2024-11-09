@@ -69,13 +69,14 @@ frame_set_active_edge(frame_t *self, edge_t *active_edge) {
     port_t *second_port = active_edge->second_port;
     edge_destroy(&active_edge);
 
-    (void)self;    
+    (void)self;
     (void)first_port;
-    (void)second_port;    
+    (void)second_port;
 
-    // node_t *first_node = port_node(first_port);
-    // node_t *second_node = port_node(second_port);
+    node_t *first_node = first_port->node;
+    node_t *second_node = second_port->node;
 
-
+    (void)first_node;
+    (void)second_node;
 
 }

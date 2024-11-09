@@ -1,13 +1,12 @@
 #pragma once
 
+// `port_t` does NOT own `node` and `opposite_port`.
+
+struct port_t {
+    node_t *node;
+    port_index_t index;
+    port_t *opposite_port;
+};
+
 port_t *port_new(void);
 void port_destroy(port_t **self_pointer);
-
-node_t *port_node(port_t *self);
-void port_set_node(port_t *self, node_t *node);
-
-port_index_t port_index(port_t *self);
-void port_set_index(port_t *self, port_index_t index);
-
-port_t *port_opposite_port(port_t *self);
-void port_set_opposite_port(port_t *self, port_t *port);
