@@ -11,12 +11,12 @@ string_destroy(char **self_pointer) {
 }
 
 char*
-string_dup(const char *s) {
-    size_t length = strlen(s);
-    char *s_dup = malloc(length + 1);
-    assert(s_dup);
-    strcpy(s_dup, s);
-    return s_dup;
+string_dup(const char *self) {
+    size_t length = strlen(self);
+    char *string = malloc(length + 1);
+    assert(string);
+    strcpy(string, self);
+    return string;
 }
 
 char *
@@ -32,32 +32,32 @@ string_equal(const char *left, const char *right) {
 }
 
 size_t
-string_hash(const char *s, size_t size) {
+string_hash(const char *self, size_t size) {
     size_t max_index = 64 - 8;
     size_t index = 0;
     size_t hash = 0;
-    while (*s) {
-        hash += (*s) << (index % max_index);
+    while (*self) {
+        hash += (*self) << (index % max_index);
         if (hash > size) hash %= size;
         index++;
-        s++;
+        self++;
     }
 
     return hash;
 }
 
 bool
-string_is_int(const char *s) {
+string_is_int(const char *self) {
     char *int_end = NULL;
-    strtol(s, &int_end, 0);
-    if (int_end == s) return false;
+    strtol(self, &int_end, 0);
+    if (int_end == self) return false;
     return *int_end == '\0';
 }
 
 int64_t
-string_to_int(const char *s) {
+string_to_int(const char *self) {
     char *int_end = NULL;
-    return strtol(s, &int_end, 0);
+    return strtol(self, &int_end, 0);
 }
 
 bool

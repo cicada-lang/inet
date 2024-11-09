@@ -1,5 +1,3 @@
-fix string methods naming
-
 `node_spec_name`
 `node_spec_input_arity`
 `node_spec_output_arity`
