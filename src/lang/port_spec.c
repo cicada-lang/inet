@@ -22,3 +22,8 @@ port_spec_destroy(port_spec_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+const char *
+port_spec_name(port_spec_t *self) {
+    return self->name;
+}
