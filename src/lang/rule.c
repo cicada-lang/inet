@@ -23,3 +23,14 @@ rule_destroy(rule_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+bool
+rule_match_active_pair(
+    const rule_t *self,
+    const active_pair_t *active_pair
+) {
+    return (((self->first_node_spec == active_pair->first_port->node->spec) &&
+             (self->second_node_spec == active_pair->second_port->node->spec)) ||
+            ((self->first_node_spec == active_pair->second_port->node->spec) &&
+             (self->second_node_spec == active_pair->first_port->node->spec)));
+}
