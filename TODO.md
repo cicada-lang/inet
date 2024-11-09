@@ -1,5 +1,4 @@
 `node_spec_set_port_spec`
-`node_spec_get_port_spec`
 
 `node_gen_id`
 `node_new`
