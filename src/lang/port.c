@@ -26,7 +26,7 @@ port_is_principal(port_t *self) {
 }
 
 void
-port_set_free(port_t *self) {
+port_free_from_node(port_t *self) {
     self->node = NULL;
     self->index = -1;
 }

@@ -79,7 +79,7 @@ frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
             self->first_free_port_group->ports[i] = NULL;
         } else {
             port_t *port = first_node->ports[i];
-            port_set_free(port);
+            port_free_from_node(port);
             self->first_free_port_group->ports[i] = port;
         }
     }
@@ -91,7 +91,7 @@ frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
             self->second_free_port_group->ports[i] = NULL;
         } else {
             port_t *port = second_node->ports[i];
-            port_set_free(port);
+            port_free_from_node(port);
             self->second_free_port_group->ports[i] = port;
         }
     }
