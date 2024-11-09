@@ -1,4 +1,7 @@
+`node_destroy`
+
 `port_new`
+`port_destroy`
 `port_set_opposite`
 
 `op_run`

@@ -14,7 +14,6 @@ node_gen_id() {
     return id;
 }
 
-
 node_t *
 node_new(const node_spec_t *spec) {
     node_t *self = allocate(sizeof(node_t));
