@@ -22,3 +22,10 @@ op_app_new(const node_spec_t *node_spec) {
     self->node_spec = node_spec;
     return self;
 }
+
+op_con_t *
+op_con_new(void) {
+    op_con_t *self = allocate(sizeof(op_con_t));
+    self->tag = OP_CON;
+    return self;
+}

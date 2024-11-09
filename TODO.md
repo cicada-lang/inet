@@ -1,4 +1,3 @@
-`op_con_new`
 `op_fpt_new`
 
 `op_exe_destroy`
