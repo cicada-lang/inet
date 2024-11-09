@@ -6,7 +6,6 @@
 #include "port.h"
 #include "edge.h"
 #include "mod.h"
-#include "free_port_group.h"
 #include "frame.h"
 #include "worker.h"
 #include "op.h"

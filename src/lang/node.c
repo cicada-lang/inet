@@ -8,14 +8,7 @@ struct node_t {
     port_t **port_array;
 };
 
-// TODO The following function is not thread safe.
-static
-node_id_t
-node_gen_id(void) {
-    static node_id_t id = 0;
-    id++;
-    return id;
-}
+static node_id_t node_gen_id(void);
 
 node_t *
 node_new(const node_spec_t *spec) {
@@ -25,6 +18,14 @@ node_new(const node_spec_t *spec) {
     size_t arity = node_spec_arity(spec);
     self->port_array = allocate_pointer_array(arity);
     return self;
+}
+
+// TODO The following function is not thread safe.
+node_id_t
+node_gen_id(void) {
+    static node_id_t id = 0;
+    id++;
+    return id;
 }
 
 void

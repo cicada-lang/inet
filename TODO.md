@@ -1,9 +1,8 @@
+`frame_t` API about `free_port_group_t`
+
 `worker_interact` -- take one `active_edge` from `active_edge_list`
 `worker_step`
 `worker_run` -- finish `frame_stack`
-
-inline `free_port_group_t` to `frame_t`
-`frame_t` API about `free_port_group_t`
 
 `op_execute`
 
