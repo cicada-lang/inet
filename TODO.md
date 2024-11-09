@@ -1,5 +1,3 @@
-extract `port_spec.c`
-
 `port_spec_new`
 `port_spec_destroy`
 

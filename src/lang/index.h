@@ -14,4 +14,5 @@
 #include "rule.h"
 #include "spec.h"
 #include "node_spec.h"
+#include "port_spec.h"
 #include "program_spec.h"
