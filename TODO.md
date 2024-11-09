@@ -1,4 +1,3 @@
-`port_opposite_port`
 `port_set_opposite_port`
 
 `edge_new`

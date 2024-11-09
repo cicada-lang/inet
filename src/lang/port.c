@@ -44,3 +44,8 @@ void
 port_set_index(port_t *self, port_index_t index) {
     self->index = index;
 }
+
+const port_t *
+port_opposite_port(port_t *self) {
+    return self->opposite_port;
+}
