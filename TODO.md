@@ -1,5 +1,3 @@
-`string_test`
-
 # lang
 
 [lang] `op_run`
