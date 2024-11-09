@@ -49,3 +49,8 @@ const port_t *
 port_opposite_port(port_t *self) {
     return self->opposite_port;
 }
+
+void
+port_set_opposite_port(port_t *self, const port_t *port) {
+    self->opposite_port = port;
+}

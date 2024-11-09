@@ -1,5 +1,3 @@
-`port_set_opposite_port`
-
 `edge_new`
 `edge_destroy`
 `edge_first_port`
