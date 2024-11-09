@@ -1,5 +1,3 @@
-`op_fpt_new`
-
 `op_exe_destroy`
 `op_app_destroy`
 `op_con_destroy`

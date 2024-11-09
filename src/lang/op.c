@@ -29,3 +29,12 @@ op_con_new(void) {
     self->tag = OP_CON;
     return self;
 }
+
+op_fpt_t *
+op_fpt_new(const node_spec_t *node_spec, port_index_t index) {
+    op_fpt_t *self = allocate(sizeof(op_fpt_t));
+    self->tag = OP_FPT;
+    self->node_spec = node_spec;
+    self->index = index;
+    return self;
+}
