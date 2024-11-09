@@ -1,5 +1,7 @@
 #include "index.h"
 
+// `port_t` does NOT own `node` and `opposite_port`.
+
 struct port_t {
     const node_t *node;
     port_index_t index;
