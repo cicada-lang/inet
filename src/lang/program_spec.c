@@ -31,3 +31,8 @@ const char *
 program_spec_name(program_spec_t *self) {
     return self->name;
 }
+
+const program_t *
+program_spec_program(program_spec_t *self) {
+    return self->program;
+}

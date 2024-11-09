@@ -1,5 +1,3 @@
-`program_spec_program`
-
 `op_exe_new`
 `op_app_new`
 `op_con_new`
