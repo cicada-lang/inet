@@ -27,3 +27,8 @@ const char *
 port_spec_name(port_spec_t *self) {
     return self->name;
 }
+
+bool
+port_spec_is_principal(port_spec_t *self) {
+    return self->is_principal;
+}

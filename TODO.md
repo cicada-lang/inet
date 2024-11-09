@@ -1,5 +1,3 @@
-`port_spec_is_principal`
-
 `node_spec_input_arity`
 `node_spec_output_arity`
 `node_spec_arity`
