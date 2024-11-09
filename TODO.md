@@ -1,4 +1,3 @@
-`program_new`
 `program_destroy`
 
 `frame_new`
