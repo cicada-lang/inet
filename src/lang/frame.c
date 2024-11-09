@@ -63,11 +63,11 @@ frame_destroy(frame_t **self_pointer) {
 }
 
 void
-frame_collect_free_ports(frame_t *self, edge_t *active_edge) {
-    port_t *first_port = active_edge->first_port;
-    port_t *second_port = active_edge->second_port;
+frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
+    port_t *first_port = active_pair->first_port;
+    port_t *second_port = active_pair->second_port;
 
-    edge_destroy(&active_edge);
+    active_pair_destroy(&active_pair);
 
     node_t *first_node = first_port->node;
     node_t *second_node = second_port->node;

@@ -6,7 +6,7 @@
 
 struct worker_t {
     const mod_t *mod;
-    list_t *active_edge_list;
+    list_t *active_pair_list;
     stack_t *port_stack;
     stack_t *frame_stack;
 };
@@ -16,10 +16,10 @@ worker_new(const mod_t *mod) {
     worker_t *self = allocate(sizeof(worker_t));
     self->mod = mod;
 
-    self->active_edge_list = list_new();
+    self->active_pair_list = list_new();
     list_set_item_destructor(
-        self->active_edge_list,
-        (list_item_destructor_t *) edge_destroy);
+        self->active_pair_list,
+        (list_item_destructor_t *) active_pair_destroy);
 
     self->port_stack = stack_new(10000);
     stack_set_item_destructor(
@@ -39,7 +39,7 @@ worker_destroy(worker_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         worker_t *self = *self_pointer;
-        list_destroy(&self->active_edge_list);
+        list_destroy(&self->active_pair_list);
         stack_destroy(&self->port_stack);
         stack_destroy(&self->frame_stack);
         free(self);

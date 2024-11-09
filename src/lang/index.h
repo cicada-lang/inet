@@ -4,7 +4,7 @@
 #include "types.h"
 #include "node.h"
 #include "port.h"
-#include "edge.h"
+#include "active_pair.h"
 #include "mod.h"
 #include "frame.h"
 #include "worker.h"

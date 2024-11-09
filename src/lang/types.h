@@ -10,7 +10,7 @@ typedef enum { PROGRAM_SPEC, NODE_SPEC } spec_tag_t;
 
 typedef struct node_t node_t;
 typedef struct port_t port_t;
-typedef struct edge_t edge_t;
+typedef struct active_pair_t active_pair_t;
 typedef struct mod_t mod_t;
 typedef struct frame_t frame_t;
 typedef struct worker_t worker_t;
