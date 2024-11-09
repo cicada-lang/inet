@@ -1,6 +1,6 @@
 # stack
 
-[stack] `stack_purge` -- call `stack_pop`
+[stack] `stack_test`
 
 # lang
 

@@ -22,9 +22,9 @@ void
 stack_purge(stack_t *self) {
     assert(self);
     while(!stack_is_empty(self)) {
-        // item_t item = stack_pop();
+        item_t item = stack_pop(self);
         assert(self->item_destructor);
-        // self->item_destructor(&item);
+        self->item_destructor(&item);
     }
 }
 
