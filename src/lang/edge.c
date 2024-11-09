@@ -31,3 +31,13 @@ port_t *
 edge_second_port(edge_t *self) {
     return self->second_port;
 }
+
+void
+edge_set_first_port(edge_t *self, port_t *port) {
+    self->first_port = port;
+}
+
+void
+edge_set_second_port(edge_t *self, port_t *port) {
+    self->second_port = port;
+}

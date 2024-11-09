@@ -1,5 +1,3 @@
-`edge_set_first_port` & `edge_set_second_port`
-
 `mod_new`
 `mod_destroy`
 
