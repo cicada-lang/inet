@@ -92,3 +92,16 @@ frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
 
     active_pair_destroy(&active_pair);
 }
+
+port_t *
+frame_get_free_port(
+    frame_t *self,
+    const node_spec_t *node_spec,
+    port_index_t index
+) {
+    if (node_spec == self->first_free_port_group->node_spec)
+        return self->first_free_port_group->ports[index];
+    if (node_spec == self->second_free_port_group->node_spec)
+        return self->second_free_port_group->ports[index];
+    assert(false);
+}
