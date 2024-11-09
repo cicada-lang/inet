@@ -9,3 +9,5 @@ void op_exe_destroy(op_exe_t **self_pointer);
 void op_app_destroy(op_app_t **self_pointer);
 void op_con_destroy(op_con_t **self_pointer);
 void op_fpt_destroy(op_fpt_t **self_pointer);
+
+void op_destroy(op_t **self_pointer);

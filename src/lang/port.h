@@ -1,6 +1,6 @@
 #pragma once
 
-port_t *port_new();
+port_t *port_new(void);
 void port_destroy(port_t **self_pointer);
 
 const node_t *port_node(port_t *self);

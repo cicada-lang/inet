@@ -9,7 +9,7 @@ struct port_t {
 };
 
 port_t *
-port_new() {
+port_new(void) {
     port_t *self = allocate(sizeof(port_t));
     self->node = NULL;
     self->index = -1;
