@@ -1,7 +1,6 @@
-rename `string_clone` to `string_dup`
-fix string methods naming
-
 `port_spec_t` should own the name string
+
+fix string methods naming
 
 `node_spec_name`
 `node_spec_input_arity`

@@ -17,7 +17,7 @@ node_spec_new(
 ) {
     node_spec_t *self = allocate(sizeof(node_spec_t));
     self->tag = NODE_SPEC;
-    self->name = string_clone(name);
+    self->name = string_dup(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;
     self->arity = input_arity + output_arity;

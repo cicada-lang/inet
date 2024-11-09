@@ -11,7 +11,7 @@ string_destroy(char **self_pointer) {
 }
 
 char*
-string_clone(const char *s) {
+string_dup(const char *s) {
     size_t length = strlen(s);
     char *s_dup = malloc(length + 1);
     assert(s_dup);

@@ -12,9 +12,9 @@ stack_test(void) {
 
     stack_set_item_destructor(stack, (stack_item_destructor_t *) string_destroy);
 
-    char *cheese = string_clone("boursin");
-    char *bread = string_clone("baguette");
-    char *wine = string_clone("bordeaux");
+    char *cheese = string_dup("boursin");
+    char *bread = string_dup("baguette");
+    char *wine = string_dup("bordeaux");
 
     stack_push(stack, cheese);
     assert(stack_length(stack) == 1);

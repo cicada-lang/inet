@@ -7,7 +7,7 @@ file_readline(FILE *file) {
 
     char *ok = fgets(buffer, line_max_length, file);
     if (ok) {
-        char *line = string_clone(buffer);
+        char *line = string_dup(buffer);
         free(buffer);
         return line;
     } else {
