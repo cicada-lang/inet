@@ -1,4 +1,3 @@
-`port_new`
 `port_destroy`
 - `node_destroy` -- call `port_destroy`
 `port_node`
