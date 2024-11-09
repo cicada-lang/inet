@@ -1,4 +1,3 @@
-make `node_t` open
 make `port_t` open
 
 `frame_set_active_edge`

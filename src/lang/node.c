@@ -1,13 +1,5 @@
 #include "index.h"
 
-// `node_t` does NOT own ports in `port_array`.
-
-struct node_t {
-    const node_spec_t *spec;
-    node_id_t id;
-    port_t **port_array;
-};
-
 static node_id_t node_gen_id(void);
 
 node_t *
