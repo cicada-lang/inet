@@ -1,12 +1,9 @@
-`op_exe_destroy`
-
-`op_app_new`
-`op_app_destroy`
-
 `op_con_new`
-`op_con_destroy`
-
 `op_fpt_new`
+
+`op_exe_destroy`
+`op_app_destroy`
+`op_con_destroy`
 `op_fpt_destroy`
 
 `op_destroy`
