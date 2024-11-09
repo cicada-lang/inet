@@ -59,3 +59,10 @@ bool
 stack_is_empty(const stack_t *self) {
     return self->cursor == 0;
 }
+
+void *
+stack_pop(stack_t *self) {
+    item_t item = self->items[self->cursor];
+    self->cursor--;
+    return item;
+}

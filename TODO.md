@@ -1,6 +1,5 @@
 # stack
 
-[stack] `stack_pop`
 [stack] `stack_push`
 [stack] `stack_purge` -- call `stack_pop`
 
