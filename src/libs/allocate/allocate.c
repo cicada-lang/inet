@@ -15,6 +15,6 @@ allocate_many(size_t size, size_t unit_size) {
 }
 
 void *
-allocate_pointer_array(size_t size) {
+allocate_pointers(size_t size) {
     return allocate_many(size, sizeof(void *));
 }

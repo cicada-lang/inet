@@ -14,7 +14,7 @@ stack_new(size_t size) {
     stack_t *self = allocate(sizeof(stack_t));
     self->size = size;
     self->cursor = 0;
-    self->items = allocate_pointer_array(size);
+    self->items = allocate_pointers(size);
     return self;
 }
 

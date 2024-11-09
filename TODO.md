@@ -1,5 +1,3 @@
-drop _array postfix
-
 `frame_collect_free_ports` -- make ports free
 `frame_get_free_port`
 

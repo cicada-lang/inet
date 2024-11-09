@@ -12,7 +12,7 @@ node_spec_new(
     self->input_arity = input_arity;
     self->output_arity = output_arity;
     self->arity = input_arity + output_arity;
-    self->port_spec_array = allocate_pointer_array(self->arity);
+    self->port_specs = allocate_pointers(self->arity);
     return self;
 }
 
@@ -22,13 +22,13 @@ node_spec_destroy(node_spec_t **self_pointer) {
     if (*self_pointer) {
         node_spec_t *self = *self_pointer;
         for (size_t i = 0; i < self->arity; i++) {
-            port_spec_t *port_spec = self->port_spec_array[i];
+            port_spec_t *port_spec = self->port_specs[i];
             if (port_spec) {
                 port_spec_destroy(&port_spec);
             }
         }
 
-        free(self->port_spec_array);
+        free(self->port_specs);
         free(self);
         *self_pointer = NULL;
     }

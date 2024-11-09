@@ -6,7 +6,7 @@ struct node_spec_t {
     size_t input_arity;
     size_t output_arity;
     size_t arity;
-    port_spec_t **port_spec_array;
+    port_spec_t **port_specs;
 };
 
 node_spec_t *node_spec_new(
