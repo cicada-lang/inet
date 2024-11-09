@@ -1,5 +1,3 @@
-`program_destroy`
-
 `frame_new`
 `frame_destroy`
 
@@ -10,6 +8,10 @@
 
 `program_spec_new`
 `program_spec_destroy`
+
+`op_destroy`
+
+`program_new` -- setup `op_destroy`
 
 `spec_destroy`
 
