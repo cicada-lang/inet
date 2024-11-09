@@ -34,3 +34,13 @@ void
 port_set_node(port_t *self, node_t *node) {
     self->node = node;
 }
+
+port_index_t
+port_index(port_t *self) {
+    return self->index;
+}
+
+void
+port_set_index(port_t *self, port_index_t index) {
+    self->index = index;
+}

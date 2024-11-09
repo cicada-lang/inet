@@ -1,5 +1,3 @@
-`port_index`
-`port_set_index`
 `port_opposite_port`
 `port_set_opposite_port`
 
