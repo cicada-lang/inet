@@ -24,3 +24,8 @@ port_destroy(port_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+const node_t *
+port_node(port_t *self) {
+    return self->node;
+}
