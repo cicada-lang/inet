@@ -1,4 +1,3 @@
-`mod_new`
 `mod_destroy`
 
 `worker_new`
@@ -13,9 +12,11 @@
 `rule_new`
 `rule_destroy`
 
-`op_run`
-`worker_interact`
-`worker_run`
+`worker_interact` -- take one `active_edge` from `active_edge_list`
+`worker_step`
+`worker_run` -- finish `frame_stack`
+
+`op_execute`
 
 test -- build mod by hand and run by worker
 
