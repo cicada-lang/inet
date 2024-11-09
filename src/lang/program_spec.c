@@ -14,3 +14,15 @@ program_spec_new(const char *name, program_t *program) {
     self->program = program;
     return self;
 }
+
+void
+program_spec_destroy(program_spec_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        program_spec_t *self = *self_pointer;
+        string_destroy(&self->name);
+        program_destroy(&self->program);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

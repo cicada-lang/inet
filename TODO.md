@@ -1,5 +1,3 @@
-`program_spec_destroy`
-
 `program_spec_name`
 `program_spec_program`
 
