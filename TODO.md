@@ -1,5 +1,3 @@
-`port_spec_t` should own the name string
-
 fix string methods naming
 
 `node_spec_name`
