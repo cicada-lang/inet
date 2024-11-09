@@ -1,8 +1,3 @@
-`op_exe_destroy`
-`op_app_destroy`
-`op_con_destroy`
-`op_fpt_destroy`
-
 `op_destroy`
 
 `program_new` -- setup `op_destroy`

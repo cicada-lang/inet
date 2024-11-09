@@ -38,3 +38,39 @@ op_fpt_new(const node_spec_t *node_spec, port_index_t index) {
     self->index = index;
     return self;
 }
+
+void op_exe_destroy(op_exe_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        op_exe_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
+void op_app_destroy(op_app_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        op_app_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
+void op_con_destroy(op_con_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        op_con_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
+void op_fpt_destroy(op_fpt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        op_fpt_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
