@@ -1,6 +1,6 @@
-`worker_interact` -- take one `active_pair` from `active_pair_list`
+`mod_find_rule`
+`worker_run` -- call `worker_step` until `frame_stack` is emphy
 `worker_step`
-`worker_run` -- finish `frame_stack`
 
 `op_execute`
 

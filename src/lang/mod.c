@@ -37,3 +37,10 @@ mod_destroy(mod_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+const rule_t *
+mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
+    (void)self;
+    (void)active_pair;
+    return NULL;
+}

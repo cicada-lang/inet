@@ -46,3 +46,21 @@ worker_destroy(worker_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+worker_interact(worker_t *self) {
+    active_pair_t *active_pair = list_pop(self->active_pair_list);
+    if (active_pair) {
+        const rule_t *rule = mod_find_rule(self->mod, active_pair);
+        assert(rule);
+        frame_t *frame = frame_new(rule->program);
+        frame_collect_free_ports(frame, active_pair);
+        stack_push(self->frame_stack, frame);
+        worker_run(self);
+    }
+}
+
+void
+worker_run(worker_t *self) {
+    (void)self;
+}
