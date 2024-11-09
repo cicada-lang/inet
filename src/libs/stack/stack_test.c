@@ -10,6 +10,8 @@ stack_test(void) {
     assert(stack_length(stack) == 0);
     assert(stack_is_empty(stack));
 
+    stack_set_item_destructor(stack, (stack_item_destructor_t *) string_destroy);
+
     stack_destroy(&stack);
 
     printf("</stack>\n");
