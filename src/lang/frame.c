@@ -27,8 +27,7 @@ free_port_group_t *
 free_port_group_new(const node_spec_t *node_spec) {
     free_port_group_t *self = allocate(sizeof(free_port_group_t));
     self->node_spec = node_spec;
-    size_t arity = node_spec_arity(node_spec);
-    self->port_array = allocate_pointer_array(arity);
+    self->port_array = allocate_pointer_array(node_spec->arity);
     return self;
 }
 

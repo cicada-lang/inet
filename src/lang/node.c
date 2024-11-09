@@ -7,8 +7,7 @@ node_new(const node_spec_t *spec) {
     node_t *self = allocate(sizeof(node_t));
     self->spec = spec;
     self->id = node_gen_id();
-    size_t arity = node_spec_arity(spec);
-    self->port_array = allocate_pointer_array(arity);
+    self->port_array = allocate_pointer_array(spec->arity);
     return self;
 }
 

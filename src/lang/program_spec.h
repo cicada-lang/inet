@@ -1,7 +1,10 @@
 #pragma once
 
+struct program_spec_t {
+    spec_tag_t tag;
+    char *name;
+    program_t *program;
+};
+
 program_spec_t *program_spec_new(const char *name, program_t *program);
 void program_spec_destroy(program_spec_t **self_pointer);
-
-const char *program_spec_name(program_spec_t *self);
-const program_t *program_spec_program(program_spec_t *self);

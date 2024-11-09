@@ -1,7 +1,5 @@
 #include "index.h"
 
-struct spec_t { const spec_tag_t tag; };
-
 void
 spec_destroy(spec_t **self_pointer) {
     assert(self_pointer);

@@ -1,11 +1,5 @@
 #include "index.h"
 
-struct program_spec_t {
-    spec_tag_t tag;
-    char *name;
-    program_t *program;
-};
-
 program_spec_t *
 program_spec_new(const char *name, program_t *program) {
     program_spec_t *self = allocate(sizeof(program_spec_t));
@@ -25,14 +19,4 @@ program_spec_destroy(program_spec_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
-}
-
-const char *
-program_spec_name(program_spec_t *self) {
-    return self->name;
-}
-
-const program_t *
-program_spec_program(program_spec_t *self) {
-    return self->program;
 }
