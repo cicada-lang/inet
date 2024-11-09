@@ -1,4 +1,4 @@
-`mod_find_rule`
+extract `rule_match_active_pair`
 `worker_run` -- call `worker_step` until `frame_stack` is emphy
 `worker_step`
 

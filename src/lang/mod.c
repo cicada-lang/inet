@@ -40,7 +40,17 @@ mod_destroy(mod_t **self_pointer) {
 
 const rule_t *
 mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
-    (void)self;
-    (void)active_pair;
+    rule_t *rule = list_start(self->rule_list);
+    while (rule) {
+        if (((rule->first_node_spec == active_pair->first_port->node->spec) &&
+             (rule->second_node_spec == active_pair->second_port->node->spec)) ||
+            ((rule->first_node_spec == active_pair->second_port->node->spec) &&
+             (rule->second_node_spec == active_pair->first_port->node->spec))) {
+            return rule;
+        }
+
+        rule = list_next(self->rule_list);
+    }
+
     return NULL;
 }
