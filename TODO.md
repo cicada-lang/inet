@@ -1,4 +1,3 @@
-`free_port_group_new`
 `free_port_group_destroy`
 
 `frame_new` -- fix `first_free_port_group` and `second_free_port_group`
