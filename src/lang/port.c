@@ -18,3 +18,9 @@ port_destroy(port_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+bool
+port_is_principal(port_t *self) {
+    port_spec_t *port_spec = self->node->spec->port_spec_array[self->index];
+    return port_spec->is_principal;
+}

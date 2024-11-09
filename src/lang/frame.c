@@ -63,7 +63,7 @@ frame_destroy(frame_t **self_pointer) {
 }
 
 void
-frame_set_active_edge(frame_t *self, edge_t *active_edge) {
+frame_collect_free_ports(frame_t *self, edge_t *active_edge) {
     port_t *first_port = active_edge->first_port;
     port_t *second_port = active_edge->second_port;
     edge_destroy(&active_edge);
@@ -77,11 +77,17 @@ frame_set_active_edge(frame_t *self, edge_t *active_edge) {
     // first_node->port_array;
 
     self->first_free_port_group = free_port_group_new(first_node->spec);
-    // for (size_t i = 0; i < first_node->spec->index) {
-    //     port_t *first_node->port_array[i];
-    // }
+    for (size_t i = 0; i < first_node->spec->arity; i++) {
+        // if (port_is_principal(first_node->port_array[i])) {
+        //     self->first_free_port_group->port_array[i] = first_node->port_array[i];
+        // } else {
+        //     self->first_free_port_group->port_array[i] = first_node->port_array[i];
+        // }
+    }
+
 
     self->second_free_port_group = free_port_group_new(second_node->spec);
+
 
     node_destroy(&first_node);
     node_destroy(&second_node);

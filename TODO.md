@@ -1,4 +1,4 @@
-`frame_set_active_edge`
+`frame_collect_free_ports`
 `frame_get_free_port`
 
 `worker_interact` -- take one `active_edge` from `active_edge_list`
