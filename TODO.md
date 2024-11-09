@@ -1,5 +1,3 @@
-`worker_destroy`
-
 `program_new`
 `program_destroy`
 
@@ -25,6 +23,10 @@
 `op_execute`
 
 test -- build mod by hand and run by worker
+
+# stack
+
+[stack] use list of arrays -- should not need require a `size`
 
 # learn
 

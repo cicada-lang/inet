@@ -33,3 +33,16 @@ worker_new(const mod_t *mod) {
 
     return self;
 }
+
+void
+worker_destroy(worker_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        worker_t *self = *self_pointer;
+        list_destroy(&self->active_edge_list);
+        stack_destroy(&self->port_stack);
+        stack_destroy(&self->frame_stack);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
