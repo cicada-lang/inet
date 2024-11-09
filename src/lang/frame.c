@@ -78,7 +78,9 @@ frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
             assert(first_node->ports[i] == first_port);
             self->first_free_port_group->ports[i] = NULL;
         } else {
-            self->first_free_port_group->ports[i] = first_node->ports[i];
+            port_t *port = first_node->ports[i];
+            port_set_free(port);
+            self->first_free_port_group->ports[i] = port;
         }
     }
 
@@ -88,7 +90,9 @@ frame_collect_free_ports(frame_t *self, active_pair_t *active_pair) {
             assert(first_node->ports[i] == second_port);
             self->second_free_port_group->ports[i] = NULL;
         } else {
-            self->second_free_port_group->ports[i] = second_node->ports[i];
+            port_t *port = second_node->ports[i];
+            port_set_free(port);
+            self->second_free_port_group->ports[i] = port;
         }
     }
 

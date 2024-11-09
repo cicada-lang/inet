@@ -1,4 +1,3 @@
-`frame_collect_free_ports` -- make ports free
 `frame_get_free_port`
 
 `worker_interact` -- take one `active_pair` from `active_pair_list`

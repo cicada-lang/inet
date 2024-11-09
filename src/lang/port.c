@@ -29,5 +29,4 @@ void
 port_set_free(port_t *self) {
     self->node = NULL;
     self->index = -1;
-    self->opposite_port = NULL;
 }
