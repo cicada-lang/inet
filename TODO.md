@@ -1,7 +1,4 @@
-`array_t`
-
-`node_spec_t` -- has `array_t *port_spec_array`
-`node_spec_destroy` -- fix for `port_spec_array`
+merge `port_spec` into `node_spec`
 
 `node_spec_name`
 `node_spec_input_arity`
