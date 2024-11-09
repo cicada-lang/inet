@@ -20,6 +20,6 @@ node_new(const node_spec_t *spec) {
     node_t *self = allocate(sizeof(node_t));
     self->spec = spec;
     self->id = node_gen_id();
-    self->port_array = allocate_array(node_spec_arity(spec), sizeof(port_t *));
+    self->port_array = allocate_pointer_array(node_spec_arity(spec));
     return self;
 }

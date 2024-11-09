@@ -1,4 +1,3 @@
-extract `allocate_pointer_array`
 `port_new`
 `port_set_opposite`
 

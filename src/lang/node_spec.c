@@ -21,7 +21,7 @@ node_spec_new(
     self->input_arity = input_arity;
     self->output_arity = output_arity;
     self->arity = input_arity + output_arity;
-    self->port_spec_array = allocate_array(self->arity, sizeof(port_spec_t *));
+    self->port_spec_array = allocate_pointer_array(self->arity);
     return self;
 }
 
