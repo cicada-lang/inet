@@ -1,13 +1,15 @@
 `program_spec_new`
 `program_spec_destroy`
 
+`program_spec_name`
+`program_spec_program`
+
 `op_destroy`
 
 `program_new` -- setup `op_destroy`
 
 `spec_destroy`
-
-`mod_destroy` -- setup `rule_destroy` and `spec_destroy`
+`mod_destroy` -- setup `spec_destroy`
 
 `worker_interact` -- take one `active_edge` from `active_edge_list`
 `worker_step`

@@ -14,8 +14,12 @@ mod_new(void) {
     mod_t *self = allocate(sizeof(mod_t));
     self->spec_list = list_new();
     // TODO setup spec_destroy
+
     self->rule_list = list_new();
-    // TODO setup rule_destroy
+    list_set_item_destructor(
+        self->rule_list,
+        (list_item_destructor_t *) rule_destroy);
+
     return self;
 }
 
