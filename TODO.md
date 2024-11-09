@@ -1,11 +1,3 @@
-`frame_first_free_port_group`
-`frame_econd_free_port_group`
-
-`frame_set_first_free_port_group`
-`frame_set_econd_free_port_group`
-
-`worker_new` -- setup `frame_destroy`
-
 `rule_new`
 `rule_destroy`
 
@@ -23,6 +15,9 @@
 `worker_interact` -- take one `active_edge` from `active_edge_list`
 `worker_step`
 `worker_run` -- finish `frame_stack`
+
+inline `free_port_group_t` to `frame_t`
+`frame_t` API about `free_port_group_t`
 
 `op_execute`
 

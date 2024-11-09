@@ -27,9 +27,9 @@ worker_new(const mod_t *mod) {
         (stack_item_destructor_t *) port_destroy);
 
     self->frame_stack = stack_new(10000);
-    // stack_set_item_destructor(
-    //     self->frame_stack,
-    //     (stack_item_destructor_t *) frame_destroy);
+    stack_set_item_destructor(
+        self->frame_stack,
+        (stack_item_destructor_t *) frame_destroy);
 
     return self;
 }
