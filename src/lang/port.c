@@ -29,3 +29,8 @@ const node_t *
 port_node(port_t *self) {
     return self->node;
 }
+
+void
+port_set_node(port_t *self, node_t *node) {
+    self->node = node;
+}
