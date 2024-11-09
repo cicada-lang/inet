@@ -10,5 +10,7 @@ stack_test(void) {
     assert(stack_length(stack) == 0);
     assert(stack_is_empty(stack));
 
+    stack_destroy(&stack);
+
     printf("</stack>\n");
 }

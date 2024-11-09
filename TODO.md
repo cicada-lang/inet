@@ -1,6 +1,5 @@
 # stack
 
-[stack] `stack_destroy`
 [stack] `stack_set_item_destructor`
 [stack] `stack_pop`
 [stack] `stack_push`
