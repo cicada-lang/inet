@@ -1,8 +1,19 @@
-`node_destroy`
-
 `port_new`
 `port_destroy`
-`port_set_opposite`
+- `node_destroy` -- call `port_destroy`
+`port_node`
+`port_set_node`
+`port_index`
+`port_set_index`
+`port_opposite_port`
+`port_set_opposite_port`
+
+`edge_new`
+`edge_destroy`
+`edge_first_port`
+`edge_second_port`
+`edge_set_first_port`
+`edge_set_second_port`
 
 `op_run`
 `worker_interact`
