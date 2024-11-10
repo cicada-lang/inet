@@ -78,22 +78,18 @@ op_destroy(op_t **self_pointer) {
     if (*self_pointer) {
         op_t *self = *self_pointer;
         switch (self->tag) {
-        case OP_CALL_PROGRAM: {
+        case OP_CALL_PROGRAM:
             op_call_program_destroy((op_call_program_t **) self_pointer);
             return;
-        }
-        case OP_CALL_NODE: {
+        case OP_CALL_NODE:
             op_call_node_destroy((op_call_node_t **) self_pointer);
             return;
-        }
-        case OP_CONNECT: {
+        case OP_CONNECT:
             op_connect_destroy((op_connect_t **) self_pointer);
             return;
-        }
-        case OP_GET_FREE_PORT: {
+        case OP_GET_FREE_PORT:
             op_get_free_port_destroy((op_get_free_port_t **) self_pointer);
             return;
-        }
         }
     }
 }
