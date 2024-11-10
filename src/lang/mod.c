@@ -38,6 +38,12 @@ mod_destroy(mod_t **self_pointer) {
     }
 }
 
+const spec_t *
+mod_find_spec(const mod_t *self, const char *name) {
+    (void) self;
+    (void) name;
+}
+
 const rule_t *
 mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
     rule_t *rule = list_start(self->rule_list);

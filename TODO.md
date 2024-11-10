@@ -1,4 +1,6 @@
-`mod_find_spec` -- `name`
+`spec_name` -- use dispatching -- can not add `name` as field in `spec_t` due to padding.
+
+`mod_find_spec`
 
 `mod_define_rule` -- `first_name`, `second_name`, `program`
 
