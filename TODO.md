@@ -1,3 +1,5 @@
+should not use abbr. for op
+
 `worker_step`
 
 - [maybe] handle tail-call here
