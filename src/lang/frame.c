@@ -110,3 +110,10 @@ bool
 frame_is_finished(const frame_t *self) {
     return self->program_counter == program_length(self->program);
 }
+
+const op_t *
+frame_fetch_op(frame_t *self) {
+    const op_t *op = program_get_op(self->program, self->program_counter);
+    self->program_counter++;
+    return op;
+}

@@ -1,5 +1,3 @@
-`frame_fetch_op`
-
 `worker_step` -- handle tail-call here
 
 `execute` -- `op_call_program`
