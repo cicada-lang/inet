@@ -1,5 +1,8 @@
 #include "index.h"
 
+static void node_apply_input_ports(node_t *node, worker_t *worker);
+static void node_return_output_ports(node_t *node, worker_t *worker);
+
 void
 execute(op_t *op, worker_t *worker, frame_t *frame) {
     (void)worker;
@@ -14,6 +17,9 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
 
     case OP_CALL_NODE: {
         op_call_node_t *op = op;
+        node_t *node = node_new(op->node_spec);
+        node_apply_input_ports(node, worker);
+        node_return_output_ports(node, worker);
         return;
     }
 
@@ -43,4 +49,16 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
         return;
     }
     }
+}
+
+void
+node_apply_input_ports(node_t *node, worker_t *worker) {
+    (void)node;
+    (void)worker;
+}
+
+void
+node_return_output_ports(node_t *node, worker_t *worker) {
+    (void)node;
+    (void)worker;
 }
