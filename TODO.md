@@ -1,9 +1,13 @@
-`worker_run` -- call `worker_step` until `frame_stack` is emphy
 `worker_step`
+
+- [maybe] handle tail-call here
+- [maybe] take `frame`
+
+`program_t` -- use builder pattern
 
 `op_execute`
 
-test -- build mod by hand and run by worker
+`worker_test` -- build `program` by hand and `worker_run`
 
 # stack
 

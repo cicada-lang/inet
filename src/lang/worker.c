@@ -62,5 +62,12 @@ worker_interact(worker_t *self) {
 
 void
 worker_run(worker_t *self) {
+    while (!stack_is_empty(self->frame_stack)) {
+        worker_step(self);
+    }
+}
+
+void
+worker_step(worker_t *self) {
     (void)self;
 }
