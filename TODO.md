@@ -1,4 +1,7 @@
-`worker_test` -- build `program` by hand and `worker_run`
+`node_spec_define_port` -- `name`, `is_principal`
+`mod_add_rule` -- `first_name`, `second_name`, `program`
+
+`worker_test` -- build `mod` by hand and `worker_run`
 
 # stack
 

@@ -48,3 +48,8 @@ mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
 
     return NULL;
 }
+
+void
+mod_define(mod_t *self, spec_t *spec) {
+    list_push(self->spec_list, spec);
+}
