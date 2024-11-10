@@ -8,8 +8,7 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
     case OP_CALL_PROGRAM: {
         op_call_program_t *op = op;
         frame_t *frame = frame_new(op->program_spec->program);
-        (void)frame;
-        // stack_push(worker->frame_stack, frame);
+        stack_push(worker->frame_stack, frame);
         return;
     }
 

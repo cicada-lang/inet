@@ -53,7 +53,7 @@ void
 worker_run(worker_t *self) {
     while (true) {
         frame_t *frame = stack_pop(self->frame_stack);
-        if (!frame) break;
+        if (!frame) return;
 
         worker_step(self, frame);
     }

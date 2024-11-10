@@ -1,4 +1,3 @@
-`execute` -- `op_call_program`
 `execute` -- `op_connect`
 `execute` -- `op_get_free_port`
 `execute` -- `op_call_node`
