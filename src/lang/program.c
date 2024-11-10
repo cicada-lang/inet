@@ -40,3 +40,16 @@ void
 program_add_op(program_t *self, op_t *op) {
     list_push(self->op_list, op);
 }
+
+void
+program_build(program_t *self) {
+    self->length = list_lenght(self->op_list);
+    self->ops = allocate_pointers(self->length);
+    size_t index = 0;
+    op_t *op = list_start(self->op_list);
+    while (op) {
+        self->ops[index] = op;
+        op = list_next(self->op_list);
+        index++;
+    }
+}
