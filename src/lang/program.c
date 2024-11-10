@@ -54,7 +54,7 @@ program_build(program_t *self) {
     }
 }
 
-const op_t *
+op_t *
 program_get_op(const program_t *self, size_t index) {
     return self->ops[index];
 }

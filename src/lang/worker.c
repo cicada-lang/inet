@@ -74,7 +74,7 @@ void
 worker_step(worker_t *self, frame_t *frame) {
     if (frame_is_finished(frame)) return;
 
-    const op_t *op = frame_fetch_op(frame);
+    op_t *op = frame_fetch_op(frame);
 
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);

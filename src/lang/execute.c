@@ -1,15 +1,25 @@
 #include "index.h"
 
 void
-execute(const op_t *op, worker_t *self, frame_t *frame) {
-    // switch (op->tag) {
-    // case OP_CALL_PROGRAM:
-    //     return;
-    // case OP_CALL_NODE
-    // case OP_CONNECT
-    // case OP_GET_FREE_PORT
-    // }
-    (void)op;
+execute(op_t *op, worker_t *self, frame_t *frame) {
     (void)self;
     (void)frame;
+    switch (op->tag) {
+    case OP_CALL_PROGRAM: {
+        op_call_program_t *op = op;
+        return;
+    }
+
+    case OP_CALL_NODE: {
+        return;
+    }
+
+    case OP_CONNECT: {
+        return;
+    }
+
+    case OP_GET_FREE_PORT: {
+        return;
+    }
+    }
 }
