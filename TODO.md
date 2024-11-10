@@ -1,4 +1,3 @@
-`program_add_op`
 `program_build`
 
 `worker_step` -- handle tail-call here
