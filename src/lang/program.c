@@ -53,3 +53,8 @@ program_build(program_t *self) {
         index++;
     }
 }
+
+const op_t *
+program_get_op(const program_t *self, size_t index) {
+    return self->ops[index];
+}
