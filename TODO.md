@@ -1,7 +1,10 @@
-`node_spec_define_port` -- `name`, `is_principal`
+`mod_find_spec` -- `name`
+
 `mod_define_rule` -- `first_name`, `second_name`, `program`
 
-`worker_test` -- build `mod` by hand and `worker_run`
+`worker_test` -- setup
+`worker_test` -- build `mod` by hand
+`worker_test` -- call `worker_run`
 
 # stack
 
