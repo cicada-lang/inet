@@ -1,7 +1,4 @@
-`worker_step`
-
-- [maybe] handle tail-call here
-- [maybe] take `frame`
+`worker_step` -- handle tail-call here
 
 `program_t` -- use builder pattern
 

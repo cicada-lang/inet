@@ -62,12 +62,17 @@ worker_interact(worker_t *self) {
 
 void
 worker_run(worker_t *self) {
-    while (!stack_is_empty(self->frame_stack)) {
-        worker_step(self);
+    while (true) {
+        frame_t *frame = stack_pop(self->frame_stack);
+        if (!frame) break;
+
+
+        worker_step(self, frame);
     }
 }
 
 void
-worker_step(worker_t *self) {
+worker_step(worker_t *self, frame_t *frame) {
     (void)self;
+    (void)frame;
 }
