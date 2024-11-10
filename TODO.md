@@ -1,4 +1,5 @@
-`execute` -- `op_connect`
+ambr opposite_port opposite
+
 `execute` -- `op_get_free_port`
 `execute` -- `op_call_node`
 

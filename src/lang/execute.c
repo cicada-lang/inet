@@ -19,6 +19,19 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
 
     case OP_CONNECT: {
         op_connect_t *op = op;
+
+        port_t *second_port = stack_pop(worker->port_stack);
+        port_t *first_port = stack_pop(worker->port_stack);
+
+        assert(second_port);
+        assert(first_port);
+
+        first_port->opposite_port->opposite_port = second_port->opposite_port;
+        second_port->opposite_port->opposite_port = first_port->opposite_port;
+
+        port_destroy(&first_port);
+        port_destroy(&second_port);
+
         return;
     }
 
