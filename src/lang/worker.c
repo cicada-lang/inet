@@ -66,7 +66,6 @@ worker_run(worker_t *self) {
         frame_t *frame = stack_pop(self->frame_stack);
         if (!frame) break;
 
-
         worker_step(self, frame);
     }
 }
@@ -75,4 +74,16 @@ void
 worker_step(worker_t *self, frame_t *frame) {
     (void)self;
     (void)frame;
+
+    // if (frame_is_finished(frame)) return;
+
+    // op_t *op = frame_fetch_op(frame);
+
+    // // handle tail-call by only push back not finished frame.
+    // bool finished = frame_is_finished(frame)
+    // if (!finished) stack_push(self->frame_stack, frame);
+
+    // execute(op, self, frame);
+
+    // if (finished) frame_destroy(&frame);
 }

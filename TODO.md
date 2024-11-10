@@ -1,5 +1,13 @@
+`execute` -- setup
+`frame_fetch_op`
+
 `worker_step` -- handle tail-call here
-`execute`
+
+`execute` -- `op_call_program`
+`execute` -- `op_connect`
+`execute` -- `op_get_free_port`
+`execute` -- `op_call_node`
+
 `worker_test` -- build `program` by hand and `worker_run`
 
 # stack

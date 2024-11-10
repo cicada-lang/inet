@@ -105,3 +105,8 @@ frame_get_free_port(
         return self->second_free_port_group->ports[index];
     assert(false);
 }
+
+bool
+frame_is_finished(const frame_t *self) {
+    return self->program_counter == program_length(self->program);
+}
