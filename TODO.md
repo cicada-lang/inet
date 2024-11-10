@@ -1,6 +1,3 @@
-ambr opposite_port opposite
-
-`execute` -- `op_get_free_port`
 `execute` -- `op_call_node`
 
 `worker_test` -- build `program` by hand and `worker_run`

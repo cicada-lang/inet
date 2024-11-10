@@ -37,6 +37,9 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
 
     case OP_GET_FREE_PORT: {
         op_get_free_port_t *op = op;
+        port_t *free_port = frame_get_free_port(frame, op->node_spec, op->index);
+        assert(free_port);
+        stack_push(worker->port_stack, free_port);
         return;
     }
     }
