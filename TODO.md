@@ -1,4 +1,3 @@
-`program_length`
 `program_add_op`
 `program_build`
 

@@ -30,3 +30,8 @@ program_destroy(program_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+size_t
+program_length(const program_t *self) {
+    return self->length;
+}
