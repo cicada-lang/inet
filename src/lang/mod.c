@@ -42,6 +42,7 @@ const spec_t *
 mod_find_spec(const mod_t *self, const char *name) {
     (void) self;
     (void) name;
+    return NULL;
 }
 
 const rule_t *
