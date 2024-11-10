@@ -7,6 +7,7 @@
 #include "active_pair.h"
 #include "mod.h"
 #include "frame.h"
+#include "execute.h"
 #include "worker.h"
 #include "op.h"
 #include "program.h"

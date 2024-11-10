@@ -1,5 +1,3 @@
-`worker_step` -- handle tail-call here
-
 `execute` -- `op_call_program`
 `execute` -- `op_connect`
 `execute` -- `op_get_free_port`
