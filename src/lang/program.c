@@ -2,13 +2,20 @@
 
 struct program_t {
     list_t *op_list;
+    size_t length;
+    op_t **ops;
 };
 
 program_t *
 program_new(void) {
     program_t *self = allocate(sizeof(program_t));
+
     self->op_list = list_new();
-    list_set_item_destructor(self->op_list, (list_item_destructor_t *) op_destroy);
+    list_set_item_destructor(
+        self->op_list, (list_item_destructor_t *) op_destroy);
+
+    self->length = 0;
+    self->ops = NULL;
     return self;
 }
 
@@ -18,6 +25,7 @@ program_destroy(program_t **self_pointer) {
     if (*self_pointer) {
         program_t *self = *self_pointer;
         list_destroy(&self->op_list);
+        if (self->ops) free(self->ops);
         free(self);
         *self_pointer = NULL;
     }

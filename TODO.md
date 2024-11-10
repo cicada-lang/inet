@@ -1,9 +1,9 @@
+`program_length`
+`program_add_op`
+`program_build`
+
 `worker_step` -- handle tail-call here
-
-`program_t` -- use builder pattern
-
-`op_execute`
-
+`execute`
 `worker_test` -- build `program` by hand and `worker_run`
 
 # stack
