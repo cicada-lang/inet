@@ -15,3 +15,5 @@ bool port_is_principal(port_t *self);
 const char *port_name(const port_t *self);
 
 void port_free_from_node(port_t *self);
+
+void port_print(const port_t *self);

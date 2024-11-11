@@ -74,7 +74,9 @@ worker_step(worker_t *self) {
 void
 worker_print(const worker_t *self) {
     printf("<worker>\n");
+
     mod_print(self->mod);
+
     size_t frame_stack_length = stack_length(self->frame_stack);
     printf("<frame_stack length=\"%lu\">\n", frame_stack_length);
     for (size_t i = 0; i < frame_stack_length; i++) {
@@ -82,12 +84,16 @@ worker_print(const worker_t *self) {
         frame_print(frame);
     }
     printf("</frame_stack>\n");
+
     size_t port_stack_length = stack_length(self->port_stack);
     printf("<port_stack length=\"%lu\">\n", port_stack_length);
     for (size_t i = 0; i < port_stack_length; i++) {
         port_t *port = stack_get(self->port_stack, i);
-        (void) port;
+        printf("- ");
+        port_print(port);
+        printf("\n");
     }
     printf("</port_stack>\n");
+
     printf("</worker>\n");
 }

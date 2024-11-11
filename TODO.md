@@ -1,8 +1,18 @@
-`worker_test` -- define some rules
-
-`worker_print` -- print `port_stack` items
+`port_is_free_port`
+`port_is_node_port`
+`port_is_loss_port`
 
 `port_print`
+
+- free-port: `(node)-port:port~`
+- node-port: `(node)-port:port-(node)`
+- lossing-port: `~<loss-port>~` -- free-port without `opposite_port`
+
+`free_port_group_print` -- fix format
+
+- `(node) ~port:port-(node)`
+
+`worker_test` -- define some rules
 
 `token_t`
 `lexer_t`
