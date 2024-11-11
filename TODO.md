@@ -1,5 +1,3 @@
-`mod_print` -- print `spec_count` and `rule_count`
-
 `worker_print` -- print `frame_stack` items
 `frame_print`
 

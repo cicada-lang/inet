@@ -82,20 +82,22 @@ mod_define_rule(
 
 void
 mod_print(const mod_t *self) {
-    printf("<mod>\n");
-
-    rule_t *rule = list_start(self->rule_list);
-    while (rule) {
-        rule_print(rule);
-        printf("\n");
-        rule = list_next(self->rule_list);
-    }
+    printf("<mod spec_count=%lu rule_count=%lu>\n",
+           list_lenght(self->spec_list),
+           list_lenght(self->rule_list));
 
     spec_t *spec = list_start(self->spec_list);
     while (spec) {
         spec_print(spec);
         printf("\n");
         spec = list_next(self->spec_list);
+    }
+
+    rule_t *rule = list_start(self->rule_list);
+    while (rule) {
+        rule_print(rule);
+        printf("\n");
+        rule = list_next(self->rule_list);
     }
 
     printf("</mod>\n");
