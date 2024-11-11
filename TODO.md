@@ -1,4 +1,3 @@
-`op_print`
 `program_print`
 
 `rule_print`

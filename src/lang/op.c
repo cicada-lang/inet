@@ -100,3 +100,33 @@ op_destroy(op_t **self_pointer) {
         }
     }
 }
+
+void
+op_print(const op_t *unknown_op) {
+    switch (unknown_op->tag) {
+    case CALL_PROGRAM_OP: {
+        call_program_op_t *op = (call_program_op_t *) unknown_op;
+        printf("%s", op->program_spec->name);
+        return;
+    }
+
+    case CALL_NODE_OP: {
+        call_node_op_t *op = (call_node_op_t *) unknown_op;
+        printf("%s", op->node_spec->name);
+        return;
+    }
+
+    case CONNECT_OP: {
+        printf("@connect");
+        return;
+    }
+
+    case GET_FREE_PORT_OP: {
+        get_free_port_op_t *op = (get_free_port_op_t *) unknown_op;        
+        printf("(%s)", op->node_spec->name);
+        port_spec_t *port_spec = op->node_spec->port_specs[op->index];
+        printf("-%s", port_spec->name);
+        return;
+    }
+    }
+}

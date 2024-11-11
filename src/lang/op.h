@@ -33,3 +33,5 @@ void connect_op_destroy(connect_op_t **self_pointer);
 void get_free_port_op_destroy(get_free_port_op_t **self_pointer);
 
 void op_destroy(op_t **self_pointer);
+
+void op_print(const op_t *self);
