@@ -59,15 +59,17 @@ worker_run(worker_t *self) {
 
 void
 worker_step(worker_t *self, frame_t *frame) {
+    printf("1");
     if (frame_is_finished(frame)) return;
-
+    printf("2");
     op_t *op = frame_fetch_op(frame);
-
+    printf("3");
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);
+    printf("4");
     if (!finished) stack_push(self->frame_stack, frame);
-
+    printf("5");
     execute(op, self, frame);
-
+    printf("6");
     if (finished) frame_destroy(&frame);
 }

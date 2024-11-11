@@ -20,16 +20,16 @@ spec_destroy(spec_t **self_pointer) {
 }
 
 const char *
-spec_name(spec_t *self) {
-    switch (self->tag) {
+spec_name(spec_t *spec_unknown) {
+    switch (spec_unknown->tag) {
     case NODE_SPEC: {
-        node_spec_t *self = self;
-        return self->name;
+        node_spec_t *spec = (node_spec_t *) spec_unknown;
+        return spec->name;
     }
 
     case PROGRAM_SPEC: {
-        program_spec_t *self = self;
-        return self->name;
+        program_spec_t *spec = (program_spec_t *) spec_unknown;
+        return spec->name;
     }
     }
 
