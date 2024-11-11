@@ -58,3 +58,11 @@ op_t *
 program_get_op(const program_t *self, size_t index) {
     return self->ops[index];
 }
+
+void
+program_print(const program_t *self) {
+    for (size_t i = 0; i < self->length; i++) {
+        op_print(self->ops[i]);
+        printf(" ");
+    }
+}

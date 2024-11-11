@@ -1,5 +1,3 @@
-`program_print`
-
 `rule_print`
 `mod_print` -- with `rule_print`
 `spec_print`
