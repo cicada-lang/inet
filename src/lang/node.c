@@ -5,12 +5,9 @@ static node_id_t node_gen_id(void);
 node_t *
 node_new(const node_spec_t *spec) {
     node_t *self = allocate(sizeof(node_t));
-    printf("i");
     self->spec = spec;
-    printf("i");    
     self->id = node_gen_id();
-printf("i");        
-    self->ports = allocate_pointers(spec->arity);    
+    self->ports = allocate_pointers(spec->arity);
     return self;
 }
 

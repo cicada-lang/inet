@@ -25,12 +25,17 @@ worker_test(void) {
 
     program_t *program = program_new();
     program_add_op(program, (op_t *) op_call_node_new(zero_spec));
+    program_add_op(program, (op_t *) op_call_node_new(zero_spec));
+    program_add_op(program, (op_t *) op_call_node_new(add1_spec));
+    program_add_op(program, (op_t *) op_call_node_new(add_spec));
     program_build(program);
 
     frame_t *frame = frame_new(program);
     stack_push(worker->frame_stack, frame);
 
     worker_run(worker);
+
+    printf("port_stack length: %li\n", stack_length(worker->port_stack));
 
     worker_destroy(&worker);
     mod_destroy(&mod);
