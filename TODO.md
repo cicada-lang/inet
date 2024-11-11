@@ -1,10 +1,10 @@
-`port_print`
-`worker_print` -- print `port_stack`
+`mod_print` -- print `spec_count` and `rule_count`
 
+`worker_print` -- print `frame_stack` items
 `frame_print`
-`worker_print` -- print `frame_stack`
 
-`worker_test` -- call `worker_print`
+`worker_print` -- print `port_stack` items
+`port_print`
 
 `token_t`
 `lexer_t`

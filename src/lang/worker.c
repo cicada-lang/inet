@@ -72,5 +72,9 @@ void
 worker_print(const worker_t *self) {
     printf("<worker>\n");
     mod_print(self->mod);
+    printf("<frame_stack length=%lu>\n", stack_length(self->frame_stack));
+    printf("</frame_stack>\n");
+    printf("<port_stack length=%lu>\n", stack_length(self->port_stack));
+    printf("</port_stack>\n");
     printf("</worker>\n");
 }
