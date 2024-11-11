@@ -20,3 +20,9 @@ program_spec_destroy(program_spec_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+program_spec_t *
+program_spec_cast(spec_t *spec) {
+    assert(spec->tag == PROGRAM_SPEC);
+    return (program_spec_t *)spec;
+}

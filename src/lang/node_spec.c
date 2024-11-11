@@ -51,3 +51,9 @@ node_spec_destroy(node_spec_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+node_spec_t *
+node_spec_cast(spec_t *spec) {
+    assert(spec->tag == NODE_SPEC);
+    return (node_spec_t *)spec;
+}
