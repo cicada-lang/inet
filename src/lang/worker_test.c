@@ -35,7 +35,7 @@ worker_test(void) {
 
     worker_run(worker);
 
-    printf("port_stack length: %li\n", stack_length(worker->port_stack));
+    assert(stack_length(worker->port_stack) == 1);
 
     worker_destroy(&worker);
     mod_destroy(&mod);
