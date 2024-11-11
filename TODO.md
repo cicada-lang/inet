@@ -1,12 +1,22 @@
-`worker_test` -- call `worker_inspect`
-
 # stack
 
 [stack] use list of arrays -- should not need require a `size`
 
-# learn
+# lang
 
-re-read scalable-c and make mimors to remember
+`worker_inspect`
+`worker_test` -- call `worker_inspect`
+
+`mod_t` -- has `filename` and `text`
+`mod_load`
+
+`eval` -- dispatch by different runes
+
+- `;` -- `ignore_comment`
+- `*` -- `define_node`
+- `.` -- `run_program`
+- `=` -- `define_program`
+- `!` -- `define_rule`
 
 # design
 
