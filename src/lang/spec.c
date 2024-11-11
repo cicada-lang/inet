@@ -18,3 +18,20 @@ spec_destroy(spec_t **self_pointer) {
         }
     }
 }
+
+const char *
+spec_name(spec_t *self) {
+    switch (self->tag) {
+    case NODE_SPEC: {
+        node_spec_t *self = self;
+        return self->name;
+    }
+
+    case PROGRAM_SPEC: {
+        program_spec_t *self = self;
+        return self->name;
+    }
+    }
+
+    assert(false);
+}
