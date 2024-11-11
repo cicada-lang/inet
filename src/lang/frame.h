@@ -8,3 +8,4 @@ port_t *frame_get_free_port(frame_t *self, const node_spec_t *node_spec, port_in
 
 bool frame_is_finished(const frame_t *self);
 op_t *frame_fetch_op(frame_t *self);
+void frame_print(const frame_t *self);

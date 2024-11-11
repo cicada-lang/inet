@@ -1,8 +1,9 @@
-`worker_print` -- print `frame_stack` items
+`stack_get`
 `frame_print`
+`worker_print` -- print `frame_stack` items
 
-`worker_print` -- print `port_stack` items
 `port_print`
+`worker_print` -- print `port_stack` items
 
 `token_t`
 `lexer_t`

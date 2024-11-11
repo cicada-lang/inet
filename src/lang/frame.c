@@ -117,3 +117,12 @@ frame_fetch_op(frame_t *self) {
     self->program_counter++;
     return op;
 }
+
+void
+frame_print(const frame_t *self) {
+    printf("<frame>\n");
+    program_print(self->program);
+    // TODO self->first_free_port_group;
+    // TODO self->second_free_port_group;
+    printf("</frame>\n");
+}
