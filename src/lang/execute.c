@@ -6,22 +6,22 @@ static void node_return_output_ports(node_t *node, worker_t *worker);
 void
 execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     switch (unknown_op->tag) {
-    case OP_CALL_PROGRAM: {
-        op_call_program_t *op = (op_call_program_t *) unknown_op;
+    case CALL_PROGRAM_OP: {
+        call_program_op_t *op = (call_program_op_t *) unknown_op;
         frame_t *frame = frame_new(op->program_spec->program);
         stack_push(worker->frame_stack, frame);
         return;
     }
 
-    case OP_CALL_NODE: {
-        op_call_node_t *op = (op_call_node_t *) unknown_op;
+    case CALL_NODE_OP: {
+        call_node_op_t *op = (call_node_op_t *) unknown_op;
         node_t *node = node_new(op->node_spec);
         node_apply_input_ports(node, worker);
         node_return_output_ports(node, worker);
         return;
     }
 
-    case OP_CONNECT: {
+    case CONNECT_OP: {
         port_t *second_port = stack_pop(worker->port_stack);
         port_t *first_port = stack_pop(worker->port_stack);
 
@@ -34,8 +34,8 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
         return;
     }
 
-    case OP_GET_FREE_PORT: {
-        op_get_free_port_t *op = (op_get_free_port_t *) unknown_op;
+    case GET_FREE_PORT_OP: {
+        get_free_port_op_t *op = (get_free_port_op_t *) unknown_op;
         port_t *free_port = frame_get_free_port(frame, op->node_spec, op->index);
         assert(free_port);
         stack_push(worker->port_stack, free_port);

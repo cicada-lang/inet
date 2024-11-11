@@ -1,6 +1,6 @@
 #include "index.h"
 
-// The free ports in a frame can be referenced by `op_get_free_port_t`.
+// The free ports in a frame can be referenced by `get_free_port_op_t`.
 
 typedef struct free_port_group_t free_port_group_t;
 

@@ -24,10 +24,10 @@ worker_test(void) {
     worker_t *worker = worker_new(mod);
 
     program_t *program = program_new();
-    program_add_op(program, (op_t *) op_call_node_new(zero_spec));
-    program_add_op(program, (op_t *) op_call_node_new(zero_spec));
-    program_add_op(program, (op_t *) op_call_node_new(add1_spec));
-    program_add_op(program, (op_t *) op_call_node_new(add_spec));
+    program_add_op(program, (op_t *) call_node_op_new(zero_spec));
+    program_add_op(program, (op_t *) call_node_op_new(zero_spec));
+    program_add_op(program, (op_t *) call_node_op_new(add1_spec));
+    program_add_op(program, (op_t *) call_node_op_new(add_spec));
     program_build(program);
 
     frame_t *frame = frame_new(program);
