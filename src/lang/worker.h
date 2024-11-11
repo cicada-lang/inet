@@ -16,6 +16,6 @@ void worker_destroy(worker_t **self_pointer);
 
 void worker_interact(worker_t *self);
 void worker_run(worker_t *self);
-void worker_step(worker_t *self, frame_t *frame);
+void worker_step(worker_t *self);
 
 void worker_print(const worker_t *self);

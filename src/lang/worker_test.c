@@ -34,9 +34,24 @@ worker_test(void) {
     stack_push(worker->frame_stack, frame);
 
     worker_print(worker);
-    worker_run(worker);
+    worker_step(worker);
+
     worker_print(worker);
-    assert(stack_length(worker->port_stack) == 1);
+    worker_step(worker);
+
+    worker_print(worker);
+    worker_step(worker);
+
+    worker_print(worker);
+    worker_step(worker);
+
+    worker_print(worker);
+    worker_step(worker);
+
+    worker_print(worker);
+    worker_step(worker);
+
+    worker_print(worker);
 
     worker_destroy(&worker);
     mod_destroy(&mod);

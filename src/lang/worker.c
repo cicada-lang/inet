@@ -52,14 +52,17 @@ worker_interact(worker_t *self) {
 void
 worker_run(worker_t *self) {
     while (!stack_is_empty(self->frame_stack)) {
-        frame_t *frame = stack_pop(self->frame_stack);
-        worker_step(self, frame);
+        worker_step(self);
     }
 }
 
 void
-worker_step(worker_t *self, frame_t *frame) {
+worker_step(worker_t *self) {
+    if (stack_is_empty(self->frame_stack)) return;
+
+    frame_t *frame = stack_pop(self->frame_stack);
     if (frame_is_finished(frame)) return;
+
     op_t *op = frame_fetch_op(frame);
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);
