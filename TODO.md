@@ -1,4 +1,3 @@
-`frame_print` -- show `program_counter`
 `frame_print` -- show `first_free_port_group` and `second_free_port_group`
 
 `port_print`

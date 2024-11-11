@@ -66,3 +66,17 @@ program_print(const program_t *self) {
         printf(" ");
     }
 }
+
+void
+program_print_with_program_counter(const program_t *self, size_t program_counter) {
+    for (size_t i = 0; i < self->length; i++) {
+        if (i == program_counter) {
+            printf(">>> ");
+            op_print(self->ops[i]);
+            printf(" <<< ");
+        } else {
+            op_print(self->ops[i]);
+            printf(" ");
+        }
+    }
+}

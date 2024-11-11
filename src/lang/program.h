@@ -9,3 +9,4 @@ void program_build(program_t *self);
 op_t *program_get_op(const program_t *self, size_t index);
 
 void program_print(const program_t *self);
+void program_print_with_program_counter(const program_t *self, size_t program_counter);

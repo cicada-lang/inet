@@ -122,7 +122,7 @@ void
 frame_print(const frame_t *self) {
     printf("<frame>\n");
     printf(". ");
-    program_print(self->program);
+    program_print_with_program_counter(self->program, self->program_counter);
     printf("\n");
     // TODO self->first_free_port_group;
     // TODO self->second_free_port_group;
