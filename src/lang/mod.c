@@ -40,8 +40,12 @@ mod_destroy(mod_t **self_pointer) {
 
 const spec_t *
 mod_find_spec(const mod_t *self, const char *name) {
-    (void) self;
-    (void) name;
+    spec_t *spec = list_start(self->spec_list);
+    while (spec) {
+        if (string_equal(spec_name(spec), name)) return spec;
+        spec = list_next(self->spec_list);
+    }
+
     return NULL;
 }
 
