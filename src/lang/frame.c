@@ -118,6 +118,18 @@ frame_fetch_op(frame_t *self) {
     return op;
 }
 
+static void
+free_port_group_print(const free_port_group_t *free_port_group) {
+    printf("~ ");
+    printf("(%s) ", free_port_group->node_spec->name);
+    for (size_t i = 0; i < free_port_group->node_spec->arity; i++) {
+        port_t *free_port = free_port_group->ports[i];
+        if (free_port) {
+            printf("~%s ", port_name(free_port));
+        }
+    }
+}
+
 void
 frame_print(const frame_t *self) {
     printf("<frame>\n");
@@ -127,21 +139,12 @@ frame_print(const frame_t *self) {
     printf("\n");
 
     if (self->first_free_port_group) {
-        printf("~ ");
-        printf("(%s) ", self->first_free_port_group->node_spec->name);
-        for (size_t i = 0; i < self->first_free_port_group->node_spec->arity; i++) {
-            port_t *free_port = self->first_free_port_group->ports[i];
-            if (free_port) {
-                // port_name(free_port)
-                // free_port->index
-            }
-        }
+        free_port_group_print(self->first_free_port_group);
         printf("\n");
     }
 
     if (self->second_free_port_group) {
-        printf("~ ");
-        // TODO self->second_free_port_group;
+        free_port_group_print(self->second_free_port_group);
         printf("\n");
     }
 

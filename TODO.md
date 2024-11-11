@@ -1,9 +1,6 @@
-`frame_print` -- show `first_free_port_group` and `second_free_port_group`
-
-- extract `free_port_group_print`
+`worker_print` -- print `port_stack` items
 
 `port_print`
-`worker_print` -- print `port_stack` items
 
 `token_t`
 `lexer_t`
