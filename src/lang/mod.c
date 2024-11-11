@@ -1,8 +1,7 @@
 #include "index.h"
 
 // A mod is a compilation unit,
-// like the dictionary of forth,
-// which stores specs.
+// like the dictionary of forth.
 
 struct mod_t {
     list_t *spec_list;

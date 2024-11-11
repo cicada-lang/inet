@@ -1,10 +1,5 @@
 # inet
 
-> I'd love to see an interaction net implementation at the scale of uxn in C with a framebuffer.
-> I use uxn as a way to teach old ways of doing computers,
-> but sometimes I'd like to show people about the future of computation too. \
-> -- [Devine Lu Linvega](https://wiki.xxiivv.com/site/devine_lu_linvega.html)
-
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets).
 
 - Untyped.
