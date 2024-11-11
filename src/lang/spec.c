@@ -43,7 +43,6 @@ spec_print(const spec_t *unknown_spec) {
         node_spec_t *spec = (node_spec_t *) unknown_spec;
         printf("* %s ", spec->name);
         // TODO
-        printf("\n");
         return;
     }
 
@@ -51,7 +50,6 @@ spec_print(const spec_t *unknown_spec) {
         program_spec_t *spec = (program_spec_t *) unknown_spec;
         printf("= %s ", spec->name);
         program_print(spec->program);
-        printf("\n");
         return;
     }
     }

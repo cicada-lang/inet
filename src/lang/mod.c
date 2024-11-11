@@ -92,5 +92,12 @@ mod_print(const mod_t *self) {
         rule = list_next(self->rule_list);
     }
 
+    spec_t *spec = list_start(self->spec_list);
+    while (spec) {
+        spec_print(spec);
+        printf("\n");
+        spec = list_next(self->spec_list);
+    }
+
     printf("</mod>\n");
 }

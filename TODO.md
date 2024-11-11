@@ -1,4 +1,3 @@
-`mod_print` -- with `spec_print`
 `spec_print` -- `node_spec_t`
 
 `port_print`
