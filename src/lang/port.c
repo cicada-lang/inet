@@ -28,8 +28,19 @@ port_is_principal(port_t *self) {
 const char *
 port_name(const port_t *self) {
     assert(self->node);
+    assert(self->node->spec);
     port_spec_t *port_spec = self->node->spec->port_specs[self->index];
+    assert(port_spec);
+    assert(port_spec->name);
     return port_spec->name;
+}
+
+const char *
+port_node_name(const port_t *self) {
+    assert(self->node);
+    assert(self->node->spec);
+    assert(self->node->spec->name);
+    return self->node->spec->name;
 }
 
 void
@@ -40,7 +51,29 @@ port_free_from_node(port_t *self) {
 
 void
 port_print(const port_t *self) {
-    if (self->node) {
-        printf("%s", port_name(self));
+    if (self->opposite_port && self->node) {
+        assert(self->opposite_port->node);
+        printf("(%s)-%s:%s-(%s)",
+               port_node_name(self->opposite_port),
+               port_name(self->opposite_port),
+               port_name(self),
+               port_node_name(self));
+    }
+
+    if (self->opposite_port && !self->node) {
+        assert(self->opposite_port->node);
+        printf("(%s)-%s~",
+               port_node_name(self->opposite_port),
+               port_name(self->opposite_port));
+    }
+
+    if (!self->opposite_port && self->node) {
+        printf("~%s-(%s)",
+               port_name(self),
+               port_node_name(self));
+    }
+
+    if (!self->opposite_port && !self->node) {
+        printf("~<loss-port>~");
     }
 }

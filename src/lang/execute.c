@@ -64,7 +64,7 @@ node_return_output_ports(node_t *node, worker_t *worker) {
         node_port->opposite_port = free_port;
         free_port->opposite_port = node_port;
 
-        size_t i = node->spec->output_arity + c;
+        size_t i = node->spec->input_arity + c;
         node_port->node = node;
         node_port->index = i;
         node->ports[i] = node_port;
