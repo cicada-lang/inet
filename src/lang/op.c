@@ -122,11 +122,13 @@ op_print(const op_t *unknown_op) {
     }
 
     case GET_FREE_PORT_OP: {
-        get_free_port_op_t *op = (get_free_port_op_t *) unknown_op;        
+        get_free_port_op_t *op = (get_free_port_op_t *) unknown_op;
         printf("(%s)", op->node_spec->name);
         port_spec_t *port_spec = op->node_spec->port_specs[op->index];
         printf("-%s", port_spec->name);
         return;
     }
     }
+
+    assert(false);
 }

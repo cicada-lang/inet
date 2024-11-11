@@ -35,3 +35,26 @@ spec_name(spec_t *unknown_spec) {
 
     assert(false);
 }
+
+void
+spec_print(const spec_t *unknown_spec) {
+    switch (unknown_spec->tag) {
+    case NODE_SPEC: {
+        node_spec_t *spec = (node_spec_t *) unknown_spec;
+        printf("* %s ", spec->name);
+        // TODO
+        printf("\n");
+        return;
+    }
+
+    case PROGRAM_SPEC: {
+        program_spec_t *spec = (program_spec_t *) unknown_spec;
+        printf("= %s ", spec->name);
+        program_print(spec->program);
+        printf("\n");
+        return;
+    }
+    }
+
+    assert(false);
+}
