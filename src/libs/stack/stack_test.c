@@ -28,6 +28,10 @@ stack_test(void) {
     assert(stack_length(stack) == 3);
     assert(!stack_is_empty(stack));
 
+    assert(stack_pick(stack, 0) == wine);
+    assert(stack_pick(stack, 1) == bread);
+    assert(stack_pick(stack, 2) == cheese);
+
     assert(stack_pop(stack) == wine);
     assert(stack_pop(stack) == bread);
     assert(stack_pop(stack) == cheese);

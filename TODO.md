@@ -1,4 +1,3 @@
-`stack_get`
 `frame_print`
 `worker_print` -- print `frame_stack` items
 
