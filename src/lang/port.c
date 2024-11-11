@@ -25,6 +25,12 @@ port_is_principal(port_t *self) {
     return port_spec->is_principal;
 }
 
+const char *
+port_name(const port_t *self) {
+    port_spec_t *port_spec = self->node->spec->port_specs[self->index];
+    return port_spec->name;
+}
+
 void
 port_free_from_node(port_t *self) {
     self->node = NULL;

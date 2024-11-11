@@ -121,10 +121,29 @@ frame_fetch_op(frame_t *self) {
 void
 frame_print(const frame_t *self) {
     printf("<frame>\n");
+
     printf(". ");
     program_print_with_program_counter(self->program, self->program_counter);
     printf("\n");
-    // TODO self->first_free_port_group;
-    // TODO self->second_free_port_group;
+
+    if (self->first_free_port_group) {
+        printf("~ ");
+        printf("(%s) ", self->first_free_port_group->node_spec->name);
+        for (size_t i = 0; i < self->first_free_port_group->node_spec->arity; i++) {
+            port_t *free_port = self->first_free_port_group->ports[i];
+            if (free_port) {
+                // port_name(free_port)
+                // free_port->index
+            }
+        }
+        printf("\n");
+    }
+
+    if (self->second_free_port_group) {
+        printf("~ ");
+        // TODO self->second_free_port_group;
+        printf("\n");
+    }
+
     printf("</frame>\n");
 }

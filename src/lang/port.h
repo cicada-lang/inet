@@ -12,4 +12,6 @@ port_t *port_new(void);
 void port_destroy(port_t **self_pointer);
 
 bool port_is_principal(port_t *self);
+const char *port_name(const port_t *self);
+
 void port_free_from_node(port_t *self);
