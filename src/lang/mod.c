@@ -65,15 +65,18 @@ mod_define(mod_t *self, spec_t *spec) {
     list_push(self->spec_list, spec);
 }
 
-// void
-// mod_define_rule(
-//     mod_t *self,
-//     const char *first_name,
-//     const char *second_name,
-//     program_t *program
-// ) {
-//     node_t *first_node_spec = mod_find_spec(self, first_name);
-//     node_spec_t *second_node_spec = mod_find_spec(self, second_name);
-//     rule_t *rule = rule_new(first_node_spec, second_node_spec, program);
-//     list_push(self->rule_list, rule);
-// }
+void
+mod_define_rule(
+    mod_t *self,
+    const char *first_name,
+    const char *second_name,
+    program_t *program
+) {
+    const node_spec_t *first_node_spec =
+        node_spec_cast(mod_find_spec(self, first_name));
+    const node_spec_t *second_node_spec =
+        node_spec_cast(mod_find_spec(self, second_name));
+
+    rule_t *rule = rule_new(first_node_spec, second_node_spec, program);
+    list_push(self->rule_list, rule);
+}
