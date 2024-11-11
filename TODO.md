@@ -1,3 +1,8 @@
+ambr spec_unknown unknown_spec
+
+`token_t`
+`lexer_t`
+
 `worker_inspect`
 `worker_test` -- call `worker_inspect`
 
