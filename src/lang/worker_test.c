@@ -29,7 +29,8 @@ worker_test(void) {
 
     worker_t *worker = worker_new(mod);
 
-    // TODO
+    worker_interact(worker);
+    worker_run(worker);
 
     worker_destroy(&worker);
     mod_destroy(&mod);

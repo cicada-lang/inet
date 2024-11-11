@@ -1,4 +1,5 @@
-`worker_test` -- call `worker_run`
+`worker_test` -- `worker_run` with `frame`
+`worker_test` -- call `worker_inspect`
 
 # stack
 

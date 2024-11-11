@@ -15,6 +15,8 @@ int
 run(char **args) {
     (void) args;
 
+    setbuf(stdout, NULL);
+    
     printf("<self-test>\n");
 
     string_test();

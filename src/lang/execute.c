@@ -29,9 +29,6 @@ execute(op_t *op, worker_t *worker, frame_t *frame) {
         port_t *second_port = stack_pop(worker->port_stack);
         port_t *first_port = stack_pop(worker->port_stack);
 
-        assert(second_port);
-        assert(first_port);
-
         first_port->opposite_port->opposite_port = second_port->opposite_port;
         second_port->opposite_port->opposite_port = first_port->opposite_port;
 
@@ -55,7 +52,6 @@ void
 node_apply_input_ports(node_t *node, worker_t *worker) {
     for (size_t c = 0; c < node->spec->input_arity; c++) {
         port_t *port = stack_pop(worker->port_stack);
-        assert(port);
         size_t i = node->spec->input_arity - 1 - c;
         port->node = node;
         port->index = i;
