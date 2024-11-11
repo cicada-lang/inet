@@ -12,3 +12,5 @@ rule_t *rule_new(
     program_t *program);
 void rule_destroy(rule_t **self_pointer);
 bool rule_match_active_pair(const rule_t *self, const active_pair_t *active_pair);
+
+void rule_print(const rule_t *self);
