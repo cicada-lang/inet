@@ -1,4 +1,3 @@
-`worker_test` -- build `mod` by hand
 `worker_test` -- call `worker_run`
 
 # stack
