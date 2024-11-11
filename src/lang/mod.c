@@ -80,3 +80,8 @@ mod_define_rule(
     rule_t *rule = rule_new(first_node_spec, second_node_spec, program);
     list_push(self->rule_list, rule);
 }
+
+void
+mod_print(const mod_t *self) {
+    (void) self;
+}

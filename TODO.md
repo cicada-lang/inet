@@ -1,3 +1,13 @@
+`spec_print`
+`rule_print`
+
+`mod_print`
+`worker_print`
+`port_print`
+`frame_print`
+
+`worker_test` -- call `worker_print`
+
 `token_t`
 `lexer_t`
 `lexer_lex`
@@ -16,9 +26,6 @@
 - `!` -- `define_rule_stmt`
 
 `compile_stmt(stmt, mod)`
-
-`worker_inspect`
-`worker_test` -- call `worker_inspect`
 
 `mod_t` -- has `filename` and `text`
 `mod_load`

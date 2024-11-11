@@ -67,3 +67,9 @@ worker_step(worker_t *self, frame_t *frame) {
     execute(op, self, frame);
     if (finished) frame_destroy(&frame);
 }
+
+void
+worker_print(const worker_t *self) {
+    mod_print(self->mod);
+    //
+}

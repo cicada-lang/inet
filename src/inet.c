@@ -4,6 +4,8 @@
 
 int
 main(int argc, char *argv[]) {
+    setbuf(stdout, NULL);
+
     commander_t *commander = commander_new("inet", INET_VERSION, argc, argv);
 
     commander_mount(commander, self_test_command);
