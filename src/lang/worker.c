@@ -10,12 +10,12 @@ worker_new(const mod_t *mod) {
         self->active_pair_list,
         (list_item_destructor_t *) active_pair_destroy);
 
-    self->port_stack = stack_new(10000);
+    self->port_stack = stack_new(PORT_STACK_SIZE);
     stack_set_item_destructor(
         self->port_stack,
         (stack_item_destructor_t *) port_destroy);
 
-    self->frame_stack = stack_new(10000);
+    self->frame_stack = stack_new(FRAME_STACK_SIZE);
     stack_set_item_destructor(
         self->frame_stack,
         (stack_item_destructor_t *) frame_destroy);

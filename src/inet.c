@@ -1,5 +1,5 @@
 #include "deps.h"
-#include "version.h"
+#include "config.h"
 #include "commands/index.h"
 
 int

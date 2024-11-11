@@ -1,16 +1,12 @@
-# stack
-
-[stack] use list of arrays -- should not need require a `size`
-
-# lang
-
 `worker_inspect`
 `worker_test` -- call `worker_inspect`
 
 `mod_t` -- has `filename` and `text`
 `mod_load`
 
-`eval` -- dispatch by different runes
+`stmt_t`
+
+`evaluate` -- dispatch by different runes
 
 - `;` -- `ignore_comment`
 - `*` -- `define_node`

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../deps.h"
+#include "../config.h"
 #include "types.h"
 #include "node.h"
 #include "port.h"
