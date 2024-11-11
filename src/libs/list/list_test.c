@@ -6,7 +6,7 @@ list_test(void) {
 
     list_t *list = list_new();
     assert(list);
-    assert(list_lenght(list) == 0);
+    assert(list_length(list) == 0);
 
     assert(list_first(list) == NULL);
     assert(list_last(list) == NULL);
@@ -29,19 +29,19 @@ list_test(void) {
 
     {
         list_push(list, cheese);
-        assert(list_lenght(list) == 1);
+        assert(list_length(list) == 1);
         assert(list_has(list, cheese));
         assert(!list_has(list, bread));
         assert(!list_has(list, wine));
 
         list_push(list, bread);
-        assert(list_lenght(list) == 2);
+        assert(list_length(list) == 2);
         assert(list_has(list, cheese));
         assert(list_has(list, bread));
         assert(!list_has(list, wine));
 
         list_push(list, wine);
-        assert(list_lenght(list) == 3);
+        assert(list_length(list) == 3);
         assert(list_has(list, cheese));
         assert(list_has(list, bread));
         assert(list_has(list, wine));
@@ -59,18 +59,18 @@ list_test(void) {
         assert(list_next(list) == NULL);
         //  After we reach end of list, next wraps around
         assert(list_next(list) == cheese);
-        assert(list_lenght(list) == 3);
+        assert(list_length(list) == 3);
 
         list_remove(list, wine);
-        assert(list_lenght(list) == 2);
+        assert(list_length(list) == 2);
 
         assert(list_first(list) == cheese);
         list_remove(list, cheese);
-        assert(list_lenght(list) == 1);
+        assert(list_length(list) == 1);
         assert(list_first(list) == bread);
 
         list_remove(list, bread);
-        assert(list_lenght(list) == 0);
+        assert(list_length(list) == 0);
     }
 
     {
@@ -85,16 +85,16 @@ list_test(void) {
 
     {
         list_unshift(list, cheese);
-        assert(list_lenght(list) == 1);
+        assert(list_length(list) == 1);
         assert(list_first(list) == cheese);
 
         list_unshift(list, bread);
-        assert(list_lenght(list) == 2);
+        assert(list_length(list) == 2);
         assert(list_start(list) == bread);
         assert(list_current(list) == bread);
 
         list_push(list, wine);
-        assert(list_lenght(list) == 3);
+        assert(list_length(list) == 3);
         assert(list_first(list) == bread);
 
         list_pop(list);
@@ -148,7 +148,7 @@ list_test(void) {
         list_set_item_destructor(list, (list_item_destructor_t *) string_destroy);
 
         list_purge(list);
-        assert(list_lenght(list) == 0);
+        assert(list_length(list) == 0);
 
         list_destroy(&list);
         assert(list == NULL);

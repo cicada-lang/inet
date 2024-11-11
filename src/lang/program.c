@@ -43,7 +43,7 @@ program_add_op(program_t *self, op_t *op) {
 
 void
 program_build(program_t *self) {
-    self->length = list_lenght(self->op_list);
+    self->length = list_length(self->op_list);
     self->ops = allocate_pointers(self->length);
     size_t index = 0;
     op_t *op = list_start(self->op_list);

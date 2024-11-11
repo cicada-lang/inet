@@ -121,7 +121,9 @@ frame_fetch_op(frame_t *self) {
 void
 frame_print(const frame_t *self) {
     printf("<frame>\n");
+    printf(". ");
     program_print(self->program);
+    printf("\n");
     // TODO self->first_free_port_group;
     // TODO self->second_free_port_group;
     printf("</frame>\n");

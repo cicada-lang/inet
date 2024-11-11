@@ -78,6 +78,12 @@ stack_push(stack_t *self, void *item) {
 }
 
 void *
+stack_get(stack_t *self, size_t index) {
+    assert(index < self->cursor);
+    return self->items[index];
+}
+
+void *
 stack_pick(stack_t *self, size_t index) {
     assert(index < self->cursor);
     return self->items[self->cursor - 1 - index];

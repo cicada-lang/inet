@@ -11,4 +11,6 @@ bool stack_is_empty(const stack_t *self);
 
 void *stack_pop(stack_t *self);
 void stack_push(stack_t *self, void *item);
+
+void *stack_get(stack_t *self, size_t index);
 void *stack_pick(stack_t *self, size_t index);

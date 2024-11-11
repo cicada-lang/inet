@@ -60,7 +60,7 @@ list_set_item_destructor(
 }
 
 size_t
-list_lenght(const list_t *self) {
+list_length(const list_t *self) {
     return self->length;
 }
 

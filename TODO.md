@@ -1,5 +1,5 @@
-`frame_print`
-`worker_print` -- print `frame_stack` items
+`frame_print` -- show `program_counter`
+`frame_print` -- show `first_free_port_group` and `second_free_port_group`
 
 `port_print`
 `worker_print` -- print `port_stack` items
