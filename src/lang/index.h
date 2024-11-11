@@ -9,6 +9,7 @@
 #include "frame.h"
 #include "execute.h"
 #include "worker.h"
+#include "worker_test.h"
 #include "op.h"
 #include "program.h"
 #include "rule.h"

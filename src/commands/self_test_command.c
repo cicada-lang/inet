@@ -1,4 +1,5 @@
 #include "index.h"
+#include "../lang/index.h"
 
 static int run(char **args);
 
@@ -20,7 +21,9 @@ run(char **args) {
     list_test();
     stack_test();
 
+    worker_test();
+
     printf("</self-test>\n");
-    
+
     return 0;
 }
