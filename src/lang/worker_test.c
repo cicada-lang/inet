@@ -2,7 +2,7 @@
 
 void
 worker_test(void) {
-    printf("<worker_test>");
+    printf("<worker_test>\n");
 
     mod_t *mod = mod_new();
 
@@ -33,8 +33,9 @@ worker_test(void) {
     frame_t *frame = frame_new(program);
     stack_push(worker->frame_stack, frame);
 
+    worker_print(worker);
     worker_run(worker);
-
+    worker_print(worker);
     assert(stack_length(worker->port_stack) == 1);
 
     worker_destroy(&worker);

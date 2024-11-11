@@ -70,6 +70,7 @@ worker_step(worker_t *self, frame_t *frame) {
 
 void
 worker_print(const worker_t *self) {
+    printf("<worker>\n");
     mod_print(self->mod);
-    //
+    printf("</worker>\n");
 }

@@ -83,5 +83,7 @@ mod_define_rule(
 
 void
 mod_print(const mod_t *self) {
+    printf("<mod>\n");
     (void) self;
+    printf("</mod>\n");
 }

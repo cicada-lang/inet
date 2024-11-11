@@ -1,7 +1,8 @@
-`spec_print`
 `rule_print`
 
-`mod_print`
+`mod_print` -- with `rule_print`
+`mod_print` -- with `spec_print`
+
 `worker_print`
 `port_print`
 `frame_print`
