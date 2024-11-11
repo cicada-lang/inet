@@ -1,5 +1,3 @@
-`spec_print` -- `node_spec_t`
-
 `port_print`
 `worker_print` -- print `port_stack`
 
