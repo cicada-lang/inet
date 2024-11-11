@@ -1,11 +1,16 @@
-`rule_print`
+`op_print`
+`program_print`
 
+`rule_print`
 `mod_print` -- with `rule_print`
+`spec_print`
 `mod_print` -- with `spec_print`
 
-`worker_print`
 `port_print`
+`worker_print` -- print `port_stack`
+
 `frame_print`
+`worker_print` -- print `frame_stack`
 
 `worker_test` -- call `worker_print`
 
@@ -36,7 +41,6 @@
 re-design syntax to simplify diff-list.test.inet
 
 - remove the idea of `(diff) @spread`
-- how about `@connect`?
 
 # debug
 
