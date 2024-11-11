@@ -1,21 +1,27 @@
 `token_t`
 `lexer_t`
+`lexer_lex`
+
+`parser_t`
+`parser_parse` -- build `stmt_list` from `token_list`
+
+- dispatch by different runes
+
+`stmt_t`
+
+- `;` -- `ignore_comment_stmt`
+- `*` -- `define_node_stmt`
+- `.` -- `run_program_stmt`
+- `=` -- `define_program_stmt`
+- `!` -- `define_rule_stmt`
+
+`compile_stmt(stmt, mod)`
 
 `worker_inspect`
 `worker_test` -- call `worker_inspect`
 
 `mod_t` -- has `filename` and `text`
 `mod_load`
-
-`stmt_t`
-
-`evaluate` -- dispatch by different runes
-
-- `;` -- `ignore_comment`
-- `*` -- `define_node`
-- `.` -- `run_program`
-- `=` -- `define_program`
-- `!` -- `define_rule`
 
 # design
 
