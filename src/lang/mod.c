@@ -84,6 +84,13 @@ mod_define_rule(
 void
 mod_print(const mod_t *self) {
     printf("<mod>\n");
-    (void) self;
+
+    rule_t *rule = list_start(self->rule_list);
+    while (rule) {
+        rule_print(rule);
+        printf("\n");
+        rule = list_next(self->rule_list);
+    }
+
     printf("</mod>\n");
 }
