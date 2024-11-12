@@ -1,4 +1,3 @@
-`token_new`
 `token_destroy`
 
 `lexer_t`
