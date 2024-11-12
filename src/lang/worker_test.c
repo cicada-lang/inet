@@ -17,10 +17,7 @@ worker_test(void) {
     program_build(program);
 
     frame_t *frame = frame_new(program);
-    stack_push(worker->frame_stack, frame);
-
-    worker_print(worker);
-    worker_step(worker);
+    stack_push(worker->return_stack, frame);
 
     worker_print(worker);
     worker_step(worker);

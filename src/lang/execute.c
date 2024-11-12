@@ -9,7 +9,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     case CALL_PROGRAM_OP: {
         call_program_op_t *op = (call_program_op_t *) unknown_op;
         frame_t *frame = frame_new(op->program_spec->program);
-        stack_push(worker->frame_stack, frame);
+        stack_push(worker->return_stack, frame);
         return;
     }
 
@@ -22,8 +22,8 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     }
 
     case CONNECT_OP: {
-        wire_t *second_wire = stack_pop(worker->wire_stack);
-        wire_t *first_wire = stack_pop(worker->wire_stack);
+        wire_t *second_wire = stack_pop(worker->value_stack);
+        wire_t *first_wire = stack_pop(worker->value_stack);
 
         first_wire->opposite_wire->opposite_wire = second_wire->opposite_wire;
         second_wire->opposite_wire->opposite_wire = first_wire->opposite_wire;
@@ -38,7 +38,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
         get_free_wire_op_t *op = (get_free_wire_op_t *) unknown_op;
         wire_t *free_wire = frame_get_free_wire(frame, op->node_spec, op->index);
         assert(free_wire);
-        stack_push(worker->wire_stack, free_wire);
+        stack_push(worker->value_stack, free_wire);
         return;
     }
     }
@@ -47,7 +47,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
 void
 node_apply_input_ports(node_t *node, worker_t *worker) {
     for (port_index_t c = 0; c < node->spec->input_arity; c++) {
-        wire_t *wire = stack_pop(worker->wire_stack);
+        wire_t *wire = stack_pop(worker->value_stack);
         port_index_t i = node->spec->input_arity - 1 - c;
         wire->node = node;
         wire->index = i;
@@ -69,6 +69,6 @@ node_return_output_ports(node_t *node, worker_t *worker) {
         node_wire->index = i;
         node->wires[i] = node_wire;
 
-        stack_push(worker->wire_stack, free_wire);
+        stack_push(worker->value_stack, free_wire);
     }
 }

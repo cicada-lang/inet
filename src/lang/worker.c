@@ -10,14 +10,14 @@ worker_new(const mod_t *mod) {
         self->active_pair_list,
         (list_item_destructor_t *) active_pair_destroy);
 
-    self->wire_stack = stack_new(WIRE_STACK_SIZE);
+    self->value_stack = stack_new(VALUE_STACK_SIZE);
     stack_set_item_destructor(
-        self->wire_stack,
+        self->value_stack,
         (stack_item_destructor_t *) wire_destroy);
 
-    self->frame_stack = stack_new(FRAME_STACK_SIZE);
+    self->return_stack = stack_new(RETURN_STACK_SIZE);
     stack_set_item_destructor(
-        self->frame_stack,
+        self->return_stack,
         (stack_item_destructor_t *) frame_destroy);
 
     return self;
@@ -29,8 +29,8 @@ worker_destroy(worker_t **self_pointer) {
     if (*self_pointer) {
         worker_t *self = *self_pointer;
         list_destroy(&self->active_pair_list);
-        stack_destroy(&self->wire_stack);
-        stack_destroy(&self->frame_stack);
+        stack_destroy(&self->value_stack);
+        stack_destroy(&self->return_stack);
         free(self);
         *self_pointer = NULL;
     }
@@ -44,29 +44,29 @@ worker_interact(worker_t *self) {
         assert(rule);
         frame_t *frame = frame_new(rule->program);
         frame_collect_free_wires(frame, active_pair);
-        stack_push(self->frame_stack, frame);
+        stack_push(self->return_stack, frame);
         worker_run(self);
     }
 }
 
 void
 worker_run(worker_t *self) {
-    while (!stack_is_empty(self->frame_stack)) {
+    while (!stack_is_empty(self->return_stack)) {
         worker_step(self);
     }
 }
 
 void
 worker_step(worker_t *self) {
-    if (stack_is_empty(self->frame_stack)) return;
+    if (stack_is_empty(self->return_stack)) return;
 
-    frame_t *frame = stack_pop(self->frame_stack);
+    frame_t *frame = stack_pop(self->return_stack);
     if (frame_is_finished(frame)) return;
 
     op_t *op = frame_fetch_op(frame);
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);
-    if (!finished) stack_push(self->frame_stack, frame);
+    if (!finished) stack_push(self->return_stack, frame);
     execute(op, self, frame);
     if (finished) frame_destroy(&frame);
 }
@@ -77,23 +77,23 @@ worker_print(const worker_t *self) {
 
     mod_print(self->mod);
 
-    size_t frame_stack_length = stack_length(self->frame_stack);
-    printf("<frame_stack length=\"%lu\">\n", frame_stack_length);
-    for (size_t i = 0; i < frame_stack_length; i++) {
-        frame_t *frame = stack_get(self->frame_stack, i);
+    size_t return_stack_length = stack_length(self->return_stack);
+    printf("<return_stack length=\"%lu\">\n", return_stack_length);
+    for (size_t i = 0; i < return_stack_length; i++) {
+        frame_t *frame = stack_get(self->return_stack, i);
         frame_print(frame);
     }
-    printf("</frame_stack>\n");
+    printf("</return_stack>\n");
 
-    size_t wire_stack_length = stack_length(self->wire_stack);
-    printf("<wire_stack length=\"%lu\">\n", wire_stack_length);
-    for (size_t i = 0; i < wire_stack_length; i++) {
-        wire_t *wire = stack_get(self->wire_stack, i);
+    size_t value_stack_length = stack_length(self->value_stack);
+    printf("<value_stack length=\"%lu\">\n", value_stack_length);
+    for (size_t i = 0; i < value_stack_length; i++) {
+        wire_t *wire = stack_get(self->value_stack, i);
         printf("- ");
         wire_print(wire);
         printf("\n");
     }
-    printf("</wire_stack>\n");
+    printf("</value_stack>\n");
 
     printf("</worker>\n");
 }
