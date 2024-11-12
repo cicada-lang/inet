@@ -1,4 +1,8 @@
+`program_emit_call`
+
 `worker_test` -- define some rules
+
+- use `program_emit_call` and `mod_import_nat`
 
 `token_t`
 `lexer_t`
