@@ -75,3 +75,11 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+run_program_stmt_t *
+run_program_stmt_new(list_t *token_list) {
+    run_program_stmt_t *self = allocate(sizeof(run_program_stmt_t));
+    self->tag = RUN_PROGRAM_STMT;
+    self->token_list = token_list;
+    return self;
+}

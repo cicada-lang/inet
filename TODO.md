@@ -1,4 +1,3 @@
-`run_program_stmt_new`
 `run_program_stmt_destroy`
 
 `stmt_destroy`
