@@ -19,22 +19,18 @@ worker_test(void) {
     frame_t *frame = frame_new(program);
     stack_push(worker->return_stack, frame);
 
-    worker_print(worker);
-    worker_step(worker);
+    // worker_print(worker);
+    // printf("\n");
 
-    worker_print(worker);
-    worker_step(worker);
+    worker_run(worker);
 
-    worker_print(worker);
-    worker_step(worker);
+    // worker_print(worker);
+    // printf("\n");
 
-    worker_print(worker);
-    worker_step(worker);
+    worker_interact(worker);
 
-    worker_print(worker);
-    worker_step(worker);
-
-    worker_print(worker);
+    // worker_print(worker);
+    // printf("\n");
 
     worker_destroy(&worker);
     mod_destroy(&mod);

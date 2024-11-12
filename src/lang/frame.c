@@ -151,7 +151,7 @@ frame_print(const frame_t *self) {
     if (self->second_free_wire_group) {
         printf("<second_free_wire_group>\n");
         free_wire_group_print(self->second_free_wire_group);
-        printf("<second_free_wire_group>\n");
+        printf("</second_free_wire_group>\n");
     }
 
     printf("</frame>\n");

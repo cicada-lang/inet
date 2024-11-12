@@ -21,7 +21,8 @@ wire_destroy(wire_t **self_pointer) {
 
 bool
 wire_is_principal(const wire_t *self) {
-    assert(self->node);
+    if (!self->node) return false;
+
     port_spec_t *port_spec = self->node->spec->port_specs[self->index];
     return port_spec->is_principal;
 }

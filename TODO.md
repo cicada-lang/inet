@@ -1,4 +1,8 @@
-`worker_test` -- test `worker_interact`
+`get_free_wire` -- should consume `free_wire_group`
+`worker_interact` and `worker_run` take `debug` flag
+`frame_print` -- show `active_pair_list`
+
+`@inspect` -- as an `op_t` to show the how net
 
 `token_t`
 `lexer_t`

@@ -73,7 +73,7 @@ program_print_with_program_counter(const program_t *self, size_t program_counter
         if (i == program_counter) {
             printf(">>> ");
             op_print(self->ops[i]);
-            printf(" <<< ");
+            printf(" ");
         } else {
             op_print(self->ops[i]);
             printf(" ");

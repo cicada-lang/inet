@@ -51,8 +51,14 @@ worker_interact(worker_t *self) {
 
 void
 worker_run(worker_t *self) {
+    worker_print(self);
+    printf("\n");
+
     while (!stack_is_empty(self->return_stack)) {
         worker_step(self);
+
+        worker_print(self);
+        printf("\n");
     }
 }
 
