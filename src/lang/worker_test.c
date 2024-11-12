@@ -11,7 +11,10 @@ worker_test(void) {
 
     program_t *program = program_new();
     emit_call(mod, program, "zero");
+    emit_call(mod, program, "add1");
+    emit_call(mod, program, "add1");
     emit_call(mod, program, "zero");
+    emit_call(mod, program, "add1");
     emit_call(mod, program, "add1");
     emit_call(mod, program, "add");
     program_build(program);
@@ -21,7 +24,7 @@ worker_test(void) {
 
     worker->debug = true;
     worker_run(worker);
-    worker_interact(worker);
+    worker_interact_once(worker);
 
     worker_destroy(&worker);
     mod_destroy(&mod);

@@ -39,7 +39,7 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 void
-worker_interact(worker_t *self) {
+worker_interact_once(worker_t *self) {
     active_pair_t *active_pair = list_pop(self->active_pair_list);
     if (active_pair) {
         const rule_t *rule = mod_find_rule(self->mod, active_pair);
