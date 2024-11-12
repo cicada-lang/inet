@@ -88,20 +88,40 @@ frame_collect_free_wires(frame_t *self, active_pair_t *active_pair) {
     active_pair_destroy(&active_pair);
 }
 
-// Should consume the returned wire,
-// viewing wire in group as resource,
-// like in linear logic.
-
 wire_t *
 frame_use_free_wire(
     frame_t *self,
     const node_spec_t *node_spec,
     port_index_t index
 ) {
-    if (node_spec == self->first_free_wire_group->node_spec)
-        return self->first_free_wire_group->wires[index];
-    if (node_spec == self->second_free_wire_group->node_spec)
-        return self->second_free_wire_group->wires[index];
+    if (node_spec == self->first_free_wire_group->node_spec) {
+        wire_t *free_wire = self->first_free_wire_group->wires[index];
+        self->first_free_wire_group->wires[index] = NULL;
+        if (!free_wire) {
+            fprintf(stderr,
+                    "[frame_use_free_wire] (%s) no wire at index: %i",
+                    node_spec->name,
+                    index);
+            assert(free_wire);
+        }
+
+        return free_wire;
+    }
+
+    if (node_spec == self->second_free_wire_group->node_spec) {
+        wire_t *free_wire = self->second_free_wire_group->wires[index];
+        self->second_free_wire_group->wires[index] = NULL;
+        if (!free_wire) {
+            fprintf(stderr,
+                    "[frame_use_free_wire] (%s) no wire at index: %i",
+                    node_spec->name,
+                    index);
+            assert(free_wire);
+        }
+
+        return free_wire;
+    }
+
     assert(false);
 }
 
@@ -120,14 +140,12 @@ frame_fetch_op(frame_t *self) {
 static void
 free_wire_group_print(const free_wire_group_t *free_wire_group) {
     for (port_index_t i = 0; i < free_wire_group->node_spec->arity; i++) {
-        if (free_wire_group->node_spec->port_specs[i]->is_principal)
-            continue;
+        wire_t *free_wire = free_wire_group->wires[i];
+        if (!free_wire) continue;
 
         printf("(%s)-%s := ",
                free_wire_group->node_spec->name,
                free_wire_group->node_spec->port_specs[i]->name);
-        wire_t *free_wire = free_wire_group->wires[i];
-        assert(free_wire);
         wire_print_reverse(free_wire);
         printf("\n");
     }
