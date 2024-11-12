@@ -1,4 +1,8 @@
-`parser_parse` -- build `stmt_list` from `token_list` -- dispatch by different rune in a loop
+`parser_parse_define_node_stmt`
+`parser_parse_define_rule_stmt`
+`parser_parse_define_program_stmt`
+`parser_parse_run_program_stmt`
+
 `compile_stmt` -- setup
 `mod_load` -- call `compile_stmt`
 `compile_stmt(stmt, mod)`

@@ -30,8 +30,50 @@ parser_destroy(parser_t **self_pointer) {
     }
 }
 
+// build `stmt_list` from `token_list`,
+// dispatch by different runes in a loop.
+
+static void parser_parse_define_node_stmt(parser_t *self);
+static void parser_parse_define_rule_stmt(parser_t *self);
+static void parser_parse_define_program_stmt(parser_t *self);
+static void parser_parse_run_program_stmt(parser_t *self);
+
 static void
 parser_parse(parser_t *self) {
+    while (!list_is_empty(self->token_list)) {
+        token_t *token = list_first(self->token_list);
+        if (string_equal(token->string, "*"))
+            parser_parse_define_node_stmt(self);
+        else if (string_equal(token->string, "!"))
+            parser_parse_define_rule_stmt(self);
+        else if (string_equal(token->string, "="))
+            parser_parse_define_program_stmt(self);
+        else if (string_equal(token->string, "."))
+            parser_parse_run_program_stmt(self);
+        else {
+            printf("[parse] unknown starting token: %s", token->string);
+            assert(false);
+        }
+    }
+}
+
+void
+parser_parse_define_node_stmt(parser_t *self) {
+    (void) self;
+}
+
+void
+parser_parse_define_rule_stmt(parser_t *self) {
+    (void) self;
+}
+
+void
+parser_parse_define_program_stmt(parser_t *self) {
+    (void) self;
+}
+
+void
+parser_parse_run_program_stmt(parser_t *self) {
     (void) self;
 }
 
