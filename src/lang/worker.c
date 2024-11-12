@@ -20,6 +20,8 @@ worker_new(const mod_t *mod) {
         self->return_stack,
         (stack_item_destructor_t *) frame_destroy);
 
+    self->debug = false;
+
     return self;
 }
 
@@ -51,14 +53,18 @@ worker_interact(worker_t *self) {
 
 void
 worker_run(worker_t *self) {
-    worker_print(self);
-    printf("\n");
+    if (self->debug) {
+        worker_print(self);
+        printf("\n");
+    }
 
     while (!stack_is_empty(self->return_stack)) {
         worker_step(self);
 
-        worker_print(self);
-        printf("\n");
+        if (self->debug) {
+            worker_print(self);
+            printf("\n");
+        }
     }
 }
 

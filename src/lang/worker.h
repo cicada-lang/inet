@@ -7,6 +7,7 @@ struct worker_t {
     list_t *active_pair_list;
     stack_t *value_stack;
     stack_t *return_stack;
+    bool debug;
 };
 
 worker_t *worker_new(const mod_t *mod);

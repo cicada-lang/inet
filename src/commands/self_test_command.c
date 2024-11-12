@@ -21,7 +21,7 @@ run(char **args) {
     list_test();
     stack_test();
 
-    mod_test();    
+    mod_test();
     worker_test();
 
     printf("</self-test>\n");
