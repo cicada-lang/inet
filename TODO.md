@@ -1,4 +1,3 @@
-`parser_destroy`
 `parser_parse` -- build `stmt_list` from `token_list` -- dispatch by different rune in a loop
 `parse` -- the only public API
 `compile_stmt` -- setup

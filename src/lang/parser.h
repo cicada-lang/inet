@@ -6,3 +6,4 @@ struct parser_t {
 };
 
 parser_t *parser_new(list_t *token_list);
+void parser_destroy(parser_t **self_pointer);
