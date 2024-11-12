@@ -28,7 +28,7 @@ lexer_destroy(lexer_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         lexer_t *self = *self_pointer;
-        // Does not own `token_list`, which is to be returned.
+        // keep `token_list` to be collected as return value.
         free(self->buffer);
         free(self);
         *self_pointer = NULL;
