@@ -50,38 +50,26 @@ wire_free_from_node(wire_t *self) {
 }
 
 void
+wire_print_left(const wire_t *self) {
+    if (self->node) {
+        printf("(%s)-%s-<", wire_node_name(self), wire_name(self));
+    } else {
+        printf("-<");
+    }
+}
+
+void
+wire_print_right(const wire_t *self) {
+    if (self->node) {
+        printf(">-%s-(%s)", wire_name(self), wire_node_name(self));
+    } else {
+        printf(">-");
+    }
+}
+
+void
 wire_print(const wire_t *self) {
-    if (self->opposite_wire && self->node) {
-        if (self->opposite_wire->node) {
-            printf("(%s)-%s-<>-%s-(%s)",
-                   wire_node_name(self->opposite_wire),
-                   wire_name(self->opposite_wire),
-                   wire_name(self),
-                   wire_node_name(self));
-        } else {
-            printf(">-%s-(%s)",
-                   wire_name(self),
-                   wire_node_name(self));
-        }
-    }
-
-    if (self->opposite_wire && !self->node) {
-        if (self->opposite_wire->node) {
-            printf("(%s)-%s-<",
-                   wire_node_name(self->opposite_wire),
-                   wire_name(self->opposite_wire));
-        } else {
-            printf("-<>-");
-        }
-    }
-
-    if (!self->opposite_wire && self->node) {
-        printf(">-%s-(%s)",
-               wire_name(self),
-               wire_node_name(self));
-    }
-
-    if (!self->opposite_wire && !self->node) {
-        printf(">-[]");
-    }
+    if (self->opposite_wire)
+        wire_print_left(self->opposite_wire);
+    wire_print_right(self);
 }

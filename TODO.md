@@ -1,10 +1,10 @@
-extract `wire_print_left` & `wire_print_right`
-
 `wire_print_reverse`
 
 `free_wire_group_print` -- fix format
 
 - `(node)-wire = >-wire-(node)`
+
+`wire_print_left` & `wire_print_right` -- handles `is_principal`
 
 `worker_test` -- define some rules
 

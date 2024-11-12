@@ -1,7 +1,7 @@
 #include "index.h"
 
-static void node_apply_input_wires(node_t *node, worker_t *worker);
-static void node_return_output_wires(node_t *node, worker_t *worker);
+static void node_apply_input_ports(node_t *node, worker_t *worker);
+static void node_return_output_ports(node_t *node, worker_t *worker);
 
 void
 execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
@@ -16,8 +16,8 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     case CALL_NODE_OP: {
         call_node_op_t *op = (call_node_op_t *) unknown_op;
         node_t *node = node_new(op->node_spec);
-        node_apply_input_wires(node, worker);
-        node_return_output_wires(node, worker);
+        node_apply_input_ports(node, worker);
+        node_return_output_ports(node, worker);
         return;
     }
 
@@ -45,7 +45,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
 }
 
 void
-node_apply_input_wires(node_t *node, worker_t *worker) {
+node_apply_input_ports(node_t *node, worker_t *worker) {
     for (size_t c = 0; c < node->spec->input_arity; c++) {
         wire_t *wire = stack_pop(worker->wire_stack);
         size_t i = node->spec->input_arity - 1 - c;
@@ -56,7 +56,7 @@ node_apply_input_wires(node_t *node, worker_t *worker) {
 }
 
 void
-node_return_output_wires(node_t *node, worker_t *worker) {
+node_return_output_ports(node_t *node, worker_t *worker) {
     for (size_t c = 0; c < node->spec->output_arity; c++) {
         wire_t *node_wire = wire_new();
         wire_t *free_wire = wire_new();

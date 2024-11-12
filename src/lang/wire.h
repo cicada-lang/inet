@@ -18,4 +18,6 @@ const char *wire_node_name(const wire_t *self);
 
 void wire_free_from_node(wire_t *self);
 
+void wire_print_left(const wire_t *self);
+void wire_print_right(const wire_t *self);
 void wire_print(const wire_t *self);
