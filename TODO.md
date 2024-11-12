@@ -1,5 +1,3 @@
-`token_destroy`
-
 `lexer_t`
 `lexer_lex`
 
