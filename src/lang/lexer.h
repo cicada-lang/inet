@@ -6,5 +6,6 @@ struct lexer_t {
     size_t text_length;
     size_t cursor;
     char *buffer;
-    char *buffer_max_length;
 };
+
+lexer_t *lexer_new(const char *text);
