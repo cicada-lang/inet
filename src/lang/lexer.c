@@ -3,23 +3,23 @@
 #define MAX_BUFFER_LENGTH 1024
 
 struct lexer_t {
-    list_t *token_list;
     const char *text;
     size_t text_length;
     size_t cursor;
     char *buffer;
     size_t buffer_length;
+    list_t *token_list;
 };
 
 static lexer_t *
 lexer_new(const char *text) {
     lexer_t *self = allocate(sizeof(lexer_t));
-    self->token_list = list_new();
     self->text = text;
     self->text_length = strlen(text);
     self->cursor = 0;
     self->buffer = allocate(MAX_BUFFER_LENGTH + 1);
     self->buffer_length = 0;
+    self->token_list = list_new();
     return self;
 }
 
