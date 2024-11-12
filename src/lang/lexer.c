@@ -12,3 +12,15 @@ lexer_new(const char *text) {
     self->buffer = allocate(BUFFER_MAX_LENGTH + 1);
     return self;
 }
+
+void
+lexer_destroy(lexer_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        lexer_t *self = *self_pointer;
+        list_destroy(&self->token_list);
+        free(self->buffer);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

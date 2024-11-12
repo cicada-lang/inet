@@ -1,4 +1,3 @@
-`lexer_destroy`
 `lexer_lex`
 `lex`
 
