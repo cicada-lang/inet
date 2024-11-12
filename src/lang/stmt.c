@@ -41,3 +41,16 @@ define_rule_stmt_new(char *first_name, char *second_name, list_t *token_list) {
     self->token_list = token_list;
     return self;
 }
+
+void
+define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        define_rule_stmt_t *self = *self_pointer;
+        free(self->first_name);
+        free(self->second_name);
+        list_destroy(&self->token_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

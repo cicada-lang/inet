@@ -1,5 +1,3 @@
-`define_rule_stmt_destroy`
-
 `define_program_stmt_new`
 `define_program_stmt_destroy`
 
