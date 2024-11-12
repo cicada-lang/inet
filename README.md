@@ -27,6 +27,58 @@ inet version     # print version
 inet help        # print help
 ```
 
+## Examples
+
+For more examples, please see the [examples/](examples/) directory.
+
+### Natural Number
+
+```inet
+* (zero) -- value!
+* (add1) prev -- value!
+* (add) target! addend -- result
+
+! (zero)-(add)
+  (add)-addend result-(add)
+
+! (add1)-(add)
+  (add)-addend (add1)-prev add
+  add1 result-(add)
+
+; test
+
+= one zero add1
+= two one one add
+= three two one add
+= four two two add
+
+. two two add two two add
+```
+
+### List
+
+```inet
+* (null) -- value!
+* (cons) head tail -- value!
+* (append) target! rest -- result
+
+! (null)-(append)
+  (append)-rest result-(append)
+
+! (cons)-(append)
+  (append)-rest (cons)-tail append
+  (cons)-head cons result-(append)
+
+; test
+
+= six-zeros
+  null zero cons zero cons zero cons
+  null zero cons zero cons zero cons
+  append
+
+. six-zeros
+```
+
 ## Development
 
 ```shell
