@@ -7,6 +7,26 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 - Pure postfix expression.
 - Using a stack-based low-layer language to build nets.
 
+## Usage
+
+On Linux:
+
+```
+git clone https://github.com/cicada-lang/inet
+cd inet
+make
+make test
+```
+
+The compiled `bin/ient` is the command-line program.
+
+```sh
+inet repl        # start the read-eval-print-loop
+inet run         # run a script
+inet version     # print version
+inet help        # print help
+```
+
 ## Development
 
 ```shell
