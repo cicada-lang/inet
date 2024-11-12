@@ -1,20 +1,25 @@
-`parser_t`
-`parser_parse` -- build `stmt_list` from `token_list`
-
-- dispatch by different runes
-
 `stmt_t`
 
-- `*` -- `define_node_stmt`
-- `.` -- `run_program_stmt`
-- `=` -- `define_program_stmt`
-- `!` -- `define_rule_stmt`
+- `*` -- `define_node_stmt_t`
+- `!` -- `define_rule_stmt_t`
+- `=` -- `define_program_stmt_t`
+- `.` -- `run_program_stmt_t`
+
+`parser_t`
+
+`parser_parse` -- build `stmt_list` from `token_list`
+
+- dispatch by different rune in a loop
+
+`parse` -- the only public API
+
+`compile_stmt` -- setup
+
+`mod_load` -- call `compile_stmt`
 
 `compile_stmt(stmt, mod)`
 
 `@inspect` -- as an `op_t` to show the whole net
-
-`mod_load`
 
 # error handling
 

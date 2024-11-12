@@ -20,6 +20,16 @@ lexer_test(void) {
     }
 
     {
+        list_t *token_list = lex("; hello ");
+        assert(list_length(token_list) == 0);
+    }
+
+    {
+        list_t *token_list = lex("  \n ; hello ");
+        assert(list_length(token_list) == 0);
+    }
+
+    {
         list_t *token_list = lex("a b c");
         assert(list_length(token_list) == 3);
         token_t *a = list_shift(token_list);
