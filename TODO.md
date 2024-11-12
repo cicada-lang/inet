@@ -1,6 +1,4 @@
-`lexer_lex`
-`lexer_step`
-`lexer_text`
+`lexer_test`
 
 `parser_t`
 `parser_parse` -- build `stmt_list` from `token_list`
@@ -9,7 +7,6 @@
 
 `stmt_t`
 
-- `;` -- `ignore_comment_stmt`
 - `*` -- `define_node_stmt`
 - `.` -- `run_program_stmt`
 - `=` -- `define_program_stmt`
