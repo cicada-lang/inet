@@ -5,12 +5,20 @@ typedef int8_t port_index_t;
 
 typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum { PROGRAM_SPEC, NODE_SPEC } spec_tag_t;
+
 typedef enum {
     CALL_PROGRAM_OP,
     CALL_NODE_OP,
     CONNECT_OP,
     GET_FREE_WIRE_OP,
 } op_tag_t;
+
+typedef enum {
+    DEFINE_NODE_STMT,
+    DEFINE_RULE_STMT,
+    DEFINE_PROGRAM_STMT,
+    RUN_PROGRAM_STMT,
+} stmt_tag_t;
 
 typedef struct node_t node_t;
 typedef struct wire_t wire_t;
@@ -31,3 +39,8 @@ typedef struct port_spec_t port_spec_t;
 typedef struct program_spec_t program_spec_t;
 typedef struct token_t token_t;
 typedef struct lexer_t lexer_t;
+typedef struct stmt_t stmt_t;
+typedef struct define_node_stmt_t define_node_stmt_t;
+typedef struct define_rule_stmt_t define_rule_stmt_t;
+typedef struct define_program_stmt_t define_program_stmt_t;
+typedef struct run_program_stmt_t run_program_stmt_t;
