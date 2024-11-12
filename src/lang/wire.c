@@ -19,14 +19,6 @@ wire_destroy(wire_t **self_pointer) {
     }
 }
 
-bool
-wire_is_principal(const wire_t *self) {
-    if (!self->node) return false;
-
-    port_spec_t *port_spec = self->node->spec->port_specs[self->index];
-    return port_spec->is_principal;
-}
-
 const char *
 wire_name(const wire_t *self) {
     assert(self->node);
@@ -45,6 +37,22 @@ void
 wire_free_from_node(wire_t *self) {
     self->node = NULL;
     self->index = -1;
+}
+
+bool
+wire_is_free(const wire_t *self) {
+    if (self->node) return false;
+
+    assert(self->index == -1);
+    return true;
+}
+
+bool
+wire_is_principal(const wire_t *self) {
+    if (!self->node) return false;
+
+    port_spec_t *port_spec = self->node->spec->port_specs[self->index];
+    return port_spec->is_principal;
 }
 
 void

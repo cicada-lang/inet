@@ -1,6 +1,6 @@
 #include "index.h"
 
-// The free wires in a frame can be referenced by `get_free_wire_op_t`.
+// The free wires in a frame is to be referenced by `get_free_wire_op_t`.
 
 typedef struct free_wire_group_t free_wire_group_t;
 
@@ -11,23 +11,17 @@ struct frame_t {
     free_wire_group_t *second_free_wire_group;
 };
 
-// A `wire_t` is a free wire
-// if it is not linked to a node
-// and it's `index` is -1.
-
-// `free_wire_group_t` does NOT own wires in `wires`.
-
 struct free_wire_group_t {
     const node_spec_t *node_spec;
     wire_t **wires;
 };
 
-// static
-free_wire_group_t *
+static free_wire_group_t *
 free_wire_group_new(const node_spec_t *node_spec) {
     free_wire_group_t *self = allocate(sizeof(free_wire_group_t));
     self->node_spec = node_spec;
     self->wires = allocate_pointers(node_spec->arity);
+    // `free_wire_group_t` does NOT own wires in `wires`.
     return self;
 }
 
