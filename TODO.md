@@ -1,5 +1,3 @@
-`worker_interact` -- in a loop
-
 `@inspect` -- as an `op_t` to show the how net
 
 `token_t`

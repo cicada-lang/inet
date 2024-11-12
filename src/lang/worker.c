@@ -39,6 +39,13 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 void
+worker_interact(worker_t *self) {
+    while (!list_is_empty(self->active_pair_list)) {
+        worker_interact_once(self);
+    }
+}
+
+void
 worker_interact_once(worker_t *self) {
     active_pair_t *active_pair = list_pop(self->active_pair_list);
     if (active_pair) {

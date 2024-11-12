@@ -24,7 +24,7 @@ worker_test(void) {
 
     worker->debug = true;
     worker_run(worker);
-    worker_interact_once(worker);
+    worker_interact(worker);
 
     worker_destroy(&worker);
     mod_destroy(&mod);
