@@ -17,3 +17,16 @@ define_node_stmt_new(char *name) {
 
     return self;
 }
+
+void
+define_node_stmt_destroy(define_node_stmt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        define_node_stmt_t *self = *self_pointer;
+        free(self->name);
+        list_destroy(&self->input_name_list);
+        list_destroy(&self->output_name_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

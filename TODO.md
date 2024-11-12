@@ -1,4 +1,4 @@
-`define_node_stmt_destroy`
+`lexer_test` -- test destroy token
 
 `define_rule_stmt_new`
 `define_rule_stmt_destroy`
