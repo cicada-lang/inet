@@ -94,3 +94,32 @@ run_program_stmt_destroy(run_program_stmt_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+stmt_destroy(stmt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        stmt_t *self = *self_pointer;
+        switch (self->tag) {
+        case DEFINE_NODE_STMT: {
+            define_node_stmt_destroy((define_node_stmt_t **) self_pointer);
+            return;
+        }
+
+        case DEFINE_RULE_STMT: {
+            define_rule_stmt_destroy((define_rule_stmt_t **) self_pointer);
+            return;
+        }
+
+        case DEFINE_PROGRAM_STMT: {
+            define_program_stmt_destroy((define_program_stmt_t **) self_pointer);
+            return;
+        }
+
+        case RUN_PROGRAM_STMT: {
+            run_program_stmt_destroy((run_program_stmt_t **) self_pointer);
+            return;
+        }
+        }
+    }
+}
