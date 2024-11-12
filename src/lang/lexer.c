@@ -18,9 +18,24 @@ lexer_destroy(lexer_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         lexer_t *self = *self_pointer;
-        list_destroy(&self->token_list);
+        // Does not own `token_list`, which is to be returned.
         free(self->buffer);
         free(self);
         *self_pointer = NULL;
     }
+}
+
+void
+lexer_lex(lexer_t *self) {
+    (void) self;
+    return;
+}
+
+list_t *
+lex(const char *text) {
+    lexer_t *lexer = lexer_new(text);
+    lexer_lex(lexer);
+    list_t *token_list = lexer->token_list;
+    lexer_destroy(&lexer);
+    return token_list;
 }
