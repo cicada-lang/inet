@@ -1,4 +1,3 @@
-`define_rule_stmt_new`
 `define_rule_stmt_destroy`
 
 `define_program_stmt_new`
@@ -10,19 +9,11 @@
 `stmt_destroy`
 
 `parser_t`
-
-`parser_parse` -- build `stmt_list` from `token_list`
-
-- dispatch by different rune in a loop
-
+`parser_parse` -- build `stmt_list` from `token_list` -- dispatch by different rune in a loop
 `parse` -- the only public API
-
 `compile_stmt` -- setup
-
 `mod_load` -- call `compile_stmt`
-
 `compile_stmt(stmt, mod)`
-
 `@inspect` -- as an `op_t` to show the whole net
 
 # error handling
