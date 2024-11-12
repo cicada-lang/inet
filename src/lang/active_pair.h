@@ -1,10 +1,10 @@
 #pragma once
 
-// `active_pair_t` does NOT own `first_port` and `second_port`.
+// `active_pair_t` does NOT own `first_wire` and `second_wire`.
 
 struct active_pair_t {
-    port_t *first_port;
-    port_t *second_port;
+    wire_t *first_wire;
+    wire_t *second_wire;
 };
 
 active_pair_t *active_pair_new(void);

@@ -1,7 +1,7 @@
 #include "index.h"
 
-static void node_apply_input_ports(node_t *node, worker_t *worker);
-static void node_return_output_ports(node_t *node, worker_t *worker);
+static void node_apply_input_wires(node_t *node, worker_t *worker);
+static void node_return_output_wires(node_t *node, worker_t *worker);
 
 void
 execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
@@ -16,59 +16,59 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     case CALL_NODE_OP: {
         call_node_op_t *op = (call_node_op_t *) unknown_op;
         node_t *node = node_new(op->node_spec);
-        node_apply_input_ports(node, worker);
-        node_return_output_ports(node, worker);
+        node_apply_input_wires(node, worker);
+        node_return_output_wires(node, worker);
         return;
     }
 
     case CONNECT_OP: {
-        port_t *second_port = stack_pop(worker->port_stack);
-        port_t *first_port = stack_pop(worker->port_stack);
+        wire_t *second_wire = stack_pop(worker->wire_stack);
+        wire_t *first_wire = stack_pop(worker->wire_stack);
 
-        first_port->opposite_port->opposite_port = second_port->opposite_port;
-        second_port->opposite_port->opposite_port = first_port->opposite_port;
+        first_wire->opposite_wire->opposite_wire = second_wire->opposite_wire;
+        second_wire->opposite_wire->opposite_wire = first_wire->opposite_wire;
 
-        port_destroy(&first_port);
-        port_destroy(&second_port);
+        wire_destroy(&first_wire);
+        wire_destroy(&second_wire);
 
         return;
     }
 
-    case GET_FREE_PORT_OP: {
-        get_free_port_op_t *op = (get_free_port_op_t *) unknown_op;
-        port_t *free_port = frame_get_free_port(frame, op->node_spec, op->index);
-        assert(free_port);
-        stack_push(worker->port_stack, free_port);
+    case GET_FREE_WIRE_OP: {
+        get_free_wire_op_t *op = (get_free_wire_op_t *) unknown_op;
+        wire_t *free_wire = frame_get_free_wire(frame, op->node_spec, op->index);
+        assert(free_wire);
+        stack_push(worker->wire_stack, free_wire);
         return;
     }
     }
 }
 
 void
-node_apply_input_ports(node_t *node, worker_t *worker) {
+node_apply_input_wires(node_t *node, worker_t *worker) {
     for (size_t c = 0; c < node->spec->input_arity; c++) {
-        port_t *port = stack_pop(worker->port_stack);
+        wire_t *wire = stack_pop(worker->wire_stack);
         size_t i = node->spec->input_arity - 1 - c;
-        port->node = node;
-        port->index = i;
-        node->ports[i] = port;
+        wire->node = node;
+        wire->index = i;
+        node->wires[i] = wire;
     }
 }
 
 void
-node_return_output_ports(node_t *node, worker_t *worker) {
+node_return_output_wires(node_t *node, worker_t *worker) {
     for (size_t c = 0; c < node->spec->output_arity; c++) {
-        port_t *node_port = port_new();
-        port_t *free_port = port_new();
+        wire_t *node_wire = wire_new();
+        wire_t *free_wire = wire_new();
 
-        node_port->opposite_port = free_port;
-        free_port->opposite_port = node_port;
+        node_wire->opposite_wire = free_wire;
+        free_wire->opposite_wire = node_wire;
 
         size_t i = node->spec->input_arity + c;
-        node_port->node = node;
-        node_port->index = i;
-        node->ports[i] = node_port;
+        node_wire->node = node;
+        node_wire->index = i;
+        node->wires[i] = node_wire;
 
-        stack_push(worker->port_stack, free_port);
+        stack_push(worker->wire_stack, free_wire);
     }
 }

@@ -7,7 +7,7 @@ node_new(const node_spec_t *spec) {
     node_t *self = allocate(sizeof(node_t));
     self->spec = spec;
     self->id = node_gen_id();
-    self->ports = allocate_pointers(spec->arity);
+    self->wires = allocate_pointers(spec->arity);
     return self;
 }
 
@@ -24,7 +24,7 @@ node_destroy(node_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_t *self = *self_pointer;
-        free(self->ports);
+        free(self->wires);
         free(self);
         *self_pointer = NULL;
     }

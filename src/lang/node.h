@@ -1,11 +1,11 @@
 #pragma once
 
-// `node_t` does NOT own ports in `ports`.
+// `node_t` does NOT own wires in `wires`.
 
 struct node_t {
     const node_spec_t *spec;
     node_id_t id;
-    port_t **ports;
+    wire_t **wires;
 };
 
 node_t *node_new(const node_spec_t *spec);

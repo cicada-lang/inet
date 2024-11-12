@@ -29,10 +29,10 @@ rule_match_active_pair(
     const rule_t *self,
     const active_pair_t *active_pair
 ) {
-    return (((self->first_node_spec == active_pair->first_port->node->spec) &&
-             (self->second_node_spec == active_pair->second_port->node->spec)) ||
-            ((self->first_node_spec == active_pair->second_port->node->spec) &&
-             (self->second_node_spec == active_pair->first_port->node->spec)));
+    return (((self->first_node_spec == active_pair->first_wire->node->spec) &&
+             (self->second_node_spec == active_pair->second_wire->node->spec)) ||
+            ((self->first_node_spec == active_pair->second_wire->node->spec) &&
+             (self->second_node_spec == active_pair->first_wire->node->spec)));
 }
 
 void

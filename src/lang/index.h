@@ -4,7 +4,7 @@
 #include "../config.h"
 #include "types.h"
 #include "node.h"
-#include "port.h"
+#include "wire.h"
 #include "active_pair.h"
 #include "mod.h"
 #include "frame.h"

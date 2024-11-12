@@ -1,6 +1,10 @@
-`free_port_group_print` -- fix format
+extract `wire_print_left` & `wire_print_right`
 
-- `(node) ~port:port-(node)`
+`wire_print_reverse`
+
+`free_wire_group_print` -- fix format
+
+- `(node)-wire = >-wire-(node)`
 
 `worker_test` -- define some rules
 

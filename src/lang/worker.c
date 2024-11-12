@@ -10,10 +10,10 @@ worker_new(const mod_t *mod) {
         self->active_pair_list,
         (list_item_destructor_t *) active_pair_destroy);
 
-    self->port_stack = stack_new(PORT_STACK_SIZE);
+    self->wire_stack = stack_new(WIRE_STACK_SIZE);
     stack_set_item_destructor(
-        self->port_stack,
-        (stack_item_destructor_t *) port_destroy);
+        self->wire_stack,
+        (stack_item_destructor_t *) wire_destroy);
 
     self->frame_stack = stack_new(FRAME_STACK_SIZE);
     stack_set_item_destructor(
@@ -29,7 +29,7 @@ worker_destroy(worker_t **self_pointer) {
     if (*self_pointer) {
         worker_t *self = *self_pointer;
         list_destroy(&self->active_pair_list);
-        stack_destroy(&self->port_stack);
+        stack_destroy(&self->wire_stack);
         stack_destroy(&self->frame_stack);
         free(self);
         *self_pointer = NULL;
@@ -43,7 +43,7 @@ worker_interact(worker_t *self) {
         const rule_t *rule = mod_find_rule(self->mod, active_pair);
         assert(rule);
         frame_t *frame = frame_new(rule->program);
-        frame_collect_free_ports(frame, active_pair);
+        frame_collect_free_wires(frame, active_pair);
         stack_push(self->frame_stack, frame);
         worker_run(self);
     }
@@ -85,15 +85,15 @@ worker_print(const worker_t *self) {
     }
     printf("</frame_stack>\n");
 
-    size_t port_stack_length = stack_length(self->port_stack);
-    printf("<port_stack length=\"%lu\">\n", port_stack_length);
-    for (size_t i = 0; i < port_stack_length; i++) {
-        port_t *port = stack_get(self->port_stack, i);
+    size_t wire_stack_length = stack_length(self->wire_stack);
+    printf("<wire_stack length=\"%lu\">\n", wire_stack_length);
+    for (size_t i = 0; i < wire_stack_length; i++) {
+        wire_t *wire = stack_get(self->wire_stack, i);
         printf("- ");
-        port_print(port);
+        wire_print(wire);
         printf("\n");
     }
-    printf("</port_stack>\n");
+    printf("</wire_stack>\n");
 
     printf("</worker>\n");
 }
