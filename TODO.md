@@ -1,11 +1,12 @@
-`define_node_stmt_new`
-`define_rule_stmt_new`
-`define_program_stmt_new`
-`run_program_stmt_new`
-
 `define_node_stmt_destroy`
+
+`define_rule_stmt_new`
 `define_rule_stmt_destroy`
+
+`define_program_stmt_new`
 `define_program_stmt_destroy`
+
+`run_program_stmt_new`
 `run_program_stmt_destroy`
 
 `stmt_destroy`
