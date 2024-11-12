@@ -17,3 +17,12 @@ active_pair_destroy(active_pair_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+active_pair_print(const active_pair_t *self) {
+    assert(self->first_wire);
+    assert(self->second_wire);
+
+    wire_print_left(self->first_wire);
+    wire_print_right(self->second_wire);
+}

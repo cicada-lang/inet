@@ -89,6 +89,16 @@ worker_print(const worker_t *self) {
 
     mod_print(self->mod);
 
+    size_t active_pair_list_length = list_length(self->active_pair_list);
+    printf("<active_pair_list length=\"%lu\">\n", active_pair_list_length);
+    active_pair_t *active_pair = list_start(self->active_pair_list);
+    while (active_pair) {
+        active_pair_print(active_pair);
+        printf("\n");
+        active_pair = list_next(self->active_pair_list);
+    }
+    printf("</active_pair_list>\n");
+
     size_t return_stack_length = stack_length(self->return_stack);
     printf("<return_stack length=\"%lu\">\n", return_stack_length);
     for (size_t i = 0; i < return_stack_length; i++) {

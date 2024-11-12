@@ -1,5 +1,3 @@
-`worker_print` -- show `<active_pair_list>`
-
 `@inspect` -- as an `op_t` to show the how net
 
 `token_t`
