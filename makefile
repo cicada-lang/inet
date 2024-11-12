@@ -3,6 +3,7 @@ ldflags =
 cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O2 -std=c11 -pedantic
 
 src = $(shell find src -name '*.c')
+header = $(shell find src -name '*.h')
 lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
 bin = bin/inet
 
@@ -20,7 +21,7 @@ test: bin/inet
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
 
-lib/%.o: src/%.c
+lib/%.o: src/%.c $(header)
 	mkdir -p $(dir $@); $(cc) -c $(cflags) $< -o $@
 
 .PHONY: clean
