@@ -24,6 +24,10 @@ make clean    # clean up compiled files
 - [modal](https://git.sr.ht/~rabbits/modal)
 - [fractran](https://git.sr.ht/~rabbits/fractran)
 
+**Books**:
+
+- [Scalable C](https://github.com/booksbyus/scalable-c)
+
 **Tools**:
 
 - [makefile tutorial](https://makefiletutorial.com)
