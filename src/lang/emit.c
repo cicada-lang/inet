@@ -32,7 +32,7 @@ emit_get_free_wire(
     const char *port_name
 ) {
     const node_spec_t *node_spec = node_spec_cast(mod_find_spec(mod, node_name));
-    port_index_t index = node_find_port_index(node_spec, port_name);
+    port_index_t index = node_spec_find_port_index(node_spec, port_name);
     program_add_op(program, (op_t *) get_free_wire_op_new(node_spec, index));
 }
 

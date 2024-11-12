@@ -60,14 +60,19 @@ node_spec_cast(const spec_t *spec) {
 }
 
 port_index_t
-node_find_port_index(
+node_spec_find_port_index(
     const node_spec_t *node_spec,
     const char *port_name
 ) {
     for (port_index_t i = 0; i < node_spec->arity; i++) {
         port_spec_t *port_spec = node_spec->port_specs[i];
-        if (port_spec->name == port_name) return i;
+        if (string_equal(port_spec->name, port_name))
+            return i;
     }
+
+    printf("[node_spec_find_port_index] fail to find index of node_name: %s, port_name: %s\n",
+           node_spec->name,
+           port_name);
 
     assert(false);
 }

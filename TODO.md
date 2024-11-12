@@ -1,4 +1,3 @@
-`mod_import_nat` -- define some rules
 `worker_test` -- test `worker_interact`
 
 `token_t`

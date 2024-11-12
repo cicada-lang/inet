@@ -24,4 +24,4 @@ node_spec_t *node_spec_new(
 void node_spec_destroy(node_spec_t **self_pointer);
 
 const node_spec_t *node_spec_cast(const spec_t *spec);
-port_index_t node_find_port_index(const node_spec_t *node_spec, const char *port_name);
+port_index_t node_spec_find_port_index(const node_spec_t *node_spec, const char *port_name);
