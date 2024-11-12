@@ -1,3 +1,10 @@
+`emit_connect`
+`emit_get_free_wire`
+`emit_reconnect_free_wire`
+
+`mod_import_nat` -- define some rules
+`worker_test` -- test `worker_interact`
+
 `token_t`
 `lexer_t`
 `lexer_lex`
