@@ -24,7 +24,7 @@ connect_op_new(void) {
 }
 
 get_free_wire_op_t *
-get_free_wire_op_new(const node_spec_t *node_spec, wire_index_t index) {
+get_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
     get_free_wire_op_t *self = allocate(sizeof(get_free_wire_op_t));
     self->tag = GET_FREE_WIRE_OP;
     self->node_spec = node_spec;

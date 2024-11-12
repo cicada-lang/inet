@@ -2,7 +2,7 @@
 
 typedef uint8_t byte_t;
 typedef int32_t node_id_t;
-typedef int32_t wire_index_t;
+typedef int32_t port_index_t;
 
 typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum { PROGRAM_SPEC, NODE_SPEC } spec_tag_t;

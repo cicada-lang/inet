@@ -4,7 +4,7 @@
 
 struct wire_t {
     node_t *node;
-    wire_index_t index;
+    port_index_t index;
     wire_t *opposite_wire;
 };
 

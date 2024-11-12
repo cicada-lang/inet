@@ -1,4 +1,3 @@
-ambr wire_index port_index
 fix makefile to recompile on .h file change
 `mod_import_nat` -- define some rules
 `worker_test` -- test `worker_interact`

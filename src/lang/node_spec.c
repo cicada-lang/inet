@@ -21,8 +21,8 @@ port_spec_destroy(port_spec_t **self_pointer) {
 node_spec_t *
 node_spec_new(
     const char *name,
-    wire_index_t input_arity,
-    wire_index_t output_arity
+    port_index_t input_arity,
+    port_index_t output_arity
 ) {
     node_spec_t *self = allocate(sizeof(node_spec_t));
     self->tag = NODE_SPEC;
@@ -39,7 +39,7 @@ node_spec_destroy(node_spec_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_spec_t *self = *self_pointer;
-        for (wire_index_t i = 0; i < self->arity; i++) {
+        for (port_index_t i = 0; i < self->arity; i++) {
             port_spec_t *port_spec = self->port_specs[i];
             if (port_spec) {
                 port_spec_destroy(&port_spec);
@@ -59,12 +59,12 @@ node_spec_cast(const spec_t *spec) {
     return (node_spec_t *)spec;
 }
 
-wire_index_t
-node_find_wire_index(
+port_index_t
+node_find_port_index(
     const node_spec_t *node_spec,
     const char *port_name
 ) {
-    for (wire_index_t i = 0; i < node_spec->arity; i++) {
+    for (port_index_t i = 0; i < node_spec->arity; i++) {
         port_spec_t *port_spec = node_spec->port_specs[i];
         if (port_spec->name == port_name) return i;
     }
