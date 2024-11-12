@@ -1,4 +1,4 @@
-`lexer_test`
+`lexer_test` -- lex some simple string
 
 `parser_t`
 `parser_parse` -- build `stmt_list` from `token_list`
