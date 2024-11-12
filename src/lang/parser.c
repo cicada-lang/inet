@@ -1,6 +1,11 @@
 #include "index.h"
 
-parser_t *
+struct parser_t {
+    list_t *token_list;
+    list_t *stmt_list;
+};
+
+static parser_t *
 parser_new(list_t *token_list) {
     parser_t *self = allocate(sizeof(parser_t));
     self->token_list = token_list;
@@ -13,7 +18,7 @@ parser_new(list_t *token_list) {
     return self;
 }
 
-void
+static void
 parser_destroy(parser_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -25,7 +30,7 @@ parser_destroy(parser_t **self_pointer) {
     }
 }
 
-void
+static void
 parser_parse(parser_t *self) {
     (void) self;
 }
