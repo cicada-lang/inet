@@ -1,5 +1,15 @@
 #pragma once
 
+// A mod is a compilation unit,
+// like the dictionary of forth.
+
+struct mod_t {
+    char *src;
+    char *text;
+    list_t *spec_list;
+    list_t *rule_list;
+};
+
 mod_t *mod_new(void);
 void mod_destroy(mod_t **self_pointer);
 
