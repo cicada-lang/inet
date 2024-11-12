@@ -3,9 +3,10 @@
 `parser_parse_define_program_stmt`
 `parser_parse_run_program_stmt`
 
-`compile_stmt` -- setup
-`mod_load` -- call `compile_stmt`
-`compile_stmt(stmt, mod)`
+`parser_test`
+
+# later
+
 `@inspect` -- as an `op_t` to show the whole net
 
 # error handling
