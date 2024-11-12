@@ -1,7 +1,7 @@
 #include "index.h"
 
 // The aim of having two free wire groups in frame
-// is to reference free wire in them by `get_free_wire_op_t`.
+// is to reference free wire in them by `use_free_wire_op_t`.
 
 typedef struct free_wire_group_t free_wire_group_t;
 
@@ -93,7 +93,7 @@ frame_collect_free_wires(frame_t *self, active_pair_t *active_pair) {
 // like in linear logic.
 
 wire_t *
-frame_get_free_wire(
+frame_use_free_wire(
     frame_t *self,
     const node_spec_t *node_spec,
     port_index_t index

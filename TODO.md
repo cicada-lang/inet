@@ -1,4 +1,4 @@
-`frame_get_free_wire` -- should consume `free_wire_group`
+`frame_use_free_wire` -- should consume `free_wire_group`
 
 `worker_interact` and `worker_run` take `debug` flag
 `frame_print` -- show `active_pair_list`

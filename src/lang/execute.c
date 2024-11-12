@@ -41,8 +41,8 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     }
 
     case GET_FREE_WIRE_OP: {
-        get_free_wire_op_t *op = (get_free_wire_op_t *) unknown_op;
-        wire_t *free_wire = frame_get_free_wire(frame, op->node_spec, op->index);
+        use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
+        wire_t *free_wire = frame_use_free_wire(frame, op->node_spec, op->index);
         assert(free_wire);
         stack_push(worker->value_stack, free_wire);
         return;

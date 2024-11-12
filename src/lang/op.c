@@ -23,9 +23,9 @@ connect_op_new(void) {
     return self;
 }
 
-get_free_wire_op_t *
-get_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
-    get_free_wire_op_t *self = allocate(sizeof(get_free_wire_op_t));
+use_free_wire_op_t *
+use_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
+    use_free_wire_op_t *self = allocate(sizeof(use_free_wire_op_t));
     self->tag = GET_FREE_WIRE_OP;
     self->node_spec = node_spec;
     self->index = index;
@@ -63,10 +63,10 @@ connect_op_destroy(connect_op_t **self_pointer) {
 }
 
 void
-get_free_wire_op_destroy(get_free_wire_op_t **self_pointer) {
+use_free_wire_op_destroy(use_free_wire_op_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        get_free_wire_op_t *self = *self_pointer;
+        use_free_wire_op_t *self = *self_pointer;
         free(self);
         *self_pointer = NULL;
     }
@@ -94,7 +94,7 @@ op_destroy(op_t **self_pointer) {
         }
 
         case GET_FREE_WIRE_OP: {
-            get_free_wire_op_destroy((get_free_wire_op_t **) self_pointer);
+            use_free_wire_op_destroy((use_free_wire_op_t **) self_pointer);
             return;
         }
         }
@@ -122,7 +122,7 @@ op_print(const op_t *unknown_op) {
     }
 
     case GET_FREE_WIRE_OP: {
-        get_free_wire_op_t *op = (get_free_wire_op_t *) unknown_op;
+        use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
         printf("(%s)", op->node_spec->name);
         port_spec_t *port_spec = op->node_spec->port_specs[op->index];
         printf("-%s", port_spec->name);
