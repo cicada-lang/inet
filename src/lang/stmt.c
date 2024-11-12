@@ -83,3 +83,14 @@ run_program_stmt_new(list_t *token_list) {
     self->token_list = token_list;
     return self;
 }
+
+void
+run_program_stmt_destroy(run_program_stmt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        run_program_stmt_t *self = *self_pointer;
+        list_destroy(&self->token_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}

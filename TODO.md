@@ -1,5 +1,3 @@
-`run_program_stmt_destroy`
-
 `stmt_destroy`
 
 `parser_t`
