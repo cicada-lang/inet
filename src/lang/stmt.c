@@ -54,3 +54,12 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+define_program_stmt_t *
+define_program_stmt_new(char *name, list_t *token_list) {
+    define_program_stmt_t *self = allocate(sizeof(define_program_stmt_t));
+    self->tag = DEFINE_PROGRAM_STMT;
+    self->name = name;
+    self->token_list = token_list;
+    return self;
+}
