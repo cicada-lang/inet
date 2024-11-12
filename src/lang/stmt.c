@@ -63,3 +63,15 @@ define_program_stmt_new(char *name, list_t *token_list) {
     self->token_list = token_list;
     return self;
 }
+
+void
+define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        define_program_stmt_t *self = *self_pointer;
+        free(self->name);
+        list_destroy(&self->token_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
