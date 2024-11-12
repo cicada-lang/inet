@@ -104,10 +104,10 @@ lexer_lex_ignore_comment(lexer_t *self) {
 
 void
 lexer_lex_word(lexer_t *self) {
-    while (!lexer_is_finished(self)) {
+    while (true) {
         char c = lexer_current_char(self);
 
-        if (isspace(c)) {
+        if (isspace(c) || lexer_is_finished(self)) {
             size_t start = self->cursor;
             size_t end = self->cursor + strlen(self->buffer);
             char *string = string_dup(self->buffer);

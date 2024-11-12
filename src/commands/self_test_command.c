@@ -21,9 +21,9 @@ run(char **args) {
     list_test();
     stack_test();
 
-    lexer_test();
     mod_test();
     worker_test();
+    lexer_test();
 
     printf("</self-test>\n");
 
