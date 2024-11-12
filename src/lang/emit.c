@@ -23,3 +23,26 @@ emit_connect(const mod_t *mod, program_t *program) {
     (void) mod;
     program_add_op(program, (op_t *) connect_op_new());
 }
+
+void
+emit_get_free_wire(
+    const mod_t *mod,
+    program_t *program,
+    const char *node_name,
+    const char *port_name
+) {
+    const node_spec_t *node_spec = node_spec_cast(mod_find_spec(mod, node_name));
+    wire_index_t index = node_find_wire_index(node_spec, port_name);
+    program_add_op(program, (op_t *) get_free_wire_op_new(node_spec, index));
+}
+
+void
+emit_reconnect_free_wire(
+    const mod_t *mod,
+    program_t *program,
+    const char *node_name,
+    const char *port_name
+) {
+    emit_get_free_wire(mod, program, node_name, port_name);
+    emit_connect(mod, program);
+}

@@ -46,9 +46,9 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
 
 void
 node_apply_input_ports(node_t *node, worker_t *worker) {
-    for (size_t c = 0; c < node->spec->input_arity; c++) {
+    for (wire_index_t c = 0; c < node->spec->input_arity; c++) {
         wire_t *wire = stack_pop(worker->wire_stack);
-        size_t i = node->spec->input_arity - 1 - c;
+        wire_index_t i = node->spec->input_arity - 1 - c;
         wire->node = node;
         wire->index = i;
         node->wires[i] = wire;
@@ -57,14 +57,14 @@ node_apply_input_ports(node_t *node, worker_t *worker) {
 
 void
 node_return_output_ports(node_t *node, worker_t *worker) {
-    for (size_t c = 0; c < node->spec->output_arity; c++) {
+    for (wire_index_t c = 0; c < node->spec->output_arity; c++) {
         wire_t *node_wire = wire_new();
         wire_t *free_wire = wire_new();
 
         node_wire->opposite_wire = free_wire;
         free_wire->opposite_wire = node_wire;
 
-        size_t i = node->spec->input_arity + c;
+        wire_index_t i = node->spec->input_arity + c;
         node_wire->node = node;
         node_wire->index = i;
         node->wires[i] = node_wire;

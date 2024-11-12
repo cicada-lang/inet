@@ -1,6 +1,5 @@
-`emit_get_free_wire`
-`emit_reconnect_free_wire`
-
+ambr wire_index port_index
+fix makefile to recompile on .h file change
 `mod_import_nat` -- define some rules
 `worker_test` -- test `worker_interact`
 

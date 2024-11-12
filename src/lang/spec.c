@@ -42,7 +42,7 @@ spec_print(const spec_t *unknown_spec) {
     case NODE_SPEC: {
         node_spec_t *spec = (node_spec_t *) unknown_spec;
         printf("* (%s) ", spec->name);
-        for (size_t i = 0; i < spec->input_arity; i++) {
+        for (wire_index_t i = 0; i < spec->input_arity; i++) {
             port_spec_t *port_spec = spec->port_specs[i];
             if (port_spec->is_principal) {
                 printf("%s! ", port_spec->name);
@@ -53,8 +53,8 @@ spec_print(const spec_t *unknown_spec) {
 
         printf("-- ");
 
-        for (size_t c = 0; c < spec->output_arity; c++) {
-            size_t i = spec->input_arity + c;
+        for (wire_index_t c = 0; c < spec->output_arity; c++) {
+            wire_index_t i = spec->input_arity + c;
             port_spec_t *port_spec = spec->port_specs[i];
             if (port_spec->is_principal) {
                 printf("%s! ", port_spec->name);

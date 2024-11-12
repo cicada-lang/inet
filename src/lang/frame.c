@@ -65,7 +65,7 @@ frame_destroy(frame_t **self_pointer) {
 static free_wire_group_t *
 collect_free_wires_from_node(node_t *node) {
     free_wire_group_t *free_wire_group = free_wire_group_new(node->spec);
-    for (size_t i = 0; i < node->spec->arity; i++) {
+    for (wire_index_t i = 0; i < node->spec->arity; i++) {
         if (wire_is_principal(node->wires[i])) {
             free_wire_group->wires[i] = NULL;
         } else {
@@ -120,7 +120,7 @@ frame_fetch_op(frame_t *self) {
 
 static void
 free_wire_group_print(const free_wire_group_t *free_wire_group) {
-    for (size_t i = 0; i < free_wire_group->node_spec->arity; i++) {
+    for (wire_index_t i = 0; i < free_wire_group->node_spec->arity; i++) {
         if (free_wire_group->node_spec->port_specs[i]->is_principal)
             continue;
 
