@@ -23,7 +23,6 @@
 
 `compile_stmt(stmt, mod)`
 
-[maybe] `mod_t` -- has `filename` and `text`
 `mod_load`
 
 # design
