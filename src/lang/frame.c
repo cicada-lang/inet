@@ -155,9 +155,11 @@ void
 frame_print(const frame_t *self) {
     printf("<frame>\n");
 
+    printf("<program>\n");
     printf(". ");
     program_print_with_program_counter(self->program, self->program_counter);
     printf("\n");
+    printf("</program>\n");
 
     if (self->first_free_wire_group) {
         printf("<first_free_wire_group>\n");
