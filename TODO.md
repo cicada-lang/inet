@@ -1,5 +1,3 @@
-`wire_print_left` & `wire_print_right` -- handles `is_principal`
-
 `worker_test` -- define some rules
 
 `token_t`
@@ -21,7 +19,7 @@
 
 `compile_stmt(stmt, mod)`
 
-`mod_t` -- has `filename` and `text`
+[maybe] `mod_t` -- has `filename` and `text`
 `mod_load`
 
 # design

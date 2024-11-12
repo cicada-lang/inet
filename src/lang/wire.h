@@ -11,7 +11,7 @@ struct wire_t {
 wire_t *wire_new(void);
 void wire_destroy(wire_t **self_pointer);
 
-bool wire_is_principal(wire_t *self);
+bool wire_is_principal(const wire_t *self);
 
 const char *wire_name(const wire_t *self);
 const char *wire_node_name(const wire_t *self);
