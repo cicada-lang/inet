@@ -20,3 +20,4 @@
 #include "node_spec.h"
 #include "program_spec.h"
 #include "token.h"
+#include "lexer.h"

@@ -1,5 +1,7 @@
-`lexer_t`
+`lexer_new`
+`lexer_destroy`
 `lexer_lex`
+`lex`
 
 `parser_t`
 `parser_parse` -- build `stmt_list` from `token_list`

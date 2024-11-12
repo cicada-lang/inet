@@ -30,3 +30,4 @@ typedef struct node_spec_t node_spec_t;
 typedef struct port_spec_t port_spec_t;
 typedef struct program_spec_t program_spec_t;
 typedef struct token_t token_t;
+typedef struct lexer_t lexer_t;
