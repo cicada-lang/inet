@@ -14,6 +14,7 @@
 #include "worker_test.h"
 #include "op.h"
 #include "program.h"
+#include "emit.h"
 #include "rule.h"
 #include "spec.h"
 #include "node_spec.h"
