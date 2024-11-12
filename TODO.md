@@ -1,5 +1,3 @@
-`wire_print_reverse`
-
 `free_wire_group_print` -- fix format
 
 - `(node)-wire = >-wire-(node)`

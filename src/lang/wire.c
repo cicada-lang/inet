@@ -73,3 +73,10 @@ wire_print(const wire_t *self) {
         wire_print_left(self->opposite_wire);
     wire_print_right(self);
 }
+
+void
+wire_print_reverse(const wire_t *self) {
+    wire_print_left(self);
+    if (self->opposite_wire)
+        wire_print_right(self->opposite_wire);
+}
