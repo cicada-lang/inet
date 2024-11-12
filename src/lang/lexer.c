@@ -2,7 +2,15 @@
 
 #define BUFFER_MAX_LENGTH 1024
 
-lexer_t *
+struct lexer_t {
+    list_t *token_list;
+    const char *text;
+    size_t text_length;
+    size_t cursor;
+    char *buffer;
+};
+
+static lexer_t *
 lexer_new(const char *text) {
     lexer_t *self = allocate(sizeof(lexer_t));
     self->token_list = list_new();
@@ -13,7 +21,7 @@ lexer_new(const char *text) {
     return self;
 }
 
-void
+static void
 lexer_destroy(lexer_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -25,7 +33,7 @@ lexer_destroy(lexer_t **self_pointer) {
     }
 }
 
-void
+static void
 lexer_lex(lexer_t *self) {
     (void) self;
     return;
