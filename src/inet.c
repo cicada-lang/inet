@@ -2,9 +2,11 @@
 #include "config.h"
 #include "commands/index.h"
 
+static void setup_io(void);
+
 int
 main(int argc, char *argv[]) {
-    setbuf(stdout, NULL);
+    setup_io();
 
     commander_t *commander = commander_new("inet", INET_VERSION, argc, argv);
 
@@ -15,4 +17,9 @@ main(int argc, char *argv[]) {
     int status = commander_run(commander);
     commander_destroy(&commander);
     return status;
+}
+
+void
+setup_io(void) {
+    setbuf(stdout, NULL);
 }
