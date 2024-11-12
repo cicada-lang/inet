@@ -49,6 +49,7 @@ void mod_import_nat(mod_t *mod) {
         program_t *program = program_new();
         emit_get_free_wire(mod, program, "add", "addend");
         emit_reconnect_free_wire(mod, program, "add", "result");
+        program_build(program);
         mod_define_rule(mod, "zero", "add", program);
     }
 
@@ -59,6 +60,7 @@ void mod_import_nat(mod_t *mod) {
         emit_call(mod, program, "add");
         emit_call(mod, program, "add1");
         emit_reconnect_free_wire(mod, program, "add", "result");
+        program_build(program);
         mod_define_rule(mod, "add1", "add", program);
     }
 }

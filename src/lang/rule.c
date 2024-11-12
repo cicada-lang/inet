@@ -37,7 +37,7 @@ rule_match_active_pair(
 
 void
 rule_print(const rule_t *self) {
-    printf("! (%s)-(%s)",
+    printf("! (%s)-(%s) ",
            self->first_node_spec->name,
            self->second_node_spec->name);
     program_print(self->program);
