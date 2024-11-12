@@ -13,6 +13,7 @@ active_pair_destroy(active_pair_t **self_pointer) {
     if (*self_pointer) {
         active_pair_t *self = *self_pointer;
         free(self);
+        // Does NOT own `first_wire` and `second_wire`.
         *self_pointer = NULL;
     }
 }

@@ -1,7 +1,5 @@
 #pragma once
 
-// `wire_t` does NOT own `node` and `opposite_wire`.
-
 struct wire_t {
     node_t *node;
     port_index_t index;

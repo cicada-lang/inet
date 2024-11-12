@@ -15,6 +15,7 @@ wire_destroy(wire_t **self_pointer) {
     if (*self_pointer) {
         wire_t *self = *self_pointer;
         free(self);
+        // Does NOT own `node` and `opposite_wire`.
         *self_pointer = NULL;
     }
 }

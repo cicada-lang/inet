@@ -1,6 +1,7 @@
 #include "index.h"
 
-// The free wires in a frame is to be referenced by `get_free_wire_op_t`.
+// The aim of having two free wire groups in frame
+// is to reference free wire in them by `get_free_wire_op_t`.
 
 typedef struct free_wire_group_t free_wire_group_t;
 
@@ -21,7 +22,6 @@ free_wire_group_new(const node_spec_t *node_spec) {
     free_wire_group_t *self = allocate(sizeof(free_wire_group_t));
     self->node_spec = node_spec;
     self->wires = allocate_pointers(node_spec->arity);
-    // `free_wire_group_t` does NOT own wires in `wires`.
     return self;
 }
 
@@ -31,6 +31,7 @@ free_wire_group_destroy(free_wire_group_t **self_pointer) {
     if (*self_pointer) {
         free_wire_group_t *self = *self_pointer;
         free(self->wires);
+        // Does NOT own wires in `wires`.
         free(self);
         *self_pointer = NULL;
     }
@@ -86,6 +87,10 @@ frame_collect_free_wires(frame_t *self, active_pair_t *active_pair) {
 
     active_pair_destroy(&active_pair);
 }
+
+// Should consume the returned wire,
+// viewing wire in group as resource,
+// like in linear logic.
 
 wire_t *
 frame_get_free_wire(

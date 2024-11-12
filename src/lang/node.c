@@ -25,6 +25,7 @@ node_destroy(node_t **self_pointer) {
     if (*self_pointer) {
         node_t *self = *self_pointer;
         free(self->wires);
+        // Does NOT own wires in `wires`.
         free(self);
         *self_pointer = NULL;
     }

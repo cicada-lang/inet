@@ -1,7 +1,5 @@
 #pragma once
 
-// `node_t` does NOT own wires in `wires`.
-
 struct node_t {
     const node_spec_t *spec;
     node_id_t id;
