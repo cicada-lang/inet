@@ -1,6 +1,6 @@
-`@inspect` -- as an `op_t` to show the how net
+`token_new`
+`token_destroy`
 
-`token_t`
 `lexer_t`
 `lexer_lex`
 
@@ -18,6 +18,8 @@
 - `!` -- `define_rule_stmt`
 
 `compile_stmt(stmt, mod)`
+
+`@inspect` -- as an `op_t` to show the whole net
 
 `mod_load`
 
