@@ -17,3 +17,9 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
     }
     }
 }
+
+void
+emit_connect(const mod_t *mod, program_t *program) {
+    (void) mod;
+    program_add_op(program, (op_t *) connect_op_new());
+}

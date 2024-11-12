@@ -1,4 +1,3 @@
-`emit_connect`
 `emit_get_free_wire`
 `emit_reconnect_free_wire`
 
