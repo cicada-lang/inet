@@ -124,12 +124,12 @@ free_wire_group_print(const free_wire_group_t *free_wire_group) {
         if (free_wire_group->node_spec->port_specs[i]->is_principal)
             continue;
 
-        printf("(%s)-%s = ",
+        printf("(%s)-%s := ",
                free_wire_group->node_spec->name,
                free_wire_group->node_spec->port_specs[i]->name);
         wire_t *free_wire = free_wire_group->wires[i];
         assert(free_wire);
-        wire_print(free_wire);
+        wire_print_reverse(free_wire);
         printf("\n");
     }
 }
