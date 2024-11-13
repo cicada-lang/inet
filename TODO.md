@@ -1,9 +1,9 @@
-`run_text`
+`run_text(text)`
 
 - parse `text`
-- run `execute_stmt(stmt, worker)` for each `stmt`
+- run `interpret(worker, stmt)` for each `stmt`
 
-`execute_stmt`
+`interpret(worker, stmt)`
 
 # later
 

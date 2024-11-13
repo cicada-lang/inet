@@ -1,11 +1,11 @@
 #include "index.h"
 
-static void node_apply_input_ports(node_t *node, worker_t *worker);
-static void node_return_output_ports(node_t *node, worker_t *worker);
-static void maybe_add_active_pair(wire_t *first_wire, wire_t *second_wire, worker_t *worker);
+static void node_apply_input_ports(worker_t *worker, node_t *node);
+static void node_return_output_ports(worker_t *worker, node_t *node);
+static void maybe_add_active_pair(worker_t *worker, wire_t *first_wire, wire_t *second_wire);
 
 void
-execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
+execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->tag) {
     case CALL_PROGRAM_OP: {
         call_program_op_t *op = (call_program_op_t *) unknown_op;
@@ -17,8 +17,8 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
     case CALL_NODE_OP: {
         call_node_op_t *op = (call_node_op_t *) unknown_op;
         node_t *node = node_new(op->node_spec);
-        node_apply_input_ports(node, worker);
-        node_return_output_ports(node, worker);
+        node_apply_input_ports(worker, node);
+        node_return_output_ports(worker, node);
         return;
     }
 
@@ -32,7 +32,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
         first_opposite_wire->opposite_wire = second_opposite_wire;
         second_opposite_wire->opposite_wire = first_opposite_wire;
 
-        maybe_add_active_pair(first_opposite_wire, second_opposite_wire, worker);
+        maybe_add_active_pair(worker, first_opposite_wire, second_opposite_wire);
 
         wire_destroy(&first_wire);
         wire_destroy(&second_wire);
@@ -51,7 +51,7 @@ execute(op_t *unknown_op, worker_t *worker, frame_t *frame) {
 }
 
 void
-node_apply_input_ports(node_t *node, worker_t *worker) {
+node_apply_input_ports(worker_t *worker, node_t *node) {
     for (port_index_t c = 0; c < node->spec->input_arity; c++) {
         wire_t *wire = stack_pop(worker->value_stack);
         port_index_t i = node->spec->input_arity - 1 - c;
@@ -59,12 +59,12 @@ node_apply_input_ports(node_t *node, worker_t *worker) {
         wire->index = i;
         node->wires[i] = wire;
 
-        maybe_add_active_pair(wire, wire->opposite_wire, worker);
+        maybe_add_active_pair(worker, wire, wire->opposite_wire);
     }
 }
 
 void
-node_return_output_ports(node_t *node, worker_t *worker) {
+node_return_output_ports(worker_t *worker, node_t *node) {
     for (port_index_t c = 0; c < node->spec->output_arity; c++) {
         wire_t *node_wire = wire_new();
         wire_t *free_wire = wire_new();
@@ -82,9 +82,9 @@ node_return_output_ports(node_t *node, worker_t *worker) {
 }
 
 void maybe_add_active_pair(
+    worker_t *worker,
     wire_t *first_wire,
-    wire_t *second_wire,
-    worker_t *worker
+    wire_t *second_wire
 ) {
     if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
         assert(first_wire->opposite_wire == second_wire);

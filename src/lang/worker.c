@@ -86,7 +86,7 @@ worker_step(worker_t *self) {
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);
     if (!finished) stack_push(self->return_stack, frame);
-    execute(op, self, frame);
+    execute(self, frame, op);
     if (finished) frame_destroy(&frame);
 }
 
