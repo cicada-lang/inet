@@ -1,7 +1,4 @@
-`interpret_text` -- instead `run_text`
-
-- take `worker` as argument -- instead of return `worker`
-
+rename `run_test` to `interpret_test` and remove `run.c`
 
 # later
 
