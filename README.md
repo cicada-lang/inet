@@ -51,7 +51,7 @@ For more examples, please see the [examples/](examples/) directory.
 = three two one add
 = four two two add
 
-. two two add two two add
+. two two add two two add add
 ```
 
 ### List

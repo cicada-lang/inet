@@ -1,4 +1,4 @@
-[debug] `nat.inet` has wrong result
+fix `list.inet`
 
 `run_program_stmt` -- print value stack
 
