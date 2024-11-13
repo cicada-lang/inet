@@ -1,4 +1,4 @@
-`compile_word`
+`run_test`
 
 # later
 
