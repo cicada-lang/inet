@@ -45,7 +45,7 @@ For more examples, please see the [examples/](examples/) directory.
   (add)-addend (add1)-prev add
   add1 result-(add)
 
-; test
+; TEST
 
 = one zero add1
 = two one one add
@@ -69,14 +69,16 @@ For more examples, please see the [examples/](examples/) directory.
   (append)-rest (cons)-tail append
   (cons)-head cons result-(append)
 
-; test
+; TEST
 
-= six-zeros
-  null zero cons zero cons zero cons
-  null zero cons zero cons zero cons
+* sole -- value!
+
+= six-soles
+  null sole cons sole cons sole cons
+  null sole cons sole cons sole cons
   append
 
-. six-zeros
+. six-soles
 ```
 
 ## Development

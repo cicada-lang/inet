@@ -8,3 +8,14 @@
 ! (cons)-(append)
   (append)-rest (cons)-tail append
   (cons)-head cons result-(append)
+
+; TEST
+
+* (sole) -- value!
+
+= six-soles
+  null sole cons sole cons sole cons
+  null sole cons sole cons sole cons
+  append
+
+. six-soles

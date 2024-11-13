@@ -16,7 +16,7 @@ run: bin/inet
 
 .PHONY: test
 test: bin/inet
-	./bin/inet self-test # && ./bin/inet run tests/*
+	./bin/inet self-test && ./bin/inet run examples/*
 
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
