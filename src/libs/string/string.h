@@ -10,3 +10,4 @@ int64_t string_to_int(const char *self);
 bool string_starts_with(const char *self, const char *prefix);
 char *string_append(const char *left, const char *right);
 char *string_slice(const char *self, size_t start, size_t end);
+int string_find_index(const char *self, char ch);

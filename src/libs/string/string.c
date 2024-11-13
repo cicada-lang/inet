@@ -91,3 +91,10 @@ string_slice(const char *self, size_t start, size_t end) {
     result[length] = '\0';
     return result;
 }
+
+int
+string_find_index(const char *self, char ch) {
+    char *p = strchr(self, ch);
+    if (!p) return -1;
+    else return (int)(p - self);
+}

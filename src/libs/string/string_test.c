@@ -23,5 +23,10 @@ string_test(void) {
 
     assert(string_equal(string_slice("01234", 2, 4), "23"));
 
+    assert(string_find_index("01234", '0') == 0);
+    assert(string_find_index("01234", '1') == 1);
+    assert(string_find_index("01234", '2') == 2);
+    assert(string_find_index("01234", '5') == -1);
+
     printf("</string>\n");
 }
