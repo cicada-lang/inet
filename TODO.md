@@ -1,4 +1,3 @@
-`interpret` -- . -- `run_program_stmt_t`
 `interpret` -- ! -- `define_node_stmt_t` -- handle ports
 
 `emit_word`

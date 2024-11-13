@@ -35,7 +35,10 @@ interpret(worker_t *worker, stmt_t *unknown_stmt) {
 
     case RUN_PROGRAM_STMT: {
         run_program_stmt_t *stmt = (run_program_stmt_t *)unknown_stmt;
-        assert(stmt);
+        program_t *program = compile(worker->mod, stmt->token_list);
+        stack_push(worker->return_stack, frame_new(program));
+        worker_run(worker);
+        worker_interact(worker);
         return;
     }
     }
