@@ -1,6 +1,5 @@
-`interpret` -- ! -- `define_node_stmt_t` -- handle ports
-
-`emit_word`
+`compile` -- use `compile_word` -- remove `emit_word`
+`compile_word`
 
 # later
 

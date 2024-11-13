@@ -10,6 +10,29 @@ interpret(worker_t *worker, stmt_t *unknown_stmt) {
                 stmt->name,
                 list_length(stmt->input_token_list),
                 list_length(stmt->output_token_list));
+
+        port_index_t index = 0;
+
+        token_t *input_token = list_start(stmt->input_token_list);
+        while (input_token) {
+            char *word = input_token->string;
+            if (string_ends_with(word, "!"))
+                word = string_slice(word, 0, strlen(word) - 1);
+            spec->port_specs[index] = port_spec_new(word, false);
+            input_token = list_next(stmt->input_token_list);
+            index++;
+        }
+
+        token_t *output_token = list_start(stmt->output_token_list);
+        while (output_token) {
+            char *word = output_token->string;
+            if (string_ends_with(word, "!"))
+                word = string_slice(word, 0, strlen(word) - 1);
+            spec->port_specs[index] = port_spec_new(word, false);
+            output_token = list_next(stmt->output_token_list);
+            index++;
+        }
+
         mod_define(worker->mod, (spec_t *) spec);
         return;
     }
