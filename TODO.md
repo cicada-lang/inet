@@ -1,4 +1,9 @@
-`worker_load` -- take `src` and `text`, create `mod` and call `worker_execute_stmt`
+`run_text`
+
+- parse `text`
+- run `execute_stmt(stmt, worker)` for each `stmt`
+
+`execute_stmt`
 
 # later
 
