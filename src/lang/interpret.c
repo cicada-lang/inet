@@ -15,21 +15,14 @@ interpret(worker_t *worker, stmt_t *unknown_stmt) {
 
     case DEFINE_RULE_STMT: {
         define_rule_stmt_t *stmt = (define_rule_stmt_t *)unknown_stmt;
+
         assert(stmt);
         return;
     }
 
     case DEFINE_PROGRAM_STMT: {
         define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
-
-        program_t *program = program_new();
-        token_t *token = list_start(stmt->token_list);
-        while (token) {
-            emit_word(worker->mod, program, token->string);
-            token = list_next(stmt->token_list);
-        }
-        program_build(program);
-
+        program_t *program = compile(worker->mod, stmt->token_list);
         program_spec_t *spec = program_spec_new(stmt->name, program);
         mod_define(worker->mod, (spec_t *) spec);
         return;
