@@ -1,5 +1,3 @@
-`parser_test`
-
 `worker_load` -- take `src` and `text`, create `mod` and call `worker_execute_stmt`
 
 # later
