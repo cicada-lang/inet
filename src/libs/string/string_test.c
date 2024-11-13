@@ -21,5 +21,7 @@ string_test(void) {
 
     assert(string_starts_with(abc123, "abc"));
 
+    assert(string_equal(string_slice("01234", 2, 4), "23"));
+
     printf("</string>\n");
 }

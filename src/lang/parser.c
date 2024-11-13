@@ -75,9 +75,45 @@ parser_parse_define_node_stmt(parser_t *self) {
     (void) self;
 }
 
+static char *
+parse_connection_first_name(const char *string) {
+    (void) string;
+    return string_dup("TODO");
+}
+
+static char *
+parse_connection_second_name(const char *string) {
+    (void) string;    
+    return string_dup("TODO");
+}
+
 void
 parser_parse_define_rule_stmt(parser_t *self) {
-    (void) self;
+    token_t *rune_token = list_shift(self->token_list);
+    token_destroy(&rune_token);
+
+    token_t *first_token = list_shift(self->token_list);
+    assert(!token_is_rune(first_token));
+    char *first_name = parse_connection_first_name(first_token->string);
+    char *second_name = parse_connection_second_name(first_token->string);
+    token_destroy(&first_token);
+
+    list_t *token_list = list_new();
+    list_set_item_destructor(
+        token_list,
+        (list_item_destructor_t *) token_destroy);
+
+    while (true) {
+        token_t *token = list_shift(self->token_list);
+        if (token_is_rune(token)) {
+            list_unshift(self->token_list, token);
+            list_push(self->stmt_list,
+                      define_rule_stmt_new(first_name, second_name, token_list));
+            return;
+        }
+
+        list_push(token_list, token);
+    }
 }
 
 void
@@ -86,6 +122,7 @@ parser_parse_define_program_stmt(parser_t *self) {
     token_destroy(&rune_token);
 
     token_t *first_token = list_shift(self->token_list);
+    assert(!token_is_rune(first_token));
     char *name = string_dup(first_token->string);
     token_destroy(&first_token);
 
