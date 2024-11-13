@@ -1,4 +1,3 @@
-`interpret` -- * -- `define_node_stmt_t`
 `interpret` -- ! -- `define_rule_stmt_t`
 `interpret` -- = -- `define_program_stmt_t`
 `interpret` -- . -- `run_program_stmt_t`

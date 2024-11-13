@@ -5,8 +5,11 @@ interpret(worker_t *worker, stmt_t *unknown_stmt) {
     switch (unknown_stmt->tag) {
     case DEFINE_NODE_STMT: {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
-        assert(worker);
-        assert(stmt);
+        node_spec_t *spec =
+            node_spec_new(stmt->name,
+                          list_length(stmt->input_token_list),
+                          list_length(stmt->output_token_list));
+        mod_define(worker->mod, (spec_t *) spec);
         return;
     }
 

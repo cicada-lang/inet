@@ -1,7 +1,7 @@
 #include "index.h"
 
 worker_t *
-worker_new(const mod_t *mod) {
+worker_new(mod_t *mod) {
     worker_t *self = allocate(sizeof(worker_t));
     self->mod = mod;
 

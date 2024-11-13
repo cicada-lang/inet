@@ -3,14 +3,14 @@
 // A worker is like a little forth inner interpreter.
 
 struct worker_t {
-    const mod_t *mod;
+    mod_t *mod;
     list_t *active_pair_list;
     stack_t *value_stack;
     stack_t *return_stack;
     bool debug;
 };
 
-worker_t *worker_new(const mod_t *mod);
+worker_t *worker_new(mod_t *mod);
 void worker_destroy(worker_t **self_pointer);
 
 void worker_interact(worker_t *self);
