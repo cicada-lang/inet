@@ -1,5 +1,3 @@
-`run_command` -- take --debug option
-
 `@inspect` -- as an `op_t` to show the whole net
 
 # error handling
