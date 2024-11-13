@@ -70,6 +70,18 @@ string_starts_with(const char *target, const char *prefix) {
     return strncmp(target, prefix, prefix_length) == 0;
 }
 
+bool
+string_ends_with(const char *target, const char *postfix) {
+    size_t target_length = strlen(target);
+    size_t postfix_length = strlen(postfix);
+
+    if (target_length < postfix_length) return false;
+
+    return strncmp(target + (target_length - postfix_length),
+                   postfix,
+                   postfix_length) == 0;
+}
+
 char *
 string_append(const char *left, const char *right) {
     assert(left);

@@ -83,7 +83,7 @@ parse_connection_first_name(const char *string) {
 
 static char *
 parse_connection_second_name(const char *string) {
-    (void) string;    
+    (void) string;
     return string_dup("TODO");
 }
 

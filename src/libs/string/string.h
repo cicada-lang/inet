@@ -8,6 +8,7 @@ size_t string_hash(const char *self, size_t size);
 bool string_is_int(const char *restrict self);
 int64_t string_to_int(const char *self);
 bool string_starts_with(const char *self, const char *prefix);
+bool string_ends_with(const char *self, const char *postfix);
 char *string_append(const char *left, const char *right);
 char *string_slice(const char *self, size_t start, size_t end);
 int string_find_index(const char *self, char ch);
