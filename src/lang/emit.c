@@ -46,3 +46,10 @@ emit_reconnect_free_wire(
     emit_use_free_wire(mod, program, node_name, port_name);
     emit_connect(mod, program);
 }
+
+void
+emit_word(const mod_t *mod, program_t *program, const char *word) {
+    (void) mod;
+    (void) program;
+    (void) word;
+}
