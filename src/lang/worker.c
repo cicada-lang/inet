@@ -48,14 +48,15 @@ worker_interact(worker_t *self) {
 void
 worker_interact_once(worker_t *self) {
     active_pair_t *active_pair = list_pop(self->active_pair_list);
-    if (active_pair) {
-        const rule_t *rule = mod_find_rule(self->mod, active_pair);
-        assert(rule);
-        frame_t *frame = frame_new(rule->program);
-        frame_collect_free_wires(frame, active_pair);
-        stack_push(self->return_stack, frame);
-        worker_run(self);
-    }
+    if (!active_pair) return;
+
+    const rule_t *rule = mod_find_rule(self->mod, active_pair);
+    if (!rule) return;
+
+    frame_t *frame = frame_new(rule->program);
+    frame_collect_free_wires(frame, active_pair);
+    stack_push(self->return_stack, frame);
+    worker_run(self);
 }
 
 void
