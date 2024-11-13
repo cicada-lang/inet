@@ -24,3 +24,4 @@
 #include "lexer_test.h"
 #include "stmt.h"
 #include "parser.h"
+#include "parser_test.h"

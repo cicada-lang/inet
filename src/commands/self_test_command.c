@@ -24,6 +24,7 @@ run(char **args) {
     mod_test();
     worker_test();
     lexer_test();
+    parser_test();
 
     printf("</self-test>\n");
 

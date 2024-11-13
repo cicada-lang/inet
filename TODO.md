@@ -1,4 +1,6 @@
-`parser_test`
+`parser` take `text` instead of `token_list` -- for error report in context
+
+`parser_test` -- setup
 
 `worker_load` -- take `src` and `text`, create `mod` and call `worker_execute_stmt`
 
