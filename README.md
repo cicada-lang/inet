@@ -18,12 +18,24 @@ make
 make test
 ```
 
-The compiled `bin/ient` is the command-line program.
+The compiled `./bin/ient` is the command-line program.
 
 ```sh
-inet run         # run a script
-inet version     # print version
-inet help        # print help
+$ ./bin/inet
+inet 0.1.0
+
+commands:
+  run -- run files, use --debug to see each step
+  help -- print help message
+  version -- print version
+  self-test -- run self test
+```
+
+For examples:
+
+```sh
+./bin/inet run examples/nat.inet
+./bin/inet run examples/nat.inet --debug
 ```
 
 ## Examples
