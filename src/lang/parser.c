@@ -1,14 +1,16 @@
 #include "index.h"
 
 struct parser_t {
+    const char *text;
     list_t *token_list;
     list_t *stmt_list;
 };
 
 static parser_t *
-parser_new(list_t *token_list) {
+parser_new(const char *text) {
     parser_t *self = allocate(sizeof(parser_t));
-    self->token_list = token_list;
+    self->text = text;
+    self->token_list = lex(text);
 
     self->stmt_list = list_new();
     list_set_item_destructor(
@@ -223,8 +225,8 @@ parser_parse_run_program_stmt(parser_t *self) {
 }
 
 list_t *
-parse(list_t *token_list) {
-    parser_t *parser = parser_new(token_list);
+parse(const char *text) {
+    parser_t *parser = parser_new(text);
     parser_parse(parser);
     list_t *stmt_list = parser->stmt_list;
     parser_destroy(&parser);
