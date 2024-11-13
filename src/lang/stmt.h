@@ -10,8 +10,8 @@ struct stmt_t { stmt_tag_t tag; };
 struct define_node_stmt_t {
     stmt_tag_t tag;
     char *name;
-    list_t *input_name_list;
-    list_t *output_name_list;
+    list_t *input_token_list;
+    list_t *output_token_list;
 };
 
 struct define_rule_stmt_t {

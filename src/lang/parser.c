@@ -70,9 +70,48 @@ parser_parse(parser_t *self) {
     }
 }
 
+static char *parse_node_name(const char *string) {
+    assert(string_starts_with(string, "("));
+    assert(string_ends_with(string, ")"));
+    int i = string_find_index(string, ')');
+    assert(i != -1);
+    return string_slice(string, 1, i);
+}
+
 void
 parser_parse_define_node_stmt(parser_t *self) {
-    (void) self;
+    token_t *rune_token = list_shift(self->token_list);
+    token_destroy(&rune_token);
+
+    token_t *first_token = list_shift(self->token_list);
+    assert(!token_is_rune(first_token));
+    char *name = parse_node_name(first_token->string);
+    token_destroy(&first_token);
+
+    define_node_stmt_t *stmt = define_node_stmt_new(name);
+
+    bool output_flag = false;
+    while (!list_is_empty(self->token_list)) {
+        token_t *token = list_shift(self->token_list);
+        if (token_is_rune(token)) {
+            list_unshift(self->token_list, token);
+            break;
+        }
+
+        if (string_equal(token->string, "--")) {
+            output_flag = true;
+            token_destroy(&token);
+            continue;
+        }
+
+        if (output_flag) {
+            list_push(stmt->output_token_list, token);
+        } else {
+            list_push(stmt->input_token_list, token);
+        }
+    }
+
+    list_push(self->stmt_list, stmt);
 }
 
 static char *
@@ -111,17 +150,21 @@ parser_parse_define_rule_stmt(parser_t *self) {
         token_list,
         (list_item_destructor_t *) token_destroy);
 
-    while (true) {
+    while (!list_is_empty(self->token_list)) {
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
-            list_push(self->stmt_list,
-                      define_rule_stmt_new(first_name, second_name, token_list));
-            return;
+            break;
         }
 
         list_push(token_list, token);
     }
+
+    list_push(self->stmt_list,
+              define_rule_stmt_new(
+                  first_name,
+                  second_name,
+                  token_list));
 }
 
 void
@@ -139,16 +182,20 @@ parser_parse_define_program_stmt(parser_t *self) {
         token_list,
         (list_item_destructor_t *) token_destroy);
 
-    while (true) {
+    while (!list_is_empty(self->token_list)) {
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
-            list_push(self->stmt_list, define_program_stmt_new(name, token_list));
-            return;
+            break;
         }
 
         list_push(token_list, token);
     }
+
+    list_push(self->stmt_list,
+              define_program_stmt_new(
+                  name,
+                  token_list));
 }
 
 void
@@ -161,16 +208,18 @@ parser_parse_run_program_stmt(parser_t *self) {
         token_list,
         (list_item_destructor_t *) token_destroy);
 
-    while (true) {
+    while (!list_is_empty(self->token_list)) {
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
-            list_push(self->stmt_list, run_program_stmt_new(token_list));
-            return;
+            break;
         }
 
         list_push(token_list, token);
     }
+
+    list_push(self->stmt_list,
+              run_program_stmt_new(token_list));
 }
 
 list_t *
