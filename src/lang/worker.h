@@ -18,4 +18,6 @@ void worker_interact_once(worker_t *self);
 void worker_run(worker_t *self);
 void worker_step(worker_t *self);
 
+void worker_print_return_stack(const worker_t *self);
+void worker_print_value_stack(const worker_t *self);
 void worker_print(const worker_t *self);

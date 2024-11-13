@@ -43,7 +43,7 @@ run_file(const char *file_name) {
     mod_t *mod = mod_new();
     worker_t *worker = worker_new(mod);
 
-    worker->debug = true;
+    // worker->debug = true;
 
     interpret_text(worker, text);
 

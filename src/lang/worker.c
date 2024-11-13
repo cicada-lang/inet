@@ -107,14 +107,26 @@ worker_print(const worker_t *self) {
     }
     printf("</active_pair_list>\n");
 
+    worker_print_return_stack(self);
+    worker_print_value_stack(self);
+
+    printf("</worker>\n");
+}
+
+void
+worker_print_return_stack(const worker_t *self) {
     size_t return_stack_length = stack_length(self->return_stack);
     printf("<return_stack length=\"%lu\">\n", return_stack_length);
     for (size_t i = 0; i < return_stack_length; i++) {
         frame_t *frame = stack_get(self->return_stack, i);
         frame_print(frame);
     }
-    printf("</return_stack>\n");
 
+    printf("</return_stack>\n");
+}
+
+void
+worker_print_value_stack(const worker_t *self) {
     size_t value_stack_length = stack_length(self->value_stack);
     printf("<value_stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
@@ -123,7 +135,6 @@ worker_print(const worker_t *self) {
         wire_print(wire);
         printf("\n");
     }
-    printf("</value_stack>\n");
 
-    printf("</worker>\n");
+    printf("</value_stack>\n");
 }

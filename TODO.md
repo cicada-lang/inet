@@ -1,4 +1,4 @@
-`run_program_stmt` -- print value stack
+`run_command` -- take --debug option
 
 # later
 
