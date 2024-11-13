@@ -21,7 +21,6 @@ make test
 The compiled `bin/ient` is the command-line program.
 
 ```sh
-inet repl        # start the read-eval-print-loop
 inet run         # run a script
 inet version     # print version
 inet help        # print help
