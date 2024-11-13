@@ -38,6 +38,19 @@ static void parser_parse_define_rule_stmt(parser_t *self);
 static void parser_parse_define_program_stmt(parser_t *self);
 static void parser_parse_run_program_stmt(parser_t *self);
 
+static bool token_is_rune(const token_t *token) {
+    if (string_equal(token->string, "*"))
+        return true;
+    else if (string_equal(token->string, "!"))
+        return true;
+    else if (string_equal(token->string, "="))
+        return true;
+    else if (string_equal(token->string, "."))
+        return true;
+    else
+        return false;
+}
+
 static void
 parser_parse(parser_t *self) {
     while (!list_is_empty(self->token_list)) {
@@ -74,7 +87,23 @@ parser_parse_define_program_stmt(parser_t *self) {
 
 void
 parser_parse_run_program_stmt(parser_t *self) {
-    (void) self;
+    token_destroy(list_shift(self->token_list));
+
+    list_t *token_list = list_new();
+    list_set_item_destructor(
+        token_list,
+        (list_item_destructor_t *) token_destroy);
+
+    while (true) {
+        token_t *token = list_shift(self->token_list);
+        if (token_is_rune(token)) {
+            list_unshift(self->token_list, token);
+            list_push(self->stmt_list, run_program_stmt_new(token_list));
+            return;
+        }
+
+        list_push(token_list, token);
+    }
 }
 
 list_t *
