@@ -82,12 +82,34 @@ parser_parse_define_rule_stmt(parser_t *self) {
 
 void
 parser_parse_define_program_stmt(parser_t *self) {
-    (void) self;
+    token_t *rune_token = list_shift(self->token_list);
+    token_destroy(&rune_token);
+
+    token_t *first_token = list_shift(self->token_list);
+    char *name = string_dup(first_token->string);
+    token_destroy(&first_token);
+
+    list_t *token_list = list_new();
+    list_set_item_destructor(
+        token_list,
+        (list_item_destructor_t *) token_destroy);
+
+    while (true) {
+        token_t *token = list_shift(self->token_list);
+        if (token_is_rune(token)) {
+            list_unshift(self->token_list, token);
+            list_push(self->stmt_list, define_program_stmt_new(name, token_list));
+            return;
+        }
+
+        list_push(token_list, token);
+    }
 }
 
 void
 parser_parse_run_program_stmt(parser_t *self) {
-    token_destroy(list_shift(self->token_list));
+    token_t *rune_token = list_shift(self->token_list);
+    token_destroy(&rune_token);
 
     list_t *token_list = list_new();
     list_set_item_destructor(

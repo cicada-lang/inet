@@ -1,6 +1,5 @@
 `parser_parse_define_node_stmt`
 `parser_parse_define_rule_stmt`
-`parser_parse_define_program_stmt`
 
 `parser_test`
 
