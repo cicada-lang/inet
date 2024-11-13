@@ -77,14 +77,22 @@ parser_parse_define_node_stmt(parser_t *self) {
 
 static char *
 parse_connection_first_name(const char *string) {
-    (void) string;
-    return string_dup("TODO");
+    assert(string_starts_with(string, "("));
+    assert(string_ends_with(string, ")"));
+    int i = string_find_index(string, ')');
+    assert(i != -1);
+    return string_slice(string, 1, i);
 }
 
 static char *
 parse_connection_second_name(const char *string) {
-    (void) string;
-    return string_dup("TODO");
+    assert(string_starts_with(string, "("));
+    assert(string_ends_with(string, ")"));
+    int i = string_find_index(string, ')');
+    assert(i != -1);
+    assert(string[i+1] == '-');
+    assert(string[i+2] == '(');
+    return string_slice(string, i+3, strlen(string) - 1);
 }
 
 void
