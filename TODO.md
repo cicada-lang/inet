@@ -1,4 +1,3 @@
-`compile` -- use `compile_word` -- remove `emit_word`
 `compile_word`
 
 # later
