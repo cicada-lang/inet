@@ -76,7 +76,7 @@ parser_parse_define_node_stmt(parser_t *self) {
 }
 
 static char *
-parse_connection_first_name(const char *string) {
+parse_rule_first_name(const char *string) {
     assert(string_starts_with(string, "("));
     assert(string_ends_with(string, ")"));
     int i = string_find_index(string, ')');
@@ -85,7 +85,7 @@ parse_connection_first_name(const char *string) {
 }
 
 static char *
-parse_connection_second_name(const char *string) {
+parse_rule_second_name(const char *string) {
     assert(string_starts_with(string, "("));
     assert(string_ends_with(string, ")"));
     int i = string_find_index(string, ')');
@@ -102,8 +102,8 @@ parser_parse_define_rule_stmt(parser_t *self) {
 
     token_t *first_token = list_shift(self->token_list);
     assert(!token_is_rune(first_token));
-    char *first_name = parse_connection_first_name(first_token->string);
-    char *second_name = parse_connection_second_name(first_token->string);
+    char *first_name = parse_rule_first_name(first_token->string);
+    char *second_name = parse_rule_second_name(first_token->string);
     token_destroy(&first_token);
 
     list_t *token_list = list_new();
