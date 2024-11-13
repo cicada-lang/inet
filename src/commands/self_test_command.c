@@ -25,7 +25,7 @@ run(char **args) {
     worker_test();
     lexer_test();
     parser_test();
-    run_test();
+    interpret_test();
 
     printf("</self-test>\n");
 

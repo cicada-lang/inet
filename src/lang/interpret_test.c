@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-run_test(void) {
-    printf("<run_test>\n");
+interpret_test(void) {
+    printf("<interpret_test>\n");
 
     const char *text = "\
 * (zero) -- value!                   \
@@ -24,8 +24,16 @@ run_test(void) {
 . two two add two two add            \
 ";
 
-    worker_t *worker = run_text(text);
-    worker_destroy(&worker);
 
-    printf("</run_test>\n");
+    mod_t *mod = mod_new();
+    worker_t *worker = worker_new(mod);
+
+    worker->debug = true;
+
+    interpret_text(worker, text);
+
+    worker_destroy(&worker);
+    mod_destroy(&mod);
+
+    printf("</interpret_test>\n");
 }

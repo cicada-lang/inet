@@ -27,5 +27,4 @@
 #include "parser_test.h"
 #include "compile.h"
 #include "interpret.h"
-#include "run.h"
-#include "run_test.h"
+#include "interpret_test.h"

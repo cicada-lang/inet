@@ -1,4 +1,6 @@
-rename `run_test` to `interpret_test` and remove `run.c`
+`run_command`
+
+[bug] `nat.inet` has wrong result
 
 # later
 
