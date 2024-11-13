@@ -10,7 +10,7 @@ run_text(const char *text) {
     list_t *stmt_list = parse(text);
     stmt_t *stmt = list_start(stmt_list);
     while (stmt) {
-        interpret(worker, stmt);
+        interpret_stmt(worker, stmt);
         stmt = list_next(stmt_list);
     }
 

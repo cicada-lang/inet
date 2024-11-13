@@ -1,5 +1,3 @@
-rename `interpret` to `interpret_stmt`
-
 `interpret_text` -- instead `run_text`
 
 - take `worker` as argument -- instead of return `worker`

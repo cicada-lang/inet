@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-interpret(worker_t *worker, stmt_t *unknown_stmt) {
+interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
     switch (unknown_stmt->tag) {
     case DEFINE_NODE_STMT: {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
