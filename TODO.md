@@ -1,8 +1,3 @@
-`run_text(text)`
-
-- parse `text`
-- run `interpret(worker, stmt)` for each `stmt`
-
 `interpret(worker, stmt)`
 
 # later

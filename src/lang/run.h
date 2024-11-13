@@ -1,3 +1,3 @@
 #pragma once
 
-void run_text(const char *text);
+worker_t *run_text(const char *text);
