@@ -6,17 +6,22 @@ interpret(worker_t *worker, stmt_t *unknown_stmt) {
     case DEFINE_NODE_STMT: {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
         node_spec_t *spec =
-            node_spec_new(stmt->name,
-                          list_length(stmt->input_token_list),
-                          list_length(stmt->output_token_list));
+            node_spec_new(
+                stmt->name,
+                list_length(stmt->input_token_list),
+                list_length(stmt->output_token_list));
         mod_define(worker->mod, (spec_t *) spec);
         return;
     }
 
     case DEFINE_RULE_STMT: {
         define_rule_stmt_t *stmt = (define_rule_stmt_t *)unknown_stmt;
-
-        assert(stmt);
+        program_t *program = compile(worker->mod, stmt->token_list);
+        mod_define_rule(
+            worker->mod,
+            stmt->first_name,
+            stmt->second_name,
+            program);
         return;
     }
 
