@@ -18,7 +18,7 @@ make
 make test
 ```
 
-The compiled `./bin/ient` is the command-line program.
+The compiled `./bin/inet` is the command-line program.
 
 ```sh
 $ ./bin/inet
