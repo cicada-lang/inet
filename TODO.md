@@ -1,6 +1,6 @@
-`run_command`
+[debug] `nat.inet` has wrong result
 
-[bug] `nat.inet` has wrong result
+`run_program_stmt` -- print value stack
 
 # later
 
