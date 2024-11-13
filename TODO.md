@@ -1,4 +1,4 @@
-`run_test`
+`run_test` -- call `run_text`
 
 # later
 

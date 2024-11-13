@@ -28,3 +28,4 @@
 #include "compile.h"
 #include "interpret.h"
 #include "run.h"
+#include "run_test.h"
