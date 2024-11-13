@@ -74,7 +74,7 @@ mod_define_rule(
 
 void
 mod_print(const mod_t *self) {
-    printf("<mod spec_count=\"%lu\" rule_count=\"%lu\">\n",
+    printf("<mod spec-count=\"%lu\" rule-count=\"%lu\">\n",
            list_length(self->spec_list),
            list_length(self->rule_list));
 

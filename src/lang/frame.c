@@ -162,15 +162,15 @@ frame_print(const frame_t *self) {
     printf("</program>\n");
 
     if (self->first_free_wire_group) {
-        printf("<first_free_wire_group>\n");
+        printf("<first-free-wire-group>\n");
         free_wire_group_print(self->first_free_wire_group);
-        printf("</first_free_wire_group>\n");
+        printf("</first-free-wire-group>\n");
     }
 
     if (self->second_free_wire_group) {
-        printf("<second_free_wire_group>\n");
+        printf("<second-free-wire-group>\n");
         free_wire_group_print(self->second_free_wire_group);
-        printf("</second_free_wire_group>\n");
+        printf("</second-free-wire-group>\n");
     }
 
     printf("</frame>\n");
