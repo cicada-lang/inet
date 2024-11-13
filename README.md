@@ -9,7 +9,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 ## Usage
 
-On Linux:
+Compile:
 
 ```
 git clone https://github.com/cicada-lang/inet
@@ -18,7 +18,7 @@ make
 make test
 ```
 
-The compiled `./bin/inet` is the command-line program.
+The compiled binary `./bin/inet` is the command-line program.
 
 ```sh
 $ ./bin/inet
