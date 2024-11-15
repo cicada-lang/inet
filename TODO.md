@@ -1,4 +1,3 @@
-`builtin_spec_new`
 `builtin_spec_destroy`
 `builtin_spec_cast`
 
