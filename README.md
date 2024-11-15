@@ -4,7 +4,6 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 - Untyped.
 - ASCII art inspired syntax.
-- Pure postfix expression.
 - Using a stack-based low-layer language to build nets.
 
 ## Usage
