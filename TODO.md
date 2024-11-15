@@ -1,4 +1,12 @@
-`builtin_spec_t`
+`builtin_spec_new`
+`builtin_spec_destroy`
+`builtin_spec_cast`
+
+`spec_destroy` -- handle `builtin_spec_t`
+`spec_name` -- handle `builtin_spec_t`
+`spec_print` -- handle `builtin_spec_t`
+`emit_call` -- handle `builtin_spec_t`
+
 `call_builtin_op_t`
 
 `@connect` -- as a builtin -- instead of an `op_t` -- remove `connect_op_t`

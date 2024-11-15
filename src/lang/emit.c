@@ -15,6 +15,10 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
         program_add_op(program, (op_t *) call_node_op_new(spec));
         return;
     }
+
+    case BUILTIN_SPEC: {
+         assert(false);
+    }
     }
 }
 

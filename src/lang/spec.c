@@ -15,6 +15,10 @@ spec_destroy(spec_t **self_pointer) {
             program_spec_destroy((program_spec_t **) self_pointer);
             return;
         }
+
+        case BUILTIN_SPEC: {
+             assert(false);
+        }
         }
     }
 }
@@ -31,6 +35,10 @@ spec_name(spec_t *unknown_spec) {
         program_spec_t *spec = (program_spec_t *) unknown_spec;
         return spec->name;
     }
+
+    case BUILTIN_SPEC: {
+        assert(false);
+    }    
     }
 
     assert(false);
@@ -71,6 +79,10 @@ spec_print(const spec_t *unknown_spec) {
         printf("= %s ", spec->name);
         program_print(spec->program);
         return;
+    }
+
+    case BUILTIN_SPEC: {
+        assert(false);
     }
     }
 

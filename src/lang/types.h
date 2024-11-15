@@ -7,7 +7,7 @@ typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum {
     PROGRAM_SPEC,
     NODE_SPEC,
-    // BUILTIN_SPEC,
+    BUILTIN_SPEC,
 } spec_tag_t;
 
 typedef enum {
@@ -40,6 +40,7 @@ typedef struct rule_t rule_t;
 typedef struct spec_t spec_t;
 typedef struct node_spec_t node_spec_t;
 typedef struct port_spec_t port_spec_t;
+typedef struct builtin_spec_t builtin_spec_t;
 typedef struct program_spec_t program_spec_t;
 typedef struct token_t token_t;
 typedef struct lexer_t lexer_t;
