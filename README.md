@@ -63,7 +63,9 @@ For more examples, please see the [examples/](examples/) directory.
 = three two one add
 = four two two add
 
-. two two add two two add add
+. two two add
+  two two add
+  add
 ```
 
 ### List
@@ -84,12 +86,9 @@ For more examples, please see the [examples/](examples/) directory.
 
 * sole -- value!
 
-= six-soles
-  null sole cons sole cons sole cons
+. null sole cons sole cons sole cons
   null sole cons sole cons sole cons
   append
-
-. six-soles
 ```
 
 ## Development

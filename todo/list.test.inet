@@ -1,9 +1,6 @@
 + null cons append "list.inet"
 + sole "trivial.inet"
 
-= six-soles
-  null sole cons sole cons sole cons
+. null sole cons sole cons sole cons
   null sole cons sole cons sole cons
   append
-
-. six-soles
