@@ -15,7 +15,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 . <program>                       ; run program
 ```
 
-```bnf
+```xml
 <inputs> := <ports>
 <outputs> := <ports>
 
