@@ -11,6 +11,7 @@ typedef enum {
 } spec_tag_t;
 
 typedef enum {
+    CALL_BUILTIN_OP,
     CALL_PROGRAM_OP,
     CALL_NODE_OP,
     CONNECT_OP,
@@ -31,6 +32,7 @@ typedef struct mod_t mod_t;
 typedef struct frame_t frame_t;
 typedef struct worker_t worker_t;
 typedef struct op_t op_t;
+typedef struct call_builtin_op_t call_builtin_op_t;
 typedef struct call_program_op_t call_program_op_t;
 typedef struct call_node_op_t call_node_op_t;
 typedef struct connect_op_t connect_op_t;

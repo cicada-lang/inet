@@ -7,6 +7,11 @@ static void maybe_add_active_pair(worker_t *worker, wire_t *first_wire, wire_t *
 void
 execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->tag) {
+    case CALL_BUILTIN_OP: {
+        assert(false);
+        return;
+    }
+
     case CALL_PROGRAM_OP: {
         call_program_op_t *op = (call_program_op_t *) unknown_op;
         frame_t *frame = frame_new(op->program_spec->program);

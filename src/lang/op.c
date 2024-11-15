@@ -78,6 +78,11 @@ op_destroy(op_t **self_pointer) {
     if (*self_pointer) {
         op_t *self = *self_pointer;
         switch (self->tag) {
+        case CALL_BUILTIN_OP: {
+            assert(false);
+            return;
+        }
+
         case CALL_PROGRAM_OP: {
             call_program_op_destroy((call_program_op_t **) self_pointer);
             return;
@@ -104,6 +109,11 @@ op_destroy(op_t **self_pointer) {
 void
 op_print(const op_t *unknown_op) {
     switch (unknown_op->tag) {
+    case CALL_BUILTIN_OP: {
+        assert(false);
+        return;
+    }
+
     case CALL_PROGRAM_OP: {
         call_program_op_t *op = (call_program_op_t *) unknown_op;
         printf("%s", op->program_spec->name);
