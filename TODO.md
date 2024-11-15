@@ -1,6 +1,3 @@
-`builtin_spec_destroy`
-`builtin_spec_cast`
-
 `spec_destroy` -- handle `builtin_spec_t`
 `spec_name` -- handle `builtin_spec_t`
 `spec_print` -- handle `builtin_spec_t`
