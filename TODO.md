@@ -1,13 +1,28 @@
 `@inspect` -- as an `op_t` to show the whole net
 
-# example
+- keep the value on stack
+- call `wire_inspect`
 
-`examples/lambda.inet` -- use interaction combinators
+`string_to_subscript`
+
+`wire_inspect`
+
+```xml
+<net>
+<root>(add1₂₅)-value!-<>-</root>
+(add1₂₅)-prev-<>-value-(add1₂₃)
+(add1₂₃)-prev-<>-value-(zero₂₁)
+</net>
+```
 
 # docs
 
 docs/articles/programming-with-interaction-nets.md -- update for new syntax
 docs/articles/反应网编程.md -- update for new syntax
+
+# example
+
+`examples/lambda.inet` -- use interaction combinators
 
 # module system
 
