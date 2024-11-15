@@ -17,7 +17,8 @@ spec_destroy(spec_t **self_pointer) {
         }
 
         case BUILTIN_SPEC: {
-             assert(false);
+            builtin_spec_destroy((builtin_spec_t **) self_pointer);
+            return;
         }
         }
     }
