@@ -8,7 +8,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 ## Syntax
 
-```inet
+```xml
 * (<name>) <inputs> -- <outputs>  ; define node
 ! (<name>)-(<name>) <program>     ; define rule
 = <name> <program>                ; define program
@@ -39,7 +39,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 ### Natural Number
 
-```inet
+```
 * (zero) -- value!
 * (add1) prev -- value!
 * (add) target! addend -- result
@@ -65,7 +65,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 ### List
 
-```inet
+```
 * (null) -- value!
 * (cons) head tail -- value!
 * (append) target! rest -- result
