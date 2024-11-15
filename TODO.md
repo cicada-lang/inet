@@ -1,5 +1,3 @@
-[docs] readme note about syntax
-
 `@inspect` -- as an `op_t` to show the whole net
 
 # module system
