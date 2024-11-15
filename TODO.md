@@ -1,5 +1,14 @@
 `@inspect` -- as an `op_t` to show the whole net
 
+# example
+
+`examples/lambda.inet` -- use interaction combinators
+
+# docs
+
+docs/articles/programming-with-interaction-nets.md -- update for new syntax
+docs/articles/反应网编程.md -- update for new syntax
+
 # module system
 
 use `module/name` syntax
@@ -28,6 +37,8 @@ improve error handling -- just use `assert(value && message)`?
 re-design syntax to simplify diff-list.test.inet
 
 - remove the idea of `(diff) @spread`
+
+# parallelism
 
 # debug
 
