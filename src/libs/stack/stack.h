@@ -1,5 +1,7 @@
 #pragma once
 
+typedef void (stack_item_destructor_t)(void **item);
+
 stack_t *stack_new(size_t size);
 void stack_purge(stack_t *self);
 void stack_destroy(stack_t **self_pointer);

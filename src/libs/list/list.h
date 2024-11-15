@@ -1,5 +1,7 @@
 #pragma once
 
+typedef void (list_item_destructor_t)(void **item);
+
 // double linked list, with a private cursor.
 
 list_t *list_new(void);

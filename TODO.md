@@ -1,10 +1,9 @@
-`@inspect` -- as an `op_t` to show the whole net
+`builtin_spec_t`
+`call_builtin_op_t`
 
-- keep the value on stack
-- call `wire_inspect`
-
+`@connect` -- as a builtin -- instead of an `op_t` -- remove `connect_op_t`
+`@inspect` -- as an builtin -- keep the value on stack and call `wire_inspect`
 `string_to_subscript`
-
 `wire_inspect`
 
 ```xml
