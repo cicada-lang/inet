@@ -9,10 +9,28 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 ## Syntax
 
 ```inet
-* (<node>) <inputs> -- <outputs>  ; define node
-! (<node>)-(<node>) <program>     ; define rule
+* (<name>) <inputs> -- <outputs>  ; define node
+! (<name>)-(<name>) <program>     ; define rule
 = <name> <program>                ; define program
 . <program>                       ; run program
+```
+
+```bnf
+<inputs> := <ports>
+<outputs> := <ports>
+
+<ports> := <port> | <port> <ports>
+<port> := <auxiliary-port> | <principle-port>
+<auxiliary-port> := <name>
+<principle-port> := <name>!
+
+<program> := <word> | <word> <program>
+<word> := <call> | <use-free-port> | <reconnect-free-port>
+<call> := <name>
+<use-free-port> := (<name>)-<name>
+<reconnect-free-port> := <name>-(<name>)
+
+<nam> := "alphanumeric string"
 ```
 
 ## Examples
