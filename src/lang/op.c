@@ -1,5 +1,13 @@
 #include "index.h"
 
+call_builtin_op_t *
+call_builtin_op_new(const builtin_spec_t *builtin_spec) {
+    call_builtin_op_t *self = allocate(sizeof(call_builtin_op_t));
+    self->tag = CALL_BUILTIN_OP;
+    self->builtin_spec = builtin_spec;
+    return self;
+}
+
 call_program_op_t *
 call_program_op_new(const program_spec_t *program_spec) {
     call_program_op_t *self = allocate(sizeof(call_program_op_t));
@@ -30,6 +38,16 @@ use_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
     self->node_spec = node_spec;
     self->index = index;
     return self;
+}
+
+void
+call_builtin_op_destroy(call_builtin_op_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        call_builtin_op_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
 }
 
 void
