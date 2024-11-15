@@ -101,3 +101,8 @@ wire_print_reverse(const wire_t *self) {
     if (self->opposite_wire)
         wire_print_right(self->opposite_wire);
 }
+
+void
+wire_inspect(const wire_t *self) {
+    wire_print(self);
+}
