@@ -1,5 +1,12 @@
 `@inspect` -- as an `op_t` to show the whole net
 
+support primitive value
+
+- learn for other inet implementations
+
+[maybe] `wire/inspect` -- instead of
+[maybe] `wire/connect` -- instead of `@connect`
+
 # error handling
 
 improve error handling -- just use `assert(value && message)`?
