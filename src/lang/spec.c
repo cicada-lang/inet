@@ -84,7 +84,9 @@ spec_print(const spec_t *unknown_spec) {
     }
 
     case BUILTIN_SPEC: {
-        assert(false);
+        builtin_spec_t *spec = (builtin_spec_t *) unknown_spec;
+        printf("@%s", spec->name);
+        return;
     }
     }
 

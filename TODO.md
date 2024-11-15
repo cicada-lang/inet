@@ -1,5 +1,3 @@
-`spec_print` -- handle `builtin_spec_t`
-
 `call_builtin_op_t`
 
 `emit_call` -- handle `builtin_spec_t`
