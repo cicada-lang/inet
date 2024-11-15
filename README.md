@@ -13,6 +13,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 ! (<name>)-(<name>) <program>     ; define rule
 = <name> <program>                ; define program
 . <program>                       ; run program
+; a line of comment (ends with \n)
 ```
 
 ```xml
