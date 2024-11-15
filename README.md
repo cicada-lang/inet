@@ -21,15 +21,15 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 <ports> := <port> | <port> <ports>
 
 <port> := <auxiliary-port> | <principle-port>
-<auxiliary-port> := <name>
-<principle-port> := <name>!
+  <auxiliary-port> := <name>
+  <principle-port> := <name>!
 
 <program> := <word> | <word> <program>
 
 <word> := <call> | <use-free-port> | <reconnect-free-port>
-<call> := <name>
-<use-free-port> := (<name>)-<name>
-<reconnect-free-port> := <name>-(<name>)
+  <call> := <name>
+  <use-free-port> := (<name>)-<name>
+  <reconnect-free-port> := <name>-(<name>)
 
 <name> := "alphanumeric string"
 ```
