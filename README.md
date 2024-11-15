@@ -6,35 +6,13 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 - ASCII art inspired syntax.
 - Using a stack-based low-layer language to build nets.
 
-## Usage
+## Syntax
 
-Compile:
-
-```
-git clone https://github.com/cicada-lang/inet
-cd inet
-make
-make test
-```
-
-The compiled binary `./bin/inet` is the command-line program.
-
-```sh
-$ ./bin/inet
-inet 0.1.0
-
-commands:
-  run -- run files, use --debug to see each step
-  help -- print help message
-  version -- print version
-  self-test -- run self test
-```
-
-For examples:
-
-```sh
-./bin/inet run examples/nat.inet
-./bin/inet run examples/nat.inet --debug
+```inet
+* (<node>) <inputs> -- <outputs>  ; define node
+! (<node>)-(<node>) <program>     ; define rule
+= <name> <program>                ; define program
+. <program>                       ; run program
 ```
 
 ## Examples
@@ -88,6 +66,37 @@ For more examples, please see the [examples/](examples/) directory.
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
   append
+```
+
+## Install
+
+Compile:
+
+```
+git clone https://github.com/cicada-lang/inet
+cd inet
+make
+make test
+```
+
+The compiled binary `./bin/inet` is the command-line program.
+
+```sh
+$ ./bin/inet
+inet 0.1.0
+
+commands:
+  run -- run files, use --debug to see each step
+  help -- print help message
+  version -- print version
+  self-test -- run self test
+```
+
+For examples:
+
+```sh
+./bin/inet run examples/nat.inet
+./bin/inet run examples/nat.inet --debug
 ```
 
 ## Development

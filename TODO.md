@@ -1,11 +1,25 @@
+[docs] readme note about syntax
+
 `@inspect` -- as an `op_t` to show the whole net
 
-support primitive value
+# module system
 
-- learn for other inet implementations
+use `module/name` syntax
+
+`wire` as a builtin module, maybe use `@wire`
 
 [maybe] `wire/inspect` -- instead of
 [maybe] `wire/connect` -- instead of `@connect`
+
+# primitive value
+
+support primitive value
+
+- dispatching but type -- `(node)-[primitive-value: type]`
+  - `[primitive-value]` in a box.
+    - box wastes memory, should just let node's port be able to store any value.
+
+- learn for other inet implementations
 
 # error handling
 
