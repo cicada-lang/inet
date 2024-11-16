@@ -131,7 +131,6 @@ worker_print_value_stack(const worker_t *self) {
     printf("<value-stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
         wire_t *wire = stack_get(self->value_stack, i);
-        printf("- ");
         wire_print(wire);
         printf("\n");
     }

@@ -2,7 +2,9 @@
 
 ```xml
 <net>
-<root>(add1₂₅)-value!-<>-</root>
+<root>
+(add1₂₅)-value!-<>-
+</root>
 (add1₂₅)-prev-<>-value-(add1₂₃)
 (add1₂₃)-prev-<>-value-(zero₂₁)
 </net>
