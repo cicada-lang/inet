@@ -1,4 +1,4 @@
-cc = clang
+cc = gcc
 ldflags =
 cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O2 -std=c99 -pedantic
 
