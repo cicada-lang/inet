@@ -70,16 +70,14 @@ wire_print_left(const wire_t *self) {
                wire_node_name(self),
                node_id_string,
                wire_name(self));
-        free(node_id_string);
-        return;
     } else {
         printf("(%s%s)-%s-<",
                wire_node_name(self),
                node_id_string,
                wire_name(self));
-        free(node_id_string);
-        return;
     }
+
+    free(node_id_string);
 }
 
 void
@@ -96,16 +94,14 @@ wire_print_right(const wire_t *self) {
                wire_name(self),
                wire_node_name(self),
                node_id_string);
-        free(node_id_string);
-        return;
     } else {
         printf(">-%s-(%s%s)",
                wire_name(self),
                wire_node_name(self),
                node_id_string);
-        free(node_id_string);
-        return;
     }
+
+    free(node_id_string);
 }
 
 void
