@@ -36,11 +36,12 @@ list_destroy(list_t **self_pointer) {
 void
 list_purge(list_t *self) {
     assert(self);
+
     node_t *node = self->first;
     while (node) {
         node_t *next = node->next;
-        assert(self->item_destructor);
-        self->item_destructor(&node->item);
+        if (self->item_destructor)
+            self->item_destructor(&node->item);
         free(node);
         node = next;
     }
