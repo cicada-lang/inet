@@ -1,6 +1,5 @@
 `emit_call` -- handle `builtin_spec_t`
 
-`op_print` -- handle `call_builtin_op_t`
 `execute` -- handle `call_builtin_op_t`
 
 `@connect` -- as a builtin -- instead of an `op_t` -- remove `connect_op_t`
