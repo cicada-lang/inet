@@ -143,7 +143,7 @@ free_wire_group_print(const free_wire_group_t *free_wire_group) {
         wire_t *free_wire = free_wire_group->wires[i];
         if (!free_wire) continue;
 
-        printf("(%s)-%s := ",
+        printf("(%s)-%s => ",
                free_wire_group->node_spec->name,
                free_wire_group->node_spec->port_specs[i]->name);
         wire_print_reverse(free_wire);
@@ -161,17 +161,12 @@ frame_print(const frame_t *self) {
     printf("\n");
     printf("</program>\n");
 
-    if (self->first_free_wire_group) {
-        printf("<first-free-wire-group>\n");
+    printf("<local-free-wires>\n");
+    if (self->first_free_wire_group)
         free_wire_group_print(self->first_free_wire_group);
-        printf("</first-free-wire-group>\n");
-    }
-
-    if (self->second_free_wire_group) {
-        printf("<second-free-wire-group>\n");
+    if (self->second_free_wire_group)
         free_wire_group_print(self->second_free_wire_group);
-        printf("</second-free-wire-group>\n");
-    }
+    printf("</local-free-wires>\n");
 
     printf("</frame>\n");
 }
