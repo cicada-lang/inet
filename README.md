@@ -35,7 +35,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
   <use-free-port> := (<name>)-<name>
   <reconnect-free-port> := <name>-(<name>)
 
-<name> := "alphanumeric string"
+<name> := <alphanumeric>
 ```
 
 </details>
