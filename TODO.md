@@ -1,5 +1,7 @@
 `@inspect` -- as an builtin -- keep the value on stack and call `wire_inspect`
 
+`stack_top`
+
 `string_to_subscript`
 `wire_inspect`
 

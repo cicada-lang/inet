@@ -17,6 +17,4 @@ builtin_connect(worker_t *worker, frame_t *frame) {
 
     wire_destroy(&first_wire);
     wire_destroy(&second_wire);
-
-    return;
 }
