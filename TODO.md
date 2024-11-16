@@ -1,5 +1,16 @@
-`string_to_subscript`
-`wire_inspect`
+`libs/int` -- for signed and unsigned int
+
+`nat_to_subscript`
+
+₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎
+
+`nat_to_superscript`
+
+⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾
+
+`wire_print_left` & `wire_print_right` -- use `nat_to_subscript` to print node id
+
+`wire_inspect` -- print net body
 
 ```xml
 <net>
