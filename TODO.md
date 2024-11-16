@@ -9,16 +9,16 @@ docs/articles/反应网编程.md -- update for new syntax
 
 # example
 
+`examples/combinators.inet` -- interaction combinators
 `examples/lambda.inet` -- use interaction combinators
 
-# module system
+# design
 
-use `module/name` syntax
+re-design syntax to simplify diff-list.test.inet
 
-`wire` as a builtin module, maybe use `@wire`
+- remove the idea of `(diff) @spread`
 
-[maybe] `wire/inspect` -- instead of
-[maybe] `wire/connect` -- instead of `@connect`
+# parallelism
 
 # primitive value
 
@@ -30,17 +30,20 @@ support primitive value
 
 - learn for other inet implementations
 
+# module system
+
+use `module/name` syntax
+
+`wire/` as a builtin module
+
+- [maybe] use `@wire/`
+
+[maybe] `@wire/inspect` -- instead of `@inspect`
+[maybe] `@wire/connect` -- instead of `@connect`
+
 # error handling
 
 improve error handling -- just use `assert(value && message)`?
-
-# design
-
-re-design syntax to simplify diff-list.test.inet
-
-- remove the idea of `(diff) @spread`
-
-# parallelism
 
 # debug
 
