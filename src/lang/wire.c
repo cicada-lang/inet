@@ -119,7 +119,7 @@ wire_print_reverse(const wire_t *self) {
 }
 
 void
-wire_inspect(const wire_t *self) {
+wire_inspect(wire_t *self) {
     printf("<net>\n");
 
     printf("<root>\n");
@@ -128,6 +128,53 @@ wire_inspect(const wire_t *self) {
     printf("</root>\n");
 
     printf("<body>\n");
+    list_t *occurred_wire_list = list_new();
+    list_t *occurred_node_list = list_new();
+    list_t *remaining_node_list = list_new();
+
+    list_push(occurred_wire_list, self);
+    if (self->opposite_wire)
+        list_push(occurred_wire_list, self->opposite_wire);
+
+    if (self->opposite_wire && self->opposite_wire->node)
+        list_push(remaining_node_list, self->opposite_wire->node);
+
+    node_t *node = list_pop(remaining_node_list);
+    while (node) {
+        if (list_has(occurred_wire_list, node)) continue;
+
+        list_push(occurred_wire_list, node);
+        for (port_index_t i = 0; i < node->spec->arity; i++) {
+            wire_t *wire = node->wires[i];
+            if (wire->opposite_wire) {
+                if (list_has(occurred_wire_list, wire)) continue;
+                if (list_has(occurred_wire_list, wire->opposite_wire)) continue;
+
+                wire_print(wire);
+                printf("\n");
+
+                list_push(occurred_wire_list, wire);
+                list_push(occurred_wire_list, wire->opposite_wire);
+            } else {
+                if (list_has(occurred_wire_list, wire)) continue;
+
+                wire_print(wire);
+                printf("\n");
+
+                list_push(occurred_wire_list, wire);
+            }
+
+            if (wire->opposite_wire)
+                list_push(remaining_node_list, wire->opposite_wire->node);
+        }
+
+        node = list_pop(remaining_node_list);
+    }
+
+    list_destroy(&occurred_wire_list);
+    list_destroy(&occurred_node_list);
+    list_destroy(&remaining_node_list);
+
     printf("</body>\n");
 
     printf("</net>\n");

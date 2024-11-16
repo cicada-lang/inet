@@ -16,10 +16,6 @@
 = three two one add
 = four two two add
 
-. zero @inspect
-  zero @inspect
-  add @inspect
-
 . two two add
   two two add
   add @inspect
