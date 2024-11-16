@@ -5,10 +5,14 @@
 <root>
 (add1₂₅)-value!-<>-
 </root>
+<body>
 (add1₂₅)-prev-<>-value-(add1₂₃)
 (add1₂₃)-prev-<>-value-(zero₂₁)
+</body>
 </net>
 ```
+
+`wire_inspect` -- `<body>` has `connection-count`
 
 [maybe] `@interact` as a builtin
 
