@@ -16,6 +16,9 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 ; a line of comment (ends with \n)
 ```
 
+<details>
+<summary>full grammar</summary>
+
 ```xml
 <inputs> := <ports>
 <outputs> := <ports>
@@ -34,6 +37,8 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 <name> := "alphanumeric string"
 ```
+
+</details>
 
 ## Examples
 
