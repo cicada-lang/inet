@@ -33,7 +33,7 @@ mod_destroy(mod_t **self_pointer) {
 
 void
 mod_import_builtins(mod_t *self) {
-    mod_define(self, (spec_t *) builtin_spec_new("connect", builtin_connect));
+    mod_define(self, (spec_t *) builtin_spec_new("@connect", builtin_connect));
 }
 
 const spec_t *

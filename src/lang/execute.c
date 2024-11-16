@@ -27,24 +27,6 @@ execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
         return;
     }
 
-    case CONNECT_OP: {
-        wire_t *second_wire = stack_pop(worker->value_stack);
-        wire_t *first_wire = stack_pop(worker->value_stack);
-
-        wire_t *first_opposite_wire = first_wire->opposite_wire;
-        wire_t *second_opposite_wire = second_wire->opposite_wire;
-
-        first_opposite_wire->opposite_wire = second_opposite_wire;
-        second_opposite_wire->opposite_wire = first_opposite_wire;
-
-        worker_maybe_add_active_pair(worker, first_opposite_wire, second_opposite_wire);
-
-        wire_destroy(&first_wire);
-        wire_destroy(&second_wire);
-
-        return;
-    }
-
     case GET_FREE_WIRE_OP: {
         use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
         wire_t *free_wire = frame_use_free_wire(frame, op->node_spec, op->index);

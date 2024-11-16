@@ -14,7 +14,6 @@ typedef enum {
     CALL_BUILTIN_OP,
     CALL_PROGRAM_OP,
     CALL_NODE_OP,
-    CONNECT_OP,
     GET_FREE_WIRE_OP,
 } op_tag_t;
 

@@ -28,9 +28,7 @@ static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
 void
 compile_word(const mod_t *mod, program_t *program, const char *word) {
-    if (string_equal(word, "@connect")) {
-        emit_connect(mod, program);
-    } else if (is_free_wire_ref(word)) {
+    if (is_free_wire_ref(word)) {
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);
         emit_use_free_wire(mod, program, node_name, port_name);

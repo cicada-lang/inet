@@ -1,7 +1,3 @@
-remove `connect_op_t`
-
-- `@connect` -- as a builtin
-
 `@inspect` -- as an builtin -- keep the value on stack and call `wire_inspect`
 
 `string_to_subscript`
