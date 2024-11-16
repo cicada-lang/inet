@@ -1,6 +1,29 @@
-`@print-value-stack`
-`@print-return-stack`
-`@print-worker`
+`@wire/print-net` -- instead of `@inspect`
+`@wire/connect` -- instead of `@connect`
+`@worker/interact` -- instead of `@interact`
+
+`@worker/print-value-stack`
+`@worker/print-return-stack`
+`@worker/print`
+
+`@wire/pair`
+
+`value_t` as sum type with `WIRE_VALUE`
+
+# linear local variables
+
+```
+1 $name  // let name = 1
+...
+name     // use name (after then name is free to use again)
+```
+
+# design
+
+re-design syntax to simplify diff-list.test.inet
+
+- remove the idea of `(diff) @spread`
+- use `@wire/pair $name ... diff ... name`
 
 # docs
 
@@ -11,12 +34,6 @@ docs/articles/反应网编程.md -- update for new syntax
 
 `examples/combinators.inet` -- interaction combinators
 `examples/lambda.inet` -- use interaction combinators
-
-# design
-
-re-design syntax to simplify diff-list.test.inet
-
-- remove the idea of `(diff) @spread`
 
 # parallelism
 

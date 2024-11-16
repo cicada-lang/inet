@@ -19,5 +19,6 @@
 . two two add
   two two add
   add
-  @inspect
-  @interact @inspect
+  @wire/inspect
+  @worker/interact
+  @wire/inspect
