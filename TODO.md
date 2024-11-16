@@ -1,5 +1,3 @@
-`stack_top`
-
 `string_to_subscript`
 `wire_inspect`
 
@@ -10,6 +8,8 @@
 (add1₂₃)-prev-<>-value-(zero₂₁)
 </net>
 ```
+
+[maybe] `@interact` as a builtin
 
 # docs
 
