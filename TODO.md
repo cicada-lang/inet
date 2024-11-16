@@ -1,5 +1,4 @@
-`wire_print_left` & `wire_print_right` -- use `uint_to_subscript` to print node id
-
+merge `<first-free-wire-group>` and `<second-free-wire-group>` to `<local-free-wires>`
 `wire_inspect` -- print net body
 
 ```xml
