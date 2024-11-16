@@ -4,7 +4,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 - Untyped.
 - ASCII art inspired syntax.
-- Using a stack-based low-layer language to build nets.
+- Using a concatenative stack-based low-layer language to build nets.
 
 ## Syntax
 
@@ -118,6 +118,10 @@ For examples:
 ./bin/inet run examples/nat.inet
 ./bin/inet run examples/nat.inet --debug
 ```
+
+## Community
+
+- [Discord / concatenative #inet](https://discord.gg/EcUfwRkbdx)
 
 ## Development
 
