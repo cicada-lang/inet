@@ -138,3 +138,19 @@ worker_print_value_stack(const worker_t *self) {
 
     printf("</value-stack>\n");
 }
+
+
+void
+worker_maybe_add_active_pair(
+    worker_t *worker,
+    wire_t *first_wire,
+    wire_t *second_wire
+) {
+    if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
+        assert(first_wire->opposite_wire == second_wire);
+        assert(second_wire->opposite_wire == first_wire);
+
+        active_pair_t *active_pair = active_pair_new(first_wire, second_wire);
+        list_push(worker->active_pair_list, active_pair);
+    }
+}

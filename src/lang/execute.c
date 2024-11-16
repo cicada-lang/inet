@@ -2,7 +2,6 @@
 
 static void node_apply_input_ports(worker_t *worker, node_t *node);
 static void node_return_output_ports(worker_t *worker, node_t *node);
-static void maybe_add_active_pair(worker_t *worker, wire_t *first_wire, wire_t *second_wire);
 
 void
 execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
@@ -38,7 +37,7 @@ execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
         first_opposite_wire->opposite_wire = second_opposite_wire;
         second_opposite_wire->opposite_wire = first_opposite_wire;
 
-        maybe_add_active_pair(worker, first_opposite_wire, second_opposite_wire);
+        worker_maybe_add_active_pair(worker, first_opposite_wire, second_opposite_wire);
 
         wire_destroy(&first_wire);
         wire_destroy(&second_wire);
@@ -65,7 +64,7 @@ node_apply_input_ports(worker_t *worker, node_t *node) {
         wire->index = i;
         node->wires[i] = wire;
 
-        maybe_add_active_pair(worker, wire, wire->opposite_wire);
+        worker_maybe_add_active_pair(worker, wire, wire->opposite_wire);
     }
 }
 
@@ -84,19 +83,5 @@ node_return_output_ports(worker_t *worker, node_t *node) {
         node->wires[i] = node_wire;
 
         stack_push(worker->value_stack, free_wire);
-    }
-}
-
-void maybe_add_active_pair(
-    worker_t *worker,
-    wire_t *first_wire,
-    wire_t *second_wire
-) {
-    if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
-        assert(first_wire->opposite_wire == second_wire);
-        assert(second_wire->opposite_wire == first_wire);
-
-        active_pair_t *active_pair = active_pair_new(first_wire, second_wire);
-        list_push(worker->active_pair_list, active_pair);
     }
 }

@@ -6,6 +6,7 @@
 #include "node.h"
 #include "wire.h"
 #include "active_pair.h"
+#include "builtins.h"
 #include "mod.h"
 #include "mod_test.h"
 #include "frame.h"

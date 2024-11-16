@@ -1,4 +1,8 @@
-`@connect` -- as a builtin -- instead of an `op_t` -- remove `connect_op_t`
+`mod_import_builtins`
+
+remove `connect_op_t`
+
+- `@connect` -- as a builtin
 
 `@inspect` -- as an builtin -- keep the value on stack and call `wire_inspect`
 
