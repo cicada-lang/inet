@@ -14,6 +14,8 @@ mod_new(void) {
         self->rule_list,
         (list_item_destructor_t *) rule_destroy);
 
+    mod_import_builtins(self);
+
     return self;
 }
 
@@ -27,6 +29,11 @@ mod_destroy(mod_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
+}
+
+void
+mod_import_builtins(mod_t *self) {
+    mod_define(self, (spec_t *) builtin_spec_new("connect", builtin_connect));
 }
 
 const spec_t *

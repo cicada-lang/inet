@@ -1,5 +1,3 @@
-`mod_import_builtins`
-
 remove `connect_op_t`
 
 - `@connect` -- as a builtin
