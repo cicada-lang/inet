@@ -19,3 +19,4 @@
 . two two add
   two two add
   add
+  @inspect

@@ -104,5 +104,9 @@ wire_print_reverse(const wire_t *self) {
 
 void
 wire_inspect(const wire_t *self) {
+    printf("<net>\n");
+    printf("<root>");
     wire_print(self);
+    printf("</root>\n");
+    printf("</net>\n");
 }
