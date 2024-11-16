@@ -97,7 +97,7 @@ op_destroy(op_t **self_pointer) {
         op_t *self = *self_pointer;
         switch (self->tag) {
         case CALL_BUILTIN_OP: {
-            assert(false);
+            call_builtin_op_destroy((call_builtin_op_t **) self_pointer);
             return;
         }
 
