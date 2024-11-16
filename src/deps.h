@@ -14,4 +14,5 @@
 #include "libs/list/index.h"
 #include "libs/file/index.h"
 #include "libs/stack/index.h"
+#include "libs/int/index.h"
 #include "libs/commander/index.h"
