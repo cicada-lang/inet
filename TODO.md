@@ -1,5 +1,3 @@
-`libs/int` -- for signed and unsigned int
-
 `uint_to_subscript`
 
 ₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎
