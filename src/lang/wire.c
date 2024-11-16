@@ -80,7 +80,7 @@ wire_print_right(const wire_t *self) {
     }
 
     if (wire_is_principal(self)) {
-        printf(">-%s!-(%s)", wire_name(self), wire_node_name(self));
+        printf(">-!%s-(%s)", wire_name(self), wire_node_name(self));
         return;
     } else {
         printf(">-%s-(%s)", wire_name(self), wire_node_name(self));
