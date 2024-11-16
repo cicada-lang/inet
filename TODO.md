@@ -1,5 +1,3 @@
-`emit_call` -- handle `builtin_spec_t`
-
 `@connect` -- as a builtin -- instead of an `op_t` -- remove `connect_op_t`
 
 `@inspect` -- as an builtin -- keep the value on stack and call `wire_inspect`
