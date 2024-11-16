@@ -67,7 +67,6 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
         stack_push(worker->return_stack, frame_new(program));
         worker_run_until(worker, base_length);
         worker_interact(worker);
-        worker_print_value_stack(worker);
         return;
     }
     }

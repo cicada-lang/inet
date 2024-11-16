@@ -1,3 +1,7 @@
+`@print-value-stack`
+`@print-return-stack`
+`@print-worker`
+
 # docs
 
 docs/articles/programming-with-interaction-nets.md -- update for new syntax
