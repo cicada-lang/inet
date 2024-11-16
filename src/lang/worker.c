@@ -53,20 +53,21 @@ worker_interact_once(worker_t *self) {
     const rule_t *rule = mod_find_rule(self->mod, active_pair);
     if (!rule) return;
 
+    size_t base_length = stack_length(self->return_stack);
     frame_t *frame = frame_new(rule->program);
     frame_collect_free_wires(frame, active_pair);
     stack_push(self->return_stack, frame);
-    worker_run(self);
+    worker_run_until(self, base_length);
 }
 
 void
-worker_run(worker_t *self) {
+worker_run_until(worker_t *self, size_t base_length) {
     if (self->debug) {
         worker_print(self);
         printf("\n");
     }
 
-    while (!stack_is_empty(self->return_stack)) {
+    while (stack_length(self->return_stack) > base_length) {
         worker_step(self);
 
         if (self->debug) {

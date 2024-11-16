@@ -23,7 +23,7 @@ worker_test(void) {
     stack_push(worker->return_stack, frame);
 
     worker->debug = true;
-    worker_run(worker);
+    worker_run_until(worker, 0);
     worker_interact(worker);
 
     worker_destroy(&worker);

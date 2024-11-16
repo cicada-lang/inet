@@ -1,7 +1,3 @@
-`wire_inspect` -- `<body>` has `connection-count`
-
-[maybe] `@interact` as a builtin
-
 # docs
 
 docs/articles/programming-with-interaction-nets.md -- update for new syntax

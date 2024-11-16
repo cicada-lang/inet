@@ -63,8 +63,9 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
     case RUN_PROGRAM_STMT: {
         run_program_stmt_t *stmt = (run_program_stmt_t *)unknown_stmt;
         program_t *program = compile(worker->mod, stmt->token_list);
+        size_t base_length = stack_length(worker->return_stack);
         stack_push(worker->return_stack, frame_new(program));
-        worker_run(worker);
+        worker_run_until(worker, base_length);
         worker_interact(worker);
         worker_print_value_stack(worker);
         return;

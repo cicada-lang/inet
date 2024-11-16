@@ -107,7 +107,7 @@ op_print(const op_t *unknown_op) {
     switch (unknown_op->tag) {
     case CALL_BUILTIN_OP: {
         call_builtin_op_t *op = (call_builtin_op_t *) unknown_op;
-        printf("@%s", op->builtin_spec->name);
+        printf("%s", op->builtin_spec->name);
         return;
     }
 

@@ -18,4 +18,6 @@
 
 . two two add
   two two add
-  add @inspect
+  add
+  @inspect
+  @interact @inspect
