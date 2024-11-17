@@ -1,23 +1,24 @@
-how to snapshot testing?
+`value_t` as sumtype with `WIRE_VALUE`
+
+# design
 
 `@wire/pair`
+diff-list.inet -- try to not use local first
+diff-list.inet -- re-design syntax to simplify
 
-`value_t` as sum type with `WIRE_VALUE`
+- remove the idea of `(diff) @spread`
+- use `@wire/pair $name ... diff ... name`
 
 # linear local variables
+
+`op_let_local_t`
+`op_use_local_t`
 
 ```
 1 $name  // let name = 1
 ...
 name     // use name (after then name is free to use again)
 ```
-
-# design
-
-re-design syntax to simplify diff-list.test.inet
-
-- remove the idea of `(diff) @spread`
-- use `@wire/pair $name ... diff ... name`
 
 # docs
 
@@ -30,6 +31,12 @@ docs/articles/反应网编程.md -- update for new syntax
 `examples/lambda.inet` -- use interaction combinators
 
 # parallelism
+
+learn linux thread
+
+# testing
+
+how to add snapshot testing?
 
 # primitive value
 
@@ -45,12 +52,8 @@ support primitive value
 
 use `module/name` syntax
 
-`wire/` as a builtin module
-
-- [maybe] use `@wire/`
-
-[maybe] `@wire/inspect` -- instead of `@inspect`
-[maybe] `@wire/connect` -- instead of `@connect`
+- we already using use `@wire/`,
+  maybe module is just name prefix.
 
 # error handling
 
