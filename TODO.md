@@ -1,6 +1,8 @@
+builtins/import_builtins.c
+
+`@worker/print`
 `@worker/print-value-stack`
 `@worker/print-return-stack`
-`@worker/print`
 
 `@wire/pair`
 

@@ -6,7 +6,6 @@
 #include "node.h"
 #include "wire.h"
 #include "active_pair.h"
-#include "builtins.h"
 #include "mod.h"
 #include "mod_test.h"
 #include "frame.h"
@@ -30,3 +29,4 @@
 #include "compile.h"
 #include "interpret.h"
 #include "interpret_test.h"
+#include "builtins/index.h"
