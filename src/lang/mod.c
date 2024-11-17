@@ -35,7 +35,7 @@ void
 mod_import_builtins(mod_t *self) {
     mod_define(self, (spec_t *) builtin_spec_new("@connect", builtin_connect));
     mod_define(self, (spec_t *) builtin_spec_new("@wire/print-net", builtin_wire_print_net));
-    mod_define(self, (spec_t *) builtin_spec_new("@interact", builtin_interact));
+    mod_define(self, (spec_t *) builtin_spec_new("@worker/interact", builtin_worker_interact));
 }
 
 const spec_t *
