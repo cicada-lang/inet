@@ -9,6 +9,9 @@ void
 import_builtins(mod_t *mod) {
     define_builtin(mod, "@wire/connect", builtin_wire_connect);
     define_builtin(mod, "@wire/print-net", builtin_wire_print_net);
+
     define_builtin(mod, "@worker/interact", builtin_worker_interact);
     define_builtin(mod, "@worker/print", builtin_worker_print);
+    define_builtin(mod, "@worker/print-value-stack", builtin_worker_print_value_stack);
+    define_builtin(mod, "@worker/print-return-stack", builtin_worker_print_return_stack);
 }

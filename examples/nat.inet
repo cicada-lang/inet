@@ -23,3 +23,5 @@
   @worker/interact
   @wire/print-net
   @worker/print
+  @worker/print-value-stack
+  @worker/print-return-stack  

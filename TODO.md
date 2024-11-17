@@ -1,6 +1,3 @@
-`@worker/print-value-stack`
-`@worker/print-return-stack`
-
 how to snapshot testing?
 
 `@wire/pair`
