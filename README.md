@@ -67,7 +67,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 . two two add
   two two add
-  add
+  add @wire/print-net
 ```
 
 ### List
@@ -90,7 +90,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
-  append
+  append @wire/print-net
 ```
 
 ## Install

@@ -15,4 +15,4 @@
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
-  append
+  append @wire/print-net
