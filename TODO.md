@@ -1,14 +1,14 @@
-`value_t` as sumtype with `WIRE_VALUE`
-
-
 # design
 
-`@wire/pair`
 diff-list.inet -- try to not use local first
 diff-list.inet -- re-design syntax to simplify
 
 - remove the idea of `(diff) @spread`
 - use `@wire/pair $name ... diff ... name`
+
+# lang
+
+`value_t` as sumtype with `WIRE_VALUE`
 
 # linear local variables
 

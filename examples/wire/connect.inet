@@ -1,0 +1,4 @@
+* (sole) -- value!
+
+. @wire/pair sole @wire/connect
+  @worker/print
