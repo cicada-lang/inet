@@ -11,8 +11,6 @@ struct mod_t {
 mod_t *mod_new(void);
 void mod_destroy(mod_t **self_pointer);
 
-void mod_import_builtins(mod_t *self);
-
 const spec_t *mod_find_spec(const mod_t *self, const char *name);
 const rule_t *mod_find_rule(const mod_t *self, const active_pair_t *active_pair);
 void mod_define(mod_t *self, spec_t *spec);

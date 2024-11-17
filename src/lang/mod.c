@@ -14,7 +14,7 @@ mod_new(void) {
         self->rule_list,
         (list_item_destructor_t *) rule_destroy);
 
-    mod_import_builtins(self);
+    import_builtins(self);
 
     return self;
 }
@@ -29,13 +29,6 @@ mod_destroy(mod_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
-}
-
-void
-mod_import_builtins(mod_t *self) {
-    mod_define(self, (spec_t *) builtin_spec_new("@wire/connect", builtin_wire_connect));
-    mod_define(self, (spec_t *) builtin_spec_new("@wire/print-net", builtin_wire_print_net));
-    mod_define(self, (spec_t *) builtin_spec_new("@worker/interact", builtin_worker_interact));
 }
 
 const spec_t *
