@@ -24,7 +24,7 @@ self-test: bin/inet
 
 .PHONY: self-test
 run-examples: bin/inet
-	 ./bin/inet run $(examples)
+	./bin/inet run $(examples)
 
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
