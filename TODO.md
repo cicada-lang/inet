@@ -1,5 +1,3 @@
-`@wire/connect` -- instead of `@connect`
-
 `@worker/print-value-stack`
 `@worker/print-return-stack`
 `@worker/print`

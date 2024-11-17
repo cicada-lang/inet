@@ -44,5 +44,5 @@ emit_reconnect_free_wire(
     const char *port_name
 ) {
     emit_use_free_wire(mod, program, node_name, port_name);
-    emit_call(mod, program, "@connect");
+    emit_call(mod, program, "@wire/connect");
 }

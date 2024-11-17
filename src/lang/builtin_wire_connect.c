@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-builtin_connect(worker_t *worker, frame_t *frame) {
+builtin_wire_connect(worker_t *worker, frame_t *frame) {
     (void) frame;
 
     wire_t *second_wire = stack_pop(worker->value_stack);
