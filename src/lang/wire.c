@@ -164,8 +164,10 @@ wire_print_net(wire_t *self) {
                 list_push(occurred_wire_list, wire);
             }
 
-            if (wire->opposite_wire)
+            if (wire->opposite_wire &&
+                !list_has(remaining_node_list, wire->opposite_wire->node)) {
                 list_push(remaining_node_list, wire->opposite_wire->node);
+            }
         }
 
         node = list_pop(remaining_node_list);

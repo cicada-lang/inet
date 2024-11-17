@@ -1,15 +1,3 @@
-# design
-
-diff-list.inet -- try to not use local first
-diff-list.inet -- re-design syntax to simplify
-
-- remove the idea of `(diff) @spread`
-- use `@wire/pair $name ... diff ... name`
-
-# lang
-
-`value_t` as sumtype with `WIRE_VALUE`
-
 # linear local variables
 
 `op_let_local_t`
@@ -21,15 +9,26 @@ diff-list.inet -- re-design syntax to simplify
 name     // use name (after then name is free to use again)
 ```
 
-# docs
+# design
 
-docs/articles/programming-with-interaction-nets.md -- update for new syntax
-docs/articles/反应网编程.md -- update for new syntax
+diff-list.inet -- re-design syntax to simplify
+
+- remove the idea of `(diff) @spread`
+- use `@wire/pair $name ... diff ... name`
 
 # example
 
 `examples/combinators.inet` -- interaction combinators
 `examples/lambda.inet` -- use interaction combinators
+
+# lang
+
+`value_t` as sumtype with `WIRE_VALUE`
+
+# docs
+
+docs/articles/programming-with-interaction-nets.md -- update for new syntax
+docs/articles/反应网编程.md -- update for new syntax
 
 # parallelism
 
