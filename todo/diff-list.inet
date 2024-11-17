@@ -8,8 +8,8 @@
 ; at the back of the first one.
 
 * (diff) front -- back value!
-* (diff-append) target! rest -- result
-* (diff-open) target! new-back -- old-back
+* (diff-append) rest target! -- result
+* (diff-open) new-back target! -- old-back
 
 ! (diff)-(diff-append)
   (diff)-front diff result-(diff-append)

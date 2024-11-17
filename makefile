@@ -3,7 +3,8 @@ ldflags =
 cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O2 -std=c99 -pedantic
 
 src = $(shell find src -name '*.c')
-header = $(shell find src -name '*.h')
+headers = $(shell find src -name '*.h')
+examples = $(shell find examples -name '*.inet')
 lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
 bin = bin/inet
 
@@ -15,13 +16,20 @@ run: bin/inet
 	./bin/inet
 
 .PHONY: test
-test: bin/inet
-	./bin/inet self-test && ./bin/inet run examples/*
+test: self-test run-examples
+
+.PHONY: self-test
+self-test: bin/inet
+	./bin/inet self-test
+
+.PHONY: self-test
+run-examples: bin/inet
+	 ./bin/inet run $(examples)
 
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
 
-lib/%.o: src/%.c $(header)
+lib/%.o: src/%.c $(headers)
 	mkdir -p $(dir $@); $(cc) -c $(cflags) $< -o $@
 
 .PHONY: clean

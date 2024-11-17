@@ -1,6 +1,6 @@
 * (null) -- value!
-* (cons) head tail -- value!
-* (append) target! rest -- result
+* (cons) tail head -- value!
+* (append) rest target! -- result
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -15,4 +15,7 @@
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
-  append @wire/print-net
+  append
+  @wire/print-net
+  @worker/interact
+  @wire/print-net

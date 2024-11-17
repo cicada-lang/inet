@@ -1,0 +1,5 @@
+* (sole) -- value!
+
+. sole sole sole
+  @worker/print-value-stack
+  sole sole sole
