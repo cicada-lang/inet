@@ -19,6 +19,6 @@
 . two two add
   two two add
   add
-  @wire/inspect
+  @wire/print-net
   @worker/interact
-  @wire/inspect
+  @wire/print-net

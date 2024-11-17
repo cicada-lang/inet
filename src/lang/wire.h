@@ -22,4 +22,4 @@ void wire_print_right(const wire_t *self);
 void wire_print(const wire_t *self);
 void wire_print_reverse(const wire_t *self);
 
-void wire_inspect(wire_t *self);
+void wire_print_net(wire_t *self);

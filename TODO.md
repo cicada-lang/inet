@@ -1,4 +1,3 @@
-`@wire/print-net` -- instead of `@inspect`
 `@wire/connect` -- instead of `@connect`
 `@worker/interact` -- instead of `@interact`
 
