@@ -59,7 +59,7 @@ For more examples, please see the [examples/](examples/) directory.
   (add)-addend (add1)-prev add
   add1 result-(add)
 
-( TEST )
+( test )
 
 = one zero add1
 = two one one add
@@ -88,7 +88,7 @@ For more examples, please see the [examples/](examples/) directory.
   (append)-rest (cons)-tail append
   (cons)-head cons result-(append)
 
-( TEST )
+( test )
 
 * sole -- value!
 

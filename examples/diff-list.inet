@@ -25,7 +25,7 @@
   (append)-rest (cons)-tail append
   (cons)-head cons result-(append)
 
-( TEST )
+( test )
 
 * (sole) -- value!
 
