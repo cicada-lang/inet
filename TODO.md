@@ -1,4 +1,3 @@
-extract `worker_connect_top_wire_pair`
 emit no need to emit call to `@wire/connect`
 `deps` for `core/`
 `deps` for `syntax/`
