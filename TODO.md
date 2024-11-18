@@ -1,5 +1,3 @@
-`@rot`
-
 diff-list.inet -- use `@swap` and `@rot`
 
 diff-list.inet -- re-design syntax to simplify

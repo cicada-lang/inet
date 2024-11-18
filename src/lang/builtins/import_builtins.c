@@ -8,6 +8,7 @@ define_builtin(mod_t *mod, const char *name, builtin_t *builtin) {
 void
 import_builtins(mod_t *mod) {
     define_builtin(mod, "@swap", builtin_swap);
+    define_builtin(mod, "@rot", builtin_rot);
 
     define_builtin(mod, "@wire/connect", builtin_wire_connect);
     define_builtin(mod, "@wire/print-net", builtin_wire_print_net);

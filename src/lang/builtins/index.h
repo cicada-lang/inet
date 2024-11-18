@@ -3,6 +3,7 @@
 void import_builtins(mod_t *self);
 
 builtin_t builtin_swap;
+builtin_t builtin_rot;
 
 builtin_t builtin_wire_connect;
 builtin_t builtin_wire_print_net;
