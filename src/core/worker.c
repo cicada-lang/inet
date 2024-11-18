@@ -50,7 +50,10 @@ worker_interact_once(worker_t *self) {
     active_pair_t *active_pair = list_pop(self->active_pair_list);
     if (!active_pair) return;
 
-    const rule_t *rule = mod_find_rule(self->mod, active_pair);
+    const rule_t *rule = mod_find_rule(
+        self->mod,
+        active_pair->first_wire,
+        active_pair->second_wire);
     if (!rule) return;
 
     size_t base_length = stack_length(self->return_stack);

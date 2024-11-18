@@ -1,4 +1,3 @@
-`mod_find_rule` -- should not take `active_pair`
 `worker` has `active_wire_list` instead of `active_pair_list` -- remove `active_pair_t`
 extract `wire_connect` -- return one wire maybe add as active wire
 add `connect_op_t` back -- so that emit no need to emit call to `@wire/connect`

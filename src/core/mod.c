@@ -43,10 +43,14 @@ mod_find_spec(const mod_t *self, const char *name) {
 }
 
 const rule_t *
-mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
+mod_find_rule(
+    const mod_t *self,
+    const wire_t *first_wire,
+    const wire_t *second_wire
+) {
     rule_t *rule = list_start(self->rule_list);
     while (rule) {
-        if (rule_match_wire_pair(rule, active_pair->first_wire, active_pair->second_wire)) return rule;
+        if (rule_match_wire_pair(rule, first_wire, second_wire)) return rule;
         rule = list_next(self->rule_list);
     }
 
