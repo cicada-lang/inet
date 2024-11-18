@@ -1,8 +1,6 @@
 #pragma once
 
-#include "../deps.h"
-#include "../config.h"
-#include "../core/index.h"
+#include "deps.h"
 #include "types.h"
 #include "token.h"
 #include "lexer.h"

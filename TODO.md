@@ -1,4 +1,3 @@
-`deps` for `syntax/`
 `deps` for `builtins/`
 `deps` for `commands/`
 `commands/` add a command to snapshot testing
