@@ -1,4 +1,3 @@
-`deps` for `commands/`
 `commands/` add a command to snapshot testing
 `libs/error` -- setup
 `error_report` macro
