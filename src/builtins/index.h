@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../lang/index.h"
+#include "../core/index.h"
 
 void import_builtins(mod_t *self);
 

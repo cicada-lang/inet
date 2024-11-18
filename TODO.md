@@ -1,4 +1,4 @@
-split `lang/` to `core/` & `syntax/`
+extract `syntax/` from `core/`
 
 `libs/error` -- setup
 
