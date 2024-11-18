@@ -34,5 +34,4 @@ lib/%.o: src/%.c $(headers)
 
 .PHONY: clean
 clean:
-	rm -f *.o
 	rm -rf lib bin
