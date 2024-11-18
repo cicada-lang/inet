@@ -8,6 +8,24 @@ text_test(void) {
         const char *text = ""
             ".\n"
             "12345\n"
+            ".";
+
+        assert(text_max_lineno(text) == 3);
+    }
+
+    {
+        const char *text = ""
+            ".\n"
+            "12345\n"
+            ".\n";
+
+        assert(text_max_lineno(text) == 4);
+    }
+
+    {
+        const char *text = ""
+            ".\n"
+            "12345\n"
             ".\n";
 
         assert(text_lineno_of_index(text, 0) == 1);
