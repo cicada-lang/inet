@@ -1,7 +1,10 @@
+`deps` for `core/`
+`deps` for `syntax/`
+`deps` for `builtins/`
+`deps` for `commands/`
+`commands/` add a command to snapshot testing
 `libs/error` -- setup
-
 `error_report` macro
-
 `lex` -- improve error report
 `parser` -- improve error report
 
@@ -33,10 +36,6 @@ name     // use name (after then name is free to use again)
 # parallelism
 
 learn linux thread
-
-# testing
-
-how to add snapshot testing?
 
 # primitive value
 
