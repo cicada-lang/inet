@@ -1,5 +1,3 @@
-`text_print_context`
-
 `parser` -- `parse_node_name` report in context
 `parser` -- `parse_rule_first_name` report in context
 `parser` -- `parse_rule_second_name` report in context
