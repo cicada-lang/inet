@@ -32,4 +32,6 @@ text_print_context(
             printf("%c", c);
         }
     }
+
+    printf("\n");
 }

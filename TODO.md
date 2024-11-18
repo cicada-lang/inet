@@ -1,8 +1,10 @@
-`parser` -- `parse_node_name` report in context
+`text_print_context` -- with 3 offset
+`text_print_context` -- with lineno at the left
+`text_print_context` -- with underline
+
 `parser` -- `parse_rule_first_name` report in context
 `parser` -- `parse_rule_second_name` report in context
 
-`error_report` -- improve format
 `commands/` add a command to snapshot testing
 
 # example

@@ -98,10 +98,20 @@ parser_maybe_ignore_comment(parser_t *self) {
 
 static char *
 parse_node_name(parser_t *self, const token_t *token) {
-    (void) self;
     char *string = token->string;
-    assert(string_starts_with(string, "(") && "a node name must starts with (");
-    assert(string_ends_with(string, ")") && "a node name must ends with )");
+
+    if (!string_starts_with(string, "(")) {
+        text_print_context(self->text, token->start, token->end);
+        printf("a node name must starts with (\n");
+        exit(1);
+    }
+
+    if (!string_ends_with(string, ")")) {
+        text_print_context(self->text, token->start, token->end);
+        printf("a node name must ends with )\n");
+        exit(1);
+    }
+
     int i = string_find_index(string, ')');
     assert(i != -1);
     return string_slice(string, 1, i);
