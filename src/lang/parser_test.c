@@ -7,7 +7,7 @@ parser_test(void) {
     list_t *stmt_list = parse("\
 * (zero) -- value!                   \
 * (add1) prev -- value!              \
-* (add) target! addend -- result     \
+* (add) addend target! -- result     \
                                      \
 ! (zero)-(add)                       \
   (add)-addend result-(add)          \

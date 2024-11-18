@@ -21,14 +21,14 @@ diff-list.inet -- re-design syntax to simplify
 `examples/combinators.inet` -- interaction combinators
 `examples/lambda.inet` -- use interaction combinators
 
-# lang
-
-`value_t` as sumtype with `WIRE_VALUE`
-
 # docs
 
 docs/articles/programming-with-interaction-nets.md -- update for new syntax
 docs/articles/反应网编程.md -- update for new syntax
+
+# lang
+
+`value_t` as sumtype with `WIRE_VALUE`
 
 # parallelism
 
