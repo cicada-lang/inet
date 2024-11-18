@@ -1,8 +1,7 @@
 #pragma once
 
 #include "../core/index.h"
-
-void import_builtins(mod_t *self);
+#include "import_builtins.h"
 
 builtin_t builtin_swap;
 builtin_t builtin_rot;
