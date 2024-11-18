@@ -3,6 +3,9 @@
 void
 emit_call(const mod_t *mod, program_t *program, const char *name) {
     const spec_t *unknown_spec = mod_find_spec(mod, name);
+
+    assert(unknown_spec);
+
     switch (unknown_spec->tag) {
     case BUILTIN_SPEC: {
         const builtin_spec_t *spec = (builtin_spec_t *) unknown_spec;

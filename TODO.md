@@ -1,10 +1,3 @@
-diff-list.inet -- use `@swap` and `@rot`
-
-diff-list.inet -- re-design syntax to simplify
-
-- remove the idea of `(diff) @spread`
-- use `@wire/pair $name ... diff ... name`
-
 # example
 
 copy examples from `inet-js`
@@ -61,6 +54,7 @@ use `module/name` syntax
 
 # error handling
 
+error report on undefined names
 improve error handling -- just use `assert(value && message)`?
 
 # debug

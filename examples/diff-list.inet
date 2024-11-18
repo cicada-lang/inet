@@ -17,7 +17,7 @@
   (diff)-back new-back-(diff-open)
   (diff)-front old-back-(diff-open)
 
-; LIST
+; list.inet
 
 * (null) -- value!
 * (cons) tail head -- value!
@@ -32,16 +32,16 @@
 
 ; TEST
 
-;; * (sole) -- value!
+* (sole) -- value!
 
-;; = sole-diff-list
-;;   @wire/pair diff ; front back value
-;;   @swap ; front value back
-;;   sole cons sole cons ; front value list
-;;   @rot ; value list front
-;;   @connect ; value
+= sole-diff-list
+  @wire/pair diff ; front back value
+  @swap ; front value back
+  sole cons sole cons ; front value list
+  @rot ; value list front
+  @wire/connect ; value
 
-;; . sole-diff-list sole-diff-list diff-append
-;;   @wire/print-net
-;;   @worker/interact
-;;   @wire/print-net
+. sole-diff-list sole-diff-list diff-append
+  @wire/print-net
+  @worker/interact
+  @wire/print-net
