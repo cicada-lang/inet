@@ -1,10 +1,12 @@
 # inet
 
-An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets).
+An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
+as a [concatenative programming language](https://en.wikipedia.org/wiki/Concatenative_programming_language).
 
 - Untyped.
 - ASCII art inspired syntax.
 - Using a concatenative stack-based low-layer language to build nets.
+- Programming with interaction nets directly (no compilation via combinators).
 
 ## Syntax
 
