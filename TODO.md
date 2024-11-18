@@ -1,4 +1,3 @@
-`libs/text` -- setup
 `text_lineno_of_index`
 `text_print_context`
 
