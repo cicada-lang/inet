@@ -256,7 +256,7 @@ make clean    # clean up compiled files
 
 **Books**:
 
-- [Scalable C](https://github.com/booksbyus/scalable-c)
+- [scalable-c](https://github.com/booksbyus/scalable-c)
 
 **Tools**:
 
