@@ -19,6 +19,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 <details>
 <summary>full grammar</summary>
+
 ```xml
 <inputs> := <ports>
 <outputs> := <ports>
@@ -37,6 +38,7 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 <name> := <alphanumeric>
 ```
+
 </details>
 
 ## Examples
@@ -74,6 +76,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 <details>
 <summary>output</summary>
+
 ```xml
 <net>
 <root>
@@ -121,6 +124,7 @@ For more examples, please see the [examples/](examples/) directory.
 </body>
 </net>
 ```
+
 </details>
 
 ### List
@@ -151,6 +155,7 @@ For more examples, please see the [examples/](examples/) directory.
 
 <details>
 <summary>output</summary>
+
 ```xml
 <net>
 <root>
@@ -194,6 +199,7 @@ For more examples, please see the [examples/](examples/) directory.
 </body>
 </net>
 ```
+
 </details>
 
 ## Install
