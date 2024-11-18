@@ -46,7 +46,7 @@ node_apply_input_ports(worker_t *worker, node_t *node) {
         wire->index = i;
         node->wires[i] = wire;
 
-        worker_maybe_add_active_pair(worker, wire, wire->opposite_wire);
+        worker_maybe_add_active_wire(worker, wire, wire->opposite_wire);
     }
 }
 

@@ -11,7 +11,7 @@ builtin_wire_connect(worker_t *worker) {
     first_opposite_wire->opposite_wire = second_opposite_wire;
     second_opposite_wire->opposite_wire = first_opposite_wire;
 
-    worker_maybe_add_active_pair(worker, first_opposite_wire, second_opposite_wire);
+    worker_maybe_add_active_wire(worker, first_opposite_wire, second_opposite_wire);
 
     wire_destroy(&first_wire);
     wire_destroy(&second_wire);

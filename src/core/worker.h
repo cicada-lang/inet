@@ -22,4 +22,4 @@ void worker_print_return_stack(const worker_t *self);
 void worker_print_value_stack(const worker_t *self);
 void worker_print(const worker_t *self);
 
-void worker_maybe_add_active_pair(worker_t *worker, wire_t *first_wire, wire_t *second_wire);
+void worker_maybe_add_active_wire(worker_t *worker, wire_t *first_wire, wire_t *second_wire);
