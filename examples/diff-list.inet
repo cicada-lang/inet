@@ -1,0 +1,47 @@
+; Concatenation of lists is performed in linear time
+; with respect to its first argument.
+; Constant time concatenation is possible
+; with difference-lists: the idea consists in
+; plugging the front of the second argument
+; at the back of the first one.
+
+* (diff) front -- back value!
+* (diff-append) rest target! -- result
+* (diff-open) new-back target! -- old-back
+
+! (diff)-(diff-append)
+  (diff)-front diff result-(diff-append)
+  (diff-append)-rest diff-open back-(diff)
+
+! (diff)-(diff-open)
+  (diff)-back new-back-(diff-open)
+  (diff)-front old-back-(diff-open)
+
+; LIST
+
+* (null) -- value!
+* (cons) tail head -- value!
+* (append) rest target! -- result
+
+! (null)-(append)
+  (append)-rest result-(append)
+
+! (cons)-(append)
+  (append)-rest (cons)-tail append
+  (cons)-head cons result-(append)
+
+; TEST
+
+;; * (sole) -- value!
+
+;; = sole-diff-list
+;;   @wire/pair diff ; front back value
+;;   @swap ; front value back
+;;   sole cons sole cons ; front value list
+;;   @rot ; value list front
+;;   @connect ; value
+
+;; . sole-diff-list sole-diff-list diff-append
+;;   @wire/print-net
+;;   @worker/interact
+;;   @wire/print-net

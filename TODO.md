@@ -1,5 +1,5 @@
-`@swap`
 `@rot`
+`builtin_t` should not take frame
 
 diff-list.inet -- use `@swap` and `@rot`
 
