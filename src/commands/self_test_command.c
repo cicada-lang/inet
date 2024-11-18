@@ -20,6 +20,7 @@ run(char **args) {
     list_test();
     stack_test();
     int_test();
+    text_test();
 
     mod_test();
     worker_test();

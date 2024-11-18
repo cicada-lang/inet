@@ -1,4 +1,3 @@
-`text_lineno_of_index`
 `text_print_context`
 
 `parser` -- `parse_node_name` report in context
