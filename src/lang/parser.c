@@ -87,7 +87,6 @@ parser_maybe_ignore_comment(parser_t *self) {
 
     while (!list_is_empty(self->token_list)) {
         token_t *token = list_shift(self->token_list);
-        printf("token: %s\n", token->string);
         if (string_equal(token->string, ")")) {
             token_destroy(&token);
             break;
