@@ -1,6 +1,6 @@
 # example
 
-copy examples from `inet-js`
+copy examples from `inet-cute`
 
 - read docs of inet-cute -- be sure about the port order
 
