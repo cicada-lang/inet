@@ -25,14 +25,15 @@ rule_destroy(rule_t **self_pointer) {
 }
 
 bool
-rule_match_active_pair(
+rule_match_wire_pair(
     const rule_t *self,
-    const active_pair_t *active_pair
+    const wire_t *first_wire,
+    const wire_t *second_wire
 ) {
-    return (((self->first_node_spec == active_pair->first_wire->node->spec) &&
-             (self->second_node_spec == active_pair->second_wire->node->spec)) ||
-            ((self->first_node_spec == active_pair->second_wire->node->spec) &&
-             (self->second_node_spec == active_pair->first_wire->node->spec)));
+    return (((self->first_node_spec == first_wire->node->spec) &&
+             (self->second_node_spec == second_wire->node->spec)) ||
+            ((self->first_node_spec == second_wire->node->spec) &&
+             (self->second_node_spec == first_wire->node->spec)));
 }
 
 void

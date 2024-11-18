@@ -46,7 +46,7 @@ const rule_t *
 mod_find_rule(const mod_t *self, const active_pair_t *active_pair) {
     rule_t *rule = list_start(self->rule_list);
     while (rule) {
-        if (rule_match_active_pair(rule, active_pair)) return rule;
+        if (rule_match_wire_pair(rule, active_pair->first_wire, active_pair->second_wire)) return rule;
         rule = list_next(self->rule_list);
     }
 
