@@ -1,5 +1,11 @@
-`lex` -- improve error report
-`parser` -- improve error report
+`libs/text` -- setup
+`text_lineno_of_index`
+`text_print_context`
+
+`parser` -- `parse_node_name` report in context
+`parser` -- `parse_rule_first_name` report in context
+`parser` -- `parse_rule_second_name` report in context
+
 `error_report` -- improve format
 `commands/` add a command to snapshot testing
 

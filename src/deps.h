@@ -15,5 +15,4 @@
 #include "libs/file/index.h"
 #include "libs/stack/index.h"
 #include "libs/int/index.h"
-#include "libs/error/index.h"
 #include "libs/commander/index.h"

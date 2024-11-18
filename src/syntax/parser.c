@@ -96,9 +96,12 @@ parser_maybe_ignore_comment(parser_t *self) {
     }
 }
 
-static char *parse_node_name(const char *string) {
-    assert(string_starts_with(string, "("));
-    assert(string_ends_with(string, ")"));
+static char *
+parse_node_name(parser_t *self, const token_t *token) {
+    (void) self;
+    char *string = token->string;
+    assert(string_starts_with(string, "(") && "a node name must starts with (");
+    assert(string_ends_with(string, ")") && "a node name must ends with )");
     int i = string_find_index(string, ')');
     assert(i != -1);
     return string_slice(string, 1, i);
@@ -111,7 +114,7 @@ parser_parse_define_node_stmt(parser_t *self) {
 
     token_t *first_token = list_shift(self->token_list);
     assert(!token_is_rune(first_token));
-    char *name = parse_node_name(first_token->string);
+    char *name = parse_node_name(self, first_token);
     token_destroy(&first_token);
 
     define_node_stmt_t *stmt = define_node_stmt_new(name);

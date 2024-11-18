@@ -25,7 +25,7 @@ call_node_op_new(const node_spec_t *node_spec) {
 }
 
 connect_op_t *
-connect_op_new() {
+connect_op_new(void) {
     connect_op_t *self = allocate(sizeof(connect_op_t));
     self->tag = CONNECT_OP;
     return self;
