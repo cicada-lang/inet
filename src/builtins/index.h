@@ -1,5 +1,5 @@
 #pragma once
 
-#include "../core/index.h"
-#include "import_builtins.h"
+#include "deps.h"
 #include "types.h"
+#include "import_builtins.h"
