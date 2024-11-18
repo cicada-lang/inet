@@ -1,4 +1,4 @@
-extract `wire_connect` -- return one wire maybe add as active wire
+extract `wire_connect` from `builtin_wire_connect` -- return one wire maybe add as active wire
 add `connect_op_t` back -- so that emit no need to emit call to `@wire/connect`
 emit no need to emit call to `@wire/connect`
 `deps` for `core/`
