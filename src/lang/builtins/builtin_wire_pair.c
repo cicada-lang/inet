@@ -1,9 +1,7 @@
 #include "../index.h"
 
 void
-builtin_wire_pair(worker_t *worker, frame_t *frame) {
-    (void) frame;
-
+builtin_wire_pair(worker_t *worker) {
     wire_t *first_wire = wire_new();
     wire_t *second_wire = wire_new();
 

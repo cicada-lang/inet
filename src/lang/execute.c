@@ -8,7 +8,7 @@ execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->tag) {
     case CALL_BUILTIN_OP: {
         call_builtin_op_t *op = (call_builtin_op_t *) unknown_op;
-        op->builtin_spec->builtin(worker, frame);
+        op->builtin_spec->builtin(worker);
         return;
     }
 
