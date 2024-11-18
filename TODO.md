@@ -1,7 +1,11 @@
-# error handling
+split `lang/` to `core/` & `syntax/`
 
-error report on undefined names
-improve error handling -- just use `assert(value && message)`?
+`libs/error` -- setup
+
+`error_report` macro
+
+`lex` -- improve error report
+`parser` -- improve error report
 
 # example
 

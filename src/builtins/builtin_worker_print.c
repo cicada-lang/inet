@@ -1,4 +1,4 @@
-#include "../index.h"
+#include "index.h"
 
 void
 builtin_worker_print(worker_t *worker) {

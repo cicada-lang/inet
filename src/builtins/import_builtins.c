@@ -1,4 +1,4 @@
-#include "../index.h"
+#include "index.h"
 
 static void
 define_builtin(mod_t *mod, const char *name, builtin_t *builtin) {

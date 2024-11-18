@@ -1,4 +1,4 @@
-#include "../index.h"
+#include "index.h"
 
 void
 builtin_wire_pair(worker_t *worker) {

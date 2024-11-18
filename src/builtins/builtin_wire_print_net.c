@@ -1,4 +1,4 @@
-#include "../index.h"
+#include "index.h"
 
 void
 builtin_wire_print_net(worker_t *worker) {

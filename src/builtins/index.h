@@ -1,5 +1,7 @@
 #pragma once
 
+#include "../lang/index.h"
+
 void import_builtins(mod_t *self);
 
 builtin_t builtin_swap;

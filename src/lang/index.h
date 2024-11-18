@@ -28,4 +28,4 @@
 #include "parser_test.h"
 #include "compile.h"
 #include "interpret.h"
-#include "builtins/index.h"
+#include "../builtins/index.h"
