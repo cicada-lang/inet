@@ -1,6 +1,0 @@
-{
-  "files.associations": {
-    "*.cic": "scheme",
-    "index.h": "c"
-  }
-}
