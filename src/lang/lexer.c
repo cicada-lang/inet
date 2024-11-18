@@ -56,7 +56,6 @@ lexer_collect_char(lexer_t *self, char c) {
 // dispatch over current char in a loop.
 
 static void lexer_lex_ignore_space(lexer_t *self);
-static void lexer_lex_ignore_comment(lexer_t *self);
 static void lexer_lex_word(lexer_t *self);
 
 static void
@@ -65,8 +64,6 @@ lexer_lex(lexer_t *self) {
         char c = lexer_current_char(self);
         if (c == '\0')
             return;
-        else if (c == ';')
-            lexer_lex_ignore_comment(self);
         else if (isspace(c))
             lexer_lex_ignore_space(self);
         else
@@ -83,22 +80,6 @@ lexer_lex_ignore_space(lexer_t *self) {
             self->cursor++;
         else
             return;
-    }
-}
-
-void
-lexer_lex_ignore_comment(lexer_t *self) {
-    self->cursor++;
-
-    while (!lexer_is_finished(self)) {
-        char c = lexer_current_char(self);
-
-        if (c == '\n') {
-            self->cursor++;
-            return;
-        }
-        else
-            self->cursor++;
     }
 }
 

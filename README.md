@@ -9,11 +9,12 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 ## Syntax
 
 ```xml
-* (<name>) <inputs> -- <outputs>  ; define node
-! (<name>)-(<name>) <program>     ; define rule
-= <name> <program>                ; define program
-. <program>                       ; run program
-; a line of comment (ends with \n)
+( comment )
+* (<name>) <inputs> -- <outputs>  ( define node )
+! (<name>)-(<name>) <program>     ( define rule )
+= <name> <program>                ( define program )
+. <program>                       ( run program )
+
 ```
 
 <details>
@@ -58,7 +59,7 @@ For more examples, please see the [examples/](examples/) directory.
   (add)-addend (add1)-prev add
   add1 result-(add)
 
-; TEST
+( TEST )
 
 = one zero add1
 = two one one add
@@ -87,7 +88,7 @@ For more examples, please see the [examples/](examples/) directory.
   (append)-rest (cons)-tail append
   (cons)-head cons result-(append)
 
-; TEST
+( TEST )
 
 * sole -- value!
 

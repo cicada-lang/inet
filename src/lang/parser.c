@@ -35,6 +35,7 @@ parser_destroy(parser_t **self_pointer) {
 // build `stmt_list` from `token_list`,
 // dispatch by different runes in a loop.
 
+static void parser_maybe_ignore_comment(parser_t *self);
 static void parser_parse_define_node_stmt(parser_t *self);
 static void parser_parse_define_rule_stmt(parser_t *self);
 static void parser_parse_define_program_stmt(parser_t *self);
@@ -56,6 +57,8 @@ static bool token_is_rune(const token_t *token) {
 static void
 parser_parse(parser_t *self) {
     while (!list_is_empty(self->token_list)) {
+        parser_maybe_ignore_comment(self);
+
         token_t *token = list_first(self->token_list);
         if (string_equal(token->string, "*"))
             parser_parse_define_node_stmt(self);
@@ -68,6 +71,28 @@ parser_parse(parser_t *self) {
         else {
             printf("[parse] unknown starting token: %s", token->string);
             assert(false);
+        }
+    }
+}
+
+void
+parser_maybe_ignore_comment(parser_t *self) {
+    if (list_is_empty(self->token_list)) return;
+
+    token_t *first_token = list_first(self->token_list);
+    if (!string_equal(first_token->string, "(")) return;
+
+    token_t *comment_start_token = list_shift(self->token_list);
+    token_destroy(&comment_start_token);
+
+    while (!list_is_empty(self->token_list)) {
+        token_t *token = list_shift(self->token_list);
+        printf("token: %s\n", token->string);
+        if (string_equal(token->string, ")")) {
+            token_destroy(&token);
+            break;
+        } else {
+            token_destroy(&token);
         }
     }
 }
@@ -94,6 +119,8 @@ parser_parse_define_node_stmt(parser_t *self) {
 
     bool output_flag = false;
     while (!list_is_empty(self->token_list)) {
+        parser_maybe_ignore_comment(self);
+
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
@@ -153,6 +180,8 @@ parser_parse_define_rule_stmt(parser_t *self) {
         (list_item_destructor_t *) token_destroy);
 
     while (!list_is_empty(self->token_list)) {
+        parser_maybe_ignore_comment(self);
+
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
@@ -185,6 +214,8 @@ parser_parse_define_program_stmt(parser_t *self) {
         (list_item_destructor_t *) token_destroy);
 
     while (!list_is_empty(self->token_list)) {
+        parser_maybe_ignore_comment(self);
+
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
@@ -211,6 +242,8 @@ parser_parse_run_program_stmt(parser_t *self) {
         (list_item_destructor_t *) token_destroy);
 
     while (!list_is_empty(self->token_list)) {
+        parser_maybe_ignore_comment(self);
+
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
             list_unshift(self->token_list, token);
