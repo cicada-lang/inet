@@ -9,7 +9,12 @@ int_test(void) {
 
     assert(string_equal(uint_to_string(123), "123"));
     assert(string_equal(uint_to_subscript(123), "₁₂₃"));
-    // assert(string_equal(uint_to_superscript(123), "¹²³"));
+    assert(string_equal(uint_to_superscript(123), "¹²³"));
+
+    assert(uint_decimal_string_length(1) == 1);
+    assert(uint_decimal_string_length(12) == 2);
+    assert(uint_decimal_string_length(123) == 3);
+    assert(uint_decimal_string_length(1234) == 4);
 
     printf("</int_test>\n");
 }
