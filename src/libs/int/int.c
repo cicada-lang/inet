@@ -3,9 +3,9 @@
 #define MAX_STRING_LENGTH 256
 
 char *
-uint_to_string(unsigned int self) {
+uint_to_string(uint64_t self) {
     char *buffer = allocate(MAX_STRING_LENGTH);
-    sprintf(buffer, "%u", self);
+    sprintf(buffer, "%lu", self);
     char *string = string_dup(buffer);
     free(buffer);
     return string;
@@ -14,7 +14,7 @@ uint_to_string(unsigned int self) {
 // ₀₁₂₃₄₅₆₇₈₉₊₋₌₍₎
 
 char *
-uint_to_subscript(unsigned int self) {
+uint_to_subscript(uint64_t self) {
     char *buffer = allocate(MAX_STRING_LENGTH);
     char *number_string = uint_to_string(self);
     for (size_t i = 0; i < strlen(number_string); i++) {
@@ -43,7 +43,7 @@ uint_to_subscript(unsigned int self) {
 // ⁰¹²³⁴⁵⁶⁷⁸⁹⁺⁻⁼⁽⁾
 
 char *
-uint_to_superscript(unsigned int self) {
+uint_to_superscript(uint64_t self) {
     char *buffer = allocate(MAX_STRING_LENGTH);
     char *number_string = uint_to_string(self);
     for (size_t i = 0; i < strlen(number_string); i++) {
