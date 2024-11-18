@@ -28,6 +28,12 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
 }
 
 void
+emit_connect(const mod_t *mod, program_t *program) {
+    (void) mod;
+    program_add_op(program, (op_t *) connect_op_new());
+}
+
+void
 emit_use_free_wire(
     const mod_t *mod,
     program_t *program,
@@ -47,5 +53,5 @@ emit_reconnect_free_wire(
     const char *port_name
 ) {
     emit_use_free_wire(mod, program, node_name, port_name);
-    emit_call(mod, program, "@wire/connect");
+    emit_connect(mod, program);
 }

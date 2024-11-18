@@ -24,6 +24,13 @@ call_node_op_new(const node_spec_t *node_spec) {
     return self;
 }
 
+connect_op_t *
+connect_op_new() {
+    connect_op_t *self = allocate(sizeof(connect_op_t));
+    self->tag = CONNECT_OP;
+    return self;
+}
+
 use_free_wire_op_t *
 use_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
     use_free_wire_op_t *self = allocate(sizeof(use_free_wire_op_t));
@@ -64,6 +71,16 @@ call_node_op_destroy(call_node_op_t **self_pointer) {
 }
 
 void
+connect_op_destroy(connect_op_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        connect_op_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
+void
 use_free_wire_op_destroy(use_free_wire_op_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -94,6 +111,11 @@ op_destroy(op_t **self_pointer) {
             return;
         }
 
+        case CONNECT_OP: {
+            connect_op_destroy((connect_op_t **) self_pointer);
+            return;
+        }
+
         case GET_FREE_WIRE_OP: {
             use_free_wire_op_destroy((use_free_wire_op_t **) self_pointer);
             return;
@@ -120,6 +142,11 @@ op_print(const op_t *unknown_op) {
     case CALL_NODE_OP: {
         call_node_op_t *op = (call_node_op_t *) unknown_op;
         printf("%s", op->node_spec->name);
+        return;
+    }
+
+    case CONNECT_OP: {
+        printf("@wire/connec");
         return;
     }
 

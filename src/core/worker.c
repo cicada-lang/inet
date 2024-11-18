@@ -103,7 +103,7 @@ worker_print(const worker_t *self) {
     wire_t *active_wire = list_start(self->active_wire_list);
     while (active_wire) {
         wire_print(active_wire);
-        printf("\n");
+    printf("\n");
         active_wire = list_next(self->active_wire_list);
     }
     printf("</active-wire-list>\n");
