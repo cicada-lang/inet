@@ -19,7 +19,6 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 <details>
 <summary>full grammar</summary>
-
 ```xml
 <inputs> := <ports>
 <outputs> := <ports>
@@ -38,7 +37,6 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 
 <name> := <alphanumeric>
 ```
-
 </details>
 
 ## Examples
@@ -74,6 +72,57 @@ For more examples, please see the [examples/](examples/) directory.
   @wire/print-net
 ```
 
+<details>
+<summary>output</summary>
+```xml
+<net>
+<root>
+(add₂₃)-result-<>-
+</root>
+<body>
+(add₁₁)-result-<>-addend-(add₂₃)
+(add₂₂)-result-<>-!target-(add₂₃)
+(add₁₆)-result-<>-addend-(add₂₂)
+(add₂₁)-result-<>-!target-(add₂₂)
+(add1₁₈)-value!-<>-addend-(add₂₁)
+(add1₂₀)-value!-<>-!target-(add₂₁)
+(zero₁₉)-value!-<>-prev-(add1₂₀)
+(zero₁₇)-value!-<>-prev-(add1₁₈)
+(add1₁₃)-value!-<>-addend-(add₁₆)
+(add1₁₅)-value!-<>-!target-(add₁₆)
+(zero₁₄)-value!-<>-prev-(add1₁₅)
+(zero₁₂)-value!-<>-prev-(add1₁₃)
+(add₅)-result-<>-addend-(add₁₁)
+(add₁₀)-result-<>-!target-(add₁₁)
+(add1₇)-value!-<>-addend-(add₁₀)
+(add1₉)-value!-<>-!target-(add₁₀)
+(zero₈)-value!-<>-prev-(add1₉)
+(zero₆)-value!-<>-prev-(add1₇)
+(add1₂)-value!-<>-addend-(add₅)
+(add1₄)-value!-<>-!target-(add₅)
+(zero₃)-value!-<>-prev-(add1₄)
+(zero₁)-value!-<>-prev-(add1₂)
+</body>
+</net>
+
+<net>
+<root>
+(add1₂₉)-value!-<>-
+</root>
+<body>
+(add1₃₃)-value!-<>-prev-(add1₂₉)
+(add1₃₇)-value!-<>-prev-(add1₃₃)
+(add1₃₉)-value!-<>-prev-(add1₃₇)
+(add1₄₃)-value!-<>-prev-(add1₃₉)
+(add1₄₅)-value!-<>-prev-(add1₄₃)
+(add1₄₇)-value!-<>-prev-(add1₄₅)
+(add1₂)-value!-<>-prev-(add1₄₇)
+(zero₁)-value!-<>-prev-(add1₂)
+</body>
+</net>
+```
+</details>
+
 ### List
 
 ```
@@ -99,6 +148,53 @@ For more examples, please see the [examples/](examples/) directory.
   @worker/interact
   @wire/print-net
 ```
+
+<details>
+<summary>output</summary>
+```xml
+<net>
+<root>
+(append₁₅)-result-<>-
+</root>
+<body>
+(cons₇)-value!-<>-rest-(append₁₅)
+(cons₁₄)-value!-<>-!target-(append₁₅)
+(cons₁₂)-value!-<>-tail-(cons₁₄)
+(sole₁₃)-value!-<>-head-(cons₁₄)
+(cons₁₀)-value!-<>-tail-(cons₁₂)
+(sole₁₁)-value!-<>-head-(cons₁₂)
+(null₈)-value!-<>-tail-(cons₁₀)
+(sole₉)-value!-<>-head-(cons₁₀)
+(cons₅)-value!-<>-tail-(cons₇)
+(sole₆)-value!-<>-head-(cons₇)
+(cons₃)-value!-<>-tail-(cons₅)
+(sole₄)-value!-<>-head-(cons₅)
+(null₁)-value!-<>-tail-(cons₃)
+(sole₂)-value!-<>-head-(cons₃)
+</body>
+</net>
+
+<net>
+<root>
+(cons₁₇)-value!-<>-
+</root>
+<body>
+(cons₁₉)-value!-<>-tail-(cons₁₇)
+(sole₁₃)-value!-<>-head-(cons₁₇)
+(cons₂₁)-value!-<>-tail-(cons₁₉)
+(sole₁₁)-value!-<>-head-(cons₁₉)
+(cons₇)-value!-<>-tail-(cons₂₁)
+(sole₉)-value!-<>-head-(cons₂₁)
+(cons₅)-value!-<>-tail-(cons₇)
+(sole₆)-value!-<>-head-(cons₇)
+(cons₃)-value!-<>-tail-(cons₅)
+(sole₄)-value!-<>-head-(cons₅)
+(null₁)-value!-<>-tail-(cons₃)
+(sole₂)-value!-<>-head-(cons₃)
+</body>
+</net>
+```
+</details>
 
 ## Install
 
