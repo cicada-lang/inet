@@ -5,10 +5,7 @@ worker_new(mod_t *mod) {
     worker_t *self = allocate(sizeof(worker_t));
     self->mod = mod;
 
-    self->active_pair_list = list_new();
-    list_set_item_destructor(
-        self->active_pair_list,
-        (list_item_destructor_t *) active_pair_destroy);
+    self->active_wire_list = list_new();
 
     self->value_stack = stack_new(VALUE_STACK_SIZE);
     stack_set_item_destructor(
@@ -30,7 +27,7 @@ worker_destroy(worker_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         worker_t *self = *self_pointer;
-        list_destroy(&self->active_pair_list);
+        list_destroy(&self->active_wire_list);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
         free(self);
@@ -40,26 +37,25 @@ worker_destroy(worker_t **self_pointer) {
 
 void
 worker_interact(worker_t *self) {
-    while (!list_is_empty(self->active_pair_list)) {
+    while (!list_is_empty(self->active_wire_list)) {
         worker_interact_once(self);
     }
 }
 
 void
 worker_interact_once(worker_t *self) {
-    active_pair_t *active_pair = list_pop(self->active_pair_list);
-    if (!active_pair) return;
+    wire_t *active_wire = list_pop(self->active_wire_list);
+    if (!active_wire) return;
 
     const rule_t *rule = mod_find_rule(
         self->mod,
-        active_pair->first_wire,
-        active_pair->second_wire);
+        active_wire,
+        active_wire->opposite_wire);
     if (!rule) return;
 
     size_t base_length = stack_length(self->return_stack);
     frame_t *frame = frame_new(rule->program);
-    frame_collect_free_wires(frame, active_pair->first_wire);
-    active_pair_destroy(&active_pair);
+    frame_collect_free_wires(frame, active_wire);
     stack_push(self->return_stack, frame);
     worker_run_until(self, base_length);
 }
@@ -102,15 +98,15 @@ worker_print(const worker_t *self) {
 
     mod_print(self->mod);
 
-    size_t active_pair_list_length = list_length(self->active_pair_list);
-    printf("<active-pair-list length=\"%lu\">\n", active_pair_list_length);
-    active_pair_t *active_pair = list_start(self->active_pair_list);
-    while (active_pair) {
-        active_pair_print(active_pair);
+    size_t active_wire_list_length = list_length(self->active_wire_list);
+    printf("<active-wire-list length=\"%lu\">\n", active_wire_list_length);
+    wire_t *active_wire = list_start(self->active_wire_list);
+    while (active_wire) {
+        wire_print(active_wire);
         printf("\n");
-        active_pair = list_next(self->active_pair_list);
+        active_wire = list_next(self->active_wire_list);
     }
-    printf("</active-pair-list>\n");
+    printf("</active-wire-list>\n");
 
     worker_print_return_stack(self);
     worker_print_value_stack(self);
@@ -154,7 +150,6 @@ worker_maybe_add_active_pair(
         assert(first_wire->opposite_wire == second_wire);
         assert(second_wire->opposite_wire == first_wire);
 
-        active_pair_t *active_pair = active_pair_new(first_wire, second_wire);
-        list_push(worker->active_pair_list, active_pair);
+        list_push(worker->active_wire_list, first_wire);
     }
 }

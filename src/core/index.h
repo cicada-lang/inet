@@ -5,7 +5,6 @@
 #include "types.h"
 #include "node.h"
 #include "wire.h"
-#include "active_pair.h"
 #include "emit.h"
 #include "mod.h"
 #include "mod_test.h"

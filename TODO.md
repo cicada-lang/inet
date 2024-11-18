@@ -1,4 +1,4 @@
-`worker` has `active_wire_list` instead of `active_pair_list` -- remove `active_pair_t`
+ambr worker_maybe_add_active_pair worker_maybe_add_active_wire
 extract `wire_connect` -- return one wire maybe add as active wire
 add `connect_op_t` back -- so that emit no need to emit call to `@wire/connect`
 emit no need to emit call to `@wire/connect`
