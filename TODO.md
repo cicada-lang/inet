@@ -1,6 +1,11 @@
+`error_report` macro -- learn from `zmalloc` from czmq
+
+```
+define zmalloc(size) safe_malloc((size), __FILE__, __LINE__)
+```
+
 `commands/` add a command to snapshot testing
-`libs/error` -- setup
-`error_report` macro
+
 `lex` -- improve error report
 `parser` -- improve error report
 
