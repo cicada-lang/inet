@@ -14,8 +14,6 @@ mod_new(void) {
         self->rule_list,
         (list_item_destructor_t *) rule_destroy);
 
-    import_builtins(self);
-
     return self;
 }
 

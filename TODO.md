@@ -1,4 +1,3 @@
-`deps` for `core/`
 `deps` for `syntax/`
 `deps` for `builtins/`
 `deps` for `commands/`

@@ -54,10 +54,10 @@ run_file(const char *file_name, bool debug) {
     char *text = file_read(file);
 
     mod_t *mod = mod_new();
+    import_builtins(mod);
+
     worker_t *worker = worker_new(mod);
-
     worker->debug = debug;
-
     interpret_text(worker, text);
 
     worker_destroy(&worker);

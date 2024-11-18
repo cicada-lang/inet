@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../deps.h"
-#include "../config.h"
+#include "deps.h"
 #include "types.h"
 #include "node.h"
 #include "wire.h"
@@ -19,4 +18,3 @@
 #include "node_spec.h"
 #include "builtin_spec.h"
 #include "program_spec.h"
-#include "../builtins/index.h"
