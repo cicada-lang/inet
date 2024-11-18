@@ -30,7 +30,8 @@
 * (sole) -- value!
 
 = sole-diff-list
-  @wire/pair diff
+  @wire/pair
+  ( wire wire ) diff
   ( front back value ) @swap
   ( front value back ) sole cons sole cons
   ( front value list ) @rot
