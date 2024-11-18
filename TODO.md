@@ -1,5 +1,3 @@
-`int` -- `uint_max` and `uint_min`
-
 `text_print_context` -- with 3 offset
 `text_print_context` -- with lineno at the left
 `text_print_context` -- with underline

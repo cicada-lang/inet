@@ -1,7 +1,7 @@
 #pragma once
 
-// bool uint_max(uint64_t x, uint64_t y);
-// bool uint_min(uint64_t x, uint64_t y);
+uint64_t uint_max(uint64_t x, uint64_t y);
+uint64_t uint_min(uint64_t x, uint64_t y);
 
 char *uint_to_string(uint64_t self);
 char *uint_to_subscript(uint64_t self);

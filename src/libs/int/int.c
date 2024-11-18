@@ -1,5 +1,17 @@
 #include "index.h"
 
+uint64_t
+uint_max(uint64_t x, uint64_t y) {
+    if (x > y) return x;
+    else return y;
+}
+
+uint64_t
+uint_min(uint64_t x, uint64_t y) {
+    if (x < y) return x;
+    else return y;
+}
+
 #define MAX_STRING_LENGTH 256
 
 char *
