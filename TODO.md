@@ -1,8 +1,9 @@
+# error handling
+
+error report on undefined names
+improve error handling -- just use `assert(value && message)`?
+
 # example
-
-copy examples from `inet-cute`
-
-- read docs of inet-cute -- be sure about the port order
 
 `examples/combinators.inet` -- interaction combinators
 `examples/lambda.inet` -- use interaction combinators
@@ -51,11 +52,6 @@ use `module/name` syntax
 
 - we already using use `@wire/`,
   maybe module is just name prefix.
-
-# error handling
-
-error report on undefined names
-improve error handling -- just use `assert(value && message)`?
 
 # debug
 

@@ -22,3 +22,64 @@
   @wire/print-net
   @worker/interact
   @wire/print-net
+
+( to define `mul`, we first need `nat-erase` and `nat-dup`. )
+
+* (nat-erase) target! --
+
+! (zero)-(nat-erase)
+
+! (add1)-(nat-erase)
+  (add1)-prev nat-erase
+
+* (nat-dup) target! -- second first
+
+! (zero)-(nat-dup)
+  zero first-(nat-dup)
+  zero second-(nat-dup)
+
+! (add1)-(nat-dup)
+  (add1)-prev nat-dup
+  ( second first ) add1 first-(nat-dup)
+  ( second ) add1 second-(nat-dup)
+
+* (mul) mulend target! --  result
+
+! (zero)-(mul)
+  (mul)-mulend nat-erase
+  zero result-(mul)
+
+! (add1)-(mul)
+  (mul)-mulend nat-dup
+  ( second first ) (add1)-prev mul
+  ( second product ) add result-(mul)
+
+. two two mul
+  @wire/print-net
+  @worker/interact
+  @wire/print-net
+
+( to define `max`, we need `max-aux`. )
+
+* (max-aux) second! first -- result
+* (max) second first! -- result
+
+! (zero)-(max)
+  (max)-second result-(max)
+
+! (add1)-(max)
+  (max)-second (add1)-prev max-aux
+  result-(max)
+
+! (zero)-(max-aux)
+  (max-aux)-first add1
+  result-(max-aux)
+
+! (add1)-(max-aux)
+  (add1)-prev (max-aux)-first max
+  add1 result-(max-aux)
+
+. one two max
+  @wire/print-net
+  @worker/interact
+  @wire/print-net
