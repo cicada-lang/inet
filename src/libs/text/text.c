@@ -31,16 +31,16 @@ text_print_context(
     size_t start,
     size_t end
 ) {
-    // size_t offset = 3;
-    // size_t start_lineno = uint_min(1, text_lineno_of_index(text, start) - offset);
-    // size_t end_lineno = uint_max(text_lineno(text), text_lineno_of_index(text, end) + offset);
+    size_t offset = 3;
+    size_t start_lineno =
+        uint_max(text_lineno_of_index(text, start) - offset,
+                 1);
+    size_t end_lineno =
+        uint_min(text_lineno_of_index(text, end) + offset,
+                 text_max_lineno(text));
 
-
-    size_t start_lineno = text_lineno_of_index(text, start);
-    size_t end_lineno = text_lineno_of_index(text, end);
-
-    size_t current_lineno = 1;
     size_t text_length = strlen(text);
+    size_t current_lineno = 1;    
     for (size_t i = 0; i < text_length; i++) {
         char c = text[i];
         if (c == '\n') current_lineno++;
