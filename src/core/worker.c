@@ -139,7 +139,6 @@ worker_print_value_stack(const worker_t *self) {
     printf("</value-stack>\n");
 }
 
-
 void
 worker_connect_top_wire_pair(worker_t *worker) {
     wire_t *second_wire = stack_pop(worker->value_stack);

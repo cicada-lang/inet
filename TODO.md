@@ -1,4 +1,3 @@
-emit no need to emit call to `@wire/connect`
 `deps` for `core/`
 `deps` for `syntax/`
 `deps` for `builtins/`
