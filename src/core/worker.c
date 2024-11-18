@@ -58,7 +58,8 @@ worker_interact_once(worker_t *self) {
 
     size_t base_length = stack_length(self->return_stack);
     frame_t *frame = frame_new(rule->program);
-    frame_collect_free_wires(frame, active_pair);
+    frame_collect_free_wires(frame, active_pair->first_wire);
+    active_pair_destroy(&active_pair);
     stack_push(self->return_stack, frame);
     worker_run_until(self, base_length);
 }

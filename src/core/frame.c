@@ -75,17 +75,15 @@ collect_free_wires_from_node(node_t *node) {
 }
 
 void
-frame_collect_free_wires(frame_t *self, active_pair_t *active_pair) {
-    wire_t *first_wire = active_pair->first_wire;
-    wire_t *second_wire = active_pair->second_wire;
+frame_collect_free_wires(frame_t *self, wire_t *wire) {
+    wire_t *first_wire = wire;
+    wire_t *second_wire = wire->opposite_wire;
 
     self->first_free_wire_group = collect_free_wires_from_node(first_wire->node);
     self->second_free_wire_group = collect_free_wires_from_node(second_wire->node);
 
     wire_destroy(&first_wire);
     wire_destroy(&second_wire);
-
-    active_pair_destroy(&active_pair);
 }
 
 wire_t *
