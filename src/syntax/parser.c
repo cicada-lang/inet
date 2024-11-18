@@ -102,13 +102,13 @@ parse_node_name(parser_t *self, const token_t *token) {
 
     if (!string_starts_with(string, "(")) {
         text_print_context(self->text, token->start, token->end);
-        printf("a node name must starts with (\n");
+        printf("[parsing error] a node name must starts with (\n");
         exit(1);
     }
 
     if (!string_ends_with(string, ")")) {
         text_print_context(self->text, token->start, token->end);
-        printf("a node name must ends with )\n");
+        printf("[parsing error] a node name must starts with (\n");
         exit(1);
     }
 

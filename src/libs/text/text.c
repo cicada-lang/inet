@@ -41,12 +41,15 @@ text_print_context(
         uint_min(text_lineno_of_index(text, end) + offset,
                  max_lineno);
 
+    size_t left_padding = uint_decimal_string_length(max_lineno) + 1;
     size_t text_length = strlen(text);
     size_t current_lineno = 1;
     for (size_t i = 0; i < text_length; i++) {
         char c = text[i];
         if (c == '\n') current_lineno++;
         if (start_lineno <= current_lineno && current_lineno <= end_lineno) {
+            if (i == 0 || text[i-1] == '\n')
+                printf("%*lu|", (int) left_padding, current_lineno);
             printf("%c", c);
         }
     }

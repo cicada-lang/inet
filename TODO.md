@@ -1,4 +1,3 @@
-`text_print_context` -- with lineno at the left
 `text_print_context` -- with underline
 
 `parser` -- `parse_rule_first_name` report in context
