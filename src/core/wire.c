@@ -56,6 +56,20 @@ wire_is_principal(const wire_t *self) {
     return port_spec->is_principal;
 }
 
+wire_t *
+wire_connect(wire_t *first_wire, wire_t *second_wire) {
+    wire_t *first_opposite_wire = first_wire->opposite_wire;
+    wire_t *second_opposite_wire = second_wire->opposite_wire;
+
+    first_opposite_wire->opposite_wire = second_opposite_wire;
+    second_opposite_wire->opposite_wire = first_opposite_wire;
+
+    wire_destroy(&first_wire);
+    wire_destroy(&second_wire);
+
+    return first_opposite_wire;
+}
+
 void
 wire_print_left(const wire_t *self) {
     if (!self->node) {
