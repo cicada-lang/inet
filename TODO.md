@@ -1,3 +1,27 @@
+`@swap`
+`@rot`
+
+diff-list.inet -- use `@swap` and `@rot`
+
+diff-list.inet -- re-design syntax to simplify
+
+- remove the idea of `(diff) @spread`
+- use `@wire/pair $name ... diff ... name`
+
+# example
+
+copy examples from `inet-js`
+
+- read docs of inet-cute -- be sure about the port order
+
+`examples/combinators.inet` -- interaction combinators
+`examples/lambda.inet` -- use interaction combinators
+
+# docs
+
+docs/articles/programming-with-interaction-nets.md -- update for new syntax
+docs/articles/反应网编程.md -- update for new syntax
+
 # linear local variables
 
 `op_let_local_t`
@@ -8,23 +32,6 @@
 ...
 name     // use name (after then name is free to use again)
 ```
-
-# design
-
-diff-list.inet -- re-design syntax to simplify
-
-- remove the idea of `(diff) @spread`
-- use `@wire/pair $name ... diff ... name`
-
-# example
-
-`examples/combinators.inet` -- interaction combinators
-`examples/lambda.inet` -- use interaction combinators
-
-# docs
-
-docs/articles/programming-with-interaction-nets.md -- update for new syntax
-docs/articles/反应网编程.md -- update for new syntax
 
 # lang
 
