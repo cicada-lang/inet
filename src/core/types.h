@@ -17,13 +17,6 @@ typedef enum {
     GET_FREE_WIRE_OP,
 } op_tag_t;
 
-typedef enum {
-    DEFINE_NODE_STMT,
-    DEFINE_RULE_STMT,
-    DEFINE_PROGRAM_STMT,
-    RUN_PROGRAM_STMT,
-} stmt_tag_t;
-
 typedef struct node_t node_t;
 typedef struct wire_t wire_t;
 typedef struct active_pair_t active_pair_t;
@@ -43,11 +36,3 @@ typedef struct node_spec_t node_spec_t;
 typedef struct port_spec_t port_spec_t;
 typedef struct builtin_spec_t builtin_spec_t;
 typedef struct program_spec_t program_spec_t;
-typedef struct token_t token_t;
-typedef struct lexer_t lexer_t;
-typedef struct stmt_t stmt_t;
-typedef struct define_node_stmt_t define_node_stmt_t;
-typedef struct define_rule_stmt_t define_rule_stmt_t;
-typedef struct define_program_stmt_t define_program_stmt_t;
-typedef struct run_program_stmt_t run_program_stmt_t;
-typedef struct parser_t parser_t;

@@ -1,5 +1,3 @@
-extract `syntax/` from `core/`
-
 `libs/error` -- setup
 
 `error_report` macro
