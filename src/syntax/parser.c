@@ -96,8 +96,8 @@ parser_maybe_ignore_comment(parser_t *self) {
     }
 }
 
-static char *
-parse_node_name(parser_t *self, const token_t *token) {
+static void
+check_node_name_format(parser_t *self, const token_t *token) {
     char *string = token->string;
 
     if (!(string_starts_with(string, "(") &&
@@ -108,9 +108,13 @@ parse_node_name(parser_t *self, const token_t *token) {
         printf("[parser-error] a node name must be: (<name>)\n");
         exit(1);
     }
+}
 
-    int i = string_find_index(string, ')');
-    return string_slice(string, 1, i);
+static char *
+parse_node_name(parser_t *self, const token_t *token) {
+    check_node_name_format(self, token);
+    int i = string_find_index(token->string, ')');
+    return string_slice(token->string, 1, i);
 }
 
 void
@@ -151,8 +155,8 @@ parser_parse_define_node_stmt(parser_t *self) {
     list_push(self->stmt_list, stmt);
 }
 
-static char *
-parse_rule_first_name(parser_t *self, const token_t *token) {
+static void
+check_rule_name_format(parser_t *self, const token_t *token) {
     char *string = token->string;
 
     if (!(string_starts_with(string, "(") &&
@@ -164,20 +168,20 @@ parse_rule_first_name(parser_t *self, const token_t *token) {
         printf("[parser-error] a rule name must be: (<name>)-(<name>)\n");
         exit(1);
     }
-
-    int i = string_find_index(string, ')');
-    return string_slice(string, 1, i);
 }
 
 static char *
-parse_rule_second_name(const char *string) {
-    assert(string_starts_with(string, "("));
-    assert(string_ends_with(string, ")"));
-    int i = string_find_index(string, ')');
-    assert(i != -1);
-    assert(string[i+1] == '-');
-    assert(string[i+2] == '(');
-    return string_slice(string, i+3, strlen(string) - 1);
+parse_rule_first_name(parser_t *self, const token_t *token) {
+    check_rule_name_format(self, token);
+    int i = string_find_index(token->string, ')');
+    return string_slice(token->string, 1, i);
+}
+
+static char *
+parse_rule_second_name(parser_t *self, const token_t *token) {
+    check_rule_name_format(self, token);
+    int i = string_find_index(token->string, ')');
+    return string_slice(token->string, i+3, strlen(token->string) - 1);
 }
 
 void
@@ -188,7 +192,7 @@ parser_parse_define_rule_stmt(parser_t *self) {
     token_t *first_token = list_shift(self->token_list);
     assert(!token_is_rune(first_token));
     char *first_name = parse_rule_first_name(self, first_token);
-    char *second_name = parse_rule_second_name(first_token->string);
+    char *second_name = parse_rule_second_name(self, first_token);
     token_destroy(&first_token);
 
     list_t *token_list = list_new();
