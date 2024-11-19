@@ -1,3 +1,8 @@
+inline `parse` -- just use `parser`
+inline `lex` -- juse `lexer` -- be like `parser`
+
+`parser` has `err` FILE
+
 `commands/` add a command to do snapshot testing
 
 - snapshot for every `.test.inet`
@@ -6,6 +11,8 @@
   - `.test.inet.err`
 
 - need to change example names
+
+`worker` has `out` and `err` FILE
 
 `node_new` take `id` as argument
 `worker` has `node_id_count` -- test snapshot testing itself
