@@ -29,5 +29,9 @@ string_test(void) {
     assert(string_find_index("01234", '2') == 2);
     assert(string_find_index("01234", '5') == -1);
 
+    assert(string_count_char("0aaa0", 'b') == 0);
+    assert(string_count_char("0aaa0", 'a') == 3);
+    assert(string_count_char("0aaa0", '0') == 2);
+
     printf("</string>\n");
 }

@@ -1,5 +1,3 @@
-`string` -- `string_count_char`
-
 `parser` -- `parse_rule_first_name` report in context
 `parser` -- `parse_rule_first_name` use `string_count_char`
 `parser` -- `parse_rule_second_name` report in context

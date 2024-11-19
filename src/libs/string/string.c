@@ -110,3 +110,14 @@ string_find_index(const char *self, char ch) {
     if (!p) return -1;
     else return (int)(p - self);
 }
+
+size_t
+string_count_char(const char *self, char ch) {
+    size_t count = 0;
+    size_t length = strlen(self);
+    for (size_t i = 0; i < length; i++) {
+        if (self[i] == ch) count++;
+    }
+
+    return count;
+}
