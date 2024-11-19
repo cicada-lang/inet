@@ -1,7 +1,9 @@
+`string` -- `string_count_substring`
 `parser` -- `parse_rule_first_name` use `string_count_substring`
 `parser` -- `parse_rule_second_name` report in context
-
-`commands/` add a command to snapshot testing
+`parser` -- `parser_parse_define_node_stmt` report on no name after rune
+`parser` -- `parser_parse_define_program_stmt` report on no name after rune
+`commands/` add a command to do snapshot testing
 
 # example
 
