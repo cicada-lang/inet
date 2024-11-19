@@ -106,7 +106,7 @@ parse_node_name(parser_t *self, const token_t *token) {
         string_count_char(string, ')') != 1)
     {
         text_print_context(self->text, token->start, token->end);
-        printf("[parsing-error] a node name must be: (<name>)\n");
+        printf("[parser-error] a node name must be: (<name>)\n");
         exit(1);
     }
 
@@ -162,7 +162,7 @@ parse_rule_first_name(parser_t *self, const token_t *token) {
         string_count_char(string, ')') != 2)
     {
         text_print_context(self->text, token->start, token->end);
-        printf("[parsing-error] a rule name must be: (<name>)-(<name>)\n");
+        printf("[parser-error] a rule name must be: (<name>)-(<name>)\n");
         exit(1);
     }
 

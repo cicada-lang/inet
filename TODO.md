@@ -3,6 +3,14 @@
 `parser` -- `parse_rule_second_name` report in context
 `parser` -- `parser_parse_define_node_stmt` report on no name after rune
 `parser` -- `parser_parse_define_program_stmt` report on no name after rune
+
+merge `mod_test` to `worker_test`
+rename `worker_test` to `emit_test`
+move `emit` to `syntax`
+
+`emit` -- take token (like `compile`) instead of string
+`emit` -- report error in context
+
 `commands/` add a command to do snapshot testing
 
 # example
