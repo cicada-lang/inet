@@ -124,7 +124,6 @@ parser_parse_define_node_stmt(parser_t *self) {
     token_destroy(&rune_token);
 
     token_t *first_token = list_shift(self->token_list);
-    assert(!token_is_rune(first_token));
     char *name = parse_node_name(self, first_token);
     token_destroy(&first_token);
 
@@ -191,7 +190,6 @@ parser_parse_define_rule_stmt(parser_t *self) {
     token_destroy(&rune_token);
 
     token_t *first_token = list_shift(self->token_list);
-    assert(!token_is_rune(first_token));
     char *first_name = parse_rule_first_name(self, first_token);
     char *second_name = parse_rule_second_name(self, first_token);
     token_destroy(&first_token);
@@ -220,13 +218,35 @@ parser_parse_define_rule_stmt(parser_t *self) {
                   token_list));
 }
 
+static void
+check_program_name_format(parser_t *self, const token_t *token) {
+    char *string = token->string;
+
+    if (token_is_rune(token)) {
+        text_print_context(self->text, token->start, token->end);
+        printf("[parser-error] program name can not be a rune: %s\n", string);
+        exit(1);
+    }
+
+    if (!(string_count_char(string, '{') == 0 &&
+          string_count_char(string, '}') == 0 &&
+          string_count_char(string, '[') == 0 &&
+          string_count_char(string, ']') == 0 &&
+          string_count_char(string, '(') == 0 &&
+          string_count_char(string, ')') == 0)) {
+        text_print_context(self->text, token->start, token->end);
+        printf("[parser-error] invalid program name: %s\n", string);
+        exit(1);
+    }
+}
+
 void
 parser_parse_define_program_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
     token_t *first_token = list_shift(self->token_list);
-    assert(!token_is_rune(first_token));
+    check_program_name_format(self, first_token);
     char *name = string_dup(first_token->string);
     token_destroy(&first_token);
 

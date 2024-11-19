@@ -1,6 +1,3 @@
-`parser` -- `parser_parse_define_node_stmt` report on no name after rune
-`parser` -- `parser_parse_define_program_stmt` report on no name after rune
-
 `parser` with optional `file_name` -- error report with `file_name`
 
 merge `mod_test` to `worker_test`
