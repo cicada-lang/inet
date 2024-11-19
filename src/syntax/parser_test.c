@@ -4,7 +4,7 @@ void
 parser_test(void) {
     printf("<parser_test>\n");
 
-    list_t *stmt_list = parse("\
+    list_t *stmt_list = parse("parser_test", "\
 * (zero) -- value!                   \
 * (add1) prev -- value!              \
 * (add) addend target! -- result     \

@@ -1,6 +1,4 @@
-`parser` has `src` -- error report with `src`
-
-- `parse` and `interpret_text` also need to take `src`
+`parser` -- error report with `src`
 
 `commands/` add a command to do snapshot testing
 
