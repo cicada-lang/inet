@@ -24,6 +24,30 @@ move `emit` to `syntax`
 docs/articles/programming-with-interaction-nets.md -- update for new syntax
 docs/articles/反应网编程.md -- update for new syntax
 
+# module system
+
+use `module/name` syntax
+
+- we already using use `@wire/`,
+  maybe module is just name prefix.
+
+# parallelism
+
+learn linux thread
+keep a single thread debug mode, which record all the allocated nodes.
+
+# primitive value
+
+`value_t` as sumtype with `WIRE_VALUE`
+
+support primitive value
+
+- dispatching but type -- `(node)-[primitive-value: type]`
+  - `[primitive-value]` in a box.
+    - box wastes memory, should just let node's port be able to store any value.
+
+- learn for other inet implementations
+
 # linear local variables
 
 `op_let_local_t`
@@ -34,32 +58,3 @@ docs/articles/反应网编程.md -- update for new syntax
 ...
 name     // use name (after then name is free to use again)
 ```
-
-# lang
-
-`value_t` as sumtype with `WIRE_VALUE`
-
-# parallelism
-
-learn linux thread
-
-# primitive value
-
-support primitive value
-
-- dispatching but type -- `(node)-[primitive-value: type]`
-  - `[primitive-value]` in a box.
-    - box wastes memory, should just let node's port be able to store any value.
-
-- learn for other inet implementations
-
-# module system
-
-use `module/name` syntax
-
-- we already using use `@wire/`,
-  maybe module is just name prefix.
-
-# debug
-
-a single thread debug mode, which record all the allocated nodes.
