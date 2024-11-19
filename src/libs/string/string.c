@@ -121,3 +121,14 @@ string_count_char(const char *self, char ch) {
 
     return count;
 }
+
+size_t
+string_count_substring(const char *self, const char* substring) {
+    size_t count = 0;
+    size_t length = strlen(self);
+    for (size_t i = 0; i < length; i++) {
+        if (string_starts_with(self+i, substring)) count++;
+    }
+
+    return count;
+}

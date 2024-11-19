@@ -33,5 +33,11 @@ string_test(void) {
     assert(string_count_char("0aaa0", 'a') == 3);
     assert(string_count_char("0aaa0", '0') == 2);
 
+    assert(string_count_substring("0aaa0", "a") == 3);
+    assert(string_count_substring("0aaa0", "aa") == 2);
+    assert(string_count_substring("0aaa0", "aaa") == 1);
+    assert(string_count_substring("0aaa0aaa", "aa") == 4);
+    assert(string_count_substring("0aaa0aaa", "aaa") == 2);
+
     printf("</string>\n");
 }
