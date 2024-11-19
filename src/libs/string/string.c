@@ -122,6 +122,10 @@ string_count_char(const char *self, char ch) {
     return count;
 }
 
+bool string_has_char(const char *self, char ch) {
+    return string_count_char(self, ch) > 0;
+}
+
 size_t
 string_count_substring(const char *self, const char* substring) {
     size_t count = 0;

@@ -104,7 +104,8 @@ check_node_name_format(parser_t *self, const token_t *token) {
     if (!(string_starts_with(string, "(") &&
           string_ends_with(string, ")") &&
           string_count_char(string, '(') == 1 &&
-          string_count_char(string, ')') == 1)) {
+          string_count_char(string, ')') == 1))
+    {
         text_print_context(self->text, token->start, token->end);
         printf("[parser-error] a node name must be: (<name>)\n");
         exit(1);
@@ -163,7 +164,8 @@ check_rule_name_format(parser_t *self, const token_t *token) {
           string_ends_with(string, ")") &&
           string_count_char(string, '(') == 2 &&
           string_count_char(string, ')') == 2 &&
-          string_count_substring(string, ")-(") == 1)) {
+          string_count_substring(string, ")-(") == 1))
+    {
         text_print_context(self->text, token->start, token->end);
         printf("[parser-error] a rule name must be: (<name>)-(<name>)\n");
         exit(1);
@@ -228,12 +230,13 @@ check_program_name_format(parser_t *self, const token_t *token) {
         exit(1);
     }
 
-    if (!(string_count_char(string, '{') == 0 &&
-          string_count_char(string, '}') == 0 &&
-          string_count_char(string, '[') == 0 &&
-          string_count_char(string, ']') == 0 &&
-          string_count_char(string, '(') == 0 &&
-          string_count_char(string, ')') == 0)) {
+    if (string_has_char(string, '{') ||
+        string_has_char(string, '}') ||
+        string_has_char(string, '[') ||
+        string_has_char(string, ']') ||
+        string_has_char(string, '(') ||
+        string_has_char(string, ')'))
+    {
         text_print_context(self->text, token->start, token->end);
         printf("[parser-error] invalid program name: %s\n", string);
         exit(1);
