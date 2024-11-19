@@ -1,5 +1,3 @@
-`parser` -- error report with `src`
-
 `commands/` add a command to do snapshot testing
 
 - snapshot for every `.test.inet`

@@ -71,8 +71,9 @@ parser_parse(parser_t *self) {
         else if (string_equal(token->string, "."))
             parser_parse_run_program_stmt(self);
         else {
-            text_print_context(self->text, token->start, token->end);
             printf("[parser-error] unknown starting token: %s\n", token->string);
+            printf("[src] %s\n", self->src);
+            text_print_context(self->text, token->start, token->end);
             exit(1);
         }
     }
@@ -108,8 +109,9 @@ check_node_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, '(') == 1 &&
           string_count_char(string, ')') == 1))
     {
-        text_print_context(self->text, token->start, token->end);
         printf("[parser-error] a node name must be: (<name>)\n");
+        printf("[src] %s\n", self->src);
+        text_print_context(self->text, token->start, token->end);
         exit(1);
     }
 }
@@ -168,8 +170,9 @@ check_rule_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, ')') == 2 &&
           string_count_substring(string, ")-(") == 1))
     {
-        text_print_context(self->text, token->start, token->end);
         printf("[parser-error] a rule name must be: (<name>)-(<name>)\n");
+        printf("[src] %s\n", self->src);
+        text_print_context(self->text, token->start, token->end);
         exit(1);
     }
 }
@@ -227,8 +230,9 @@ check_program_name_format(parser_t *self, const token_t *token) {
     char *string = token->string;
 
     if (token_is_rune(token)) {
-        text_print_context(self->text, token->start, token->end);
         printf("[parser-error] program name can not be a rune: %s\n", string);
+        printf("[src] %s\n", self->src);
+        text_print_context(self->text, token->start, token->end);
         exit(1);
     }
 
@@ -239,8 +243,9 @@ check_program_name_format(parser_t *self, const token_t *token) {
         string_has_char(string, '(') ||
         string_has_char(string, ')'))
     {
-        text_print_context(self->text, token->start, token->end);
         printf("[parser-error] invalid program name: %s\n", string);
+        printf("[src] %s\n", self->src);
+        text_print_context(self->text, token->start, token->end);
         exit(1);
     }
 }

@@ -61,6 +61,4 @@ text_print_context(
 
         if (c == '\n') current_lineno++;
     }
-
-    printf("\n");
 }
