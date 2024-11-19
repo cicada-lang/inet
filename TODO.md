@@ -4,12 +4,16 @@
 `parser` -- `parser_parse_define_node_stmt` report on no name after rune
 `parser` -- `parser_parse_define_program_stmt` report on no name after rune
 
+`parser` with optional `file_name` -- error report with `file_name`
+
 merge `mod_test` to `worker_test`
 rename `worker_test` to `emit_test`
 move `emit` to `syntax`
 
 `emit` -- take token (like `compile`) instead of string
 `emit` -- report error in context
+
+`mod` with optional `file_name` -- error report with `file_name`
 
 `commands/` add a command to do snapshot testing
 
