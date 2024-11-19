@@ -253,6 +253,7 @@ make clean    # clean up compiled files
 
 **Inspirations**:
 
+- [forth](https://en.wikipedia.org/wiki/Forth_(programming_language))
 - [uxn](https://100r.co/site/uxn.html)
 - [modal](https://git.sr.ht/~rabbits/modal)
 - [fractran](https://git.sr.ht/~rabbits/fractran)
