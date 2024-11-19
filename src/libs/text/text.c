@@ -13,8 +13,8 @@ text_max_lineno(const char *text) {
 
 size_t
 text_lineno_of_index(const char *text, size_t index) {
-    // just count the number of '\n'
-    // starting from 1
+    // just count the number of '\n'.
+    // the consting starts from 1.
     size_t lineno = 1;
     size_t text_length = strlen(text);
     for (size_t i = 0; i < text_length; i++) {
@@ -43,7 +43,6 @@ text_print_context(
     size_t current_lineno = 1;
     for (size_t i = 0; i < text_length; i++) {
         char c = text[i];
-        if (c == '\n') current_lineno++;
         if (start_lineno - offset <= current_lineno &&
             current_lineno <= end_lineno + offset) {
             if (i == 0 || text[i-1] == '\n') {
@@ -57,6 +56,8 @@ text_print_context(
 
             printf("%c", c);
         }
+
+        if (c == '\n') current_lineno++;
     }
 
     printf("\n");

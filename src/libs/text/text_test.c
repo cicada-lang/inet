@@ -33,6 +33,5 @@ text_test(void) {
         assert(text_lineno_of_index(text, 100) == 4);
     }
 
-
     printf("</text_test>\n");
 }

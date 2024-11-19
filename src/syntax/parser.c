@@ -100,15 +100,10 @@ static char *
 parse_node_name(parser_t *self, const token_t *token) {
     char *string = token->string;
 
-    if (!string_starts_with(string, "(")) {
+    if (!string_starts_with(string, "(") ||
+        !string_ends_with(string, ")")) {
         text_print_context(self->text, token->start, token->end);
-        printf("[parsing error] a node name must starts with (\n");
-        exit(1);
-    }
-
-    if (!string_ends_with(string, ")")) {
-        text_print_context(self->text, token->start, token->end);
-        printf("[parsing error] a node name must starts with (\n");
+        printf("[parsing-error] a node name must be: (<name>)\n");
         exit(1);
     }
 
@@ -156,9 +151,16 @@ parser_parse_define_node_stmt(parser_t *self) {
 }
 
 static char *
-parse_rule_first_name(const char *string) {
-    assert(string_starts_with(string, "("));
-    assert(string_ends_with(string, ")"));
+parse_rule_first_name(parser_t *self, const token_t *token) {
+    char *string = token->string;
+
+    if (!string_starts_with(string, "(") ||
+        !string_ends_with(string, ")")) {
+        text_print_context(self->text, token->start, token->end);
+        printf("[parsing-error] a rule name must be: (<name>)-(<name>)\n");
+        exit(1);
+    }
+
     int i = string_find_index(string, ')');
     assert(i != -1);
     return string_slice(string, 1, i);
@@ -182,7 +184,7 @@ parser_parse_define_rule_stmt(parser_t *self) {
 
     token_t *first_token = list_shift(self->token_list);
     assert(!token_is_rune(first_token));
-    char *first_name = parse_rule_first_name(first_token->string);
+    char *first_name = parse_rule_first_name(self, first_token);
     char *second_name = parse_rule_second_name(first_token->string);
     token_destroy(&first_token);
 
