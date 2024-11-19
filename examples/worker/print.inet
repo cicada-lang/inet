@@ -1,7 +1,0 @@
-* (sole) -- value!
-
-. @worker/print
-  sole
-  @worker/print
-  sole
-  @worker/print

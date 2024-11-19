@@ -17,5 +17,5 @@
   null sole cons sole cons sole cons
   append
   @wire/print-net
-  @worker/interact
+  @interact
   @wire/print-net

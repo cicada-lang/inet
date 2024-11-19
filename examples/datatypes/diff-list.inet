@@ -40,5 +40,5 @@
 
 . sole-diff-list sole-diff-list diff-append
   @wire/print-net
-  @worker/interact
+  @interact
   @wire/print-net

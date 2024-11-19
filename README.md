@@ -73,7 +73,7 @@ For more examples, please see the [examples/](examples/) directory.
   two two add
   add
   @wire/print-net
-  @worker/interact
+  @interact
   @wire/print-net
 ```
 
@@ -152,7 +152,7 @@ For more examples, please see the [examples/](examples/) directory.
   null sole cons sole cons sole cons
   append
   @wire/print-net
-  @worker/interact
+  @interact
   @wire/print-net
 ```
 
