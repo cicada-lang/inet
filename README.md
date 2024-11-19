@@ -1,7 +1,8 @@
 # inet
 
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
-as a [concatenative programming language](https://en.wikipedia.org/wiki/Concatenative_programming_language).
+as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
+[concatenative programming language](https://en.wikipedia.org/wiki/Concatenative_programming_language).
 
 - Untyped.
 - ASCII art inspired syntax.
