@@ -1,5 +1,3 @@
-`text_print_context` -- with underline
-
 `parser` -- `parse_rule_first_name` report in context
 `parser` -- `parse_rule_second_name` report in context
 

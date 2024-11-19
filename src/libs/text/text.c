@@ -32,24 +32,29 @@ text_print_context(
     size_t end
 ) {
     size_t offset = 3;
-    size_t max_lineno = text_max_lineno(text);
 
-    size_t start_lineno =
-        uint_max(text_lineno_of_index(text, start) - offset,
-                 1);
-    size_t end_lineno =
-        uint_min(text_lineno_of_index(text, end) + offset,
-                 max_lineno);
+    size_t start_lineno = text_lineno_of_index(text, start);
+    size_t end_lineno = text_lineno_of_index(text, end);
+    size_t max_lineno = end_lineno + offset;
 
-    size_t left_padding = uint_decimal_string_length(max_lineno) + 1;
+    size_t left_padding = uint_decimal_string_length(max_lineno);
     size_t text_length = strlen(text);
+
     size_t current_lineno = 1;
     for (size_t i = 0; i < text_length; i++) {
         char c = text[i];
         if (c == '\n') current_lineno++;
-        if (start_lineno <= current_lineno && current_lineno <= end_lineno) {
-            if (i == 0 || text[i-1] == '\n')
-                printf("%*lu|", (int) left_padding, current_lineno);
+        if (start_lineno - offset <= current_lineno &&
+            current_lineno <= end_lineno + offset) {
+            if (i == 0 || text[i-1] == '\n') {
+                if (start_lineno <= current_lineno &&
+                    current_lineno <= end_lineno) {
+                    printf("> %*lu|", (int) left_padding, current_lineno);
+                } else {
+                    printf("  %*lu|", (int) left_padding, current_lineno);
+                }
+            }
+
             printf("%c", c);
         }
     }
