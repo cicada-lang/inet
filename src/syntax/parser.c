@@ -69,8 +69,9 @@ parser_parse(parser_t *self) {
         else if (string_equal(token->string, "."))
             parser_parse_run_program_stmt(self);
         else {
-            printf("[parse] unknown starting token: %s", token->string);
-            assert(false);
+            text_print_context(self->text, token->start, token->end);
+            printf("[parser-error] unknown starting token: %s\n", token->string);
+            exit(1);
         }
     }
 }

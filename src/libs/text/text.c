@@ -41,9 +41,11 @@ text_print_context(
     size_t text_length = strlen(text);
 
     size_t current_lineno = 1;
+
     for (size_t i = 0; i < text_length; i++) {
         char c = text[i];
-        if (start_lineno - offset <= current_lineno &&
+        // Do NOT use minus on unsigned int!
+        if (start_lineno <= current_lineno + offset &&
             current_lineno <= end_lineno + offset) {
             if (i == 0 || text[i-1] == '\n') {
                 if (start_lineno <= current_lineno &&
