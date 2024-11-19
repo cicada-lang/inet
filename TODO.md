@@ -1,4 +1,20 @@
-`parser` with optional `file_name` -- error report with `file_name`
+`parser` has `src` -- error report with `src`
+
+- `parse` and `interpret_text` also need to take `src`
+
+`commands/` add a command to do snapshot testing
+
+- snapshot for every `.test.inet`
+
+  - `.test.inet.out`
+  - `.test.inet.err`
+
+- need to change example names
+
+`node_new` take `id` as argument
+`worker` has `node_id_count` -- test snapshot testing itself
+
+- `inet run` -- clear node id counter for each file
 
 merge `mod_test` to `worker_test`
 rename `worker_test` to `emit_test`
@@ -7,19 +23,17 @@ move `emit` to `syntax`
 `emit` -- take token (like `compile`) instead of string
 `emit` -- report error in context
 
-`mod` with optional `file_name` -- error report with `file_name`
-
-`commands/` add a command to do snapshot testing
-
-# example
-
-`examples/combinators.inet` -- interaction combinators
-`examples/lambda.inet` -- use interaction combinators
+`mod` has `src` -- error report with `src`
 
 # docs
 
 docs/articles/programming-with-interaction-nets.md -- update for new syntax
 docs/articles/反应网编程.md -- update for new syntax
+
+# example
+
+`examples/combinators.inet` -- interaction combinators
+`examples/lambda.inet` -- use interaction combinators
 
 # module system
 
