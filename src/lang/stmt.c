@@ -1,9 +1,11 @@
 #include "index.h"
 
 define_node_stmt_t *
-define_node_stmt_new(char *name) {
+define_node_stmt_new(token_t *head_token, char *name) {
     define_node_stmt_t *self = allocate(sizeof(define_node_stmt_t));
     self->tag = DEFINE_NODE_STMT;
+
+    self->head_token = head_token;
     self->name = name;
 
     self->input_token_list = list_new();
@@ -24,6 +26,7 @@ define_node_stmt_destroy(define_node_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         define_node_stmt_t *self = *self_pointer;
+        token_destroy(&self->head_token);
         free(self->name);
         list_destroy(&self->input_token_list);
         list_destroy(&self->output_token_list);

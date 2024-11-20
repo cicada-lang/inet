@@ -9,6 +9,7 @@ struct stmt_t { stmt_tag_t tag; };
 
 struct define_node_stmt_t {
     stmt_tag_t tag;
+    token_t *head_token;
     char *name;
     list_t *input_token_list;
     list_t *output_token_list;
@@ -24,6 +25,7 @@ struct define_rule_stmt_t {
 
 struct define_program_stmt_t {
     stmt_tag_t tag;
+    // token_t *head_token;
     char *name;
     list_t *token_list;
 };
@@ -33,7 +35,9 @@ struct run_program_stmt_t {
     list_t *token_list;
 };
 
-define_node_stmt_t *define_node_stmt_new(char *name);
+define_node_stmt_t *define_node_stmt_new(
+    token_t *head_token,
+    char *name);
 define_rule_stmt_t *define_rule_stmt_new(
     token_t *head_token,
     char *first_name,

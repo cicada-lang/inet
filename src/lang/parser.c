@@ -127,11 +127,10 @@ parser_parse_define_node_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
-    token_t *first_token = list_shift(self->token_list);
-    char *name = parse_node_name(self, first_token);
-    token_destroy(&first_token);
+    token_t *head_token = list_shift(self->token_list);
+    char *name = parse_node_name(self, head_token);
 
-    define_node_stmt_t *stmt = define_node_stmt_new(name);
+    define_node_stmt_t *stmt = define_node_stmt_new(head_token, name);
 
     bool output_flag = false;
     while (true) {
