@@ -3,10 +3,10 @@
 static void mod_import_nat(mod_t *mod);
 
 void
-emit_test(void) {
-    printf("<emit_test>\n");
+worker_test(void) {
+    printf("<worker_test>\n");
 
-    mod_t *mod = mod_new("emit_test");
+    mod_t *mod = mod_new("worker_test");
     mod_import_nat(mod);
 
     worker_t *worker = worker_new(mod);
@@ -31,7 +31,7 @@ emit_test(void) {
     worker_destroy(&worker);
     mod_destroy(&mod);
 
-    printf("</emit_test>\n");
+    printf("</worker_test>\n");
 }
 
 void

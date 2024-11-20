@@ -1,3 +1,6 @@
+rename `worker_test` to `emit_test`
+move `emit` to `lang/`
+
 `emit` -- take token (like `compile`) instead of string
 `emit` -- report undefined error in context
 
