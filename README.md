@@ -49,6 +49,10 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 - [Programming with Interaction Nets](docs/articles/programming-with-interaction-nets.md)
 - [反应网编程](docs/articles/反应网编程.md)
 
+## Community
+
+- [Discord / concatenative #inet](https://discord.gg/EcUfwRkbdx)
+
 ## Examples
 
 For more examples, please see the [examples/](examples/) directory.
@@ -240,10 +244,6 @@ For examples:
 ./bin/inet run examples/datatypes/nat.test.inet
 ./bin/inet run examples/datatypes/nat.test.inet --debug
 ```
-
-## Community
-
-- [Discord / concatenative #inet](https://discord.gg/EcUfwRkbdx)
 
 ## Development
 
