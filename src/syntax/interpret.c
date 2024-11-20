@@ -76,7 +76,11 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
 void
 interpret_text(worker_t *worker, const char *src, const char *text) {
-    list_t *stmt_list = parse(src, text);
+    parser_t *parser = parser_new(src, text);
+    parser_parse(parser);
+    list_t *stmt_list = parser->stmt_list;
+    parser_destroy(&parser);
+
     stmt_t *stmt = list_start(stmt_list);
     while (stmt) {
         interpret_stmt(worker, stmt);

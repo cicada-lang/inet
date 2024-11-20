@@ -1,5 +1,4 @@
-inline `parse` -- just use `parser`
-inline `lex` -- juse `lexer` -- be like `parser`
+rename `syntax/` to `lang/`
 
 `parser` has `err` FILE
 

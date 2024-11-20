@@ -4,7 +4,7 @@ void
 parser_test(void) {
     printf("<parser_test>\n");
 
-    list_t *stmt_list = parse("parser_test", "\
+    const char *text = "\
 * (zero) -- value!                   \
 * (add1) prev -- value!              \
 * (add) addend target! -- result     \
@@ -22,7 +22,13 @@ parser_test(void) {
 = four two two add                   \
                                      \
 . two two add two two add            \
-");
+";
+
+    parser_t *parser = parser_new("parser_test", text);
+    parser_parse(parser);
+    list_t *stmt_list = parser->stmt_list;
+    parser_destroy(&parser);
+
 
     assert(list_length(stmt_list) == 10);
 

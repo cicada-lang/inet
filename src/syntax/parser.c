@@ -1,13 +1,6 @@
 #include "index.h"
 
-struct parser_t {
-    const char *src;
-    const char *text;
-    list_t *token_list;
-    list_t *stmt_list;
-};
-
-static parser_t *
+parser_t *
 parser_new(const char *src, const char *text) {
     parser_t *self = allocate(sizeof(parser_t));
     self->src = src;
@@ -22,7 +15,7 @@ parser_new(const char *src, const char *text) {
     return self;
 }
 
-static void
+void
 parser_destroy(parser_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -56,7 +49,7 @@ static bool token_is_rune(const token_t *token) {
         return false;
 }
 
-static void
+void
 parser_parse(parser_t *self) {
     while (!list_is_empty(self->token_list)) {
         parser_maybe_ignore_comment(self);
@@ -307,13 +300,4 @@ parser_parse_run_program_stmt(parser_t *self) {
 
     list_push(self->stmt_list,
               run_program_stmt_new(token_list));
-}
-
-list_t *
-parse(const char *src, const char *text) {
-    parser_t *parser = parser_new(src, text);
-    parser_parse(parser);
-    list_t *stmt_list = parser->stmt_list;
-    parser_destroy(&parser);
-    return stmt_list;
 }
