@@ -66,9 +66,10 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
 }
 
 define_program_stmt_t *
-define_program_stmt_new(char *name, list_t *token_list) {
+define_program_stmt_new(token_t *head_token, char *name, list_t *token_list) {
     define_program_stmt_t *self = allocate(sizeof(define_program_stmt_t));
     self->tag = DEFINE_PROGRAM_STMT;
+    self->head_token = head_token;
     self->name = name;
     self->token_list = token_list;
     return self;
@@ -79,6 +80,7 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         define_program_stmt_t *self = *self_pointer;
+        token_destroy(&self->head_token);
         free(self->name);
         list_destroy(&self->token_list);
         free(self);

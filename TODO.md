@@ -1,9 +1,6 @@
-`define_program_stmt_t` has `head_token`
-
 `interpret` -- check node defined on `DEFINE_RULE_STMT`
 
 `compile` -- report undefined port name in context
-
 
 `interpret` -- check name not defined on `DEFINE_NODE_STMT`
 `interpret` -- check name not defined on `DEFINE_PROGRAM_STMT`

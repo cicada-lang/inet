@@ -281,6 +281,7 @@ parser_parse_define_program_stmt(parser_t *self) {
 
     list_push(self->stmt_list,
               define_program_stmt_new(
+                  head_token,
                   name,
                   token_list));
 }
