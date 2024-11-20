@@ -754,8 +754,6 @@ We solve this by using stack and postfix notation to build graph.
 
 In this way, the language we used to build graph,
 becomes the lower layer language for the language of interaction nets.
-View this lower layer language as a programming language,
-it is also Turing complete.
 
 This idea can not only be used to build graph,
 and provide syntax for graph-based computation models,
