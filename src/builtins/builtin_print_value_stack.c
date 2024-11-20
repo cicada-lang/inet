@@ -3,5 +3,5 @@
 void
 builtin_print_value_stack(worker_t *worker) {
     worker_print_value_stack(worker, worker->out);
-    printf("\n");
+    fprintf(worker->out, "\n");
 }

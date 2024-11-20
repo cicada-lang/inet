@@ -1,5 +1,3 @@
-builtin print functions add newline
-
 should not inject `exit_code` -- should change makefile instead
 
 `file` -- `file_size`
