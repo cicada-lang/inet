@@ -762,11 +762,8 @@ graphs consist of nodes and edges,
 to encode natural number we need to do something like knot counting,
 in many use cases, this is obviously not practical.
 
-But fortunately, our language already has two layers,
-the upper layer is pure interaction nets,
-the lower layer is a stack-based postfix notation general programming language.
-We can make the whole language a practical programming language,
-simply by extending this lower layer language.
+We can make the language a practical programming language,
+by extending it with primitive datatypes like int and float.
 
 How to design such extension?
-Please see the report of my next project :)
+Please see the report of my next paper :)
