@@ -20,7 +20,6 @@ worker_new(mod_t *mod) {
     self->debug = false;
     self->out = stdout;
     self->err = stderr;
-    self->exit_code = 1;
 
     return self;
 }

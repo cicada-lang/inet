@@ -12,7 +12,6 @@ parser_new(void) {
         (list_item_destructor_t *) stmt_destroy);
 
     self->err = stderr;
-    self->exit_code = 1;
 
     return self;
 }
@@ -72,7 +71,7 @@ parser_parse(parser_t *self) {
             fprintf(self->err, "[parser-error] unknown starting token: %s\n", token->string);
             fprintf(self->err, "[src] %s\n", self->src);
             text_print_context(self->err, self->text, token->start, token->end);
-            exit(self->exit_code);
+            exit(1);
         }
     }
 }
@@ -110,7 +109,7 @@ check_node_name_format(parser_t *self, const token_t *token) {
         fprintf(self->err, "[parser-error] a node name must be like (<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
-        exit(self->exit_code);
+        exit(1);
     }
 }
 
@@ -171,7 +170,7 @@ check_rule_name_format(parser_t *self, const token_t *token) {
         fprintf(self->err, "[parser-error] a rule name must be like (<name>)-(<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
-        exit(self->exit_code);
+        exit(1);
     }
 }
 
@@ -231,7 +230,7 @@ check_program_name_format(parser_t *self, const token_t *token) {
         fprintf(self->err, "[parser-error] program name can not be a rune: %s\n", string);
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
-        exit(self->exit_code);
+        exit(1);
     }
 
     if (string_has_char(string, '{') ||
@@ -244,7 +243,7 @@ check_program_name_format(parser_t *self, const token_t *token) {
         fprintf(self->err, "[parser-error] invalid program name: %s\n", string);
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
-        exit(self->exit_code);
+        exit(1);
     }
 }
 

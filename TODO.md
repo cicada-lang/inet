@@ -1,5 +1,3 @@
-should not inject `exit_code` -- should change makefile instead
-
 [bug] file with only comment
 
 `file` -- `file_size`

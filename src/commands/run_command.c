@@ -69,7 +69,6 @@ run_file(const char *file_name, bool debug) {
 
         worker->out = out;
         worker->err = err;
-        worker->exit_code = 0;
     }
 
     interpret_text(worker, file_read(file));

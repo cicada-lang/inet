@@ -80,7 +80,6 @@ interpret_text(worker_t *worker, const char *text) {
     parser->src = worker->mod->src;
     parser->text = text;
     parser->err = worker->err;
-    parser->exit_code = worker->exit_code;
     parser_parse(parser);
     list_t *stmt_list = parser->stmt_list;
     parser_destroy(&parser);

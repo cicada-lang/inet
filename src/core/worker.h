@@ -10,7 +10,6 @@ struct worker_t {
     bool debug;
     file_t *out;
     file_t *err;
-    int exit_code;
 };
 
 worker_t *worker_new(mod_t *mod);
