@@ -1,5 +1,3 @@
-`file` -- `file_read` take `file_name` instead of file
-`file` -- `file_size`
 `file` -- `file_remove`
 `run_command` -- delete empty snapshot file
 

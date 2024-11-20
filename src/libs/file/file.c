@@ -46,3 +46,10 @@ file_read(file_t *file) {
         text = new_text;
     }
 }
+
+off_t
+file_size(file_t *file) {
+    struct stat st;
+    fstat(fileno(file), &st);
+    return st.st_size;
+}
