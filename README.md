@@ -286,6 +286,11 @@ make clean    # clean up compiled files
 
 ## References
 
+**Papers**:
+
+- [1990-interaction-nets](./docs/references/1990-interaction-nets.pdf)
+- [1997-interaction-combinators](./docs/references/1997-interaction-combinators.pdf)
+
 **Inspirations**:
 
 - [forth](https://en.wikipedia.org/wiki/Forth_(programming_language))
