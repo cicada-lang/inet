@@ -6,7 +6,7 @@ void
 worker_test(void) {
     printf("<worker_test>\n");
 
-    mod_t *mod = mod_new("worker_test");
+    mod_t *mod = mod_new("worker_test", "");
     mod_import_nat(mod);
 
     worker_t *worker = worker_new(mod);

@@ -1,16 +1,16 @@
 #include "index.h"
 
-static void compile_word(
+static void compile_token(
     const mod_t *mod,
     program_t *program,
-    const char *word);
+    const token_t *token);
 
 program_t *
 compile(const mod_t *mod, list_t *token_list) {
     program_t *program = program_new();
     token_t *token = list_start(token_list);
     while (token) {
-        compile_word(mod, program, token->string);
+        compile_token(mod, program, token);
         token = list_next(token_list);
     }
     program_build(program);
@@ -27,7 +27,9 @@ static char *parse_reversed_free_wire_ref_node_name(const char *word);
 static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
 void
-compile_word(const mod_t *mod, program_t *program, const char *word) {
+compile_token(const mod_t *mod, program_t *program, const token_t *token) {
+    char *word = token->string;
+
     if (is_free_wire_ref(word)) {
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);

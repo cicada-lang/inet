@@ -41,8 +41,9 @@ run(char **args) {
 void
 run_file(const char *path, bool debug) {
     file_t *file = file_open_or_fail(path, "r", "[run] can not open file");
+    const char *text = file_read(file);
 
-    mod_t *mod = mod_new(path);
+    mod_t *mod = mod_new(path, text);
     import_builtins(mod);
 
     worker_t *worker = worker_new(mod);
@@ -56,7 +57,7 @@ run_file(const char *path, bool debug) {
     if (string_ends_with(path, ".error.inet"))
         worker->err = file_open_or_fail(err_path, "w", "[run] can not open err path");
 
-    interpret_text(worker, file_read(file));
+    interpret_mod(worker);
 
     if (worker->out && file_size(worker->out) == 0) remove(out_path);
     if (worker->err && file_size(worker->err) == 0) remove(err_path);

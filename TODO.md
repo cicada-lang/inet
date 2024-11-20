@@ -1,8 +1,5 @@
-rename `worker_test` to `emit_test`
-move `emit` to `lang/`
-
-`emit` -- take token (like `compile`) instead of string
-`emit` -- report undefined error in context
+`compile` -- take `worker`
+`compile` -- report undefined name in context
 
 [maybe] quit using bash to run examples -- write more testing commands
 
