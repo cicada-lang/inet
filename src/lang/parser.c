@@ -55,8 +55,10 @@ parser_parse(parser_t *self) {
     assert(self->text);
     self->token_list = lex(self->text);
 
-    while (!list_is_empty(self->token_list)) {
+    while (true) {
         parser_maybe_ignore_comment(self);
+
+        if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_first(self->token_list);
         if (string_equal(token->string, "*"))
@@ -132,8 +134,10 @@ parser_parse_define_node_stmt(parser_t *self) {
     define_node_stmt_t *stmt = define_node_stmt_new(name);
 
     bool output_flag = false;
-    while (!list_is_empty(self->token_list)) {
+    while (true) {
         parser_maybe_ignore_comment(self);
+
+        if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {
@@ -203,8 +207,10 @@ parser_parse_define_rule_stmt(parser_t *self) {
         token_list,
         (list_item_destructor_t *) token_destroy);
 
-    while (!list_is_empty(self->token_list)) {
+    while (true) {
         parser_maybe_ignore_comment(self);
+
+        if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_shift(self->token_list);
         if (token_is_rune(token)) {

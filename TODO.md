@@ -1,5 +1,3 @@
-[bug] file with only comment
-
 merge `mod_test` to `worker_test`
 rename `worker_test` to `emit_test`
 move `emit` to `syntax`
