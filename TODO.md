@@ -1,5 +1,3 @@
-rename `syntax/` to `lang/`
-
 `parser` has `err` FILE
 
 `commands/` add a command to do snapshot testing
