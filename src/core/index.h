@@ -6,7 +6,6 @@
 #include "wire.h"
 #include "emit.h"
 #include "mod.h"
-#include "mod_test.h"
 #include "frame.h"
 #include "execute.h"
 #include "worker.h"

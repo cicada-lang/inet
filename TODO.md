@@ -1,9 +1,8 @@
-merge `mod_test` to `worker_test`
 rename `worker_test` to `emit_test`
-move `emit` to `syntax`
+move `emit` to `lang/`
 
 `emit` -- take token (like `compile`) instead of string
-`emit` -- report error in context
+`emit` -- report undefined error in context
 
 [maybe] quit using bash to run examples -- write more testing commands
 
