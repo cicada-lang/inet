@@ -1,3 +1,6 @@
+ambr commander_add_command commander_add
+ambr commander_mount commander_define
+
 `commands/` add a command to do snapshot testing
 
 - snapshot for every `.test.inet`

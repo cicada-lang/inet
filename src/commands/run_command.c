@@ -41,13 +41,13 @@ run(char **args) {
 int
 run_file(const char *file_name, bool debug) {
     if (!file_name) {
-        printf("[run] I expect a file name.\n");
+        fprintf(stderr, "[run] I expect a file name.\n");
         return 1;
     }
 
     file_t *file = fopen(file_name, "r");
     if (!file) {
-        printf("[run] I file to open file: %s\n", file_name);
+        fprintf(stderr, "[run] I file to open file: %s\n", file_name);
         return 1;
     }
 

@@ -104,7 +104,7 @@ check_node_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, '(') == 1 &&
           string_count_char(string, ')') == 1))
     {
-        fprintf(self->err, "[parser-error] a node name must be: (<name>)\n");
+        fprintf(self->err, "[parser-error] a node name must be like (<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
         exit(1);
@@ -165,7 +165,7 @@ check_rule_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, ')') == 2 &&
           string_count_substring(string, ")-(") == 1))
     {
-        fprintf(self->err, "[parser-error] a rule name must be: (<name>)-(<name>)\n");
+        fprintf(self->err, "[parser-error] a rule name must be like (<name>)-(<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->err, self->text, token->start, token->end);
         exit(1);
