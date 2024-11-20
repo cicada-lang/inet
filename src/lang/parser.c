@@ -260,7 +260,6 @@ parser_parse_define_program_stmt(parser_t *self) {
     token_t *head_token = list_shift(self->token_list);
     check_program_name_format(self, head_token);
     char *name = string_dup(head_token->string);
-    token_destroy(&head_token);
 
     list_t *token_list = list_new();
     list_set_item_destructor(

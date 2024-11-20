@@ -58,6 +58,7 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
     case DEFINE_PROGRAM_STMT: {
         define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
+        check_name_not_defined(worker, stmt->name, stmt->head_token);
         program_t *program = compile(worker, stmt->token_list);
         program_spec_t *spec = program_spec_new(stmt->name, program);
         mod_define(worker->mod, (spec_t *) spec);
