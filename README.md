@@ -67,7 +67,7 @@ Define nodes:
 * (add) target! addend -- result
 ```
 
-Interaction rule between `(zero)` and `(add)`:
+The rule between `(zero)` and `(add)` as ASCII art:
 
 ```
      value           value
@@ -77,12 +77,14 @@ Interaction rule between `(zero)` and `(add)`:
 (zero)   addend        addend
 ```
 
+Define the rule between `(zero)` and `(add)`:
+
 ```
 ! (zero)-(add)
   (add)-addend result-(add)
 ```
 
-Interaction rule between `(add1)` and `(add)`:
+The rule between `(add1)` and `(add)` as ASCII art:
 
 ```
      value           value
@@ -94,13 +96,15 @@ Interaction rule between `(add1)` and `(add)`:
 prev              prev   addend
 ```
 
+Define the rule between `(add1)` and `(add)`:
+
 ```
 ! (add1)-(add)
   (add)-addend (add1)-prev add
   add1 result-(add)
 ```
 
-Test:
+Example interaction:
 
 ```
        |                  |                 |            |
@@ -116,6 +120,8 @@ Test:
                                                 |
                                               (zero)
 ```
+
+Test the interaction by running program:
 
 ```
 . zero add1 add1
