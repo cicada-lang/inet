@@ -4,7 +4,7 @@ void
 mod_test(void) {
     printf("<mod_test>\n");
 
-    mod_t *mod = mod_new();
+    mod_t *mod = mod_new("mod_test");
     mod_import_nat(mod);
 
     mod_destroy(&mod);

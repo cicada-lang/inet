@@ -47,7 +47,7 @@ run_file(const char *file_name, bool debug) {
 
     char *text = file_read(file);
 
-    mod_t *mod = mod_new();
+    mod_t *mod = mod_new(file_name);
     import_builtins(mod);
 
     worker_t *worker = worker_new(mod);

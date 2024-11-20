@@ -1,8 +1,10 @@
 #include "index.h"
 
 mod_t *
-mod_new(void) {
+mod_new(const char *src) {
     mod_t *self = allocate(sizeof(mod_t));
+
+    self->src = src;
 
     self->spec_list = list_new();
     list_set_item_destructor(
