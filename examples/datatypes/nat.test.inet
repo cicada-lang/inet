@@ -19,6 +19,7 @@
 . two two add
   two two add
   add
+
   @wire/print-net
   @interact
   @wire/print-net
@@ -55,6 +56,7 @@
   ( second product ) add result-(mul)
 
 . two two mul
+
   @wire/print-net
   @interact
   @wire/print-net
@@ -80,6 +82,7 @@
   add1 result-(max-aux)
 
 . one two max
+
   @wire/print-net
   @interact
   @wire/print-net

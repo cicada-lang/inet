@@ -116,6 +116,7 @@ Test the interaction by running program:
 . zero add1 add1
   zero add1 add1
   add
+
   @wire/print-net
   @interact
   @wire/print-net
@@ -175,6 +176,7 @@ Test the interaction by running program:
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
   append
+
   @wire/print-net
   @interact
   @wire/print-net
