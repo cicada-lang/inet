@@ -42,7 +42,7 @@ commander_add(const commander_t *self, command_t *command) {
 }
 
 void
-commander_define(const commander_t *self, command_plugin_t *plugin) {
+commander_use(const commander_t *self, command_plugin_t *plugin) {
     (*plugin)(self);
 }
 
