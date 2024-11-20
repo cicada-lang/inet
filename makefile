@@ -4,7 +4,6 @@ cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O0 -std=c99 -pedantic
 
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
-examples = $(shell find examples -name '*.inet')
 lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
 bin = bin/inet
 
@@ -24,7 +23,7 @@ self-test: bin/inet
 
 .PHONY: self-test
 run-examples: bin/inet
-	./bin/inet run $(examples)
+	bash scripts/run-examples.sh
 
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
