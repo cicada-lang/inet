@@ -1,5 +1,3 @@
-ambr check_name_defined_to_node_spec check_node_name_defined
-
 # example
 
 `examples/combinators.inet` -- interaction combinators

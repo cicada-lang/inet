@@ -46,8 +46,8 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
     case DEFINE_RULE_STMT: {
         define_rule_stmt_t *stmt = (define_rule_stmt_t *)unknown_stmt;
         program_t *program = compile(worker, stmt->token_list);
-        check_name_defined_to_node_spec(worker, stmt->first_name, stmt->head_token);
-        check_name_defined_to_node_spec(worker, stmt->second_name, stmt->head_token);
+        check_node_name_defined(worker, stmt->first_name, stmt->head_token);
+        check_node_name_defined(worker, stmt->second_name, stmt->head_token);
         mod_define_rule(
             worker->mod,
             stmt->first_name,

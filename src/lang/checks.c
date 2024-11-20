@@ -36,7 +36,7 @@ check_name_defined(
 }
 
 void
-check_name_defined_to_node_spec(
+check_node_name_defined(
     const worker_t *worker,
     const char *name,
     const token_t *token
@@ -65,7 +65,7 @@ check_port_name_defined(
     const char *port_name,
     const token_t *token
 ) {
-    check_name_defined_to_node_spec(worker, node_name, token);
+    check_node_name_defined(worker, node_name, token);
     mod_t *mod = worker->mod;
     const spec_t *found = mod_find_spec(mod, node_name);
     const node_spec_t *spec = (node_spec_t *) found;
