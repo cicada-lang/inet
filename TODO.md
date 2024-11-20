@@ -1,11 +1,11 @@
-`commands/` add a command to do snapshot testing
+`interpret_text` take `src` from `worker->mod`
+`mod` has `src` and `mod_new` take `src`
+`run_command` -- snapshot for every `.test.inet`
 
-- snapshot for every `.test.inet`
+- `.test.inet.out`
+- `.test.inet.err`
 
-  - `.test.inet.out`
-  - `.test.inet.err`
-
-- need to change example names
+change example file names
 
 `worker` has `out` and `err` FILE
 
@@ -20,8 +20,6 @@ move `emit` to `syntax`
 
 `emit` -- take token (like `compile`) instead of string
 `emit` -- report error in context
-
-`mod` has `src` -- error report with `src`
 
 # docs
 

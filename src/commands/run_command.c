@@ -10,7 +10,7 @@ run_command(const commander_t *runner) {
     commander_add(runner, command);
 }
 
-static int run_file(const char *file_name, bool debug);
+static void run_file(const char *file_name, bool debug);
 
 int
 run(char **args) {
@@ -30,25 +30,19 @@ run(char **args) {
         char *file_name = *file_names;
         file_names++;
         if (!string_starts_with(file_name, "--")) {
-            int status = run_file(file_name, debug);
-            if (status != 0) return status;
+            run_file(file_name, debug);
         }
     }
 
     return 0;
 }
 
-int
+void
 run_file(const char *file_name, bool debug) {
-    if (!file_name) {
-        fprintf(stderr, "[run] I expect a file name.\n");
-        return 1;
-    }
-
     file_t *file = fopen(file_name, "r");
     if (!file) {
-        fprintf(stderr, "[run] I file to open file: %s\n", file_name);
-        return 1;
+        fprintf(stderr, "[run] can not open file: %s\n", file_name);
+        exit(1);
     }
 
     char *text = file_read(file);
@@ -58,11 +52,11 @@ run_file(const char *file_name, bool debug) {
 
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
+
     interpret_text(worker, file_name, text);
 
     worker_destroy(&worker);
     mod_destroy(&mod);
 
     fclose(file);
-    return 0;
 }
