@@ -1,4 +1,4 @@
-`parser` has `err` FILE
+`text_print_context` take file as `input`
 
 `commands/` add a command to do snapshot testing
 

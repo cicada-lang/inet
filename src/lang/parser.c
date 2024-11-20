@@ -3,6 +3,7 @@
 parser_t *
 parser_new(void) {
     parser_t *self = allocate(sizeof(parser_t));
+    self->err = stderr;
     self->token_list = NULL;
 
     self->stmt_list = list_new();
@@ -65,8 +66,8 @@ parser_parse(parser_t *self) {
         else if (string_equal(token->string, "."))
             parser_parse_run_program_stmt(self);
         else {
-            printf("[parser-error] unknown starting token: %s\n", token->string);
-            printf("[src] %s\n", self->src);
+            fprintf(self->err, "[parser-error] unknown starting token: %s\n", token->string);
+            fprintf(self->err, "[src] %s\n", self->src);
             text_print_context(self->text, token->start, token->end);
             exit(1);
         }
@@ -103,8 +104,8 @@ check_node_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, '(') == 1 &&
           string_count_char(string, ')') == 1))
     {
-        printf("[parser-error] a node name must be: (<name>)\n");
-        printf("[src] %s\n", self->src);
+        fprintf(self->err, "[parser-error] a node name must be: (<name>)\n");
+        fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->text, token->start, token->end);
         exit(1);
     }
@@ -164,8 +165,8 @@ check_rule_name_format(parser_t *self, const token_t *token) {
           string_count_char(string, ')') == 2 &&
           string_count_substring(string, ")-(") == 1))
     {
-        printf("[parser-error] a rule name must be: (<name>)-(<name>)\n");
-        printf("[src] %s\n", self->src);
+        fprintf(self->err, "[parser-error] a rule name must be: (<name>)-(<name>)\n");
+        fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->text, token->start, token->end);
         exit(1);
     }
@@ -224,8 +225,8 @@ check_program_name_format(parser_t *self, const token_t *token) {
     char *string = token->string;
 
     if (token_is_rune(token)) {
-        printf("[parser-error] program name can not be a rune: %s\n", string);
-        printf("[src] %s\n", self->src);
+        fprintf(self->err, "[parser-error] program name can not be a rune: %s\n", string);
+        fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->text, token->start, token->end);
         exit(1);
     }
@@ -237,8 +238,8 @@ check_program_name_format(parser_t *self, const token_t *token) {
         string_has_char(string, '(') ||
         string_has_char(string, ')'))
     {
-        printf("[parser-error] invalid program name: %s\n", string);
-        printf("[src] %s\n", self->src);
+        fprintf(self->err, "[parser-error] invalid program name: %s\n", string);
+        fprintf(self->err, "[src] %s\n", self->src);
         text_print_context(self->text, token->start, token->end);
         exit(1);
     }

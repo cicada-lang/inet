@@ -3,6 +3,7 @@
 struct parser_t {
     const char *src;
     const char *text;
+    FILE *err;
     list_t *token_list;
     list_t *stmt_list;
 };
