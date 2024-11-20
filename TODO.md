@@ -29,6 +29,10 @@ keep a single thread debug mode, which record all the allocated nodes.
 
 `value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
+- use explicit `@dup` -- keep linear variable like `(<node>)-<port>` simple
+  - is it possible to have a generic `@dup` that can dup any net with a root wire?
+- use `{ ... }` for un-named program -- just program, no closure over linear variables
+
 how to find rule?
 
 - [maybe] by type -- `(node)-[primitive-value: type]`
