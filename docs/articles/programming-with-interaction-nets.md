@@ -211,7 +211,7 @@ connected through two principal ports.
 
 We design the statement to define node as follows:
 
-- The statement starts with `node`,
+- The statement starts with `*`,
   follows the name of the node.
 - Use a dividing line to distinguish the input ports from the output ports.
   - Above the dividing line are the input ports.
@@ -219,8 +219,7 @@ We design the statement to define node as follows:
   - The dividing can be as long as wish, at least two characters `--`.
 - For principal port, add `!` as suffix.
 
-Suppose the type representing natural number is `Nat`,
-the aforementioned nodes are defined as follows:
+The aforementioned nodes are defined as follows:
 
 ```
 * (zero) -- value!
