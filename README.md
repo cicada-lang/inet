@@ -59,27 +59,67 @@ For more examples, please see the [examples/](examples/) directory.
 
 ### Natural Number
 
+Define nodes:
+
 ```
 * (zero) -- value!
 * (add1) prev -- value!
 * (add) target! addend -- result
+```
 
+Interaction rule between `(zero)` and `(add)`:
+
+```
+     value           value
+       |               |
+     (add)     =>      |
+     /   \              \
+(zero)   addend        addend
+```
+
+```
 ! (zero)-(add)
   (add)-addend result-(add)
+```
 
+Interaction rule between `(add1)` and `(add)`:
+
+```
+     value           value
+       |               |
+     (add)     =>    (add1)
+     /   \             |
+(add1)   addend      (add)
+  |                  /   \
+prev              prev   addend
+```
+
+```
 ! (add1)-(add)
   (add)-addend (add1)-prev add
   add1 result-(add)
+```
 
-( test )
+Test:
 
-= one zero add1
-= two one one add
-= three two one add
-= four two two add
+```
+       |                  |                 |            |
+     (add)              (add1)            (add1)       (add1)
+     /   \                |                 |            |
+(add1)   (add1)         (add)             (add1)       (add1)
+  |        |    =>      /   \      =>       |       =>   |
+(add1)   (add1)    (add1)   (add1)        (add)        (add1)
+  |        |         |        |           /   \          |
+(zero)   (zero)    (zero)   (add1)   (zero)   (add1)   (add1)
+                              |                 |        |
+                            (zero)            (add1)   (zero)
+                                                |
+                                              (zero)
+```
 
-. two two add
-  two two add
+```
+. zero add1 add1
+  zero add1 add1
   add
   @wire/print-net
   @interact
@@ -92,47 +132,27 @@ For more examples, please see the [examples/](examples/) directory.
 ```xml
 <net>
 <root>
-(add₂₃)-result-<>-
+(add₇)-result-<>-
 </root>
 <body>
-(add₁₁)-result-<>-addend-(add₂₃)
-(add₂₂)-result-<>-!target-(add₂₃)
-(add₁₆)-result-<>-addend-(add₂₂)
-(add₂₁)-result-<>-!target-(add₂₂)
-(add1₁₈)-value!-<>-addend-(add₂₁)
-(add1₂₀)-value!-<>-!target-(add₂₁)
-(zero₁₉)-value!-<>-prev-(add1₂₀)
-(zero₁₇)-value!-<>-prev-(add1₁₈)
-(add1₁₃)-value!-<>-addend-(add₁₆)
-(add1₁₅)-value!-<>-!target-(add₁₆)
-(zero₁₄)-value!-<>-prev-(add1₁₅)
-(zero₁₂)-value!-<>-prev-(add1₁₃)
-(add₅)-result-<>-addend-(add₁₁)
-(add₁₀)-result-<>-!target-(add₁₁)
-(add1₇)-value!-<>-addend-(add₁₀)
-(add1₉)-value!-<>-!target-(add₁₀)
-(zero₈)-value!-<>-prev-(add1₉)
-(zero₆)-value!-<>-prev-(add1₇)
-(add1₂)-value!-<>-addend-(add₅)
-(add1₄)-value!-<>-!target-(add₅)
-(zero₃)-value!-<>-prev-(add1₄)
+(add1₃)-value!-<>-!target-(add₇)
+(add1₆)-value!-<>-addend-(add₇)
+(add1₅)-value!-<>-prev-(add1₆)
+(zero₄)-value!-<>-prev-(add1₅)
+(add1₂)-value!-<>-prev-(add1₃)
 (zero₁)-value!-<>-prev-(add1₂)
 </body>
 </net>
 
 <net>
 <root>
-(add1₂₉)-value!-<>-
+(add1₉)-value!-<>-
 </root>
 <body>
-(add1₃₃)-value!-<>-prev-(add1₂₉)
-(add1₃₇)-value!-<>-prev-(add1₃₃)
-(add1₃₉)-value!-<>-prev-(add1₃₇)
-(add1₄₃)-value!-<>-prev-(add1₃₉)
-(add1₄₅)-value!-<>-prev-(add1₄₃)
-(add1₄₇)-value!-<>-prev-(add1₄₅)
-(add1₂)-value!-<>-prev-(add1₄₇)
-(zero₁)-value!-<>-prev-(add1₂)
+(add1₁₁)-value!-<>-prev-(add1₉)
+(add1₁₃)-value!-<>-prev-(add1₁₁)
+(add1₁₅)-value!-<>-prev-(add1₁₃)
+(zero₄)-value!-<>-prev-(add1₁₅)
 </body>
 </net>
 ```
