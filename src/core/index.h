@@ -4,8 +4,6 @@
 #include "types.h"
 #include "node.h"
 #include "wire.h"
-#include "emit.h"
-#include "emit_test.h"
 #include "mod.h"
 #include "frame.h"
 #include "execute.h"

@@ -8,5 +8,7 @@
 #include "stmt.h"
 #include "parser.h"
 #include "parser_test.h"
+#include "emit.h"
+#include "emit_test.h"
 #include "compile.h"
 #include "interpret.h"
