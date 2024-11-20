@@ -75,6 +75,7 @@ check_port_name_defined(
     }
 
     fprintf(worker->err, "[compiler-error] undefined port name: %s\n", port_name);
+    fprintf(worker->err, "[compiler-error] for node name: %s\n", node_name);
     fprintf(worker->err, "[src] %s\n", mod->src);
     text_print_context(worker->err, mod->text, token->start, token->end);
     exit(1);
