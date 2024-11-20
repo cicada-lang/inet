@@ -16,7 +16,7 @@ and viewing interaction between connected nodes as computation.
 In this paper, I will follow Lafont's examples
 to introduce the principal of interaction nets.
 And I will also introduce a language I designed
-to write program in this computation model.
+to program this computation model.
 
 # 2
 
@@ -136,7 +136,7 @@ will become 4 through the following interaction:
 # 4
 
 Let's design a programming language
-to practice this computation model.
+to program this computation model.
 
 In our language each node has fixed number of ports.
 
