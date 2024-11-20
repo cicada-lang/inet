@@ -1,4 +1,3 @@
-`interpret_text` set `parser->err` to `worker->err`
 `run_command` -- snapshot for every `.test.inet`
 
 - `.test.inet.out`
