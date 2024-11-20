@@ -766,4 +766,4 @@ We can make the language a practical programming language,
 by extending it with primitive datatypes like int and float.
 
 How to design such extension?
-Please see the report of my next paper :)
+Please wait for my next report :)
