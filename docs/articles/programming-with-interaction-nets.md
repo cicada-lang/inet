@@ -16,7 +16,7 @@ and viewing interaction between connected nodes as computation.
 In this paper, I will follow Lafont's examples
 to introduce the principal of interaction nets.
 And I will also introduce a language I designed
-to practice this computation model.
+to write program in this computation model.
 
 # 2
 
