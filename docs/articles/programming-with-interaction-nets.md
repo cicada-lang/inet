@@ -186,9 +186,9 @@ Take the graph representing 2 as an example:
 The detailed connections are the following:
 
 ```
-(zero)-value prev-(add1)
-(add1)-value prev-(add1)
-(add1)-value // not yet connected free port
+(zero)-value-<>-prev-(add1)
+(add1)-value-<>-prev-(add1)
+(add1)-value-<>- ( not yet connected free port )
 ```
 
 Each node has one and only one principal port,
