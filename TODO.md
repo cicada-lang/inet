@@ -1,13 +1,10 @@
-[bug] file with only comment
+`run_command` -- `.error.inet` v.s. `.test.inet` -- no need to ignore exit code in bash
 
 `file` -- `file_size`
 `file` -- `file_remove`
 `run_command` -- delete empty snapshot file
 
-`node_new` take `id` as argument
-`worker` has `node_id_count` -- test snapshot testing itself
-
-- `inet run` -- clear node id counter for each file
+[bug] file with only comment
 
 merge `mod_test` to `worker_test`
 rename `worker_test` to `emit_test`

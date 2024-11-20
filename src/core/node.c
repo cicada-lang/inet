@@ -1,22 +1,12 @@
 #include "index.h"
 
-static node_id_t node_gen_id(void);
-
 node_t *
-node_new(const node_spec_t *spec) {
+node_new(const node_spec_t *spec, node_id_t id) {
     node_t *self = allocate(sizeof(node_t));
     self->spec = spec;
-    self->id = node_gen_id();
+    self->id = id;
     self->wires = allocate_pointers(spec->arity);
     return self;
-}
-
-// TODO The following function is not thread safe.
-node_id_t
-node_gen_id(void) {
-    static node_id_t id = 0;
-    id++;
-    return id;
 }
 
 void

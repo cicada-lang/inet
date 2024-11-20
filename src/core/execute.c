@@ -20,8 +20,8 @@ execute(worker_t *worker, frame_t *frame, op_t *unknown_op) {
     }
 
     case CALL_NODE_OP: {
-        call_node_op_t *op = (call_node_op_t *) unknown_op;
-        node_t *node = node_new(op->node_spec);
+        call_node_op_t *op = (call_node_op_t *) unknown_op;        
+        node_t *node = node_new(op->node_spec, ++worker->node_id_count);
         node_apply_input_ports(worker, node);
         node_return_output_ports(worker, node);
         return;
