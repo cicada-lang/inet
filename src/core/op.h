@@ -41,4 +41,4 @@ void use_free_wire_op_destroy(use_free_wire_op_t **self_pointer);
 
 void op_destroy(op_t **self_pointer);
 
-void op_print(const op_t *self);
+void op_print(const op_t *self, file_t *file);

@@ -20,4 +20,4 @@ const rule_t *mod_find_rule(
 void mod_define(mod_t *self, spec_t *spec);
 void mod_define_rule(mod_t *self, const char *first_name, const char *second_name, program_t *program);
 
-void mod_print(const mod_t *self);
+void mod_print(const mod_t *self, file_t *file);

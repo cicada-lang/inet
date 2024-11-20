@@ -66,16 +66,16 @@ worker_interact_once(worker_t *self) {
 void
 worker_run_until(worker_t *self, size_t base_length) {
     if (self->debug) {
-        worker_print(self);
-        printf("\n");
+        worker_print(self, self->out);
+        fprintf(self->out, "\n");
     }
 
     while (stack_length(self->return_stack) > base_length) {
         worker_step(self);
 
         if (self->debug) {
-            worker_print(self);
-            printf("\n");
+            worker_print(self, self->out);
+            fprintf(self->out, "\n");
         }
     }
 }
@@ -96,50 +96,50 @@ worker_step(worker_t *self) {
 }
 
 void
-worker_print(const worker_t *self) {
-    printf("<worker>\n");
+worker_print(const worker_t *self, file_t *file) {
+    fprintf(file, "<worker>\n");
 
-    mod_print(self->mod);
+    mod_print(self->mod, file);
 
     size_t active_wire_list_length = list_length(self->active_wire_list);
-    printf("<active-wire-list length=\"%lu\">\n", active_wire_list_length);
+    fprintf(file, "<active-wire-list length=\"%lu\">\n", active_wire_list_length);
     wire_t *active_wire = list_start(self->active_wire_list);
     while (active_wire) {
-        wire_print(active_wire);
-        printf("\n");
+        wire_print(active_wire, file);
+        fprintf(file, "\n");
         active_wire = list_next(self->active_wire_list);
     }
-    printf("</active-wire-list>\n");
+    fprintf(file, "</active-wire-list>\n");
 
-    worker_print_return_stack(self);
-    worker_print_value_stack(self);
+    worker_print_return_stack(self, file);
+    worker_print_value_stack(self, file);
 
-    printf("</worker>\n");
+    fprintf(file, "</worker>\n");
 }
 
 void
-worker_print_return_stack(const worker_t *self) {
+worker_print_return_stack(const worker_t *self, file_t *file) {
     size_t return_stack_length = stack_length(self->return_stack);
-    printf("<return-stack length=\"%lu\">\n", return_stack_length);
+    fprintf(file, "<return-stack length=\"%lu\">\n", return_stack_length);
     for (size_t i = 0; i < return_stack_length; i++) {
         frame_t *frame = stack_get(self->return_stack, i);
-        frame_print(frame);
+        frame_print(frame, file);
     }
 
-    printf("</return-stack>\n");
+    fprintf(file, "</return-stack>\n");
 }
 
 void
-worker_print_value_stack(const worker_t *self) {
+worker_print_value_stack(const worker_t *self, file_t *file) {
     size_t value_stack_length = stack_length(self->value_stack);
-    printf("<value-stack length=\"%lu\">\n", value_stack_length);
+    fprintf(file, "<value-stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
         wire_t *wire = stack_get(self->value_stack, i);
-        wire_print(wire);
-        printf("\n");
+        wire_print(wire, file);
+        fprintf(file, "\n");
     }
 
-    printf("</value-stack>\n");
+    fprintf(file, "</value-stack>\n");
 }
 
 void

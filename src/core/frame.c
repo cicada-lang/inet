@@ -136,35 +136,35 @@ frame_fetch_op(frame_t *self) {
 }
 
 static void
-free_wire_group_print(const free_wire_group_t *free_wire_group) {
+free_wire_group_print(const free_wire_group_t *free_wire_group, file_t *file) {
     for (port_index_t i = 0; i < free_wire_group->node_spec->arity; i++) {
         wire_t *free_wire = free_wire_group->wires[i];
         if (!free_wire) continue;
 
-        printf("(%s)-%s => ",
-               free_wire_group->node_spec->name,
-               free_wire_group->node_spec->port_specs[i]->name);
-        wire_print_reverse(free_wire);
-        printf("\n");
+        fprintf(file, "(%s)-%s => ",
+                free_wire_group->node_spec->name,
+                free_wire_group->node_spec->port_specs[i]->name);
+        wire_print_reverse(free_wire, file);
+        fprintf(file, "\n");
     }
 }
 
 void
-frame_print(const frame_t *self) {
-    printf("<frame>\n");
+frame_print(const frame_t *self, file_t *file) {
+    fprintf(file, "<frame>\n");
 
-    printf("<program>\n");
-    printf(". ");
-    program_print_with_program_counter(self->program, self->program_counter);
-    printf("\n");
-    printf("</program>\n");
+    fprintf(file, "<program>\n");
+    fprintf(file, ". ");
+    program_print_with_program_counter(self->program, file, self->program_counter);
+    fprintf(file, "\n");
+    fprintf(file, "</program>\n");
 
-    printf("<local-free-wires>\n");
+    fprintf(file, "<local-free-wires>\n");
     if (self->first_free_wire_group)
-        free_wire_group_print(self->first_free_wire_group);
+        free_wire_group_print(self->first_free_wire_group, file);
     if (self->second_free_wire_group)
-        free_wire_group_print(self->second_free_wire_group);
-    printf("</local-free-wires>\n");
+        free_wire_group_print(self->second_free_wire_group, file);
+    fprintf(file, "</local-free-wires>\n");
 
-    printf("</frame>\n");
+    fprintf(file, "</frame>\n");
 }

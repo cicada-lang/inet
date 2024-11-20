@@ -71,77 +71,77 @@ wire_connect(wire_t *first_wire, wire_t *second_wire) {
 }
 
 void
-wire_print_left(const wire_t *self) {
+wire_print_left(const wire_t *self, file_t *file) {
     if (!self->node) {
-        printf("-<");
+        fprintf(file, "-<");
         return;
     }
 
     char *node_id_string = uint_to_subscript(self->node->id);
 
     if (wire_is_principal(self)) {
-        printf("(%s%s)-%s!-<",
-               wire_node_name(self),
-               node_id_string,
-               wire_name(self));
+        fprintf(file, "(%s%s)-%s!-<",
+                wire_node_name(self),
+                node_id_string,
+                wire_name(self));
     } else {
-        printf("(%s%s)-%s-<",
-               wire_node_name(self),
-               node_id_string,
-               wire_name(self));
+        fprintf(file, "(%s%s)-%s-<",
+                wire_node_name(self),
+                node_id_string,
+                wire_name(self));
     }
 
     free(node_id_string);
 }
 
 void
-wire_print_right(const wire_t *self) {
+wire_print_right(const wire_t *self, file_t *file) {
     if (!self->node) {
-        printf(">-");
+        fprintf(file, ">-");
         return;
     }
 
     char *node_id_string = uint_to_subscript(self->node->id);
 
     if (wire_is_principal(self)) {
-        printf(">-!%s-(%s%s)",
-               wire_name(self),
-               wire_node_name(self),
-               node_id_string);
+        fprintf(file, ">-!%s-(%s%s)",
+                wire_name(self),
+                wire_node_name(self),
+                node_id_string);
     } else {
-        printf(">-%s-(%s%s)",
-               wire_name(self),
-               wire_node_name(self),
-               node_id_string);
+        fprintf(file, ">-%s-(%s%s)",
+                wire_name(self),
+                wire_node_name(self),
+                node_id_string);
     }
 
     free(node_id_string);
 }
 
 void
-wire_print(const wire_t *self) {
+wire_print(const wire_t *self, file_t *file) {
     if (self->opposite_wire)
-        wire_print_left(self->opposite_wire);
-    wire_print_right(self);
+        wire_print_left(self->opposite_wire, file);
+    wire_print_right(self, file);
 }
 
 void
-wire_print_reverse(const wire_t *self) {
-    wire_print_left(self);
+wire_print_reverse(const wire_t *self, file_t *file) {
+    wire_print_left(self, file);
     if (self->opposite_wire)
-        wire_print_right(self->opposite_wire);
+        wire_print_right(self->opposite_wire, file);
 }
 
 void
-wire_print_net(wire_t *self) {
-    printf("<net>\n");
+wire_print_net(wire_t *self, file_t *file) {
+    fprintf(file, "<net>\n");
 
-    printf("<root>\n");
-    wire_print(self);
-    printf("\n");
-    printf("</root>\n");
+    fprintf(file, "<root>\n");
+    wire_print(self, file);
+    fprintf(file, "\n");
+    fprintf(file, "</root>\n");
 
-    printf("<body>\n");
+    fprintf(file, "<body>\n");
     list_t *occurred_wire_list = list_new();
     list_t *occurred_node_list = list_new();
     list_t *remaining_node_list = list_new();
@@ -164,16 +164,16 @@ wire_print_net(wire_t *self) {
                 if (list_has(occurred_wire_list, wire)) continue;
                 if (list_has(occurred_wire_list, wire->opposite_wire)) continue;
 
-                wire_print(wire);
-                printf("\n");
+                wire_print(wire, file);
+                fprintf(file, "\n");
 
                 list_push(occurred_wire_list, wire);
                 list_push(occurred_wire_list, wire->opposite_wire);
             } else {
                 if (list_has(occurred_wire_list, wire)) continue;
 
-                wire_print(wire);
-                printf("\n");
+                wire_print(wire, file);
+                fprintf(file, "\n");
 
                 list_push(occurred_wire_list, wire);
             }
@@ -191,8 +191,6 @@ wire_print_net(wire_t *self) {
     list_destroy(&occurred_node_list);
     list_destroy(&remaining_node_list);
 
-    printf("</body>\n");
-
-    printf("</net>\n");
-
+    fprintf(file, "</body>\n");
+    fprintf(file, "</net>\n");
 }

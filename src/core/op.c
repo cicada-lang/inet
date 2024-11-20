@@ -125,36 +125,36 @@ op_destroy(op_t **self_pointer) {
 }
 
 void
-op_print(const op_t *unknown_op) {
+op_print(const op_t *unknown_op, file_t *file) {
     switch (unknown_op->tag) {
     case CALL_BUILTIN_OP: {
         call_builtin_op_t *op = (call_builtin_op_t *) unknown_op;
-        printf("%s", op->builtin_spec->name);
+        fprintf(file, "%s", op->builtin_spec->name);
         return;
     }
 
     case CALL_PROGRAM_OP: {
         call_program_op_t *op = (call_program_op_t *) unknown_op;
-        printf("%s", op->program_spec->name);
+        fprintf(file, "%s", op->program_spec->name);
         return;
     }
 
     case CALL_NODE_OP: {
         call_node_op_t *op = (call_node_op_t *) unknown_op;
-        printf("%s", op->node_spec->name);
+        fprintf(file, "%s", op->node_spec->name);
         return;
     }
 
     case CONNECT_OP: {
-        printf("@wire/connec");
+        fprintf(file, "@wire/connec");
         return;
     }
 
     case GET_FREE_WIRE_OP: {
         use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
-        printf("(%s)", op->node_spec->name);
+        fprintf(file, "(%s)", op->node_spec->name);
         port_spec_t *port_spec = op->node_spec->port_specs[op->index];
-        printf("-%s", port_spec->name);
+        fprintf(file, "-%s", port_spec->name);
         return;
     }
     }

@@ -47,29 +47,29 @@ spec_name(spec_t *unknown_spec) {
 }
 
 void
-spec_print(const spec_t *unknown_spec) {
+spec_print(const spec_t *unknown_spec, file_t *file) {
     switch (unknown_spec->tag) {
     case NODE_SPEC: {
         node_spec_t *spec = (node_spec_t *) unknown_spec;
-        printf("* (%s) ", spec->name);
+        fprintf(file, "* (%s) ", spec->name);
         for (port_index_t i = 0; i < spec->input_arity; i++) {
             port_spec_t *port_spec = spec->port_specs[i];
             if (port_spec->is_principal) {
-                printf("%s! ", port_spec->name);
+                fprintf(file, "%s! ", port_spec->name);
             } else {
-                printf("%s ", port_spec->name);
+                fprintf(file, "%s ", port_spec->name);
             }
         }
 
-        printf("-- ");
+        fprintf(file, "-- ");
 
         for (port_index_t c = 0; c < spec->output_arity; c++) {
             port_index_t i = spec->input_arity + c;
             port_spec_t *port_spec = spec->port_specs[i];
             if (port_spec->is_principal) {
-                printf("%s! ", port_spec->name);
+                fprintf(file, "%s! ", port_spec->name);
             } else {
-                printf("%s ", port_spec->name);
+                fprintf(file, "%s ", port_spec->name);
             }
         }
 
@@ -78,14 +78,14 @@ spec_print(const spec_t *unknown_spec) {
 
     case PROGRAM_SPEC: {
         program_spec_t *spec = (program_spec_t *) unknown_spec;
-        printf("= %s ", spec->name);
-        program_print(spec->program);
+        fprintf(file, "= %s ", spec->name);
+        program_print(spec->program, file);
         return;
     }
 
     case BUILTIN_SPEC: {
         builtin_spec_t *spec = (builtin_spec_t *) unknown_spec;
-        printf("%s", spec->name);
+        fprintf(file, "%s", spec->name);
         return;
     }
     }

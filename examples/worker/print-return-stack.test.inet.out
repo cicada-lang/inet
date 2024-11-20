@@ -1,0 +1,20 @@
+<return-stack length="1">
+<frame>
+<program>
+. @print-return-stack <<< @print-return-stack @print-return-stack 
+</program>
+<local-free-wires>
+</local-free-wires>
+</frame>
+</return-stack>
+<return-stack length="1">
+<frame>
+<program>
+. @print-return-stack @print-return-stack <<< @print-return-stack 
+</program>
+<local-free-wires>
+</local-free-wires>
+</frame>
+</return-stack>
+<return-stack length="0">
+</return-stack>

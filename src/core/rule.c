@@ -37,9 +37,9 @@ rule_match_wire_pair(
 }
 
 void
-rule_print(const rule_t *self) {
-    printf("! (%s)-(%s) ",
-           self->first_node_spec->name,
-           self->second_node_spec->name);
-    program_print(self->program);
+rule_print(const rule_t *self, file_t *file) {
+    fprintf(file, "! (%s)-(%s) ",
+            self->first_node_spec->name,
+            self->second_node_spec->name);
+    program_print(self->program, file);
 }

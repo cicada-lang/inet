@@ -60,23 +60,23 @@ program_get_op(const program_t *self, size_t index) {
 }
 
 void
-program_print(const program_t *self) {
+program_print(const program_t *self, file_t *file) {
     for (size_t i = 0; i < self->length; i++) {
-        op_print(self->ops[i]);
-        printf(" ");
+        op_print(self->ops[i], file);
+        fprintf(file, " ");
     }
 }
 
 void
-program_print_with_program_counter(const program_t *self, size_t program_counter) {
+program_print_with_program_counter(const program_t *self, file_t *file, size_t program_counter) {
     for (size_t i = 0; i < self->length; i++) {
         if (i == program_counter) {
-            printf("<<< ");
-            op_print(self->ops[i]);
-            printf(" ");
+            fprintf(file, "<<< ");
+            op_print(self->ops[i], file);
+            fprintf(file, " ");
         } else {
-            op_print(self->ops[i]);
-            printf(" ");
+            op_print(self->ops[i], file);
+            fprintf(file, " ");
         }
     }
 }

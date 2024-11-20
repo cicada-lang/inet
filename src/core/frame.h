@@ -8,4 +8,4 @@ wire_t *frame_use_free_wire(frame_t *self, const node_spec_t *node_spec, port_in
 
 bool frame_is_finished(const frame_t *self);
 op_t *frame_fetch_op(frame_t *self);
-void frame_print(const frame_t *self);
+void frame_print(const frame_t *self, file_t *file);

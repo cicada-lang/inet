@@ -79,24 +79,24 @@ mod_define_rule(
 }
 
 void
-mod_print(const mod_t *self) {
-    printf("<mod spec-count=\"%lu\" rule-count=\"%lu\">\n",
-           list_length(self->spec_list),
-           list_length(self->rule_list));
+mod_print(const mod_t *self, file_t *file) {
+    fprintf(file, "<mod spec-count=\"%lu\" rule-count=\"%lu\">\n",
+            list_length(self->spec_list),
+            list_length(self->rule_list));
 
     spec_t *spec = list_start(self->spec_list);
     while (spec) {
-        spec_print(spec);
-        printf("\n");
+        spec_print(spec, file);
+        fprintf(file, "\n");
         spec = list_next(self->spec_list);
     }
 
     rule_t *rule = list_start(self->rule_list);
     while (rule) {
-        rule_print(rule);
-        printf("\n");
+        rule_print(rule, file);
+        fprintf(file, "\n");
         rule = list_next(self->rule_list);
     }
 
-    printf("</mod>\n");
+    fprintf(file, "</mod>\n");
 }

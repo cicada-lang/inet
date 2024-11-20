@@ -1,10 +1,12 @@
-print functions take `file` as argument
+builtin print functions add newline
 
-`run_command` -- snapshot for every `.test.inet` -- create `.test.inet.out` & `.test.inet.err`
+should not inject `exit_code` -- should change makefile instead
 
 `file` -- `file_size`
-
+`file` -- `file_remove`
 `run_command` -- delete empty snapshot file
+
+`run_command` -- snapshot for every `.test.inet` -- create `.test.inet.out` & `.test.inet.err`
 
 change example file names
 
