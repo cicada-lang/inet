@@ -46,6 +46,25 @@ spec_name(spec_t *unknown_spec) {
     assert(false);
 }
 
+const char *
+spec_tag_name(spec_tag_t tag) {
+    switch (tag) {
+    case NODE_SPEC: {
+        return "node";
+    }
+
+    case PROGRAM_SPEC: {
+        return "program";
+    }
+
+    case BUILTIN_SPEC: {
+        return "builtin";
+    }
+    }
+
+    assert(false);
+}
+
 void
 spec_print(const spec_t *unknown_spec, file_t *file) {
     switch (unknown_spec->tag) {

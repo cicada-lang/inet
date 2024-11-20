@@ -43,6 +43,29 @@ check_spec_defined(
     }
 }
 
+static void
+check_node_spec_defined(
+    const worker_t *worker,
+    const char *name,
+    const token_t *token
+) {
+    mod_t *mod = worker->mod;
+    const spec_t *found = mod_find_spec(mod, name);
+    if (!found) {
+        fprintf(worker->err, "[compiler-error] undefined node name: %s\n", name);
+        fprintf(worker->err, "[src] %s\n", mod->src);
+        text_print_context(worker->err, mod->text, token->start, token->end);
+        exit(1);
+    }
+
+    if (found->tag != NODE_SPEC) {
+        fprintf(worker->err, "[compiler-error] expect name defined as node instead of: %s\n", spec_tag_name(found->tag));
+        fprintf(worker->err, "[src] %s\n", mod->src);
+        text_print_context(worker->err, mod->text, token->start, token->end);
+        exit(1);
+    }
+}
+
 void
 compile_token(const worker_t *worker, program_t *program, const token_t *token) {
     mod_t *mod = worker->mod;
@@ -51,12 +74,12 @@ compile_token(const worker_t *worker, program_t *program, const token_t *token) 
     if (is_free_wire_ref(word)) {
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);
-        check_spec_defined(worker, node_name, token);
+        check_node_spec_defined(worker, node_name, token);
         emit_use_free_wire(mod, program, node_name, port_name);
     } else if (is_reversed_free_wire_ref(word)) {
         char *node_name = parse_reversed_free_wire_ref_node_name(word);
         char *port_name = parse_reversed_free_wire_ref_port_name(word);
-        check_spec_defined(worker, node_name, token);
+        check_node_spec_defined(worker, node_name, token);
         emit_reconnect_free_wire(mod, program, node_name, port_name);
     } else {
         check_spec_defined(worker, word, token);
