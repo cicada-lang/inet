@@ -1,4 +1,9 @@
-`compile` -- report undefined name in context
+`compile` -- report undefined node name in context
+`compile` -- report undefined port name in context
+
+`interpret` -- check node defined on `DEFINE_RULE_STMT`
+`interpret` -- check name not defined on `DEFINE_NODE_STMT`
+`interpret` -- check name not defined on `DEFINE_PROGRAM_STMT`
 
 [maybe] quit using bash to run examples -- write more testing commands
 

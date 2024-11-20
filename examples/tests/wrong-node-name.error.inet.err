@@ -1,3 +1,3 @@
 [parser-error] a node name must be like (<name>)
-[src] examples/parser/wrong-node-name.error.inet
+[src] examples/tests/wrong-node-name.error.inet
 > 1|* sole -- value!
