@@ -47,7 +47,7 @@ check_name_not_defined(
 }
 
 void
-check_spec_defined(
+check_name_defined(
     const worker_t *worker,
     const char *name,
     const token_t *token
@@ -63,7 +63,7 @@ check_spec_defined(
 }
 
 void
-check_node_spec_defined(
+check_name_defined_to_node_spec(
     const worker_t *worker,
     const char *name,
     const token_t *token
@@ -93,15 +93,15 @@ compile_token(const worker_t *worker, program_t *program, const token_t *token) 
     if (is_free_wire_ref(word)) {
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);
-        check_node_spec_defined(worker, node_name, token);
+        check_name_defined_to_node_spec(worker, node_name, token);
         emit_use_free_wire(mod, program, node_name, port_name);
     } else if (is_reversed_free_wire_ref(word)) {
         char *node_name = parse_reversed_free_wire_ref_node_name(word);
         char *port_name = parse_reversed_free_wire_ref_port_name(word);
-        check_node_spec_defined(worker, node_name, token);
+        check_name_defined_to_node_spec(worker, node_name, token);
         emit_reconnect_free_wire(mod, program, node_name, port_name);
     } else {
-        check_spec_defined(worker, word, token);
+        check_name_defined(worker, word, token);
         emit_call(mod, program, word);
     }
 }
