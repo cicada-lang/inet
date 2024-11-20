@@ -261,8 +261,8 @@ commands:
 For examples:
 
 ```sh
-./bin/inet run examples/datatypes/nat.test.inet
-./bin/inet run examples/datatypes/nat.test.inet --debug
+./bin/inet run examples/nat.inet
+./bin/inet run examples/nat.inet --debug
 ```
 
 ## Development
