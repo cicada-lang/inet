@@ -22,7 +22,7 @@ run(char **args) {
     int_test();
     text_test();
 
-    worker_test();
+    emit_test();
     lexer_test();
     parser_test();
 
