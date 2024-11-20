@@ -4,6 +4,8 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = allocate(sizeof(worker_t));
     self->mod = mod;
+    self->out = stdout;
+    self->err = stderr;
 
     self->active_wire_list = list_new();
 

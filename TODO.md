@@ -1,11 +1,10 @@
+`interpret_text` set `parser->err` to `worker->err`
 `run_command` -- snapshot for every `.test.inet`
 
 - `.test.inet.out`
 - `.test.inet.err`
 
 change example file names
-
-`worker` has `out` and `err` FILE
 
 `node_new` take `id` as argument
 `worker` has `node_id_count` -- test snapshot testing itself

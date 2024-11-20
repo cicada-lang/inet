@@ -45,15 +45,13 @@ run_file(const char *file_name, bool debug) {
         exit(1);
     }
 
-    char *text = file_read(file);
-
     mod_t *mod = mod_new(file_name);
     import_builtins(mod);
 
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
 
-    interpret_text(worker, text);
+    interpret_text(worker, file_read(file));
 
     worker_destroy(&worker);
     mod_destroy(&mod);

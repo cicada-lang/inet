@@ -4,6 +4,8 @@
 
 struct worker_t {
     mod_t *mod;
+    file_t *out;    
+    file_t *err;
     list_t *active_wire_list;
     stack_t *value_stack;
     stack_t *return_stack;
