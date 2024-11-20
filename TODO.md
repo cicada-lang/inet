@@ -1,5 +1,3 @@
-rename FILE to file_t
-
 `commands/` add a command to do snapshot testing
 
 - snapshot for every `.test.inet`

@@ -1,7 +1,7 @@
 #include "index.h"
 
 char *
-file_readline(FILE *file) {
+file_readline(file_t *file) {
     size_t line_max_length  = 1000 * 1000;
     char *buffer = allocate(line_max_length);
 
@@ -17,7 +17,7 @@ file_readline(FILE *file) {
 }
 
 char *
-file_read(FILE *file) {
+file_read(file_t *file) {
     char *text = string_empty();
     while (true) {
         char *line = file_readline(file);

@@ -45,7 +45,7 @@ run_file(const char *file_name, bool debug) {
         return 1;
     }
 
-    FILE *file = fopen(file_name, "r");
+    file_t *file = fopen(file_name, "r");
     if (!file) {
         printf("[run] I file to open file: %s\n", file_name);
         return 1;

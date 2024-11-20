@@ -1,4 +1,6 @@
 #pragma once
 
-char *file_readline(FILE *file);
-char *file_read(FILE *file);
+typedef FILE file_t;
+
+char *file_readline(file_t *file);
+char *file_read(file_t *file);
