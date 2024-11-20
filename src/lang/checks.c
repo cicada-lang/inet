@@ -57,3 +57,25 @@ check_name_defined_to_node_spec(
         exit(1);
     }
 }
+
+void
+check_port_name_defined(
+    const worker_t *worker,
+    const char *node_name,
+    const char *port_name,
+    const token_t *token
+) {
+    check_name_defined_to_node_spec(worker, node_name, token);
+    mod_t *mod = worker->mod;
+    const spec_t *found = mod_find_spec(mod, node_name);
+    const node_spec_t *spec = (node_spec_t *) found;
+    for (port_index_t i = 0; i < spec->arity; i++) {
+        port_spec_t *port_spec = spec->port_specs[i];
+        if (string_equal(port_spec->name, port_name)) return;
+    }
+
+    fprintf(worker->err, "[compiler-error] undefined port name: %s\n", port_name);
+    fprintf(worker->err, "[src] %s\n", mod->src);
+    text_print_context(worker->err, mod->text, token->start, token->end);
+    exit(1);
+}

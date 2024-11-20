@@ -36,11 +36,13 @@ compile_token(const worker_t *worker, program_t *program, const token_t *token) 
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);
         check_name_defined_to_node_spec(worker, node_name, token);
+        check_port_name_defined(worker, node_name, port_name, token);
         emit_use_free_wire(mod, program, node_name, port_name);
     } else if (is_reversed_free_wire_ref(word)) {
         char *node_name = parse_reversed_free_wire_ref_node_name(word);
         char *port_name = parse_reversed_free_wire_ref_port_name(word);
         check_name_defined_to_node_spec(worker, node_name, token);
+        check_port_name_defined(worker, node_name, port_name, token);
         emit_reconnect_free_wire(mod, program, node_name, port_name);
     } else {
         check_name_defined(worker, word, token);

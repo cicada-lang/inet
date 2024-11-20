@@ -1,4 +1,4 @@
-`compile` -- report undefined port name in context
+ambr check_name_defined_to_node_spec check_node_name_defined
 
 # example
 
