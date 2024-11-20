@@ -1,8 +1,7 @@
+`file` -- `file_read` take `file_name` instead of file
 `file` -- `file_size`
 `file` -- `file_remove`
 `run_command` -- delete empty snapshot file
-
-quit using bash to run examples
 
 [bug] file with only comment
 
@@ -12,6 +11,8 @@ move `emit` to `syntax`
 
 `emit` -- take token (like `compile`) instead of string
 `emit` -- report error in context
+
+[maybe] quit using bash to run examples -- write more testing commands
 
 # docs
 

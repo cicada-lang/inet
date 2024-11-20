@@ -1,6 +1,23 @@
 #include "index.h"
 
-char *
+file_t *
+file_open_or_fail(
+    const char *file_name,
+    const char *mode,
+    const char *message
+) {
+    file_t *file = fopen(file_name, "r");
+    if (!file) {
+        fprintf(stderr, "%s\n", message);
+        fprintf(stderr, "[file_open_or_fail] file name: %s\n", file_name);
+        fprintf(stderr, "[file_open_or_fail] mode: %s\n", mode);
+        exit(1);
+    }
+
+    return file;
+}
+
+static char *
 file_readline(file_t *file) {
     size_t line_max_length  = 1000 * 1000;
     char *buffer = allocate(line_max_length);

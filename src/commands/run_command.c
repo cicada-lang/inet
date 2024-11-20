@@ -40,12 +40,7 @@ run(char **args) {
 
 void
 run_file(const char *file_name, bool debug) {
-    file_t *file = fopen(file_name, "r");
-    if (!file) {
-        fprintf(stderr, "[run] can not open file: %s\n", file_name);
-        exit(1);
-    }
-
+    file_t *file = file_open_or_fail(file_name, "r", "[run] can not open file");
     mod_t *mod = mod_new(file_name);
     import_builtins(mod);
 
@@ -55,25 +50,15 @@ run_file(const char *file_name, bool debug) {
     if (string_ends_with(file_name, ".test.inet") ||
         string_ends_with(file_name, ".error.inet"))
     {
-        char *out_file_name = string_append(file_name, ".out");
-        file_t *out = fopen(out_file_name, "w");
-        if (!out) {
-            fprintf(stderr, "[run] can not open out file: %s\n", out_file_name);
-            exit(1);
-        }
-
-        worker->out = out;
+        worker->out = file_open_or_fail(
+            string_append(file_name, ".out"), "w",
+            "[run] can not open out file");
     }
 
     if (string_ends_with(file_name, ".error.inet")) {
-        char *err_file_name = string_append(file_name, ".err");
-        file_t *err = fopen(err_file_name, "w");
-        if (!err) {
-            fprintf(stderr, "[run] can not open err file: %s\n", err_file_name);
-            exit(1);
-        }
-
-        worker->err = err;
+        worker->err = file_open_or_fail(
+            string_append(file_name, ".err"), "w",
+            "[run] can not open err file");
     }
 
     interpret_text(worker, file_read(file));
