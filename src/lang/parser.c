@@ -1,11 +1,9 @@
 #include "index.h"
 
 parser_t *
-parser_new(const char *src, const char *text) {
+parser_new(void) {
     parser_t *self = allocate(sizeof(parser_t));
-    self->src = src;
-    self->text = text;
-    self->token_list = lex(text);
+    self->token_list = NULL;
 
     self->stmt_list = list_new();
     list_set_item_destructor(
@@ -51,6 +49,9 @@ static bool token_is_rune(const token_t *token) {
 
 void
 parser_parse(parser_t *self) {
+    assert(self->text);
+    self->token_list = lex(self->text);
+
     while (!list_is_empty(self->token_list)) {
         parser_maybe_ignore_comment(self);
 

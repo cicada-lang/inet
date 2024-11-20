@@ -7,7 +7,7 @@ struct parser_t {
     list_t *stmt_list;
 };
 
-parser_t *parser_new(const char *src, const char *text);
+parser_t *parser_new(void);
 void parser_destroy(parser_t **self_pointer);
 
 void parser_parse(parser_t *self);
