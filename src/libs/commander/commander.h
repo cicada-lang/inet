@@ -7,6 +7,6 @@ void commander_destroy(commander_t **self_pointer);
 
 const char *commander_version(const commander_t *self);
 void commander_add(const commander_t *self, command_t *command);
-void commander_mount(const commander_t *self, command_plugin_t *plugin);
+void commander_define(const commander_t *self, command_plugin_t *plugin);
 void commander_help(const commander_t *self);
 int commander_run(const commander_t *self);
