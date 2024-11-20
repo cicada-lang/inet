@@ -1,4 +1,4 @@
-# iNet
+# inet
 
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
 as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
