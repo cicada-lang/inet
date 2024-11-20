@@ -61,8 +61,8 @@
 
 ( to define `max`, we need `max-aux`. )
 
-* (max-aux) second! first -- result
 * (max) second first! -- result
+* (max-aux) second! first -- result
 
 ! (zero)-(max)
   (max)-second result-(max)

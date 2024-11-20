@@ -26,10 +26,10 @@ Suppose we want to encode the simplest data -- natural number.
 We can mimic the ancient knot counting, using node to do the counting.
 
 ```
-0  (zero)--
-1  (zero)--(add1)--
-2  (zero)--(add1)--(add1)--
-3  (zero)--(add1)--(add1)--(add1)--
+0  (zero)-
+1  (zero)-(add1)-
+2  (zero)-(add1)-(add1)-
+3  (zero)-(add1)-(add1)-(add1)-
 ```
 
 The node representing 0 `(zero)` has one port,
@@ -175,13 +175,12 @@ There are two kinds of ports -- input ports and output ports.
 (add)-result   // output port
 ```
 
-Two nodes can be connected through ports,
-an input port must be connected to an output port.
+Two nodes can be connected through ports.
 
 Take the graph representing 2 as an example:
 
 ```
-(zero)--(add1)--(add1)--
+(zero)-(add1)-(add1)-
 ```
 
 The detailed connections are the following:
@@ -210,78 +209,26 @@ connected through two principal ports.
 (add)-result
 ```
 
-We also require each port to have a specific type,
-and only ports with matching types can be connected.
-
 We design the statement to define node as follows:
 
 - The statement starts with `node`,
-  follows the name of the node,
-  ends with `end`.
+  follows the name of the node.
 - Use a dividing line to distinguish the input ports from the output ports.
   - Above the dividing line are the input ports.
   - Below the dividing line are the output ports.
   - The dividing can be as long as wish, at least two characters `--`.
-- The name of a port is written after the type as a label.
 - For principal port, add `!` as suffix.
 
 Suppose the type representing natural number is `Nat`,
 the aforementioned nodes are defined as follows:
 
 ```
-node zero
-  --------
-  Nat :value!
-end
-
-node add1
-  Nat :prev
-  --------
-  Nat :value!
-end
-
-node add
-  Nat :target!
-  Nat :prev
-  --------
-  Nat :result
-end
+* (zero) -- value!
+* (add1) prev -- value!
+* (add) prev target! -- result
 ```
 
 # 5
-
-A type might have other types as arguments.
-
-For now, the only information we need is the number of input arguments,
-because the type of an argument must be a type,
-and the number of output arguments must be one.
-
-But to be consistent with the definition of node,
-we design the statement to define type as follows:
-
-- The statement starts with `type`,
-  follows the name of the type,
-  ends with `end`.
-- Use a dividing line to distinguish the input type arguments from the output type arguments.
-  - Above the dividing line are the input type arguments (must be `Type`).
-  - Below the dividing line are the output type arguments, (must be one `Type`).
-  - The dividing can be as long as wish, at least two characters `--`.
-  - `Type` is a built-in value, we reference it by `@Type`.
-    - All built-in definitions will use `@` as prefix.
-
-Take the type representing natural number `Nat` as an example, it has no input type arguments, thus it's definition is:
-
-```
-type Nat -- @Type end
-```
-
-Take `List` as another example, it has one input type argument, i.e. the element type, thus it's definition is:
-
-```
-type List @Type -- @Type end
-```
-
-# 6
 
 Given two nodes, we can define an interaction rule for them.
 
@@ -306,9 +253,8 @@ We can see that, the so called interaction can be viewed as:
 
 We design the statement for defining rule as follows:
 
-- The statement starts with `rule`,
-  follows the name of two ports,
-  ends with `end`.
+- The statement starts with `!`,
+  follows the name of two ports.
 - Use a stack for temporarily saving the ports.
 - Use the word `(node)-port`
   to reference a exposed port caused by removing a port of a node,
@@ -316,20 +262,17 @@ We design the statement for defining rule as follows:
 - Use the word `port-(node)`
   also to reference a exposed port caused by removing a port of a node,
   and connect the exposed port with the port at the top of the stack.
-- Use the word `(node)` to call a node,
+- Use the word `node` to call a node,
   and connect the input ports of this node with the ports at the top
-  of the stack in order, each input port will use up a port in the
-  stack, and then put the output ports of this node back into the
-  stack in order.
+  of the stack in order, and then put the output ports of this node
+  back into the stack in order.
 
 The the rule between `(add1)` and `(add)` as an example:
 
 ```
-rule add1 add
-  (add)-addend
-  (add1)-prev add
+! (add1)-(add)
+  (add)-addend (add1)-prev add
   add1 result-(add)
-end
 ```
 
 Let's analyze the above definition,
@@ -384,77 +327,44 @@ because during reconnecting the exposed ports,
 it does not introduce any new nodes.
 
 ```
-rule zero add
-  (add)-addend
-  result-(add)
-end
+! zero add
+  (add)-addend result-(add)
 ```
 
-# 7
+# 6
 
 Using the statements designed above,
 we can write a complete code example.
 
-In which we will use `define` to define new words,
-and before using `define` to define a new word,
-we must use `claim` to claim the type of the word.
+In which we will use `=` to define new words,
+use `( ... )` to write comments,
+and use `.` to run program.
 
 ```
-type Nat -- @Type end
+* (zero) -- value!
+* (add1) prev -- value!
+* (add) target! addend -- result
 
-node zero
-  ------------
-  Nat :value!
-end
+! (zero)-(add)
+  (add)-addend result-(add)
 
-node add1
-  Nat :prev
-  ------------
-  Nat :value!
-end
-
-node add
-  Nat :target!
-  Nat :addend
-  ------------
-  Nat :result
-end
-
-rule zero add
-  (add)-addend
-  result-(add)
-end
-
-rule add1 add
-  (add)-addend
-  (add1)-prev add
+! (add1)-(add)
+  (add)-addend (add1)-prev add
   add1 result-(add)
-end
 
-claim one -- Nat end
+( test )
 
-define one
-  zero add1
-end
+= one zero add1
+= two one one add
+= three two one add
+= four two two add
 
-claim two -- Nat end
-
-define two
-  one add1
-end
-
-claim add2 Nat -- Nat end
-
-define add2
-  two add
-end
-
-one add2
-one add2
-add
+. two two add
+  two two add
+  add
 ```
 
-# 8
+# 7
 
 We emphasize the constraints of interaction nets, as a computational
 model some of the good properties of interaction nets are gained by
@@ -513,7 +423,7 @@ sharing the same memory,
 do the interactions at different place in parallel,
 the threads will not interfere with each other.
 
-# 9
+# 8
 
 Every node has one and only one principal port,
 this constraint can bring good properties to our computation model,
@@ -533,12 +443,7 @@ first!   second
 Node definition:
 
 ```
-node max
-  Nat :first!
-  Nat :second
-  ----------
-  Nat :result
-end
+* (max) second first! -- result
 ```
 
 The interaction between `(zero)` and `(zero)` is simple:
@@ -554,9 +459,8 @@ The interaction between `(zero)` and `(zero)` is simple:
 Rule definition:
 
 ```
-rule zero max
+! (zero)-(max)
   (max)-second result-(max)
-end
 ```
 
 For the `(add1)` and `(zero)`,
@@ -577,12 +481,12 @@ But because of single-principal-port constraint,
 we have to introduce an auxiliary node and some auxiliary rules,
 to explicitly choose between two interactable edges.
 
-We call the auxiliary node `(maxAux)`.
+We call the auxiliary node `(max-aux)`.
 
 ```
      result
        |
-    (maxAux)
+    (max-aux)
      /    \
 first    second!
 ```
@@ -590,12 +494,7 @@ first    second!
 Node definition:
 
 ```
-node maxAux
-  Nat :first
-  Nat :second!
-  --------
-  Nat :result
-end
+* (max-aux) second! first -- result
 ```
 
 Using the auxiliary node to define
@@ -604,7 +503,7 @@ the rule between `(add1)` and `(max)`:
 ```
      result            result
        |                 |
-     (max)      =>    (maxAux)
+     (max)      =>    (max-aux)
      /    \            /   \
 (add1)   second     prev   second
    |
@@ -614,19 +513,17 @@ the rule between `(add1)` and `(max)`:
 Rule definition:
 
 ```
-rule add1 max
-  (max)-second
-  (add1)-prev maxAux
+! (add1)-(max)
+  (max)-second (add1)-prev max-aux
   result-(max)
-end
 ```
 
-The rule between `(zero)` and `(maxAux)`:
+The rule between `(zero)` and `(max-aux)`:
 
 ```
      result            result
        |                 |
-    (maxAux)     =>    (add1)
+    (max-aux)     =>   (add1)
      /    \              |
  first   (zero)        first
 ```
@@ -634,18 +531,17 @@ The rule between `(zero)` and `(maxAux)`:
 Rule definition:
 
 ```
-rule zero maxAux
-  (maxAux)-first add1
-  result-(maxAux)
-end
+! (zero)-(max-aux)
+  (max-aux)-first add1
+  result-(max-aux)
 ```
 
-The rule between `(add1)` and `(maxAux)`:
+The rule between `(add1)` and `(max-aux)`:
 
 ```
      result            result
        |                 |
-    (maxAux)     =>    (add1)
+    (max-aux)     =>   (add1)
      /    \              |
  first   (add1)        (max)
            |           /   \
@@ -655,78 +551,34 @@ The rule between `(add1)` and `(maxAux)`:
 Rule definition:
 
 ```
-rule add1 maxAux
-  (add1)-prev
-  (maxAux)-first max
-  add1 result-(maxAux)
-end
+! (add1)-(max-aux)
+  (add1)-prev (max-aux)-first max
+  add1 result-(max-aux)
 ```
 
 ```
-type Nat -- @Type end
+* (max) second first! -- result
+* (max-aux) second! first -- result
 
-node zero
-  ------
-  Nat :value!
-end
-
-node add1
-  Nat :prev
-  ----------
-  Nat :value!
-end
-
-node maxAux
-  Nat :first
-  Nat :second!
-  --------
-  Nat :result
-end
-
-node max
-  Nat :first!
-  Nat :second
-  ----------
-  Nat :result
-end
-
-rule zero max
+! (zero)-(max)
   (max)-second result-(max)
-end
 
-rule add1 max
-  (max)-second (add1)-prev maxAux
+! (add1)-(max)
+  (max)-second (add1)-prev max-aux
   result-(max)
-end
 
-rule zero maxAux
-  (maxAux)-first add1
-  result-(maxAux)
-end
+! (zero)-(max-aux)
+  (max-aux)-first add1
+  result-(max-aux)
 
-rule add1 maxAux
-  (add1)-prev (maxAux)-first max
-  add1 result-(maxAux)
-end
+! (add1)-(max-aux)
+  (add1)-prev (max-aux)-first max
+  add1 result-(max-aux)
 
-claim one -- Nat end
-define one zero add1 end
-
-claim two -- Nat end
-define two one add1 end
-
-claim three -- Nat end
-define three two add1 end
-
-claim four -- Nat end
-define four three add1 end
-
-zero two max
-
-three two max
+. one two max
 ```
 
-# 10
+# 9
 
 We have already analyzed the node representing addition `(add)`,
 now we analyze the node representing multiplication `(mul)`.
@@ -735,15 +587,15 @@ We will find that, to define the interaction rule between `(mul)` and
 `(zero)` or `(mul)` and `(add1)`, we need to introduce auxiliary nodes
 again:
 
-- `(natErase)` to erase a natural number.
-- `(natDup)` to duplicate a natural number.
+- `(nat-erase)` to erase a natural number.
+- `(nat-dup)` to duplicate a natural number.
 
 These two nodes are different from all aforementioned nodes,
 because all aforementioned nodes has one output port,
 but:
 
-- `(natErase)` has zero output ports.
-- `(natDup)` has two output ports.
+- `(nat-erase)` has zero output ports.
+- `(nat-dup)` has two output ports.
 
 This is the main reason why we use stack to build net.
 
@@ -776,134 +628,72 @@ to a local variable named `local`.
   and can be used to save other value.
 
 ```
-import
-  Nat, zero, add1, add,
-  one, two, three,
-from "https://code-of-inet-cute.xieyuheng.com/examples/datatypes/Nat.i"
+* (nat-erase) target! --
 
-node natErase
-  Nat :target!
-  --------
-end
+! (zero)-(nat-erase)
 
-rule zero natErase end
+! (add1)-(nat-erase)
+  (add1)-prev nat-erase
 
-rule add1 natErase
-  (add1)-prev natErase
-end
+* (nat-dup) target! -- second first
 
-node natDup
-  Nat :target!
-  --------
-  Nat :second
-  Nat :first
-end
+! (zero)-(nat-dup)
+  zero first-(nat-dup)
+  zero second-(nat-dup)
 
-rule zero natDup
-  zero first-(natDup)
-  zero second-(natDup)
-end
+! (add1)-(nat-dup)
+  (add1)-prev nat-dup
+  ( second first ) add1 first-(nat-dup)
+  ( second ) add1 second-(nat-dup)
 
-rule add1 natDup
-  (add1)-prev natDup $first $second
-  first add1 first-(natDup)
-  second add1 second-(natDup)
-end
+* (mul) mulend target! --  result
 
-node mul
-  Nat :target!
-  Nat :mulend
-  --------
-  Nat :result
-end
-
-rule zero mul
-  (mul)-mulend natErase
+! (zero)-(mul)
+  (mul)-mulend nat-erase
   zero result-(mul)
-end
 
-rule add1 mul
-  (mul)-mulend natDup $first $second
-  (add1)-prev first mul second add
-  result-(mul)
-end
+! (add1)-(mul)
+  (mul)-mulend nat-dup
+  ( second first ) (add1)-prev mul
+  ( second product ) add result-(mul)
 
-two natDup $first $second
-
-two two mul
-
-three three mul
+. two two mul
 ```
 
-# 11
+# 10
 
-After introduced the simplest data `Nat`,
-we introduce the second simplest data -- `List`.
+After introduced the simplest data natural number,
+we introduce the second simplest data -- list.
 
 The goal is to implement `append` function.
 
-The `(append)` of `List`
-is very similar to the `(add)` of `Nat`.
-The difference is that the `(add1)` of `Nat` only add one node,
-while the `(cons)` of `List` add one node and link to an extra node.
-
-In the following code, we will use a new word `'A`.
-
-- `'A` will add the symbol of `A` to the stack.
-- `'A` can be used as type variable.
-- Type variable can be used as type argument, for example `'A List`.
-
-When defining `(cons)` and `(append)`,
-the same symbol `'A` occured many times
-to representing a type variable.
-This means when connecting the corresponding ports,
-this type variable must match the same type.
+The `(append)` of list
+is very similar to the `(add)` of natural number.
+The difference is that the `(add1)` of natural number only add one node,
+while the `(cons)` of list add one node and link to an extra node.
 
 ```
-type List @Type -- @Type end
+* (null) -- value!
+* (cons) tail head -- value!
+* (append) rest target! -- result
 
-node null
-  --------
-  'A List :value!
-end
+! (null)-(append)
+  (append)-rest result-(append)
 
-node cons
-  'A :head
-  'A List :tail
-  --------
-  'A List :value!
-end
-
-node append
-  'A List :target!
-  'A List :rest
-  --------
-  'A List :result
-end
-
-rule null append
-  (append)-rest
-  result-(append)
-end
-
-rule cons append
+! (cons)-(append)
   (append)-rest (cons)-tail append
-  (cons)-head cons
-  result-(append)
-end
+  (cons)-head cons result-(append)
 
-import zero from "https://code-of-inet-cute.xieyuheng.com/examples/datatypes/Nat.i"
+( test )
 
-null zero cons zero cons
-null zero cons zero cons
-append
+* (sole) -- value!
 
-null zero cons zero cons
-null zero cons zero cons
-append @run $result
+. null sole cons sole cons sole cons
+  null sole cons sole cons sole cons
+  append
 ```
 
-# 12
+# 11
 
 If we want to use `(append)` to append two `List`s,
 we must traverse the `target` of `(append)`,
@@ -930,77 +720,36 @@ while the reverse is not true.
 But in interaction nets,
 the relationship between all nodes is symmetric.
 
-In the following code,
-we use `(diff)` to create a new node and return it to the stack,
-follows `@spread` to put all it's ports to the stack
-in reverse order of the definition,
-then we save the ports to local variables for later use.
-
 ```
-import List from "https://code-of-inet-cute.xieyuheng.com/examples/datatypes/List.i"
+* (diff) front -- back value!
+* (diff-append) rest target! -- result
+* (diff-open) new-back target! -- old-back
 
-type DiffList @Type -- @Type end
+! (diff)-(diff-append)
+  (diff)-front diff result-(diff-append)
+  (diff-append)-rest diff-open back-(diff)
 
-node diff
-  'A List :front
-  -------
-  'A List :back
-  'A DiffList :value!
-end
+! (diff)-(diff-open)
+  (diff)-back new-back-(diff-open)
+  (diff)-front old-back-(diff-open)
 
-node diffAppend
-  'A DiffList :target!
-  'A DiffList :rest
-  --------
-  'A DiffList :result
-end
+( test )
 
-node diffOpen
-  'A DiffList :target!
-  'A List :newBack
-  ----------
-  'A List :oldBack
-end
+* (sole) -- value!
 
-rule diff diffAppend
-  (diff)-front diff result-(diffAppend)
-  (diffAppend)-rest diffOpen back-(diff)
-end
+= sole-diff-list
+  @wire/pair
+  ( wire wire ) diff
+  ( front back value ) @swap
+  ( front value back ) sole cons sole cons
+  ( front value list ) @rot
+  ( value list front ) @wire/connect
+  ( value )
 
-rule diff diffOpen
-  (diff)-back newBack-(diffOpen)
-  (diff)-front oldBack-(diffOpen)
-end
-
-import zero from "https://code-of-inet-cute.xieyuheng.com/examples/datatypes/Nat.i"
-import cons from "https://code-of-inet-cute.xieyuheng.com/examples/datatypes/List.i"
-
-(diff) @spread $front $back $value
-back zero cons zero cons front @connect value
-(diff) @spread $front $back $value
-back zero cons zero cons front @connect value
-diffAppend
-
-// By using one less local variable `$value`,
-// we can simplify the above code:
-
-(diff) @spread $front $back
-back zero cons zero cons front @connect
-(diff) @spread $front $back
-back zero cons zero cons front @connect
-diffAppend
-
-// By using one less local variable `$back`,
-// we can further simplify the above code:
-
-(diff) @spread $front zero cons zero cons front @connect
-(diff) @spread $front zero cons zero cons front @connect
-diffAppend
-
-@run $result
+. sole-diff-list sole-diff-list diff-append
 ```
 
-# 13
+# 12
 
 It is the end of this article now.
 
@@ -1035,30 +784,6 @@ such as the generalization of graph theory in high dimensions
 If we have a new computation model based on cell complex,
 Then the idea of using stacks and postfix notation
 to provide syntax for computation model is still applicable.
-
-## Type System
-
-Our language also has a type system,
-the process of type checking, is just
-the process of runing the lower layer language,
-we only need to check weather the types of the two ports
-match when connecting the nodes.
-
-In the type system of our language,
-the arguments of a type must be type,
-but we can also imagine to let the arguments of a type be any value,
-to get the so called [dependent type](https://en.wikipedia.org/wiki/Dependent_type).
-
-In this case, it is more difficult for us to judge whether the two
-types match, because it needs to judge whether two values ​​that may
-contain arbitrary computations are equal.
-
-In common computation models, like Lambda calculus,
-it is difficult to implement such judgement,
-but in interaction nets, it is relatively easy,
-because it is sufficient to judge
-whether two pointed graphs are isomorphic
-after all the possible interactions in them are finished.
 
 ## To be a Practical Programming Language
 

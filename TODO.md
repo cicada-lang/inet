@@ -1,6 +1,3 @@
-docs/articles/programming-with-interaction-nets.md -- update for new syntax
-docs/articles/反应网编程.md -- update for new syntax -- update for new syntax
-
 `compile` -- report undefined node name in context
 `compile` -- report undefined port name in context
 
