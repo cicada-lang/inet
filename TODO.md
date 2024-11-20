@@ -1,16 +1,12 @@
+docs/articles/programming-with-interaction-nets.md -- update for new syntax
+docs/articles/反应网编程.md -- update for new syntax -- update for new syntax
+
 `compile` -- report undefined node name in context
 `compile` -- report undefined port name in context
 
 `interpret` -- check node defined on `DEFINE_RULE_STMT`
 `interpret` -- check name not defined on `DEFINE_NODE_STMT`
 `interpret` -- check name not defined on `DEFINE_PROGRAM_STMT`
-
-[maybe] quit using bash to run examples -- write more testing commands
-
-# docs
-
-docs/articles/programming-with-interaction-nets.md -- update for new syntax
-docs/articles/反应网编程.md -- update for new syntax
 
 # example
 
@@ -21,33 +17,22 @@ docs/articles/反应网编程.md -- update for new syntax
 
 use `module/name` syntax
 
-- we already using use `@wire/`,
-  maybe module is just name prefix.
+- we already using use name such as `@wire/pair`,
+  thus module syntax should just map name like `module/name` to value.
 
 # parallelism
 
 learn linux thread
+
 keep a single thread debug mode, which record all the allocated nodes.
 
 # primitive value
 
-`value_t` as sumtype with `WIRE_VALUE`
+[prerequisite] linear v.s. normal value
 
-support primitive value
+`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
-- dispatching but type -- `(node)-[primitive-value: type]`
-  - `[primitive-value]` in a box.
-    - box wastes memory, should just let node's port be able to store any value.
+how to find rule?
 
-- learn for other inet implementations
-
-# linear local variables
-
-`op_let_local_t`
-`op_use_local_t`
-
-```
-1 $name  // let name = 1
-...
-name     // use name (after then name is free to use again)
-```
+- [maybe] by type -- `(node)-[primitive-value: type]`
+- [maybe] by predicate `(node)-[primitive-value: predicate?]`
