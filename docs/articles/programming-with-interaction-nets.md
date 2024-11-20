@@ -609,24 +609,6 @@ This give us another good thing, i.e. composition of words is associative.
 Thus when we want to factor out a subsequence from a sequence of words,
 there will be no complicated syntax preventing us from doing so.
 
-In the following code, we will use a syntax keyword `import`,
-to import definitions from other module.
-
-- One file corresponds to one module.
-- Use `.i` as file extension.
-- We can use full URL `https//...` to specify a file.
-- We can also use relative path `./...` to specify a file.
-
-We will also use a new word `$local`
-to save the value at the top of the stack
-to a local variable named `local`.
-
-- After saving a value to `$local`,
-  we can fetch the value back to the stack
-  by calling `local`.
-- After the fetching, `$local` will be empty again,
-  and can be used to save other value.
-
 ```
 * (nat-erase) target! --
 
