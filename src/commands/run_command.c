@@ -27,9 +27,10 @@ run(char **args) {
     paths = args + 1;
     while (*paths) {
         char *path = *paths++;
+        if (string_ends_with(path, "--")) continue;
         if (string_ends_with(path, ".inet")) {
             run_file(path, debug);
-        } else {
+        } else  {
             fprintf(stderr, "[run] file name must ends with .inet, given file name: %s\n", path);
             exit(1);
         }
