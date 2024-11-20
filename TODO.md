@@ -1,8 +1,8 @@
-`run_command` -- `.error.inet` v.s. `.test.inet` -- no need to ignore exit code in bash
-
 `file` -- `file_size`
 `file` -- `file_remove`
 `run_command` -- delete empty snapshot file
+
+quit using bash to run examples
 
 [bug] file with only comment
 

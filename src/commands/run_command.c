@@ -52,7 +52,9 @@ run_file(const char *file_name, bool debug) {
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
 
-    if (string_ends_with(file_name, ".test.inet")) {
+    if (string_ends_with(file_name, ".test.inet") ||
+        string_ends_with(file_name, ".error.inet"))
+    {
         char *out_file_name = string_append(file_name, ".out");
         file_t *out = fopen(out_file_name, "w");
         if (!out) {
@@ -60,6 +62,10 @@ run_file(const char *file_name, bool debug) {
             exit(1);
         }
 
+        worker->out = out;
+    }
+
+    if (string_ends_with(file_name, ".error.inet")) {
         char *err_file_name = string_append(file_name, ".err");
         file_t *err = fopen(err_file_name, "w");
         if (!err) {
@@ -67,7 +73,6 @@ run_file(const char *file_name, bool debug) {
             exit(1);
         }
 
-        worker->out = out;
         worker->err = err;
     }
 
