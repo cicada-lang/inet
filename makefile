@@ -21,7 +21,7 @@ test: self-test run-examples
 self-test: bin/inet
 	./bin/inet self-test
 
-.PHONY: self-test
+.PHONY: run-examples
 run-examples: bin/inet
 	bash scripts/run-examples.sh
 
