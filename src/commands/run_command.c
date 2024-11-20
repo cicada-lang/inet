@@ -10,27 +10,27 @@ run_command(const commander_t *runner) {
     commander_add(runner, command);
 }
 
-static void run_file(const char *file_name, bool debug);
+static void run_file(const char *path, bool debug);
 
 int
 run(char **args) {
     bool debug = false;
 
-    char **file_names = args + 1;
-    while (*file_names) {
-        char *file_name = *file_names++;
-        if (string_equal(file_name, "--debug")) {
+    char **paths = args + 1;
+    while (*paths) {
+        char *path = *paths++;
+        if (string_equal(path, "--debug")) {
             debug = true;
         }
     }
 
-    file_names = args + 1;
-    while (*file_names) {
-        char *file_name = *file_names++;
-        if (string_ends_with(file_name, ".inet")) {
-            run_file(file_name, debug);
+    paths = args + 1;
+    while (*paths) {
+        char *path = *paths++;
+        if (string_ends_with(path, ".inet")) {
+            run_file(path, debug);
         } else {
-            fprintf(stderr, "[run] file name must ends with .inet, given file name: %s\n", file_name);
+            fprintf(stderr, "[run] file name must ends with .inet, given file name: %s\n", path);
             exit(1);
         }
     }
@@ -39,27 +39,32 @@ run(char **args) {
 }
 
 void
-run_file(const char *file_name, bool debug) {
-    file_t *file = file_open_or_fail(file_name, "r", "[run] can not open file");
-    mod_t *mod = mod_new(file_name);
+run_file(const char *path, bool debug) {
+    file_t *file = file_open_or_fail(path, "r", "[run] can not open file");
+    mod_t *mod = mod_new(path);
     import_builtins(mod);
 
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
 
-    if (string_ends_with(file_name, ".test.inet") ||
-        string_ends_with(file_name, ".error.inet"))
+    char *out_path = string_append(path, ".out");
+    char *err_path = string_append(path, ".err");
+
+    if (string_ends_with(path, ".test.inet") ||
+        string_ends_with(path, ".error.inet"))
     {
-        worker->out = file_open_or_fail(
-            string_append(file_name, ".out"), "w",
-            "[run] can not open out file");
+        worker->out = file_open_or_fail(out_path, "w","[run] can not open out path");
     }
 
-    if (string_ends_with(file_name, ".error.inet")) {
-        worker->err = file_open_or_fail(
-            string_append(file_name, ".err"), "w",
-            "[run] can not open err file");
+    if (string_ends_with(path, ".error.inet")) {
+        worker->err = file_open_or_fail(err_path, "w","[run] can not open err path");
     }
+
+    if (worker->out && file_size(worker->out) == 0)
+        remove(out_path);
+
+    if (worker->err && file_size(worker->err) == 0)
+        remove(err_path);
 
     interpret_text(worker, file_read(file));
 

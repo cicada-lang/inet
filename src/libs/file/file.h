@@ -1,7 +1,5 @@
 #pragma once
 
-#define _POSIX_SOURCE 1
-
 typedef FILE file_t;
 
 file_t *file_open_or_fail(

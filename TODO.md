@@ -1,6 +1,3 @@
-`file` -- `file_remove`
-`run_command` -- delete empty snapshot file
-
 [bug] file with only comment
 
 merge `mod_test` to `worker_test`
