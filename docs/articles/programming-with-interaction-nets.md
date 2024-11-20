@@ -755,15 +755,6 @@ We solve this by using stack and postfix notation to build graph.
 In this way, the language we used to build graph,
 becomes the lower layer language for the language of interaction nets.
 
-This idea can not only be used to build graph,
-and provide syntax for graph-based computation models,
-it can also be used to build more complex nonlinear objects,
-such as the generalization of graph theory in high dimensions
--- [Cell complex](https://zh.wikipedia.org/wiki/CW%E5%A4%8D%E5%BD%A2).
-If we have a new computation model based on cell complex,
-Then the idea of using stacks and postfix notation
-to provide syntax for computation model is still applicable.
-
 ## To be a Practical Programming Language
 
 In pure interaction nets, the only data are
