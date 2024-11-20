@@ -33,9 +33,15 @@ define_node_stmt_destroy(define_node_stmt_t **self_pointer) {
 }
 
 define_rule_stmt_t *
-define_rule_stmt_new(char *first_name, char *second_name, list_t *token_list) {
+define_rule_stmt_new(
+    token_t *head_token,
+    char *first_name,
+    char *second_name,
+    list_t *token_list
+) {
     define_rule_stmt_t *self = allocate(sizeof(define_rule_stmt_t));
     self->tag = DEFINE_RULE_STMT;
+    self->head_token = head_token;
     self->first_name = first_name;
     self->second_name = second_name;
     self->token_list = token_list;
@@ -47,6 +53,7 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         define_rule_stmt_t *self = *self_pointer;
+        token_destroy(&self->head_token);
         free(self->first_name);
         free(self->second_name);
         list_destroy(&self->token_list);

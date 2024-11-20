@@ -197,10 +197,9 @@ parser_parse_define_rule_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
-    token_t *first_token = list_shift(self->token_list);
-    char *first_name = parse_rule_first_name(self, first_token);
-    char *second_name = parse_rule_second_name(self, first_token);
-    token_destroy(&first_token);
+    token_t *head_token = list_shift(self->token_list);
+    char *first_name = parse_rule_first_name(self, head_token);
+    char *second_name = parse_rule_second_name(self, head_token);
 
     list_t *token_list = list_new();
     list_set_item_destructor(
@@ -223,6 +222,7 @@ parser_parse_define_rule_stmt(parser_t *self) {
 
     list_push(self->stmt_list,
               define_rule_stmt_new(
+                  head_token,
                   first_name,
                   second_name,
                   token_list));
@@ -258,10 +258,10 @@ parser_parse_define_program_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
-    token_t *first_token = list_shift(self->token_list);
-    check_program_name_format(self, first_token);
-    char *name = string_dup(first_token->string);
-    token_destroy(&first_token);
+    token_t *head_token = list_shift(self->token_list);
+    check_program_name_format(self, head_token);
+    char *name = string_dup(head_token->string);
+    token_destroy(&head_token);
 
     list_t *token_list = list_new();
     list_set_item_destructor(

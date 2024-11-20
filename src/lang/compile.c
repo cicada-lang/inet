@@ -27,7 +27,7 @@ static char *parse_free_wire_ref_port_name(const char *word);
 static char *parse_reversed_free_wire_ref_node_name(const char *word);
 static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
-static void
+void
 check_spec_defined(
     const worker_t *worker,
     const char *name,
@@ -43,7 +43,7 @@ check_spec_defined(
     }
 }
 
-static void
+void
 check_node_spec_defined(
     const worker_t *worker,
     const char *name,
