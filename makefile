@@ -1,6 +1,6 @@
-cc = clang
+cc = gcc
 ldflags =
-cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O2 -std=c99 -pedantic
+cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O0 -std=c99 -pedantic
 
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
