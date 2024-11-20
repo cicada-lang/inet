@@ -53,7 +53,7 @@ run_file(const char *file_name, bool debug) {
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
 
-    interpret_text(worker, file_name, text);
+    interpret_text(worker, text);
 
     worker_destroy(&worker);
     mod_destroy(&mod);

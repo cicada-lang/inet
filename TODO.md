@@ -1,4 +1,3 @@
-`interpret_text` take `src` from `worker->mod`
 `run_command` -- snapshot for every `.test.inet`
 
 - `.test.inet.out`
