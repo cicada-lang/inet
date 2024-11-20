@@ -7,7 +7,7 @@ default_help_command(const commander_t *commander) {
     command_t *command = command_new("help");
     command->description = "print help message";
     command->run_with_commander = run_with_commander;
-    commander_add_command(commander, command);
+    commander_add(commander, command);
 }
 
 int

@@ -37,7 +37,7 @@ const char *commander_version(const commander_t *self) {
 }
 
 void
-commander_add_command(const commander_t *self, command_t *command) {
+commander_add(const commander_t *self, command_t *command) {
     list_push(self->command_list, command);
 }
 

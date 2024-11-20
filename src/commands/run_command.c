@@ -7,7 +7,7 @@ run_command(const commander_t *runner) {
     command_t *command = command_new("run");
     command->description = "run files, use --debug to see each step";
     command->run = run;
-    commander_add_command(runner, command);
+    commander_add(runner, command);
 }
 
 static int run_file(const char *file_name, bool debug);
