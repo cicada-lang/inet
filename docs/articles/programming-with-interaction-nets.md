@@ -141,38 +141,38 @@ to program this computation model.
 In our language each node has fixed number of ports.
 
 ```
-(zero) // has one port
-(add1) // has two ports
-(add)  // has three ports
+(zero) ( has one port )
+(add1) ( has two ports )
+(add)  ( has three ports )
 ```
 
 Every port has a name.
 
 ```
-(zero)-value  // the value of 0
+(zero)-value  ( the value of 0 )
 
-(add1)-prev   // previous number
-(add1)-value  // the value of +1
+(add1)-prev   ( previous number )
+(add1)-value  ( the value of +1 )
 
-(add)-target  // target number
-(add)-addend  // the number to be added
-(add)-result  // result of addition
+(add)-target  ( target number )
+(add)-addend  ( the number to be added )
+(add)-result  ( result of addition )
 ```
 
 There are two kinds of ports -- input ports and output ports.
 
 ```
 -------------
-(zero)-value   // output port
+(zero)-value   ( output port )
 
-(add1)-prev    // input port
+(add1)-prev    ( input port )
 -------------
-(add1)-value   // output port
+(add1)-value   ( output port )
 
-(add)-target   // input port
-(add)-addend   // input port
+(add)-target   ( input port )
+(add)-addend   ( input port )
 -------------
-(add)-result   // output port
+(add)-result   ( output port )
 ```
 
 Two nodes can be connected through ports.
@@ -197,13 +197,13 @@ connected through two principal ports.
 
 ```
 -------------
-(zero)-value!   // principal port
+(zero)-value!   ( principal port )
 
 (add1)-prev
 -------------
-(add1)-value!   // principal port
+(add1)-value!   ( principal port )
 
-(add)-target!   // principal port
+(add)-target!   ( principal port )
 (add)-addend
 -------------
 (add)-result
