@@ -1,0 +1,22 @@
+<worker>
+<mod spec-count="9" rule-count="0">
+@swap
+@rot
+@wire/connect
+@wire/print-net
+@wire/pair
+@interact
+@print-current-worker
+@print-value-stack
+@print-return-stack
+</mod>
+<active-wire-list length="0">
+</active-wire-list>
+<return-stack length="0">
+</return-stack>
+<value-stack length="2">
+-<>-
+-<>-
+</value-stack>
+</worker>
+

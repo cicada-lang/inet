@@ -4,10 +4,6 @@ should not inject `exit_code` -- should change makefile instead
 `file` -- `file_remove`
 `run_command` -- delete empty snapshot file
 
-`run_command` -- snapshot for every `.test.inet` -- create `.test.inet.out` & `.test.inet.err`
-
-change example file names
-
 `node_new` take `id` as argument
 `worker` has `node_id_count` -- test snapshot testing itself
 
