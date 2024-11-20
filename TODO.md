@@ -1,5 +1,3 @@
-`interpret` -- check node defined on `DEFINE_RULE_STMT`
-
 `compile` -- report undefined port name in context
 
 `interpret` -- check name not defined on `DEFINE_NODE_STMT`
