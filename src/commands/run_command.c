@@ -41,6 +41,7 @@ run(char **args) {
 void
 run_file(const char *path, bool debug) {
     file_t *file = file_open_or_fail(path, "r", "[run] can not open file");
+
     mod_t *mod = mod_new(path);
     import_builtins(mod);
 
@@ -50,26 +51,19 @@ run_file(const char *path, bool debug) {
     char *out_path = string_append(path, ".out");
     char *err_path = string_append(path, ".err");
 
-    if (string_ends_with(path, ".test.inet") ||
-        string_ends_with(path, ".error.inet"))
-    {
-        worker->out = file_open_or_fail(out_path, "w","[run] can not open out path");
-    }
-
-    if (string_ends_with(path, ".error.inet")) {
-        worker->err = file_open_or_fail(err_path, "w","[run] can not open err path");
-    }
-
-    if (worker->out && file_size(worker->out) == 0)
-        remove(out_path);
-
-    if (worker->err && file_size(worker->err) == 0)
-        remove(err_path);
+    if (string_ends_with(path, ".test.inet"))
+        worker->out = file_open_or_fail(out_path, "w", "[run] can not open out path");
+    if (string_ends_with(path, ".error.inet"))
+        worker->err = file_open_or_fail(err_path, "w", "[run] can not open err path");
 
     interpret_text(worker, file_read(file));
 
-    worker_destroy(&worker);
-    mod_destroy(&mod);
+    if (worker->out && file_size(worker->out) == 0) remove(out_path);
+    if (worker->err && file_size(worker->err) == 0) remove(err_path);
 
     fclose(file);
+    fclose(worker->out);
+    fclose(worker->err);
+    mod_destroy(&mod);
+    worker_destroy(&worker);
 }

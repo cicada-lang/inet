@@ -6,7 +6,7 @@ file_open_or_fail(
     const char *mode,
     const char *message
 ) {
-    file_t *file = fopen(file_name, "r");
+    file_t *file = fopen(file_name, mode);
     if (!file) {
         fprintf(stderr, "%s\n", message);
         fprintf(stderr, "[file_open_or_fail] file name: %s\n", file_name);
@@ -14,6 +14,7 @@ file_open_or_fail(
         exit(1);
     }
 
+    setbuf(file, NULL);
     return file;
 }
 
