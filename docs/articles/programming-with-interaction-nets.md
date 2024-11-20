@@ -32,8 +32,8 @@ We can mimic the ancient knot counting, using node to do the counting.
 3  (zero)-(add1)-(add1)-(add1)-
 ```
 
-The node representing 0 `(zero)` has one port,
-the node representing +1 `(add1)` has two ports,
+The node representing 0 `(zero)-` has one port,
+the node representing +1 `-(add1)-` has two ports,
 we can encode natural number
 by connecting these nodes through the ports.
 
