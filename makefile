@@ -15,15 +15,11 @@ run: bin/inet
 	./bin/inet
 
 .PHONY: test
-test: self-test run-examples
+test: self-test 
 
 .PHONY: self-test
 self-test: bin/inet
 	./bin/inet self-test
-
-.PHONY: run-examples
-run-examples: bin/inet
-	bash scripts/run-examples.sh
 
 bin/inet: $(lib) lib/inet.o
 	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@

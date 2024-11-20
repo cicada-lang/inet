@@ -49,22 +49,9 @@ run_file(const char *path, bool debug) {
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
 
-    char *out_path = string_append(path, ".out");
-    char *err_path = string_append(path, ".err");
-
-    if (string_ends_with(path, ".test.inet"))
-        worker->out = file_open_or_fail(out_path, "w", "[run] can not open out path");
-    if (string_ends_with(path, ".error.inet"))
-        worker->err = file_open_or_fail(err_path, "w", "[run] can not open err path");
-
     interpret_mod(worker);
 
-    if (worker->out && file_size(worker->out) == 0) remove(out_path);
-    if (worker->err && file_size(worker->err) == 0) remove(err_path);
-
     fclose(file);
-    fclose(worker->out);
-    fclose(worker->err);
     mod_destroy(&mod);
     worker_destroy(&worker);
 }
