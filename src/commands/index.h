@@ -2,5 +2,5 @@
 
 #include "deps.h"
 
-void self_test_command(const commander_t *commander);
-void run_command(const commander_t *commander);
+commander_plugin_t self_test_command;
+commander_plugin_t run_command;
