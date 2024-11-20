@@ -2,7 +2,11 @@
 
 typedef void (command_plugin_t)(const commander_t *commander);
 
-commander_t *commander_new(const char *name, const char *version, int argc, char **argv);
+commander_t *commander_new(
+    const char *name,
+    const char *version,
+    int argc,
+    char **argv);
 void commander_destroy(commander_t **self_pointer);
 
 const char *commander_version(const commander_t *self);
