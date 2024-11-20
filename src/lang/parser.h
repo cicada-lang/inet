@@ -3,9 +3,10 @@
 struct parser_t {
     const char *src;
     const char *text;
-    file_t *err;
     list_t *token_list;
     list_t *stmt_list;
+    file_t *err;
+    int exit_code;    
 };
 
 parser_t *parser_new(void);

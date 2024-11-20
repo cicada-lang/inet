@@ -4,8 +4,6 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = allocate(sizeof(worker_t));
     self->mod = mod;
-    self->out = stdout;
-    self->err = stderr;
 
     self->active_wire_list = list_new();
 
@@ -20,6 +18,9 @@ worker_new(mod_t *mod) {
         (stack_item_destructor_t *) frame_destroy);
 
     self->debug = false;
+    self->out = stdout;
+    self->err = stderr;
+    self->exit_code = 1;
 
     return self;
 }

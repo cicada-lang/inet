@@ -4,12 +4,13 @@
 
 struct worker_t {
     mod_t *mod;
-    file_t *out;    
-    file_t *err;
     list_t *active_wire_list;
     stack_t *value_stack;
     stack_t *return_stack;
     bool debug;
+    file_t *out;
+    file_t *err;
+    int exit_code;
 };
 
 worker_t *worker_new(mod_t *mod);

@@ -18,8 +18,7 @@ run(char **args) {
 
     char **file_names = args + 1;
     while (*file_names) {
-        char *file_name = *file_names;
-        file_names++;
+        char *file_name = *file_names++;
         if (string_equal(file_name, "--debug")) {
             debug = true;
         }
@@ -27,10 +26,12 @@ run(char **args) {
 
     file_names = args + 1;
     while (*file_names) {
-        char *file_name = *file_names;
-        file_names++;
-        if (!string_starts_with(file_name, "--")) {
+        char *file_name = *file_names++;
+        if (string_ends_with(file_name, ".inet")) {
             run_file(file_name, debug);
+        } else {
+            fprintf(stderr, "[run] file name must ends with .inet, given file name: %s\n", file_name);
+            exit(1);
         }
     }
 
@@ -50,6 +51,26 @@ run_file(const char *file_name, bool debug) {
 
     worker_t *worker = worker_new(mod);
     worker->debug = debug;
+
+    if (string_ends_with(file_name, ".test.inet")) {
+        char *out_file_name = string_append(file_name, ".out");
+        file_t *out = fopen(out_file_name, "w");
+        if (!out) {
+            fprintf(stderr, "[run] can not open out file: %s\n", out_file_name);
+            exit(1);
+        }
+
+        char *err_file_name = string_append(file_name, ".err");
+        file_t *err = fopen(err_file_name, "w");
+        if (!err) {
+            fprintf(stderr, "[run] can not open err file: %s\n", err_file_name);
+            exit(1);
+        }
+
+        worker->out = out;
+        worker->err = err;
+        worker->exit_code = 0;
+    }
 
     interpret_text(worker, file_read(file));
 

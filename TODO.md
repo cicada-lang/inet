@@ -1,7 +1,10 @@
-`run_command` -- snapshot for every `.test.inet`
+print functions take `file` as argument
 
-- `.test.inet.out`
-- `.test.inet.err`
+`run_command` -- snapshot for every `.test.inet` -- create `.test.inet.out` & `.test.inet.err`
+
+`file` -- `file_size`
+
+`run_command` -- delete empty snapshot file
 
 change example file names
 
