@@ -1,4 +1,3 @@
-`compile` -- take `worker`
 `compile` -- report undefined name in context
 
 [maybe] quit using bash to run examples -- write more testing commands

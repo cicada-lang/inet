@@ -43,7 +43,7 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
     case DEFINE_RULE_STMT: {
         define_rule_stmt_t *stmt = (define_rule_stmt_t *)unknown_stmt;
-        program_t *program = compile(worker->mod, stmt->token_list);
+        program_t *program = compile(worker, stmt->token_list);
         mod_define_rule(
             worker->mod,
             stmt->first_name,
@@ -54,7 +54,7 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
     case DEFINE_PROGRAM_STMT: {
         define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
-        program_t *program = compile(worker->mod, stmt->token_list);
+        program_t *program = compile(worker, stmt->token_list);
         program_spec_t *spec = program_spec_new(stmt->name, program);
         mod_define(worker->mod, (spec_t *) spec);
         return;
@@ -62,7 +62,7 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
     case RUN_PROGRAM_STMT: {
         run_program_stmt_t *stmt = (run_program_stmt_t *)unknown_stmt;
-        program_t *program = compile(worker->mod, stmt->token_list);
+        program_t *program = compile(worker, stmt->token_list);
         size_t base_length = stack_length(worker->return_stack);
         stack_push(worker->return_stack, frame_new(program));
         worker_run_until(worker, base_length);
