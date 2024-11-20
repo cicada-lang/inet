@@ -1,4 +1,4 @@
-# inet
+# iNet
 
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
 as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
@@ -283,6 +283,11 @@ make run      # compile and run the command-line program
 make test     # compile and run test
 make clean    # clean up compiled files
 ```
+
+## Other Implementations
+
+- [iNet Cute](https://github.com/cicada-lang/inet-cute)
+- [iNet JS](https://github.com/cicada-lang/inet-js)
 
 ## References
 
