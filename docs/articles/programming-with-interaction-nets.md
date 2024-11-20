@@ -162,16 +162,13 @@ Every port has a name.
 There are two kinds of ports -- input ports and output ports.
 
 ```
--------------
 (zero)-value   ( output port )
 
 (add1)-prev    ( input port )
--------------
 (add1)-value   ( output port )
 
 (add)-target   ( input port )
 (add)-addend   ( input port )
--------------
 (add)-result   ( output port )
 ```
 
@@ -196,16 +193,13 @@ two nodes can interact only when they are
 connected through two principal ports.
 
 ```
--------------
 (zero)-value!   ( principal port )
 
 (add1)-prev
--------------
 (add1)-value!   ( principal port )
 
 (add)-target!   ( principal port )
 (add)-addend
--------------
 (add)-result
 ```
 
