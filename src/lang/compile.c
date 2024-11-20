@@ -28,6 +28,25 @@ static char *parse_reversed_free_wire_ref_node_name(const char *word);
 static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
 void
+check_name_not_defined(
+    const worker_t *worker,
+    const char *name,
+    const token_t *token
+) {
+    mod_t *mod = worker->mod;
+    const spec_t *found = mod_find_spec(mod, name);
+    if (found) {
+        fprintf(worker->err, "[compiler-error] can not re-define name: %s\n", name);
+        fprintf(worker->err, "[compiler-error] already defined to: ");
+        spec_print(found, worker->err);
+        fprintf(worker->err, "\n");
+        fprintf(worker->err, "[src] %s\n", mod->src);
+        text_print_context(worker->err, mod->text, token->start, token->end);
+        exit(1);
+    }
+}
+
+void
 check_spec_defined(
     const worker_t *worker,
     const char *name,

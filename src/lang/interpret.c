@@ -15,6 +15,8 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
     switch (unknown_stmt->tag) {
     case DEFINE_NODE_STMT: {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
+        check_name_not_defined(worker, stmt->name, stmt->head_token);
+
         node_spec_t *spec =
             node_spec_new(
                 stmt->name,

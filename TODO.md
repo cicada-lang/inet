@@ -1,7 +1,6 @@
-`compile` -- report undefined port name in context
-
-`interpret` -- check name not defined on `DEFINE_NODE_STMT`
 `interpret` -- check name not defined on `DEFINE_PROGRAM_STMT`
+
+`compile` -- report undefined port name in context
 
 # example
 
