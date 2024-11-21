@@ -1,4 +1,3 @@
-readme/nat -- reverse input port order
 readme/list -- reverse input port order
 
 examples/datatypes/list -- reverse input port order

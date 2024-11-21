@@ -89,7 +89,7 @@ Define the rule between `(add1)` and `(add)`:
 
 ```
 ! (add1)-(add)
-  (add)-addend (add1)-prev add
+  (add1)-prev (add)-addend add
   add1 result-(add)
 ```
 
@@ -146,9 +146,9 @@ Test the interaction by running program:
 </root>
 <body>
 (add1₁₁)-value!-<>-prev-(add1₉)
-(add1₁₃)-value!-<>-prev-(add1₁₁)
-(add1₁₅)-value!-<>-prev-(add1₁₃)
-(zero₄)-value!-<>-prev-(add1₁₅)
+(add1₆)-value!-<>-prev-(add1₁₁)
+(add1₅)-value!-<>-prev-(add1₆)
+(zero₄)-value!-<>-prev-(add1₅)
 </body>
 </net>
 ```
