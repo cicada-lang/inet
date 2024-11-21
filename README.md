@@ -171,7 +171,7 @@ Test the interaction by running program:
 
 ( test )
 
-* sole -- value!
+* (sole) -- value!
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons

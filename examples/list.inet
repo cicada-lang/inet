@@ -1,0 +1,22 @@
+* (null) -- value!
+* (cons) head tail -- value!
+* (append) target! rest -- result
+
+! (null)-(append)
+  (append)-rest result-(append)
+
+! (cons)-(append)
+  (append)-rest (cons)-tail append
+  (cons)-head cons result-(append)
+
+( test )
+
+* (sole) -- value!
+
+. null sole cons sole cons sole cons
+  null sole cons sole cons sole cons
+  append
+
+  @wire/print-net
+  @interact
+  @wire/print-net
