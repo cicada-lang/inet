@@ -1,9 +1,10 @@
-examples/list -- reverse input port order
-
 readme/nat -- reverse input port order
 readme/list -- reverse input port order
 
-examples/datatypes -- reverse input port order
+examples/datatypes/list -- reverse input port order
+examples/datatypes/nat -- reverse input port order
+
+docs/articles -- reverse input port order
 
 # example
 
