@@ -59,14 +59,19 @@ Define nodes:
 The rule between `(zero)` and `(add)` as ASCII art:
 
 ```
-     value           value
-       |               |
-     (add)     =>      |
-     /   \              \
-(zero)   addend        addend
+     value          value         value
+       |              |             |
+     (add)     =>             =>    |
+     /   \              \            \
+(zero)   addend         addend       addend
 ```
 
 Define the rule between `(zero)` and `(add)`:
+
+- disconnect and delete `(zero)-(add)`;
+- reconnect newly exposed wires,
+  that originally connected with
+  `(add)-addend` and `(add)-result`.
 
 ```
 ! (zero)-(add)
@@ -76,16 +81,22 @@ Define the rule between `(zero)` and `(add)`:
 The rule between `(add1)` and `(add)` as ASCII art:
 
 ```
-     value           value
-       |               |
-     (add)     =>    (add1)
-     /   \             |
-(add1)   addend      (add)
-  |                  /   \
-prev              prev   addend
+     value             value            value
+       |                 |                |
+     (add)     =>                =>     (add1)
+     /   \                 \              |
+(add1)   addend            addend       (add)
+   |                 |                  /   \
+ prev              prev              prev   addend
 ```
 
 Define the rule between `(add1)` and `(add)`:
+
+- disconnect and delete `(add1)-(add)`;
+- reconnect newly exposed wires,
+  that originally connected with
+  `(add1)-prev`, `(add)-addend`
+  and `result-(add)`.
 
 ```
 ! (add1)-(add)
