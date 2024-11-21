@@ -106,9 +106,11 @@ Explanation of the above rule definition:
 
 - Disconnect and delete `(add1)-(add)`.
 - Reconnect newly exposed wires:
-  - `(add1)-prev` and `(add)-addend`
+  - `(add1)-prev`
+  - `(add)-addend`
      - Push the corresponding wire to the stack.
-  - `add` and `add1`
+  - `add`
+  - `add1`
     - Create new node by take wires from the stack,
       and connect them to the node's input ports,
       then return free wires connected to the node's output ports.
