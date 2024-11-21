@@ -18,7 +18,7 @@ keep a single thread debug mode, which record all the allocated nodes.
 
 # primitive value
 
-[prerequisite] linear v.s. normal value
+polish parsing (from 1990-interaction-nets) as an example -- need primitive string type
 
 `value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
