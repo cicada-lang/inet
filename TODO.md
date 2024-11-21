@@ -1,5 +1,3 @@
-examples/datatypes/diff-list -- reverse input port order
-
 docs/articles -- reverse input port order
 
 # example

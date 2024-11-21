@@ -1,5 +1,5 @@
 * (diff) front -- back value!
-* (diff-append) rest target! -- result
+* (diff-append) target! rest -- result
 * (diff-open) new-back target! -- old-back
 
 ( plug the front of the `target` to the back of `rest` )
@@ -16,13 +16,13 @@
 
 * (null) -- value!
 * (cons) tail head -- value!
-* (append) rest target! -- result
+* (append) target! rest -- result
 
 ! (null)-(append)
   (append)-rest result-(append)
 
 ! (cons)-(append)
-  (append)-rest (cons)-tail append
+  (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
 ( test )
@@ -32,10 +32,10 @@
 = sole-diff-list
   @wire/pair
   ( wire wire ) diff
-  ( front back value ) @swap
-  ( front value back ) sole cons sole cons
-  ( front value list ) @rot
-  ( value list front ) @wire/connect
+  ( wire back value ) @swap
+  ( wire value back ) sole cons sole cons
+  ( wire value list ) @rot
+  ( value list wire ) @wire/connect
   ( value )
 
 . sole-diff-list sole-diff-list diff-append

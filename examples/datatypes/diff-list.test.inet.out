@@ -3,8 +3,8 @@
 (diff-append₁₁)-result-<>-
 </root>
 <body>
-(diff₁)-value!-<>-rest-(diff-append₁₁)
-(diff₆)-value!-<>-!target-(diff-append₁₁)
+(diff₁)-value!-<>-!target-(diff-append₁₁)
+(diff₆)-value!-<>-rest-(diff-append₁₁)
 (cons₁₀)-value!-<>-front-(diff₆)
 (cons₈)-tail-<>-back-(diff₆)
 (sole₇)-value!-<>-head-(cons₈)
@@ -23,15 +23,15 @@
 (diff₁₂)-value!-<>-
 </root>
 <body>
-(cons₁₀)-value!-<>-front-(diff₁₂)
-(cons₃)-tail-<>-back-(diff₁₂)
-(sole₂)-value!-<>-head-(cons₃)
-(cons₅)-tail-<>-!value-(cons₃)
-(sole₄)-value!-<>-head-(cons₅)
-(cons₈)-tail-<>-!value-(cons₅)
+(cons₅)-value!-<>-front-(diff₁₂)
+(cons₈)-tail-<>-back-(diff₁₂)
 (sole₇)-value!-<>-head-(cons₈)
 (cons₁₀)-tail-<>-!value-(cons₈)
 (sole₉)-value!-<>-head-(cons₁₀)
+(cons₃)-tail-<>-!value-(cons₁₀)
+(sole₂)-value!-<>-head-(cons₃)
+(cons₅)-tail-<>-!value-(cons₃)
+(sole₄)-value!-<>-head-(cons₅)
 </body>
 </net>
 
