@@ -159,14 +159,14 @@ Test the interaction by running program:
 
 ```
 * (null) -- value!
-* (cons) head tail -- value!
+* (cons) tail head -- value!
 * (append) target! rest -- result
 
 ! (null)-(append)
   (append)-rest result-(append)
 
 ! (cons)-(append)
-  (append)-rest (cons)-tail append
+  (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
 ( test )
@@ -191,8 +191,8 @@ Test the interaction by running program:
 (append₁₅)-result-<>-
 </root>
 <body>
-(cons₇)-value!-<>-rest-(append₁₅)
-(cons₁₄)-value!-<>-!target-(append₁₅)
+(cons₇)-value!-<>-!target-(append₁₅)
+(cons₁₄)-value!-<>-rest-(append₁₅)
 (cons₁₂)-value!-<>-tail-(cons₁₄)
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
@@ -214,17 +214,17 @@ Test the interaction by running program:
 </root>
 <body>
 (cons₁₉)-value!-<>-tail-(cons₁₇)
-(sole₁₃)-value!-<>-head-(cons₁₇)
+(sole₆)-value!-<>-head-(cons₁₇)
 (cons₂₁)-value!-<>-tail-(cons₁₉)
-(sole₁₁)-value!-<>-head-(cons₁₉)
-(cons₇)-value!-<>-tail-(cons₂₁)
-(sole₉)-value!-<>-head-(cons₂₁)
-(cons₅)-value!-<>-tail-(cons₇)
-(sole₆)-value!-<>-head-(cons₇)
-(cons₃)-value!-<>-tail-(cons₅)
-(sole₄)-value!-<>-head-(cons₅)
-(null₁)-value!-<>-tail-(cons₃)
-(sole₂)-value!-<>-head-(cons₃)
+(sole₄)-value!-<>-head-(cons₁₉)
+(cons₁₄)-value!-<>-tail-(cons₂₁)
+(sole₂)-value!-<>-head-(cons₂₁)
+(cons₁₂)-value!-<>-tail-(cons₁₄)
+(sole₁₃)-value!-<>-head-(cons₁₄)
+(cons₁₀)-value!-<>-tail-(cons₁₂)
+(sole₁₁)-value!-<>-head-(cons₁₂)
+(null₈)-value!-<>-tail-(cons₁₀)
+(sole₉)-value!-<>-head-(cons₁₀)
 </body>
 </net>
 ```
