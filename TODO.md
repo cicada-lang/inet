@@ -1,5 +1,3 @@
-examples/datatypes/list -- reverse input port order
-
 docs/articles -- reverse input port order
 
 builtins/ fix the use of `first` `second` in name

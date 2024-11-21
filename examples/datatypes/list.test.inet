@@ -1,12 +1,12 @@
 * (null) -- value!
 * (cons) tail head -- value!
-* (append) rest target! -- result
+* (append) target! rest -- result
 
 ! (null)-(append)
   (append)-rest result-(append)
 
 ! (cons)-(append)
-  (append)-rest (cons)-tail append
+  (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
 ( test )
