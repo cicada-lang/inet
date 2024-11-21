@@ -1,6 +1,6 @@
-docs/articles -- reverse input port order
+examples/datatypes/diff-list -- reverse input port order
 
-builtins/ fix the use of `first` `second` in name
+docs/articles -- reverse input port order
 
 # example
 
