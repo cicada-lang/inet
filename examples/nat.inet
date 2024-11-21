@@ -6,7 +6,7 @@
   (add)-addend result-(add)
 
 ! (add1)-(add)
-  (add)-addend (add1)-prev add
+  (add1)-prev (add)-addend add
   add1 result-(add)
 
 . zero add1 add1
