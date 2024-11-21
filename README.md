@@ -111,7 +111,7 @@ Explanation of the above rule definition:
      - Push the corresponding wire to the stack.
   - `add`
   - `add1`
-    - Create new node by take wires from the stack,
+    - Create new node by taking wires from the stack,
       and connect them to the node's input ports,
       then return free wires connected to the node's output ports.
   - `result-(add)`
