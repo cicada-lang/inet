@@ -78,9 +78,9 @@ Explanation of the above rule definition:
 - Disconnect and delete `(zero)-(add)`.
 - Reconnect newly exposed wires:
   - `(add)-addend`
-    - Push the corresponding wire to the stack.
+    - push the corresponding wire to the stack.
   - `result-(add)`
-    - Connect the corresponding wire with the wire on top of the stack.
+    - connect the corresponding wire with the wire on top of the stack.
 
 The rule between `(add1)` and `(add)` as ASCII art:
 
@@ -108,14 +108,15 @@ Explanation of the above rule definition:
 - Reconnect newly exposed wires:
   - `(add1)-prev`
   - `(add)-addend`
-     - Push the corresponding wire to the stack.
+     - push the corresponding wire to the stack.
   - `add`
   - `add1`
-    - Create new node by taking wires from the stack,
-      and connect them to the node's input ports,
-      then return free wires connected to the node's output ports.
+    - create new node by:
+      - taking wires from the stack,
+      - and connect them to the node's input ports,
+      - then return free wires connected to the node's output ports.
   - `result-(add)`
-     - Connect the corresponding wire with the wire on top of the stack.
+     - connect the corresponding wire with the wire on top of the stack.
 
 Example interaction:
 
