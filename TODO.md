@@ -1,5 +1,3 @@
-docs/articles -- reverse input port order
-
 # example
 
 `examples/combinators.inet` -- interaction combinators

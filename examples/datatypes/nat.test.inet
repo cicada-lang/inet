@@ -41,8 +41,8 @@
 
 ! (add1)-(nat-dup)
   (add1)-prev nat-dup
-  ( second first ) add1 first-(nat-dup)
-  ( second ) add1 second-(nat-dup)
+  ( first second ) add1 second-(nat-dup)
+  ( first ) add1 first-(nat-dup)
 
 * (mul) target! mulend -- result
 
@@ -52,8 +52,8 @@
 
 ! (add1)-(mul)
   (mul)-mulend nat-dup
-  ( second first ) (add1)-prev @swap mul
-  ( second product ) add result-(mul)
+  ( first second ) (add1)-prev @swap mul
+  ( first almost ) add result-(mul)
 
 . two two mul
 

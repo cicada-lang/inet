@@ -68,8 +68,8 @@
 </root>
 <body>
 (add1₇₅)-value!-<>-prev-(add1₇₀)
-(add1₈₈)-value!-<>-prev-(add1₇₅)
-(add1₉₃)-value!-<>-prev-(add1₈₈)
+(add1₈₇)-value!-<>-prev-(add1₇₅)
+(add1₉₃)-value!-<>-prev-(add1₈₇)
 (zero₈₂)-value!-<>-prev-(add1₉₃)
 </body>
 </net>

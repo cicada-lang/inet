@@ -218,7 +218,7 @@ The aforementioned nodes are defined as follows:
 ```
 * (zero) -- value!
 * (add1) prev -- value!
-* (add) prev target! -- result
+* (add) target! prev -- result
 ```
 
 # 5
@@ -264,7 +264,7 @@ The the rule between `(add1)` and `(add)` as an example:
 
 ```
 ! (add1)-(add)
-  (add)-addend (add1)-prev add
+  (add1)-prev (add)-addend add
   add1 result-(add)
 ```
 
@@ -283,13 +283,13 @@ and newly generated connections at each step.
 ```
   stack: [ ]
 
-(add)-addend
-
-  stack: [ (add)-addend ]
-
 (add1)-prev
 
-  stack: [ (add)-addend, (add1)-prev ]
+  stack: [ (add1)-prev ]
+
+(add)-addend
+
+  stack: [ (add1)-prev, (add)-addend ]
 
 add
 
@@ -342,7 +342,7 @@ and use `.` to run program.
   (add)-addend result-(add)
 
 ! (add1)-(add)
-  (add)-addend (add1)-prev add
+  (add1)-prev (add)-addend add
   add1 result-(add)
 
 ( test )
@@ -436,7 +436,7 @@ first!   second
 Node definition:
 
 ```
-* (max) second first! -- result
+* (max) first! second -- result
 ```
 
 The interaction between `(zero)` and `(zero)` is simple:
@@ -487,7 +487,7 @@ first    second!
 Node definition:
 
 ```
-* (max-aux) second! first -- result
+* (max-aux) first second! -- result
 ```
 
 Using the auxiliary node to define
@@ -507,7 +507,7 @@ Rule definition:
 
 ```
 ! (add1)-(max)
-  (max)-second (add1)-prev max-aux
+  (add1)-prev (max)-second max-aux
   result-(max)
 ```
 
@@ -543,21 +543,22 @@ The rule between `(add1)` and `(max-aux)`:
 
 Rule definition:
 
+
 ```
 ! (add1)-(max-aux)
-  (add1)-prev (max-aux)-first max
+  (max-aux)-first (add1)-prev max
   add1 result-(max-aux)
 ```
 
 ```
-* (max) second first! -- result
-* (max-aux) second! first -- result
+* (max) first! second -- result
+* (max-aux) first second! -- result
 
 ! (zero)-(max)
   (max)-second result-(max)
 
 ! (add1)-(max)
-  (max)-second (add1)-prev max-aux
+  (add1)-prev (max)-second max-aux
   result-(max)
 
 ! (zero)-(max-aux)
@@ -565,7 +566,7 @@ Rule definition:
   result-(max-aux)
 
 ! (add1)-(max-aux)
-  (add1)-prev (max-aux)-first max
+  (max-aux)-first (add1)-prev max
   add1 result-(max-aux)
 
 . one two max
@@ -610,7 +611,7 @@ there will be no complicated syntax preventing us from doing so.
 ! (add1)-(nat-erase)
   (add1)-prev nat-erase
 
-* (nat-dup) target! -- second first
+* (nat-dup) target! -- first second
 
 ! (zero)-(nat-dup)
   zero first-(nat-dup)
@@ -618,10 +619,10 @@ there will be no complicated syntax preventing us from doing so.
 
 ! (add1)-(nat-dup)
   (add1)-prev nat-dup
-  ( second first ) add1 first-(nat-dup)
-  ( second ) add1 second-(nat-dup)
+  ( first second ) add1 second-(nat-dup)
+  ( first ) add1 first-(nat-dup)
 
-* (mul) mulend target! --  result
+* (mul) target! mulend -- result
 
 ! (zero)-(mul)
   (mul)-mulend nat-erase
@@ -629,8 +630,8 @@ there will be no complicated syntax preventing us from doing so.
 
 ! (add1)-(mul)
   (mul)-mulend nat-dup
-  ( second first ) (add1)-prev mul
-  ( second product ) add result-(mul)
+  ( first second ) (add1)-prev @swap mul
+  ( first almost ) add result-(mul)
 
 . two two mul
 ```
@@ -650,13 +651,13 @@ while the `(cons)` of list add one node and link to an extra node.
 ```
 * (null) -- value!
 * (cons) tail head -- value!
-* (append) rest target! -- result
+* (append) target! rest -- result
 
 ! (null)-(append)
   (append)-rest result-(append)
 
 ! (cons)-(append)
-  (append)-rest (cons)-tail append
+  (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
 ( test )
@@ -697,7 +698,7 @@ the relationship between all nodes is symmetric.
 
 ```
 * (diff) front -- back value!
-* (diff-append) rest target! -- result
+* (diff-append) target! rest -- result
 * (diff-open) new-back target! -- old-back
 
 ! (diff)-(diff-append)
@@ -715,10 +716,10 @@ the relationship between all nodes is symmetric.
 = sole-diff-list
   @wire/pair
   ( wire wire ) diff
-  ( front back value ) @swap
-  ( front value back ) sole cons sole cons
-  ( front value list ) @rot
-  ( value list front ) @wire/connect
+  ( wire back value ) @swap
+  ( wire value back ) sole cons sole cons
+  ( wire value list ) @rot
+  ( value list wire ) @wire/connect
   ( value )
 
 . sole-diff-list sole-diff-list diff-append
