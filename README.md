@@ -134,16 +134,25 @@ Example interaction:
                                               (zero)
 ```
 
-Test the interaction by running program:
+The whole program with test:
 
 ```
+* (zero) -- value!
+* (add1) prev -- value!
+* (add) target! addend -- result
+
+! (zero)-(add)
+  (add)-addend result-(add)
+
+! (add1)-(add)
+  (add1)-prev (add)-addend add
+  add1 result-(add)
+
+( test )
+
 . zero add1 add1
   zero add1 add1
   add
-
-  @wire/print-net
-  @interact
-  @wire/print-net
 ```
 
 <details>
