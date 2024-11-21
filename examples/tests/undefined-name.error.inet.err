@@ -4,4 +4,4 @@
 > 2|  (add)-addend result-(add)
   3|
   4|! (add1)-(add)
-  5|  (add)-addend (add1)-prev add
+  5|  (add1)-prev (add)-addend add

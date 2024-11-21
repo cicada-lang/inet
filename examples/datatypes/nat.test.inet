@@ -1,12 +1,12 @@
 * (zero) -- value!
 * (add1) prev -- value!
-* (add) addend target! -- result
+* (add) target! addend -- result
 
 ! (zero)-(add)
   (add)-addend result-(add)
 
 ! (add1)-(add)
-  (add)-addend (add1)-prev add
+  (add1)-prev (add)-addend add
   add1 result-(add)
 
 ( test )
@@ -33,7 +33,7 @@
 ! (add1)-(nat-erase)
   (add1)-prev nat-erase
 
-* (nat-dup) target! -- second first
+* (nat-dup) target! -- first second
 
 ! (zero)-(nat-dup)
   zero first-(nat-dup)
@@ -44,7 +44,7 @@
   ( second first ) add1 first-(nat-dup)
   ( second ) add1 second-(nat-dup)
 
-* (mul) mulend target! --  result
+* (mul) target! mulend -- result
 
 ! (zero)-(mul)
   (mul)-mulend nat-erase
@@ -52,7 +52,7 @@
 
 ! (add1)-(mul)
   (mul)-mulend nat-dup
-  ( second first ) (add1)-prev mul
+  ( second first ) (add1)-prev @swap mul
   ( second product ) add result-(mul)
 
 . two two mul
@@ -63,14 +63,14 @@
 
 ( to define `max`, we need `max-aux`. )
 
-* (max) second first! -- result
-* (max-aux) second! first -- result
+* (max) first! second -- result
+* (max-aux) first second! -- result
 
 ! (zero)-(max)
   (max)-second result-(max)
 
 ! (add1)-(max)
-  (max)-second (add1)-prev max-aux
+  (add1)-prev (max)-second max-aux
   result-(max)
 
 ! (zero)-(max-aux)
@@ -78,7 +78,7 @@
   result-(max-aux)
 
 ! (add1)-(max-aux)
-  (add1)-prev (max-aux)-first max
+  (max-aux)-first (add1)-prev max
   add1 result-(max-aux)
 
 . one two max
