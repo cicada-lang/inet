@@ -111,9 +111,8 @@ Explanation of the above rule definition:
      - push the corresponding wire to the stack.
   - `add`
   - `add1`
-    - create new node by:
-      - taking wires from the stack,
-      - and connect them to the node's input ports,
+    - create new node by applying it like a Forth function:
+      - wires from the stack and connect them to the node's input ports,
       - then return free wires connected to the node's output ports.
   - `result-(add)`
      - connect the corresponding wire with the wire on top of the stack.
