@@ -1,6 +1,19 @@
+# render
+
+render inet by programming a subset of varvara devices in c,
+
+# todo tree
+
+理解 HVM 并且做类似的事 -> 读 projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
+- inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
+  - 图灵机作为 inet 的例子 -> 读 2008-the-annotated-turing.djvu
+    - 1997-interaction-combinators.pdf 开篇提到
+      diophantus 自己解方程的时候只能用一个变量，为什么？ -> 读 diophantus
+      可能是 2008-the-annotated-turing.djvu 作者的误解。
+
 # study
 
-[study] persons/yves-lafont/papers/1997-interaction-combinators
+[study] persons/yves-lafont/papers/1997-interaction-combinators.pdf
 [study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
 [study] topics/computer-science/interaction-nets/2006-proof-nets-and-the-identity-of-proofs--straßburger.pdf
 [study] projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
