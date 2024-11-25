@@ -26,7 +26,7 @@ run-examples: bin/inet
 	bash run-examples.sh
 
 bin/inet: $(lib) lib/inet.o
-	mkdir -p $(dir $@); $(cc) $(ldflags) $^ -o $@
+	mkdir -p $(dir $@); $(cc) $^ $(ldflags) -o $@
 
 lib/%.o: src/%.c $(headers)
 	mkdir -p $(dir $@); $(cc) -c $(cflags) $< -o $@
