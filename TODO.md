@@ -1,3 +1,12 @@
+# varvara
+
+`libs/varvara` -- setup
+extract `vv_screen_t` (varvara screen) from uxn11
+be able to handle icn and chr format
+port button.tal to `vv_screen`
+port more programs to `vv_screen`
+render inet by programming `vv_screen`
+
 # study
 
 [study] persons/yves-lafont/papers/1997-interaction-combinators.pdf
