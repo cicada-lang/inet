@@ -54,7 +54,8 @@ void
 parser_parse(parser_t *self) {
     assert(self->text);
 
-    lexer_t *lexer = lexer_new(self->text);
+    lexer_t *lexer = lexer_new();
+    lexer->text = self->text;
     lexer_lex(lexer);
     self->token_list = lexer->token_list;
     lexer_destroy(&lexer);

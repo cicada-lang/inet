@@ -11,7 +11,7 @@ struct lexer_t {
     list_t *token_list;
 };
 
-lexer_t *lexer_new(const char *text);
+lexer_t *lexer_new(void);
 void lexer_destroy(lexer_t **self_pointer);
 
 void lexer_lex(lexer_t *self);

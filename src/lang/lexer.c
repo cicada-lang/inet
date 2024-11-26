@@ -1,14 +1,9 @@
 #include "index.h"
 
 lexer_t *
-lexer_new(const char *text) {
+lexer_new(void) {
     lexer_t *self = allocate(sizeof(lexer_t));
-    self->text = text;
-    self->text_length = strlen(text);
-    self->cursor = 0;
     self->buffer = allocate(MAX_TOKEN_LENGTH + 1);
-    self->buffer_length = 0;
-    self->token_list = list_new();
     return self;
 }
 
@@ -49,6 +44,13 @@ static void lexer_lex_word(lexer_t *self);
 
 void
 lexer_lex(lexer_t *self) {
+    assert(self->text);
+
+    self->cursor = 0;
+    self->buffer_length = 0;
+    self->text_length = strlen(self->text);
+    self->token_list = list_new();
+
     while (!lexer_is_finished(self)) {
         char c = lexer_current_char(self);
         if (c == '\0')
