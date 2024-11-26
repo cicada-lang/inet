@@ -7,8 +7,6 @@ typedef enum {
     RUN_PROGRAM_STMT,
 } stmt_tag_t;
 
-typedef struct token_t token_t;
-typedef struct lexer_t lexer_t;
 typedef struct stmt_t stmt_t;
 typedef struct define_node_stmt_t define_node_stmt_t;
 typedef struct define_rule_stmt_t define_rule_stmt_t;
