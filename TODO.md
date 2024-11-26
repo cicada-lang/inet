@@ -1,4 +1,3 @@
-[syntax] test nested inline comment
 [syntax] `--` as line comment
 
 # varvara
