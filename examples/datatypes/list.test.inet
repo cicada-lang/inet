@@ -9,7 +9,7 @@
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
-( test )
+(- test -)
 
 * (sole) -> value!
 

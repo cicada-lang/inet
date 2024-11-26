@@ -9,7 +9,7 @@
   (add1)-prev (add)-addend add
   add1 result-(add)
 
-( test )
+(- test -)
 
 . zero add1 add1
   zero add1 add1

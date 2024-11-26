@@ -12,11 +12,12 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 ## Syntax
 
 ```xml
-( comment )
-* (<name>) <inputs> -- <outputs>  ( define node )
-! (<name>)-(<name>) <program>     ( define rule )
-= <name> <program>                ( define program )
-. <program>                       ( run program )
+-- line comment
+(- inline comment -)
+* (<name>) <inputs> -> <outputs>  -- define node
+! (<name>)-(<name>) <program>     -- define rule
+= <name> <program>                -- define program
+. <program>                       -- run program
 
 ```
 
@@ -51,9 +52,9 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 Define nodes:
 
 ```
-* (zero) -- value!
-* (add1) prev -- value!
-* (add) target! addend -- result
+* (zero) -> value!
+* (add1) prev -> value!
+* (add) target! addend -> result
 ```
 
 The rule between `(zero)` and `(add)` as ASCII art:
@@ -137,9 +138,9 @@ Example interaction:
 The whole program with test:
 
 ```
-* (zero) -- value!
-* (add1) prev -- value!
-* (add) target! addend -- result
+* (zero) -> value!
+* (add1) prev -> value!
+* (add) target! addend -> result
 
 ! (zero)-(add)
   (add)-addend result-(add)
@@ -148,7 +149,7 @@ The whole program with test:
   (add1)-prev (add)-addend add
   add1 result-(add)
 
-( test )
+(- test -)
 
 . zero add1 add1
   zero add1 add1
@@ -191,9 +192,9 @@ The whole program with test:
 ### List
 
 ```
-* (null) -- value!
-* (cons) tail head -- value!
-* (append) target! rest -- result
+* (null) -> value!
+* (cons) tail head -> value!
+* (append) target! rest -> result
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -202,9 +203,9 @@ The whole program with test:
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
-( test )
+(- test -)
 
-* (sole) -- value!
+* (sole) -> value!
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons

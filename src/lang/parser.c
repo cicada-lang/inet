@@ -83,14 +83,14 @@ parser_maybe_ignore_comment(parser_t *self) {
     if (list_is_empty(self->token_list)) return;
 
     token_t *first_token = list_first(self->token_list);
-    if (!string_equal(first_token->string, "(")) return;
+    if (!string_equal(first_token->string, "(-")) return;
 
     token_t *comment_start_token = list_shift(self->token_list);
     token_destroy(&comment_start_token);
 
     while (!list_is_empty(self->token_list)) {
         token_t *token = list_shift(self->token_list);
-        if (string_equal(token->string, ")")) {
+        if (string_equal(token->string, "-)")) {
             token_destroy(&token);
             break;
         } else {

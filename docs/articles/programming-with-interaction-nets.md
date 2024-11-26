@@ -141,35 +141,35 @@ to program this computation model.
 In our language each node has fixed number of ports.
 
 ```
-(zero) ( has one port )
-(add1) ( has two ports )
-(add)  ( has three ports )
+(zero) -- has one port
+(add1) -- has two ports
+(add)  -- has three ports
 ```
 
 Every port has a name.
 
 ```
-(zero)-value  ( the value of 0 )
+(zero)-value  -- the value of 0
 
-(add1)-prev   ( previous number )
-(add1)-value  ( the value of +1 )
+(add1)-prev   -- previous number
+(add1)-value  -- the value of +1
 
-(add)-target  ( target number )
-(add)-addend  ( the number to be added )
-(add)-result  ( result of addition )
+(add)-target  -- target number
+(add)-addend  -- the number to be added
+(add)-result  -- result of addition
 ```
 
 There are two kinds of ports -- input ports and output ports.
 
 ```
-(zero)-value   ( output port )
+(zero)-value   -- output port
 
-(add1)-prev    ( input port )
-(add1)-value   ( output port )
+(add1)-prev    -- input port
+(add1)-value   -- output port
 
-(add)-target   ( input port )
-(add)-addend   ( input port )
-(add)-result   ( output port )
+(add)-target   -- input port
+(add)-addend   -- input port
+(add)-result   -- output port
 ```
 
 Two nodes can be connected through ports.
@@ -185,7 +185,7 @@ The detailed connections are the following:
 ```
 (zero)-value-<>-prev-(add1)
 (add1)-value-<>-prev-(add1)
-(add1)-value-<>- ( not yet connected free port )
+(add1)-value-<>-
 ```
 
 Each node has one and only one principal port,
@@ -193,12 +193,12 @@ two nodes can interact only when they are
 connected through two principal ports.
 
 ```
-(zero)-value!   ( principal port )
+(zero)-value!   -- principal port
 
 (add1)-prev
-(add1)-value!   ( principal port )
+(add1)-value!   -- principal port
 
-(add)-target!   ( principal port )
+(add)-target!   -- principal port
 (add)-addend
 (add)-result
 ```
@@ -330,7 +330,7 @@ Using the statements designed above,
 we can write a complete code example.
 
 In which we will use `=` to define new words,
-use `( ... )` to write comments,
+use `(- ... -)` to write comments,
 and use `.` to run program.
 
 ```
@@ -345,7 +345,7 @@ and use `.` to run program.
   (add1)-prev (add)-addend add
   add1 result-(add)
 
-( test )
+(- test -)
 
 = one zero add1
 = two one one add
@@ -619,8 +619,8 @@ there will be no complicated syntax preventing us from doing so.
 
 ! (add1)-(nat-dup)
   (add1)-prev nat-dup
-  ( first second ) add1 second-(nat-dup)
-  ( first ) add1 first-(nat-dup)
+  (- first second -) add1 second-(nat-dup)
+  (- first -) add1 first-(nat-dup)
 
 * (mul) target! mulend -> result
 
@@ -630,8 +630,8 @@ there will be no complicated syntax preventing us from doing so.
 
 ! (add1)-(mul)
   (mul)-mulend nat-dup
-  ( first second ) (add1)-prev @swap mul
-  ( first almost ) add result-(mul)
+  (- first second -) (add1)-prev @swap mul
+  (- first almost -) add result-(mul)
 
 . two two mul
 ```
@@ -660,7 +660,7 @@ while the `(cons)` of list add one node and link to an extra node.
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 
-( test )
+(- test -)
 
 * (sole) -> value!
 
@@ -709,18 +709,18 @@ the relationship between all nodes is symmetric.
   (diff)-back new-back-(diff-open)
   (diff)-front old-back-(diff-open)
 
-( test )
+(- test -)
 
 * (sole) -> value!
 
 = sole-diff-list
   @wire/pair
-  ( wire wire ) diff
-  ( wire back value ) @swap
-  ( wire value back ) sole cons sole cons
-  ( wire value list ) @rot
-  ( value list wire ) @wire/connect
-  ( value )
+  (- wire wire -) diff
+  (- wire back value -) @swap
+  (- wire value back -) sole cons sole cons
+  (- wire value list -) @rot
+  (- value list wire -) @wire/connect
+  (- value -)
 
 . sole-diff-list sole-diff-list diff-append
 ```

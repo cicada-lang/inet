@@ -1,5 +1,5 @@
+[syntax] test nested inline comment
 [syntax] `--` as line comment
-[syntax] `(- ... -)` as inline comment
 
 # varvara
 
