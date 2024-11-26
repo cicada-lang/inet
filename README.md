@@ -18,7 +18,6 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 ! (<name>)-(<name>) <program>     -- define rule
 = <name> <program>                -- define program
 . <program>                       -- run program
-
 ```
 
 <details>
@@ -279,6 +278,12 @@ For more examples, please see the [examples/](examples/) directory.
 - [Discord / concatenative #inet](https://discord.gg/EcUfwRkbdx)
 
 ## Install
+
+Dependencies:
+
+- `libx11`:
+  - debian: `sudo apt install libx11-dev`
+  - ubuntu: `sudo apt install libx11-dev`
 
 Compile:
 
