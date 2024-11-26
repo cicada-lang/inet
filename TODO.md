@@ -1,6 +1,9 @@
 # varvara
 
-`canvas_t` -- setup x window
+`canvas_t` -- setup type
+`canvas` -- create window
+`canvas` -- close window
+`canvas` -- render pixmap
 render icn to screen
 render inet by programming `canvas`
 
