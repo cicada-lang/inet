@@ -1,4 +1,9 @@
+inline `lex` -- preparing for config support
+inject `lexer` to `parser`
+extract `libs/lexer`
+`libs/lexer` be able to config line comment
 [syntax] `--` as line comment
+fix `line-comment.test.inet`
 
 # varvara
 
