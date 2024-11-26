@@ -10,18 +10,21 @@ lexer_test(void) {
         lexer->text = "";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
+        list_destroy(&lexer->token_list);
     }
 
     {
         lexer->text = " ";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
+        list_destroy(&lexer->token_list);
     }
 
     {
         lexer->text = " \n \t \n ";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
+        list_destroy(&lexer->token_list);
     }
 
     {
@@ -37,6 +40,7 @@ lexer_test(void) {
         token_t *c = list_shift(token_list);
         assert(string_equal(c->string, "c"));
 
+        list_destroy(&token_list);
         token_destroy(&a);
         token_destroy(&b);
         token_destroy(&c);

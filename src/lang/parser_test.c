@@ -26,10 +26,9 @@ parser_test(void) {
         ". two two add two two add add        \n";
 
     parser_parse(parser);
-    list_t *stmt_list = parser->stmt_list;
+    assert(list_length(parser->stmt_list) == 10);
+    list_destroy(&parser->stmt_list);
     parser_destroy(&parser);
-
-    assert(list_length(stmt_list) == 10);
 
     printf("</parser_test>\n");
 }

@@ -3,16 +3,8 @@
 parser_t *
 parser_new(void) {
     parser_t *self = allocate(sizeof(parser_t));
-
     self->token_list = NULL;
-
-    self->stmt_list = list_new();
-    list_set_item_destructor(
-        self->stmt_list,
-        (list_item_destructor_t *) stmt_destroy);
-
     self->err = stderr;
-
     return self;
 }
 
@@ -58,6 +50,11 @@ parser_parse(parser_t *self) {
     self->lexer->text = self->text;
     lexer_lex(self->lexer);
     self->token_list = self->lexer->token_list;
+
+    self->stmt_list = list_new();
+    list_set_item_destructor(
+        self->stmt_list,
+        (list_item_destructor_t *) stmt_destroy);
 
     while (true) {
         parser_maybe_ignore_inline_comment(self);
