@@ -144,7 +144,7 @@ parser_parse_define_node_stmt(parser_t *self) {
             break;
         }
 
-        if (string_equal(token->string, "--")) {
+        if (string_equal(token->string, "->")) {
             output_flag = true;
             token_destroy(&token);
             continue;

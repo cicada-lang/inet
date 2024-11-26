@@ -1,8 +1,5 @@
-# inet
-
-- 可能把 -- 改成 ->
-- -- 作为 line comment
-- `(- ... -)` 作为 inline comment
+[syntax] `--` as line comment
+[syntax] `(- ... -)` as inline comment
 
 # varvara
 

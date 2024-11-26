@@ -6,9 +6,9 @@ parser_test(void) {
 
     parser_t *parser = parser_new();
     parser->text = ""
-        "* (zero) -- value!                   \n"
-        "* (add1) prev -- value!              \n"
-        "* (add) addend target! -- result     \n"
+        "* (zero) -> value!                   \n"
+        "* (add1) prev -> value!              \n"
+        "* (add) addend target! -> result     \n"
         "                                     \n"
         "! (zero)-(add)                       \n"
         "  (add)-addend result-(add)          \n"

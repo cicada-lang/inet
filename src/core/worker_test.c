@@ -36,9 +36,9 @@ worker_test(void) {
 
 void
 mod_import_nat(mod_t *mod) {
-    // * (zero) -- value!
-    // * (add1) prev -- value!
-    // * (add) addend target! -- result
+    // * (zero) -> value!
+    // * (add1) prev -> value!
+    // * (add) addend target! -> result
 
     {
         node_spec_t *spec = node_spec_new("zero", 0, 1);

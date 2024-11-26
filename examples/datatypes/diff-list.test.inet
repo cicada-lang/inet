@@ -1,6 +1,6 @@
-* (diff) front -- back value!
-* (diff-append) target! rest -- result
-* (diff-open) new-back target! -- old-back
+* (diff) front -> back value!
+* (diff-append) target! rest -> result
+* (diff-open) new-back target! -> old-back
 
 ( plug the front of the `target` to the back of `rest` )
 
@@ -14,9 +14,9 @@
 
 ( list.inet )
 
-* (null) -- value!
-* (cons) tail head -- value!
-* (append) target! rest -- result
+* (null) -> value!
+* (cons) tail head -> value!
+* (append) target! rest -> result
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -27,7 +27,7 @@
 
 ( test )
 
-* (sole) -- value!
+* (sole) -> value!
 
 = sole-diff-list
   @wire/pair

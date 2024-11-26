@@ -1,4 +1,4 @@
-* (sole) -- value!
+* (sole) -> value!
 
 . @print-current-worker
   sole

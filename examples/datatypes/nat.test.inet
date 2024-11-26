@@ -1,6 +1,6 @@
-* (zero) -- value!
-* (add1) prev -- value!
-* (add) target! addend -- result
+* (zero) -> value!
+* (add1) prev -> value!
+* (add) target! addend -> result
 
 ! (zero)-(add)
   (add)-addend result-(add)
@@ -26,14 +26,14 @@
 
 ( to define `mul`, we first need `nat-erase` and `nat-dup`. )
 
-* (nat-erase) target! --
+* (nat-erase) target! ->
 
 ! (zero)-(nat-erase)
 
 ! (add1)-(nat-erase)
   (add1)-prev nat-erase
 
-* (nat-dup) target! -- first second
+* (nat-dup) target! -> first second
 
 ! (zero)-(nat-dup)
   zero first-(nat-dup)
@@ -44,7 +44,7 @@
   ( first second ) add1 second-(nat-dup)
   ( first ) add1 first-(nat-dup)
 
-* (mul) target! mulend -- result
+* (mul) target! mulend -> result
 
 ! (zero)-(mul)
   (mul)-mulend nat-erase
@@ -63,8 +63,8 @@
 
 ( to define `max`, we need `max-aux`. )
 
-* (max) first! second -- result
-* (max-aux) first second! -- result
+* (max) first! second -> result
+* (max-aux) first second! -> result
 
 ! (zero)-(max)
   (max)-second result-(max)
