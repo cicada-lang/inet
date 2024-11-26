@@ -5,10 +5,9 @@ fix `line-comment.test.inet`
 
 # varvara
 
-`libs/convas` -- setup
-`convas_t` -- setup x window
+`canvas_t` -- setup x window
 render icn to screen
-render inet by programming `convas`
+render inet by programming `canvas`
 
 # study
 
