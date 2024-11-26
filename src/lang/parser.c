@@ -53,12 +53,11 @@ static bool token_is_rune(const token_t *token) {
 void
 parser_parse(parser_t *self) {
     assert(self->text);
+    assert(self->lexer);
 
-    lexer_t *lexer = lexer_new();
-    lexer->text = self->text;
-    lexer_lex(lexer);
-    self->token_list = lexer->token_list;
-    lexer_destroy(&lexer);
+    self->lexer->text = self->text;
+    lexer_lex(self->lexer);
+    self->token_list = self->lexer->token_list;
 
     while (true) {
         parser_maybe_ignore_inline_comment(self);

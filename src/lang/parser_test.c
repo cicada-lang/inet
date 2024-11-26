@@ -5,6 +5,7 @@ parser_test(void) {
     printf("<parser_test>\n");
 
     parser_t *parser = parser_new();
+    parser->lexer = lexer_new();
     parser->text = ""
         "* (zero) -> value!                   \n"
         "* (add1) prev -> value!              \n"

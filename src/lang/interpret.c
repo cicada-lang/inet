@@ -82,6 +82,7 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 void
 interpret_mod(worker_t *worker) {
     parser_t *parser = parser_new();
+    parser->lexer = lexer_new();
     parser->src = worker->mod->src;
     parser->text = worker->mod->text;
     parser->err = worker->err;
