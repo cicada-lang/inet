@@ -5,22 +5,30 @@ lexer_test(void) {
     printf("<lexer_test>\n");
 
     {
-        list_t *token_list = lex("");
+        lexer_t *lexer = lexer_new("");
+        lexer_lex(lexer);
+        list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 0);
     }
 
     {
-        list_t *token_list = lex(" ");
+        lexer_t *lexer = lexer_new(" ");
+        lexer_lex(lexer);
+        list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 0);
     }
 
     {
-        list_t *token_list = lex(" \n \t \n ");
+        lexer_t *lexer = lexer_new(" \n \t \n ");
+        lexer_lex(lexer);
+        list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 0);
     }
 
     {
-        list_t *token_list = lex("a b c");
+        lexer_t *lexer = lexer_new("a b c");
+        lexer_lex(lexer);
+        list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 3);
 
         token_t *a = list_shift(token_list);

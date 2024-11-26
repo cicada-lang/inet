@@ -1,29 +1,18 @@
 #include "index.h"
 
-#define MAX_BUFFER_LENGTH 1024
-
-struct lexer_t {
-    const char *text;
-    size_t text_length;
-    size_t cursor;
-    char *buffer;
-    size_t buffer_length;
-    list_t *token_list;
-};
-
-static lexer_t *
+lexer_t *
 lexer_new(const char *text) {
     lexer_t *self = allocate(sizeof(lexer_t));
     self->text = text;
     self->text_length = strlen(text);
     self->cursor = 0;
-    self->buffer = allocate(MAX_BUFFER_LENGTH + 1);
+    self->buffer = allocate(MAX_TOKEN_LENGTH + 1);
     self->buffer_length = 0;
     self->token_list = list_new();
     return self;
 }
 
-static void
+void
 lexer_destroy(lexer_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
@@ -50,7 +39,7 @@ lexer_collect_char(lexer_t *self, char c) {
     self->buffer[self->buffer_length] = c;
     self->buffer[self->buffer_length + 1] = '\0';
     self->buffer_length++;
-    assert(self->buffer_length <= MAX_BUFFER_LENGTH);
+    assert(self->buffer_length <= MAX_TOKEN_LENGTH);
 }
 
 // dispatch over current char in a loop.
@@ -58,7 +47,7 @@ lexer_collect_char(lexer_t *self, char c) {
 static void lexer_lex_ignore_space(lexer_t *self);
 static void lexer_lex_word(lexer_t *self);
 
-static void
+void
 lexer_lex(lexer_t *self) {
     while (!lexer_is_finished(self)) {
         char c = lexer_current_char(self);
@@ -102,14 +91,4 @@ lexer_lex_word(lexer_t *self) {
             self->cursor++;
         }
     }
-}
-
-
-list_t *
-lex(const char *text) {
-    lexer_t *lexer = lexer_new(text);
-    lexer_lex(lexer);
-    list_t *token_list = lexer->token_list;
-    lexer_destroy(&lexer);
-    return token_list;
 }
