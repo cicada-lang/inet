@@ -1,4 +1,3 @@
-`libs/lexer` be able to config line comment
 [syntax] `--` as line comment
 fix `line-comment.test.inet`
 
