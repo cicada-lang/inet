@@ -83,6 +83,7 @@ void
 interpret_mod(worker_t *worker) {
     parser_t *parser = parser_new();
     parser->lexer = lexer_new();
+    parser->lexer->line_comment_start = "--";
     parser->src = worker->mod->src;
     parser->text = worker->mod->text;
     parser->err = worker->err;

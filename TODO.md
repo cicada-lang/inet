@@ -1,6 +1,3 @@
-[syntax] `--` as line comment
-fix `line-comment.test.inet`
-
 # varvara
 
 `canvas_t` -- setup x window
