@@ -216,9 +216,9 @@ We design the statement to define node as follows:
 The aforementioned nodes are defined as follows:
 
 ```
-* (zero) -- value!
-* (add1) prev -- value!
-* (add) target! prev -- result
+* (zero) -> value!
+* (add1) prev -> value!
+* (add) target! prev -> result
 ```
 
 # 5
@@ -334,9 +334,9 @@ use `( ... )` to write comments,
 and use `.` to run program.
 
 ```
-* (zero) -- value!
-* (add1) prev -- value!
-* (add) target! addend -- result
+* (zero) -> value!
+* (add1) prev -> value!
+* (add) target! addend -> result
 
 ! (zero)-(add)
   (add)-addend result-(add)
@@ -436,7 +436,7 @@ first!   second
 Node definition:
 
 ```
-* (max) first! second -- result
+* (max) first! second -> result
 ```
 
 The interaction between `(zero)` and `(zero)` is simple:
@@ -487,7 +487,7 @@ first    second!
 Node definition:
 
 ```
-* (max-aux) first second! -- result
+* (max-aux) first second! -> result
 ```
 
 Using the auxiliary node to define
@@ -551,8 +551,8 @@ Rule definition:
 ```
 
 ```
-* (max) first! second -- result
-* (max-aux) first second! -- result
+* (max) first! second -> result
+* (max-aux) first second! -> result
 
 ! (zero)-(max)
   (max)-second result-(max)
@@ -604,14 +604,14 @@ Thus when we want to factor out a subsequence from a sequence of words,
 there will be no complicated syntax preventing us from doing so.
 
 ```
-* (nat-erase) target! --
+* (nat-erase) target! ->
 
 ! (zero)-(nat-erase)
 
 ! (add1)-(nat-erase)
   (add1)-prev nat-erase
 
-* (nat-dup) target! -- first second
+* (nat-dup) target! -> first second
 
 ! (zero)-(nat-dup)
   zero first-(nat-dup)
@@ -622,7 +622,7 @@ there will be no complicated syntax preventing us from doing so.
   ( first second ) add1 second-(nat-dup)
   ( first ) add1 first-(nat-dup)
 
-* (mul) target! mulend -- result
+* (mul) target! mulend -> result
 
 ! (zero)-(mul)
   (mul)-mulend nat-erase
@@ -649,9 +649,9 @@ The difference is that the `(add1)` of natural number only add one node,
 while the `(cons)` of list add one node and link to an extra node.
 
 ```
-* (null) -- value!
-* (cons) tail head -- value!
-* (append) target! rest -- result
+* (null) -> value!
+* (cons) tail head -> value!
+* (append) target! rest -> result
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -662,7 +662,7 @@ while the `(cons)` of list add one node and link to an extra node.
 
 ( test )
 
-* (sole) -- value!
+* (sole) -> value!
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons
@@ -697,9 +697,9 @@ But in interaction nets,
 the relationship between all nodes is symmetric.
 
 ```
-* (diff) front -- back value!
-* (diff-append) target! rest -- result
-* (diff-open) new-back target! -- old-back
+* (diff) front -> back value!
+* (diff-append) target! rest -> result
+* (diff-open) new-back target! -> old-back
 
 ! (diff)-(diff-append)
   (diff)-front diff result-(diff-append)
@@ -711,7 +711,7 @@ the relationship between all nodes is symmetric.
 
 ( test )
 
-* (sole) -- value!
+* (sole) -> value!
 
 = sole-diff-list
   @wire/pair
