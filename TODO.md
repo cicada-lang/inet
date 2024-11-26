@@ -1,11 +1,15 @@
+# inet
+
+- 可能把 -- 改成 ->
+- -- 作为 line comment
+- `(- ... -)` 作为 inline comment
+
 # varvara
 
-`libs/varvara` -- setup
-extract `vv_screen_t` (varvara screen) from uxn11
-be able to handle icn and chr format
-port button.tal to `vv_screen`
-port more programs to `vv_screen`
-render inet by programming `vv_screen`
+`libs/convas` -- setup
+`convas_t` -- setup x window
+render icn to screen
+render inet by programming `convas`
 
 # study
 
