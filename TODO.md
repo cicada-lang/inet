@@ -1,10 +1,12 @@
-# varvara
+# canvas
 
-`canvas_t` -- setup type
+`canvas_test` -- setup
+`canvas_new`
+`canvas_destroy`
 `canvas` -- create window
 `canvas` -- close window
 `canvas` -- render pixmap
-render icn to screen
+render icn-like to screen
 render inet by programming `canvas`
 
 # study
