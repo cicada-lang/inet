@@ -85,21 +85,7 @@ canvas_handle_event(canvas_t *self) {
 }
 
 static void
-canvas_loop(canvas_t *self) {
-    while (self->window_open) {
-        while (XPending(self->display)) {
-            canvas_handle_event(self);
-        }
-    }
-}
-
-void
-canvas_open(canvas_t *self) {
-    canvas_init(self);
-
-    XMapWindow(self->display, self->window);
-    XFlush(self->display);
-
+canvas_draw(canvas_t *self) {
     Visual *visual = DefaultVisual(self->display, 0);
     uint64_t image_depth = DefaultDepth(self->display, 0);
     int64_t image_offset = 0;
@@ -120,6 +106,20 @@ canvas_open(canvas_t *self) {
             }
         }
     }
+}
 
-    canvas_loop(self);
+void
+canvas_open(canvas_t *self) {
+    canvas_init(self);
+
+    XMapWindow(self->display, self->window);
+    XFlush(self->display);
+
+    canvas_draw(self);
+
+    while (self->window_open) {
+        while (XPending(self->display)) {
+            canvas_handle_event(self);
+        }
+    }
 }
