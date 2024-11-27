@@ -1,9 +1,9 @@
 # canvas
 
-`canvas` -- render pixmap
-render icn-like to screen
-render inet by programming `canvas`
-`canvas_close`
+[canvas] `canvas` -- render pixmap
+[canvas] render icn-like to screen
+[canvas] render inet by programming `canvas`
+[canvas] `canvas_close`
 
 # study
 

@@ -44,9 +44,12 @@ canvas_init(canvas_t *self) {
         KeyPressMask |
         KeyReleaseMask);
 
-    // XStoreName(self->display, self->window, self->window_name);
-    XStoreName(self->display, self->window,
-               string_append("floating ", self->window_name));
+    XClassHint *class_hint = XAllocClassHint();
+    class_hint->res_name = string_dup("inet");
+    class_hint->res_class = string_dup("canvas");
+    XSetClassHint(self->display, self->window, class_hint);
+
+    XStoreName(self->display, self->window, self->window_name);
 }
 
 static void
