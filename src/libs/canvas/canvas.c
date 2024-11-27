@@ -73,7 +73,8 @@ canvas_handle_event(canvas_t *self) {
             self->window_open = false;
             XDestroyWindow(self->display, self->window);
         }
-    } break;
+        return;
+    }
 
     case Expose: {
         XPutImage(
@@ -82,7 +83,8 @@ canvas_handle_event(canvas_t *self) {
             self->image,
             0, 0, 0, 0,
             self->width, self->height);
-    } break;
+        return;
+    }
 
     case ConfigureNotify: {
         XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
@@ -92,7 +94,8 @@ canvas_handle_event(canvas_t *self) {
         printf("[ConfigureNotify] width: %lu, height: %lu\n",
                self->width,
                self->height);
-    } break;
+        return;
+    }
     }
 }
 
