@@ -1,6 +1,5 @@
 # canvas
 
-`canvas_new`
 `canvas_destroy`
 `canvas` -- create window
 `canvas` -- close window
