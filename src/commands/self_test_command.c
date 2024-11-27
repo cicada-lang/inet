@@ -21,6 +21,7 @@ run(char **args) {
     stack_test();
     int_test();
     text_test();
+    canvas_test();
 
     worker_test();
     lexer_test();
