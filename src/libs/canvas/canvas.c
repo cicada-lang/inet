@@ -3,6 +3,7 @@
 canvas_t *
 canvas_new(void) {
     canvas_t *self = allocate(sizeof(canvas_t));
+    self->window_open = true;
     return self;
 }
 
@@ -42,7 +43,37 @@ canvas_init(canvas_t *self) {
         ExposureMask |
         KeyPressMask |
         KeyReleaseMask);
-    XStoreName(self->display, self->window, self->window_name);
+
+    // XStoreName(self->display, self->window, self->window_name);
+    XStoreName(self->display, self->window,
+               string_append("floating ", self->window_name));
+}
+
+static void
+canvas_handle_event(canvas_t *self) {
+    Atom wmDelete = XInternAtom(self->display, "WM_DELETE_WINDOW", True);
+    XSetWMProtocols(self->display, self->window, &wmDelete, 1);
+
+    XEvent unknown_event;
+    XNextEvent(self->display, &unknown_event);
+    switch(unknown_event.type) {
+    case ClientMessage: {
+        XClientMessageEvent* event = (XClientMessageEvent*) &unknown_event;
+        if ((Atom)event->data.l[0] == wmDelete) {
+            self->window_open = false;
+            XDestroyWindow(self->display, self->window);
+        }
+        break;
+    }
+    }
+}
+
+static void
+canvas_loop(canvas_t *self) {
+    while (self->window_open) {
+        while (XPending(self->display))
+            canvas_handle_event(self);
+    }
 }
 
 void
@@ -50,7 +81,5 @@ canvas_open(canvas_t *self) {
     canvas_init(self);
     XMapWindow(self->display, self->window);
     XFlush(self->display);
-
-    // while (true) {}
-    // while (true) {}
+    canvas_loop(self);
 }

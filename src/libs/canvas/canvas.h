@@ -3,6 +3,7 @@
 struct canvas_t {
     Display* display;
     Window window;
+    bool window_open;
     const char *window_name;
     uint64_t width;
     uint64_t height;
