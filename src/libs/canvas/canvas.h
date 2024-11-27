@@ -9,6 +9,7 @@ struct canvas_t {
     const char *window_name;
     size_t width;
     size_t height;
+    bool size_changed;
 };
 
 canvas_t *canvas_new(size_t width, size_t height);

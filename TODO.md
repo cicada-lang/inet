@@ -2,8 +2,6 @@ fix the use of `switch` -- always `break`
 
 # canvas
 
-[canvas] handle resize
-
 [canvas] pixel size
 [canvas] resize window change pixel size
 

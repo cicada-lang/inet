@@ -7,6 +7,7 @@ canvas_new(size_t width, size_t height) {
     self->height = height;
     self->pixels = allocate(self->width * self->height * sizeof(uint32_t));
     self->window_open = true;
+    self->size_changed = false;
     return self;
 }
 
@@ -46,7 +47,8 @@ canvas_init(canvas_t *self) {
         PointerMotionMask |
         ExposureMask |
         KeyPressMask |
-        KeyReleaseMask;
+        KeyReleaseMask |
+        StructureNotifyMask;
     XSelectInput(self->display, self->window, event_mask);
 
     XClassHint *class_hint = XAllocClassHint();
@@ -66,7 +68,7 @@ canvas_handle_event(canvas_t *self) {
     XNextEvent(self->display, &unknown_event);
     switch(unknown_event.type) {
     case ClientMessage: {
-        XClientMessageEvent* event = (XClientMessageEvent*) &unknown_event;
+        XClientMessageEvent* event = (XClientMessageEvent *) &unknown_event;
         if ((Atom)event->data.l[0] == wmDelete) {
             self->window_open = false;
             XDestroyWindow(self->display, self->window);
@@ -80,6 +82,16 @@ canvas_handle_event(canvas_t *self) {
             self->image,
             0, 0, 0, 0,
             self->width, self->height);
+    } break;
+
+    case ConfigureNotify: {
+        XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
+        self->width = event->width;
+        self->height = event->height;
+        self->size_changed = true;
+        printf("[ConfigureNotify] width: %lu, height: %lu\n",
+               self->width,
+               self->height);
     } break;
     }
 }
@@ -103,6 +115,8 @@ canvas_draw(canvas_t *self) {
         for (size_t x = 0; x < self->width; x++) {
             if ((x % 16 == 0) && (y % 16 == 0)) {
                 self->pixels[y * self->width + x] = 0xffffffff;
+            } else {
+                self->pixels[y * self->width + x] = 0;
             }
         }
     }
@@ -120,6 +134,14 @@ canvas_open(canvas_t *self) {
     while (self->window_open) {
         while (XPending(self->display)) {
             canvas_handle_event(self);
+        }
+
+        if (self->size_changed) {
+            self->size_changed = false;
+            self->pixels = realloc(
+                self->pixels,
+                self->width * self->height * sizeof(uint32_t));
+            canvas_draw(self);
         }
     }
 }
