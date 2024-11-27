@@ -3,6 +3,8 @@
 struct canvas_t {
     Display* display;
     Window window;
+    XImage* image;
+    char *pixels;
     bool window_open;
     const char *window_name;
     uint64_t width;

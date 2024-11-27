@@ -1,7 +1,7 @@
 # canvas
 
-[canvas] `canvas` -- render pixmap
 [canvas] render icn-like to screen
+[canvas] handle resize like uxn
 [canvas] render inet by programming `canvas`
 [canvas] `canvas_close`
 

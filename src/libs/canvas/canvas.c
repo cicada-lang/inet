@@ -22,6 +22,7 @@ canvas_init(canvas_t *self) {
     self->display = XOpenDisplay(NULL);
     assert(self->display);
     int root = DefaultRootWindow(self->display);
+
     int window_x = 0;
     int window_y = 0;
     uint64_t border_width = 1;
@@ -30,10 +31,11 @@ canvas_init(canvas_t *self) {
     self->window = XCreateSimpleWindow(
         self->display, root,
         window_x, window_y,
-        self->width + self->padding * 2,
-        self->height + self->padding * 2,
+        self->width,
+        self->height,
         border_width,  border_pixel,
         background_pixel);
+
     XSelectInput(
         self->display,
         self->window,
@@ -82,7 +84,42 @@ canvas_loop(canvas_t *self) {
 void
 canvas_open(canvas_t *self) {
     canvas_init(self);
+
     XMapWindow(self->display, self->window);
     XFlush(self->display);
+
+    int screen_number = DefaultScreen(self->display);
+    Visual *visual = DefaultVisual(self->display, screen_number);
+    uint64_t image_depth = DefaultDepth(self->display, screen_number);
+    int64_t image_offset = 0;
+    int64_t pixel_bits = 32;
+    int64_t pixel_bytes = pixel_bits / 8;
+    int64_t bytes_per_line = 0;
+    self->pixels = allocate(self->width * self->height * pixel_bytes);
+    self->image = XCreateImage(
+        self->display, visual,
+        image_depth, ZPixmap, image_offset,
+        self->pixels, self->width, self->height,
+        pixel_bits, bytes_per_line);
+
+    int pitch = self->width * pixel_bytes;
+    for(uint64_t y = 0; y < self->height; y++) {
+        char* row = self->pixels + (y * pitch);
+        for(uint64_t x = 0; x < self->width; x++) {
+            unsigned int* p = (unsigned int*) (row + (x * pixel_bytes));
+            if(x%16 && y%16) {
+                *p = 0xffffffff;
+            } else {
+                *p = 0;
+            }
+        }
+    }
+
+    GC defaultGC = DefaultGC(self->display, screen_number);
+    XPutImage(self->display, self->window,
+              defaultGC, self->image,
+              0, 0, 0, 0,
+              self->width, self->height);
+
     canvas_loop(self);
 }
