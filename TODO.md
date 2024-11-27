@@ -1,6 +1,7 @@
+fix the use of `switch` -- always `break`
+
 # canvas
 
-[canvas] handle `Expose`
 [canvas] handle resize
 
 [canvas] pixel size

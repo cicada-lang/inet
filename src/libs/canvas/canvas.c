@@ -5,6 +5,7 @@ canvas_new(size_t width, size_t height) {
     canvas_t *self = allocate(sizeof(canvas_t));
     self->width = width;
     self->height = height;
+    self->pixels = allocate(self->width * self->height * sizeof(uint32_t));
     self->window_open = true;
     return self;
 }
@@ -14,6 +15,7 @@ canvas_destroy(canvas_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         canvas_t *self = *self_pointer;
+        free(self->pixels);
         free(self);
         *self_pointer = NULL;
     }
@@ -38,15 +40,14 @@ canvas_init(canvas_t *self) {
         border_width,  border_pixel,
         background_pixel);
 
-    XSelectInput(
-        self->display,
-        self->window,
+    long event_mask =
         ButtonPressMask |
         ButtonReleaseMask |
         PointerMotionMask |
         ExposureMask |
         KeyPressMask |
-        KeyReleaseMask);
+        KeyReleaseMask;
+    XSelectInput(self->display, self->window, event_mask);
 
     XClassHint *class_hint = XAllocClassHint();
     class_hint->res_name = string_dup("inet");
@@ -70,16 +71,25 @@ canvas_handle_event(canvas_t *self) {
             self->window_open = false;
             XDestroyWindow(self->display, self->window);
         }
-        break;
-    }
+    } break;
+
+    case Expose: {
+        XPutImage(
+            self->display, self->window,
+            DefaultGC(self->display, 0),
+            self->image,
+            0, 0, 0, 0,
+            self->width, self->height);
+    } break;
     }
 }
 
 static void
 canvas_loop(canvas_t *self) {
     while (self->window_open) {
-        while (XPending(self->display))
+        while (XPending(self->display)) {
             canvas_handle_event(self);
+        }
     }
 }
 
@@ -90,14 +100,13 @@ canvas_open(canvas_t *self) {
     XMapWindow(self->display, self->window);
     XFlush(self->display);
 
-    int screen_number = DefaultScreen(self->display);
-    Visual *visual = DefaultVisual(self->display, screen_number);
-    uint64_t image_depth = DefaultDepth(self->display, screen_number);
+    Visual *visual = DefaultVisual(self->display, 0);
+    uint64_t image_depth = DefaultDepth(self->display, 0);
     int64_t image_offset = 0;
     int64_t pixel_bytes = sizeof(uint32_t);
     int64_t pixel_bits = pixel_bytes * 8;
     int64_t bytes_per_line = 0;
-    self->pixels = allocate(self->width * self->height * sizeof(uint32_t));
+
     self->image = XCreateImage(
         self->display, visual,
         image_depth, ZPixmap, image_offset,
@@ -111,12 +120,6 @@ canvas_open(canvas_t *self) {
             }
         }
     }
-
-    GC defaultGC = DefaultGC(self->display, screen_number);
-    XPutImage(self->display, self->window,
-              defaultGC, self->image,
-              0, 0, 0, 0,
-              self->width, self->height);
 
     canvas_loop(self);
 }
