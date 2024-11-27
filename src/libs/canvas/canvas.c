@@ -126,7 +126,7 @@ canvas_draw(canvas_t *self) {
 }
 
 void
-canvas_render(canvas_t *self) {
+canvas_open(canvas_t *self) {
     canvas_init(self);
 
     XMapWindow(self->display, self->window);
