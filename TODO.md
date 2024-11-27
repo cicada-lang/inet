@@ -1,7 +1,6 @@
 # canvas
 
 [canvas] extract `canvas_renderer_t`
-[canvas] rename `canvas_open` to `canvas_render`
 [canvas] pixel size
 [canvas] resize window change pixel size
 

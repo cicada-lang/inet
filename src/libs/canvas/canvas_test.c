@@ -6,7 +6,7 @@ canvas_test(void) {
 
     canvas_t *canvas = canvas_new(64 * 8, 40 * 8);
     canvas->window_name = "hello canvas";
-    canvas_open(canvas);
+    canvas_render(canvas);
 
     printf("</canvas_test>\n");
 }
