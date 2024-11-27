@@ -4,15 +4,14 @@ struct canvas_t {
     Display* display;
     Window window;
     XImage* image;
-    char *pixels;
+    uint32_t *pixels;
     bool window_open;
     const char *window_name;
-    uint64_t width;
-    uint64_t height;
-    uint64_t padding;
+    size_t width;
+    size_t height;
 };
 
-canvas_t *canvas_new(void);
+canvas_t *canvas_new(size_t width, size_t height);
 void canvas_destroy(canvas_t **self_pointer);
 
 void canvas_open(canvas_t *self);

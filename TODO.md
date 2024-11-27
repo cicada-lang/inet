@@ -1,7 +1,12 @@
 # canvas
 
+[canvas] handle `Expose`
+[canvas] handle resize
+
+[canvas] pixel size
+[canvas] resize window change pixel size
+
 [canvas] render icn-like to screen
-[canvas] handle resize like uxn
 [canvas] render inet by programming `canvas`
 [canvas] `canvas_close`
 

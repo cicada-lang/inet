@@ -1,8 +1,10 @@
 #include "index.h"
 
 canvas_t *
-canvas_new(void) {
+canvas_new(size_t width, size_t height) {
     canvas_t *self = allocate(sizeof(canvas_t));
+    self->width = width;
+    self->height = height;
     self->window_open = true;
     return self;
 }
@@ -92,25 +94,20 @@ canvas_open(canvas_t *self) {
     Visual *visual = DefaultVisual(self->display, screen_number);
     uint64_t image_depth = DefaultDepth(self->display, screen_number);
     int64_t image_offset = 0;
-    int64_t pixel_bits = 32;
-    int64_t pixel_bytes = pixel_bits / 8;
+    int64_t pixel_bytes = sizeof(uint32_t);
+    int64_t pixel_bits = pixel_bytes * 8;
     int64_t bytes_per_line = 0;
-    self->pixels = allocate(self->width * self->height * pixel_bytes);
+    self->pixels = allocate(self->width * self->height * sizeof(uint32_t));
     self->image = XCreateImage(
         self->display, visual,
         image_depth, ZPixmap, image_offset,
-        self->pixels, self->width, self->height,
+        (char *) self->pixels, self->width, self->height,
         pixel_bits, bytes_per_line);
 
-    int pitch = self->width * pixel_bytes;
-    for(uint64_t y = 0; y < self->height; y++) {
-        char* row = self->pixels + (y * pitch);
-        for(uint64_t x = 0; x < self->width; x++) {
-            unsigned int* p = (unsigned int*) (row + (x * pixel_bytes));
-            if(x%16 && y%16) {
-                *p = 0xffffffff;
-            } else {
-                *p = 0;
+    for (size_t y = 0; y < self->height; y++) {
+        for (size_t x = 0; x < self->width; x++) {
+            if ((x % 16 == 0) && (y % 16 == 0)) {
+                self->pixels[y * self->width + x] = 0xffffffff;
             }
         }
     }
