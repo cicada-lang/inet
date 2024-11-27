@@ -1,6 +1,5 @@
 # canvas
 
-`canvas_destroy`
 `canvas` -- create window
 `canvas` -- close window
 `canvas` -- render pixmap

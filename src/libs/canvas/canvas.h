@@ -5,3 +5,4 @@ struct canvas_t {
 };
 
 canvas_t *canvas_new(void);
+void canvas_destroy(canvas_t **self_pointer);
