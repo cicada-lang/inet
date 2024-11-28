@@ -175,21 +175,25 @@ canvas_window_receive(canvas_window_t *self) {
 
     case ConfigureNotify: {
         XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
-        printf("[ConfigureNotify] width: %lu, height: %lu\n",
-               self->width,
-               self->height);
+        // printf("[ConfigureNotify] width: %lu, height: %lu\n",
+        //        self->width,
+        //        self->height);
         canvas_window_resize(self, event->width, event->height);
         return;
     }
     }
 }
 
+static void
+canvas_window_show(canvas_window_t *self) {
+    XMapWindow(self->display, self->window);
+    XFlush(self->display);
+}
+
 void
 canvas_window_open(canvas_window_t *self) {
     canvas_window_init(self);
-
-    XMapWindow(self->display, self->window);
-    XFlush(self->display);
+    canvas_window_show(self);
 
     self->is_open = true;
     while (self->is_open) {
