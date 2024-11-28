@@ -9,5 +9,8 @@ canvas_test(void) {
     window->window_name = "hello canvas";
     canvas_window_open(window);
 
+    canvas_window_destroy(&window);
+    canvas_destroy(&canvas);
+
     printf("</canvas_test>\n");
 }

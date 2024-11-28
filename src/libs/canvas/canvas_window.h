@@ -10,7 +10,6 @@ struct canvas_window_t {
     Window window;
     bool window_open;
     const char *window_name;
-    bool size_changed;
 };
 
 canvas_window_t *canvas_window_new(canvas_t *canvas);

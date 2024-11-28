@@ -4,6 +4,7 @@ canvas_window_t *
 canvas_window_new(canvas_t *canvas) {
     canvas_window_t *self = allocate(sizeof(canvas_window_t));
     self->canvas = canvas;
+
     self->image_buffer = allocate(
         self->canvas->width *
         self->canvas->height *
@@ -15,7 +16,6 @@ canvas_window_new(canvas_t *canvas) {
     self->height = self->canvas->height * self->canvas->scale;
 
     self->window_open = true;
-    self->size_changed = false;
     return self;
 }
 
@@ -24,6 +24,7 @@ canvas_window_destroy(canvas_window_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         canvas_window_t *self = *self_pointer;
+        if (self->image) XFree(self->image);
         free(self->image_buffer);
         free(self);
         *self_pointer = NULL;
@@ -34,7 +35,6 @@ static void
 canvas_window_init(canvas_window_t *self) {
     self->display = XOpenDisplay(NULL);
     assert(self->display);
-    int root = DefaultRootWindow(self->display);
 
     int window_x = 0;
     int window_y = 0;
@@ -42,7 +42,8 @@ canvas_window_init(canvas_window_t *self) {
     uint64_t border_pixel = 0;
     uint64_t background_pixel = 0;
     self->window = XCreateSimpleWindow(
-        self->display, root,
+        self->display,
+        DefaultRootWindow(self->display),
         window_x, window_y,
         self->width,
         self->height,
@@ -65,6 +66,58 @@ canvas_window_init(canvas_window_t *self) {
     XSetClassHint(self->display, self->window, class_hint);
 
     XStoreName(self->display, self->window, self->window_name);
+}
+
+
+static void
+canvas_window_draw_pixel(canvas_window_t *self, size_t row, size_t col) {
+    uint32_t pixel = self->canvas->pixels[row * self->canvas->width + col];
+    uint32_t y_start = row * self->canvas->scale;
+    uint32_t x_start = col * self->canvas->scale;
+    uint32_t x_width = self->canvas->width * self->canvas->scale;
+    for (size_t y = y_start; y < y_start + self->canvas->scale; y++) {
+        for (size_t x = x_start; x < x_start + self->canvas->scale; x++) {
+            self->image_buffer[y * x_width + x] = pixel;
+        }
+    }
+}
+
+static void
+canvas_window_draw_image(canvas_window_t *self) {
+    self->image_buffer = realloc(
+        self->image_buffer,
+        self->canvas->width *
+        self->canvas->height *
+        self->canvas->scale *
+        self->canvas->scale *
+        sizeof(uint32_t));
+
+    for (size_t row = 0; row < self->canvas->height; row++) {
+        for (size_t col = 0; col < self->canvas->width; col++) {
+            canvas_window_draw_pixel(self, row, col);
+        }
+    }
+}
+
+static void
+canvas_window_draw(canvas_window_t *self) {
+    canvas_window_draw_image(self);
+
+    Visual *visual = DefaultVisual(self->display, 0);
+    uint64_t image_depth = DefaultDepth(self->display, 0);
+    int64_t image_offset = 0;
+    int64_t pixel_bytes = sizeof(uint32_t);
+    int64_t pixel_bits = pixel_bytes * 8;
+    int64_t bytes_per_line = 0;
+
+    if (self->image) XFree(self->image);
+    self->image = XCreateImage(
+        self->display, visual,
+        image_depth, ZPixmap, image_offset,
+        (char *) self->image_buffer,
+        self->canvas->width * self->canvas->scale,
+        self->canvas->height * self->canvas->scale,
+        pixel_bits, bytes_per_line);
 }
 
 static void
@@ -99,40 +152,12 @@ canvas_window_receive(canvas_window_t *self) {
         XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
         self->width = event->width;
         self->height = event->height;
-        self->size_changed = true;
         printf("[ConfigureNotify] width: %lu, height: %lu\n",
                self->width,
                self->height);
+        canvas_window_draw(self);
         return;
     }
-    }
-}
-
-static void
-canvas_window_draw(canvas_window_t *self) {
-    Visual *visual = DefaultVisual(self->display, 0);
-    uint64_t image_depth = DefaultDepth(self->display, 0);
-    int64_t image_offset = 0;
-    int64_t pixel_bytes = sizeof(uint32_t);
-    int64_t pixel_bits = pixel_bytes * 8;
-    int64_t bytes_per_line = 0;
-
-    self->image = XCreateImage(
-        self->display, visual,
-        image_depth, ZPixmap, image_offset,
-        (char *) self->image_buffer,
-        self->width,
-        self->height,
-        pixel_bits, bytes_per_line);
-
-    for (size_t y = 0; y < self->height; y++) {
-        for (size_t x = 0; x < self->width; x++) {
-            if ((x % 16 == 0) && (y % 16 == 0)) {
-                self->image_buffer[y * self->width + x] = 0xffffffff;
-            } else {
-                self->image_buffer[y * self->width + x] = 0;
-            }
-        }
     }
 }
 
@@ -148,14 +173,6 @@ canvas_window_open(canvas_window_t *self) {
     while (self->window_open) {
         while (XPending(self->display)) {
             canvas_window_receive(self);
-        }
-
-        if (self->size_changed) {
-            self->size_changed = false;
-            self->image_buffer = realloc(
-                self->image_buffer,
-                self->width * self->height * sizeof(uint32_t));
-            canvas_window_draw(self);
         }
     }
 }

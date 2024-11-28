@@ -1,6 +1,11 @@
 # canvas
 
-[canvas] refacter render logic
+[canvas] `canvas_put_pixel`
+[canvas] test drawing by canvas API
+
+[canvas] scale should be in of `canvas_window_t` -- instead of `canvas_t`
+[canvas] `canvas_window_draw` -- 居中
+
 [canvas] resize window change pixel size
 
 [canvas] render icn-like to screen
