@@ -1,6 +1,7 @@
 # canvas
 
-[canvas] extract `canvas_window_t`
+[canvas] `canvas_window_new`
+[canvas] `canvas_window_destroy`
 [canvas] pixel size
 [canvas] resize window change pixel size
 
