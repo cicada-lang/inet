@@ -97,6 +97,34 @@ canvas_window_receive(canvas_window_t *self) {
     }
 }
 
+static void
+canvas_window_draw(canvas_window_t *self) {
+    Visual *visual = DefaultVisual(self->display, 0);
+    uint64_t image_depth = DefaultDepth(self->display, 0);
+    int64_t image_offset = 0;
+    int64_t pixel_bytes = sizeof(uint32_t);
+    int64_t pixel_bits = pixel_bytes * 8;
+    int64_t bytes_per_line = 0;
+
+    self->image = XCreateImage(
+        self->display, visual,
+        image_depth, ZPixmap, image_offset,
+        (char *) self->canvas->pixels,
+        self->canvas->width,
+        self->canvas->height,
+        pixel_bits, bytes_per_line);
+
+    for (size_t y = 0; y < self->canvas->height; y++) {
+        for (size_t x = 0; x < self->canvas->width; x++) {
+            if ((x % 16 == 0) && (y % 16 == 0)) {
+                self->canvas->pixels[y * self->canvas->width + x] = 0xffffffff;
+            } else {
+                self->canvas->pixels[y * self->canvas->width + x] = 0;
+            }
+        }
+    }
+}
+
 void
 canvas_window_open(canvas_window_t *self) {
     canvas_window_init(self);
@@ -104,7 +132,7 @@ canvas_window_open(canvas_window_t *self) {
     XMapWindow(self->display, self->window);
     XFlush(self->display);
 
-    // canvas_window_draw(self);
+    canvas_window_draw(self);
 
     while (self->window_open) {
         while (XPending(self->display)) {
@@ -116,7 +144,7 @@ canvas_window_open(canvas_window_t *self) {
             self->canvas->pixels = realloc(
                 self->canvas->pixels,
                 self->canvas->width * self->canvas->height * sizeof(uint32_t));
-            // canvas_window_draw(self);
+            canvas_window_draw(self);
         }
     }
 }
