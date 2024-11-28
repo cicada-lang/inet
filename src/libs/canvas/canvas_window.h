@@ -13,4 +13,4 @@ struct canvas_window_t {
 canvas_window_t *canvas_window_new(canvas_t *canvas);
 void canvas_window_destroy(canvas_window_t **self_pointer);
 
-// void canvas_window_open(canvas_window_t *self);
+void canvas_window_open(canvas_window_t *self);
