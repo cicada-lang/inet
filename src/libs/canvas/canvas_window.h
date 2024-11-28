@@ -10,8 +10,9 @@ struct canvas_window_t {
 
     Display* display;
     Window window;
-    bool window_open;
-    const char *window_name;
+
+    const char *title;
+    bool is_open;
 };
 
 canvas_window_t *canvas_window_new(canvas_t *canvas, size_t scale);

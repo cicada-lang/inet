@@ -16,7 +16,7 @@ canvas_window_new(canvas_t *canvas, size_t scale) {
     self->width = self->canvas->width * self->scale;
     self->height = self->canvas->height * self->scale;
 
-    self->window_open = true;
+    self->is_open = true;
     return self;
 }
 
@@ -66,7 +66,8 @@ canvas_window_init(canvas_window_t *self) {
     class_hint->res_class = string_dup("canvas");
     XSetClassHint(self->display, self->window, class_hint);
 
-    XStoreName(self->display, self->window, self->window_name);
+    if (self->title)
+        XStoreName(self->display, self->window, self->title);
 }
 
 
@@ -134,7 +135,7 @@ canvas_window_receive(canvas_window_t *self) {
     case ClientMessage: {
         XClientMessageEvent* event = (XClientMessageEvent *) &unknown_event;
         if ((Atom)event->data.l[0] == wmDelete) {
-            self->window_open = false;
+            self->is_open = false;
             XDestroyWindow(self->display, self->window);
         }
         return;
@@ -171,9 +172,7 @@ canvas_window_open(canvas_window_t *self) {
     XMapWindow(self->display, self->window);
     XFlush(self->display);
 
-    canvas_window_draw(self);
-
-    while (self->window_open) {
+    while (self->is_open) {
         while (XPending(self->display)) {
             canvas_window_receive(self);
         }

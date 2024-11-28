@@ -6,7 +6,7 @@ canvas_test(void) {
 
     canvas_t *canvas = canvas_new(10, 10);
     canvas_window_t *window = canvas_window_new(canvas, 100);
-    window->window_name = "hello canvas";
+    window->title = "hello canvas";
 
     canvas_put_pixel(canvas, 0, 0, 0xffff0000);
     canvas_put_pixel(canvas, 1, 1, 0xffff0000);

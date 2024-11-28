@@ -1,6 +1,7 @@
 # canvas
 
-[canvas] `canvas_window_draw` -- 居中
+[canvas] `canvas_window_draw` -- center
+[canvas] `canvas_window_draw` -- change scale
 
 [canvas] resize window change pixel size
 
