@@ -2,8 +2,6 @@
 
 [canvas] `canvas_window_show_image` -- center
 
-[canvas] resize window change pixel size
-
 [canvas] render icn-like to screen
 [canvas] render inet by programming `canvas`
 
