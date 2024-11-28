@@ -1,11 +1,10 @@
 #include "index.h"
 
 canvas_t *
-canvas_new(size_t width, size_t height, size_t scale) {
+canvas_new(size_t width, size_t height) {
     canvas_t *self = allocate(sizeof(canvas_t));
     self->width = width;
     self->height = height;
-    self->scale = scale;
     self->pixels = allocate(self->width * self->height * sizeof(uint32_t));
     return self;
 }

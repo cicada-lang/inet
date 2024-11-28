@@ -1,19 +1,20 @@
 #include "index.h"
 
 canvas_window_t *
-canvas_window_new(canvas_t *canvas) {
+canvas_window_new(canvas_t *canvas, size_t scale) {
     canvas_window_t *self = allocate(sizeof(canvas_window_t));
     self->canvas = canvas;
+    self->scale = scale;
 
     self->image_buffer = allocate(
         self->canvas->width *
         self->canvas->height *
-        self->canvas->scale *
-        self->canvas->scale *
+        self->scale *
+        self->scale *
         sizeof(uint32_t));
 
-    self->width = self->canvas->width * self->canvas->scale;
-    self->height = self->canvas->height * self->canvas->scale;
+    self->width = self->canvas->width * self->scale;
+    self->height = self->canvas->height * self->scale;
 
     self->window_open = true;
     return self;
@@ -74,11 +75,11 @@ canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
     uint32_t pixel = self->canvas->pixels[row * self->canvas->width + col];
     printf("[canvas_window_draw_pixel] col: %lu, row: %lu, pixel: %u\n",
            col, row, pixel);
-    uint32_t y_start = row * self->canvas->scale;
-    uint32_t x_start = col * self->canvas->scale;
-    uint32_t x_width = self->canvas->width * self->canvas->scale;
-    for (size_t y = y_start; y < y_start + self->canvas->scale; y++) {
-        for (size_t x = x_start; x < x_start + self->canvas->scale; x++) {
+    uint32_t y_start = row * self->scale;
+    uint32_t x_start = col * self->scale;
+    uint32_t x_width = self->canvas->width * self->scale;
+    for (size_t y = y_start; y < y_start + self->scale; y++) {
+        for (size_t x = x_start; x < x_start + self->scale; x++) {
             self->image_buffer[y * x_width + x] = pixel;
         }
     }
@@ -90,8 +91,8 @@ canvas_window_draw_image(canvas_window_t *self) {
         self->image_buffer,
         self->canvas->width *
         self->canvas->height *
-        self->canvas->scale *
-        self->canvas->scale *
+        self->scale *
+        self->scale *
         sizeof(uint32_t));
 
     for (size_t row = 0; row < self->canvas->height; row++) {
@@ -117,8 +118,8 @@ canvas_window_draw(canvas_window_t *self) {
         self->display, visual,
         image_depth, ZPixmap, image_offset,
         (char *) self->image_buffer,
-        self->canvas->width * self->canvas->scale,
-        self->canvas->height * self->canvas->scale,
+        self->canvas->width * self->scale,
+        self->canvas->height * self->scale,
         pixel_bits, bytes_per_line);
 }
 

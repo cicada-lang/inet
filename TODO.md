@@ -1,6 +1,5 @@
 # canvas
 
-[canvas] scale should be in of `canvas_window_t` -- instead of `canvas_t`
 [canvas] `canvas_window_draw` -- 居中
 
 [canvas] resize window change pixel size

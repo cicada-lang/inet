@@ -4,8 +4,8 @@ void
 canvas_test(void) {
     printf("<canvas_test>\n");
 
-    canvas_t *canvas = canvas_new(10, 10, 100);
-    canvas_window_t *window = canvas_window_new(canvas);
+    canvas_t *canvas = canvas_new(10, 10);
+    canvas_window_t *window = canvas_window_new(canvas, 100);
     window->window_name = "hello canvas";
 
     canvas_put_pixel(canvas, 0, 0, 0xffff0000);
