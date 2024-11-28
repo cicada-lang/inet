@@ -1,7 +1,5 @@
 # canvas
 
-[canvas] `canvas_window_show_image` -- center
-
 [canvas] render icn-like to screen
 [canvas] render inet by programming `canvas`
 
