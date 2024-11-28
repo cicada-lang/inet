@@ -16,7 +16,6 @@ canvas_window_new(canvas_t *canvas, size_t scale) {
     self->width = self->canvas->width * self->scale;
     self->height = self->canvas->height * self->scale;
 
-    self->is_open = true;
     return self;
 }
 
@@ -72,7 +71,7 @@ canvas_window_init(canvas_window_t *self) {
 
 
 static void
-canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
+canvas_window_update_pixel(canvas_window_t *self, size_t col, size_t row) {
     uint32_t pixel = self->canvas->pixels[row * self->canvas->width + col];
     uint32_t y_start = row * self->scale;
     uint32_t x_start = col * self->scale;
@@ -85,17 +84,17 @@ canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
 }
 
 static void
-canvas_window_draw_image(canvas_window_t *self) {
+canvas_window_update_image_buffer(canvas_window_t *self) {
     for (size_t row = 0; row < self->canvas->height; row++) {
         for (size_t col = 0; col < self->canvas->width; col++) {
-            canvas_window_draw_pixel(self, col, row);
+            canvas_window_update_pixel(self, col, row);
         }
     }
 }
 
 static void
-canvas_window_draw(canvas_window_t *self) {
-    canvas_window_draw_image(self);
+canvas_window_update_image(canvas_window_t *self) {
+    canvas_window_update_image_buffer(self);
 
     Visual *visual = DefaultVisual(self->display, 0);
     uint64_t image_depth = DefaultDepth(self->display, 0);
@@ -131,7 +130,18 @@ canvas_window_resize(canvas_window_t *self, size_t width, size_t height) {
         self->scale *
         sizeof(uint32_t));
 
-    canvas_window_draw(self);
+    canvas_window_update_image(self);
+}
+
+static void
+canvas_window_show_image(canvas_window_t *self) {
+    XPutImage(
+        self->display, self->window,
+        DefaultGC(self->display, 0),
+        self->image,
+        0, 0, 0, 0,
+        self->width,
+        self->height);
 }
 
 static void
@@ -152,13 +162,7 @@ canvas_window_receive(canvas_window_t *self) {
     }
 
     case Expose: {
-        XPutImage(
-            self->display, self->window,
-            DefaultGC(self->display, 0),
-            self->image,
-            0, 0, 0, 0,
-            self->width,
-            self->height);
+        canvas_window_show_image(self);
         return;
     }
 
@@ -180,6 +184,7 @@ canvas_window_open(canvas_window_t *self) {
     XMapWindow(self->display, self->window);
     XFlush(self->display);
 
+    self->is_open = true;
     while (self->is_open) {
         while (XPending(self->display)) {
             canvas_window_receive(self);

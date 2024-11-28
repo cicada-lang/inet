@@ -1,6 +1,6 @@
 # canvas
 
-[canvas] `canvas_window_draw` -- center
+[canvas] `canvas_window_show_image` -- center
 
 [canvas] resize window change pixel size
 
