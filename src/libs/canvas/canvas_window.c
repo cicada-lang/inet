@@ -70,8 +70,10 @@ canvas_window_init(canvas_window_t *self) {
 
 
 static void
-canvas_window_draw_pixel(canvas_window_t *self, size_t row, size_t col) {
+canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
     uint32_t pixel = self->canvas->pixels[row * self->canvas->width + col];
+    printf("[canvas_window_draw_pixel] col: %lu, row: %lu, pixel: %u\n",
+           col, row, pixel);
     uint32_t y_start = row * self->canvas->scale;
     uint32_t x_start = col * self->canvas->scale;
     uint32_t x_width = self->canvas->width * self->canvas->scale;
@@ -94,7 +96,7 @@ canvas_window_draw_image(canvas_window_t *self) {
 
     for (size_t row = 0; row < self->canvas->height; row++) {
         for (size_t col = 0; col < self->canvas->width; col++) {
-            canvas_window_draw_pixel(self, row, col);
+            canvas_window_draw_pixel(self, col, row);
         }
     }
 }

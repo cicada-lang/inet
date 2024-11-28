@@ -20,3 +20,8 @@ canvas_destroy(canvas_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+canvas_put_pixel(canvas_t *self, size_t x, size_t y, uint32_t pixel) {
+    self->pixels[y * self->width + x] = pixel;
+}
