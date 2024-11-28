@@ -56,9 +56,67 @@ canvas_window_init(canvas_window_t *self) {
     XStoreName(self->display, self->window, self->window_name);
 }
 
+static void
+canvas_window_receive(canvas_window_t *self) {
+    Atom wmDelete = XInternAtom(self->display, "WM_DELETE_WINDOW", True);
+    XSetWMProtocols(self->display, self->window, &wmDelete, 1);
+
+    XEvent unknown_event;
+    XNextEvent(self->display, &unknown_event);
+    switch(unknown_event.type) {
+    case ClientMessage: {
+        XClientMessageEvent* event = (XClientMessageEvent *) &unknown_event;
+        if ((Atom)event->data.l[0] == wmDelete) {
+            self->window_open = false;
+            XDestroyWindow(self->display, self->window);
+        }
+        return;
+    }
+
+    case Expose: {
+        XPutImage(
+            self->display, self->window,
+            DefaultGC(self->display, 0),
+            self->image,
+            0, 0, 0, 0,
+            self->canvas->width,
+            self->canvas->height);
+        return;
+    }
+
+    case ConfigureNotify: {
+        XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
+        self->canvas->width = event->width;
+        self->canvas->height = event->height;
+        self->size_changed = true;
+        printf("[ConfigureNotify] width: %lu, height: %lu\n",
+               self->canvas->width,
+               self->canvas->height);
+        return;
+    }
+    }
+}
+
 void
 canvas_window_open(canvas_window_t *self) {
     canvas_window_init(self);
 
+    XMapWindow(self->display, self->window);
+    XFlush(self->display);
 
+    // canvas_window_draw(self);
+
+    while (self->window_open) {
+        while (XPending(self->display)) {
+            canvas_window_receive(self);
+        }
+
+        if (self->size_changed) {
+            self->size_changed = false;
+            self->canvas->pixels = realloc(
+                self->canvas->pixels,
+                self->canvas->width * self->canvas->height * sizeof(uint32_t));
+            // canvas_window_draw(self);
+        }
+    }
 }

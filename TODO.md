@@ -1,6 +1,5 @@
 # canvas
 
-[canvas] `canvas_window_receive`
 [canvas] `canvas_window_open`
 
 [canvas] pixel size
