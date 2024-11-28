@@ -74,8 +74,6 @@ canvas_window_init(canvas_window_t *self) {
 static void
 canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
     uint32_t pixel = self->canvas->pixels[row * self->canvas->width + col];
-    printf("[canvas_window_draw_pixel] col: %lu, row: %lu, pixel: %u\n",
-           col, row, pixel);
     uint32_t y_start = row * self->scale;
     uint32_t x_start = col * self->scale;
     uint32_t x_width = self->canvas->width * self->scale;
@@ -88,14 +86,6 @@ canvas_window_draw_pixel(canvas_window_t *self, size_t col, size_t row) {
 
 static void
 canvas_window_draw_image(canvas_window_t *self) {
-    self->image_buffer = realloc(
-        self->image_buffer,
-        self->canvas->width *
-        self->canvas->height *
-        self->scale *
-        self->scale *
-        sizeof(uint32_t));
-
     for (size_t row = 0; row < self->canvas->height; row++) {
         for (size_t col = 0; col < self->canvas->width; col++) {
             canvas_window_draw_pixel(self, col, row);
@@ -122,6 +112,26 @@ canvas_window_draw(canvas_window_t *self) {
         self->canvas->width * self->scale,
         self->canvas->height * self->scale,
         pixel_bits, bytes_per_line);
+}
+
+static void
+canvas_window_resize(canvas_window_t *self, size_t width, size_t height) {
+    self->width = width;
+    self->height = height;
+
+    size_t width_scale = self->width / self->canvas->width;
+    size_t height_scale = self->height / self->canvas->height;
+    self->scale = uint_min(width_scale, height_scale);
+
+    self->image_buffer = realloc(
+        self->image_buffer,
+        self->canvas->width *
+        self->canvas->height *
+        self->scale *
+        self->scale *
+        sizeof(uint32_t));
+
+    canvas_window_draw(self);
 }
 
 static void
@@ -154,12 +164,10 @@ canvas_window_receive(canvas_window_t *self) {
 
     case ConfigureNotify: {
         XConfigureEvent* event = (XConfigureEvent *) &unknown_event;
-        self->width = event->width;
-        self->height = event->height;
         printf("[ConfigureNotify] width: %lu, height: %lu\n",
                self->width,
                self->height);
-        canvas_window_draw(self);
+        canvas_window_resize(self, event->width, event->height);
         return;
     }
     }
