@@ -1,10 +1,13 @@
 #pragma once
 
 struct canvas_window_t {
+    canvas_t *canvas;
+    uint32_t *image_buffer;
+    XImage* image;
+    size_t width, height;
+
     Display* display;
     Window window;
-    XImage* image;
-    canvas_t *canvas;
     bool window_open;
     const char *window_name;
     bool size_changed;

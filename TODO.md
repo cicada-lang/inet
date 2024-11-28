@@ -1,6 +1,6 @@
 # canvas
 
-[canvas] `canvas_window_t` has `image_buffer`
+[canvas] refacter render logic
 [canvas] resize window change pixel size
 
 [canvas] render icn-like to screen
