@@ -1,10 +1,3 @@
-# canvas
-
-[canvas] `canvas` has `palette`
-[canvas] `canvas_put_pixel`
-[canvas] `canvas_draw_chr`
-[canvas] render inet by programming `canvas`
-
 # study
 
 [study] persons/yves-lafont/papers/1997-interaction-combinators.pdf
