@@ -42,7 +42,7 @@ run(char **args) {
 void
 run_file(const char *path, bool debug) {
     file_t *file = file_open_or_fail(path, "r", "[run] can not open file");
-    const char *text = file_read(file);
+    const char *text = file_read_text(file);
 
     mod_t *mod = mod_new(path, text);
     import_builtins(mod);

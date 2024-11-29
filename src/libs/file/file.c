@@ -35,7 +35,7 @@ file_readline(file_t *file) {
 }
 
 char *
-file_read(file_t *file) {
+file_read_text(file_t *file) {
     char *text = string_empty();
     while (true) {
         char *line = file_readline(file);
