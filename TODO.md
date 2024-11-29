@@ -1,6 +1,8 @@
 # canvas
 
-[canvas] render icn-like to screen
+[canvas] render .icn
+[canvas] has palette
+[canvas] render .chr
 [canvas] render inet by programming `canvas`
 
 # study

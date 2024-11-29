@@ -8,16 +8,16 @@ canvas_test(void) {
     canvas_window_t *canvas_window = canvas_window_new(canvas, 100);
     canvas_window->title = "hello canvas";
 
-    canvas_draw_pixel(canvas, 0, 0, 0xffff0000);
-    canvas_draw_pixel(canvas, 1, 1, 0xffff0000);
-    canvas_draw_pixel(canvas, 2, 2, 0xffff0000);
+    canvas_put_pixel(canvas, 0, 0, 0xffff0000);
+    canvas_put_pixel(canvas, 1, 1, 0xffff0000);
+    canvas_put_pixel(canvas, 2, 2, 0xffff0000);
 
-    canvas_draw_pixel(canvas, 4, 4, 0xffff0000);
-    canvas_draw_pixel(canvas, 5, 5, 0xffff0000);
+    canvas_put_pixel(canvas, 4, 4, 0xffff0000);
+    canvas_put_pixel(canvas, 5, 5, 0xffff0000);
 
-    canvas_draw_pixel(canvas, 7, 7, 0xffff0000);
-    canvas_draw_pixel(canvas, 8, 8, 0xffff0000);
-    canvas_draw_pixel(canvas, 9, 9, 0xffff0000);
+    canvas_put_pixel(canvas, 7, 7, 0xffff0000);
+    canvas_put_pixel(canvas, 8, 8, 0xffff0000);
+    canvas_put_pixel(canvas, 9, 9, 0xffff0000);
 
     canvas_window_open(canvas_window);
 
