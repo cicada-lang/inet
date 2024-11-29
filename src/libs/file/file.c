@@ -18,6 +18,13 @@ file_open_or_fail(
     return file;
 }
 
+off_t
+file_size(file_t *file) {
+    struct stat st;
+    fstat(fileno(file), &st);
+    return st.st_size;
+}
+
 static char *
 file_readline(file_t *file) {
     size_t line_max_length  = 1000 * 1000;
@@ -48,9 +55,10 @@ file_read_text(file_t *file) {
     }
 }
 
-off_t
-file_size(file_t *file) {
-    struct stat st;
-    fstat(fileno(file), &st);
-    return st.st_size;
+uint8_t *
+file_read_bytes(file_t *file) {
+    off_t size = file_size(file);
+    uint8_t *bytes = allocate(size);
+    fread(bytes, 1, size, file);
+    return bytes;
 }

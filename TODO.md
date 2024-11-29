@@ -1,6 +1,5 @@
 # canvas
 
-[file] `file_read_bytes`
 [canvas] `canvas_draw_icn(canvas, addr, width, height, x, y)`
 [canvas] render .icn
 [canvas] has palette
