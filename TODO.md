@@ -1,9 +1,8 @@
 # canvas
 
-[canvas] `canvas_draw_icn(canvas, addr, width, height, x, y)`
-[canvas] render .icn
-[canvas] has palette
-[canvas] render .chr
+[canvas] `canvas` has `palette`
+[canvas] `canvas_put_pixel`
+[canvas] `canvas_draw_chr`
 [canvas] render inet by programming `canvas`
 
 # study

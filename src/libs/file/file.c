@@ -3,12 +3,10 @@
 file_t *
 file_open_or_fail(
     const char *file_name,
-    const char *mode,
-    const char *message
+    const char *mode
 ) {
     file_t *file = fopen(file_name, mode);
     if (!file) {
-        fprintf(stderr, "%s\n", message);
         fprintf(stderr, "[file_open_or_fail] file name: %s\n", file_name);
         fprintf(stderr, "[file_open_or_fail] mode: %s\n", mode);
         exit(1);
