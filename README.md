@@ -346,11 +346,6 @@ make clean    # clean up compiled files
 
 - [scalable c](https://github.com/booksbyus/scalable-c)
 
-**Tools**:
-
-- [makefile tutorial](https://makefiletutorial.com)
-- [makefile manual](https://www.gnu.org/software/make/manual/make.html)
-
 ## Contributions
 
 To make a contribution, fork this project and create a pull request.
