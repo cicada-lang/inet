@@ -1,6 +1,6 @@
 cc = gcc
 ldflags = -lX11
-cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O0 -std=c99 -pedantic
+cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O0 -std=c99 -D_POSIX_C_SOURCE=199309L -pedantic
 
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
