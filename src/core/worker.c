@@ -7,14 +7,12 @@ worker_new(mod_t *mod) {
 
     self->active_wire_list = list_new();
 
-    self->value_stack = stack_new(VALUE_STACK_SIZE);
-    stack_set_item_destructor(
-        self->value_stack,
+    self->value_stack = stack_new_with(
+        VALUE_STACK_SIZE,
         (stack_item_destructor_t *) wire_destroy);
 
-    self->return_stack = stack_new(RETURN_STACK_SIZE);
-    stack_set_item_destructor(
-        self->return_stack,
+    self->return_stack = stack_new_with(
+        RETURN_STACK_SIZE,
         (stack_item_destructor_t *) frame_destroy);
 
     self->node_id_count = 0;
