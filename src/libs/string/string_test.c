@@ -10,6 +10,11 @@ string_test(void) {
     char *abc = string_dup("abc");
     assert(string_equal("abc", abc));
 
+    assert(string_length("") == 0);
+    assert(string_length("1") == 1);
+    assert(string_length("12") == 2);
+    assert(string_length("123") == 3);
+
     string_destroy(&abc);
     assert(abc == NULL);
 
@@ -42,6 +47,12 @@ string_test(void) {
     assert(string_count_substring("0aaa0", "aaa") == 1);
     assert(string_count_substring("0aaa0aaa", "aa") == 4);
     assert(string_count_substring("0aaa0aaa", "aaa") == 2);
+
+    assert(string_equal(string_to_lower_case("ABC"), "abc"));
+    assert(string_equal(string_to_upper_case("abc"), "ABC"));
+
+    assert(string_equal_mod_case("ABC", "abc"));
+    assert(string_equal_mod_case("abc", "ABC"));
 
     printf("</string>\n");
 }

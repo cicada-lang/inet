@@ -19,6 +19,11 @@ string_dup(const char *self) {
     return string;
 }
 
+size_t
+string_length(const char *self) {
+    return strlen(self);
+}
+
 char *
 string_empty(void) {
     char *s = malloc(1);
@@ -135,4 +140,37 @@ string_count_substring(const char *self, const char* substring) {
     }
 
     return count;
+}
+
+char *
+string_to_lower_case(const char *self) {
+    char *result = string_dup(self);
+    for (size_t i = 0; i < string_length(result); i++) {
+        result[i] = tolower((unsigned char) result[i]);
+    }
+
+    return result;
+}
+
+char *
+string_to_upper_case(const char *self) {
+    char *result = string_dup(self);
+    for (size_t i = 0; i < string_length(result); i++) {
+        result[i] = toupper((unsigned char) result[i]);
+    }
+
+    return result;
+}
+
+bool
+string_equal_mod_case(const char *left, const char *right) {
+    char *left_upper = string_to_upper_case(left);
+    char *right_upper = string_to_upper_case(right);
+
+    bool result = string_equal(left_upper, right_upper);
+
+    free(left_upper);
+    free(right_upper);
+
+    return result;
 }

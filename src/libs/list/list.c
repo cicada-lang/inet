@@ -60,6 +60,13 @@ list_set_item_destructor(
     self->item_destructor = item_destructor;
 }
 
+list_t *
+list_new_with(list_item_destructor_t *item_destructor) {
+    list_t *self = list_new();
+    self->item_destructor = item_destructor;
+    return self;
+}
+
 size_t
 list_length(const list_t *self) {
     return self->length;

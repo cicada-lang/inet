@@ -16,7 +16,7 @@ commander_new(const char *name, const char *version, int argc, char **argv) {
     self->version = version;
     self->argc = argc;
     self->argv = argv;
-    self->command_list = list_new();
+    self->command_list = list_new_with((list_item_destructor_t *) command_destroy);
     return self;
 }
 
@@ -25,7 +25,6 @@ commander_destroy(commander_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         commander_t *self = *self_pointer;
-        list_set_item_destructor(self->command_list, (list_item_destructor_t *) command_destroy);
         list_destroy(&self->command_list);
         free(self);
         *self_pointer = NULL;

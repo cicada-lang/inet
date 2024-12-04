@@ -48,6 +48,13 @@ stack_set_item_destructor(
     self->item_destructor = item_destructor;
 }
 
+stack_t *
+stack_new_with(size_t size, stack_item_destructor_t *item_destructor) {
+    stack_t *self = stack_new(size);
+    self->item_destructor = item_destructor;
+    return self;
+}
+
 size_t
 stack_size(const stack_t *self) {
     return self->size;
