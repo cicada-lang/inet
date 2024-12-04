@@ -5,27 +5,28 @@ cflags = -g -Wall -Wwrite-strings -Wextra -Werror -O0 -std=c99 -D_POSIX_C_SOURCE
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
 lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
-bin = bin/inet
+app = inet
+bin = bin/$(app)
 
 .PHONY: all
-all: bin/inet
+all: bin/$(app)
 
 .PHONY: run
-run: bin/inet
-	./bin/inet
+run: bin/$(app)
+	./bin/$(app)
 
 .PHONY: test
 test: self-test run-examples
 
 .PHONY: self-test
-self-test: bin/inet
-	./bin/inet self-test
+self-test: bin/$(app)
+	./bin/$(app) self-test
 
 .PHONY: run-examples
-run-examples: bin/inet
+run-examples: bin/$(app)
 	bash run-examples.sh
 
-bin/inet: $(lib) lib/inet.o
+bin/$(app): $(lib) lib/$(app).o
 	mkdir -p $(dir $@); $(cc) $^ $(ldflags) -o $@
 
 lib/%.o: src/%.c $(headers)
