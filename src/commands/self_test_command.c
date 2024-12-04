@@ -16,16 +16,8 @@ run(char **args) {
 
     printf("<self-test>\n");
 
-    string_test();
-    list_test();
-    stack_test();
-    int_test();
-    text_test();
-    canvas_test();
-
-    worker_test();
-    lexer_test();
-    parser_test();
+    libs_test();
+    
 
     printf("</self-test>\n");
 

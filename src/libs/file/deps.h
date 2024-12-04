@@ -6,5 +6,5 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 
-#include "../allocate/index.h"
+#include "../memory/index.h"
 #include "../string/index.h"

@@ -6,7 +6,7 @@ struct stack_t {
     size_t size;
     size_t cursor;
     item_t *items;
-    stack_item_destructor_t *item_destructor;
+    destructor_t *destructor;
 };
 
 stack_t *
@@ -23,8 +23,8 @@ stack_purge(stack_t *self) {
     assert(self);
     while(!stack_is_empty(self)) {
         item_t item = stack_pop(self);
-        if (self->item_destructor)
-            self->item_destructor(&item);
+        if (self->destructor)
+            self->destructor(&item);
     }
 }
 
@@ -41,17 +41,17 @@ stack_destroy(stack_t **self_pointer) {
 
 
 void
-stack_set_item_destructor(
+stack_set_destructor(
     stack_t *self,
-    stack_item_destructor_t *item_destructor
+    destructor_t *destructor
 ) {
-    self->item_destructor = item_destructor;
+    self->destructor = destructor;
 }
 
 stack_t *
-stack_new_with(size_t size, stack_item_destructor_t *item_destructor) {
+stack_new_with(size_t size, destructor_t *destructor) {
     stack_t *self = stack_new(size);
-    self->item_destructor = item_destructor;
+    self->destructor = destructor;
     return self;
 }
 

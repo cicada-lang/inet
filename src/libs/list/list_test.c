@@ -2,7 +2,7 @@
 
 void
 list_test(void) {
-    printf("<list>");
+    printf("<list_test>\n");
 
     list_t *list = list_new();
     assert(list);
@@ -145,7 +145,7 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        list_set_item_destructor(list, (list_item_destructor_t *) string_destroy);
+        list_set_destructor(list, (destructor_t *) string_destroy);
 
         list_purge(list);
         assert(list_length(list) == 0);
@@ -154,5 +154,5 @@ list_test(void) {
         assert(list == NULL);
     }
 
-    printf("</list>\n");
+    printf("</list_test>\n");
 }

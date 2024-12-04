@@ -9,11 +9,11 @@ worker_new(mod_t *mod) {
 
     self->value_stack = stack_new_with(
         VALUE_STACK_SIZE,
-        (stack_item_destructor_t *) wire_destroy);
+        (destructor_t *) wire_destroy);
 
     self->return_stack = stack_new_with(
         RETURN_STACK_SIZE,
-        (stack_item_destructor_t *) frame_destroy);
+        (destructor_t *) frame_destroy);
 
     self->node_id_count = 0;
     self->debug = false;

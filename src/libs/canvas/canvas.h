@@ -53,3 +53,10 @@ void canvas_open(canvas_t *self);
 
 void canvas_put_pixel(canvas_t *self, size_t x, size_t y, uint32_t pixel);
 void canvas_draw_pixel(canvas_t *self, size_t x, size_t y, color_t color);
+
+void canvas_add_clickable_area(
+    canvas_t *self,
+    size_t x, size_t y,
+    size_t width, size_t height,
+    on_click_t *on_click);
+void canvas_clear_clickable_area(canvas_t *self);

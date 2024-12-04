@@ -30,6 +30,16 @@ canvas_window_destroy(canvas_window_t **self_pointer) {
     }
 }
 
+size_t canvas_window_offset_x(canvas_window_t *self) {
+    size_t image_width = self->canvas->width * self->canvas->scale;
+    return (self->width - image_width) / 2;
+}
+
+size_t canvas_window_offset_y(canvas_window_t *self) {
+    size_t image_height = self->canvas->height * self->canvas->scale;
+    return (self->height - image_height) / 2;
+}
+
 static void canvas_window_init_display(canvas_window_t *self);
 static void canvas_window_init_window(canvas_window_t *self);
 static void canvas_window_init_input(canvas_window_t *self);
@@ -111,14 +121,12 @@ canvas_window_update_pixel(canvas_window_t *self, size_t col, size_t row) {
 
     self->canvas->scale = uint_min(width_scale, height_scale);
 
-    size_t image_width = self->canvas->width * self->canvas->scale;
-    size_t image_height = self->canvas->height * self->canvas->scale;
-
-    size_t x_offset = (self->width - image_width) / 2;
-    size_t y_offset = (self->height - image_height) / 2;
+    size_t x_offset = canvas_window_offset_x(self);
+    size_t y_offset = canvas_window_offset_y(self);
 
     uint32_t y_start = row * self->canvas->scale;
     uint32_t x_start = col * self->canvas->scale;
+
     for (size_t y = y_start; y < y_start + self->canvas->scale; y++) {
         for (size_t x = x_start; x < x_start + self->canvas->scale; x++) {
             self->image_buffer[(y_offset + y) * self->width + (x_offset + x)] =
@@ -196,6 +204,54 @@ canvas_window_resize(canvas_window_t *self, size_t width, size_t height) {
 }
 
 static void
+canvas_window_resize_button(
+    canvas_window_t *self,
+    size_t event_x,
+    size_t event_y,
+    uint8_t button_id,
+    bool is_release
+) {
+    // adjust `x` and `y` after centering.
+    size_t adjusted_x = event_x - canvas_window_offset_x(self);
+    size_t adjusted_y = event_y - canvas_window_offset_y(self);
+
+    size_t x = adjusted_x / self->canvas->scale;
+    size_t y = adjusted_y / self->canvas->scale;
+
+    if (self->canvas->on_click) {
+        self->canvas->on_click(
+            self->canvas->state,
+            self->canvas,
+            x, y,
+            button_id,
+            is_release);
+    }
+
+    clickable_area_t *clickable_area =
+        list_first(self->canvas->clickable_area_list);
+
+    while (clickable_area) {
+        if (x >= clickable_area->x &&
+            x < clickable_area->x + clickable_area->width &&
+            y >= clickable_area->y &&
+            y < clickable_area->y + clickable_area->height)
+        {
+            clickable_area->on_click(
+                self->canvas->state,
+                self->canvas,
+                x, y,
+                button_id,
+                is_release);
+            return;
+        }
+
+        clickable_area = list_next(self->canvas->clickable_area_list);
+    }
+
+    return;
+}
+
+static void
 canvas_window_receive(canvas_window_t *self) {
     Atom wmDelete = XInternAtom(self->display, "WM_DELETE_WINDOW", True);
     XSetWMProtocols(self->display, self->window, &wmDelete, 1);
@@ -261,33 +317,25 @@ canvas_window_receive(canvas_window_t *self) {
 
     case ButtonPress: {
         XButtonPressedEvent *event = (XButtonPressedEvent *)&unknown_event;
-        if (self->canvas->on_click) {
-            bool is_release = false;
-            self->canvas->on_click(
-                self->canvas->state,
-                self->canvas,
-                event->x / self->canvas->scale,
-                event->y / self->canvas->scale,
-                event->button,
-                is_release);
-        }
-
+        bool is_release = false;
+        canvas_window_resize_button(
+            self,
+            event->x,
+            event->y,
+            event->button,
+            is_release);
         return;
     }
 
     case ButtonRelease: {
         XButtonPressedEvent *event = (XButtonPressedEvent *)&unknown_event;
-        if (self->canvas->on_click) {
-            bool is_release = true;
-            self->canvas->on_click(
-                self->canvas->state,
-                self->canvas,
-                event->x / self->canvas->scale,
-                event->y / self->canvas->scale,
-                event->button,
-                is_release);
-        }
-
+        bool is_release = true;
+        canvas_window_resize_button(
+            self,
+            event->x,
+            event->y,
+            event->button,
+            is_release);
         return;
     }
     }

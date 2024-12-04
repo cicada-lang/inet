@@ -2,10 +2,10 @@
 
 void
 stack_test(void) {
-    printf("<stack>");
+    printf("<stack_test>\n");
 
     stack_t *stack = stack_new_with(
-        100, (stack_item_destructor_t *) string_destroy);
+        100, (destructor_t *) string_destroy);
 
     assert(stack);
     assert(stack_size(stack) == 100);
@@ -55,5 +55,5 @@ stack_test(void) {
     stack_destroy(&stack);
     assert(stack == NULL);
 
-    printf("</stack>\n");
+    printf("</stack_test>\n");
 }

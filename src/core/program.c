@@ -9,7 +9,7 @@ struct program_t {
 program_t *
 program_new(void) {
     program_t *self = allocate(sizeof(program_t));
-    self->op_list = list_new_with((list_item_destructor_t *) op_destroy);
+    self->op_list = list_new_with((destructor_t *) op_destroy);
     self->length = 0;
     self->ops = NULL;
     return self;

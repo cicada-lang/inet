@@ -2,7 +2,7 @@
 
 void
 string_test(void) {
-    printf("<string>");
+    printf("<string_test>\n");
 
     assert(string_equal("abc", "abc"));
     assert(!string_equal("abc", "abd"));
@@ -54,5 +54,5 @@ string_test(void) {
     assert(string_equal_mod_case("ABC", "abc"));
     assert(string_equal_mod_case("abc", "ABC"));
 
-    printf("</string>\n");
+    printf("</string_test>\n");
 }
