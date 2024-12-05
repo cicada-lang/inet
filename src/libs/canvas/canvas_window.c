@@ -33,10 +33,39 @@ size_t canvas_window_offset_y(canvas_window_t *self) {
     return (self->height - image_height) / 2;
 }
 
+size_t
+canvas_window_adjust_x(canvas_window_t *self, size_t x) {
+    // adjust `x` after centering.
+    size_t offset_x = canvas_window_offset_x(self);
+
+    if (x < offset_x)
+        x = offset_x;
+
+    if (x > self->width + offset_x)
+        x = self->width + offset_x;
+
+    return (x - offset_x) / self->canvas->scale;
+}
+
+size_t
+canvas_window_adjust_y(canvas_window_t *self, size_t y) {
+    // adjust `y` after centering.
+    size_t offset_y = canvas_window_offset_y(self);
+
+    if (y < offset_y)
+        y = offset_y;
+
+    if (y > self->height + offset_y)
+        y = self->height + offset_y;
+
+    return (y - offset_y) / self->canvas->scale;
+}
+
 static void canvas_window_init_display(canvas_window_t *self);
 static void canvas_window_init_window(canvas_window_t *self);
 static void canvas_window_init_input(canvas_window_t *self);
 static void canvas_window_init_title(canvas_window_t *self);
+static void canvas_window_init_cursor(canvas_window_t *self);
 
 static void
 canvas_window_init(canvas_window_t *self) {
@@ -44,6 +73,7 @@ canvas_window_init(canvas_window_t *self) {
     canvas_window_init_window(self);
     canvas_window_init_input(self);
     canvas_window_init_title(self);
+    canvas_window_init_cursor(self);
 }
 
 void
@@ -103,6 +133,24 @@ canvas_window_init_title(canvas_window_t *self) {
 
     if (self->canvas->title)
         XStoreName(self->display, self->window, self->canvas->title);
+}
+
+static void
+canvas_window_hide_cursor(canvas_window_t *self) {
+    XColor black = {0};
+    char empty[] = {0};
+    Pixmap bitmap = XCreateBitmapFromData(self->display, self->window, empty, 1, 1);
+    Cursor blank = XCreatePixmapCursor(self->display, bitmap, bitmap, &black, &black, 0, 0);
+    XDefineCursor(self->display, self->window, blank);
+    XFreeCursor(self->display, blank);
+    XFreePixmap(self->display, bitmap);
+}
+
+void
+canvas_window_init_cursor(canvas_window_t *self) {
+    if (self->canvas->hide_system_cursor) {
+        canvas_window_hide_cursor(self);
+    }
 }
 
 static void
@@ -202,25 +250,18 @@ canvas_window_resize(canvas_window_t *self, size_t width, size_t height) {
 }
 
 static void
-canvas_window_resize_button(
+canvas_window_receive_button(
     canvas_window_t *self,
-    size_t event_x,
-    size_t event_y,
     uint8_t button_id,
     bool is_release
 ) {
-    // adjust `x` and `y` after centering.
-    size_t adjusted_x = event_x - canvas_window_offset_x(self);
-    size_t adjusted_y = event_y - canvas_window_offset_y(self);
-
-    size_t x = adjusted_x / self->canvas->scale;
-    size_t y = adjusted_y / self->canvas->scale;
+    size_t x = self->canvas->cursor->x;
+    size_t y = self->canvas->cursor->y;
 
     if (self->canvas->on_click) {
         self->canvas->on_click(
             self->canvas->state,
             self->canvas,
-            x, y,
             button_id,
             is_release);
     }
@@ -237,7 +278,6 @@ canvas_window_resize_button(
             clickable_area->on_click(
                 self->canvas->state,
                 self->canvas,
-                x, y,
                 button_id,
                 is_release);
             return;
@@ -316,10 +356,8 @@ canvas_window_receive(canvas_window_t *self) {
     case ButtonPress: {
         XButtonPressedEvent *event = (XButtonPressedEvent *)&unknown_event;
         bool is_release = false;
-        canvas_window_resize_button(
+        canvas_window_receive_button(
             self,
-            event->x,
-            event->y,
             event->button,
             is_release);
         return;
@@ -328,13 +366,20 @@ canvas_window_receive(canvas_window_t *self) {
     case ButtonRelease: {
         XButtonPressedEvent *event = (XButtonPressedEvent *)&unknown_event;
         bool is_release = true;
-        canvas_window_resize_button(
+        canvas_window_receive_button(
             self,
-            event->x,
-            event->y,
             event->button,
             is_release);
         return;
+    }
+
+    case MotionNotify: {
+        XMotionEvent *event = (XMotionEvent *)&unknown_event;
+        size_t x = canvas_window_adjust_x(self, int_relu(event->x));
+        size_t y = canvas_window_adjust_y(self, int_relu(event->y));
+        self->canvas->cursor->x = x;
+        self->canvas->cursor->y = y;
+        break;
     }
     }
 }

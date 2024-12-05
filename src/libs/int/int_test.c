@@ -16,5 +16,13 @@ int_test(void) {
     assert(uint_decimal_string_length(123) == 3);
     assert(uint_decimal_string_length(1234) == 4);
 
+    {
+        assert(int_relu(1) == 1);
+        assert(int_relu(-1) == 0);
+
+        int x = -1;
+        assert(int_relu(x) == 0);
+    }
+
     printf("</int_test>\n");
 }

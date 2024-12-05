@@ -60,9 +60,15 @@ string_is_int(const char *self) {
 }
 
 int64_t
-string_to_int(const char *self) {
+string_parse_int(const char *self) {
     char *int_end = NULL;
     return strtol(self, &int_end, 0);
+}
+
+uint64_t
+string_parse_hex(const char *self) {
+    char *int_end = NULL;
+    return strtol(self, &int_end, 16);
 }
 
 bool

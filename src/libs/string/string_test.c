@@ -21,6 +21,18 @@ string_test(void) {
     assert(string_is_int("123"));
     assert(!string_is_int("a123"));
 
+    assert(string_parse_int("") == 0);
+    assert(string_parse_int("-") == 0);
+    assert(string_parse_int("-1") == -1);
+    assert(string_parse_int("123") == 123);
+    assert(string_parse_int("-123") == -123);
+
+    assert(string_parse_hex("") == 0);
+    assert(string_parse_hex("f") == 15);
+    assert(string_parse_hex("F") == 15);
+    assert(string_parse_hex("ff") == 255);
+    assert(string_parse_hex("FF") == 255);
+
     char *abc123 = string_append("abc", "123");
     assert(string_equal(abc123, "abc123"));
 

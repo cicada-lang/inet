@@ -86,3 +86,12 @@ uint_decimal_string_length(uint64_t self) {
     free(decimal_string);
     return length;
 }
+
+uint64_t
+int_relu(int64_t self) {
+    if (self > 0) {
+        return self;
+    } {
+        return 0;
+    }
+}

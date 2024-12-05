@@ -11,12 +11,14 @@ typedef enum {
 } color_t;
 
 typedef void (on_key_t)(void *state, canvas_t *canvas, const char *key_name, bool is_release);
-typedef void (on_click_t)(void *state, canvas_t *canvas, size_t x, size_t y, uint8_t button, bool is_release);
+typedef void (on_click_t)(void *state, canvas_t *canvas, uint8_t button, bool is_release);
 typedef void (on_frame_t)(void *state, canvas_t *canvas, uint64_t passed);
 
 // The width and height of canvas are measured in tile.
 struct canvas_t {
     size_t width, height;
+    cursor_t *cursor;
+    bool hide_system_cursor;
 
     // scale defines the ratio between
     // canvas pixel and screen pixel.

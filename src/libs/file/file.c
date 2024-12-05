@@ -66,3 +66,8 @@ file_read_bytes(file_t *file) {
     assert(nbytes == (size_t) size);
     return bytes;
 }
+
+void
+file_write_bytes(file_t *file, uint8_t *bytes, size_t size) {
+    fwrite(bytes, 1, size, file);
+}
