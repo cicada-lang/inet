@@ -23,4 +23,5 @@ main(int argc, char *argv[]) {
 void
 setup_io(void) {
     setbuf(stdout, NULL);
+    setbuf(stderr, NULL);
 }
