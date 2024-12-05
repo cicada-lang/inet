@@ -2,7 +2,7 @@
 
 worker_t *
 worker_new(mod_t *mod) {
-    worker_t *self = allocate(sizeof(worker_t));
+    worker_t *self = new(worker_t);
     self->mod = mod;
 
     self->active_wire_list = list_new();

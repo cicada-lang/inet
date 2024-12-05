@@ -2,7 +2,7 @@
 
 wire_t *
 wire_new(void) {
-    wire_t *self = allocate(sizeof(wire_t));
+    wire_t *self = new(wire_t);
     self->node = NULL;
     self->index = -1;
     self->opposite_wire = NULL;

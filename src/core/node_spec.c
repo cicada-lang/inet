@@ -2,7 +2,7 @@
 
 port_spec_t *
 port_spec_new(const char *name, bool is_principal) {
-    port_spec_t *self = allocate(sizeof(port_spec_t));
+    port_spec_t *self = new(port_spec_t);
     self->name = string_dup(name);
     self->is_principal = is_principal;
     return self;
@@ -24,7 +24,7 @@ node_spec_new(
     port_index_t input_arity,
     port_index_t output_arity
 ) {
-    node_spec_t *self = allocate(sizeof(node_spec_t));
+    node_spec_t *self = new(node_spec_t);
     self->tag = NODE_SPEC;
     self->name = string_dup(name);
     self->input_arity = input_arity;

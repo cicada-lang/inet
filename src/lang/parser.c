@@ -2,7 +2,7 @@
 
 parser_t *
 parser_new(void) {
-    parser_t *self = allocate(sizeof(parser_t));
+    parser_t *self = new(parser_t);
     self->token_list = NULL;
     self->err = stderr;
     return self;

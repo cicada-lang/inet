@@ -2,7 +2,7 @@
 
 mod_t *
 mod_new(const char *src, const char *text) {
-    mod_t *self = allocate(sizeof(mod_t));
+    mod_t *self = new(mod_t);
 
     self->src = src;
     self->text = text;

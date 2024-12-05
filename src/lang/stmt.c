@@ -2,7 +2,7 @@
 
 define_node_stmt_t *
 define_node_stmt_new(token_t *head_token, char *name) {
-    define_node_stmt_t *self = allocate(sizeof(define_node_stmt_t));
+    define_node_stmt_t *self = new(define_node_stmt_t);
     self->tag = DEFINE_NODE_STMT;
 
     self->head_token = head_token;
@@ -35,7 +35,7 @@ define_rule_stmt_new(
     char *second_name,
     list_t *token_list
 ) {
-    define_rule_stmt_t *self = allocate(sizeof(define_rule_stmt_t));
+    define_rule_stmt_t *self = new(define_rule_stmt_t);
     self->tag = DEFINE_RULE_STMT;
     self->head_token = head_token;
     self->first_name = first_name;
@@ -60,7 +60,7 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
 
 define_program_stmt_t *
 define_program_stmt_new(token_t *head_token, char *name, list_t *token_list) {
-    define_program_stmt_t *self = allocate(sizeof(define_program_stmt_t));
+    define_program_stmt_t *self = new(define_program_stmt_t);
     self->tag = DEFINE_PROGRAM_STMT;
     self->head_token = head_token;
     self->name = name;
@@ -83,7 +83,7 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
 
 run_program_stmt_t *
 run_program_stmt_new(list_t *token_list) {
-    run_program_stmt_t *self = allocate(sizeof(run_program_stmt_t));
+    run_program_stmt_t *self = new(run_program_stmt_t);
     self->tag = RUN_PROGRAM_STMT;
     self->token_list = token_list;
     return self;

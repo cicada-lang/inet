@@ -19,7 +19,7 @@ struct free_wire_group_t {
 
 static free_wire_group_t *
 free_wire_group_new(const node_spec_t *node_spec) {
-    free_wire_group_t *self = allocate(sizeof(free_wire_group_t));
+    free_wire_group_t *self = new(free_wire_group_t);
     self->node_spec = node_spec;
     self->wires = allocate_pointers(node_spec->arity);
     return self;
@@ -39,7 +39,7 @@ free_wire_group_destroy(free_wire_group_t **self_pointer) {
 
 frame_t *
 frame_new(const program_t *program) {
-    frame_t *self = allocate(sizeof(frame_t));
+    frame_t *self = new(frame_t);
     self->program_counter = 0;
     self->program = program;
     return self;
