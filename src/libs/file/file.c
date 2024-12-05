@@ -1,5 +1,10 @@
 #include "index.h"
 
+bool
+file_exists(const char *file_name) {
+    return access(file_name, F_OK) != -1;
+}
+
 file_t *
 file_open_or_fail(
     const char *file_name,
@@ -57,6 +62,7 @@ uint8_t *
 file_read_bytes(file_t *file) {
     off_t size = file_size(file);
     uint8_t *bytes = allocate(size);
-    fread(bytes, 1, size, file);
+    size_t nbytes = fread(bytes, 1, size, file);
+    assert(nbytes == (size_t) size);
     return bytes;
 }

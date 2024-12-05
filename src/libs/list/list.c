@@ -18,7 +18,7 @@ struct list_t {
 
 list_t *
 list_new(void) {
-    list_t *self = allocate(sizeof(list_t));
+    list_t *self = new(list_t);
     return self;
 }
 
@@ -179,7 +179,7 @@ list_end(list_t *self) {
 
 void
 list_push(list_t *self, void *item) {
-    node_t *node = allocate(sizeof(node_t));
+    node_t *node = new(node_t);
     assert(node);
     node->item = item;
 
@@ -225,7 +225,7 @@ list_pop(list_t *self) {
 
 void
 list_unshift(list_t *self, void *item) {
-    node_t *node = allocate(sizeof(node_t));
+    node_t *node = new(node_t);
     assert(node);
     node->item = item;
 

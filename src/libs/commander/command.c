@@ -2,7 +2,7 @@
 
 command_t *
 command_new(const char *name) {
-    command_t *self = allocate(sizeof(command_t));
+    command_t *self = new(command_t);
     self->name = name;
     self->description = NULL;
     self->help = NULL;

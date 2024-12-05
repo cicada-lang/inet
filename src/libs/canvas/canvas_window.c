@@ -2,19 +2,12 @@
 
 canvas_window_t *
 canvas_window_new(canvas_t *canvas) {
-    canvas_window_t *self = allocate(sizeof(canvas_window_t));
+    canvas_window_t *self = new(canvas_window_t);
     self->canvas = canvas;
-
-    size_t image_width = self->canvas->width * self->canvas->scale;
-    size_t image_height = self->canvas->height * self->canvas->scale;
-
-    self->image_buffer = allocate(image_width * image_height * sizeof(uint32_t));
-
-    self->width = image_width;
-    self->height = image_height;
-
+    self->width = self->canvas->width * self->canvas->scale;
+    self->height = self->canvas->height * self->canvas->scale;
+    self->image_buffer = allocate(self->width * self->height * sizeof(uint32_t));
     self->background_pixel = 0xff000000;
-
     return self;
 }
 
@@ -188,8 +181,13 @@ canvas_window_show_image(canvas_window_t *self) {
 
 static void
 canvas_window_resize(canvas_window_t *self, size_t width, size_t height) {
+    if ((width == self->width) &&
+        (height == self->height)) {
+        return;
+    }
+
     printf("[canvas_window_resize] width:  %lupx\n", width);
-    printf("[canvas_window_resize] height: %lupx\n", width);
+    printf("[canvas_window_resize] height: %lupx\n", height);
 
     self->width = width;
     self->height = height;
@@ -369,10 +367,13 @@ canvas_window_open(canvas_window_t *self) {
     canvas_window_init(self);
     canvas_window_show(self);
 
+    canvas_window_update_image(self);
+    canvas_window_show_image(self);
+
     size_t nfds = 2;
     struct pollfd fds[nfds];
     fds[0].fd = XConnectionNumber(self->display);
-    fds[1].fd = frame_timerfd(60);
+    fds[1].fd = frame_timerfd(self->canvas->frame_rate);
     fds[0].events = fds[1].events = POLLIN;
 
     self->is_open = true;
@@ -385,7 +386,8 @@ canvas_window_open(canvas_window_t *self) {
 
         if ((fds[1].revents & POLLIN) != 0) {
             uint64_t passed;
-            read(fds[1].fd, &passed, sizeof(uint64_t));
+            ssize_t nbytes = read(fds[1].fd, &passed, sizeof(uint64_t));
+            assert(nbytes == 8);
             canvas_window_update_image(self);
             canvas_window_show_image(self);
             if (self->canvas->on_frame) {

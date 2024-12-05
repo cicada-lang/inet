@@ -13,6 +13,7 @@ libs_test(void) {
     lexer_test();
     canvas_test();
     image_test();
+    store_test();
 
     printf("</libs_test>\n");
 }

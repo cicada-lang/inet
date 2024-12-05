@@ -8,9 +8,10 @@
 #include "stack/index.h"
 #include "int/index.h"
 #include "text/index.h"
-#include "file/index.h"
 #include "lexer/index.h"
+#include "file/index.h"
 #include "image/index.h"
+#include "store/index.h"
 #include "canvas/index.h"
 #include "commander/index.h"
 

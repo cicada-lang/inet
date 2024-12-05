@@ -2,7 +2,7 @@
 
 lexer_t *
 lexer_new(void) {
-    lexer_t *self = allocate(sizeof(lexer_t));
+    lexer_t *self = new(lexer_t);
     self->cursor = 0;
     self->buffer_length = 0;
     self->buffer = allocate(MAX_TOKEN_LENGTH + 1);

@@ -11,7 +11,7 @@ struct stack_t {
 
 stack_t *
 stack_new(size_t size) {
-    stack_t *self = allocate(sizeof(stack_t));
+    stack_t *self = new(stack_t);
     self->size = size;
     self->cursor = 0;
     self->items = allocate_pointers(size);

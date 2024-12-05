@@ -6,7 +6,7 @@ clickable_area_new(
     size_t width, size_t height,
     on_click_t *on_click
 ) {
-    clickable_area_t *self = allocate(sizeof(clickable_area_t));
+    clickable_area_t *self = new(clickable_area_t);
     self->x = x;
     self->y = y;
     self->width = width;

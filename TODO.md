@@ -1,3 +1,5 @@
+use the `new` macro
+
 # study
 
 [study] persons/yves-lafont/papers/1997-interaction-combinators.pdf

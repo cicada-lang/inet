@@ -10,19 +10,9 @@ typedef enum {
     AP_COLOR = 3, // Application
 } color_t;
 
-typedef void (on_key_t)(
-    void *state, canvas_t *canvas,
-    const char *key_name, bool is_release);
-
-typedef void (on_click_t)(
-    void *state, canvas_t *canvas,
-    size_t x, size_t y,
-    uint8_t button,
-    bool is_release);
-
-typedef void (on_frame_t)(
-    void *state, canvas_t *canvas,
-    uint64_t passed);
+typedef void (on_key_t)(void *state, canvas_t *canvas, const char *key_name, bool is_release);
+typedef void (on_click_t)(void *state, canvas_t *canvas, size_t x, size_t y, uint8_t button, bool is_release);
+typedef void (on_frame_t)(void *state, canvas_t *canvas, uint64_t passed);
 
 // The width and height of canvas are measured in tile.
 struct canvas_t {
@@ -38,16 +28,21 @@ struct canvas_t {
     canvas_window_t *window;
     const char *title;
 
+    size_t frame_rate;
     void *state;
     on_key_t *on_key;
     on_click_t *on_click;
     on_frame_t *on_frame;
-
     list_t *clickable_area_list;
+
+    store_t *asset_store;
 };
 
 canvas_t *canvas_new(size_t width, size_t height, size_t scale);
 void canvas_destroy(canvas_t **self_pointer);
+
+void canvas_init_asset_store(canvas_t *self, const char *base);
+uint8_t *canvas_asset_store_get(canvas_t *self, const char *path);
 
 void canvas_open(canvas_t *self);
 

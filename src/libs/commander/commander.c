@@ -11,7 +11,7 @@ struct commander_t {
 
 commander_t *
 commander_new(const char *name, const char *version, int argc, char **argv) {
-    commander_t *self = allocate(sizeof(commander_t));
+    commander_t *self = new(commander_t);
     self->name = name;
     self->version = version;
     self->argc = argc;
