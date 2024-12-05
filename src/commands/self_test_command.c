@@ -1,9 +1,9 @@
 #include "index.h"
 
-static int run(char **args);
+static int run(commander_t *commander);
 
 void
-self_test_command(const commander_t *commander) {
+self_test_command(commander_t *commander) {
     command_t *command = command_new("self-test");
     command->description = "run self test";
     command->run = run;
@@ -11,8 +11,8 @@ self_test_command(const commander_t *commander) {
 }
 
 int
-run(char **args) {
-    (void) args;
+run(commander_t *commander) {
+    (void) commander;
 
     printf("<self-test>\n");
 

@@ -1,19 +1,17 @@
 #include "index.h"
 
-static int run_with_commander(char **args, const commander_t *commander);
+static int run(commander_t *commander);
 
 void
-default_help_command(const commander_t *commander) {
+default_help_command(commander_t *commander) {
     command_t *command = command_new("help");
     command->description = "print help message";
-    command->run_with_commander = run_with_commander;
+    command->run = run;
     commander_add(commander, command);
 }
 
 int
-run_with_commander(char **args, const commander_t *commander) {
-    (void) args;
-
+run(commander_t *commander) {
     commander_help(commander);
 
     return 0;

@@ -1,9 +1,9 @@
 #include "index.h"
 
-static int run(char **args);
+static int run(commander_t *commander);
 
 void
-run_command(const commander_t *runner) {
+run_command(commander_t *runner) {
     command_t *command = command_new("run");
     command->description = "run files, use --debug to see each step";
     command->run = run;
@@ -13,10 +13,10 @@ run_command(const commander_t *runner) {
 static void run_file(const char *path, bool debug);
 
 int
-run(char **args) {
+run(commander_t *commander) {
     bool debug = false;
 
-    char **paths = args + 1;
+    char **paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
         if (string_equal(path, "--debug")) {
@@ -24,7 +24,7 @@ run(char **args) {
         }
     }
 
-    paths = args + 1;
+    paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
         if (string_ends_with(path, "--")) continue;
