@@ -4,17 +4,9 @@ worker_t *
 worker_new(mod_t *mod) {
     worker_t *self = new(worker_t);
     self->mod = mod;
-
     self->active_wire_list = list_new();
-
-    self->value_stack = stack_new_with(
-        VALUE_STACK_SIZE,
-        (destructor_t *) wire_destroy);
-
-    self->return_stack = stack_new_with(
-        RETURN_STACK_SIZE,
-        (destructor_t *) frame_destroy);
-
+    self->value_stack = stack_new_with((destructor_t *) wire_destroy);
+    self->return_stack = stack_new_with((destructor_t *) frame_destroy);
     self->node_id_count = 0;
     self->debug = false;
     self->out = stdout;

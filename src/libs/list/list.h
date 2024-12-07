@@ -15,8 +15,6 @@ bool list_has(const list_t *self, void *item);
 bool list_remove(list_t *self, void *item);
 
 void *list_current(const list_t *self);
-void *list_first(const list_t *self);
-void *list_last(const list_t *self);
 
 // move the cursor.
 
@@ -34,3 +32,7 @@ void *list_pop(list_t *self);
 
 void list_unshift(list_t *self, void *item);
 void *list_shift(list_t *self);
+
+// at the index of the list.
+
+void *list_get(list_t *self, size_t index);

@@ -9,9 +9,9 @@ allocate(size_t size) {
 
 void *
 allocate_many(size_t size, size_t unit_size) {
-    void *array = calloc(size, unit_size);
-    assert(array);
-    return array;
+    void *many = calloc(size, unit_size);
+    assert(many);
+    return many;
 }
 
 void *

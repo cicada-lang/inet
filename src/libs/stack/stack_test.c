@@ -4,11 +4,10 @@ void
 stack_test(void) {
     printf("<stack_test>\n");
 
-    stack_t *stack = stack_new_with(
-        100, (destructor_t *) string_destroy);
+    stack_t *stack = stack_new_with((destructor_t *) string_destroy);
 
     assert(stack);
-    assert(stack_size(stack) == 100);
+
     assert(stack_length(stack) == 0);
     assert(stack_is_empty(stack));
 
@@ -17,14 +16,17 @@ stack_test(void) {
     char *wine = string_dup("bordeaux");
 
     stack_push(stack, cheese);
+    assert(stack_top(stack) == cheese);
     assert(stack_length(stack) == 1);
     assert(!stack_is_empty(stack));
 
     stack_push(stack, bread);
+    assert(stack_top(stack) == bread);
     assert(stack_length(stack) == 2);
     assert(!stack_is_empty(stack));
 
     stack_push(stack, wine);
+    assert(stack_top(stack) == wine);
     assert(stack_length(stack) == 3);
     assert(!stack_is_empty(stack));
 

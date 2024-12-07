@@ -84,7 +84,7 @@ dict_length(dict_t *self) {
 
 void
 dict_set(dict_t *self, const char *key, void *item) {
-    entry_t *entry = list_first(self->entry_list);
+    entry_t *entry = list_start(self->entry_list);
     while (entry) {
         if (string_equal(entry->key, key)) {
             if (self->destructor) {
@@ -103,7 +103,7 @@ dict_set(dict_t *self, const char *key, void *item) {
 
 void *
 dict_get(dict_t *self, const char *key) {
-    entry_t *entry = list_first(self->entry_list);
+    entry_t *entry = list_start(self->entry_list);
     while (entry) {
         if (string_equal(entry->key, key)) {
             return entry->item;
