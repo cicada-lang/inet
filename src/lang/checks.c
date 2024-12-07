@@ -14,7 +14,7 @@ check_name_not_defined(
         spec_print(found, worker->err);
         fprintf(worker->err, "\n");
         fprintf(worker->err, "[src] %s\n", mod->src);
-        text_print_context(worker->err, mod->text, token->start, token->end);
+        code_print_context(worker->err, mod->string, token->start, token->end);
         exit(1);
     }
 }
@@ -30,7 +30,7 @@ check_name_defined(
     if (!found) {
         fprintf(worker->err, "[compiler-error] undefined name: %s\n", name);
         fprintf(worker->err, "[src] %s\n", mod->src);
-        text_print_context(worker->err, mod->text, token->start, token->end);
+        code_print_context(worker->err, mod->string, token->start, token->end);
         exit(1);
     }
 }
@@ -46,14 +46,14 @@ check_node_name_defined(
     if (!found) {
         fprintf(worker->err, "[compiler-error] undefined node name: %s\n", name);
         fprintf(worker->err, "[src] %s\n", mod->src);
-        text_print_context(worker->err, mod->text, token->start, token->end);
+        code_print_context(worker->err, mod->string, token->start, token->end);
         exit(1);
     }
 
     if (found->tag != NODE_SPEC) {
         fprintf(worker->err, "[compiler-error] expect name defined as node instead of: %s\n", spec_tag_name(found->tag));
         fprintf(worker->err, "[src] %s\n", mod->src);
-        text_print_context(worker->err, mod->text, token->start, token->end);
+        code_print_context(worker->err, mod->string, token->start, token->end);
         exit(1);
     }
 }
@@ -77,6 +77,6 @@ check_port_name_defined(
     fprintf(worker->err, "[compiler-error] undefined port name: %s\n", port_name);
     fprintf(worker->err, "[compiler-error] for node name: %s\n", node_name);
     fprintf(worker->err, "[src] %s\n", mod->src);
-    text_print_context(worker->err, mod->text, token->start, token->end);
+    code_print_context(worker->err, mod->string, token->start, token->end);
     exit(1);
 }

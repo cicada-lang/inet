@@ -7,6 +7,6 @@ char *uint_to_string(uint64_t self);
 char *uint_to_subscript(uint64_t self);
 char *uint_to_superscript(uint64_t self);
 
-size_t uint_decimal_string_length(uint64_t self);
+size_t uint_decimal_length(uint64_t self);
 
 uint64_t int_relu(int64_t self);

@@ -45,16 +45,16 @@ file_readline(file_t *file) {
 }
 
 char *
-file_read_text(file_t *file) {
-    char *text = string_empty();
+file_read_string(file_t *file) {
+    char *string = string_empty();
     while (true) {
         char *line = file_readline(file);
-        if (!line) return text;
+        if (!line) return string;
 
-        char *new_text = string_append(text, line);
-        free(text);
+        char *new_string = string_append(string, line);
+        free(string);
         free(line);
-        text = new_text;
+        string = new_string;
     }
 }
 

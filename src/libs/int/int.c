@@ -80,7 +80,7 @@ uint_to_superscript(uint64_t self) {
 }
 
 size_t
-uint_decimal_string_length(uint64_t self) {
+uint_decimal_length(uint64_t self) {
     char *decimal_string = uint_to_string(self);
     size_t length = strlen(decimal_string);
     free(decimal_string);

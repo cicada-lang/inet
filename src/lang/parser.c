@@ -44,10 +44,10 @@ static bool token_is_rune(const token_t *token) {
 
 void
 parser_parse(parser_t *self) {
-    assert(self->text);
+    assert(self->string);
     assert(self->lexer);
 
-    self->lexer->text = self->text;
+    self->lexer->string = self->string;
     lexer_lex(self->lexer);
     self->token_list = self->lexer->token_list;
 
@@ -69,7 +69,7 @@ parser_parse(parser_t *self) {
         else {
             fprintf(self->err, "[parser-error] unknown starting token: %s\n", token->string);
             fprintf(self->err, "[src] %s\n", self->src);
-            text_print_context(self->err, self->text, token->start, token->end);
+            code_print_context(self->err, self->string, token->start, token->end);
             exit(1);
         }
     }
@@ -116,7 +116,7 @@ check_node_name_format(parser_t *self, const token_t *token) {
     {
         fprintf(self->err, "[parser-error] a node name must be like (<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
-        text_print_context(self->err, self->text, token->start, token->end);
+        code_print_context(self->err, self->string, token->start, token->end);
         exit(1);
     }
 }
@@ -178,7 +178,7 @@ check_rule_name_format(parser_t *self, const token_t *token) {
     {
         fprintf(self->err, "[parser-error] a rule name must be like (<name>)-(<name>)\n");
         fprintf(self->err, "[src] %s\n", self->src);
-        text_print_context(self->err, self->text, token->start, token->end);
+        code_print_context(self->err, self->string, token->start, token->end);
         exit(1);
     }
 }
@@ -236,7 +236,7 @@ check_program_name_format(parser_t *self, const token_t *token) {
     if (token_is_rune(token)) {
         fprintf(self->err, "[parser-error] program name can not be a rune: %s\n", string);
         fprintf(self->err, "[src] %s\n", self->src);
-        text_print_context(self->err, self->text, token->start, token->end);
+        code_print_context(self->err, self->string, token->start, token->end);
         exit(1);
     }
 
@@ -249,7 +249,7 @@ check_program_name_format(parser_t *self, const token_t *token) {
     {
         fprintf(self->err, "[parser-error] invalid program name: %s\n", string);
         fprintf(self->err, "[src] %s\n", self->src);
-        text_print_context(self->err, self->text, token->start, token->end);
+        code_print_context(self->err, self->string, token->start, token->end);
         exit(1);
     }
 }

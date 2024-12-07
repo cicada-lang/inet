@@ -85,7 +85,7 @@ interpret_mod(worker_t *worker) {
     parser->lexer = lexer_new();
     parser->lexer->line_comment_start = "--";
     parser->src = worker->mod->src;
-    parser->text = worker->mod->text;
+    parser->string = worker->mod->string;
     parser->err = worker->err;
     parser_parse(parser);
     list_t *stmt_list = parser->stmt_list;

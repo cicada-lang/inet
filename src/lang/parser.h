@@ -2,7 +2,7 @@
 
 struct parser_t {
     const char *src;
-    const char *text;
+    const char *string;
     lexer_t *lexer;
     list_t *token_list;
     list_t *stmt_list;

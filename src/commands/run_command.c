@@ -42,9 +42,9 @@ run(commander_t *commander) {
 void
 run_file(const char *path, bool debug) {
     file_t *file = file_open_or_fail(path, "r");
-    const char *text = file_read_text(file);
+    const char *string = file_read_string(file);
 
-    mod_t *mod = mod_new(path, text);
+    mod_t *mod = mod_new(path, string);
     import_builtins(mod);
 
     worker_t *worker = worker_new(mod);

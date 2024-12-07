@@ -3,8 +3,8 @@
 #define MAX_TOKEN_LENGTH 1024
 
 struct lexer_t {
-    const char *text;
-    size_t text_length;
+    const char *string;
+    size_t length;
     size_t cursor;
     char *buffer;
     size_t buffer_length;

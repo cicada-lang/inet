@@ -1,28 +1,12 @@
 #include "index.h"
 
-static uint8_t blending_table[4][16] = {
-    {0, 0, 0, 0, 1, 0, 1, 1, 2, 2, 0, 2, 3, 3, 3, 0},
-    {0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3},
-    {1, 2, 3, 1, 1, 2, 3, 1, 1, 2, 3, 1, 1, 2, 3, 1},
-    {2, 3, 1, 2, 2, 3, 1, 2, 2, 3, 1, 2, 2, 3, 1, 2},
-};
-
-static bool
-blending_is_transparent(uint8_t blending) {
-    return
-        (blending == 0x0) ||
-        (blending == 0x5) ||
-        (blending == 0xa) ||
-        (blending == 0xf);
-}
-
 void
 canvas_draw_icn_bytes(
     canvas_t *self,
     size_t x, size_t y,
     uint8_t *bytes,
     size_t width, size_t height,
-    uint8_t blending
+    blending_t blending
 ) {
     for (size_t row = 0; row < height; row++) {
         for (size_t col = 0; col < width; col++) {
@@ -34,12 +18,12 @@ canvas_draw_icn_bytes(
                     color_t color = bit;
                     if (blending_is_transparent(blending) && color == 0) continue;
 
-                    color_t blended = blending_table[color][blending];
+                    color_t blended = blending_table[blending][color];
                     canvas_draw_pixel(
                         self,
                         x + (col * 8 + s),
                         y + (row * 8 + line),
-                        blended);
+                        self->palette[blended]);
                 }
             }
         }
@@ -52,7 +36,7 @@ canvas_draw_chr_bytes(
     size_t x, size_t y,
     uint8_t *bytes,
     size_t width, size_t height,
-    uint8_t blending
+    blending_t blending
 ) {
     for (size_t row = 0; row < height; row++) {
         for (size_t col = 0; col < width; col++) {
@@ -66,12 +50,12 @@ canvas_draw_chr_bytes(
                     color_t color = bit1 + bit2 * 2;
                     if (blending_is_transparent(blending) && color == 0) continue;
 
-                    color_t blended = blending_table[color][blending];
+                    color_t blended = blending_table[blending][color];
                     canvas_draw_pixel(
                         self,
                         x + (col * 8 + s),
                         y + (row * 8 + line),
-                        blended);
+                        self->palette[blended]);
                 }
             }
         }
@@ -83,7 +67,7 @@ canvas_draw_image(
     canvas_t *self,
     size_t x, size_t y,
     const char *path,
-    uint8_t blending
+    blending_t blending
 ) {
     uint8_t width = image_hex_width_from_path(path);
     uint8_t height = image_hex_height_from_path(path);
@@ -96,7 +80,7 @@ canvas_draw_image_button(
     canvas_t *self,
     size_t x, size_t y,
     const char *path,
-    uint8_t blending,
+    blending_t blending,
     on_click_t *on_click
 ) {
     uint8_t width = image_hex_width_from_path(path);

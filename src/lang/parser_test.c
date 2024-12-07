@@ -6,7 +6,7 @@ parser_test(void) {
 
     parser_t *parser = parser_new();
     parser->lexer = lexer_new();
-    parser->text = ""
+    parser->string = ""
         "* (zero) -> value!                   \n"
         "* (add1) prev -> value!              \n"
         "* (add) addend target! -> result     \n"

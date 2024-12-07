@@ -7,28 +7,28 @@ lexer_test(void) {
     lexer_t *lexer = lexer_new();
 
     {
-        lexer->text = "";
+        lexer->string = "";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
         list_destroy(&lexer->token_list);
     }
 
     {
-        lexer->text = " ";
+        lexer->string = " ";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
         list_destroy(&lexer->token_list);
     }
 
     {
-        lexer->text = " \n \t \n ";
+        lexer->string = " \n \t \n ";
         lexer_lex(lexer);
         assert(list_length(lexer->token_list) == 0);
         list_destroy(&lexer->token_list);
     }
 
     {
-        lexer->text = "a b c";
+        lexer->string = "a b c";
         lexer_lex(lexer);
         list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 3);
@@ -48,7 +48,7 @@ lexer_test(void) {
 
     {
         lexer->line_comment_start = "//";
-        lexer->text = "a b //x\n c";
+        lexer->string = "a b //x\n c";
         lexer_lex(lexer);
         list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 3);
@@ -68,7 +68,7 @@ lexer_test(void) {
 
     {
         lexer->line_comment_start = "--";
-        lexer->text = "a b --x\n c";
+        lexer->string = "a b --x\n c";
         lexer_lex(lexer);
         list_t *token_list = lexer->token_list;
         assert(list_length(token_list) == 3);

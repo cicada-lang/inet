@@ -9,22 +9,22 @@ canvas_test(void) {
 
     // {
     //     for (size_t i = 0; i < 8; i++)
-    //         canvas_draw_pixel(canvas, i, i, 1);
+    //         canvas_draw_pixel(canvas, i, i, canvas->palette[SL_COLOR]);
     //     canvas_open(canvas);
     // }
 
     // {
-    //     canvas_fill_bottom_left(canvas, TILE, 2 * TILE, SL_COLOR);
+    //     canvas_fill_bottom_left(canvas, TILE, 2 * TILE, canvas->palette[SL_COLOR]);
     //     canvas_open(canvas);
     // }
 
     // {
-    //     canvas_fill_top_right(canvas, TILE, 2 * TILE, SL_COLOR);
+    //     canvas_fill_top_right(canvas, TILE, 2 * TILE, canvas->palette[SL_COLOR]);
     //     canvas_open(canvas);
     // }
 
     // {
-    //     canvas_fill_top_left(canvas, TILE, 2 * TILE, SL_COLOR);
+    //     canvas_fill_top_left(canvas, TILE, 2 * TILE, canvas->palette[SL_COLOR]);
     //     canvas_open(canvas);
     // }
 

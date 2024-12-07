@@ -9,7 +9,7 @@ libs_test(void) {
     dict_test();
     stack_test();
     int_test();
-    text_test();
+    code_test();
     lexer_test();
     canvas_test();
     image_test();

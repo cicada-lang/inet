@@ -23,12 +23,12 @@ lexer_destroy(lexer_t **self_pointer) {
 
 static bool
 lexer_is_finished(lexer_t *self) {
-    return self->cursor == self->text_length;
+    return self->cursor == self->length;
 }
 
 static char
 lexer_current_char(const lexer_t *self) {
-    return self->text[self->cursor];
+    return self->string[self->cursor];
 }
 
 static void
@@ -47,11 +47,11 @@ static void lexer_lex_word(lexer_t *self);
 
 void
 lexer_lex(lexer_t *self) {
-    assert(self->text);
+    assert(self->string);
 
     self->cursor = 0;
     self->buffer_length = 0;
-    self->text_length = strlen(self->text);
+    self->length = strlen(self->string);
 
     self->token_list = list_new_with((destructor_t *) token_destroy);
     while (!lexer_is_finished(self)) {
@@ -62,7 +62,7 @@ lexer_lex(lexer_t *self) {
             lexer_lex_ignore_space(self);
         } else if (self->line_comment_start &&
                    string_starts_with(
-                     self->text + self->cursor,
+                     self->string + self->cursor,
                      self->line_comment_start)
             ) {
             lexer_lex_ignore_comment(self);

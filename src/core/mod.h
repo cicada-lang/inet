@@ -5,12 +5,12 @@
 
 struct mod_t {
     const char *src;
-    const char *text;
+    const char *string;
     list_t *spec_list;
     list_t *rule_list;
 };
 
-mod_t *mod_new(const char *src, const char *text);
+mod_t *mod_new(const char *src, const char *string);
 void mod_destroy(mod_t **self_pointer);
 
 const spec_t *mod_find_spec(const mod_t *self, const char *name);
