@@ -32,6 +32,7 @@ string_test(void) {
     assert(string_parse_hex("F") == 15);
     assert(string_parse_hex("ff") == 255);
     assert(string_parse_hex("FF") == 255);
+    assert(string_parse_hex("FF:123") == 255);
 
     char *abc123 = string_append("abc", "123");
     assert(string_equal(abc123, "abc123"));
@@ -45,6 +46,8 @@ string_test(void) {
     assert(string_find_index("01234", '1') == 1);
     assert(string_find_index("01234", '2') == 2);
     assert(string_find_index("01234", '5') == -1);
+    assert(string_find_index("", '5') == -1);
+    assert(string_find_index("", '\0') == 0);
 
     assert(string_count_char("0aaa0", 'b') == 0);
     assert(string_count_char("0aaa0", 'a') == 3);

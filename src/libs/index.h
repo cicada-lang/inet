@@ -1,6 +1,7 @@
 #pragma once
 
 #include "memory/index.h"
+#include "char/index.h"
 #include "string/index.h"
 #include "list/index.h"
 #include "dict/index.h"
@@ -9,7 +10,9 @@
 #include "stack/index.h"
 #include "int/index.h"
 #include "code/index.h"
+#include "utf8/index.h"
 #include "text/index.h"
+#include "font/index.h"
 #include "lexer/index.h"
 #include "file/index.h"
 #include "image/index.h"

@@ -28,34 +28,13 @@ file_size(file_t *file) {
     return st.st_size;
 }
 
-static char *
-file_readline(file_t *file) {
-    size_t line_max_length  = 1000 * 1000;
-    char *buffer = allocate(line_max_length);
-
-    char *ok = fgets(buffer, line_max_length, file);
-    if (ok) {
-        char *line = string_dup(buffer);
-        free(buffer);
-        return line;
-    } else {
-        free(buffer);
-        return NULL;
-    }
-}
-
 char *
 file_read_string(file_t *file) {
-    char *string = string_empty();
-    while (true) {
-        char *line = file_readline(file);
-        if (!line) return string;
-
-        char *new_string = string_append(string, line);
-        free(string);
-        free(line);
-        string = new_string;
-    }
+    off_t size = file_size(file);
+    char *string = allocate(size + 1); // +1 for the ending '\0'.
+    size_t nbytes = fread(string, 1, size, file);
+    assert(nbytes == (size_t) size);
+    return string;
 }
 
 uint8_t *
