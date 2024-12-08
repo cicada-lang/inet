@@ -13,6 +13,8 @@ struct glyph_t {
 
 glyph_t *
 glyph_new(code_point_t code_point, size_t width, size_t height) {
+    assert(code_point <= MAX_CODE_POINT);
+
     glyph_t *self = new(glyph_t);
     self->code_point = code_point;
 

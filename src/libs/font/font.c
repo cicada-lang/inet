@@ -1,15 +1,14 @@
 #include "index.h"
 
-#define MAX_CODE_POINT 0x110000
-
 struct font_t {
-    glyph_t *glyphs;
+    glyph_t **glyphs;
 };
 
 font_t *
 font_new(void) {
     font_t *self = new(font_t);
-    self->glyphs = allocate_pointers(MAX_CODE_POINT);
+    // length is one more than the max.
+    self->glyphs = allocate_pointers(MAX_CODE_POINT + 1);
     return self;
 }
 
@@ -24,7 +23,33 @@ font_destroy(font_t **self_pointer) {
     }
 }
 
-// font_t *
-// font_load_hex_file(file_t *file) {
+glyph_t *
+font_get(font_t *self, code_point_t code_point) {
+    assert(code_point <= MAX_CODE_POINT);
+    return self->glyphs[code_point];
+}
 
-// }
+void
+font_put(font_t *self, glyph_t *glyph) {
+    self->glyphs[glyph_code_point(glyph)] = glyph;
+}
+
+font_t *
+font_from_hex_string(const char *string) {
+    font_t *font = font_new();
+    const char *line = string;
+    while (line) {
+        font_put(font, glyph_parse_hex(line));
+        line = string_next_line(line);
+    }
+
+    return font;
+}
+
+font_t *
+font_from_hex_file(file_t *file) {
+    char *string = file_read_string(file);
+    font_t *font = font_from_hex_string(string);
+    free(string);
+    return font;
+}

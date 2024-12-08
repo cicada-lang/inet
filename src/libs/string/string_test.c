@@ -69,5 +69,54 @@ string_test(void) {
     assert(string_equal_mod_case("ABC", "abc"));
     assert(string_equal_mod_case("abc", "ABC"));
 
+
+
+    {
+        assert(string_next_line("") == NULL);
+        assert(string_next_line("abc") == NULL);
+        assert(string_next_line("abc\n") == NULL);
+    }
+
+    {
+        const char *string =
+            "123\n"
+            "456\n"
+            "789\n";
+
+        const char *line = string;
+        size_t count = 0;
+        while (line) {
+            if (count == 0) assert(string_starts_with(line, "123\n"));
+            if (count == 1) assert(string_starts_with(line, "456\n"));
+            if (count == 2) assert(string_starts_with(line, "789\n"));
+            if (count == 3) assert(line == NULL);
+
+            line = string_next_line(line);
+            count++;
+        }
+    }
+
+    {
+        // no ending newline.
+
+        const char *string =
+            "123\n"
+            "456\n"
+            "789";
+
+        const char *line = string;
+        size_t count = 0;
+        while (line) {
+            if (count == 0) assert(string_starts_with(line, "123\n"));
+            if (count == 1) assert(string_starts_with(line, "456\n"));
+            if (count == 2) assert(string_starts_with(line, "789"));
+            if (count == 3) assert(line == NULL);
+
+            line = string_next_line(line);
+            count++;
+        }
+    }
+
+
     printf("</string_test>\n");
 }

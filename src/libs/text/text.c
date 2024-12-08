@@ -38,6 +38,7 @@ text_from_string(const char *string) {
         index++;
     }
 
+    utf8_iter_destroy(&iter);
     return text;
 }
 

@@ -1,5 +1,7 @@
 #pragma once
 
+#define MAX_CODE_POINT 0x10FFFF
+
 glyph_t *glyph_new(code_point_t code_point, size_t width, size_t height);
 void glyph_destroy(glyph_t **self_pointer);
 
