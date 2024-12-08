@@ -1,6 +1,20 @@
 #include "index.h"
 
 void
+canvas_draw_color(
+    canvas_t *self,
+    size_t x, size_t y,
+    color_t color,
+    blending_t blending
+) {
+    if (blending_is_transparent(blending) && color == 0)
+        return;
+
+    color_t blended = blending_table[blending][color];
+    canvas_draw_pixel(self, x, y, self->palette[blended]);
+}
+
+void
 canvas_draw_icn_bytes(
     canvas_t *self,
     size_t x, size_t y,
@@ -16,14 +30,11 @@ canvas_draw_icn_bytes(
                 for (uint8_t s = 0; s < 8; s++) {
                     uint8_t bit = ((byte << s) & 0x80) != 0;
                     color_t color = bit;
-                    if (blending_is_transparent(blending) && color == 0) continue;
-
-                    color_t blended = blending_table[blending][color];
-                    canvas_draw_pixel(
+                    canvas_draw_color(
                         self,
                         x + (col * 8 + s),
                         y + (row * 8 + line),
-                        self->palette[blended]);
+                        color, blending);
                 }
             }
         }
@@ -48,14 +59,11 @@ canvas_draw_chr_bytes(
                     uint8_t bit1 = ((chr1 << s) & 0x80) != 0;
                     uint8_t bit2 = ((chr2 << s) & 0x80) != 0;
                     color_t color = bit1 + bit2 * 2;
-                    if (blending_is_transparent(blending) && color == 0) continue;
-
-                    color_t blended = blending_table[blending][color];
-                    canvas_draw_pixel(
+                    canvas_draw_color(
                         self,
                         x + (col * 8 + s),
                         y + (row * 8 + line),
-                        self->palette[blended]);
+                        color, blending);
                 }
             }
         }
