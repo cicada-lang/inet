@@ -20,4 +20,4 @@
 #include "canvas/index.h"
 #include "commander/index.h"
 
-#include "libs_test.h"
+#include "modules_test.h"

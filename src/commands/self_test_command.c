@@ -16,7 +16,7 @@ run(commander_t *commander) {
 
     printf("<self-test>\n");
 
-    libs_test();
+    modules_test();
     
 
     printf("</self-test>\n");

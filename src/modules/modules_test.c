@@ -1,8 +1,8 @@
 #include "index.h"
 
 void
-libs_test(void) {
-    printf("<libs_test>\n");
+modules_test(void) {
+    printf("<modules_test>\n");
 
     char_test();
     string_test();
@@ -21,5 +21,5 @@ libs_test(void) {
     image_test();
     store_test();
 
-    printf("</libs_test>\n");
+    printf("</modules_test>\n");
 }
