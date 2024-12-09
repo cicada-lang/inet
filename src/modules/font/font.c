@@ -39,7 +39,7 @@ font_from_hex_string(const char *string) {
     font_t *font = font_new();
     const char *line = string;
     while (line) {
-        font_put(font, glyph_parse_hex(line));
+        font_put(font, glyph_decode_hex(line));
         line = string_next_line(line);
     }
 

@@ -4,7 +4,7 @@ void
 glyph_test(void) {
     printf("<glyph_test>\n");
 
-    glyph_t *glyph = glyph_parse_hex("0041:0000000018242442427E424242420000");
+    glyph_t *glyph = glyph_decode_hex("0041:0000000018242442427E424242420000");
 
     glyph_print_ascii_art(glyph, '-', 'A');
     printf("\n");

@@ -98,7 +98,7 @@ glyph_set(const glyph_t *self, size_t x, size_t y, bool dot) {
 }
 
 glyph_t *
-glyph_parse_hex(const char* string) {
+glyph_decode_hex(const char* string) {
     int colon_index = string_find_index(string, ':');
     assert(colon_index != -1);
 

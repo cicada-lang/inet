@@ -1,20 +1,6 @@
 #include "index.h"
 
 void
-canvas_draw_color(
-    canvas_t *self,
-    size_t x, size_t y,
-    color_t color,
-    blending_t blending
-) {
-    if (blending_is_transparent(blending) && color == 0)
-        return;
-
-    color_t blended = blending_table[blending][color];
-    canvas_draw_pixel(self, x, y, self->palette[blended]);
-}
-
-void
 canvas_draw_icn_bytes(
     canvas_t *self,
     size_t x, size_t y,

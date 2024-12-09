@@ -1,15 +1,5 @@
 #pragma once
 
-// About the four colors:
-// - https://wiki.xxiivv.com/site/theme.html
-
-typedef enum {
-    BG_COLOR = 0, // Background/alpha
-    SL_COLOR = 1, // Selection
-    FG_COLOR = 2, // Foreground
-    AP_COLOR = 3, // Application
-} color_t;
-
 typedef void (on_key_t)(void *state, canvas_t *canvas, const char *key_name, bool is_release);
 typedef void (on_click_t)(void *state, canvas_t *canvas, uint8_t button, bool is_release);
 typedef void (on_frame_t)(void *state, canvas_t *canvas, uint64_t passed);
@@ -39,6 +29,8 @@ struct canvas_t {
 
     const char *asset_base;
     store_t *asset_store;
+
+    const font_t *font;
 };
 
 canvas_t *canvas_new(size_t width, size_t height, size_t scale);
@@ -50,6 +42,7 @@ uint8_t *canvas_asset_store_get(canvas_t *self, const char *path);
 void canvas_open(canvas_t *self);
 
 void canvas_draw_pixel(canvas_t *self, size_t x, size_t y, uint32_t pixel);
+void canvas_draw_color(canvas_t *self, size_t x, size_t y, color_t color, blending_t blending);
 
 void canvas_add_clickable_area(
     canvas_t *self,

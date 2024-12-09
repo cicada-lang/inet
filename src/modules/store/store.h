@@ -9,9 +9,6 @@ const char *store_base(store_t *self);
 void store_purge_cache(store_t *self);
 size_t store_cache_size(store_t *self);
 
-uint8_t *store_get_cache(store_t *self, const char* path);
-void store_set_cache(store_t *self, const char* path, uint8_t *bytes);
-
 uint8_t *store_get_fresh(store_t *self, const char* path);
 
 uint8_t *store_get(store_t *self, const char* path);

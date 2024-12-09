@@ -1,7 +1,5 @@
 #pragma once
 
-void canvas_draw_color(canvas_t *self, size_t x, size_t y, color_t color, blending_t blending);
-
 // The width and height of image are measured in tile.
 
 void canvas_draw_icn_bytes(canvas_t *self, size_t x, size_t y, uint8_t *bytes, size_t width, size_t height, blending_t blending);
