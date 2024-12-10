@@ -16,3 +16,16 @@ wire_iter_new(const wire_t *root_wire) {
     self->remaining_node_list = list_new();
     return self;
 }
+
+void
+wire_iter_destroy(wire_iter_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        wire_iter_t *self = *self_pointer;
+        list_destroy(&self->occurred_wire_list);
+        list_destroy(&self->occurred_node_list);
+        list_destroy(&self->remaining_node_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
