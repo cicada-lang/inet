@@ -136,56 +136,23 @@ void
 wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 
+    wire_iter_t *iter = wire_iter_new(self);
+    wire_t *wire = wire_iter_start(iter);
+
     fprintf(file, "<root>\n");
-    wire_print(self, file);
+    wire_print(wire, file);
     fprintf(file, "\n");
     fprintf(file, "</root>\n");
 
+    wire = wire_iter_next(iter);
+
     fprintf(file, "<body>\n");
-    list_t *occurred_wire_list = list_new();
-    list_t *remaining_node_list = list_new();
-
-    list_push(occurred_wire_list, self);
-    if (self->opposite_wire)
-        list_push(occurred_wire_list, self->opposite_wire);
-
-    if (self->opposite_wire && self->opposite_wire->node)
-        list_push(remaining_node_list, self->opposite_wire->node);
-
-    node_t *node = list_pop(remaining_node_list);
-    while (node) {
-        for (port_index_t i = 0; i < node->spec->arity; i++) {
-            wire_t *wire = node->wires[i];
-            if (wire->opposite_wire) {
-                if (list_has(occurred_wire_list, wire)) continue;
-                if (list_has(occurred_wire_list, wire->opposite_wire)) continue;
-
-                wire_print(wire, file);
-                fprintf(file, "\n");
-
-                list_push(occurred_wire_list, wire);
-                list_push(occurred_wire_list, wire->opposite_wire);
-            } else {
-                if (list_has(occurred_wire_list, wire)) continue;
-
-                wire_print(wire, file);
-                fprintf(file, "\n");
-
-                list_push(occurred_wire_list, wire);
-            }
-
-            if (wire->opposite_wire &&
-                !list_has(remaining_node_list, wire->opposite_wire->node)) {
-                list_push(remaining_node_list, wire->opposite_wire->node);
-            }
-        }
-
-        node = list_pop(remaining_node_list);
+    while (wire) {
+        wire_print(wire, file);
+        fprintf(file, "\n");
+        wire = wire_iter_next(iter);
     }
-
-    list_destroy(&occurred_wire_list);
-    list_destroy(&remaining_node_list);
-
     fprintf(file, "</body>\n");
+
     fprintf(file, "</net>\n");
 }

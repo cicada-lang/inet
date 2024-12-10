@@ -1,7 +1,3 @@
-[core] `wire_iter_start`
-[core] `wire_iter_next`
-[core] `wire_print_net` use `wire_iter`
-
 # player
 
 [player] setup `player/`
