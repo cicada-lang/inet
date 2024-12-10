@@ -1,3 +1,9 @@
+[core] `node_iter_t`
+[core] `node_iter_new`
+[core] `node_iter_destroy`
+[core] `node_iter_start`
+[core] `node_iter_next`
+
 # player
 
 [player] setup `player/`

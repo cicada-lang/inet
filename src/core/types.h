@@ -19,6 +19,7 @@ typedef enum {
 } op_tag_t;
 
 typedef struct node_t node_t;
+typedef struct node_iter_t node_iter_t;
 typedef struct wire_t wire_t;
 typedef struct wire_iter_t wire_iter_t;
 typedef struct mod_t mod_t;
