@@ -88,6 +88,7 @@ interpret_mod(worker_t *worker) {
     parser->string = worker->mod->string;
     parser->err = worker->err;
     parser_parse(parser);
+    
     list_t *stmt_list = parser->stmt_list;
     parser_destroy(&parser);
 

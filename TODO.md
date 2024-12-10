@@ -1,6 +1,22 @@
+[core] `wire_iter_t` has three lists -- learn from `wire_print_net`
+[core] `wire_iter_new`
+[core] `wire_iter_destroy`
+[core] `wire_iter_start`
+[core] `wire_iter_next`
+[core] `wire_print_net` use `wire_iter`
+
+# player
+
+[player] setup `player/`
+[player] setup `canvas`
+[player] setup `play` commend
+[player] use `node_iter` to draw to random place in canvas
+[canvas] `canvas_draw_line`
+[player] use `canvas_draw_line`
+[player] use force-based layout
+
 # study
 
-[study] persons/yves-lafont/papers/1997-interaction-combinators.pdf
 [study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
 [study] topics/computer-science/interaction-nets/2006-proof-nets-and-the-identity-of-proofs--straßburger.pdf
 [study] projects/others/HigherOrderCO/HVM/paper/HVM2.pdf

@@ -43,6 +43,7 @@ void
 run_file(const char *path, bool debug) {
     file_t *file = file_open_or_fail(path, "r");
     const char *string = file_read_string(file);
+    fclose(file);
 
     mod_t *mod = mod_new(path, string);
     import_builtins(mod);
@@ -52,7 +53,6 @@ run_file(const char *path, bool debug) {
 
     interpret_mod(worker);
 
-    fclose(file);
     mod_destroy(&mod);
     worker_destroy(&worker);
 }

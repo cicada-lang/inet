@@ -4,6 +4,7 @@
 #include "types.h"
 #include "node.h"
 #include "wire.h"
+#include "wire_iter.h"
 #include "emit.h"
 #include "mod.h"
 #include "frame.h"
