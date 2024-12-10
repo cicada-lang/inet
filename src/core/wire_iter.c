@@ -67,8 +67,11 @@ wire_iter_next(wire_iter_t *self) {
 
             list_push(self->occurred_wire_list, wire->opposite_wire);
 
-            if (!list_has(self->remaining_node_list, wire->opposite_wire->node))
+            if (wire->opposite_wire->node &&
+                !list_has(self->remaining_node_list, wire->opposite_wire->node))
+            {
                 list_push(self->remaining_node_list, wire->opposite_wire->node);
+            }
         }
 
         return wire;

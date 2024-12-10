@@ -8,6 +8,8 @@ struct node_iter_t {
 
 node_iter_t *
 node_iter_new(node_t *root) {
+    assert(root);
+
     node_iter_t *self = new(node_iter_t);
     self->root = root;
     self->occurred_node_list = list_new();
@@ -34,9 +36,33 @@ node_iter_start(node_iter_t *self) {
 
     for (port_index_t i = 0; i < node->spec->arity; i++) {
         wire_t *wire = node->wires[i];
-        if (wire->opposite_wire) {
-            if (!list_has(self->remaining_node_list, wire->opposite_wire->node))
-                list_push(self->remaining_node_list, wire->opposite_wire->node);
+        if (wire->opposite_wire && wire->opposite_wire->node) {
+            if (list_has(self->occurred_node_list, wire->opposite_wire->node) ||
+                list_has(self->remaining_node_list, wire->opposite_wire->node))
+                continue;
+
+            list_push(self->remaining_node_list, wire->opposite_wire->node);
+        }
+    }
+
+    return node;
+}
+
+node_t *
+node_iter_next(node_iter_t *self) {
+    node_t *node = list_pop(self->remaining_node_list);
+    if (!node) return NULL;
+
+    list_push(self->occurred_node_list, node);
+
+    for (port_index_t i = 0; i < node->spec->arity; i++) {
+        wire_t *wire = node->wires[i];
+        if (wire->opposite_wire && wire->opposite_wire->node) {
+            if (list_has(self->occurred_node_list, wire->opposite_wire->node) ||
+                list_has(self->remaining_node_list, wire->opposite_wire->node))
+                continue;
+
+            list_push(self->remaining_node_list, wire->opposite_wire->node);
         }
     }
 

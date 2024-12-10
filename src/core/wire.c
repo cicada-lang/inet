@@ -156,5 +156,15 @@ wire_print_net(wire_t *self, file_t *file) {
     wire_iter_destroy(&iter);
     fprintf(file, "</body>\n");
 
+    // {
+    //     node_iter_t *iter = node_iter_new(self->opposite_wire->node);
+    //     node_t *node = node_iter_start(iter);
+    //     while (node) {
+    //         spec_print((spec_t *) node->spec, file);
+    //         printf("\n");
+    //         node = node_iter_next(iter);
+    //     }
+    // }
+
     fprintf(file, "</net>\n");
 }
