@@ -143,7 +143,6 @@ wire_print_net(wire_t *self, file_t *file) {
 
     fprintf(file, "<body>\n");
     list_t *occurred_wire_list = list_new();
-    list_t *occurred_node_list = list_new();
     list_t *remaining_node_list = list_new();
 
     list_push(occurred_wire_list, self);
@@ -155,9 +154,6 @@ wire_print_net(wire_t *self, file_t *file) {
 
     node_t *node = list_pop(remaining_node_list);
     while (node) {
-        if (list_has(occurred_wire_list, node)) continue;
-
-        list_push(occurred_wire_list, node);
         for (port_index_t i = 0; i < node->spec->arity; i++) {
             wire_t *wire = node->wires[i];
             if (wire->opposite_wire) {
@@ -188,7 +184,6 @@ wire_print_net(wire_t *self, file_t *file) {
     }
 
     list_destroy(&occurred_wire_list);
-    list_destroy(&occurred_node_list);
     list_destroy(&remaining_node_list);
 
     fprintf(file, "</body>\n");
