@@ -20,3 +20,10 @@ node_destroy(node_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+node_print(const node_t *self, file_t *file) {
+    char *id_string = uint_to_subscript(self->id);
+    fprintf(file, "(%s%s)", self->spec->name, id_string);
+    free(id_string);
+}

@@ -1,5 +1,3 @@
-[core] `node_print` -- test `node_iter_next`
-
 # player
 
 [player] setup `player/`

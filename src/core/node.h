@@ -8,3 +8,5 @@ struct node_t {
 
 node_t *node_new(const node_spec_t *spec, node_id_t id);
 void node_destroy(node_t **self_pointer);
+
+void node_print(const node_t *self, file_t *file);

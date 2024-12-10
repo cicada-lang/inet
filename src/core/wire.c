@@ -77,21 +77,13 @@ wire_print_left(const wire_t *self, file_t *file) {
         return;
     }
 
-    char *node_id_string = uint_to_subscript(self->node->id);
+    node_print(self->node, file);
 
     if (wire_is_principal(self)) {
-        fprintf(file, "(%s%s)-%s!-<",
-                wire_node_name(self),
-                node_id_string,
-                wire_name(self));
+        fprintf(file, "-%s!-<", wire_name(self));
     } else {
-        fprintf(file, "(%s%s)-%s-<",
-                wire_node_name(self),
-                node_id_string,
-                wire_name(self));
+        fprintf(file, "-%s-<", wire_name(self));
     }
-
-    free(node_id_string);
 }
 
 void
@@ -101,21 +93,13 @@ wire_print_right(const wire_t *self, file_t *file) {
         return;
     }
 
-    char *node_id_string = uint_to_subscript(self->node->id);
-
     if (wire_is_principal(self)) {
-        fprintf(file, ">-!%s-(%s%s)",
-                wire_name(self),
-                wire_node_name(self),
-                node_id_string);
+        fprintf(file, ">-!%s-", wire_name(self));
     } else {
-        fprintf(file, ">-%s-(%s%s)",
-                wire_name(self),
-                wire_node_name(self),
-                node_id_string);
+        fprintf(file, ">-%s-", wire_name(self));
     }
 
-    free(node_id_string);
+    node_print(self->node, file);
 }
 
 void
@@ -155,16 +139,6 @@ wire_print_net(wire_t *self, file_t *file) {
 
     wire_iter_destroy(&iter);
     fprintf(file, "</body>\n");
-
-    // {
-    //     node_iter_t *iter = node_iter_new(self->opposite_wire->node);
-    //     node_t *node = node_iter_start(iter);
-    //     while (node) {
-    //         spec_print((spec_t *) node->spec, file);
-    //         printf("\n");
-    //         node = node_iter_next(iter);
-    //     }
-    // }
 
     fprintf(file, "</net>\n");
 }
