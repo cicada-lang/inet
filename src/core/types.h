@@ -20,6 +20,7 @@ typedef enum {
 
 typedef struct node_t node_t;
 typedef struct wire_t wire_t;
+typedef struct wire_iter_t wire_iter_t;
 typedef struct mod_t mod_t;
 typedef struct frame_t frame_t;
 typedef struct worker_t worker_t;
