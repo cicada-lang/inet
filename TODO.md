@@ -1,4 +1,3 @@
-[core] `wire_iter_t` has three lists -- learn from `wire_print_net`
 [core] `wire_iter_new`
 [core] `wire_iter_destroy`
 [core] `wire_iter_start`
