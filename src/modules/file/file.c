@@ -50,3 +50,18 @@ void
 file_write_bytes(file_t *file, uint8_t *bytes, size_t size) {
     fwrite(bytes, 1, size, file);
 }
+
+blob_t *
+file_read_blob(file_t *file) {
+    off_t size = file_size(file);
+    blob_t *blob = blob_new(size);
+    uint8_t *bytes = blob_bytes(blob);
+    size_t nbytes = fread(bytes, 1, size, file);
+    assert(nbytes == (size_t) size);
+    return blob;
+}
+
+void
+file_write_blob(file_t *file, blob_t *blob) {
+    fwrite(blob_bytes(blob), 1, blob_length(blob), file);
+}

@@ -14,7 +14,7 @@ canvas_draw_glyph(
     for (size_t i = 0; i < width; i++) {
         for (size_t j = 0; j < height; j++) {
             bool dot = glyph_get(glyph, i, j);
-            color_t color = dot;
+            color_t color = dot ? 3 : 0;
             for (size_t s = 0; s < scale; s++) {
                 for (size_t t = 0; t < scale; t++) {
                     canvas_draw_color(

@@ -2,14 +2,14 @@
 
 struct store_t {
     const char *base;
-    dict_t *cache_dict;
+    dict_t *cached_blob_dict;
 };
 
 store_t *
 store_new(const char *base) {
     store_t *self = new(store_t);
     self->base = base;
-    self->cache_dict = dict_new_with((destructor_t *) destroy);
+    self->cached_blob_dict = dict_new_with((destructor_t *) blob_destroy);
     return self;
 }
 
@@ -18,7 +18,7 @@ store_destroy(store_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         store_t *self = *self_pointer;
-        dict_destroy(&self->cache_dict);
+        dict_destroy(&self->cached_blob_dict);
         free(self);
         *self_pointer = NULL;
     }
@@ -31,25 +31,25 @@ store_base(store_t *self) {
 
 void
 store_purge_cache(store_t *self) {
-    dict_purge(self->cache_dict);
+    dict_purge(self->cached_blob_dict);
 }
 
 size_t
 store_cache_size(store_t *self) {
-    return dict_length(self->cache_dict);
+    return dict_length(self->cached_blob_dict);
 }
 
-uint8_t *
+blob_t *
 store_get_cache(store_t *self, const char* path) {
-    return dict_get(self->cache_dict, path);
+    return dict_get(self->cached_blob_dict, path);
 }
 
 void
-store_set_cache(store_t *self, const char* path, uint8_t *bytes) {
-    dict_set(self->cache_dict, path, bytes);
+store_set_cache(store_t *self, const char* path, blob_t *blob) {
+    dict_set(self->cached_blob_dict, path, blob);
 }
 
-uint8_t *
+blob_t *
 store_get_fresh(store_t *self, const char* path) {
     char *normalized_path = string_append("/", path);
     char *file_name = string_append(self->base, normalized_path);
@@ -59,34 +59,34 @@ store_get_fresh(store_t *self, const char* path) {
     }
 
     file_t *file = fopen(file_name, "rb");
-    uint8_t *bytes = file_read_bytes(file);
+    blob_t *blob = file_read_blob(file);
 
     free(normalized_path);
     free(file_name);
     fclose(file);
 
-    return bytes;
+    return blob;
 }
 
-uint8_t *
+blob_t *
 store_get(store_t *self, const char* path) {
-    uint8_t *cached_bytes = store_get_cache(self, path);
-    if (cached_bytes) {
-        return cached_bytes;
+    blob_t *cached_blob = store_get_cache(self, path);
+    if (cached_blob) {
+        return cached_blob;
     }
 
-    uint8_t *fresh_bytes = store_get_fresh(self, path);
-    if (fresh_bytes) {
-        store_set_cache(self, path, fresh_bytes);
+    blob_t *fresh_blob = store_get_fresh(self, path);
+    if (fresh_blob) {
+        store_set_cache(self, path, fresh_blob);
     }
 
-    return fresh_bytes;
+    return fresh_blob;
 }
 
 bool
 store_has(store_t *self, const char* path) {
-    uint8_t *bytes = store_get(self, path);
-    if (bytes) {
+    blob_t *blob = store_get(self, path);
+    if (blob) {
         return true;
     } else {
         return false;

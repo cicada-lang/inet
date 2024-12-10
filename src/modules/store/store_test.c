@@ -19,17 +19,17 @@ store_test(void) {
     assert(store_cache_size(store) == 2);
 
     {
-        uint8_t *bytes = store_get(store, "abc.txt");
-        assert(bytes[0] == 'a');
-        assert(bytes[1] == 'b');
-        assert(bytes[2] == 'c');
+        blob_t *blob = store_get(store, "abc.txt");
+        assert(blob_bytes(blob)[0] == 'a');
+        assert(blob_bytes(blob)[1] == 'b');
+        assert(blob_bytes(blob)[2] == 'c');
     }
 
     {
-        uint8_t *bytes = store_get(store, "123.txt");
-        assert(bytes[0] == '1');
-        assert(bytes[1] == '2');
-        assert(bytes[2] == '3');
+        blob_t *blob = store_get(store, "123.txt");
+        assert(blob_bytes(blob)[0] == '1');
+        assert(blob_bytes(blob)[1] == '2');
+        assert(blob_bytes(blob)[2] == '3');
     }
 
     assert(store_cache_size(store) == 2);
@@ -37,17 +37,17 @@ store_test(void) {
     assert(store_cache_size(store) == 0);
 
     {
-        uint8_t *bytes = store_get(store, "abc.txt");
-        assert(bytes[0] == 'a');
-        assert(bytes[1] == 'b');
-        assert(bytes[2] == 'c');
+        blob_t *blob = store_get(store, "abc.txt");
+        assert(blob_bytes(blob)[0] == 'a');
+        assert(blob_bytes(blob)[1] == 'b');
+        assert(blob_bytes(blob)[2] == 'c');
     }
 
     {
-        uint8_t *bytes = store_get(store, "123.txt");
-        assert(bytes[0] == '1');
-        assert(bytes[1] == '2');
-        assert(bytes[2] == '3');
+        blob_t *blob = store_get(store, "123.txt");
+        assert(blob_bytes(blob)[0] == '1');
+        assert(blob_bytes(blob)[1] == '2');
+        assert(blob_bytes(blob)[2] == '3');
     }
 
     assert(store_cache_size(store) == 2);

@@ -14,7 +14,7 @@ typedef enum {
 //     <BG_COLOR>_<AP_COLOR><VARIANT>
 
 typedef enum {
-    TR_FG_BLENDING,
+    TR_FG_BLENDING = 0,
     BG_AP_BLENDING,
     BG_SL_BLENDING,
     BG_FG2_BLENDING,

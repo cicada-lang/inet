@@ -5,6 +5,7 @@
 #include "string/index.h"
 #include "list/index.h"
 #include "dict/index.h"
+#include "blob/index.h"
 #include "file/index.h"
 #include "array/index.h"
 #include "stack/index.h"

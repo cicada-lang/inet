@@ -17,4 +17,5 @@
 #include "../int/index.h"
 #include "../image/index.h"
 #include "../font/index.h"
+#include "../blob/index.h"
 #include "../store/index.h"

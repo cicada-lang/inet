@@ -65,8 +65,8 @@ canvas_draw_image(
 ) {
     uint8_t width = image_hex_width_from_path(path);
     uint8_t height = image_hex_height_from_path(path);
-    uint8_t *bytes = canvas_asset_store_get(self, path);
-    canvas_draw_chr_bytes(self, x, y, bytes, width, height, blending);
+    blob_t *blob = canvas_asset_store_get(self, path);
+    canvas_draw_chr_bytes(self, x, y, blob_bytes(blob), width, height, blending);
 }
 
 void

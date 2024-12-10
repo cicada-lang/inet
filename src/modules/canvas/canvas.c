@@ -39,23 +39,20 @@ canvas_destroy(canvas_t **self_pointer) {
     }
 }
 
-uint8_t *
+blob_t *
 canvas_asset_store_get(canvas_t *self, const char *path) {
     return store_get(self->asset_store, path);
 }
 
 void
-canvas_init_asset_store(canvas_t *self) {
+canvas_init_asset_store(canvas_t *self, const char *base) {
     if (self->asset_store) return;
 
-    if (self->asset_base) {
-        self->asset_store = store_new(self->asset_base);
-    }
+    self->asset_store = store_new(base);
 }
 
 void
 canvas_open(canvas_t *self) {
-    canvas_init_asset_store(self);
     canvas_window_open(self->window);
 }
 
