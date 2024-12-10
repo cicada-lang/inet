@@ -1,4 +1,3 @@
-[core] `wire_iter_new`
 [core] `wire_iter_destroy`
 [core] `wire_iter_start`
 [core] `wire_iter_next`
