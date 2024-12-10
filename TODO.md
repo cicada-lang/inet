@@ -1,12 +1,14 @@
-# player
+# debug
 
-[player] setup `player/`
-[player] setup `canvas`
-[player] setup `play` commend
-[player] use `node_iter` to draw to random place in canvas
+[debug] setup `debug/`
+[debug] setup `canvas`
+[debug] `debug_start` -- open canvas
+[debug] `@debug` as a builtin -- run `debug_start`
+
+[debug] use `node_iter` to draw to random place in canvas
 [canvas] `canvas_draw_line`
-[player] use `canvas_draw_line`
-[player] use force-based layout
+[debug] use `canvas_draw_line`
+[debug] use force-based layout
 
 # study
 
