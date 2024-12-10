@@ -1,4 +1,3 @@
-[core] `node_iter_start`
 [core] `node_iter_next`
 
 # player

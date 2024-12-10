@@ -26,3 +26,19 @@ node_iter_destroy(node_iter_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+node_t *
+node_iter_start(node_iter_t *self) {
+    node_t *node = self->root;
+    list_push(self->occurred_node_list, node);
+
+    for (port_index_t i = 0; i < node->spec->arity; i++) {
+        wire_t *wire = node->wires[i];
+        if (wire->opposite_wire) {
+            if (!list_has(self->remaining_node_list, wire->opposite_wire->node))
+                list_push(self->remaining_node_list, wire->opposite_wire->node);
+        }
+    }
+
+    return node;
+}
