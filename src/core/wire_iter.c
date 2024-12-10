@@ -54,24 +54,20 @@ wire_iter_next(wire_iter_t *self) {
         while (self->index < self->node->spec->arity) {
             port_index_t i = self->index++;
             wire_t *wire = self->node->wires[i];
+
+            if (list_has(self->occurred_wire_list, wire))
+                continue;
+
+            list_push(self->occurred_wire_list, wire);
+
             if (wire->opposite_wire) {
-                if (list_has(self->occurred_wire_list, wire) ||
-                    list_has(self->occurred_wire_list, wire->opposite_wire))
+                if (list_has(self->occurred_wire_list, wire->opposite_wire))
                     continue;
 
-                list_push(self->occurred_wire_list, wire);
                 list_push(self->occurred_wire_list, wire->opposite_wire);
-            } else {
-                if (list_has(self->occurred_wire_list, wire))
-                    continue;
 
-                list_push(self->occurred_wire_list, wire);
-            }
-
-            if (wire->opposite_wire &&
-                !list_has(self->remaining_node_list, wire->opposite_wire->node))
-            {
-                list_push(self->remaining_node_list, wire->opposite_wire->node);
+                if (!list_has(self->remaining_node_list, wire->opposite_wire->node))
+                    list_push(self->remaining_node_list, wire->opposite_wire->node);
             }
 
             return wire;
