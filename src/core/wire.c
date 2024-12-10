@@ -152,6 +152,8 @@ wire_print_net(wire_t *self, file_t *file) {
         fprintf(file, "\n");
         wire = wire_iter_next(iter);
     }
+
+    wire_iter_destroy(&iter);
     fprintf(file, "</body>\n");
 
     fprintf(file, "</net>\n");
