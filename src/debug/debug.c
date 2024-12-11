@@ -152,10 +152,8 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 static void
 init_net_layout(debug_t *self) {
     wire_t *wire = stack_top(self->worker->value_stack);
-    if (!wire->opposite) return;
-    if (!wire->opposite->node) return;
-
-    net_layout_update(self->net_layout, node_iter_new(wire->opposite->node));
+    self->net_layout->root = wire;
+    net_layout_update(self->net_layout);
 }
 
 void

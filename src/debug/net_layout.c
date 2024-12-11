@@ -37,7 +37,12 @@ find_node_layout(const net_layout_t *self, const node_t *node) {
 }
 
 void
-net_layout_update(net_layout_t *self, node_iter_t *iter) {
+net_layout_update(net_layout_t *self) {
+    if (!self->root) return;
+    if (!self->root->opposite) return;
+    if (!self->root->opposite->node) return;
+
+    node_iter_t *iter = node_iter_new(self->root->opposite->node);
     list_t *new_list = list_new_with((destroy_t *) node_layout_destroy);
     node_t *node = node_iter_start(iter);
     while (node) {
@@ -54,6 +59,7 @@ net_layout_update(net_layout_t *self, node_iter_t *iter) {
 
         node = node_iter_next(iter);
     }
+    node_iter_destroy(&iter);
 
     list_destroy(&self->node_layout_list);
     self->node_layout_list = new_list;

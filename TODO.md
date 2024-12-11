@@ -1,6 +1,5 @@
 # debug
 
-[debug] `net_layout_update` use the `root` -- instead of taking `node_iter`
 [debug] `draw_wire` instead of `draw_edge`
 [debug] use force-based layout
 
