@@ -35,6 +35,10 @@ typedef enum {
     TR_FG2_BLENDING,
 } blending_t;
 
+typedef enum {
+    SM_ROUNDNESS,
+} roundness_t;
+
 typedef struct canvas_t canvas_t;
 typedef struct canvas_window_t canvas_window_t;
 typedef struct clickable_area_t clickable_area_t;

@@ -1,6 +1,5 @@
 # debug
 
-[canvas] `canvas_fiil_rect_round`
 [debug] use force-based layout
 
 # study

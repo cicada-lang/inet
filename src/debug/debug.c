@@ -82,16 +82,25 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
-    size_t thickness = 1;
-    uint32_t pixel = canvas->palette[AP_COLOR];
 
+    canvas_fiil_rect_round(
+        canvas,
+        x - x_padding,
+        y - y_padding,
+        width,
+        height + y_padding * 2,
+        canvas->palette[FG_COLOR],
+        SM_ROUNDNESS);
+
+    size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
         x - x_padding,
         y - y_padding,
         width,
         height + y_padding * 2,
-        thickness, pixel,
+        thickness,
+        canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
 
     size_t scale = 1;
@@ -122,14 +131,14 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
     size_t thickness = 1;
-    uint32_t pixel = canvas->palette[AP_COLOR];
     canvas_draw_rect_round(
         canvas,
         self->net_layout->x,
         self->net_layout->y,
         self->net_layout->width,
         self->net_layout->height,
-        thickness, pixel,
+        thickness,
+        canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
 }
 
