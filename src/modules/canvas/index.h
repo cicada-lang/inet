@@ -5,6 +5,7 @@
 #include "canvas.h"
 #include "blending.h"
 #include "canvas_fill_rect.h"
+#include "canvas_draw_rect.h"
 #include "canvas_draw_image.h"
 #include "canvas_draw_glyph.h"
 #include "canvas_draw_text.h"
