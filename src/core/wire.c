@@ -5,7 +5,7 @@ wire_new(void) {
     wire_t *self = new(wire_t);
     self->node = NULL;
     self->index = -1;
-    self->opposite_wire = NULL;
+    self->opposite = NULL;
     return self;
 }
 
@@ -15,7 +15,7 @@ wire_destroy(wire_t **self_pointer) {
     if (*self_pointer) {
         wire_t *self = *self_pointer;
         free(self);
-        // Does NOT own `node` and `opposite_wire`.
+        // Does NOT own `node` and `opposite`.
         *self_pointer = NULL;
     }
 }
@@ -58,16 +58,16 @@ wire_is_principal(const wire_t *self) {
 
 wire_t *
 wire_connect(wire_t *first_wire, wire_t *second_wire) {
-    wire_t *first_opposite_wire = first_wire->opposite_wire;
-    wire_t *second_opposite_wire = second_wire->opposite_wire;
+    wire_t *first_opposite = first_wire->opposite;
+    wire_t *second_opposite = second_wire->opposite;
 
-    first_opposite_wire->opposite_wire = second_opposite_wire;
-    second_opposite_wire->opposite_wire = first_opposite_wire;
+    first_opposite->opposite = second_opposite;
+    second_opposite->opposite = first_opposite;
 
     wire_destroy(&first_wire);
     wire_destroy(&second_wire);
 
-    return first_opposite_wire;
+    return first_opposite;
 }
 
 void
@@ -104,16 +104,16 @@ wire_print_right(const wire_t *self, file_t *file) {
 
 void
 wire_print(const wire_t *self, file_t *file) {
-    if (self->opposite_wire)
-        wire_print_left(self->opposite_wire, file);
+    if (self->opposite)
+        wire_print_left(self->opposite, file);
     wire_print_right(self, file);
 }
 
 void
 wire_print_reverse(const wire_t *self, file_t *file) {
     wire_print_left(self, file);
-    if (self->opposite_wire)
-        wire_print_right(self->opposite_wire, file);
+    if (self->opposite)
+        wire_print_right(self->opposite, file);
 }
 
 void

@@ -33,15 +33,15 @@ wire_t *
 wire_iter_start(wire_iter_t *self) {
     list_push(self->occurred_wire_list, self->root);
 
-    if (self->root->opposite_wire) {
+    if (self->root->opposite) {
         list_push(self->occurred_wire_list,
-                  self->root->opposite_wire);
+                  self->root->opposite);
     }
 
-    if (self->root->opposite_wire &&
-        self->root->opposite_wire->node)
+    if (self->root->opposite &&
+        self->root->opposite->node)
     {
-        self->node = self->root->opposite_wire->node;
+        self->node = self->root->opposite->node;
         self->index = 0;
     }
 
@@ -61,16 +61,16 @@ wire_iter_next(wire_iter_t *self) {
 
         list_push(self->occurred_wire_list, wire);
 
-        if (wire->opposite_wire) {
-            if (list_has(self->occurred_wire_list, wire->opposite_wire))
+        if (wire->opposite) {
+            if (list_has(self->occurred_wire_list, wire->opposite))
                 continue;
 
-            list_push(self->occurred_wire_list, wire->opposite_wire);
+            list_push(self->occurred_wire_list, wire->opposite);
 
-            if (wire->opposite_wire->node &&
-                !list_has(self->remaining_node_list, wire->opposite_wire->node))
+            if (wire->opposite->node &&
+                !list_has(self->remaining_node_list, wire->opposite->node))
             {
-                list_push(self->remaining_node_list, wire->opposite_wire->node);
+                list_push(self->remaining_node_list, wire->opposite->node);
             }
         }
 

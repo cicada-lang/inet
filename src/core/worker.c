@@ -43,7 +43,7 @@ worker_interact_once(worker_t *self) {
     const rule_t *rule = mod_find_rule(
         self->mod,
         active_wire,
-        active_wire->opposite_wire);
+        active_wire->opposite);
     if (!rule) return;
 
     size_t base_length = stack_length(self->return_stack);
@@ -137,12 +137,12 @@ worker_connect_top_wire_pair(worker_t *worker) {
     wire_t *second_wire = stack_pop(worker->value_stack);
     wire_t *first_wire = stack_pop(worker->value_stack);
 
-    wire_t *first_opposite_wire = wire_connect(second_wire, first_wire);
+    wire_t *first_opposite = wire_connect(second_wire, first_wire);
 
     worker_maybe_add_active_wire(
         worker,
-        first_opposite_wire,
-        first_opposite_wire->opposite_wire);
+        first_opposite,
+        first_opposite->opposite);
 }
 
 void
@@ -152,8 +152,8 @@ worker_maybe_add_active_wire(
     wire_t *second_wire
 ) {
     if (wire_is_principal(first_wire) && wire_is_principal(second_wire)) {
-        assert(first_wire->opposite_wire == second_wire);
-        assert(second_wire->opposite_wire == first_wire);
+        assert(first_wire->opposite == second_wire);
+        assert(second_wire->opposite == first_wire);
 
         list_push(worker->active_wire_list, first_wire);
     }

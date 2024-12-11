@@ -51,7 +51,7 @@ node_apply_input_ports(worker_t *worker, node_t *node) {
         wire->index = i;
         node->wires[i] = wire;
 
-        worker_maybe_add_active_wire(worker, wire, wire->opposite_wire);
+        worker_maybe_add_active_wire(worker, wire, wire->opposite);
     }
 }
 
@@ -61,8 +61,8 @@ node_return_output_ports(worker_t *worker, node_t *node) {
         wire_t *node_wire = wire_new();
         wire_t *free_wire = wire_new();
 
-        node_wire->opposite_wire = free_wire;
-        free_wire->opposite_wire = node_wire;
+        node_wire->opposite = free_wire;
+        free_wire->opposite = node_wire;
 
         port_index_t i = node->spec->input_arity + c;
         node_wire->node = node;

@@ -77,7 +77,7 @@ collect_free_wires_from_node(node_t *node) {
 void
 frame_collect_free_wires(frame_t *self, wire_t *wire) {
     wire_t *first_wire = wire;
-    wire_t *second_wire = wire->opposite_wire;
+    wire_t *second_wire = wire->opposite;
 
     self->first_free_wire_group = collect_free_wires_from_node(first_wire->node);
     self->second_free_wire_group = collect_free_wires_from_node(second_wire->node);

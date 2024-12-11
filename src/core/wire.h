@@ -3,7 +3,7 @@
 struct wire_t {
     node_t *node;
     port_index_t index;
-    wire_t *opposite_wire;
+    wire_t *opposite;
 };
 
 wire_t *wire_new(void);
