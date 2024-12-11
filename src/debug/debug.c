@@ -55,7 +55,9 @@ init_canvas_font(canvas_t *canvas) {
 }
 
 static void
-draw_background_grid(debug_t *self, canvas_t *canvas) {
+draw_background_grid(debug_t *self, canvas_t *canvas, bool is_on) {
+    if (!is_on) return;
+
     (void) self;
 
     for (size_t i = 0; i < WIDTH / TILE; i++) {
@@ -100,7 +102,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[BG_COLOR]);
     canvas_clear_clickable_area(canvas);
 
-    draw_background_grid(self, canvas);
+    draw_background_grid(self, canvas, false);
     draw_net(self, canvas);
 }
 
