@@ -75,8 +75,9 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
     size_t text_width = font_text_width(canvas->font, text);
     size_t x_padding = TILE / 2;
 
-    size_t x = node_layout->x - (text_width / 2);
-    size_t y = node_layout->y;
+    size_t x = self->net_layout->x + node_layout->x - (text_width / 2);
+    size_t y = self->net_layout->y + node_layout->y;
+
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
     size_t thickness = 1;
@@ -93,6 +94,22 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
     canvas_draw_text(canvas, x, y, text, scale, TR_AP_BLENDING);
     text_destroy(&text);
 }
+
+// static void
+// draw_edge(
+//     debug_t *self,
+//     canvas_t *canvas,
+//     node_layout_t *node_layout1,
+//     node_layout_t *node_layout2
+// ) {
+//     canvas_draw_line(
+//         canvas,
+//         self->net_layout->x + node_layout1->x,
+//         self->net_layout->y + node_layout1->y,
+//         self->net_layout->x + node_layout2->x,
+//         self->net_layout->y + node_layout2->y,
+//         canvas->palette[AP_COLOR]);
+// }
 
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
@@ -129,14 +146,12 @@ init_net_layout(debug_t *self) {
 void
 debug_start(worker_t *worker) {
     debug_t *self = debug_new(worker);
+    init_net_layout(self);
 
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);
     init_canvas_font(self->canvas);
-
     self->canvas->on_frame = (on_frame_t *) on_frame;
-
-    init_net_layout(self);
 
     canvas_open(self->canvas);
 
