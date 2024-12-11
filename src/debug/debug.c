@@ -196,6 +196,8 @@ init_net_layout(debug_t *self) {
 
 void
 debug_start(worker_t *worker) {
+    srand(time(NULL));
+
     debug_t *self = debug_new(worker);
     init_net_layout(self);
 
