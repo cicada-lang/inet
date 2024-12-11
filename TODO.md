@@ -1,7 +1,6 @@
 # debug
 
 [debug] `spring_force`
-[debug] `electrical_force`
 
 [debug] `net_layout_evolve`
 
