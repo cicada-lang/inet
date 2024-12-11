@@ -1,7 +1,7 @@
 #include "index.h"
 
-position_t
-electrical_force(position_t first, position_t second) {
+vec2_t
+electrical_force(vec2_t first, vec2_t second) {
     double C = 1000 * 50;
 
     double delta_x = second.x - first.x;
@@ -17,17 +17,17 @@ electrical_force(position_t first, position_t second) {
     double force_y = -(C / distance_sqared) * unit_y;
 
     if (isnan(force_x) || isnan(force_y)) {
-        return (position_t) { .x = 0, .y = 0 };
+        return (vec2_t) { .x = 0, .y = 0 };
     }
 
-    return (position_t) {
+    return (vec2_t) {
         .x = force_x,
         .y = force_y,
     };
 }
 
-position_t
-spring_force(position_t first, position_t second) {
+vec2_t
+spring_force(vec2_t first, vec2_t second) {
     double C = 1 / 30;
     double spring_length = 5;
 
@@ -42,10 +42,10 @@ spring_force(position_t first, position_t second) {
     double force_y = C * factor * delta_y;
 
     if (isnan(force_x) || isnan(force_y)) {
-        return (position_t) { .x = 0, .y = 0 };
+        return (vec2_t) { .x = 0, .y = 0 };
     }
 
-    return (position_t) {
+    return (vec2_t) {
         .x = force_x,
         .y = force_y,
     };

@@ -1,9 +1,10 @@
 # debug
 
-[debug] `net_layout_evolve`
+[debug] `node_layout` has `force` (`vec2_t`)
+[debug] `net_layout_electrical_force`
+[debug] `net_layout_spring_force`
 
-[debug] `net_layout_apply_spring_force`
-[debug] `net_layout_apply_electrical_force`
+[debug] `net_layout_evolve` -- apply `force` in `node_layout`
 
 [debug] use force-based layout
 

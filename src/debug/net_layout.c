@@ -69,3 +69,8 @@ net_layout_update(net_layout_t *self) {
     list_destroy(&self->node_layout_list);
     self->node_layout_list = new_list;
 }
+
+// void
+// net_layout_electrical_force(net_layout_t *self) {
+
+// }

@@ -1,7 +1,7 @@
 #pragma once
 
-struct position_t { double x, y; };
-typedef struct position_t position_t;
+struct vec2_t { double x, y; };
+typedef struct vec2_t vec2_t;
 
 typedef struct debug_t debug_t;
 typedef struct node_layout_t node_layout_t;
