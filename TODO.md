@@ -1,14 +1,11 @@
-[set] `set_t` -- hidden
-[set] `set_new`
-[set] `set_destroy`
-[set] `set_add`
-[set] `set_has`
-[set] `set_purge`
+[memory] define `comparator_t`
+
+[list] `list_t` has optional `comparator_t`
+[list] `list_find` return the found item and move `cursor` -- like czmq
 
 # debug
 
-[debug] `net_layout_t` should have `node_layout_set` -- instead of `node_layout_list`
-[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_set`
+[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_list` with `comparator_t`
 
 [debug] `draw_net`
 [debug] `draw_node`
