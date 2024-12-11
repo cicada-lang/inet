@@ -66,6 +66,33 @@ draw_background_grid(debug_t *self, canvas_t *canvas) {
 }
 
 static void
+draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
+    (void) self;
+
+    size_t scale = 1;
+    text_t *text = text_from_string(node_layout->node->spec->name);
+    canvas_draw_text(
+        canvas,
+        node_layout->x,
+        node_layout->y,
+        text,
+        scale,
+        BG_AP_BLENDING);
+    text_destroy(&text);
+}
+
+static void
+draw_net(debug_t *self, canvas_t *canvas) {
+    assert(self->net_layout);
+
+    node_layout_t *node_layout = list_start(self->net_layout->node_layout_list);
+    while (node_layout) {
+        draw_node(self, canvas, node_layout);
+        node_layout = list_next(self->net_layout->node_layout_list);
+    }
+}
+
+static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
 
@@ -74,6 +101,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     canvas_clear_clickable_area(canvas);
 
     draw_background_grid(self, canvas);
+    draw_net(self, canvas);
 }
 
 static void

@@ -1,7 +1,9 @@
 # debug
 
-[debug] `draw_net`
-[debug] `draw_node`
+[debug] `draw_node` -- show boundary
+[font] `font_text_width` & `font_text_height`
+[debug] `draw_node` -- use `font_text_width` & `font_text_height`
+[debug] `draw_node` -- show boundary -- `node-conner.chr`
 
 [canvas] `canvas_draw_line`
 [debug] `draw_edge` use `canvas_draw_line`
