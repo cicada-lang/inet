@@ -76,6 +76,14 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     draw_background_grid(self, canvas);
 }
 
+static void
+init_net_layout(debug_t *self) {
+    wire_t *wire = stack_top(self->worker->value_stack);
+    if (!(wire->opposite && wire->opposite->node)) return;
+
+    net_layout_update(self->net_layout, node_iter_new(wire->opposite->node));
+}
+
 void
 debug_start(worker_t *worker) {
     debug_t *self = debug_new(worker);
@@ -85,6 +93,8 @@ debug_start(worker_t *worker) {
     init_canvas_font(self->canvas);
 
     self->canvas->on_frame = (on_frame_t *) on_frame;
+
+    init_net_layout(self);
 
     canvas_open(self->canvas);
 

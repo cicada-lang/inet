@@ -1,6 +1,5 @@
 # debug
 
-[debug] call `net_layout_update`
 [debug] `draw_net`
 [debug] `draw_node`
 
