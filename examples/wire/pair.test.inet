@@ -1,2 +1,2 @@
 . @wire/pair
-  @print-current-worker
+  @print-worker

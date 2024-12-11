@@ -4,7 +4,7 @@
 <return-stack length="1">
 <frame>
 <program>
-. @print-current-worker <<< sole @print-current-worker sole @print-current-worker 
+. @print-worker <<< sole @print-worker sole @print-worker 
 </program>
 <local-free-wires>
 </local-free-wires>
@@ -20,7 +20,7 @@
 <return-stack length="1">
 <frame>
 <program>
-. @print-current-worker sole @print-current-worker <<< sole @print-current-worker 
+. @print-worker sole @print-worker <<< sole @print-worker 
 </program>
 <local-free-wires>
 </local-free-wires>
