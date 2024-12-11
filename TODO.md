@@ -1,7 +1,5 @@
 # debug
 
-[debug] `net_layout_destroy`
-
 [debug] `debug_t` -- has `net_layout`
 
 [debug] `net_layout_refresh` take a `node_iter`
