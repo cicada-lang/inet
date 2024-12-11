@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-for example in $(find examples -name '*.inet' -not -name '*.test.inet' -not -name '*.error.inet'); do
+for example in $(find examples -name '*.inet' -not -name '*.test.inet' -not -name '*.error.inet' -not -name '*.play.inet'); do
     echo "[run] $example"
     ./bin/inet run $example
 done

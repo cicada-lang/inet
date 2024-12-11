@@ -18,4 +18,6 @@ import_builtins(mod_t *mod) {
     define_builtin(mod, "@print-worker", builtin_print_worker);
     define_builtin(mod, "@print-value-stack", builtin_print_value_stack);
     define_builtin(mod, "@print-return-stack", builtin_print_return_stack);
+
+    define_builtin(mod, "@debug", builtin_debug);
 }

@@ -11,3 +11,5 @@ builtin_t builtin_interact;
 builtin_t builtin_print_worker;
 builtin_t builtin_print_value_stack;
 builtin_t builtin_print_return_stack;
+
+builtin_t builtin_debug;

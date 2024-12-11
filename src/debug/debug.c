@@ -1,7 +1,7 @@
 #include "index.h"
 
-#define WIDTH (400 * TILE)
-#define HEIGHT (300 * TILE)
+#define WIDTH (120 * TILE)
+#define HEIGHT (80 * TILE)
 #define SCALE 2
 
 debug_t *
