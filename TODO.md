@@ -1,8 +1,26 @@
 # debug
 
-[debug] use `node_iter` to draw to random place in canvas
+[debug] setup `node_layout.c`
+[debug] `node_layout_t` -- has `node`
+[debug] `node_layout_new`
+[debug] `node_layout_destroy`
+
+[debug] setup `net_layout.c`
+[debug] `net_layout_t` -- has `x y width height` and `node_layout_list`
+[debug] `net_layout_new`
+[debug] `net_layout_destroy`
+
+[debug] `debug_t` -- has `net_layout`
+
+[debug] `net_layout_refresh` take a `node_iter`
+
+[debug] random node layout for testing
+
+[debug] `draw_net`
+[debug] `draw_node`
+
 [canvas] `canvas_draw_line`
-[debug] use `canvas_draw_line`
+[debug] `draw_edge` use `canvas_draw_line`
 [debug] use force-based layout
 
 # study

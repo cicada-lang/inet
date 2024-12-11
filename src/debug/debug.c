@@ -1,8 +1,8 @@
 #include "index.h"
 
-#define WIDTH (120 * TILE)
-#define HEIGHT (80 * TILE)
-#define SCALE 2
+#define WIDTH (90 * TILE)
+#define HEIGHT (60 * TILE)
+#define SCALE 3
 
 debug_t *
 debug_new(worker_t *worker) {
@@ -49,7 +49,7 @@ init_canvas_font(canvas_t *canvas) {
 }
 
 static void
-render_background_grid(debug_t *self, canvas_t *canvas) {
+draw_background_grid(debug_t *self, canvas_t *canvas) {
     (void) self;
 
     for (size_t i = 0; i < WIDTH / TILE; i++) {
@@ -67,7 +67,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[BG_COLOR]);
     canvas_clear_clickable_area(canvas);
 
-    render_background_grid(self, canvas);
+    draw_background_grid(self, canvas);
 }
 
 void
