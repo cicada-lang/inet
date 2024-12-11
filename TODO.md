@@ -1,7 +1,5 @@
 # debug
 
-[debug] `position_t`
-
 [debug] `spring_force`
 [debug] `electrical_force`
 
