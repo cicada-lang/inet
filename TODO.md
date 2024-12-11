@@ -1,7 +1,6 @@
 # debug
 
-[debug] `net_layout_update` -- take a `node_iter` and update the `node_layout_list`
-
+[debug] call `net_layout_update`
 [debug] `draw_net`
 [debug] `draw_node`
 
