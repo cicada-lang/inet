@@ -1,6 +1,7 @@
 # debug
 
-[debug] `net_layout_t` has something like a edge list
+[debug] `net_layout_update` use the `root` -- instead of taking `node_iter`
+[debug] `draw_wire` instead of `draw_edge`
 [debug] use force-based layout
 
 # study

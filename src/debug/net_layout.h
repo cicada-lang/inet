@@ -3,6 +3,7 @@
 struct net_layout_t {
     size_t x, y;
     size_t width, height;
+    wire_t *root;
     list_t *node_layout_list;
 };
 
