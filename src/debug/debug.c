@@ -128,10 +128,6 @@ init_net_layout(debug_t *self) {
 
 void
 debug_start(worker_t *worker) {
-    time_t seed = time(NULL);
-    printf("[debug_start] random seed: %lu\n", seed);
-    srand(seed);
-
     debug_t *self = debug_new(worker);
 
     init_canvas_theme(self->canvas);
