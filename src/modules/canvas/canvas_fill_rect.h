@@ -1,9 +1,5 @@
 #pragma once
 
-typedef enum {
-    SM_ROUNDNESS,
-} roundness_t;
-
 void canvas_fill_bottom_right(canvas_t *self, size_t x, size_t y, uint32_t pixel);
 void canvas_fill_bottom_left(canvas_t *self, size_t x, size_t y, uint32_t pixel);
 void canvas_fill_top_right(canvas_t *self, size_t x, size_t y, uint32_t pixel);
