@@ -81,7 +81,13 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
     size_t height = 2 * TILE;
     size_t thickness = 1;
     uint32_t pixel = canvas->palette[AP_COLOR];
-    canvas_draw_rect(canvas, x - x_padding, y, width, height, thickness, pixel);
+    canvas_draw_rect_round(
+        canvas,
+        x - x_padding,
+        y,
+        width, height,
+        thickness, pixel,
+        SM_ROUNDNESS);
 
     size_t scale = 1;
     canvas_draw_text(canvas, x, y, text, scale, TR_AP_BLENDING);

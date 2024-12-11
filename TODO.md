@@ -1,9 +1,5 @@
 # debug
 
-[canvas] `canvas_draw_rect_round` -- with `roundness_t`
-
-[debug] `draw_node` -- use `canvas_draw_rect_round`
-
 [canvas] `canvas_draw_line`
 [debug] `draw_edge` use `canvas_draw_line`
 [debug] use force-based layout
