@@ -247,7 +247,7 @@ list_test(void) {
         assert(list_has(copy, "C"));
 
         list_destroy(&copy);
-        assert(list == NULL);
+        assert(copy == NULL);
     }
 
     printf("</list_test>\n");

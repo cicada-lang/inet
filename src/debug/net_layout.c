@@ -71,6 +71,32 @@ net_layout_update(net_layout_t *self) {
 }
 
 void
+net_layout_electrical_force(net_layout_t *self) {
+    list_t *copy = list_dup(self->node_layout_list);
+    node_layout_t *node_layout = list_start(self->node_layout_list);
+    while (node_layout) {
+        node_layout_t *node_layout2 = list_start(copy);
+        while (node_layout2) {
+            if (node_layout2 == node_layout)
+                continue;
+
+            vec2_t force = electrical_force(
+                (vec2_t) { .x = node_layout->x, .y = node_layout->y },
+                (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
+
+            node_layout->force.x += force.x;
+            node_layout->force.y += force.y;
+
+            node_layout2 = list_next(copy);
+        }
+
+        node_layout = list_next(self->node_layout_list);
+    }
+
+    list_destroy(&copy);
+}
+
+void
 net_layout_spring_force(net_layout_t *self) {
     if (!self->root) return;
 

@@ -1,6 +1,5 @@
 # debug
 
-[debug] `net_layout_electrical_force`
 [debug] `net_layout_spring_force`
 
 [debug] `net_layout_evolve` -- apply `force` in `node_layout`
