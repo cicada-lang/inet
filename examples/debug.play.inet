@@ -11,8 +11,10 @@
 
 (- test -)
 
-. zero add1 add1
-  zero add1 add1
+= two zero add1 add1
+
+. two two add
+  two two add
   add
 
   @wire/print-net
