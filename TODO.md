@@ -1,7 +1,5 @@
 # debug
 
-[debug] `spring_force`
-
 [debug] `net_layout_evolve`
 
 [debug] `net_layout_apply_spring_force`

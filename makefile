@@ -1,5 +1,5 @@
 cc = gcc
-ldflags = -lX11
+ldflags = -lX11 -lm
 cflags = -g -Wall -Wwrite-strings -Wextra -Werror -Wpedantic -O3 -std=c99 -D_POSIX_C_SOURCE=199309L
 
 src = $(shell find src -name '*.c')
