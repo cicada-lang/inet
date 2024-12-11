@@ -1,11 +1,7 @@
 # debug
 
-[debug] `debug_t` -- has `net_layout`
-
-[debug] `net_layout_refresh` take a `node_iter`
-
-[debug] random node layout for testing
-
+[debug] `net_layout_refresh` -- take a `node_iter` and refresh the `node_layout_list`
+[debug] `net_layout_refresh` -- random node layout within `net_layout` for testing
 [debug] `draw_net`
 [debug] `draw_node`
 

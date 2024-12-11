@@ -14,6 +14,12 @@ debug_new(worker_t *worker) {
     canvas->title = "inet debug";
     self->canvas = canvas;
 
+    self->net_layout = net_layout_new(
+        15 * TILE,
+        15 * TILE,
+        60 * TILE,
+        40 * TILE);
+
     return self;
 }
 
