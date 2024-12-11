@@ -1,6 +1,5 @@
 # debug
 
-[debug] `net_layout_new`
 [debug] `net_layout_destroy`
 
 [debug] `debug_t` -- has `net_layout`
