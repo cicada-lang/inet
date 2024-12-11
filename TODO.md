@@ -1,5 +1,3 @@
-[list] `list_find` return the found item and move `cursor` -- like czmq
-
 # debug
 
 [debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_list` with `equal_fn_t`

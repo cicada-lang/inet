@@ -85,10 +85,8 @@ list_has(const list_t *self, const void *item) {
     assert(self);
     node_t *node = self->first;
     while (node) {
-        if (node->item == item)
-            return true;
-
-        if (self->equal && self->equal(node->item, item) == 0)
+        if ((node->item == item) ||
+            (self->equal && self->equal(node->item, item)))
             return true;
 
         node = node->next;
@@ -124,6 +122,27 @@ list_remove(list_t *self, void *item) {
     free(node);
     self->length--;
     return true;
+}
+
+void *
+list_find(list_t *self, const void *item) {
+    assert(self);
+
+    self->cursor = self->first;
+
+    node_t *node = self->first;
+    while (node) {
+        if ((node->item == item) ||
+            (self->equal && self->equal(node->item, item)))
+        {
+            self->cursor = node;
+            return node->item;
+        }
+
+        node = node->next;
+    }
+
+    return NULL;
 }
 
 void *
