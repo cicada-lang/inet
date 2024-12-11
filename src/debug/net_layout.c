@@ -46,7 +46,10 @@ net_layout_update(net_layout_t *self, node_iter_t *iter) {
             list_push(new_list, found);
             list_remove(self->node_layout_list, found);
         } else {
-            node_layout_t *node_layout = node_layout_new(node, 0, 0);
+            size_t x = self->width * ((double) rand() / RAND_MAX);
+            size_t y = self->height * ((double) rand() / RAND_MAX);
+            printf("[net_layout_update] %lu, %lu\n", x, y);
+            node_layout_t *node_layout = node_layout_new(node, x, y);
             list_push(new_list, node_layout);
         }
 

@@ -3,8 +3,6 @@
 [debug] `draw_net`
 [debug] `draw_node`
 
-[debug] `net_layout_refresh` -- random node layout within `net_layout` for testing
-
 [canvas] `canvas_draw_line`
 [debug] `draw_edge` use `canvas_draw_line`
 [debug] use force-based layout
