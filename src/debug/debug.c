@@ -110,9 +110,10 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
 
 static void
 draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
-    if (!wire->node) return;
-    if (!wire->opposite) return;
-    if (!wire->opposite->node) return;
+    if (!wire->node ||
+        !wire->opposite ||
+        !wire->opposite->node)
+        return;
 
     net_layout_t *net_layout = self->net_layout;
 
@@ -121,13 +122,15 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     node_layout_t *node_layout2 =
         net_layout_find_node_layout(net_layout, wire->opposite->node);
 
-    canvas_draw_line(
-        canvas,
-        net_layout->x + node_layout1->x,
-        net_layout->y + node_layout1->y,
-        net_layout->x + node_layout2->x,
-        net_layout->y + node_layout2->y,
-        canvas->palette[AP_COLOR]);
+    if (node_layout1 && node_layout2) {
+        canvas_draw_line(
+            canvas,
+            net_layout->x + node_layout1->x,
+            net_layout->y + node_layout1->y,
+            net_layout->x + node_layout2->x,
+            net_layout->y + node_layout2->y,
+            canvas->palette[AP_COLOR]);
+    }
 }
 
 static void
@@ -158,6 +161,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
         draw_wire(self, canvas, wire);
         wire = wire_iter_next(iter);
     }
+    wire_iter_destroy(&iter);
 
     node_layout_t *node_layout = list_start(net_layout->node_layout_list);
     while (node_layout) {

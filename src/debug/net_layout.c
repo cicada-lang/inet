@@ -70,7 +70,29 @@ net_layout_update(net_layout_t *self) {
     self->node_layout_list = new_list;
 }
 
-// void
-// net_layout_electrical_force(net_layout_t *self) {
+void
+net_layout_spring_force(net_layout_t *self) {
+    if (!self->root) return;
 
-// }
+    wire_iter_t *iter = wire_iter_new(self->root);
+    wire_t *wire = wire_iter_start(iter);
+    while (wire) {
+        if (wire->node &&
+            wire->opposite &&
+            wire->opposite->node)
+        {
+            node_layout_t *node_layout1 =
+                net_layout_find_node_layout(self, wire->node);
+            node_layout_t *node_layout2 =
+                net_layout_find_node_layout(self, wire->opposite->node);
+
+            (void) node_layout1;
+            (void) node_layout2;
+
+            //
+
+            wire = wire_iter_next(iter);
+        }
+    }
+    wire_iter_destroy(&iter);
+}

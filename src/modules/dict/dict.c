@@ -31,7 +31,7 @@ entry_destroy(entry_t **self_pointer) {
 
 struct dict_t {
     list_t *entry_list;
-    destroy_t *destroy;
+    destroy_t *destroy_fn;
 };
 
 dict_t *
@@ -43,22 +43,22 @@ dict_new(void) {
 
 void
 dict_set_destroy_fn(dict_t *self, destroy_t *destroy) {
-    self->destroy = destroy;
+    self->destroy_fn = destroy;
 }
 
 dict_t *
 dict_new_with(destroy_t *destroy) {
     dict_t *self = dict_new();
-    self->destroy = destroy;
+    self->destroy_fn = destroy;
     return self;
 }
 
 void
 dict_purge(dict_t *self) {
-    if (self->destroy) {
+    if (self->destroy_fn) {
         entry_t *entry = list_pop(self->entry_list);
         while (entry) {
-            self->destroy(&entry->item);
+            self->destroy_fn(&entry->item);
             entry_destroy(&entry);
             entry = list_pop(self->entry_list);
         }
@@ -87,8 +87,8 @@ dict_set(dict_t *self, const char *key, void *item) {
     entry_t *entry = list_start(self->entry_list);
     while (entry) {
         if (string_equal(entry->key, key)) {
-            if (self->destroy) {
-                self->destroy(&entry->item);
+            if (self->destroy_fn) {
+                self->destroy_fn(&entry->item);
             }
 
             entry->item = item;
