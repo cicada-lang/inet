@@ -12,8 +12,9 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
         list_new_with((destroy_t *) node_layout_destroy);
 
     self->evolving_step = 0;
-    self->max_evolving_step = 1000;
-    self->cooling_factor = 0.995;
+    self->max_evolving_step = 100000;
+    // self->cooling_factor = 0.999;
+    self->cooling_factor = 1;
     return self;
 }
 
@@ -73,19 +74,20 @@ net_layout_update(net_layout_t *self) {
 static void
 net_layout_electrical_force(net_layout_t *self) {
     list_t *copy = list_dup(self->node_layout_list);
+    list_set_destroy_fn(copy, NULL);
     node_layout_t *node_layout = list_start(self->node_layout_list);
+
     while (node_layout) {
         node_layout_t *node_layout2 = list_start(copy);
         while (node_layout2) {
-            if (node_layout2 == node_layout)
-                continue;
+            if (node_layout2 != node_layout) {
+                vec2_t force = electrical_force(
+                    (vec2_t) { .x = node_layout->x, .y = node_layout->y },
+                    (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
 
-            vec2_t force = electrical_force(
-                (vec2_t) { .x = node_layout->x, .y = node_layout->y },
-                (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
-
-            node_layout->force.x += force.x;
-            node_layout->force.y += force.y;
+                node_layout->force.x += force.x;
+                node_layout->force.y += force.y;
+            }
 
             node_layout2 = list_next(copy);
         }
@@ -112,7 +114,7 @@ net_layout_spring_force(net_layout_t *self) {
             node_layout_t *node_layout2 =
                 net_layout_find_node_layout(self, wire->opposite->node);
 
-            vec2_t force = electrical_force(
+            vec2_t force = spring_force(
                 (vec2_t) { .x = node_layout1->x, .y = node_layout1->y },
                 (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
 
@@ -122,8 +124,11 @@ net_layout_spring_force(net_layout_t *self) {
             node_layout2->force.x -= force.x;
             node_layout2->force.y -= force.y;
 
-            wire = wire_iter_next(iter);
+            // printf("[net_layout_spring_force] force.x %f, force.y: %f\n",
+            //        force.x, force.y);
         }
+
+        wire = wire_iter_next(iter);
     }
     wire_iter_destroy(&iter);
 }
@@ -135,18 +140,22 @@ net_layout_evolve(net_layout_t *self) {
 
     self->evolving_step++;
 
-    net_layout_electrical_force(self);
+    (void) net_layout_electrical_force;
+    (void) net_layout_spring_force;
+
     net_layout_spring_force(self);
+    net_layout_electrical_force(self);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
-
     node_layout_t *node_layout = list_start(self->node_layout_list);
     while (node_layout) {
-        node_layout->x += node_layout->force.x * cooling;
-        node_layout->y += node_layout->force.y * cooling;
+        node_layout_apply_force(node_layout, cooling);
 
-        node_layout->force.x = 0;
-        node_layout->force.y = 0;
+        if (node_layout->x > self->width)
+            node_layout->x = self->width;
+
+        if (node_layout->y > self->height)
+            node_layout->y = self->height;
 
         node_layout = list_next(self->node_layout_list);
     }

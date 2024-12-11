@@ -1,6 +1,6 @@
 # debug
 
-[debug] use force-based layout
+[debug] try to add `velocity`
 
 # study
 

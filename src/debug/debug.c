@@ -69,8 +69,6 @@ draw_background_grid(debug_t *self, canvas_t *canvas, bool is_on) {
 
 static void
 draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
-    (void) self;
-
     text_t *text = text_from_string(node_layout->node->spec->name);
     size_t text_width = font_text_width(canvas->font, text);
     size_t text_height = 16;
@@ -151,12 +149,16 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
     assert(self->net_layout);
+
     net_layout_t *net_layout = self->net_layout;
+    if (!net_layout->root)
+        return;
+    net_layout_evolve(net_layout);
     draw_net_border(self, canvas);
 
-    if (!net_layout->root) return;
     wire_iter_t *iter = wire_iter_new(net_layout->root);
     wire_t *wire = wire_iter_start(iter);
+
     while (wire) {
         draw_wire(self, canvas, wire);
         wire = wire_iter_next(iter);

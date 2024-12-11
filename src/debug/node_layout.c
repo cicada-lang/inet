@@ -19,3 +19,18 @@ node_layout_destroy(node_layout_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+node_layout_apply_force(node_layout_t *self, double cooling) {
+    int32_t dx = self->force.x * cooling;
+    int32_t dy = self->force.y * cooling;
+
+    int32_t x = self->x + dx;
+    int32_t y = self->y + dy;
+
+    self->x = x > 0 ? x : 0;
+    self->y = y > 0 ? y : 0;
+
+    self->force.x = 0;
+    self->force.y = 0;
+}
