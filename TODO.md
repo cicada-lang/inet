@@ -1,7 +1,5 @@
 # debug
 
-[debug] setup `node_layout.c`
-[debug] `node_layout_t` -- has `node`
 [debug] `node_layout_new`
 [debug] `node_layout_destroy`
 
