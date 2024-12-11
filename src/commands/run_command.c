@@ -27,7 +27,9 @@ run(commander_t *commander) {
     paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
-        if (string_ends_with(path, "--")) continue;
+        if (string_starts_with(path, "--")) 
+            continue;
+
         if (string_ends_with(path, ".inet")) {
             run_file(path, debug);
         } else  {
