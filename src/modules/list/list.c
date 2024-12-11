@@ -85,7 +85,12 @@ list_has(const list_t *self, void *item) {
     assert(self);
     node_t *node = self->first;
     while (node) {
-        if (node->item == item) return true;
+        if (node->item == item)
+            return true;
+
+        if (self->comparator && self->comparator(node->item, item) == 0)
+            return true;
+
         node = node->next;
     }
 
