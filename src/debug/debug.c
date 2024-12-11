@@ -48,6 +48,28 @@ init_canvas_font(canvas_t *canvas) {
     canvas->font = font_from_hex_string(blob_string(blob));
 }
 
+static void
+render_background_grid(debug_t *self, canvas_t *canvas) {
+    (void) self;
+
+    for (size_t i = 0; i < WIDTH / TILE; i++) {
+        for (size_t j = 0; j < HEIGHT / TILE; j++) {
+            canvas_draw_pixel(canvas, i * TILE, j * TILE, 0xffff0000);
+        }
+    }
+}
+
+static void
+on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
+    (void) passed;
+
+    canvas->window->background_pixel = canvas->palette[BG_COLOR];
+    canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[BG_COLOR]);
+    canvas_clear_clickable_area(canvas);
+
+    render_background_grid(self, canvas);
+}
+
 void
 debug_start(worker_t *worker) {
     debug_t *self = debug_new(worker);
@@ -55,6 +77,8 @@ debug_start(worker_t *worker) {
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);
     init_canvas_font(self->canvas);
+
+    self->canvas->on_frame = (on_frame_t *) on_frame;
 
     canvas_open(self->canvas);
 

@@ -1,7 +1,5 @@
 # debug
 
-[debug] `on_frame`
-
 [debug] use `node_iter` to draw to random place in canvas
 [canvas] `canvas_draw_line`
 [debug] use `canvas_draw_line`
