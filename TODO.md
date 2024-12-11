@@ -1,5 +1,4 @@
-[set] setup `modules/set`
-[set] `set_t`
+[set] `set_t` -- hidden
 [set] `set_new`
 [set] `set_destroy`
 [set] `set_add`
