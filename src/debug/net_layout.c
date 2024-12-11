@@ -112,10 +112,15 @@ net_layout_spring_force(net_layout_t *self) {
             node_layout_t *node_layout2 =
                 net_layout_find_node_layout(self, wire->opposite->node);
 
-            (void) node_layout1;
-            (void) node_layout2;
+            vec2_t force = electrical_force(
+                (vec2_t) { .x = node_layout1->x, .y = node_layout1->y },
+                (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
 
-            //
+            node_layout1->force.x += force.x;
+            node_layout1->force.y += force.y;
+
+            node_layout2->force.x -= force.x;
+            node_layout2->force.y -= force.y;
 
             wire = wire_iter_next(iter);
         }
