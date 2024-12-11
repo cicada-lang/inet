@@ -73,43 +73,51 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
 
     text_t *text = text_from_string(node_layout->node->spec->name);
     size_t text_width = font_text_width(canvas->font, text);
+    size_t text_height = 16;
     size_t x_padding = TILE / 2;
+    size_t y_padding = 2;
 
     size_t x = self->net_layout->x + node_layout->x - (text_width / 2);
-    size_t y = self->net_layout->y + node_layout->y;
+    size_t y = self->net_layout->y + node_layout->y - (text_height / 2);
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
     size_t thickness = 1;
     uint32_t pixel = canvas->palette[AP_COLOR];
+
     canvas_draw_rect_round(
         canvas,
         x - x_padding,
-        y,
-        width, height,
+        y - y_padding,
+        width,
+        height + y_padding * 2,
         thickness, pixel,
         SM_ROUNDNESS);
 
     size_t scale = 1;
-    canvas_draw_text(canvas, x, y, text, scale, TR_AP_BLENDING);
+    canvas_draw_text(canvas, x, y, text, scale, BG_AP_BLENDING);
     text_destroy(&text);
 }
 
-// static void
-// draw_edge(
-//     debug_t *self,
-//     canvas_t *canvas,
-//     node_layout_t *node_layout1,
-//     node_layout_t *node_layout2
-// ) {
-//     canvas_draw_line(
-//         canvas,
-//         self->net_layout->x + node_layout1->x,
-//         self->net_layout->y + node_layout1->y,
-//         self->net_layout->x + node_layout2->x,
-//         self->net_layout->y + node_layout2->y,
-//         canvas->palette[AP_COLOR]);
-// }
+static void
+draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
+    if (!wire->node) return;
+    if (!wire->opposite) return;
+    if (!wire->opposite->node) return;
+
+    node_layout_t *node_layout1 =
+        net_layout_find_node_layout(self->net_layout, wire->node);
+    node_layout_t *node_layout2 =
+        net_layout_find_node_layout(self->net_layout, wire->opposite->node);
+
+    canvas_draw_line(
+        canvas,
+        self->net_layout->x + node_layout1->x,
+        self->net_layout->y + node_layout1->y,
+        self->net_layout->x + node_layout2->x,
+        self->net_layout->y + node_layout2->y,
+        canvas->palette[AP_COLOR]);
+}
 
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
@@ -129,6 +137,14 @@ static void
 draw_net(debug_t *self, canvas_t *canvas) {
     assert(self->net_layout);
     draw_net_border(self, canvas);
+
+    if (!self->net_layout->root) return;
+    wire_iter_t *iter = wire_iter_new(self->net_layout->root);
+    wire_t *wire = wire_iter_start(iter);
+    while (wire) {
+        draw_wire(self, canvas, wire);
+        wire = wire_iter_next(iter);
+    }
 
     node_layout_t *node_layout = list_start(self->net_layout->node_layout_list);
     while (node_layout) {
@@ -151,6 +167,9 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 
 static void
 init_net_layout(debug_t *self) {
+    if (stack_is_empty(self->worker->value_stack))
+        return;
+
     wire_t *wire = stack_top(self->worker->value_stack);
     self->net_layout->root = wire;
     net_layout_update(self->net_layout);

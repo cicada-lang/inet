@@ -1,6 +1,6 @@
 # debug
 
-[debug] `draw_wire` instead of `draw_edge`
+[canvas] `canvas_fiil_rect_round`
 [debug] use force-based layout
 
 # study

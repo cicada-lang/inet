@@ -23,8 +23,8 @@ net_layout_destroy(net_layout_t **self_pointer) {
     }
 }
 
-static node_layout_t *
-find_node_layout(const net_layout_t *self, const node_t *node) {
+node_layout_t *
+net_layout_find_node_layout(const net_layout_t *self, const node_t *node) {
     node_layout_t *node_layout = list_start(self->node_layout_list);
     while (node_layout) {
         if (node_layout->node == node)
@@ -46,7 +46,7 @@ net_layout_update(net_layout_t *self) {
     list_t *new_list = list_new_with((destroy_t *) node_layout_destroy);
     node_t *node = node_iter_start(iter);
     while (node) {
-        node_layout_t *found = find_node_layout(self, node);
+        node_layout_t *found = net_layout_find_node_layout(self, node);
         if (found) {
             list_push(new_list, found);
             list_remove(self->node_layout_list, found);
