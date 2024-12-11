@@ -16,3 +16,14 @@ debug_new(worker_t *worker) {
 
     return self;
 }
+
+void
+debug_destroy(debug_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        debug_t *self = *self_pointer;
+        canvas_destroy(&self->canvas);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
