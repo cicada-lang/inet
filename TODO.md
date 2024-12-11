@@ -1,6 +1,5 @@
 # debug
 
-[debug] `draw_net_border`
 [debug] `net_layout_t` has something like a edge list
 [debug] use force-based layout
 

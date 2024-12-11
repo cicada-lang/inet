@@ -112,8 +112,23 @@ draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
 // }
 
 static void
+draw_net_border(debug_t *self, canvas_t *canvas) {
+    size_t thickness = 1;
+    uint32_t pixel = canvas->palette[AP_COLOR];
+    canvas_draw_rect_round(
+        canvas,
+        self->net_layout->x,
+        self->net_layout->y,
+        self->net_layout->width,
+        self->net_layout->height,
+        thickness, pixel,
+        SM_ROUNDNESS);
+}
+
+static void
 draw_net(debug_t *self, canvas_t *canvas) {
     assert(self->net_layout);
+    draw_net_border(self, canvas);
 
     node_layout_t *node_layout = list_start(self->net_layout->node_layout_list);
     while (node_layout) {
