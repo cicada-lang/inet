@@ -71,15 +71,25 @@ static void
 draw_node(debug_t *self, canvas_t *canvas, node_layout_t *node_layout) {
     (void) self;
 
+    size_t x = node_layout->x;
+    size_t y = node_layout->y;
+    size_t width = 5 * TILE;
+    size_t height = 2 * TILE;
+    size_t thickness = 1;
+    canvas_draw_rect(
+        canvas,
+        x, y,
+        width, height,
+        thickness,
+        canvas->palette[AP_COLOR]);
+
     size_t scale = 1;
     text_t *text = text_from_string(node_layout->node->spec->name);
     canvas_draw_text(
         canvas,
-        node_layout->x,
-        node_layout->y,
-        text,
-        scale,
-        BG_AP_BLENDING);
+        x, y,
+        text, scale,
+        TR_AP_BLENDING);
     text_destroy(&text);
 }
 
