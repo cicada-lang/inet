@@ -1,4 +1,3 @@
-[list] `list_set_dup_fn`
 [list] `list_dup` -- like czmq
 
 # debug
