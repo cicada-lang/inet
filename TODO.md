@@ -1,6 +1,8 @@
 # debug
 
-[canvas] `canvas_draw_line`
+[canvas] `canvas_draw_line_low`
+[canvas] `canvas_draw_line_high`
+
 [debug] `draw_edge` use `canvas_draw_line`
 [debug] use force-based layout
 
