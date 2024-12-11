@@ -1,5 +1,3 @@
-[list] test `list_has` with `equal_fn` using `string_equal_mod_case`
-
 [list] `list_find` return the found item and move `cursor` -- like czmq
 
 # debug

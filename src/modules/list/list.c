@@ -81,7 +81,7 @@ list_is_empty(const list_t *self) {
 }
 
 bool
-list_has(const list_t *self, void *item) {
+list_has(const list_t *self, const void *item) {
     assert(self);
     node_t *node = self->first;
     while (node) {

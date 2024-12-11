@@ -13,7 +13,7 @@ list_t *list_new_with(destroy_t *destroy);
 
 size_t list_length(const list_t *self);
 bool list_is_empty(const list_t *self);
-bool list_has(const list_t *self, void *item);
+bool list_has(const list_t *self, const void *item);
 bool list_remove(list_t *self, void *item);
 
 void *list_current(const list_t *self);
