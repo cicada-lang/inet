@@ -15,6 +15,7 @@ struct list_t {
     size_t length;
     destroy_t *destroy_fn;
     equal_t *equal_fn;
+    dup_t *dup_fn;    
 };
 
 list_t *
