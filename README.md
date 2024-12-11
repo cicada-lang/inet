@@ -338,6 +338,7 @@ make clean    # clean up compiled files
 
 - [forth](https://en.wikipedia.org/wiki/Forth_(programming_language))
 - [uxn](https://100r.co/site/uxn.html)
+  - [tote](https://wiki.xxiivv.com/site/tote.html)
 - [modal](https://git.sr.ht/~rabbits/modal)
 - [fractran](https://git.sr.ht/~rabbits/fractran)
 

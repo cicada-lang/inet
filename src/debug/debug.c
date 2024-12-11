@@ -16,7 +16,7 @@ debug_new(worker_t *worker) {
 
     self->net_layout = net_layout_new(
         15 * TILE,
-        15 * TILE,
+        10 * TILE,
         60 * TILE,
         40 * TILE);
 
