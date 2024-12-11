@@ -8,10 +8,9 @@ worker_new(mod_t *mod) {
     self->value_stack = stack_new_with((destructor_t *) wire_destroy);
     self->return_stack = stack_new_with((destructor_t *) frame_destroy);
     self->node_id_count = 0;
-    self->debug = false;
+    self->log_level = 0;
     self->out = stdout;
     self->err = stderr;
-
     return self;
 }
 
@@ -55,7 +54,7 @@ worker_interact_once(worker_t *self) {
 
 void
 worker_run_until(worker_t *self, size_t base_length) {
-    if (self->debug) {
+    if (self->log_level > 0) {
         worker_print(self, self->out);
         fprintf(self->out, "\n");
     }
@@ -63,7 +62,7 @@ worker_run_until(worker_t *self, size_t base_length) {
     while (stack_length(self->return_stack) > base_length) {
         worker_step(self);
 
-        if (self->debug) {
+        if (self->log_level > 0) {
             worker_print(self, self->out);
             fprintf(self->out, "\n");
         }
@@ -88,8 +87,6 @@ worker_step(worker_t *self) {
 void
 worker_print(const worker_t *self, file_t *file) {
     fprintf(file, "<worker>\n");
-
-    mod_print(self->mod, file);
 
     size_t active_wire_list_length = list_length(self->active_wire_list);
     fprintf(file, "<active-wire-list length=\"%lu\">\n", active_wire_list_length);

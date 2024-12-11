@@ -8,7 +8,7 @@ struct worker_t {
     stack_t *value_stack;
     stack_t *return_stack;
     node_id_t node_id_count;
-    bool debug;
+    size_t log_level;
     file_t *out;
     file_t *err;
 };

@@ -24,7 +24,7 @@ worker_test(void) {
     frame_t *frame = frame_new(program);
     stack_push(worker->return_stack, frame);
 
-    worker->debug = true;
+    worker->log_level = 1;
     worker_run_until(worker, 0);
     worker_interact(worker);
 

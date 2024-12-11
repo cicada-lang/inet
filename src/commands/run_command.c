@@ -5,22 +5,38 @@ static int run(commander_t *commander);
 void
 run_command(commander_t *runner) {
     command_t *command = command_new("run");
-    command->description = "run files, use --debug to see each step";
+    command->description = "run files";
     command->run = run;
     commander_add(runner, command);
 }
 
-static void run_file(const char *path, bool debug);
+void
+run_file(const char *path, size_t log_level) {
+    file_t *file = file_open_or_fail(path, "r");
+    const char *string = file_read_string(file);
+    fclose(file);
+
+    mod_t *mod = mod_new(path, string);
+    import_builtins(mod);
+
+    worker_t *worker = worker_new(mod);
+    worker->log_level = log_level;
+
+    interpret_mod(worker);
+
+    mod_destroy(&mod);
+    worker_destroy(&worker);
+}
 
 int
 run(commander_t *commander) {
-    bool debug = false;
+    size_t log_level = false;
 
     char **paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
-        if (string_equal(path, "--debug")) {
-            debug = true;
+        if (string_equal(path, "--log-level=1")) {
+            log_level = 1;
         }
     }
 
@@ -31,7 +47,7 @@ run(commander_t *commander) {
             continue;
 
         if (string_ends_with(path, ".inet")) {
-            run_file(path, debug);
+            run_file(path, log_level);
         } else  {
             fprintf(stderr, "[run] file name must ends with .inet, given file name: %s\n", path);
             exit(1);
@@ -39,22 +55,4 @@ run(commander_t *commander) {
     }
 
     return 0;
-}
-
-void
-run_file(const char *path, bool debug) {
-    file_t *file = file_open_or_fail(path, "r");
-    const char *string = file_read_string(file);
-    fclose(file);
-
-    mod_t *mod = mod_new(path, string);
-    import_builtins(mod);
-
-    worker_t *worker = worker_new(mod);
-    worker->debug = debug;
-
-    interpret_mod(worker);
-
-    mod_destroy(&mod);
-    worker_destroy(&worker);
 }
