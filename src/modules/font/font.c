@@ -77,3 +77,20 @@ font_next_glyph(font_t *self, code_point_t code_point) {
 
     return NULL;
 }
+
+size_t
+font_text_width(font_t *self, const text_t *text) {
+    size_t width = 0;
+
+    for (size_t i = 0; i < text_length(text); i++) {
+        code_point_t code_point = text_get(text, i);
+        glyph_t *glyph = font_get(self, code_point);
+        if (glyph) {
+            width += glyph_width(glyph);
+        } else {
+            width += 16;
+        }
+    }
+
+    return width;
+}
