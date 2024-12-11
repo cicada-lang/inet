@@ -1,5 +1,3 @@
-[memory] define `dup_t`
-
 [list] `list_t` has `dup_fn`
 [list] `list_set_dup_fn`
 [list] `list_dup` -- like czmq
