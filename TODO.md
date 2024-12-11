@@ -1,8 +1,10 @@
+[list] test `list_has` with `equal_fn` using `string_equal_mod_case`
+
 [list] `list_find` return the found item and move `cursor` -- like czmq
 
 # debug
 
-[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_list` with `comparator_t`
+[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_list` with `equal_fn_t`
 
 [debug] `draw_net`
 [debug] `draw_node`

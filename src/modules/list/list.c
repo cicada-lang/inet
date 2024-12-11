@@ -13,8 +13,8 @@ struct list_t {
     node_t *last;
     node_t *cursor;
     size_t length;
-    destructor_t *destructor;
-    comparator_t *comparator;
+    destroy_t *destroy;
+    equal_t *equal;
 };
 
 list_t *
@@ -41,8 +41,8 @@ list_purge(list_t *self) {
     node_t *node = self->first;
     while (node) {
         node_t *next = node->next;
-        if (self->destructor)
-            self->destructor(&node->item);
+        if (self->destroy)
+            self->destroy(&node->item);
         free(node);
         node = next;
     }
@@ -54,19 +54,19 @@ list_purge(list_t *self) {
 }
 
 void
-list_set_destructor(list_t *self, destructor_t *destructor) {
-    self->destructor = destructor;
+list_set_destroy_fn(list_t *self, destroy_t *destroy) {
+    self->destroy = destroy;
 }
 
 void
-list_set_comparator(list_t *self, comparator_t *comparator) {
-    self->comparator = comparator;
+list_set_equal_fn(list_t *self, equal_t *equal) {
+    self->equal = equal;
 }
 
 list_t *
-list_new_with(destructor_t *destructor) {
+list_new_with(destroy_t *destroy) {
     list_t *self = list_new();
-    self->destructor = destructor;
+    self->destroy = destroy;
     return self;
 }
 
@@ -88,7 +88,7 @@ list_has(const list_t *self, void *item) {
         if (node->item == item)
             return true;
 
-        if (self->comparator && self->comparator(node->item, item) == 0)
+        if (self->equal && self->equal(node->item, item) == 0)
             return true;
 
         node = node->next;

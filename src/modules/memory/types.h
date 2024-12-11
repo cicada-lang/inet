@@ -1,4 +1,4 @@
 #pragma once
 
-typedef void (destructor_t)(void **item_pointer);
-typedef int (comparator_t)(const void *item1, const void *item2);
+typedef void (destroy_t)(void **item_pointer);
+typedef bool (equal_t)(const void *item1, const void *item2);

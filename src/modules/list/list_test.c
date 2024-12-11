@@ -150,13 +150,23 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        list_set_destructor(list, (destructor_t *) string_destroy);
+        list_set_destroy_fn(list, (destroy_t *) string_destroy);
 
         list_purge(list);
         assert(list_length(list) == 0);
 
         list_destroy(&list);
         assert(list == NULL);
+    }
+
+    {
+        // char *a = string_dup("a");
+        // char *b = string_dup("b");
+        // char *c = string_dup("c");
+
+        list_t *list = list_new();
+        list_set_destroy_fn(list, (destroy_t *) string_destroy);
+        list_set_equal_fn(list, (equal_t *) string_equal_mod_case);
     }
 
     printf("</list_test>\n");

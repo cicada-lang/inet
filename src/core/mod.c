@@ -7,8 +7,8 @@ mod_new(const char *src, const char *string) {
     self->src = src;
     self->string = string;
 
-    self->spec_list = list_new_with((destructor_t *) spec_destroy);
-    self->rule_list = list_new_with((destructor_t *) rule_destroy);
+    self->spec_list = list_new_with((destroy_t *) spec_destroy);
+    self->rule_list = list_new_with((destroy_t *) rule_destroy);
 
     return self;
 }

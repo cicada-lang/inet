@@ -8,8 +8,8 @@ define_node_stmt_new(token_t *head_token, char *name) {
     self->head_token = head_token;
     self->name = name;
 
-    self->input_token_list = list_new_with((destructor_t *) token_destroy);
-    self->output_token_list = list_new_with((destructor_t *) token_destroy);
+    self->input_token_list = list_new_with((destroy_t *) token_destroy);
+    self->output_token_list = list_new_with((destroy_t *) token_destroy);
 
     return self;
 }

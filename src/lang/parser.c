@@ -51,7 +51,7 @@ parser_parse(parser_t *self) {
     lexer_lex(self->lexer);
     self->token_list = self->lexer->token_list;
 
-    self->stmt_list = list_new_with((destructor_t *) stmt_destroy);
+    self->stmt_list = list_new_with((destroy_t *) stmt_destroy);
     while (true) {
         parser_maybe_ignore_inline_comment(self);
 
@@ -206,7 +206,7 @@ parser_parse_define_rule_stmt(parser_t *self) {
     char *first_name = parse_rule_first_name(self, head_token);
     char *second_name = parse_rule_second_name(self, head_token);
 
-    list_t *token_list = list_new_with((destructor_t *) token_destroy);
+    list_t *token_list = list_new_with((destroy_t *) token_destroy);
     while (true) {
         parser_maybe_ignore_inline_comment(self);
 
@@ -263,7 +263,7 @@ parser_parse_define_program_stmt(parser_t *self) {
     check_program_name_format(self, head_token);
     char *name = string_dup(head_token->string);
 
-    list_t *token_list = list_new_with((destructor_t *) token_destroy);
+    list_t *token_list = list_new_with((destroy_t *) token_destroy);
     while (!list_is_empty(self->token_list)) {
         parser_maybe_ignore_inline_comment(self);
 
@@ -288,7 +288,7 @@ parser_parse_run_program_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
-    list_t *token_list = list_new_with((destructor_t *) token_destroy);
+    list_t *token_list = list_new_with((destroy_t *) token_destroy);
     while (!list_is_empty(self->token_list)) {
         parser_maybe_ignore_inline_comment(self);
 

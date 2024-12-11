@@ -4,7 +4,7 @@ void
 stack_test(void) {
     printf("<stack_test>\n");
 
-    stack_t *stack = stack_new_with((destructor_t *) string_destroy);
+    stack_t *stack = stack_new_with((destroy_t *) string_destroy);
 
     assert(stack);
 

@@ -4,8 +4,8 @@ stack_t *stack_new(void);
 void stack_purge(stack_t *self);
 void stack_destroy(stack_t **self_pointer);
 
-void stack_set_destructor(stack_t *self, destructor_t *destructor);
-stack_t *stack_new_with(destructor_t *destructor);
+void stack_set_destroy_fn(stack_t *self, destroy_t *destroy);
+stack_t *stack_new_with(destroy_t *destroy);
 
 size_t stack_length(const stack_t *self);
 bool stack_is_empty(const stack_t *self);

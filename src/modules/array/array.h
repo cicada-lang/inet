@@ -4,8 +4,8 @@ array_t *array_new(size_t size);
 void array_purge(array_t *self);
 void array_destroy(array_t **self_pointer);
 
-void array_set_destructor(array_t *self, destructor_t *destructor);
-array_t *array_new_with(size_t size, destructor_t *destructor);
+void array_set_destroy_fn(array_t *self, destroy_t *destroy);
+array_t *array_new_with(size_t size, destroy_t *destroy);
 
 size_t array_size(const array_t *self);
 size_t array_length(const array_t *self);

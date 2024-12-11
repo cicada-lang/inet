@@ -4,7 +4,7 @@ struct array_t {
     size_t size;
     size_t cursor;
     void **items;
-    destructor_t *destructor;
+    destroy_t *destroy;
 };
 
 array_t *
@@ -21,8 +21,8 @@ array_purge(array_t *self) {
     assert(self);
     while(!array_is_empty(self)) {
         void *item = array_pop(self);
-        if (self->destructor)
-            self->destructor(&item);
+        if (self->destroy)
+            self->destroy(&item);
     }
 }
 
@@ -39,17 +39,17 @@ array_destroy(array_t **self_pointer) {
 
 
 void
-array_set_destructor(
+array_set_destroy_fn(
     array_t *self,
-    destructor_t *destructor
+    destroy_t *destroy
 ) {
-    self->destructor = destructor;
+    self->destroy = destroy;
 }
 
 array_t *
-array_new_with(size_t size, destructor_t *destructor) {
+array_new_with(size_t size, destroy_t *destroy) {
     array_t *self = array_new(size);
-    self->destructor = destructor;
+    self->destroy = destroy;
     return self;
 }
 

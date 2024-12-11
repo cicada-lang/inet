@@ -53,7 +53,7 @@ lexer_lex(lexer_t *self) {
     self->buffer_length = 0;
     self->length = strlen(self->string);
 
-    self->token_list = list_new_with((destructor_t *) token_destroy);
+    self->token_list = list_new_with((destroy_t *) token_destroy);
     while (!lexer_is_finished(self)) {
         char c = lexer_current_char(self);
         if (c == '\0') {

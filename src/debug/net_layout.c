@@ -9,7 +9,7 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
     self->height = height;
     self->revision = 0;
     self->node_layout_list =
-        list_new_with((destructor_t *) node_layout_destroy);
+        list_new_with((destroy_t *) node_layout_destroy);
     return self;
 }
 

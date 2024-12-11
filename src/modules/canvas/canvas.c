@@ -20,7 +20,7 @@ canvas_new(size_t width, size_t height, size_t scale) {
     self->frame_rate = 60;
 
     self->clickable_area_list = list_new_with(
-        (destructor_t *) clickable_area_destroy);
+        (destroy_t *) clickable_area_destroy);
 
     return self;
 }
