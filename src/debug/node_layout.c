@@ -8,3 +8,13 @@ node_layout_new(const node_t *node) {
     self->y = 0;
     return self;
 }
+
+void
+node_layout_destroy(node_layout_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        node_layout_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}

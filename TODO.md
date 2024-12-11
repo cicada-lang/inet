@@ -1,7 +1,5 @@
 # debug
 
-[debug] `node_layout_destroy`
-
 [debug] setup `net_layout.c`
 [debug] `net_layout_t` -- has `x y width height` and `node_layout_list`
 [debug] `net_layout_new`
