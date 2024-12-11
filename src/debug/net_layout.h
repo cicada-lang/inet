@@ -3,8 +3,13 @@
 struct net_layout_t {
     size_t x, y;
     size_t width, height;
+
     wire_t *root;
     list_t *node_layout_list;
+
+    uint32_t evolving_step;
+    uint32_t max_evolving_step;
+    double cooling_factor;
 };
 
 net_layout_t *net_layout_new(size_t x, size_t y, size_t width, size_t height);

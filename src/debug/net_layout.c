@@ -7,8 +7,13 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
     self->y = y;
     self->width = width;
     self->height = height;
+
     self->node_layout_list =
         list_new_with((destroy_t *) node_layout_destroy);
+
+    self->evolving_step = 0;
+    self->max_evolving_step = 1000;
+    self->cooling_factor = 0.995;
     return self;
 }
 

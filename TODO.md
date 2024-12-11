@@ -1,5 +1,15 @@
 # debug
 
+[debug] `position_t`
+
+[debug] `spring_force`
+[debug] `electrical_force`
+
+[debug] `net_layout_evolve`
+
+[debug] `net_layout_apply_spring_force`
+[debug] `net_layout_apply_electrical_force`
+
 [debug] use force-based layout
 
 # study
