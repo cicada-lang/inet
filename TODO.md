@@ -1,7 +1,9 @@
 # debug
 
-[debug] setup `debug/`
-[debug] setup `canvas`
+[debug] `debug_t`
+[debug] `debug_new`
+[debug] `debug_destroy`
+[debug] `debug_t` setup `canvas`
 [debug] `debug_start` -- open canvas
 [debug] `@debug` as a builtin -- run `debug_start`
 
