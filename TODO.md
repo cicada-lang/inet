@@ -1,6 +1,5 @@
 # debug
 
-[debug] `node_layout_new`
 [debug] `node_layout_destroy`
 
 [debug] setup `net_layout.c`
