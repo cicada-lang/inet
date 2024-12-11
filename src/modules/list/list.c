@@ -14,6 +14,7 @@ struct list_t {
     node_t *cursor;
     size_t length;
     destructor_t *destructor;
+    comparator_t *comparator;
 };
 
 list_t *

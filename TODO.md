@@ -1,4 +1,4 @@
-[list] `list_t` has optional `comparator_t`
+[list] `list_set_comparator`
 [list] `list_find` return the found item and move `cursor` -- like czmq
 
 # debug
