@@ -114,29 +114,32 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     if (!wire->opposite) return;
     if (!wire->opposite->node) return;
 
+    net_layout_t *net_layout = self->net_layout;
+
     node_layout_t *node_layout1 =
-        net_layout_find_node_layout(self->net_layout, wire->node);
+        net_layout_find_node_layout(net_layout, wire->node);
     node_layout_t *node_layout2 =
-        net_layout_find_node_layout(self->net_layout, wire->opposite->node);
+        net_layout_find_node_layout(net_layout, wire->opposite->node);
 
     canvas_draw_line(
         canvas,
-        self->net_layout->x + node_layout1->x,
-        self->net_layout->y + node_layout1->y,
-        self->net_layout->x + node_layout2->x,
-        self->net_layout->y + node_layout2->y,
+        net_layout->x + node_layout1->x,
+        net_layout->y + node_layout1->y,
+        net_layout->x + node_layout2->x,
+        net_layout->y + node_layout2->y,
         canvas->palette[AP_COLOR]);
 }
 
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
+    net_layout_t *net_layout = self->net_layout;
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        self->net_layout->x,
-        self->net_layout->y,
-        self->net_layout->width,
-        self->net_layout->height,
+        net_layout->x,
+        net_layout->y,
+        net_layout->width,
+        net_layout->height,
         thickness,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
@@ -145,20 +148,21 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
     assert(self->net_layout);
+    net_layout_t *net_layout = self->net_layout;
     draw_net_border(self, canvas);
 
-    if (!self->net_layout->root) return;
-    wire_iter_t *iter = wire_iter_new(self->net_layout->root);
+    if (!net_layout->root) return;
+    wire_iter_t *iter = wire_iter_new(net_layout->root);
     wire_t *wire = wire_iter_start(iter);
     while (wire) {
         draw_wire(self, canvas, wire);
         wire = wire_iter_next(iter);
     }
 
-    node_layout_t *node_layout = list_start(self->net_layout->node_layout_list);
+    node_layout_t *node_layout = list_start(net_layout->node_layout_list);
     while (node_layout) {
         draw_node(self, canvas, node_layout);
-        node_layout = list_next(self->net_layout->node_layout_list);
+        node_layout = list_next(net_layout->node_layout_list);
     }
 }
 
