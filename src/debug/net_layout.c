@@ -127,3 +127,27 @@ net_layout_spring_force(net_layout_t *self) {
     }
     wire_iter_destroy(&iter);
 }
+
+void
+net_layout_evolve(net_layout_t *self) {
+    if (self->evolving_step > self->max_evolving_step)
+        return;
+
+    self->evolving_step++;
+
+    net_layout_electrical_force(self);
+    net_layout_spring_force(self);
+
+    double cooling = pow(self->cooling_factor, self->evolving_step);
+
+    node_layout_t *node_layout = list_start(self->node_layout_list);
+    while (node_layout) {
+        node_layout->x += node_layout->force.x * cooling;
+        node_layout->y += node_layout->force.y * cooling;
+
+        node_layout->force.x = 0;
+        node_layout->force.y = 0;
+
+        node_layout = list_next(self->node_layout_list);
+    }
+}

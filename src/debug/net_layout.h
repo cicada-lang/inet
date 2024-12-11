@@ -21,3 +21,5 @@ void net_layout_update(net_layout_t *self);
 
 void net_layout_electrical_force(net_layout_t *self);
 void net_layout_spring_force(net_layout_t *self);
+
+void net_layout_evolve(net_layout_t *self);
