@@ -30,5 +30,17 @@ font_test(void) {
         font_destroy(&font);
     }
 
+    {
+        char *base = dirname(string_dup(__FILE__));
+        char *file_name = string_append(base, "/unifont-ascii.hex");
+        file_t *file = file_open_or_fail(file_name, "r");
+        font_t *font = font_from_hex_file(file);
+
+        assert(font_text_width(font, text_from_string("abc")) == 24);
+        assert(font_text_width(font, text_from_string("\1\2\3")) == 48);
+
+        font_destroy(&font);
+    }
+
     printf("</font_test>\n");
 }
