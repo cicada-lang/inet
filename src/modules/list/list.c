@@ -54,11 +54,13 @@ list_purge(list_t *self) {
 }
 
 void
-list_set_destructor(
-    list_t *self,
-    destructor_t *destructor
-) {
+list_set_destructor(list_t *self, destructor_t *destructor) {
     self->destructor = destructor;
+}
+
+void
+list_set_comparator(list_t *self, comparator_t *comparator) {
+    self->comparator = comparator;
 }
 
 list_t *

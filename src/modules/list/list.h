@@ -7,6 +7,8 @@ void list_destroy(list_t **self_pointer);
 void list_purge(list_t *self);
 
 void list_set_destructor(list_t *self, destructor_t *destructor);
+void list_set_comparator(list_t *self, comparator_t *comparator);
+
 list_t *list_new_with(destructor_t *destructor);
 
 size_t list_length(const list_t *self);
