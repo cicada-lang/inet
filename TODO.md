@@ -1,5 +1,7 @@
 # debug
 
+[canvas] extract `canvas_draw_rect.c`
+[canvas] setup `canvas_draw_line.c`
 [canvas] `canvas_draw_line`
 [debug] `draw_edge` use `canvas_draw_line`
 [debug] use force-based layout
