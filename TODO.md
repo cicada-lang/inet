@@ -1,9 +1,20 @@
+[set] setup `modules/set`
+[set] `set_t`
+[set] `set_new`
+[set] `set_destroy`
+[set] `set_add`
+[set] `set_has`
+[set] `set_purge`
+
 # debug
 
-[debug] `net_layout_refresh` -- take a `node_iter` and refresh the `node_layout_list`
-[debug] `net_layout_refresh` -- random node layout within `net_layout` for testing
+[debug] `net_layout_t` should have `node_layout_set` -- instead of `node_layout_list`
+[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_set`
+
 [debug] `draw_net`
 [debug] `draw_node`
+
+[debug] `net_layout_refresh` -- random node layout within `net_layout` for testing
 
 [canvas] `canvas_draw_line`
 [debug] `draw_edge` use `canvas_draw_line`

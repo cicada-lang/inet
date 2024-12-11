@@ -6,6 +6,7 @@ node_layout_new(const node_t *node, size_t x, size_t y) {
     self->node = node;
     self->x = x;
     self->y = y;
+    self->revision = 0;
     return self;
 }
 
