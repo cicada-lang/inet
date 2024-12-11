@@ -1,6 +1,5 @@
 # debug
 
-[debug] `debug_t`
 [debug] `debug_new`
 [debug] `debug_destroy`
 [debug] `debug_t` setup `canvas`
