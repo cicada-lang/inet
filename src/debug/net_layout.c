@@ -70,7 +70,7 @@ net_layout_update(net_layout_t *self) {
     self->node_layout_list = new_list;
 }
 
-void
+static void
 net_layout_electrical_force(net_layout_t *self) {
     list_t *copy = list_dup(self->node_layout_list);
     node_layout_t *node_layout = list_start(self->node_layout_list);
@@ -96,7 +96,7 @@ net_layout_electrical_force(net_layout_t *self) {
     list_destroy(&copy);
 }
 
-void
+static void
 net_layout_spring_force(net_layout_t *self) {
     if (!self->root) return;
 
