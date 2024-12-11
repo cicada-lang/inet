@@ -1,6 +1,6 @@
 # debug
 
-[debug] `net_layout_update` -- take a `node_iter` and refresh the `node_layout_list` with `equal_fn_t`
+[debug] `net_layout_update` -- take a `node_iter` and update the `node_layout_list`
 
 [debug] `draw_net`
 [debug] `draw_node`
