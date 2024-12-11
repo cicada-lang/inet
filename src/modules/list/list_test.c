@@ -217,5 +217,38 @@ list_test(void) {
         assert(list == NULL);
     }
 
+
+    {
+        assert(list_dup(NULL) == NULL);
+    }
+
+    {
+        char *a = string_dup("a");
+        char *b = string_dup("b");
+        char *c = string_dup("c");
+
+        list_t *list = list_new_with((destroy_t *) string_destroy);
+        list_set_equal_fn(list, (equal_t *) string_equal_mod_case);
+        list_set_dup_fn(list, (dup_t *) string_dup);
+
+        list_push(list, a);
+        list_push(list, b);
+        list_push(list, c);
+
+        list_t *copy = list_dup(list);
+        list_destroy(&list);
+
+        assert(list_has(copy, "a"));
+        assert(list_has(copy, "b"));
+        assert(list_has(copy, "c"));
+
+        assert(list_has(copy, "A"));
+        assert(list_has(copy, "B"));
+        assert(list_has(copy, "C"));
+
+        list_destroy(&copy);
+        assert(list == NULL);
+    }
+
     printf("</list_test>\n");
 }

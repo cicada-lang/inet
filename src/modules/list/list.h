@@ -8,8 +8,14 @@ void list_purge(list_t *self);
 
 void list_set_destroy_fn(list_t *self, destroy_t *destroy);
 void list_set_equal_fn(list_t *self, equal_t *equal);
+void list_set_dup_fn(list_t *self, dup_t *dup);
 
 list_t *list_new_with(destroy_t *destroy);
+
+// Make a copy of the list; items are dup-ed if you set a dup_fn for
+// the list, otherwise not. Copying a null reference returns a null
+// reference.
+list_t *list_dup(list_t *self);
 
 size_t list_length(const list_t *self);
 bool list_is_empty(const list_t *self);

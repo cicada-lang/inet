@@ -76,6 +76,29 @@ list_new_with(destroy_t *destroy) {
     return self;
 }
 
+list_t *
+list_dup(list_t *self) {
+    if (!self) return NULL;
+
+    list_t *list = list_new();
+    list->destroy_fn = self->destroy_fn;
+    list->equal_fn = self->equal_fn;
+    list->dup_fn = self->dup_fn;
+
+    void *item = list_start(self);
+    while (item) {
+        if (self->dup_fn) {
+            list_push(list, self->dup_fn(item));
+        } else {
+            list_push(list, item);
+        }
+
+        item = list_next(self);
+    }
+
+    return list;
+}
+
 size_t
 list_length(const list_t *self) {
     return self->length;

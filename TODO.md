@@ -1,5 +1,3 @@
-[list] `list_dup` -- like czmq
-
 # debug
 
 [debug] `net_layout_electrical_force`
