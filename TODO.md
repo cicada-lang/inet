@@ -1,11 +1,24 @@
+[canvas] 从下列函数中抽出来谓词 `canvas_draw_rect`，`canvas_fiil_rect_round`，`canvas_draw_rect_round`
+
+- 谓词是用来判断点的位置的，这些函数只是在这些位置 draw pixel，
+  所以这些谓词才是重要的。
+
 # debug
 
 [debug] `net_layout` should have a `force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
 - 为了获得更好的 abstraction，需要学习物理学知识 -- read sussman books
+  可能应该抽出来：
+  - `net_t` -- 专门用来遍历 net 中的元素
+  - `debug_t` 应该有一个 node id 到 `particle_t` (或者类似的物理建模对象) 的 hash map
 
-[debug] try to add `velocity`
+  也许不应该依赖物理知识，因为我需要的只是合理的命名而已。
+  可以先把正确的代码结构写出来，再改名字。
+
+[debug] try to add `velocity` -- 另外一种 force group
+
+[debug] 建立临时的 file 用来 print，从 file 收集 string -- 可能又需要学 linux 的 API。
 
 # study
 
