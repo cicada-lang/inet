@@ -81,10 +81,6 @@ list_dup(list_t *self) {
     if (!self) return NULL;
 
     list_t *list = list_new();
-    list->destroy_fn = self->destroy_fn;
-    list->equal_fn = self->equal_fn;
-    list->dup_fn = self->dup_fn;
-
     void *item = list_start(self);
     while (item) {
         if (self->dup_fn) {

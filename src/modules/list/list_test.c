@@ -236,6 +236,9 @@ list_test(void) {
         list_push(list, c);
 
         list_t *copy = list_dup(list);
+        list_set_destroy_fn(copy, (destroy_t *) string_destroy);
+        list_set_equal_fn(copy, (equal_t *) string_equal_mod_case);
+
         list_destroy(&list);
 
         assert(list_has(copy, "a"));

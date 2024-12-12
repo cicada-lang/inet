@@ -12,9 +12,8 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
         list_new_with((destroy_t *) node_layout_destroy);
 
     self->evolving_step = 0;
-    self->max_evolving_step = 100000;
-    // self->cooling_factor = 0.999;
-    self->cooling_factor = 1;
+    self->max_evolving_step = 1000;
+    self->cooling_factor = 0.999;
     return self;
 }
 
@@ -74,9 +73,7 @@ net_layout_update(net_layout_t *self) {
 static void
 net_layout_electrical_force(net_layout_t *self) {
     list_t *copy = list_dup(self->node_layout_list);
-    list_set_destroy_fn(copy, NULL);
     node_layout_t *node_layout = list_start(self->node_layout_list);
-
     while (node_layout) {
         node_layout_t *node_layout2 = list_start(copy);
         while (node_layout2) {

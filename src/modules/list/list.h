@@ -15,6 +15,9 @@ list_t *list_new_with(destroy_t *destroy);
 // Make a copy of the list; items are dup-ed if you set a dup_fn for
 // the list, otherwise not. Copying a null reference returns a null
 // reference.
+// - `list_dup` should not copy callbacks,
+//   specially not `destroy_fn`,
+//   to avoid double free.
 list_t *list_dup(list_t *self);
 
 size_t list_length(const list_t *self);

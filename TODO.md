@@ -1,5 +1,10 @@
 # debug
 
+[debug] `net_layout` should have a `force_list`
+
+- so that we can switch from one group of forces to another by clicking a button
+- 为了获得更好的 abstraction，需要学习物理学知识 -- read sussman books
+
 [debug] try to add `velocity`
 
 # study
