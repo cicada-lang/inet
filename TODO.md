@@ -1,3 +1,9 @@
+# hash
+
+[hash] a hash table with constant time lookup and dense iteration.
+
+# canvas
+
 [canvas] 从下列函数中抽出来谓词 `canvas_draw_rect`，`canvas_fiil_rect_round`，`canvas_draw_rect_round`
 
 - 谓词是用来判断点的位置的，这些函数只是在这些位置 draw pixel，
