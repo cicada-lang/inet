@@ -36,5 +36,22 @@ hash_test(void) {
         hash_destroy(&hash);
     }
 
+    {
+        hash_t *hash = hash_new();
+
+        size_t length = 10 * 1000 * 1000;
+        for (size_t i = 0; i < length; i++) {
+            // printf("i: %lu\n", i);
+            hash_set(hash, (void *) i, (void *) i);
+        }
+
+        printf("hash_length(hash): %lu\n", hash_length(hash));
+        assert(hash_length(hash) == length);
+
+        hash_purge(hash);
+        assert(hash_length(hash) == 0);
+        hash_destroy(&hash);
+    }
+
     printf("</hash_test>\n");
 }
