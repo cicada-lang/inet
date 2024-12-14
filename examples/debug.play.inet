@@ -17,7 +17,7 @@
   two two add
   add
 
-  @wire/print-net
+  @wire-print-net
   @debug
   @interact
-  @wire/print-net
+  @wire-print-net

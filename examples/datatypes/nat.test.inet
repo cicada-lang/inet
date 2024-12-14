@@ -20,9 +20,9 @@
   two two add
   add
 
-  @wire/print-net
+  @wire-print-net
   @interact
-  @wire/print-net
+  @wire-print-net
 
 (- to define `mul`, we first need `nat-erase` and `nat-dup`. -)
 
@@ -57,9 +57,9 @@
 
 . two two mul
 
-  @wire/print-net
+  @wire-print-net
   @interact
-  @wire/print-net
+  @wire-print-net
 
 (- to define `max`, we need `max-aux`. -)
 
@@ -83,6 +83,6 @@
 
 . one two max
 
-  @wire/print-net
+  @wire-print-net
   @interact
-  @wire/print-net
+  @wire-print-net

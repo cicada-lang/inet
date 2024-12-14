@@ -40,6 +40,6 @@
 
 . sole-diff-list sole-diff-list diff-append
 
-  @wire/print-net
+  @wire-print-net
   @interact
-  @wire/print-net
+  @wire-print-net

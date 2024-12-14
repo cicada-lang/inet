@@ -12,8 +12,8 @@
 
 ;; (- test -)
 
-(wire/print-net
+(wire-print-net
  (interact
-  (wire/print-net
+  (wire-print-net
    (add (add1 (add1 zero))
         (add1 (add1 zero))))))
