@@ -6,7 +6,6 @@
 typedef struct entry_t entry_t;
 
 struct entry_t {
-    hash_t *hash;
     size_t index;
     void *key;
     void *value;
@@ -28,9 +27,8 @@ struct hash_t {
 };
 
 static entry_t *
-entry_new(hash_t *hash, size_t index, void *key, void *value) {
+entry_new(size_t index, void *key, void *value) {
     entry_t *self = new(entry_t);
-    self->hash = hash;
     self->index = index;
     self->key = key;
     self->value = value;
@@ -38,15 +36,15 @@ entry_new(hash_t *hash, size_t index, void *key, void *value) {
 }
 
 static void
-entry_destroy(entry_t **self_pointer) {
+hash_entry_destroy(hash_t *hash, entry_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         entry_t *self = *self_pointer;
-        if (self->hash->destroy_fn)
-            self->hash->destroy_fn(&self->value);
-        if (self->hash->key_destroy_fn)
-            self->hash->key_destroy_fn(&self->key);
-        entry_destroy(&self->next);
+        if (hash->destroy_fn)
+            hash->destroy_fn(&self->value);
+        if (hash->key_destroy_fn)
+            hash->key_destroy_fn(&self->key);
+        hash_entry_destroy(hash, &self->next);
         free(self);
         *self_pointer = NULL;
     }
@@ -54,9 +52,6 @@ entry_destroy(entry_t **self_pointer) {
 
 hash_t *
 hash_new(void) {
-    (void) entry_new;
-    (void) entry_destroy;
-
     hash_t *self = new(hash_t);
     self->prime_index = 0;
     self->used_indexes_size = 0;
@@ -66,4 +61,9 @@ hash_new(void) {
     self->cursor_index = 0;
     self->cursor_entry = NULL;
     return self;
+}
+
+void todo(void) {
+    (void) entry_new;
+    (void) hash_entry_destroy;
 }

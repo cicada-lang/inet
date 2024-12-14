@@ -136,13 +136,15 @@ list_remove(list_t *self, void *value) {
     if (node->prev)
         node->prev->next = node->next;
 
-
     if (self->cursor == node)
         self->cursor = NULL;
     if (self->first == node)
         self->first = node->next;
     if (self->last == node)
         self->last = node->prev;
+
+    if (self->destroy_fn)
+        self->destroy_fn(&node->value);
 
     free(node);
     self->length--;
