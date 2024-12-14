@@ -97,3 +97,8 @@ use `module/name` syntax
 learn linux thread
 
 keep a single thread debug mode, which record all the allocated nodes.
+
+# inet-vm & inet-asm
+
+making postfix language inet-asm,
+do a inet-lisp for scalable syntax.

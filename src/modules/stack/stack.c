@@ -5,7 +5,7 @@
 struct stack_t {
     size_t block_size;
     list_t *array_list;
-    destroy_t *destroy_fn;
+    destroy_fn_t *destroy_fn;
 };
 
 stack_t *
@@ -42,13 +42,13 @@ stack_destroy(stack_t **self_pointer) {
 void
 stack_set_destroy_fn(
     stack_t *self,
-    destroy_t *destroy
+    destroy_fn_t *destroy
 ) {
     self->destroy_fn = destroy;
 }
 
 stack_t *
-stack_new_with(destroy_t *destroy) {
+stack_new_with(destroy_fn_t *destroy) {
     stack_t *self = stack_new();
     self->destroy_fn = destroy;
     return self;

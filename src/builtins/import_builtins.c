@@ -1,7 +1,7 @@
 #include "index.h"
 
 static void
-define_builtin(mod_t *mod, const char *name, builtin_t *builtin) {
+define_builtin(mod_t *mod, const char *name, builtin_fn_t *builtin) {
     mod_define(mod, (spec_t *) builtin_spec_new(name, builtin));
 }
 

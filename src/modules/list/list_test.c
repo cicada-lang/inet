@@ -150,7 +150,7 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        list_set_destroy_fn(list, (destroy_t *) string_destroy);
+        list_set_destroy_fn(list, (destroy_fn_t *) string_destroy);
 
         list_purge(list);
         assert(list_length(list) == 0);
@@ -164,7 +164,7 @@ list_test(void) {
         char *b = string_dup("b");
         char *c = string_dup("c");
 
-        list_t *list = list_new_with((destroy_t *) string_destroy);
+        list_t *list = list_new_with((destroy_fn_t *) string_destroy);
 
         list_push(list, a);
         list_push(list, b);
@@ -227,16 +227,16 @@ list_test(void) {
         char *b = string_dup("b");
         char *c = string_dup("c");
 
-        list_t *list = list_new_with((destroy_t *) string_destroy);
+        list_t *list = list_new_with((destroy_fn_t *) string_destroy);
         list_set_equal_fn(list, (equal_t *) string_equal_mod_case);
-        list_set_dup_fn(list, (dup_t *) string_dup);
+        list_set_dup_fn(list, (dup_fn_t *) string_dup);
 
         list_push(list, a);
         list_push(list, b);
         list_push(list, c);
 
         list_t *copy = list_dup(list);
-        list_set_destroy_fn(copy, (destroy_t *) string_destroy);
+        list_set_destroy_fn(copy, (destroy_fn_t *) string_destroy);
         list_set_equal_fn(copy, (equal_t *) string_equal_mod_case);
 
         list_destroy(&list);

@@ -6,11 +6,11 @@ list_t *list_new(void);
 void list_destroy(list_t **self_pointer);
 void list_purge(list_t *self);
 
-void list_set_destroy_fn(list_t *self, destroy_t *destroy);
+void list_set_destroy_fn(list_t *self, destroy_fn_t *destroy);
 void list_set_equal_fn(list_t *self, equal_t *equal);
-void list_set_dup_fn(list_t *self, dup_t *dup);
+void list_set_dup_fn(list_t *self, dup_fn_t *dup);
 
-list_t *list_new_with(destroy_t *destroy);
+list_t *list_new_with(destroy_fn_t *destroy);
 
 // Make a copy of the list; items are dup-ed if you set a dup_fn for
 // the list, otherwise not. Copying a null reference returns a null

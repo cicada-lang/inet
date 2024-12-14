@@ -31,23 +31,23 @@ entry_destroy(entry_t **self_pointer) {
 
 struct dict_t {
     list_t *entry_list;
-    destroy_t *destroy_fn;
+    destroy_fn_t *destroy_fn;
 };
 
 dict_t *
 dict_new(void) {
     dict_t *self = new(dict_t);
-    self->entry_list = list_new_with((destroy_t *) entry_destroy);
+    self->entry_list = list_new_with((destroy_fn_t *) entry_destroy);
     return self;
 }
 
 void
-dict_set_destroy_fn(dict_t *self, destroy_t *destroy) {
+dict_set_destroy_fn(dict_t *self, destroy_fn_t *destroy) {
     self->destroy_fn = destroy;
 }
 
 dict_t *
-dict_new_with(destroy_t *destroy) {
+dict_new_with(destroy_fn_t *destroy) {
     dict_t *self = dict_new();
     self->destroy_fn = destroy;
     return self;

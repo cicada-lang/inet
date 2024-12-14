@@ -20,7 +20,7 @@ canvas_new(size_t width, size_t height, size_t scale) {
     self->frame_rate = 60;
 
     self->clickable_area_list = list_new_with(
-        (destroy_t *) clickable_area_destroy);
+        (destroy_fn_t *) clickable_area_destroy);
 
     return self;
 }
@@ -83,7 +83,7 @@ canvas_add_clickable_area(
     canvas_t *self,
     size_t x, size_t y,
     size_t width, size_t height,
-    on_click_t *on_click
+    on_click_fn_t *on_click
 ) {
     clickable_area_t *clickable_area =
         clickable_area_new(x, y, width, height, on_click);

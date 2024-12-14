@@ -7,7 +7,7 @@ commander_new(const char *name, const char *version, int argc, char **argv) {
     self->version = version;
     self->argc = argc;
     self->argv = argv;
-    self->command_list = list_new_with((destroy_t *) command_destroy);
+    self->command_list = list_new_with((destroy_fn_t *) command_destroy);
     return self;
 }
 
@@ -44,7 +44,7 @@ commander_add(commander_t *self, command_t *command) {
 }
 
 void
-commander_use(commander_t *self, commander_plugin_t *plugin) {
+commander_use(commander_t *self, commander_plugin_fn_t *plugin) {
     (*plugin)(self);
 }
 

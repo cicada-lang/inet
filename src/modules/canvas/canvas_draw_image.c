@@ -75,7 +75,7 @@ canvas_draw_image_button(
     size_t x, size_t y,
     const char *path,
     blending_t blending,
-    on_click_t *on_click
+    on_click_fn_t *on_click
 ) {
     uint8_t width = image_hex_width_from_path(path);
     uint8_t height = image_hex_height_from_path(path);

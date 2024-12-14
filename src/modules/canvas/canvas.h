@@ -1,8 +1,8 @@
 #pragma once
 
-typedef void (on_key_t)(void *state, canvas_t *canvas, const char *key_name, bool is_release);
-typedef void (on_click_t)(void *state, canvas_t *canvas, uint8_t button, bool is_release);
-typedef void (on_frame_t)(void *state, canvas_t *canvas, uint64_t passed);
+typedef void (on_key_fn_t)(void *state, canvas_t *canvas, const char *key_name, bool is_release);
+typedef void (on_click_fn_t)(void *state, canvas_t *canvas, uint8_t button, bool is_release);
+typedef void (on_frame_fn_t)(void *state, canvas_t *canvas, uint64_t passed);
 
 // The width and height of canvas are measured in tile.
 struct canvas_t {
@@ -22,9 +22,9 @@ struct canvas_t {
 
     size_t frame_rate;
     void *state;
-    on_key_t *on_key;
-    on_click_t *on_click;
-    on_frame_t *on_frame;
+    on_key_fn_t *on_key;
+    on_click_fn_t *on_click;
+    on_frame_fn_t *on_frame;
     list_t *clickable_area_list;
 
     store_t *asset_store;
@@ -47,5 +47,5 @@ void canvas_add_clickable_area(
     canvas_t *self,
     size_t x, size_t y,
     size_t width, size_t height,
-    on_click_t *on_click);
+    on_click_fn_t *on_click);
 void canvas_clear_clickable_area(canvas_t *self);

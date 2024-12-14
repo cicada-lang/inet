@@ -204,7 +204,7 @@ debug_start(worker_t *worker) {
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);
     init_canvas_font(self->canvas);
-    self->canvas->on_frame = (on_frame_t *) on_frame;
+    self->canvas->on_frame = (on_frame_fn_t *) on_frame;
 
     canvas_open(self->canvas);
 

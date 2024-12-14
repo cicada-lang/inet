@@ -9,7 +9,7 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
     self->height = height;
 
     self->node_layout_list =
-        list_new_with((destroy_t *) node_layout_destroy);
+        list_new_with((destroy_fn_t *) node_layout_destroy);
 
     self->evolving_step = 0;
     self->max_evolving_step = 1000;
@@ -48,7 +48,7 @@ net_layout_update(net_layout_t *self) {
     if (!self->root->opposite->node) return;
 
     node_iter_t *iter = node_iter_new(self->root->opposite->node);
-    list_t *new_list = list_new_with((destroy_t *) node_layout_destroy);
+    list_t *new_list = list_new_with((destroy_fn_t *) node_layout_destroy);
     node_t *node = node_iter_first(iter);
     while (node) {
         node_layout_t *found = net_layout_find_node_layout(self, node);

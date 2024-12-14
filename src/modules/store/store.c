@@ -9,7 +9,7 @@ store_t *
 store_new(const char *base) {
     store_t *self = new(store_t);
     self->base = base;
-    self->cached_blob_dict = dict_new_with((destroy_t *) blob_destroy);
+    self->cached_blob_dict = dict_new_with((destroy_fn_t *) blob_destroy);
     return self;
 }
 

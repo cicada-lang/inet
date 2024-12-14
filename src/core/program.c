@@ -9,7 +9,7 @@ struct program_t {
 program_t *
 program_new(void) {
     program_t *self = new(program_t);
-    self->op_list = list_new_with((destroy_t *) op_destroy);
+    self->op_list = list_new_with((destroy_fn_t *) op_destroy);
     self->length = 0;
     self->ops = NULL;
     return self;

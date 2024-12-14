@@ -5,7 +5,7 @@ array_test(void) {
     printf("<array_test>\n");
 
     array_t *array = array_new_with(
-        100, (destroy_t *) string_destroy);
+        100, (destroy_fn_t *) string_destroy);
 
     assert(array);
     assert(array_size(array) == 100);
@@ -61,7 +61,7 @@ array_test(void) {
         char *wine = string_dup("bordeaux");
 
         array_t *array = array_new_with(
-            3, (destroy_t *) string_destroy);
+            3, (destroy_fn_t *) string_destroy);
 
         assert(!array_is_full(array));
 

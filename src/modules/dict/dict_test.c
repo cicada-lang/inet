@@ -4,7 +4,7 @@ void
 dict_test(void) {
     printf("<dict_test>\n");
 
-    dict_t *dict = dict_new_with((destroy_t *) string_destroy);
+    dict_t *dict = dict_new_with((destroy_fn_t *) string_destroy);
 
     assert(dict_length(dict) == 0);
 

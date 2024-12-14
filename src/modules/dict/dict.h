@@ -5,8 +5,8 @@
 dict_t *dict_new(void);
 void dict_purge(dict_t *self);
 void dict_destroy(dict_t **self_pointer);
-void dict_set_destroy_fn(dict_t *self, destroy_t *destroy);
-dict_t *dict_new_with(destroy_t *destroy);
+void dict_set_destroy_fn(dict_t *self, destroy_fn_t *destroy);
+dict_t *dict_new_with(destroy_fn_t *destroy);
 
 size_t dict_length(dict_t *self);
 void dict_set(dict_t *self, const char *key, void *item);
