@@ -31,7 +31,7 @@ utf8_test(void) {
     {
         const char *string = "abc 中文 123";
         utf8_iter_t *iter = utf8_iter_new(string);
-        code_point_t code_point = utf8_iter_start(iter);
+        code_point_t code_point = utf8_iter_first(iter);
         size_t index = 0;
         while (code_point) {
             if (index == 0) assert(code_point == 0x61);
@@ -55,7 +55,7 @@ utf8_test(void) {
     {
         const char *string = "";
         utf8_iter_t *iter = utf8_iter_new(string);
-        code_point_t code_point = utf8_iter_start(iter);
+        code_point_t code_point = utf8_iter_first(iter);
         assert(code_point == 0);
         utf8_iter_destroy(&iter);
     }

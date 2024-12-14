@@ -30,7 +30,7 @@ text_from_string(const char *string) {
     text_t *text = text_new(length);
 
     utf8_iter_t *iter = utf8_iter_new(string);
-    code_point_t code_point = utf8_iter_start(iter);
+    code_point_t code_point = utf8_iter_first(iter);
     size_t index = 0;
     while (code_point) {
         text->code_points[index] = code_point;

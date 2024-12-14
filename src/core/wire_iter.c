@@ -30,7 +30,7 @@ wire_iter_destroy(wire_iter_t **self_pointer) {
 }
 
 wire_t *
-wire_iter_start(wire_iter_t *self) {
+wire_iter_first(wire_iter_t *self) {
     list_push(self->occurred_wire_list, self->root);
 
     if (self->root->opposite) {

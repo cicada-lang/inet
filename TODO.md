@@ -1,5 +1,3 @@
-ambr iter_start iter_first
-
 # canvas
 
 [canvas] 从下列函数中抽出来谓词 `canvas_draw_rect`，`canvas_fiil_rect_round`，`canvas_draw_rect_round`

@@ -30,7 +30,7 @@ node_iter_destroy(node_iter_t **self_pointer) {
 }
 
 node_t *
-node_iter_start(node_iter_t *self) {
+node_iter_first(node_iter_t *self) {
     node_t *node = self->root;
     list_push(self->occurred_node_list, node);
 

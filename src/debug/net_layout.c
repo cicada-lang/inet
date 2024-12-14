@@ -49,7 +49,7 @@ net_layout_update(net_layout_t *self) {
 
     node_iter_t *iter = node_iter_new(self->root->opposite->node);
     list_t *new_list = list_new_with((destroy_t *) node_layout_destroy);
-    node_t *node = node_iter_start(iter);
+    node_t *node = node_iter_first(iter);
     while (node) {
         node_layout_t *found = net_layout_find_node_layout(self, node);
         if (found) {
@@ -100,7 +100,7 @@ net_layout_spring_force(net_layout_t *self) {
     if (!self->root) return;
 
     wire_iter_t *iter = wire_iter_new(self->root);
-    wire_t *wire = wire_iter_start(iter);
+    wire_t *wire = wire_iter_first(iter);
     while (wire) {
         if (wire->node &&
             wire->opposite &&

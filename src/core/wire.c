@@ -121,7 +121,7 @@ wire_print_net(wire_t *self, file_t *file) {
     fprintf(file, "<net>\n");
 
     wire_iter_t *iter = wire_iter_new(self);
-    wire_t *wire = wire_iter_start(iter);
+    wire_t *wire = wire_iter_first(iter);
 
     fprintf(file, "<root>\n");
     wire_print(wire, file);

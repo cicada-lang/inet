@@ -27,7 +27,7 @@ utf8_iter_current(utf8_iter_t *self) {
 }
 
 code_point_t
-utf8_iter_start(utf8_iter_t *self) {
+utf8_iter_first(utf8_iter_t *self) {
     self->cursor = 0;
 
     if (self->string[self->cursor] == '\0')

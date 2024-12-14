@@ -71,7 +71,7 @@ size_t
 utf8_string_length(const char *string) {
     size_t length = 0;
     utf8_iter_t *iter = utf8_iter_new(string);
-    code_point_t code_point = utf8_iter_start(iter);
+    code_point_t code_point = utf8_iter_first(iter);
     while (code_point) {
         length++;
         code_point = utf8_iter_next(iter);

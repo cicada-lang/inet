@@ -157,7 +157,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
     draw_net_border(self, canvas);
 
     wire_iter_t *iter = wire_iter_new(net_layout->root);
-    wire_t *wire = wire_iter_start(iter);
+    wire_t *wire = wire_iter_first(iter);
 
     while (wire) {
         draw_wire(self, canvas, wire);
