@@ -1,5 +1,11 @@
 #include "index.h"
 
+static bool
+in_boundary(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+return ((x < thickness || x >= width - thickness) ||
+        (y < thickness || y >= height - thickness));
+}
+
 void
 canvas_draw_rect(
     canvas_t *self,
@@ -12,9 +18,7 @@ canvas_draw_rect(
 ) {
     for (size_t j = 0; j < height; j++) {
         for (size_t i = 0; i < width; i++) {
-            if ((i < thickness || i >= width - thickness) ||
-                (j < thickness || j >= height - thickness))
-            {
+            if (in_boundary(i, j, width, height, thickness)) {
                 canvas_draw_pixel(self, x + i, y + j, pixel);
             }
 
