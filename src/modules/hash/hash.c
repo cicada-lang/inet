@@ -27,27 +27,35 @@ struct hash_t {
     equal_fn_t *key_equal_fn;
 };
 
+static size_t
+hash_key_index(hash_t *self, void *key) {
+    size_t base = self->hash_fn ? self->hash_fn(key) : (size_t) key;
+    size_t limit = hash_primes[self->prime_index];
+    size_t index = base % limit;
+    return index;
+}
+
 static entry_t *
-entry_new(size_t index, void *key, void *value) {
-    entry_t *self = new(entry_t);
-    self->index = index;
-    self->key = key;
-    self->value = value;
-    return self;
+hash_new_entry(hash_t *self, void *key, void *value) {
+    entry_t *entry = new(entry_t);
+    entry->index = hash_key_index(self, key);
+    entry->key = key;
+    entry->value = value;
+    return entry;
 }
 
 static void
-hash_entry_destroy(hash_t *hash, entry_t **self_pointer) {
-    assert(self_pointer);
-    if (*self_pointer) {
-        entry_t *self = *self_pointer;
-        if (hash->destroy_fn)
-            hash->destroy_fn(&self->value);
-        if (hash->key_destroy_fn)
-            hash->key_destroy_fn(&self->key);
-        hash_entry_destroy(hash, &self->next);
-        free(self);
-        *self_pointer = NULL;
+hash_destroy_entry(hash_t *self, entry_t **entry_pointer) {
+    assert(entry_pointer);
+    if (*entry_pointer) {
+        entry_t *entry = *entry_pointer;
+        if (self->destroy_fn)
+            self->destroy_fn(&entry->value);
+        if (self->key_destroy_fn)
+            self->key_destroy_fn(&entry->key);
+        hash_destroy_entry(self, &entry->next);
+        free(entry);
+        *entry_pointer = NULL;
     }
 }
 
@@ -66,23 +74,22 @@ hash_new(void) {
 
 static bool
 hash_key_equal(hash_t *self, void *key1, void *key2) {
-    if (!self->hash_fn)
+    if (!self->key_equal_fn)
         return key1 == key2;
 
-    return self->hash_fn(key1) == self->hash_fn(key2);
+    return self->key_equal_fn(key1, key2);
 }
 
 static entry_t *
 hash_get_entry(hash_t *self, void *key) {
-    size_t base = self->hash_fn ? self->hash_fn(key) : (size_t) key;
-    size_t limit = hash_primes[self->prime_index];
-    size_t index = base % limit;
+    size_t index = hash_key_index(self, key);
     entry_t *entry = self->entries[index];
     if (!entry) return NULL;
 
     while (entry) {
         if (hash_key_equal(self, entry->key, key))
             return entry;
+
         entry = entry->next;
     }
 
@@ -97,7 +104,35 @@ hash_get(hash_t *self, void *key) {
     return entry;
 }
 
+// no rehash here.
+// if not exists return true,
+// if exists return false.
+static bool
+hash_set_entry_if_not_exists(hash_t *self, void *key, void *value) {
+    size_t index = hash_key_index(self, key);
+    entry_t *entry = self->entries[index];
+    if (!entry) {
+        entry_t *new_entry = hash_new_entry(self, key, value);
+        self->entries[index] = new_entry;
+        return true;
+    }
+
+    while (entry) {
+        if (hash_key_equal(self, entry->key, key))
+            return false;
+
+        entry = entry->next;
+    }
+
+    entry_t *new_entry = hash_new_entry(self, key, value);
+    entry_t *top_entry = self->entries[index];
+    self->entries[index] = new_entry;
+    new_entry->next = top_entry;
+    return true;
+}
+
 void todo(void) {
-    (void) entry_new;
-    (void) hash_entry_destroy;
+    (void) hash_set_entry_if_not_exists;
+    (void) hash_new_entry;
+    (void) hash_destroy_entry;
 }

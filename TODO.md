@@ -1,14 +1,14 @@
 # hash
 
-[hash] `hash_set` -- error if exists
-[hash] `hash_put` -- call destroy_fn if exists
-
-[hash] `hash_set_entry` -- private
 [hash] `hash_remove_entry` -- private
 
-[hash] `hash_destroy`
 [hash] `hash_purge_without_shrink` -- private
 [hash] `hash_purge`
+[hash] `hash_destroy`
+
+
+[hash] `hash_set` -- error if exists
+[hash] `hash_put` -- call destroy_fn if exists
 
 [hash] `hash_rehash`
 [hash] `string_bernstein_hash`
