@@ -39,14 +39,15 @@ hash_test(void) {
     {
         hash_t *hash = hash_new();
 
-        size_t length = 1000 * 1000;
-        for (size_t i = 0; i < length; i++) {
-            // printf("i: %lu\n", i);
+        size_t length = 5 * 1000 * 1000;
+        for (size_t i = 0; i < length; i++)
             hash_set(hash, (void *) i, (void *) i);
-        }
 
         printf("hash_length(hash): %lu\n", hash_length(hash));
         assert(hash_length(hash) == length);
+
+        for (size_t i = 0; i < length; i++)
+            assert(hash_get(hash, (void *) i) == (void *) i);
 
         hash_purge(hash);
         assert(hash_length(hash) == 0);
