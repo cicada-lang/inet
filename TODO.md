@@ -1,8 +1,7 @@
 # hash
 
-[hash] `hash_report` -- for testing
-[hash] `hash_test` -- more tests
 [hash] `string_bernstein_hash`
+[hash] `hash_test` -- test by string
 
 # debug
 

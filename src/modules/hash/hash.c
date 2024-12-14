@@ -1,7 +1,7 @@
 #include "index.h"
 #include "hash_primes.h"
 
-#define INDEX_REHASH_PERCENTAGE 60
+#define INDEX_REHASH_PERCENTAGE 50
 #define LENGTH_REHASH_PERCENTAGE 75
 
 typedef struct entry_t entry_t;
@@ -115,6 +115,11 @@ hash_rehash(hash_t *self, size_t new_prime_index) {
     size_t new_limit = hash_primes[new_prime_index];
     entry_t **new_entries = allocate_pointers(new_limit);
 
+    // to debug performance:
+    // {
+    //     hash_report(self);
+    // }
+
     self->prime_index = new_prime_index;
     self->used_indexes_size = 0;
 
@@ -127,6 +132,7 @@ hash_rehash(hash_t *self, size_t new_prime_index) {
             entry_t *top_entry = new_entries[new_index];
             if (top_entry == NULL)
                 self->used_indexes_size++;
+
             entry->next = top_entry;
             new_entries[new_index] = entry;
             entry = next;
@@ -258,4 +264,34 @@ hash_put(hash_t *self, void *key, void *value) {
     if (self->destroy_fn)
         self->destroy_fn(&entry->value);
     entry->value = value;
+}
+
+void
+hash_report(const hash_t *self) {
+    size_t limit = hash_primes[self->prime_index];
+    size_t length_percentage = self->length * 100 / limit;
+    size_t index_percentage = self->used_indexes_size * 100 / limit;
+
+    printf("[hash_report] length percentage : %lu\n", length_percentage);
+    printf("[hash_report] index  percentage : %lu\n", index_percentage);
+    printf("[hash_report] prime index : %lu\n", self->prime_index);
+    printf("[hash_report] prime       : %lu\n", limit);
+    printf("[hash_report] used idx: %lu\n", self->used_indexes_size);
+    printf("[hash_report] length  : %lu\n", self->length);
+
+    size_t max_chain = 0;
+    for (size_t i = 0; i < limit; i++) {
+        entry_t *entry = self->entries[i];
+        size_t length = 0;
+        while (entry) {
+            entry = entry->next;
+            length++;
+        }
+
+        max_chain = uint_max(length, max_chain);
+    }
+
+    printf("[hash_report] max_chain  : %lu\n", max_chain);
+
+    printf("\n");
 }
