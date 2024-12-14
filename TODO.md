@@ -1,6 +1,5 @@
-# hash
-
-[hash] a hash table with constant time lookup and dense iteration.
+ambr list_end list_last
+ambr iter_start iter_first
 
 # canvas
 
@@ -8,6 +7,11 @@
 
 - 谓词是用来判断点的位置的，这些函数只是在这些位置 draw pixel，
   所以这些谓词才是重要的。
+
+# hash
+
+[hash] setup `hash.c`
+[hash] a hash table with constant time lookup and dense iteration.
 
 # debug
 

@@ -8,7 +8,7 @@ static void compile_token(
 program_t *
 compile(const worker_t *worker, list_t *token_list) {
     program_t *program = program_new();
-    token_t *token = list_start(token_list);
+    token_t *token = list_first(token_list);
     while (token) {
         compile_token(worker, program, token);
         token = list_next(token_list);

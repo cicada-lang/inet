@@ -25,14 +25,14 @@ interpret_stmt(worker_t *worker, stmt_t *unknown_stmt) {
 
         port_index_t index = 0;
 
-        token_t *input_token = list_start(stmt->input_token_list);
+        token_t *input_token = list_first(stmt->input_token_list);
         while (input_token) {
             spec->port_specs[index] = compile_port_spec(input_token->string);
             input_token = list_next(stmt->input_token_list);
             index++;
         }
 
-        token_t *output_token = list_start(stmt->output_token_list);
+        token_t *output_token = list_first(stmt->output_token_list);
         while (output_token) {
             spec->port_specs[index] = compile_port_spec(output_token->string);
             output_token = list_next(stmt->output_token_list);
@@ -92,7 +92,7 @@ interpret_mod(worker_t *worker) {
     list_t *stmt_list = parser->stmt_list;
     parser_destroy(&parser);
 
-    stmt_t *stmt = list_start(stmt_list);
+    stmt_t *stmt = list_first(stmt_list);
     while (stmt) {
         interpret_stmt(worker, stmt);
         stmt = list_next(stmt_list);

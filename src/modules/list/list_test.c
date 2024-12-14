@@ -10,7 +10,7 @@ list_test(void) {
 
     assert(list_current(list) == NULL);
 
-    assert(list_start(list) == NULL);
+    assert(list_first(list) == NULL);
     assert(list_end(list) == NULL);
 
     assert(list_next(list) == NULL);
@@ -46,10 +46,10 @@ list_test(void) {
 
         assert(list_next(list) == cheese);
 
-        assert(list_start(list) == cheese);
+        assert(list_first(list) == cheese);
         assert(list_next(list) == bread);
 
-        assert(list_start(list) == cheese);
+        assert(list_first(list) == cheese);
         assert(list_next(list) == bread);
         assert(list_next(list) == wine);
         assert(list_next(list) == NULL);
@@ -80,7 +80,7 @@ list_test(void) {
 
         list_unshift(list, bread);
         assert(list_length(list) == 2);
-        assert(list_start(list) == bread);
+        assert(list_first(list) == bread);
         assert(list_current(list) == bread);
 
         list_push(list, wine);
@@ -106,7 +106,7 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        assert(list_start(list) == cheese);
+        assert(list_first(list) == cheese);
         assert(list_next(list) == bread);
         assert(list_next(list) == wine);
 

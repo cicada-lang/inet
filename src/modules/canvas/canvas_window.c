@@ -267,7 +267,7 @@ canvas_window_receive_button(
     }
 
     clickable_area_t *clickable_area =
-        list_start(self->canvas->clickable_area_list);
+        list_first(self->canvas->clickable_area_list);
 
     while (clickable_area) {
         if (x >= clickable_area->x &&

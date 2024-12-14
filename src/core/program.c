@@ -42,7 +42,7 @@ program_build(program_t *self) {
     self->length = list_length(self->op_list);
     self->ops = allocate_pointers(self->length);
     size_t index = 0;
-    op_t *op = list_start(self->op_list);
+    op_t *op = list_first(self->op_list);
     while (op) {
         self->ops[index] = op;
         op = list_next(self->op_list);

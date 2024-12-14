@@ -30,7 +30,7 @@ net_layout_destroy(net_layout_t **self_pointer) {
 
 node_layout_t *
 net_layout_find_node_layout(const net_layout_t *self, const node_t *node) {
-    node_layout_t *node_layout = list_start(self->node_layout_list);
+    node_layout_t *node_layout = list_first(self->node_layout_list);
     while (node_layout) {
         if (node_layout->node == node)
             return node_layout;
@@ -73,9 +73,9 @@ net_layout_update(net_layout_t *self) {
 static void
 net_layout_electrical_force(net_layout_t *self) {
     list_t *copy = list_dup(self->node_layout_list);
-    node_layout_t *node_layout = list_start(self->node_layout_list);
+    node_layout_t *node_layout = list_first(self->node_layout_list);
     while (node_layout) {
-        node_layout_t *node_layout2 = list_start(copy);
+        node_layout_t *node_layout2 = list_first(copy);
         while (node_layout2) {
             if (node_layout2 != node_layout) {
                 vec2_t force = electrical_force(
@@ -144,7 +144,7 @@ net_layout_evolve(net_layout_t *self) {
     net_layout_electrical_force(self);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
-    node_layout_t *node_layout = list_start(self->node_layout_list);
+    node_layout_t *node_layout = list_first(self->node_layout_list);
     while (node_layout) {
         node_layout_apply_force(node_layout, cooling);
 

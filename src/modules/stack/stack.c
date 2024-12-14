@@ -57,7 +57,7 @@ stack_new_with(destroy_t *destroy) {
 size_t
 stack_length(const stack_t *self) {
     size_t length = 0;
-    array_t *array = list_start(self->array_list);
+    array_t *array = list_first(self->array_list);
     while (array) {
         length += array_length(array);
         array = list_next(self->array_list);

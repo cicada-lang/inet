@@ -50,7 +50,7 @@ commander_use(commander_t *self, commander_plugin_t *plugin) {
 
 static const command_t *
 commander_default_command(const commander_t *self) {
-    command_t *command = list_start(self->command_list);
+    command_t *command = list_first(self->command_list);
     while (command) {
         if (string_equal(command->name, "default")) {
             return command;
@@ -68,7 +68,7 @@ commander_help(const commander_t *self) {
     printf("\n");
 
     printf("commands:\n");
-    command_t *command = list_start(self->command_list);
+    command_t *command = list_first(self->command_list);
     while (command) {
         printf("  %s", command->name);
         if (command->description)
@@ -99,7 +99,7 @@ commander_run(commander_t *self) {
         }
     }
 
-    command_t *command = list_start(self->command_list);
+    command_t *command = list_first(self->command_list);
     while (command) {
         if (string_equal(command->name, command_name)) {
             return commander_run_command(self, command);

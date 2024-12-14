@@ -27,7 +27,7 @@ mod_destroy(mod_t **self_pointer) {
 
 const spec_t *
 mod_find_spec(const mod_t *self, const char *name) {
-    spec_t *spec = list_start(self->spec_list);
+    spec_t *spec = list_first(self->spec_list);
     while (spec) {
         if (string_equal(spec_name(spec), name)) return spec;
         spec = list_next(self->spec_list);
@@ -42,7 +42,7 @@ mod_find_rule(
     const wire_t *first_wire,
     const wire_t *second_wire
 ) {
-    rule_t *rule = list_start(self->rule_list);
+    rule_t *rule = list_first(self->rule_list);
     while (rule) {
         if (rule_match_wire_pair(rule, first_wire, second_wire)) return rule;
         rule = list_next(self->rule_list);
@@ -78,14 +78,14 @@ mod_print(const mod_t *self, file_t *file) {
             list_length(self->spec_list),
             list_length(self->rule_list));
 
-    spec_t *spec = list_start(self->spec_list);
+    spec_t *spec = list_first(self->spec_list);
     while (spec) {
         spec_print(spec, file);
         fprintf(file, "\n");
         spec = list_next(self->spec_list);
     }
 
-    rule_t *rule = list_start(self->rule_list);
+    rule_t *rule = list_first(self->rule_list);
     while (rule) {
         rule_print(rule, file);
         fprintf(file, "\n");

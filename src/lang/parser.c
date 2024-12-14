@@ -57,7 +57,7 @@ parser_parse(parser_t *self) {
 
         if (list_is_empty(self->token_list)) break;
 
-        token_t *token = list_start(self->token_list);
+        token_t *token = list_first(self->token_list);
         if (string_equal(token->string, "*"))
             parser_parse_define_node_stmt(self);
         else if (string_equal(token->string, "!"))
@@ -79,7 +79,7 @@ void
 parser_maybe_ignore_inline_comment(parser_t *self) {
     if (list_is_empty(self->token_list)) return;
 
-    token_t *first_token = list_start(self->token_list);
+    token_t *first_token = list_first(self->token_list);
     if (!string_equal(first_token->string, "(-")) return;
 
     size_t before_token_list_length = list_length(self->token_list);

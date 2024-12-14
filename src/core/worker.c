@@ -90,7 +90,7 @@ worker_print(const worker_t *self, file_t *file) {
 
     size_t active_wire_list_length = list_length(self->active_wire_list);
     fprintf(file, "<active-wire-list length=\"%lu\">\n", active_wire_list_length);
-    wire_t *active_wire = list_start(self->active_wire_list);
+    wire_t *active_wire = list_first(self->active_wire_list);
     while (active_wire) {
         wire_print(active_wire, file);
         fprintf(file, "\n");

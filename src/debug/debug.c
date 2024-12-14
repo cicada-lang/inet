@@ -165,7 +165,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
     }
     wire_iter_destroy(&iter);
 
-    node_layout_t *node_layout = list_start(net_layout->node_layout_list);
+    node_layout_t *node_layout = list_first(net_layout->node_layout_list);
     while (node_layout) {
         draw_node(self, canvas, node_layout);
         node_layout = list_next(net_layout->node_layout_list);
