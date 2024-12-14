@@ -24,6 +24,7 @@ struct hash_t {
     hash_fn_t *hash_fn;
     destroy_fn_t *destroy_fn;
     destroy_fn_t *key_destroy_fn;
+    equal_t *key_equal_fn;
 };
 
 static entry_t *
@@ -61,6 +62,31 @@ hash_new(void) {
     self->cursor_index = 0;
     self->cursor_entry = NULL;
     return self;
+}
+
+static bool
+hash_key_equal(hash_t *self, void *key1, void *key2) {
+    (void) self;
+    (void) key1;
+    (void) key2;
+    return true;
+}
+
+void *
+hash_get(hash_t *self, void *key) {
+    size_t base = self->hash_fn ? self->hash_fn(key) : (size_t) key;
+    size_t limit = hash_primes[self->prime_index];
+    size_t index = base % limit;
+    entry_t *entry = self->entries[index];
+    if (!entry) return NULL;
+
+    while (entry) {
+        if (hash_key_equal(self, entry->key, key))
+            return entry->value;
+        entry = entry->next;
+    }
+
+    return NULL;
 }
 
 void todo(void) {

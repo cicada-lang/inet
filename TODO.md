@@ -1,10 +1,12 @@
+ambr equal_t equal_fn_t
+
 # hash
 
-[hash] `hash_get`
+[hash] `hash_get_entry` -- private
+[hash] `hash_key_equal` -- private
 [hash] `hash_set` -- error if exists
 [hash] `hash_put` -- call destroy_fn if exists
 
-[hash] `hash_get_entry` -- private
 [hash] `hash_set_entry` -- private
 [hash] `hash_remove_entry` -- private
 
