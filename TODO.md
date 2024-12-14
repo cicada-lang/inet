@@ -1,5 +1,3 @@
-ambr equal_t equal_fn_t
-
 # hash
 
 [hash] `hash_get_entry` -- private

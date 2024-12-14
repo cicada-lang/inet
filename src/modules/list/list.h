@@ -7,7 +7,7 @@ void list_destroy(list_t **self_pointer);
 void list_purge(list_t *self);
 
 void list_set_destroy_fn(list_t *self, destroy_fn_t *destroy_fn);
-void list_set_equal_fn(list_t *self, equal_t *equal_fn);
+void list_set_equal_fn(list_t *self, equal_fn_t *equal_fn);
 void list_set_dup_fn(list_t *self, dup_fn_t *dup_fn);
 
 list_t *list_new_with(destroy_fn_t *destroy_fn);

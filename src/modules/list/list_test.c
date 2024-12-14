@@ -182,7 +182,7 @@ list_test(void) {
         assert(!list_has(list, "B"));
         assert(!list_has(list, "C"));
 
-        list_set_equal_fn(list, (equal_t *) string_equal);
+        list_set_equal_fn(list, (equal_fn_t *) string_equal);
 
         assert(list_has(list, "a"));
         assert(list_has(list, "b"));
@@ -196,7 +196,7 @@ list_test(void) {
         assert(!list_find(list, "B"));
         assert(!list_find(list, "C"));
 
-        list_set_equal_fn(list, (equal_t *) string_equal_mod_case);
+        list_set_equal_fn(list, (equal_fn_t *) string_equal_mod_case);
 
         assert(list_has(list, "a"));
         assert(list_has(list, "b"));
@@ -228,7 +228,7 @@ list_test(void) {
         char *c = string_dup("c");
 
         list_t *list = list_new_with((destroy_fn_t *) string_destroy);
-        list_set_equal_fn(list, (equal_t *) string_equal_mod_case);
+        list_set_equal_fn(list, (equal_fn_t *) string_equal_mod_case);
         list_set_dup_fn(list, (dup_fn_t *) string_dup);
 
         list_push(list, a);
@@ -237,7 +237,7 @@ list_test(void) {
 
         list_t *copy = list_dup(list);
         list_set_destroy_fn(copy, (destroy_fn_t *) string_destroy);
-        list_set_equal_fn(copy, (equal_t *) string_equal_mod_case);
+        list_set_equal_fn(copy, (equal_fn_t *) string_equal_mod_case);
 
         list_destroy(&list);
 

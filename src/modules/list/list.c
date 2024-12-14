@@ -14,7 +14,7 @@ struct list_t {
     node_t *cursor;
     size_t length;
     destroy_fn_t *destroy_fn;
-    equal_t *equal_fn;
+    equal_fn_t *equal_fn;
     dup_fn_t *dup_fn;
 };
 
@@ -60,7 +60,7 @@ list_set_destroy_fn(list_t *self, destroy_fn_t *destroy_fn) {
 }
 
 void
-list_set_equal_fn(list_t *self, equal_t *equal_fn) {
+list_set_equal_fn(list_t *self, equal_fn_t *equal_fn) {
     self->equal_fn = equal_fn;
 }
 

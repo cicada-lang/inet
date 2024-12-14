@@ -24,7 +24,7 @@ struct hash_t {
     hash_fn_t *hash_fn;
     destroy_fn_t *destroy_fn;
     destroy_fn_t *key_destroy_fn;
-    equal_t *key_equal_fn;
+    equal_fn_t *key_equal_fn;
 };
 
 static entry_t *
