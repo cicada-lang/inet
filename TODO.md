@@ -1,6 +1,5 @@
 # hash
 
-[hash] copy `hash_primes.c` from czmq
 [hash] using `uintptr_t` as key
 [hash] `hash_t`
 [hash] `hash_new`
