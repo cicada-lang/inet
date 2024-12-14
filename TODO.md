@@ -1,6 +1,5 @@
 # hash
 
-[hash] `hash_fn_t`
 [hash] `entry_t` -- local type
 [hash] `hash_t` -- using `void *` as key, has optional `hash_fn`
 [hash] `hash_new`
