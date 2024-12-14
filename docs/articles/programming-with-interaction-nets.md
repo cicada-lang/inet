@@ -719,7 +719,7 @@ the relationship between all nodes is symmetric.
   (- wire back value -) @swap
   (- wire value back -) sole cons sole cons
   (- wire value list -) @rot
-  (- value list wire -) @wire/connect
+  (- value list wire -) @wire-connect
   (- value -)
 
 . sole-diff-list sole-diff-list diff-append
