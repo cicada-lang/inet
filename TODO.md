@@ -1,9 +1,15 @@
 # hash
 
-[hash] setup `hash.c`
-[hash] a hash table with constant time lookup and dense iteration.
+[hash] setup `hash.c` -- a hash table with constant time lookup and dense iteration.
+[hash] copy `hash_primes.c` from czmq
+[hash] `hash_t`
 
 # debug
+
+[debug] `node_layout` 有什么更好的名字？
+node_state
+
+- `node_state`
 
 [debug] `net_layout` should have a `force_list`
 
@@ -16,9 +22,17 @@
   也许不应该依赖物理知识，因为我需要的只是合理的命名而已。
   可以先把正确的代码结构写出来，再改名字。
 
+[debug] 到目前为止，最简单的可用设计是：
+
+- 不要显示 stack（因为未来可能是 lisp）
+- 直接增加两个按钮，一个 `step` 一个 `run`
+  - 要把 `interact` 函数改成 `run` -- 别的带有 `run` 的函数也需要改。
+
 [debug] try to add `velocity` -- 另外一种 force group
 
 [debug] 建立临时的 file 用来 print，从 file 收集 string -- 可能又需要学 linux 的 API。
+
+- 这是为了显示带有角标的 node。
 
 # study
 
