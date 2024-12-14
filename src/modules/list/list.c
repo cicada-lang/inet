@@ -121,11 +121,13 @@ list_has(const list_t *self, const void *value) {
 }
 
 bool
-list_remove(list_t *self, void *value) {
+list_remove(list_t *self, const void *value) {
     node_t *node = self->first;
 
     while (node != NULL) {
-        if (node->value == value) break;
+        if ((node->value == value) ||
+            (self->equal_fn && self->equal_fn(node->value, value)))
+            break;
         node = node->next;
     }
 

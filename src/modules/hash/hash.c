@@ -44,21 +44,6 @@ hash_new_entry(hash_t *self, void *key, void *value) {
     return entry;
 }
 
-static void
-hash_destroy_entry(hash_t *self, entry_t **entry_pointer) {
-    assert(entry_pointer);
-    if (*entry_pointer) {
-        entry_t *entry = *entry_pointer;
-        if (self->destroy_fn)
-            self->destroy_fn(&entry->value);
-        if (self->key_destroy_fn)
-            self->key_destroy_fn(&entry->key);
-        hash_destroy_entry(self, &entry->next);
-        free(entry);
-        *entry_pointer = NULL;
-    }
-}
-
 hash_t *
 hash_new(void) {
     hash_t *self = new(hash_t);
@@ -131,8 +116,41 @@ hash_set_entry_if_not_exists(hash_t *self, void *key, void *value) {
     return true;
 }
 
+static void
+hash_delete_entry(hash_t *self, entry_t *entry) {
+    // find previous entry since it's a singly-linked list.
+    entry_t **entry_pointer = &(self->entries[entry->index]);
+    entry_t *cursor_entry = self->entries[entry->index];
+    while (cursor_entry) {
+        if (cursor_entry == entry) break;
+        entry_pointer = &(cursor_entry->next);
+        cursor_entry = cursor_entry->next;
+    }
+
+    // entry must in the table.
+    assert(cursor_entry);
+    *entry_pointer = entry->next;
+    self->length--;
+    if (entry_pointer == &(self->entries[entry->index]))
+        self->used_indexes_size--;
+
+    if (self->destroy_fn)
+        self->destroy_fn(&entry->value);
+    if (self->key_destroy_fn)
+        self->key_destroy_fn(&entry->key);
+    free(entry);
+}
+
+void
+hash_delete(hash_t *self, void *key) {
+    entry_t *entry = hash_get_entry(self, key);
+    if (!entry) return;
+
+    hash_delete_entry(self, entry);
+}
+
 void todo(void) {
     (void) hash_set_entry_if_not_exists;
     (void) hash_new_entry;
-    (void) hash_destroy_entry;
 }
+

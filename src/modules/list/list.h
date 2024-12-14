@@ -23,7 +23,7 @@ list_t *list_dup(list_t *self);
 size_t list_length(const list_t *self);
 bool list_is_empty(const list_t *self);
 bool list_has(const list_t *self, const void *value);
-bool list_remove(list_t *self, void *value);
+bool list_remove(list_t *self, const void *value);
 
 // Find an value in the list, searching from the start.
 // Uses the injected `equal`, if any, else compares value values directly.
