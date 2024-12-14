@@ -7,6 +7,7 @@ modules_test(void) {
     char_test();
     string_test();
     list_test();
+    hash_test();
     dict_test();
     blob_test();
     file_test();
