@@ -1,7 +1,7 @@
 # hash
 
-[hash] `string_bernstein_hash`
-[hash] `hash_test` -- test by string
+[hash] `hash_first`
+[hash] `hash_next`
 
 # debug
 

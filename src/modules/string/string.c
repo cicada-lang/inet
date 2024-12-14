@@ -39,17 +39,11 @@ string_equal(const char *left, const char *right) {
 }
 
 size_t
-string_hash(const char *self, size_t size) {
-    size_t max_index = 64 - 8;
-    size_t index = 0;
+string_bernstein_hash(const char *self) {
+    const char *pointer = (const char *) self;
     size_t hash = 0;
-    while (*self) {
-        hash += (*self) << (index % max_index);
-        if (hash > size) hash %= size;
-        index++;
-        self++;
-    }
-
+    while (*pointer)
+        hash = 33 * hash ^ *pointer++;
     return hash;
 }
 

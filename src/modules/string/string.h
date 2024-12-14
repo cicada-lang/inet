@@ -5,7 +5,7 @@ char *string_dup(const char *self);
 size_t string_length(const char *self);
 char *string_empty(void);
 bool string_equal(const char *left, const char *right);
-size_t string_hash(const char *self, size_t size);
+size_t string_bernstein_hash(const char *self);
 bool string_is_int(const char *restrict self);
 int64_t string_parse_int(const char *self);
 uint64_t string_parse_hex(const char *self);

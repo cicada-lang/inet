@@ -29,7 +29,7 @@ struct hash_t {
 };
 
 static size_t
-hash_key_index(hash_t *self, void *key) {
+hash_key_index(hash_t *self, const void *key) {
     size_t base = self->hash_fn ? self->hash_fn(key) : (size_t) key;
     size_t limit = hash_primes[self->prime_index];
     size_t index = base % limit;
@@ -62,6 +62,26 @@ hash_new(void) {
     hash_t *self = new(hash_t);
     hash_init(self);
     return self;
+}
+
+void
+hash_set_hash_fn(hash_t *self, hash_fn_t *hash_fn) {
+    self->hash_fn = hash_fn;
+}
+
+void
+hash_set_destroy_fn(hash_t *self, destroy_fn_t *destroy_fn) {
+    self->destroy_fn = destroy_fn;
+}
+
+void
+hash_set_key_destroy_fn(hash_t *self, destroy_fn_t *key_destroy_fn) {
+    self->key_destroy_fn = key_destroy_fn;
+}
+
+void
+hash_set_key_equal_fn(hash_t *self, equal_fn_t *key_equal_fn) {
+    self->key_equal_fn = key_equal_fn;
 }
 
 static void hash_delete_entry(hash_t *self, entry_t *entry);
@@ -144,7 +164,7 @@ hash_rehash(hash_t *self, size_t new_prime_index) {
 }
 
 static bool
-hash_key_equal(hash_t *self, void *key1, void *key2) {
+hash_key_equal(hash_t *self, const void *key1, const void *key2) {
     if (!self->key_equal_fn)
         return key1 == key2;
 
@@ -152,7 +172,7 @@ hash_key_equal(hash_t *self, void *key1, void *key2) {
 }
 
 static entry_t *
-hash_get_entry(hash_t *self, void *key) {
+hash_get_entry(hash_t *self, const void *key) {
     size_t index = hash_key_index(self, key);
     entry_t *entry = self->entries[index];
     if (!entry) return NULL;
@@ -168,7 +188,7 @@ hash_get_entry(hash_t *self, void *key) {
 }
 
 void *
-hash_get(hash_t *self, void *key) {
+hash_get(hash_t *self, const void *key) {
     entry_t *entry = hash_get_entry(self, key);
     if (!entry) return NULL;
 
@@ -231,7 +251,7 @@ hash_delete_entry(hash_t *self, entry_t *entry) {
 }
 
 void
-hash_delete(hash_t *self, void *key) {
+hash_delete(hash_t *self, const void *key) {
     entry_t *entry = hash_get_entry(self, key);
     if (!entry) return;
 
