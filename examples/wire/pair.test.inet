@@ -1,2 +1,2 @@
-. @wire/pair
+. @wire-pair
   @print-worker

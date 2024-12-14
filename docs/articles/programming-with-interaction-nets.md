@@ -714,7 +714,7 @@ the relationship between all nodes is symmetric.
 * (sole) -> value!
 
 = sole-diff-list
-  @wire/pair
+  @wire-pair
   (- wire wire -) diff
   (- wire back value -) @swap
   (- wire value back -) sole cons sole cons

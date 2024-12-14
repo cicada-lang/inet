@@ -37,7 +37,7 @@
 
 use `module/name` syntax
 
-- we already using use name such as `@wire/pair`,
+- we already using use name such as `@wire-pair`,
   thus module syntax should just map name like `module/name` to value.
 
 # primitive value
