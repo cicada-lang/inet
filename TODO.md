@@ -1,6 +1,5 @@
 # hash
 
-[hash] `hash_set` -- call `hash_rehash`, error if exists
 [hash] `hash_put` -- call `hash_rehash`, call `destroy_fn` if exists
 
 [hash] `string_bernstein_hash`

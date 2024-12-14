@@ -2,7 +2,7 @@
 #include "hash_primes.h"
 
 #define INDEX_REHASH_PERCENTAGE 60
-#define LENGHT_REHASH_PERCENTAGE 75
+#define LENGTH_REHASH_PERCENTAGE 75
 
 typedef struct entry_t entry_t;
 
@@ -104,20 +104,24 @@ hash_purge(hash_t *self) {
 static void
 hash_rehash(hash_t *self, size_t new_prime_index) {
     assert(self);
-    assert (new_prime_index < sizeof (hash_primes));
+    assert(new_prime_index < sizeof(hash_primes));
 
-    size_t limit = hash_primes[self->prime_index];
+    size_t old_limit = hash_primes[self->prime_index];
     size_t new_limit = hash_primes[new_prime_index];
     entry_t **new_entries = allocate_pointers(new_limit);
 
     self->prime_index = new_prime_index;
-    for (size_t index = 0; index < limit; index++) {
+    self->used_indexes_size = 0;
+
+    for (size_t index = 0; index < old_limit; index++) {
         entry_t *entry = self->entries[index];
         while (entry) {
             entry_t *next = entry->next;
             size_t new_index = hash_key_index(self, entry->key);
             entry->index = new_index;
             entry_t *top_entry = new_entries[new_index];
+            if (top_entry == NULL)
+                self->used_indexes_size++;
             entry->next = top_entry;
             new_entries[new_index] = entry;
             entry = next;
@@ -223,8 +227,22 @@ hash_delete(hash_t *self, void *key) {
     hash_delete_entry(self, entry);
 }
 
-void todo(void) {
-    (void) hash_set_entry_if_not_exists;
-    (void) hash_new_entry;
-    (void) hash_rehash;
+static bool
+hash_is_overload(hash_t *self) {
+    size_t limit = hash_primes[self->prime_index];
+    return ((self->length >= limit * LENGTH_REHASH_PERCENTAGE / 100) ||
+            (self->used_indexes_size >= limit * INDEX_REHASH_PERCENTAGE / 100));
 }
+
+bool
+hash_set(hash_t *self, void *key, void *value) {
+    if (hash_is_overload(self))
+        hash_rehash(self, self->prime_index + 1);
+
+    return hash_set_entry_if_not_exists(self, key, value);
+}
+
+// void
+// hash_put(hash_t *self, void *key, void *value) {
+
+// }
