@@ -73,14 +73,14 @@ stack_is_empty(const stack_t *self) {
 
 void *
 stack_top(stack_t *self) {
-    array_t *array = list_end(self->array_list);
+    array_t *array = list_last(self->array_list);
     assert(array);
     return array_top(array);
 }
 
 void *
 stack_pop(stack_t *self) {
-    array_t *array = list_end(self->array_list);
+    array_t *array = list_last(self->array_list);
     assert(array);
     void* item = array_pop(array);
     if (array_is_empty(array)) {
@@ -93,7 +93,7 @@ stack_pop(stack_t *self) {
 
 void
 stack_push(stack_t *self, void *item) {
-    array_t *array = list_end(self->array_list);
+    array_t *array = list_last(self->array_list);
     if (!array || array_is_full(array)) {
         array = array_new(self->block_size);
         list_push(self->array_list, array);

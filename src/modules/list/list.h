@@ -38,7 +38,7 @@ void *list_current(const list_t *self);
 void *list_first(list_t *self);
 void *list_next(list_t *self);
 void *list_prev(list_t *self);
-void *list_end(list_t *self);
+void *list_last(list_t *self);
 
 // at the end of the list.
 

@@ -205,7 +205,7 @@ list_prev(list_t *self) {
 }
 
 void *
-list_end(list_t *self) {
+list_last(list_t *self) {
     assert(self);
     self->cursor = self->last;
     return list_current(self);

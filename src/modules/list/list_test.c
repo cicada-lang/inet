@@ -11,7 +11,7 @@ list_test(void) {
     assert(list_current(list) == NULL);
 
     assert(list_first(list) == NULL);
-    assert(list_end(list) == NULL);
+    assert(list_last(list) == NULL);
 
     assert(list_next(list) == NULL);
     assert(list_prev(list) == NULL);
@@ -120,7 +120,7 @@ list_test(void) {
         list_push(list, bread);
         list_push(list, wine);
 
-        assert(list_end(list) == wine);
+        assert(list_last(list) == wine);
         assert(list_prev(list) == bread);
         assert(list_prev(list) == cheese);
 
