@@ -1,11 +1,19 @@
-(node zero value!)
-(node add1 prev value!)
-(node add target! addend result)
+(define-node zero value!)
+(define-node add1 prev value!)
+(define-node add target! addend result)
 
-(rule (add (zero) addend result)
+(define-rule (add (zero) addend result)
   (connect addend result))
 
-(rule (add (add1 prev) addend result)
+(define-rule (add (add1 prev) addend result)
+  (add1 (add prev addend) result))
+
+(define-rule* ((add target! addend result)
+               (zero value!))
+  (connect addend result))
+
+(define-rule* ((add target! addend result)
+               (add1 prev value!))
   (add1 (add prev addend) result))
 
 ;; test
