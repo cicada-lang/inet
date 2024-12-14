@@ -1,7 +1,7 @@
 #include "index.h"
 
 static bool
-in_boundary(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+on_boundary(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
 return ((x < thickness || x >= width - thickness) ||
         (y < thickness || y >= height - thickness));
 }
@@ -18,12 +18,24 @@ canvas_draw_rect(
 ) {
     for (size_t j = 0; j < height; j++) {
         for (size_t i = 0; i < width; i++) {
-            if (in_boundary(i, j, width, height, thickness)) {
+            if (on_boundary(i, j, width, height, thickness))
                 canvas_draw_pixel(self, x + i, y + j, pixel);
-            }
-
         }
     }
+}
+
+static bool
+on_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+    return (((thickness <= x && x < (2 * thickness)) ||
+             (width - thickness > x && x >= width - (2 * thickness))) &&
+            ((thickness <= y && y < (2 * thickness)) ||
+             (height - thickness > y && y >= height - (2 * thickness))));
+}
+
+static bool
+outside_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+    return ((x < (2 * thickness) || x >= width - (2 * thickness)) &&
+            (y < (2 * thickness) || y >= height - (2 * thickness)));
 }
 
 void
@@ -40,26 +52,17 @@ canvas_draw_rect_round(
     if (roundness == SM_ROUNDNESS) {
         for (size_t j = 0; j < height; j++) {
             for (size_t i = 0; i < width; i++) {
-                // on four corners:
-                if (((thickness <= i && i < (2 * thickness)) ||
-                     (width - thickness > i && i >= width - (2 * thickness))) &&
-                    ((thickness <= j && j < (2 * thickness)) ||
-                     (height - thickness > j && j >= height - (2 * thickness))))
+                if (on_sm_round_corner(i, j, width, height, thickness))
                     canvas_draw_pixel(self, x + i, y + j, pixel);
 
-                // one four sides:
-                if ((i < thickness || i >= width - thickness) ||
-                    (j < thickness || j >= height - thickness))
-                {
-                    // avoid four corners:
-                    if (!((i < (2 * thickness) || i >= width - (2 * thickness)) &&
-                          (j < (2 * thickness) || j >= height - (2 * thickness))))
-                        canvas_draw_pixel(self, x + i, y + j, pixel);
-                }
+                if (on_boundary(i, j, width, height, thickness) &&
+                    !outside_sm_round_corner(i, j, width, height, thickness))
+                    canvas_draw_pixel(self, x + i, y + j, pixel);
             }
         }
     } else {
-        fprintf(stderr, "[canvas_draw_rect_round] unknown roundness: %u\n", roundness);
+        fprintf(stderr, "[canvas_draw_rect_round] unknown roundness: %u\n",
+                roundness);
         exit(1);
     }
 }
