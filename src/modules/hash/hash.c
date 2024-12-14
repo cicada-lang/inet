@@ -161,7 +161,7 @@ hash_get(hash_t *self, void *key) {
     entry_t *entry = hash_get_entry(self, key);
     if (!entry) return NULL;
 
-    return entry;
+    return entry->value;
 }
 
 // no rehash here.
