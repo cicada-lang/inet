@@ -1,8 +1,10 @@
 # hash
 
-[hash] using `uintptr_t` as key
-[hash] `hash_t`
+[hash] `hash_fn_t`
+[hash] `entry_t` -- local type
+[hash] `hash_t` -- using `uintptr_t` as key, has optional `hash_fn`
 [hash] `hash_new`
+[hash] `hash_rehash`
 [hash] `hash_destroy`
 
 # debug

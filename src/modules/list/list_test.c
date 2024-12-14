@@ -19,8 +19,8 @@ list_test(void) {
     assert(list_pop(list) == NULL);
     assert(list_shift(list) == NULL);
 
-    //  Three items we'll use as test data
-    //  List items are void *, not particularly strings
+    //  Three values we'll use as test data
+    //  List values are void *, not particularly strings
     char *cheese = string_dup("cheese");
     char *bread = string_dup("bread");
     char *wine = string_dup("wine");

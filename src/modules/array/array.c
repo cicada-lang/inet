@@ -3,7 +3,7 @@
 struct array_t {
     size_t size;
     size_t cursor;
-    void **items;
+    void **values;
     destroy_fn_t *destroy_fn;
 };
 
@@ -12,7 +12,7 @@ array_new(size_t size) {
     array_t *self = new(array_t);
     self->size = size;
     self->cursor = 0;
-    self->items = allocate_pointers(size);
+    self->values = allocate_pointers(size);
     return self;
 }
 
@@ -20,9 +20,9 @@ void
 array_purge(array_t *self) {
     assert(self);
     while(!array_is_empty(self)) {
-        void *item = array_pop(self);
+        void *value = array_pop(self);
         if (self->destroy_fn)
-            self->destroy_fn(&item);
+            self->destroy_fn(&value);
     }
 }
 
@@ -72,32 +72,32 @@ array_is_full(const array_t *self) {
 void *
 array_top(array_t *self) {
     assert(self->cursor > 0);
-    void *item = self->items[self->cursor - 1];
-    return item;
+    void *value = self->values[self->cursor - 1];
+    return value;
 }
 
 void *
 array_pop(array_t *self) {
     assert(self->cursor > 0);
     self->cursor--;
-    void *item = self->items[self->cursor];
-    return item;
+    void *value = self->values[self->cursor];
+    return value;
 }
 
 void
-array_push(array_t *self, void *item) {
-    self->items[self->cursor] = item;
+array_push(array_t *self, void *value) {
+    self->values[self->cursor] = value;
     self->cursor++;
 }
 
 void *
 array_get(array_t *self, size_t index) {
     assert(index < self->cursor);
-    return self->items[index];
+    return self->values[index];
 }
 
 void *
 array_pick(array_t *self, size_t index) {
     assert(index < self->cursor);
-    return self->items[self->cursor - 1 - index];
+    return self->values[self->cursor - 1 - index];
 }

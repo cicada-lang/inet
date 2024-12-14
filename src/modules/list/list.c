@@ -5,7 +5,7 @@ typedef struct node_t node_t;
 struct node_t {
     node_t *prev;
     node_t *next;
-    void *item;
+    void *value;
 };
 
 struct list_t {
@@ -43,7 +43,7 @@ list_purge(list_t *self) {
     while (node) {
         node_t *next = node->next;
         if (self->destroy_fn)
-            self->destroy_fn(&node->item);
+            self->destroy_fn(&node->value);
         free(node);
         node = next;
     }
@@ -81,15 +81,15 @@ list_dup(list_t *self) {
     if (!self) return NULL;
 
     list_t *list = list_new();
-    void *item = list_first(self);
-    while (item) {
+    void *value = list_first(self);
+    while (value) {
         if (self->dup_fn) {
-            list_push(list, self->dup_fn(item));
+            list_push(list, self->dup_fn(value));
         } else {
-            list_push(list, item);
+            list_push(list, value);
         }
 
-        item = list_next(self);
+        value = list_next(self);
     }
 
     return list;
@@ -106,12 +106,12 @@ list_is_empty(const list_t *self) {
 }
 
 bool
-list_has(const list_t *self, const void *item) {
+list_has(const list_t *self, const void *value) {
     assert(self);
     node_t *node = self->first;
     while (node) {
-        if ((node->item == item) ||
-            (self->equal_fn && self->equal_fn(node->item, item)))
+        if ((node->value == value) ||
+            (self->equal_fn && self->equal_fn(node->value, value)))
             return true;
 
         node = node->next;
@@ -121,11 +121,11 @@ list_has(const list_t *self, const void *item) {
 }
 
 bool
-list_remove(list_t *self, void *item) {
+list_remove(list_t *self, void *value) {
     node_t *node = self->first;
 
     while (node != NULL) {
-        if (node->item == item) break;
+        if (node->value == value) break;
         node = node->next;
     }
 
@@ -150,18 +150,18 @@ list_remove(list_t *self, void *item) {
 }
 
 void *
-list_find(list_t *self, const void *item) {
+list_find(list_t *self, const void *value) {
     assert(self);
 
     self->cursor = self->first;
 
     node_t *node = self->first;
     while (node) {
-        if ((node->item == item) ||
-            (self->equal_fn && self->equal_fn(node->item, item)))
+        if ((node->value == value) ||
+            (self->equal_fn && self->equal_fn(node->value, value)))
         {
             self->cursor = node;
-            return node->item;
+            return node->value;
         }
 
         node = node->next;
@@ -174,7 +174,7 @@ void *
 list_current(const list_t *self) {
     assert(self);
     if (self->cursor)
-        return self->cursor->item;
+        return self->cursor->value;
     else
         return NULL;
 }
@@ -212,10 +212,10 @@ list_last(list_t *self) {
 }
 
 void
-list_push(list_t *self, void *item) {
+list_push(list_t *self, void *value) {
     node_t *node = new(node_t);
     assert(node);
-    node->item = item;
+    node->value = value;
 
     if (self->last) {
         self->last->next = node;
@@ -242,7 +242,7 @@ list_pop(list_t *self) {
     if (self->first == node)
         self->first = NULL;
 
-    void *item = node->item;
+    void *value = node->value;
 
     if (node->prev) {
         self->last = node->prev;
@@ -254,14 +254,14 @@ list_pop(list_t *self) {
     free(node);
     self->length--;
 
-    return item;
+    return value;
 }
 
 void
-list_unshift(list_t *self, void *item) {
+list_unshift(list_t *self, void *value) {
     node_t *node = new(node_t);
     assert(node);
-    node->item = item;
+    node->value = value;
 
     if (self->first) {
         self->first->prev = node;
@@ -288,7 +288,7 @@ list_shift(list_t *self) {
     if (self->last == node)
         self->last = NULL;
 
-    void *item = node->item;
+    void *value = node->value;
 
     if (node->next) {
         self->first = node->next;
@@ -300,15 +300,15 @@ list_shift(list_t *self) {
     free(node);
     self->length--;
 
-    return item;
+    return value;
 }
 
 void *
 list_get(list_t *self, size_t index) {
-    void *item = list_first(self);
-    while (item) {
-        if (index == 0) return item;
-        item = list_next(self);
+    void *value = list_first(self);
+    while (value) {
+        if (index == 0) return value;
+        value = list_next(self);
         index--;
     }
 

@@ -14,7 +14,7 @@ bool array_is_full(const array_t *self);
 
 void *array_top(array_t *self);
 void *array_pop(array_t *self);
-void array_push(array_t *self, void *item);
+void array_push(array_t *self, void *value);
 
 void *array_get(array_t *self, size_t index);
 void *array_pick(array_t *self, size_t index);

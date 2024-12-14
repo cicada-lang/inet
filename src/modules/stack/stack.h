@@ -12,7 +12,7 @@ bool stack_is_empty(const stack_t *self);
 
 void *stack_top(stack_t *self);
 void *stack_pop(stack_t *self);
-void stack_push(stack_t *self, void *item);
+void stack_push(stack_t *self, void *value);
 
 void *stack_get(stack_t *self, size_t index);
 void *stack_pick(stack_t *self, size_t index);

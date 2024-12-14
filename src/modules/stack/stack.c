@@ -21,9 +21,9 @@ void
 stack_purge(stack_t *self) {
     assert(self);
     while(!stack_is_empty(self)) {
-        void* item = stack_pop(self);
+        void* value = stack_pop(self);
         if (self->destroy_fn)
-            self->destroy_fn(&item);
+            self->destroy_fn(&value);
     }
 }
 
@@ -79,24 +79,24 @@ void *
 stack_pop(stack_t *self) {
     array_t *array = list_last(self->array_list);
     assert(array);
-    void* item = array_pop(array);
+    void* value = array_pop(array);
     if (array_is_empty(array)) {
         list_pop(self->array_list);
         array_destroy(&array);
     }
 
-    return item;
+    return value;
 }
 
 void
-stack_push(stack_t *self, void *item) {
+stack_push(stack_t *self, void *value) {
     array_t *array = list_last(self->array_list);
     if (!array || array_is_full(array)) {
         array = array_new(self->block_size);
         list_push(self->array_list, array);
     }
 
-    array_push(array, item);
+    array_push(array, value);
 }
 
 void *

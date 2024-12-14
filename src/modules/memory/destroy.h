@@ -1,3 +1,3 @@
 #pragma once
 
-void destroy(void **item_pointer);
+void destroy(void **value_pointer);

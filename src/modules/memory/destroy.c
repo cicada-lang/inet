@@ -1,11 +1,11 @@
 #include "index.h"
 
 void
-destroy(void **item_pointer) {
-    assert(item_pointer);
-    if (*item_pointer) {
-        void *item = *item_pointer;
-        free(item);
-        *item_pointer = NULL;
+destroy(void **value_pointer) {
+    assert(value_pointer);
+    if (*value_pointer) {
+        void *value = *value_pointer;
+        free(value);
+        *value_pointer = NULL;
     }
 }

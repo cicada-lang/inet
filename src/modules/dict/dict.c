@@ -2,19 +2,19 @@
 
 struct entry_t {
     char *key;
-    void *item;
+    void *value;
 };
 
 typedef struct entry_t entry_t;
 
-entry_t *entry_new(char *key, void *item);
+entry_t *entry_new(char *key, void *value);
 void entry_destroy(entry_t **self_pointer);
 
 entry_t *
-entry_new(char *key, void *item) {
+entry_new(char *key, void *value) {
     entry_t *self = new(entry_t);
     self->key = key;
-    self->item = item;
+    self->value = value;
     return self;
 }
 
@@ -58,7 +58,7 @@ dict_purge(dict_t *self) {
     if (self->destroy_fn) {
         entry_t *entry = list_pop(self->entry_list);
         while (entry) {
-            self->destroy_fn(&entry->item);
+            self->destroy_fn(&entry->value);
             entry_destroy(&entry);
             entry = list_pop(self->entry_list);
         }
@@ -83,22 +83,22 @@ dict_length(dict_t *self) {
 }
 
 void
-dict_set(dict_t *self, const char *key, void *item) {
+dict_set(dict_t *self, const char *key, void *value) {
     entry_t *entry = list_first(self->entry_list);
     while (entry) {
         if (string_equal(entry->key, key)) {
             if (self->destroy_fn) {
-                self->destroy_fn(&entry->item);
+                self->destroy_fn(&entry->value);
             }
 
-            entry->item = item;
+            entry->value = value;
             return;
         }
 
         entry = list_next(self->entry_list);
     }
 
-    list_push(self->entry_list, entry_new(string_dup(key), item));
+    list_push(self->entry_list, entry_new(string_dup(key), value));
 }
 
 void *
@@ -106,7 +106,7 @@ dict_get(dict_t *self, const char *key) {
     entry_t *entry = list_first(self->entry_list);
     while (entry) {
         if (string_equal(entry->key, key)) {
-            return entry->item;
+            return entry->value;
         }
 
         entry = list_next(self->entry_list);
@@ -117,19 +117,19 @@ dict_get(dict_t *self, const char *key) {
 
 void *
 dict_get_or_fail(dict_t *self, const char *key) {
-    void *item = dict_get(self, key);
-    if (!item) {
+    void *value = dict_get(self, key);
+    if (!value) {
         fprintf(stderr, "[dict_get_or_fail] undefined key: %s\n", key);
         exit(1);
     }
 
-    return item;
+    return value;
 }
 
 bool
 dict_has(dict_t *self, const char *key) {
-    void *item = dict_get(self, key);
-    if (item) {
+    void *value = dict_get(self, key);
+    if (value) {
         return true;
     } else {
         return false;
