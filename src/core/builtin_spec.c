@@ -1,11 +1,11 @@
 #include "index.h"
 
 builtin_spec_t *
-builtin_spec_new(const char *name, builtin_fn_t *builtin) {
+builtin_spec_new(const char *name, builtin_fn_t *builtin_fn) {
     builtin_spec_t *self = new(builtin_spec_t);
     self->tag = BUILTIN_SPEC;
     self->name = string_dup(name);
-    self->builtin = builtin;
+    self->builtin_fn = builtin_fn;
     return self;
 }
 

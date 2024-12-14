@@ -40,17 +40,14 @@ stack_destroy(stack_t **self_pointer) {
 }
 
 void
-stack_set_destroy_fn(
-    stack_t *self,
-    destroy_fn_t *destroy
-) {
-    self->destroy_fn = destroy;
+stack_set_destroy_fn(stack_t *self, destroy_fn_t *destroy_fn) {
+    self->destroy_fn = destroy_fn;
 }
 
 stack_t *
-stack_new_with(destroy_fn_t *destroy) {
+stack_new_with(destroy_fn_t *destroy_fn) {
     stack_t *self = stack_new();
-    self->destroy_fn = destroy;
+    self->destroy_fn = destroy_fn;
     return self;
 }
 

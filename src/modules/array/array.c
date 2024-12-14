@@ -39,17 +39,14 @@ array_destroy(array_t **self_pointer) {
 
 
 void
-array_set_destroy_fn(
-    array_t *self,
-    destroy_fn_t *destroy
-) {
-    self->destroy_fn = destroy;
+array_set_destroy_fn(array_t *self, destroy_fn_t *destroy_fn) {
+    self->destroy_fn = destroy_fn;
 }
 
 array_t *
-array_new_with(size_t size, destroy_fn_t *destroy) {
+array_new_with(size_t size, destroy_fn_t *destroy_fn) {
     array_t *self = array_new(size);
-    self->destroy_fn = destroy;
+    self->destroy_fn = destroy_fn;
     return self;
 }
 
