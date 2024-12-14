@@ -1,9 +1,8 @@
 # hash
 
-[hash] `hash_key_t`
 [hash] `hash_fn_t`
 [hash] `entry_t` -- local type
-[hash] `hash_t` -- using `uintptr_t` as key, has optional `hash_fn`
+[hash] `hash_t` -- using `void *` as key, has optional `hash_fn`
 [hash] `hash_new`
 [hash] `hash_rehash`
 [hash] `hash_destroy`

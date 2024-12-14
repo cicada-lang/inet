@@ -69,8 +69,25 @@ array_test(void) {
         array_push(array, bread);   assert(!array_is_full(array));
         array_push(array, wine);    assert(array_is_full(array));
 
-        // array_destroy(&array);
-        // assert(array == NULL);
+        array_destroy(&array);
+        assert(array == NULL);
+    }
+
+    {
+        // cast atom value to void *.
+
+        array_t *array = array_new(3);
+
+        array_push(array, (void *) 1);
+        array_push(array, (void *) 0);
+        array_push(array, (void *) -1);
+
+        assert(((int64_t) array_pop(array)) == -1);
+        assert(((int64_t) array_pop(array)) == 0);
+        assert(((int64_t) array_pop(array)) == 1);
+
+        array_destroy(&array);
+        assert(array == NULL);
     }
 
     printf("</array_test>\n");
