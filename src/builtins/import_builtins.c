@@ -10,7 +10,7 @@ import_builtins(mod_t *mod) {
     define_builtin(mod, "@swap", builtin_swap);
     define_builtin(mod, "@rot", builtin_rot);
 
-    define_builtin(mod, "@wire-connect", builtin_wire_connect);
+    define_builtin(mod, "@connect", builtin_connect);
     define_builtin(mod, "@wire-print-net", builtin_wire_print_net);
     define_builtin(mod, "@wire-pair", builtin_wire_pair);
 
