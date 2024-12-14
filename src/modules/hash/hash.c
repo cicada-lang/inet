@@ -101,6 +101,11 @@ hash_purge(hash_t *self) {
     hash_init(self);
 }
 
+size_t
+hash_length(const hash_t *self) {
+    return self->length;
+}
+
 static void
 hash_rehash(hash_t *self, size_t new_prime_index) {
     assert(self);

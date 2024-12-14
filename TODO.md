@@ -1,5 +1,6 @@
 # hash
 
+[hash] `hash_report` -- for testing
 [hash] `hash_test` -- more tests
 [hash] `string_bernstein_hash`
 
