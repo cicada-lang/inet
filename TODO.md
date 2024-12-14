@@ -1,7 +1,5 @@
 # hash
 
-[hash] `hash_put` -- call `hash_rehash`, call `destroy_fn` if exists
-
 [hash] `string_bernstein_hash`
 
 # debug

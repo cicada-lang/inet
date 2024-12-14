@@ -242,7 +242,15 @@ hash_set(hash_t *self, void *key, void *value) {
     return hash_set_entry_if_not_exists(self, key, value);
 }
 
-// void
-// hash_put(hash_t *self, void *key, void *value) {
+void
+hash_put(hash_t *self, void *key, void *value) {
+    entry_t *entry = hash_get_entry(self, key);
+    if (!entry) {
+        assert(hash_set(self, key, value));
+        return;
+    }
 
-// }
+    if (self->destroy_fn)
+        self->destroy_fn(&entry->value);
+    entry->value = value;
+}
