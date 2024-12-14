@@ -1,7 +1,7 @@
 * (sole) -> value!
 
-. @print-worker
+. print-worker
   sole
-  @print-worker
+  print-worker
   sole
-  @print-worker
+  print-worker

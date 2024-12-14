@@ -20,9 +20,9 @@
   two two add
   add
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  interact
+  wire-print-net
 
 (- to define `mul`, we first need `nat-erase` and `nat-dup`. -)
 
@@ -52,14 +52,14 @@
 
 ! (add1)-(mul)
   (mul)-mulend nat-dup
-  (- first second -) (add1)-prev @swap mul
+  (- first second -) (add1)-prev swap mul
   (- first almost -) add result-(mul)
 
 . two two mul
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  interact
+  wire-print-net
 
 (- to define `max`, we need `max-aux`. -)
 
@@ -83,6 +83,6 @@
 
 . one two max
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  interact
+  wire-print-net

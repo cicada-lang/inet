@@ -1,4 +1,4 @@
 * (sole) -> value!
 
-. @wire-pair sole @connect
-  @print-worker
+. wire-pair sole connect
+  print-worker

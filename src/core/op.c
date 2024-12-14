@@ -146,7 +146,7 @@ op_print(const op_t *unknown_op, file_t *file) {
     }
 
     case CONNECT_OP: {
-        fprintf(file, "@connect");
+        fprintf(file, "connect");
         return;
     }
 

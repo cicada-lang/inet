@@ -1,5 +1,5 @@
 * (sole) -> value!
 
 . sole sole sole
-  @print-value-stack
+  print-value-stack
   sole sole sole

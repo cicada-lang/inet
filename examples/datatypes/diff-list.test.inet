@@ -30,16 +30,16 @@
 * (sole) -> value!
 
 = sole-diff-list
-  @wire-pair
+  wire-pair
   (- wire wire -) diff
-  (- wire back value -) @swap
+  (- wire back value -) swap
   (- wire value back -) sole cons sole cons
-  (- wire value list -) @rot
-  (- value list wire -) @connect
+  (- wire value list -) rot
+  (- value list wire -) connect
   (- value -)
 
 . sole-diff-list sole-diff-list diff-append
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  interact
+  wire-print-net

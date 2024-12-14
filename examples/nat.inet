@@ -15,6 +15,6 @@
   zero add1 add1
   add
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  interact
+  wire-print-net
