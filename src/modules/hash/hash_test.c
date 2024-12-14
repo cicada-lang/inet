@@ -98,6 +98,13 @@ hash_test(void) {
         hash_put(hash, string_dup("DEADBEEF"), string_dup("foo"));
         assert(string_equal(hash_get(hash, "DEADBEEF"), "foo"));
 
+        //  Delete entries
+        hash_delete(hash, "DEADBEEF");
+        assert(!hash_get(hash, "DEADBEEF"));
+        hash_delete(hash, "ABADCAFE");
+        assert(!hash_get(hash, "ABADCAFE"));
+        assert(hash_length(hash) == 2);
+
         hash_purge(hash);
         assert(hash_length(hash) == 0);
         hash_destroy(&hash);
