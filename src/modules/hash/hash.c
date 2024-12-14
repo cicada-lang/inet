@@ -44,9 +44,9 @@ hash_new_entry(hash_t *self, void *key, void *value) {
     return entry;
 }
 
-hash_t *
-hash_new(void) {
-    hash_t *self = new(hash_t);
+// reused by `hash_purge` to shrink table.
+static void
+hash_init(hash_t *self) {
     self->prime_index = 0;
     self->used_indexes_size = 0;
     self->length = 0;
@@ -54,6 +54,12 @@ hash_new(void) {
     self->entries = allocate_pointers(limit);
     self->cursor_index = 0;
     self->cursor_entry = NULL;
+}
+
+hash_t *
+hash_new(void) {
+    hash_t *self = new(hash_t);
+    hash_init(self);
     return self;
 }
 
@@ -85,6 +91,13 @@ hash_destroy(hash_t **self_pointer) {
         free(self);
         *self_pointer = NULL;
     }
+}
+
+void
+hash_purge(hash_t *self) {
+    hash_purge_without_shrink(self);
+    free(self->entries);
+    hash_init(self);
 }
 
 static bool

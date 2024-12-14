@@ -1,7 +1,5 @@
 # hash
 
-[hash] `hash_purge` -- need to shrink
-
 [hash] `hash_set` -- error if exists
 [hash] `hash_put` -- call destroy_fn if exists
 
