@@ -7,9 +7,16 @@
 # debug
 
 [debug] `node_layout` 有什么更好的名字？
-node_state
 
-- `node_state`
+- `node_state`？
+
+```c
+struct {
+    vec2_t position;
+    vec2_t velocity;
+    vec2_t force;
+};
+```
 
 [debug] `net_layout` should have a `force_list`
 
