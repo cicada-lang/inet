@@ -7,10 +7,19 @@ typedef struct entry_t entry_t;
 
 struct entry_t {
     size_t index;
-    const void *key;
+    void *key;
     void *value;
     entry_t *next;
 };
+
+static entry_t *
+entry_new(size_t index, void *key, void *value) {
+    entry_t *self = new(entry_t);
+    self->index = index;
+    self->key = key;
+    self->value = value;
+    return self;
+}
 
 struct hash_t {
     size_t used_indexes_size;

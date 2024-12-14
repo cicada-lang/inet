@@ -1,7 +1,6 @@
 # hash
 
-[hash] `entry_new`
-[hash] `entry_destroy`
+[hash] `entry_destroy` -- private
 
 [hash] `hash_get_entry` -- private
 [hash] `hash_set_entry` -- private
