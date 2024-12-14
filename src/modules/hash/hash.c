@@ -72,8 +72,8 @@ hash_key_equal(hash_t *self, void *key1, void *key2) {
     return true;
 }
 
-void *
-hash_get(hash_t *self, void *key) {
+static entry_t *
+hash_get_entry(hash_t *self, void *key) {
     size_t base = self->hash_fn ? self->hash_fn(key) : (size_t) key;
     size_t limit = hash_primes[self->prime_index];
     size_t index = base % limit;
@@ -82,11 +82,19 @@ hash_get(hash_t *self, void *key) {
 
     while (entry) {
         if (hash_key_equal(self, entry->key, key))
-            return entry->value;
+            return entry;
         entry = entry->next;
     }
 
     return NULL;
+}
+
+void *
+hash_get(hash_t *self, void *key) {
+    entry_t *entry = hash_get_entry(self, key);
+    if (!entry) return NULL;
+
+    return entry;
 }
 
 void todo(void) {
