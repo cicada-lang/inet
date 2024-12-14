@@ -1,7 +1,7 @@
 #include "index.h"
 
-static bool
-on_boundary(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+bool
+on_rect_boundary(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
 return ((x < thickness || x >= width - thickness) ||
         (y < thickness || y >= height - thickness));
 }
@@ -18,22 +18,22 @@ canvas_draw_rect(
 ) {
     for (size_t j = 0; j < height; j++) {
         for (size_t i = 0; i < width; i++) {
-            if (on_boundary(i, j, width, height, thickness))
+            if (on_rect_boundary(i, j, width, height, thickness))
                 canvas_draw_pixel(self, x + i, y + j, pixel);
         }
     }
 }
 
-static bool
-on_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+bool
+on_rect_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
     return (((thickness <= x && x < (2 * thickness)) ||
              (width - thickness > x && x >= width - (2 * thickness))) &&
             ((thickness <= y && y < (2 * thickness)) ||
              (height - thickness > y && y >= height - (2 * thickness))));
 }
 
-static bool
-outside_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
+bool
+outside_rect_sm_round_corner(size_t x, size_t y, size_t width, size_t height, size_t thickness) {
     return ((x < (2 * thickness) || x >= width - (2 * thickness)) &&
             (y < (2 * thickness) || y >= height - (2 * thickness)));
 }
@@ -52,11 +52,11 @@ canvas_draw_rect_round(
     if (roundness == SM_ROUNDNESS) {
         for (size_t j = 0; j < height; j++) {
             for (size_t i = 0; i < width; i++) {
-                if (on_sm_round_corner(i, j, width, height, thickness))
+                if (on_rect_sm_round_corner(i, j, width, height, thickness))
                     canvas_draw_pixel(self, x + i, y + j, pixel);
 
-                if (on_boundary(i, j, width, height, thickness) &&
-                    !outside_sm_round_corner(i, j, width, height, thickness))
+                if (on_rect_boundary(i, j, width, height, thickness) &&
+                    !outside_rect_sm_round_corner(i, j, width, height, thickness))
                     canvas_draw_pixel(self, x + i, y + j, pixel);
             }
         }

@@ -1,7 +1,3 @@
-# canvas
-
-[canvas] extract ... from `canvas_draw_rect_round`
-
 # hash
 
 [hash] setup `hash.c`
