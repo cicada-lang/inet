@@ -5,7 +5,6 @@
 [hash] `hash_get_entry` -- private
 [hash] `hash_set_entry` -- private
 
-[hash] `hash_new`
 [hash] `hash_destroy`
 [hash] `hash_purge_without_shrink` -- private
 [hash] `hash_purge`
