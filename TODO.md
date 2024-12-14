@@ -1,10 +1,21 @@
 # hash
 
-[hash] `entry_t` -- local type
-[hash] `hash_t` -- using `void *` as key, has optional `hash_fn`
+[hash] `entry_new`
+[hash] `entry_destroy`
+
+[hash] `hash_get_entry` -- private
+[hash] `hash_set_entry` -- private
+
 [hash] `hash_new`
-[hash] `hash_rehash`
 [hash] `hash_destroy`
+[hash] `hash_purge_without_shrink` -- private
+[hash] `hash_purge`
+
+[hash] `hash_get`
+[hash] `hash_set`
+
+[hash] `hash_rehash`
+[hash] `string_bernstein_hash`
 
 # debug
 
