@@ -57,6 +57,36 @@ hash_new(void) {
     return self;
 }
 
+static void hash_delete_entry(hash_t *self, entry_t *entry);
+
+static void
+hash_purge_without_shrink(hash_t *self) {
+    size_t limit = hash_primes[self->prime_index];
+    for (size_t index = 0; index < limit; index++) {
+        // destroy all entries in this hash bucket.
+        entry_t *entry = self->entries[index];
+        while (entry) {
+            entry_t *next = entry->next;
+            hash_delete_entry(self, entry);
+            entry = next;
+        }
+
+        self->entries[index] = NULL;
+    }
+}
+
+void
+hash_destroy(hash_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        hash_t *self = *self_pointer;
+        hash_purge_without_shrink(self);
+        free(self->entries);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
 static bool
 hash_key_equal(hash_t *self, void *key1, void *key2) {
     if (!self->key_equal_fn)
@@ -153,4 +183,3 @@ void todo(void) {
     (void) hash_set_entry_if_not_exists;
     (void) hash_new_entry;
 }
-

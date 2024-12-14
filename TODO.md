@@ -1,7 +1,5 @@
 # hash
 
-[hash] `hash_purge_without_shrink` -- private
-[hash] `hash_destroy`
 [hash] `hash_purge` -- need to shrink
 
 [hash] `hash_set` -- error if exists
