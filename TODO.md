@@ -1,6 +1,5 @@
 # hash
 
-[hash] `hash_key_equal` -- private
 [hash] `hash_set` -- error if exists
 [hash] `hash_put` -- call destroy_fn if exists
 

@@ -66,10 +66,10 @@ hash_new(void) {
 
 static bool
 hash_key_equal(hash_t *self, void *key1, void *key2) {
-    (void) self;
-    (void) key1;
-    (void) key2;
-    return true;
+    if (!self->hash_fn)
+        return key1 == key2;
+
+    return self->hash_fn(key1) == self->hash_fn(key2);
 }
 
 static entry_t *
