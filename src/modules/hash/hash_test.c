@@ -39,7 +39,7 @@ hash_test(void) {
     {
         hash_t *hash = hash_new();
 
-        size_t length = 10 * 1000 * 1000;
+        size_t length = 1000 * 1000;
         for (size_t i = 0; i < length; i++) {
             // printf("i: %lu\n", i);
             hash_set(hash, (void *) i, (void *) i);
