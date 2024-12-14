@@ -1,4 +1,5 @@
 #include "index.h"
+#include "hash_primes.h"
 
 #define INDEX_REHASH_PERCENTAGE 60
 #define LENGHT_REHASH_PERCENTAGE 75
@@ -100,6 +101,33 @@ hash_purge(hash_t *self) {
     hash_init(self);
 }
 
+static void
+hash_rehash(hash_t *self, size_t new_prime_index) {
+    assert(self);
+    assert (new_prime_index < sizeof (hash_primes));
+
+    size_t limit = hash_primes[self->prime_index];
+    size_t new_limit = hash_primes[new_prime_index];
+    entry_t **new_entries = allocate_pointers(new_limit);
+
+    self->prime_index = new_prime_index;
+    for (size_t index = 0; index < limit; index++) {
+        entry_t *entry = self->entries[index];
+        while (entry) {
+            entry_t *next = entry->next;
+            size_t new_index = hash_key_index(self, entry->key);
+            entry->index = new_index;
+            entry_t *top_entry = new_entries[new_index];
+            entry->next = top_entry;
+            new_entries[new_index] = entry;
+            entry = next;
+        }
+    }
+
+    free(self->entries);
+    self->entries = new_entries;
+}
+
 static bool
 hash_key_equal(hash_t *self, void *key1, void *key2) {
     if (!self->key_equal_fn)
@@ -142,6 +170,8 @@ hash_set_entry_if_not_exists(hash_t *self, void *key, void *value) {
     if (!entry) {
         entry_t *new_entry = hash_new_entry(self, key, value);
         self->entries[index] = new_entry;
+        self->used_indexes_size++;
+        self->length++;
         return true;
     }
 
@@ -156,6 +186,7 @@ hash_set_entry_if_not_exists(hash_t *self, void *key, void *value) {
     entry_t *top_entry = self->entries[index];
     self->entries[index] = new_entry;
     new_entry->next = top_entry;
+    self->length++;
     return true;
 }
 
@@ -195,4 +226,5 @@ hash_delete(hash_t *self, void *key) {
 void todo(void) {
     (void) hash_set_entry_if_not_exists;
     (void) hash_new_entry;
+    (void) hash_rehash;
 }
