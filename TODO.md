@@ -1,8 +1,10 @@
 # hash
 
-[hash] setup `hash.c` -- a hash table with constant time lookup and dense iteration.
 [hash] copy `hash_primes.c` from czmq
+[hash] using `uintptr_t` as key
 [hash] `hash_t`
+[hash] `hash_new`
+[hash] `hash_destroy`
 
 # debug
 

@@ -37,7 +37,6 @@ array_destroy(array_t **self_pointer) {
     }
 }
 
-
 void
 array_set_destroy_fn(array_t *self, destroy_fn_t *destroy_fn) {
     self->destroy_fn = destroy_fn;
