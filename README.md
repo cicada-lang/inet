@@ -290,7 +290,7 @@ Compile:
 ```
 git clone https://github.com/cicada-lang/inet
 cd inet
-make
+make -j
 make test
 ```
 
