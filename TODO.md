@@ -1,11 +1,12 @@
 # debug
 
-[debug] `node_layout` 有什么更好的名字？
+ambr node_layout node_model
+ambr net_layout net_model
 
-- `node_state`？
+[debug] `node_model_t` has `position` and `velocity`
 
 ```c
-struct {
+struct node_state_t {
     vec2_t position;
     vec2_t velocity;
     vec2_t force;
@@ -15,21 +16,14 @@ struct {
 [debug] `net_layout` should have a `force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
-- 为了获得更好的 abstraction，需要学习物理学知识 -- read sussman books
-  可能应该抽出来：
-  - `net_t` -- 专门用来遍历 net 中的元素
-  - `debug_t` 应该有一个 node id 到 `particle_t` (或者类似的物理建模对象) 的 hash map
 
-  也许不应该依赖物理知识，因为我需要的只是合理的命名而已。
-  可以先把正确的代码结构写出来，再改名字。
+[debug] `net_model` has `node_model_hash` and `node_hash`
 
-[debug] 到目前为止，最简单的可用设计是：
+[debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
+[core] rename function with "run" to other names -- to rename `interact` to `run`
+[core] rename `interact` to `run` -- to have a `run` button
 
-- 不要显示 stack（因为未来可能是 lisp）
-- 直接增加两个按钮，一个 `step` 一个 `run`
-  - 要把 `interact` 函数改成 `run` -- 别的带有 `run` 的函数也需要改。
-
-[debug] try to add `velocity` -- 另外一种 force group
+[debug] 尝试使用真实的物理学来实现 force
 
 [debug] 建立临时的 file 用来 print，从 file 收集 string -- 可能又需要学 linux 的 API。
 
