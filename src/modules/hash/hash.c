@@ -286,6 +286,35 @@ hash_put(hash_t *self, void *key, void *value) {
     entry->value = value;
 }
 
+void *
+hash_first(hash_t *self) {
+    assert(self);
+    self->cursor_index = 0;
+    self->cursor_entry = self->entries[self->cursor_index];
+    return hash_next(self);
+}
+
+void *
+hash_next(hash_t *self) {
+    assert (self);
+    // Scan forward from cursor until we find an non empty bucket
+    size_t limit = hash_primes[self->prime_index];
+    while (self->cursor_entry == NULL) {
+        if (self->cursor_index < limit - 1)
+            self->cursor_index++;
+        else
+            return NULL;
+
+        self->cursor_entry = self->entries[self->cursor_index];
+    }
+
+    // We have an entry, so return it, and bump past it
+    assert(self->cursor_entry);
+    entry_t *entry = self->cursor_entry;
+    self->cursor_entry = self->cursor_entry->next;
+    return entry->value;
+}
+
 void
 hash_report(const hash_t *self) {
     size_t limit = hash_primes[self->prime_index];

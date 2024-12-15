@@ -1,7 +1,6 @@
 # hash
 
-[hash] `hash_first`
-[hash] `hash_next`
+[hash] test `hash_first` & `hash_next`
 
 # debug
 
