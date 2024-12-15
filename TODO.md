@@ -1,7 +1,3 @@
-# hash
-
-[hash] test `hash_first` & `hash_next`
-
 # debug
 
 [debug] `node_layout` 有什么更好的名字？

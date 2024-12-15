@@ -110,5 +110,32 @@ hash_test(void) {
         hash_destroy(&hash);
     }
 
+    {
+        hash_t *hash = hash_new();
+        hash_set_hash_fn(hash, (hash_fn_t *) string_bernstein_hash);
+        hash_set_destroy_fn(hash, (destroy_fn_t *) string_destroy);
+        hash_set_key_destroy_fn(hash, (destroy_fn_t *) string_destroy);
+        hash_set_key_equal_fn(hash, (equal_fn_t *) string_equal);
+
+        assert(!hash_first(hash));
+
+        //  Insert some entries
+        assert(hash_set(hash, string_dup("DEADBEEF"), string_dup("dead beef")));
+        assert(hash_set(hash, string_dup("ABADCAFE"), string_dup("a bad cafe")));
+        assert(hash_set(hash, string_dup("C0DEDBAD"), string_dup("coded bad")));
+        assert(hash_set(hash, string_dup("DEADF00D"), string_dup("dead food")));
+        assert(hash_length(hash) == 4);
+
+        char *value = hash_first(hash);
+        while (value) {
+            printf("value: %s\n", value);
+            value = hash_next(hash);
+        }
+
+        hash_purge(hash);
+        assert(hash_length(hash) == 0);
+        hash_destroy(&hash);
+    }
+
     printf("</hash_test>\n");
 }
