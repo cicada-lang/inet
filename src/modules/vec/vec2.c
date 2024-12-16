@@ -51,3 +51,8 @@ double
 vec2_length(vec2_t v) {
     return sqrt(vec2_square(v));
 }
+
+bool
+vec2_is_nan(vec2_t v) {
+    return isnan(v.x) || isnan(v.y);
+}

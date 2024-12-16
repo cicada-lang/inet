@@ -10,17 +10,15 @@ spring_force(vec2_t first, vec2_t second) {
 
     double factor = log(fabs(distance / spring_length));
 
-    double force_x = C * factor * delta.x;
-    double force_y = C * factor * delta.y;
-
-    if (isnan(force_x) || isnan(force_y)) {
-        return vec2_zero();
-    }
-
-    return (vec2_t) {
-        .x = force_x,
-        .y = force_y,
+    vec2_t force = {
+        .x = C * factor * delta.x,
+        .y = C * factor * delta.y,
     };
+
+    if (vec2_is_nan(force))
+        return vec2_zero();
+
+    return force;
 }
 
 void

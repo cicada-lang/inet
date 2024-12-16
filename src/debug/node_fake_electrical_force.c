@@ -11,17 +11,15 @@ electrical_force(vec2_t first, vec2_t second) {
 
     double C = 5000;
 
-    double force_x = -(C / distance_sqared) * unit_x;
-    double force_y = -(C / distance_sqared) * unit_y;
-
-    if (isnan(force_x) || isnan(force_y)) {
-        return vec2_zero();
-    }
-
-    return (vec2_t) {
-        .x = force_x,
-        .y = force_y,
+    vec2_t force = {
+        .x = -(C / distance_sqared) * unit_x,
+        .y = -(C / distance_sqared) * unit_y,
     };
+
+    if (vec2_is_nan(force))
+        return vec2_zero();
+
+    return force;
 }
 
 void
