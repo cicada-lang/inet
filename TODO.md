@@ -1,4 +1,3 @@
-[vec] `vec2_neg`
 [vec] `vec2_mul`
 
 [vec] `vec2_dot`
