@@ -48,6 +48,10 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
         !wire->opposite->node)
         return;
 
+    uint32_t pixel = canvas->palette[FG_COLOR];
+    if (wire_is_principal(wire) && wire_is_principal(wire->opposite))
+        pixel = canvas->palette[SL_COLOR];
+
     node_model_t *node_model1 =
         hash_get(self->node_model_hash, (void *) wire->node->id);
     node_model_t *node_model2 =
@@ -60,7 +64,7 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
             self->node_physics->y + node_model1->position.y,
             self->node_physics->x + node_model2->position.x,
             self->node_physics->y + node_model2->position.y,
-            canvas->palette[FG_COLOR]);
+            pixel);
     }
 }
 
