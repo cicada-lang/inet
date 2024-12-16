@@ -1,5 +1,3 @@
-[vec] `vec2_test` -- test `vec2_map`
-
 # debug
 
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
