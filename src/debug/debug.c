@@ -1,15 +1,17 @@
 #include "index.h"
 
-#define WIDTH (90 * TILE)
-#define HEIGHT (60 * TILE)
-#define SCALE 3
+
 
 debug_t *
 debug_new(worker_t *worker) {
     debug_t *self = new(debug_t);
     self->worker = worker;
 
-    canvas_t *canvas = canvas_new(WIDTH, HEIGHT, SCALE);
+    size_t width = 90 * TILE;
+    size_t height = 60 * TILE;
+    size_t scale = 3;
+
+    canvas_t *canvas = canvas_new(width, height, scale);
     canvas->state = self;
     canvas->title = "inet debug";
     self->canvas = canvas;
@@ -23,8 +25,8 @@ debug_new(worker_t *worker) {
     self->node_physics = node_physics_new(
         padding_x,
         padding_y,
-        WIDTH - padding_x * 2,
-        HEIGHT - padding_y * 2);
+        width - padding_x * 2,
+        height - padding_y * 2);
 
     return self;
 }
@@ -67,8 +69,8 @@ draw_background_grid(debug_t *self, canvas_t *canvas, bool really) {
 
     (void) self;
 
-    for (size_t i = 0; i < WIDTH / TILE; i++) {
-        for (size_t j = 0; j < HEIGHT / TILE; j++) {
+    for (size_t i = 0; i < self->width / TILE; i++) {
+        for (size_t j = 0; j < self->height / TILE; j++) {
             canvas_draw_pixel(canvas, i * TILE, j * TILE, 0xffff0000);
         }
     }
