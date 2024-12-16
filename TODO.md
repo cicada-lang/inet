@@ -1,5 +1,7 @@
 # debug
 
+[debug] `node_physics_system_update` -- take `node_hash` and `node_model_hash`
+[debug] delete `node_model_hash` by `node_hash` diff
 [debug] move `node_model_hash` to `debug`
 [debug] `node_force_t`
 [debug] `node_physics_system` should have a `node_force_list`
