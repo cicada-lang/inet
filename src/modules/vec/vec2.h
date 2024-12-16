@@ -5,6 +5,8 @@ struct vec2_t { double x, y; };
 vec2_t vec2_zeros(void);
 vec2_t vec2_ones(void);
 
+bool vec2_equal(vec2_t v1, vec2_t v2);
+
 vec2_t vec2_add(vec2_t v1, vec2_t v2);
 vec2_t vec2_sub(vec2_t v1, vec2_t v2);
 vec2_t vec2_neg(vec2_t v);

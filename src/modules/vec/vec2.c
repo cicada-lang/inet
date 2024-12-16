@@ -10,6 +10,11 @@ vec2_ones(void) {
     return (vec2_t) { .x = 1, .y = 1 };
 }
 
+bool
+vec2_equal(vec2_t v1, vec2_t v2) {
+    return v1.x == v2.x && v1.y == v2.y;
+}
+
 vec2_t
 vec2_add(vec2_t v1, vec2_t v2) {
     return (vec2_t) {

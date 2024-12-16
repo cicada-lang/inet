@@ -1,4 +1,3 @@
-[vec] `vec2_equal`
 [vec] `vec2_test` -- test `vec2_map`
 
 # debug
