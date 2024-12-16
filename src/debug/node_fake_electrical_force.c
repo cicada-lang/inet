@@ -11,7 +11,7 @@ electrical_force(vec2_t first, vec2_t second) {
     vec2_t force = vec2_mul_scalar(unit, -(C / distance_sqared));;
 
     if (vec2_is_nan(force))
-        return vec2_zero();
+        return vec2_zeros();
 
     return force;
 }

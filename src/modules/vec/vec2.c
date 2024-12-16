@@ -1,7 +1,7 @@
 #include "index.h"
 
 vec2_t
-vec2_zero(void) {
+vec2_zeros(void) {
     return (vec2_t) { .x = 0, .y = 0 };
 }
 

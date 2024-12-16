@@ -1,3 +1,4 @@
+[vec] `vec2_ones`
 [vec] `vec2_test` -- test `vec2_map`
 
 # debug
