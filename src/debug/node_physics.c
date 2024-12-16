@@ -27,13 +27,13 @@ void
 node_physics_add_more_nodes(node_physics_t *self, hash_t *node_hash, hash_t *node_model_hash) {
     node_t *node = hash_first(node_hash);
     while (node) {
-        node_model_t *found = hash_get(node_model_hash, (void *) (size_t) node->id);
+        node_model_t *found = hash_get(node_model_hash, (void *) node->id);
         if (!found) {
             node_model_t *node_model = node_model_new((vec2_t) {
                     .x = self->width * ((double) rand() / RAND_MAX),
                     .y = self->height * ((double) rand() / RAND_MAX),
                 });
-            hash_set(node_model_hash, (void *) (size_t) node->id, node_model);
+            hash_set(node_model_hash, (void *) node->id, node_model);
         }
 
         node = hash_next(node_hash);

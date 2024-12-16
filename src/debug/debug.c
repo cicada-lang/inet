@@ -73,7 +73,7 @@ draw_background_grid(debug_t *self, canvas_t *canvas, bool is_on) {
 
 static void
 draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_model) {
-    node_t *node = hash_get(self->node_hash, (void *) (size_t) node_id);
+    node_t *node = hash_get(self->node_hash, (void *) node_id);
     if (!node) return;
     text_t *text = text_from_string(node->spec->name);
     size_t text_width = font_text_width(canvas->font, text);
@@ -120,9 +120,9 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
         return;
 
     node_model_t *node_model1 =
-        hash_get(self->node_model_hash, (void *) (size_t) wire->node->id);
+        hash_get(self->node_model_hash, (void *) wire->node->id);
     node_model_t *node_model2 =
-        hash_get(self->node_model_hash, (void *) (size_t) wire->opposite->node->id);
+        hash_get(self->node_model_hash, (void *) wire->opposite->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(
@@ -203,7 +203,7 @@ init_node_hash(debug_t *self) {
     node_iter_t *iter = node_iter_new(root->opposite->node);
     node_t *node = node_iter_first(iter);
     while (node) {
-        hash_set(self->node_hash, (void *) (size_t) node->id, node);
+        hash_set(self->node_hash, (void *) node->id, node);
         node = node_iter_next(iter);
     }
     node_iter_destroy(&iter);

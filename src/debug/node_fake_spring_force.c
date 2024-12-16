@@ -37,8 +37,8 @@ node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
             wire->opposite &&
             wire->opposite->node)
         {
-            node_model_t *node_model1 = hash_get(node_model_hash, (void *) (size_t) wire->node->id);
-            node_model_t *node_model2 = hash_get(node_model_hash, (void *) (size_t) wire->opposite->node->id);
+            node_model_t *node_model1 = hash_get(node_model_hash, (void *) wire->node->id);
+            node_model_t *node_model2 = hash_get(node_model_hash, (void *) wire->opposite->node->id);
 
             vec2_t force = spring_force(node_model1->position, node_model2->position);
 
