@@ -2,10 +2,9 @@
 
 static vec2_t
 spring_force(vec2_t first, vec2_t second) {
-    double delta_x = second.x - first.x;
-    double delta_y = second.y - first.y;
+    vec2_t delta = vec2_sub(second, first);
 
-    double distance_sqared = delta_x * delta_x + delta_y * delta_y;
+    double distance_sqared = delta.x * delta.x + delta.y * delta.y;
     double distance = sqrt(distance_sqared);
 
     double C = 0.03;
@@ -13,8 +12,8 @@ spring_force(vec2_t first, vec2_t second) {
 
     double factor = log(fabs(distance / spring_length));
 
-    double force_x = C * factor * delta_x;
-    double force_y = C * factor * delta_y;
+    double force_x = C * factor * delta.x;
+    double force_y = C * factor * delta.y;
 
     if (isnan(force_x) || isnan(force_y)) {
         return (vec2_t) { .x = 0, .y = 0 };

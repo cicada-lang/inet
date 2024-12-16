@@ -2,14 +2,13 @@
 
 static vec2_t
 electrical_force(vec2_t first, vec2_t second) {
-    double delta_x = second.x - first.x;
-    double delta_y = second.y - first.y;
+    vec2_t delta = vec2_sub(second, first);
 
-    double distance_sqared = delta_x * delta_x + delta_y * delta_y;
+    double distance_sqared = delta.x * delta.x + delta.y * delta.y;
     double distance = sqrt(distance_sqared);
 
-    double unit_x = delta_x / distance;
-    double unit_y = delta_y / distance;
+    double unit_x = delta.x / distance;
+    double unit_y = delta.y / distance;
 
     double C = 5000;
 

@@ -1,6 +1,11 @@
-[vec] `vec2_sub`
-[vec] `vec2_add`
+[vec] `vec2_neg`
 [vec] `vec2_mul`
+
+[vec] `vec2_dot`
+[vec] `vec2_square`
+[vec] `vec2_length`
+
+[vec] `vec2_map`
 
 # debug
 
