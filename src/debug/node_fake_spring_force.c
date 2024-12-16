@@ -16,10 +16,6 @@ spring_force(vec2_t first, vec2_t second) {
     double force_x = C * factor * delta_x;
     double force_y = C * factor * delta_y;
 
-    // printf("[spring_delta] C: %f, factor: %f\n", C, factor);
-    // printf("[spring_delta] delta_x: %f, delta_y: %f\n", delta_x, delta_y);
-    // printf("[spring_force] force_x: %f, force_y: %f\n", force_x, force_y);
-
     if (isnan(force_x) || isnan(force_y)) {
         return (vec2_t) { .x = 0, .y = 0 };
     }
@@ -41,23 +37,16 @@ node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
             wire->opposite &&
             wire->opposite->node)
         {
-            node_model_t *node_model1 =
-                hash_get(node_model_hash, (void *) (size_t) wire->node->id);
-            node_model_t *node_model2 =
-                hash_get(node_model_hash, (void *) (size_t) wire->opposite->node->id);
+            node_model_t *node_model1 = hash_get(node_model_hash, (void *) (size_t) wire->node->id);
+            node_model_t *node_model2 = hash_get(node_model_hash, (void *) (size_t) wire->opposite->node->id);
 
-            vec2_t force = spring_force(
-                node_model1->position,
-                node_model2->position);
+            vec2_t force = spring_force(node_model1->position, node_model2->position);
 
             node_model1->force.x += force.x;
             node_model1->force.y += force.y;
 
             node_model2->force.x -= force.x;
             node_model2->force.y -= force.y;
-
-            // printf("[node_fake_spring_force] force.x %f, force.y: %f\n",
-            //        force.x, force.y);
         }
 
         wire = wire_iter_next(iter);

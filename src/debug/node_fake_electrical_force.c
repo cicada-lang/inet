@@ -36,9 +36,7 @@ node_fake_electrical_force(node_physics_t *self, hash_t *node_model_hash) {
         node_model_t *node_model2 = list_first(node_model_list);
         while (node_model2) {
             if (node_model2 != node_model) {
-                vec2_t force = electrical_force(
-                    node_model->position,
-                    node_model2->position);
+                vec2_t force = electrical_force(node_model->position, node_model2->position);
 
                 node_model->force.x += force.x;
                 node_model->force.y += force.y;

@@ -1,3 +1,4 @@
+[vec] `vec2_sub`
 [vec] `vec2_add`
 [vec] `vec2_mul`
 
