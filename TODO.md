@@ -1,15 +1,12 @@
 # debug
 
-[debug] if `run_toggle` -- call `worker_net_step` every 0.3s
+[debug] if `is_playing` -- call `worker_net_step` every 0.3s
+
+[debug] 显示带有角标的 node
 
 [debug] 尝试使用真实的物理学来实现 force
-[debug] fake forces should change velocity instead of force
 [debug] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
-
-[debug] 建立临时的 file 用来 print，从 file 收集 string -- 可能又需要学 linux 的 API。
-
-- 这是为了显示带有角标的 node。
-
+[debug] remove `node_physics_fake_simulate`
 # study
 
 [study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
