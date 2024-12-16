@@ -1,7 +1,5 @@
 # debug
 
-[debug] extract `draw_net.c` from `debug.c` -- with `drawings.h`
-
 [debug] `draw_step_button.c`
 [debug] `draw_run_button.c`
 
