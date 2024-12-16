@@ -7,6 +7,8 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
     if (button == 1) {
         if (is_release) {
             self->run_button_is_pressed = false;
+            worker_net_run(self->worker);
+            debug_update(self);
         } else {
             self->run_button_is_pressed = true;
         }

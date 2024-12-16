@@ -1,6 +1,5 @@
 # debug
 
-[debug] `draw_run_button.c` -- handle click
 [debug] extract `draw_toolbar.c`
 
 [debug] `draw_cursor.c`
