@@ -109,6 +109,18 @@ debug_new_node_hash(debug_t *self) {
     return node_hash;
 }
 
+void
+debug_update(debug_t *self) {
+    hash_t *new_node_hash = debug_new_node_hash(self);
+    node_physics_update_nodes(
+        self->node_physics,
+        new_node_hash,
+        self->node_hash,
+        self->node_model_hash);
+    hash_destroy(&self->node_hash);
+    self->node_hash = new_node_hash;
+}
+
 static void
 init_node_hash(debug_t *self) {
     hash_destroy(&self->node_hash);

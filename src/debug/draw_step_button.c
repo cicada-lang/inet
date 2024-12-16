@@ -9,14 +9,7 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
             self->step_button_is_pressed = false;
 
             worker_net_step(self->worker);
-            hash_t *new_node_hash = debug_new_node_hash(self);
-            node_physics_update_nodes(
-                self->node_physics,
-                new_node_hash,
-                self->node_hash,
-                self->node_model_hash);
-            hash_destroy(&self->node_hash);
-            self->node_hash = new_node_hash;
+            debug_update(self);
         } else {
             self->step_button_is_pressed = true;
         }
