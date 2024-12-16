@@ -1,8 +1,7 @@
 # debug
 
-[debug] `step` button -- call `worker_net_step`
-[debug] `run` button -- call `worker_net_run`
-[debug] `run` button as a toggle -- call `worker_net_step` every 0.3s
+[debug] `draw_end_button` -- call `worker_net_run`
+[debug] `draw_run_button` -- button as a toggle -- call `worker_net_step` every 0.3s
 
 [debug] 尝试使用真实的物理学来实现 force
 [debug] fake forces should change velocity instead of force
