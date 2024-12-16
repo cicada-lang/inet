@@ -7,9 +7,6 @@ node_physics_system_new(size_t x, size_t y, size_t width, size_t height) {
     self->y = y;
     self->width = width;
     self->height = height;
-
-    self->node_model_hash = hash_new();
-    hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
     self->evolving_step = 0;
     self->max_evolving_step = 1000;
     self->cooling_factor = 0.999;
@@ -21,7 +18,6 @@ node_physics_system_destroy(node_physics_system_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         node_physics_system_t *self = *self_pointer;
-        hash_destroy(&self->node_model_hash);
         free(self);
         *self_pointer = NULL;
     }

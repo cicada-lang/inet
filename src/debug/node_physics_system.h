@@ -3,10 +3,7 @@
 struct node_physics_system_t {
     size_t x, y;
     size_t width, height;
-
     wire_t *root; // to query relation between nodes.
-    hash_t *node_model_hash;
-
     uint32_t evolving_step;
     uint32_t max_evolving_step;
     double cooling_factor;

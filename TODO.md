@@ -1,13 +1,14 @@
 # debug
 
-[debug] delete `node_model_hash` by `node_hash` diff
-[debug] move `node_model_hash` to `debug`
 [debug] `node_force_t`
 [debug] `node_physics_system` should have a `node_force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
 
+[debug] delete `node_model_hash` by `node_hash` diff
+
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
+
 [core] rename function with "run" to other names -- to rename `interact` to `run`
 [core] rename `interact` to `run` -- to have a `run` button
 

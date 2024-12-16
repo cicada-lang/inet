@@ -15,6 +15,8 @@ debug_new(worker_t *worker) {
     self->canvas = canvas;
 
     self->node_hash = hash_new();
+    self->node_model_hash = hash_new();
+    hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
     self->node_physics_system = node_physics_system_new(
         15 * TILE,
         10 * TILE,
@@ -30,6 +32,7 @@ debug_destroy(debug_t **self_pointer) {
     if (*self_pointer) {
         debug_t *self = *self_pointer;
         canvas_destroy(&self->canvas);
+        hash_destroy(&self->node_model_hash);
         free(self);
         *self_pointer = NULL;
     }
@@ -116,34 +119,31 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
         !wire->opposite->node)
         return;
 
-    node_physics_system_t *node_physics_system = self->node_physics_system;
-
     node_model_t *node_model1 =
-        hash_get(node_physics_system->node_model_hash, (void *) (size_t) wire->node->id);
+        hash_get(self->node_model_hash, (void *) (size_t) wire->node->id);
     node_model_t *node_model2 =
-        hash_get(node_physics_system->node_model_hash, (void *) (size_t) wire->opposite->node->id);
+        hash_get(self->node_model_hash, (void *) (size_t) wire->opposite->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(
             canvas,
-            node_physics_system->x + node_model1->position.x,
-            node_physics_system->y + node_model1->position.y,
-            node_physics_system->x + node_model2->position.x,
-            node_physics_system->y + node_model2->position.y,
+            self->node_physics_system->x + node_model1->position.x,
+            self->node_physics_system->y + node_model1->position.y,
+            self->node_physics_system->x + node_model2->position.x,
+            self->node_physics_system->y + node_model2->position.y,
             canvas->palette[AP_COLOR]);
     }
 }
 
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
-    node_physics_system_t *node_physics_system = self->node_physics_system;
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        node_physics_system->x,
-        node_physics_system->y,
-        node_physics_system->width,
-        node_physics_system->height,
+        self->node_physics_system->x,
+        self->node_physics_system->y,
+        self->node_physics_system->width,
+        self->node_physics_system->height,
         thickness,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
@@ -153,17 +153,16 @@ static void
 draw_net(debug_t *self, canvas_t *canvas) {
     assert(self->node_physics_system);
 
-    node_physics_system_t *node_physics_system = self->node_physics_system;
-    if (!node_physics_system->root)
+    if (!self->node_physics_system->root)
         return;
 
     node_physics_system_evolve(
-        node_physics_system,
-        node_physics_system->node_model_hash);
+        self->node_physics_system,
+        self->node_model_hash);
 
     draw_net_border(self, canvas);
 
-    wire_iter_t *iter = wire_iter_new(node_physics_system->root);
+    wire_iter_t *iter = wire_iter_new(self->node_physics_system->root);
     wire_t *wire = wire_iter_first(iter);
 
     while (wire) {
@@ -172,11 +171,11 @@ draw_net(debug_t *self, canvas_t *canvas) {
     }
     wire_iter_destroy(&iter);
 
-    node_model_t *node_model = hash_first(node_physics_system->node_model_hash);
+    node_model_t *node_model = hash_first(self->node_model_hash);
     while (node_model) {
-        size_t node_id = (size_t) hash_cursor(node_physics_system->node_model_hash);
+        size_t node_id = (size_t) hash_cursor(self->node_model_hash);
         draw_node(self, canvas, node_id, node_model);
-        node_model = hash_next(node_physics_system->node_model_hash);
+        node_model = hash_next(self->node_model_hash);
     }
 }
 
@@ -220,7 +219,7 @@ init_node_physics_system(debug_t *self) {
     node_physics_system_add_node_models(
         self->node_physics_system,
         self->node_hash,
-        self->node_physics_system->node_model_hash);
+        self->node_model_hash);
 }
 
 void
