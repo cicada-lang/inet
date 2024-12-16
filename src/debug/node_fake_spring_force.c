@@ -9,11 +9,7 @@ spring_force(vec2_t first, vec2_t second) {
     double spring_length = 5;
 
     double factor = log(fabs(distance / spring_length));
-
-    vec2_t force = {
-        .x = C * factor * delta.x,
-        .y = C * factor * delta.y,
-    };
+    vec2_t force = vec2_mul_scalar(delta, C * factor);;
 
     if (vec2_is_nan(force))
         return vec2_zero();

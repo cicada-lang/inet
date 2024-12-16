@@ -6,15 +6,9 @@ electrical_force(vec2_t first, vec2_t second) {
     double distance_sqared = vec2_square(delta);
     double distance = sqrt(distance_sqared);
 
-    double unit_x = delta.x / distance;
-    double unit_y = delta.y / distance;
-
     double C = 5000;
-
-    vec2_t force = {
-        .x = -(C / distance_sqared) * unit_x,
-        .y = -(C / distance_sqared) * unit_y,
-    };
+    vec2_t unit = vec2_div_scalar(delta, distance);
+    vec2_t force = vec2_mul_scalar(unit, -(C / distance_sqared));;
 
     if (vec2_is_nan(force))
         return vec2_zero();

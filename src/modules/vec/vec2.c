@@ -56,3 +56,35 @@ bool
 vec2_is_nan(vec2_t v) {
     return isnan(v.x) || isnan(v.y);
 }
+
+vec2_t
+vec2_add_scalar(vec2_t v, double s) {
+    return (vec2_t) {
+        .x = v.x + s,
+        .y = v.y + s,
+    };
+}
+
+vec2_t
+vec2_sub_scalar(vec2_t v, double s) {
+    return (vec2_t) {
+        .x = v.x - s,
+        .y = v.y - s,
+    };
+}
+
+vec2_t
+vec2_mul_scalar(vec2_t v, double s) {
+    return (vec2_t) {
+        .x = v.x * s,
+        .y = v.y * s,
+    };
+}
+
+vec2_t
+vec2_div_scalar(vec2_t v, double s) {
+    return (vec2_t) {
+        .x = v.x / s,
+        .y = v.y / s,
+    };
+}
