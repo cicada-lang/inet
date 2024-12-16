@@ -28,14 +28,14 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 void
-worker_interact(worker_t *self) {
+worker_net_run(worker_t *self) {
     while (!list_is_empty(self->active_wire_list)) {
-        worker_interact_once(self);
+        worker_net_step(self);
     }
 }
 
 void
-worker_interact_once(worker_t *self) {
+worker_net_step(worker_t *self) {
     wire_t *active_wire = list_pop(self->active_wire_list);
     if (!active_wire) return;
 
