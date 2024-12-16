@@ -19,5 +19,5 @@
 
   wire-print-net
   debug
-  interact
+  run
   wire-print-net

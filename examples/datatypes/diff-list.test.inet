@@ -41,5 +41,5 @@
 . sole-diff-list sole-diff-list diff-append
 
   wire-print-net
-  interact
+  run
   wire-print-net

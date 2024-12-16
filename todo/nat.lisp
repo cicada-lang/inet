@@ -19,7 +19,7 @@
 ;; test
 
 (wire-print-net
- (interact
+ (run
   (wire-print-net
    (add (add1 (add1 zero))
         (add1 (add1 zero))))))

@@ -18,5 +18,5 @@
   append
 
   wire-print-net
-  interact
+  run
   wire-print-net

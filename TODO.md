@@ -2,8 +2,7 @@
 
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
 [debug] delete `node_model_hash` by `node_hash` diff
-[core] rename function with "run" to other names -- to rename `interact` to `run`
-[core] rename `interact` to `run` -- to have a `run` button
+[core] rename function with "run" to other names
 
 [debug] 尝试使用真实的物理学来实现 force
 [debug] fake forces should change velocity instead of force
