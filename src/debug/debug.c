@@ -86,6 +86,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 
     draw_background_grid(self, canvas, false);
     draw_net(self, canvas);
+    draw_run_button(self, canvas);
     draw_step_button(self, canvas);
 }
 
