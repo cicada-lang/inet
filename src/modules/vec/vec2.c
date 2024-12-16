@@ -1,6 +1,11 @@
 #include "index.h"
 
 vec2_t
+vec2_zero(void) {
+    return (vec2_t) { .x = 0, .y = 0 };
+}
+
+vec2_t
 vec2_add(vec2_t v1, vec2_t v2) {
     return (vec2_t) {
         .x = v1.x + v2.x,

@@ -14,7 +14,7 @@ spring_force(vec2_t first, vec2_t second) {
     double force_y = C * factor * delta.y;
 
     if (isnan(force_x) || isnan(force_y)) {
-        return (vec2_t) { .x = 0, .y = 0 };
+        return vec2_zero();
     }
 
     return (vec2_t) {
