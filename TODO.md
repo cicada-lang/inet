@@ -1,6 +1,6 @@
 # debug
 
-[debug] if `is_playing` -- call `worker_net_step` every 0.3s
+[debug] if `is_running` -- call `worker_net_step` every 0.3s
 
 [debug] 显示带有角标的 node
 

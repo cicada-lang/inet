@@ -6,8 +6,9 @@ struct debug_t {
     canvas_t *canvas;
     bool step_button_is_pressed;
     bool run_button_is_pressed;
-    bool is_playing;
     bool end_button_is_pressed;
+
+    bool is_running;
 
     hash_t *node_hash;
     hash_t *node_model_hash;

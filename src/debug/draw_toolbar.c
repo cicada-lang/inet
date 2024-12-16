@@ -35,7 +35,7 @@ on_click_run_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_rel
     if (button == 1) {
         if (is_release) {
             self->run_button_is_pressed = false;
-            self->is_playing = !self->is_playing;
+            self->is_running = !self->is_running;
         } else {
             self->run_button_is_pressed = true;
         }
@@ -44,7 +44,7 @@ on_click_run_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_rel
 
 static void
 draw_run_button(debug_t *self, canvas_t *canvas, size_t x, size_t y) {
-    if (self->run_button_is_pressed || self->is_playing) {
+    if (self->run_button_is_pressed || self->is_running) {
         canvas_draw_image_button(
             canvas, x, y, "images/run-button-down-03x03.chr", TR_AP_BLENDING,
             (on_click_fn_t *) on_click_run_button);
