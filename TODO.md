@@ -1,6 +1,5 @@
 # debug
 
-[debug] remove `node` from `node_model`
 [debug] move `node_model_hash` to `debug`
 [debug] `force_t`
 [debug] `node_physics_system` should have a `force_list`

@@ -40,11 +40,11 @@ node_physics_system_update(node_physics_system_t *self) {
     while (node) {
         node_model_t *found = hash_get(self->node_model_hash, (void *) (size_t) node->id);
         if (found) {
-            hash_set(new_hash, (void *) (size_t) found->node->id, found);
+            hash_set(new_hash, (void *) (size_t) node->id, found);
         } else {
             size_t x = self->width * ((double) rand() / RAND_MAX);
             size_t y = self->height * ((double) rand() / RAND_MAX);
-            node_model_t *node_model = node_model_new(node, (vec2_t) { .x = x, y = y });
+            node_model_t *node_model = node_model_new((vec2_t) { .x = x, y = y });
             hash_set(new_hash, (void *) (size_t) node->id, node_model);
         }
 
