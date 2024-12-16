@@ -40,33 +40,6 @@ node_physics_add_more_nodes(node_physics_t *self, hash_t *node_hash, hash_t *nod
 }
 
 static void
-node_physics_electrical_force(node_physics_t *self, hash_t *node_model_hash) {
-    (void) self;
-
-    list_t *node_model_list = hash_value_list(node_model_hash);
-    node_model_t *node_model = hash_first(node_model_hash);
-    while (node_model) {
-        node_model_t *node_model2 = list_first(node_model_list);
-        while (node_model2) {
-            if (node_model2 != node_model) {
-                vec2_t force = electrical_force(
-                    node_model->position,
-                    node_model2->position);
-
-                node_model->force.x += force.x;
-                node_model->force.y += force.y;
-            }
-
-            node_model2 = list_next(node_model_list);
-        }
-
-        node_model = hash_next(node_model_hash);
-    }
-
-    list_destroy(&node_model_list);
-}
-
-static void
 node_physics_spring_force(node_physics_t *self, hash_t *node_model_hash) {
     if (!self->root) return;
 

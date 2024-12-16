@@ -4,7 +4,6 @@
 
 # debug
 
-[debug] extract `node_fake_electrical_force`
 [debug] extract `node_fake_spring_force` -- remove `forces.h`
 
 [debug] `node_physics_fake_simulate` -- clear `velocity` for every `node_model`
