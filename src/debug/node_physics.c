@@ -55,18 +55,15 @@ keep_node_model_in_box(node_physics_t *self, node_model_t *node_model) {
         node_model->position.y = self->height;
 }
 
-static void
-apply_all_forces(node_physics_t *self, hash_t *node_model_hash) {
-    node_fake_spring_force(self, node_model_hash);
-    node_fake_electrical_force(self, node_model_hash);
-}
+// fake force use force as velocity.
 
 void
-node_physics_simulate(node_physics_t *self, hash_t *node_model_hash) {
+node_physics_fake_simulate(node_physics_t *self, hash_t *node_model_hash) {
     if (self->evolving_step > self->max_evolving_step) return;
     self->evolving_step++;
 
-    apply_all_forces(self, node_model_hash);
+    node_fake_spring_force(self, node_model_hash);
+    node_fake_electrical_force(self, node_model_hash);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
     node_model_t *node_model = hash_first(node_model_hash);

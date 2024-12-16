@@ -4,17 +4,14 @@
 
 # debug
 
-[debug] `node_physics_simulate` -- clear `force` for every `node_model`
-[debug] `node_physics_fake_simulate` -- clear `velocity` for every `node_model`
-
-[debug] fake forces should change velocity instead of force
-
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
 [debug] delete `node_model_hash` by `node_hash` diff
 [core] rename function with "run" to other names -- to rename `interact` to `run`
 [core] rename `interact` to `run` -- to have a `run` button
 
 [debug] 尝试使用真实的物理学来实现 force
+[debug] fake forces should change velocity instead of force
+[debug] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
 
 [debug] 建立临时的 file 用来 print，从 file 收集 string -- 可能又需要学 linux 的 API。
 
