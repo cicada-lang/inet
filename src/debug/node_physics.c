@@ -102,7 +102,7 @@ node_physics_spring_force(node_physics_t *self, hash_t *node_model_hash) {
 }
 
 void
-node_physics_evolve(node_physics_t *self, hash_t *node_model_hash) {
+node_physics_simulate(node_physics_t *self, hash_t *node_model_hash) {
     if (self->evolving_step > self->max_evolving_step)
         return;
 

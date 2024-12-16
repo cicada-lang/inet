@@ -1,14 +1,19 @@
 # debug
 
-[debug] `node_force_t`
-[debug] `node_physics` should have a `node_force_list`
+[debug] `node_force_fn_t` -- interface
 
-- so that we can switch from one group of forces to another by clicking a button
+[debug] `node_fake_electrical_force`
+[debug] `node_fake_spring_force`
 
-[debug] delete `node_model_hash` by `node_hash` diff
+[debug] `node_forces.h`
+
+[debug] `node_physics_fake_simulate` -- clear `velocity` for every `node_model`
+[debug] `node_physics_simulate` -- clear `force` for every `node_model`
+
+[debug] `node_physics` should have a `node_force_fn_list`
 
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
-
+[debug] delete `node_model_hash` by `node_hash` diff
 [core] rename function with "run" to other names -- to rename `interact` to `run`
 [core] rename `interact` to `run` -- to have a `run` button
 

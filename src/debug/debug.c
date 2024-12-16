@@ -156,7 +156,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
     if (!self->node_physics->root)
         return;
 
-    node_physics_evolve(
+    node_physics_simulate(
         self->node_physics,
         self->node_model_hash);
 
