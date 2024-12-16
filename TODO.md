@@ -1,6 +1,6 @@
 # debug
 
-[debug] `node_physics_system_update` -- take `node_hash` and `node_model_hash`
+ambr node_physics_system_update node_physics_system_add_node_models
 [debug] delete `node_model_hash` by `node_hash` diff
 [debug] move `node_model_hash` to `debug`
 [debug] `node_force_t`

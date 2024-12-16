@@ -28,25 +28,19 @@ node_physics_system_destroy(node_physics_system_t **self_pointer) {
 }
 
 void
-node_physics_system_update(node_physics_system_t *self) {
-    if (!self->root) return;
-    if (!self->root->opposite) return;
-    if (!self->root->opposite->node) return;
-
-    node_iter_t *iter = node_iter_new(self->root->opposite->node);
-    node_t *node = node_iter_first(iter);
+node_physics_system_update(node_physics_system_t *self, hash_t *node_hash, hash_t *node_model_hash) {
+    node_t *node = hash_first(node_hash);
     while (node) {
-        node_model_t *found = hash_get(self->node_model_hash, (void *) (size_t) node->id);
+        node_model_t *found = hash_get(node_model_hash, (void *) (size_t) node->id);
         if (!found) {
             size_t x = self->width * ((double) rand() / RAND_MAX);
             size_t y = self->height * ((double) rand() / RAND_MAX);
             node_model_t *node_model = node_model_new((vec2_t) { .x = x, y = y });
-            hash_set(self->node_model_hash, (void *) (size_t) node->id, node_model);
+            hash_set(node_model_hash, (void *) (size_t) node->id, node_model);
         }
 
-        node = node_iter_next(iter);
+        node = hash_next(node_hash);
     }
-    node_iter_destroy(&iter);
 }
 
 static void
