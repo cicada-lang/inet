@@ -17,11 +17,14 @@ debug_new(worker_t *worker) {
     self->node_hash = hash_new();
     self->node_model_hash = hash_new();
     hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
+
+    size_t padding_x = 2 * TILE;
+    size_t padding_y = 2 * TILE;
     self->node_physics = node_physics_new(
-        15 * TILE,
-        10 * TILE,
-        60 * TILE,
-        40 * TILE);
+        padding_x,
+        padding_y,
+        WIDTH - padding_x * 2,
+        HEIGHT - padding_y * 2);
 
     return self;
 }
@@ -136,7 +139,9 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
 }
 
 static void
-draw_net_border(debug_t *self, canvas_t *canvas) {
+draw_net_border(debug_t *self, canvas_t *canvas, bool really) {
+    if (!really) return;
+
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
@@ -160,7 +165,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
         self->node_physics,
         self->node_model_hash);
 
-    draw_net_border(self, canvas);
+    draw_net_border(self, canvas, false);
 
     wire_iter_t *iter = wire_iter_new(self->node_physics->root);
     wire_t *wire = wire_iter_first(iter);
