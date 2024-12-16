@@ -2,5 +2,5 @@
 
 void
 builtin_interact(worker_t *worker) {
-    run(worker);
+    worker_interact(worker);
 }
