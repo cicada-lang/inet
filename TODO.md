@@ -1,4 +1,3 @@
-[vec] `vec2_dot`
 [vec] `vec2_square`
 [vec] `vec2_length`
 
