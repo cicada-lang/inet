@@ -15,8 +15,6 @@ struct net_model_t {
 net_model_t *net_model_new(size_t x, size_t y, size_t width, size_t height);
 void net_model_destroy(net_model_t **self_pointer);
 
-node_model_t *net_model_find_node_model(const net_model_t *self, const node_t *node);
-
 void net_model_update(net_model_t *self);
 
 void net_model_evolve(net_model_t *self);

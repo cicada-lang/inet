@@ -116,9 +116,9 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     net_model_t *net_model = self->net_model;
 
     node_model_t *node_model1 =
-        net_model_find_node_model(net_model, wire->node);
+        hash_get(net_model->node_model_hash, (void *) (size_t) wire->node->id);
     node_model_t *node_model2 =
-        net_model_find_node_model(net_model, wire->opposite->node);
+        hash_get(net_model->node_model_hash, (void *) (size_t) wire->opposite->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(

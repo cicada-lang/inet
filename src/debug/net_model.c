@@ -27,19 +27,6 @@ net_model_destroy(net_model_t **self_pointer) {
     }
 }
 
-node_model_t *
-net_model_find_node_model(const net_model_t *self, const node_t *node) {
-    node_model_t *node_model = hash_first(self->node_model_hash);
-    while (node_model) {
-        if (node_model->node == node)
-            return node_model;
-
-        node_model = hash_next(self->node_model_hash);
-    }
-
-    return NULL;
-}
-
 void
 net_model_update(net_model_t *self) {
     if (!self->root) return;
@@ -51,7 +38,7 @@ net_model_update(net_model_t *self) {
     hash_set_destroy_fn(new_hash, (destroy_fn_t *) node_model_destroy);
     node_t *node = node_iter_first(iter);
     while (node) {
-        node_model_t *found = net_model_find_node_model(self, node);
+        node_model_t *found = hash_get(self->node_model_hash, (void *) (size_t) node->id);
         if (found) {
             hash_set(new_hash, (void *) (size_t) found->node->id, found);
         } else {
@@ -106,9 +93,9 @@ net_model_spring_force(net_model_t *self) {
             wire->opposite->node)
         {
             node_model_t *node_model1 =
-                net_model_find_node_model(self, wire->node);
+                hash_get(self->node_model_hash, (void *) (size_t) wire->node->id);
             node_model_t *node_model2 =
-                net_model_find_node_model(self, wire->opposite->node);
+                hash_get(self->node_model_hash, (void *) (size_t) wire->opposite->node->id);
 
             vec2_t force = spring_force(
                 node_model1->position,
