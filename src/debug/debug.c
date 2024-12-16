@@ -14,6 +14,7 @@ debug_new(worker_t *worker) {
     canvas->title = "inet debug";
     self->canvas = canvas;
 
+    self->node_hash = hash_new();
     self->node_physics_system = node_physics_system_new(
         15 * TILE,
         10 * TILE,
@@ -185,6 +186,24 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 }
 
 static void
+init_node_hash(debug_t *self) {
+    hash_purge(self->node_hash);
+
+    wire_t *root = stack_top(self->worker->value_stack);
+    if (!root) return;
+    if (!root->opposite) return;
+    if (!root->opposite->node) return;
+
+    node_iter_t *iter = node_iter_new(root->opposite->node);
+    node_t *node = node_iter_first(iter);
+    while (node) {
+        hash_set(self->node_hash, (void *) (size_t) node->id, node);
+        node = node_iter_next(iter);
+    }
+    node_iter_destroy(&iter);
+}
+
+static void
 init_node_physics_system(debug_t *self) {
     if (stack_is_empty(self->worker->value_stack))
         return;
@@ -199,6 +218,7 @@ debug_start(worker_t *worker) {
     srand(time(NULL));
 
     debug_t *self = debug_new(worker);
+    init_node_hash(self);
     init_node_physics_system(self);
 
     init_canvas_theme(self->canvas);
