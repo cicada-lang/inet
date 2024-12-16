@@ -28,7 +28,7 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 void
-worker_interact(worker_t *self) {
+run(worker_t *self) {
     while (!list_is_empty(self->active_wire_list)) {
         step(self);
     }

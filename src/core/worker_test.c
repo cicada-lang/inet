@@ -26,7 +26,7 @@ worker_test(void) {
 
     worker->log_level = 1;
     worker_run_until(worker, 0);
-    worker_interact(worker);
+    run(worker);
 
     worker_destroy(&worker);
     mod_destroy(&mod);

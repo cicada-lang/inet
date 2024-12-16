@@ -16,7 +16,7 @@ struct worker_t {
 worker_t *worker_new(mod_t *mod);
 void worker_destroy(worker_t **self_pointer);
 
-void worker_interact(worker_t *self);
+void run(worker_t *self);
 void step(worker_t *self);
 void worker_run_until(worker_t *self, size_t base_length);
 void worker_step(worker_t *self);

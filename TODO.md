@@ -1,6 +1,5 @@
 # debug
 
-ambr worker_interact run
 [core] extract run.c
 ambr interact run
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
