@@ -20,11 +20,11 @@ draw_step_button(debug_t *self, canvas_t *canvas) {
 
     if (self->step_button_is_pressed) {
         canvas_draw_image_button(
-            canvas, x, y, "images/button-step-down-03x03.chr", TR_AP_BLENDING,
+            canvas, x, y, "images/step-button-down-03x03.chr", TR_AP_BLENDING,
             (on_click_fn_t *) on_click);
     } else {
         canvas_draw_image_button(
-            canvas, x, y, "images/button-step-up-03x03.chr", TR_AP_BLENDING,
+            canvas, x, y, "images/step-button-up-03x03.chr", TR_AP_BLENDING,
             (on_click_fn_t *) on_click);
     }
 }
