@@ -14,7 +14,7 @@ debug_new(worker_t *worker) {
     canvas->title = "inet debug";
     self->canvas = canvas;
 
-    self->net_layout = net_layout_new(
+    self->net_model = net_model_new(
         15 * TILE,
         10 * TILE,
         60 * TILE,
@@ -75,8 +75,8 @@ draw_node(debug_t *self, canvas_t *canvas, node_model_t *node_model) {
     size_t x_padding = TILE / 2;
     size_t y_padding = 2;
 
-    size_t x = self->net_layout->x + node_model->x - (text_width / 2);
-    size_t y = self->net_layout->y + node_model->y - (text_height / 2);
+    size_t x = self->net_model->x + node_model->x - (text_width / 2);
+    size_t y = self->net_model->y + node_model->y - (text_height / 2);
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
@@ -113,34 +113,34 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
         !wire->opposite->node)
         return;
 
-    net_layout_t *net_layout = self->net_layout;
+    net_model_t *net_model = self->net_model;
 
     node_model_t *node_model1 =
-        net_layout_find_node_model(net_layout, wire->node);
+        net_model_find_node_model(net_model, wire->node);
     node_model_t *node_model2 =
-        net_layout_find_node_model(net_layout, wire->opposite->node);
+        net_model_find_node_model(net_model, wire->opposite->node);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(
             canvas,
-            net_layout->x + node_model1->x,
-            net_layout->y + node_model1->y,
-            net_layout->x + node_model2->x,
-            net_layout->y + node_model2->y,
+            net_model->x + node_model1->x,
+            net_model->y + node_model1->y,
+            net_model->x + node_model2->x,
+            net_model->y + node_model2->y,
             canvas->palette[AP_COLOR]);
     }
 }
 
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
-    net_layout_t *net_layout = self->net_layout;
+    net_model_t *net_model = self->net_model;
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        net_layout->x,
-        net_layout->y,
-        net_layout->width,
-        net_layout->height,
+        net_model->x,
+        net_model->y,
+        net_model->width,
+        net_model->height,
         thickness,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
@@ -148,15 +148,15 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
 
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
-    assert(self->net_layout);
+    assert(self->net_model);
 
-    net_layout_t *net_layout = self->net_layout;
-    if (!net_layout->root)
+    net_model_t *net_model = self->net_model;
+    if (!net_model->root)
         return;
-    net_layout_evolve(net_layout);
+    net_model_evolve(net_model);
     draw_net_border(self, canvas);
 
-    wire_iter_t *iter = wire_iter_new(net_layout->root);
+    wire_iter_t *iter = wire_iter_new(net_model->root);
     wire_t *wire = wire_iter_first(iter);
 
     while (wire) {
@@ -165,10 +165,10 @@ draw_net(debug_t *self, canvas_t *canvas) {
     }
     wire_iter_destroy(&iter);
 
-    node_model_t *node_model = list_first(net_layout->node_model_list);
+    node_model_t *node_model = list_first(net_model->node_model_list);
     while (node_model) {
         draw_node(self, canvas, node_model);
-        node_model = list_next(net_layout->node_model_list);
+        node_model = list_next(net_model->node_model_list);
     }
 }
 
@@ -185,13 +185,13 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 }
 
 static void
-init_net_layout(debug_t *self) {
+init_net_model(debug_t *self) {
     if (stack_is_empty(self->worker->value_stack))
         return;
 
     wire_t *wire = stack_top(self->worker->value_stack);
-    self->net_layout->root = wire;
-    net_layout_update(self->net_layout);
+    self->net_model->root = wire;
+    net_model_update(self->net_model);
 }
 
 void
@@ -199,7 +199,7 @@ debug_start(worker_t *worker) {
     srand(time(NULL));
 
     debug_t *self = debug_new(worker);
-    init_net_layout(self);
+    init_net_model(self);
 
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);

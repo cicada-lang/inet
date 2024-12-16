@@ -1,7 +1,5 @@
 # debug
-
-ambr net_layout net_model
-
+find . | ag net_layout
 [debug] `node_model_t` has `position` and `velocity`
 
 ```c
@@ -12,7 +10,7 @@ struct node_state_t {
 };
 ```
 
-[debug] `net_layout` should have a `force_list`
+[debug] `net_model` should have a `force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
 

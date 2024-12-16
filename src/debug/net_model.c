@@ -1,8 +1,8 @@
 #include "index.h"
 
-net_layout_t *
-net_layout_new(size_t x, size_t y, size_t width, size_t height) {
-    net_layout_t *self = new(net_layout_t);
+net_model_t *
+net_model_new(size_t x, size_t y, size_t width, size_t height) {
+    net_model_t *self = new(net_model_t);
     self->x = x;
     self->y = y;
     self->width = width;
@@ -18,10 +18,10 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
 }
 
 void
-net_layout_destroy(net_layout_t **self_pointer) {
+net_model_destroy(net_model_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        net_layout_t *self = *self_pointer;
+        net_model_t *self = *self_pointer;
         list_destroy(&self->node_model_list);
         free(self);
         *self_pointer = NULL;
@@ -29,7 +29,7 @@ net_layout_destroy(net_layout_t **self_pointer) {
 }
 
 node_model_t *
-net_layout_find_node_model(const net_layout_t *self, const node_t *node) {
+net_model_find_node_model(const net_model_t *self, const node_t *node) {
     node_model_t *node_model = list_first(self->node_model_list);
     while (node_model) {
         if (node_model->node == node)
@@ -42,7 +42,7 @@ net_layout_find_node_model(const net_layout_t *self, const node_t *node) {
 }
 
 void
-net_layout_update(net_layout_t *self) {
+net_model_update(net_model_t *self) {
     if (!self->root) return;
     if (!self->root->opposite) return;
     if (!self->root->opposite->node) return;
@@ -51,7 +51,7 @@ net_layout_update(net_layout_t *self) {
     list_t *new_list = list_new_with((destroy_fn_t *) node_model_destroy);
     node_t *node = node_iter_first(iter);
     while (node) {
-        node_model_t *found = net_layout_find_node_model(self, node);
+        node_model_t *found = net_model_find_node_model(self, node);
         if (found) {
             list_push(new_list, found);
             list_remove(self->node_model_list, found);
@@ -71,7 +71,7 @@ net_layout_update(net_layout_t *self) {
 }
 
 static void
-net_layout_electrical_force(net_layout_t *self) {
+net_model_electrical_force(net_model_t *self) {
     list_t *copy = list_dup(self->node_model_list);
     node_model_t *node_model = list_first(self->node_model_list);
     while (node_model) {
@@ -96,7 +96,7 @@ net_layout_electrical_force(net_layout_t *self) {
 }
 
 static void
-net_layout_spring_force(net_layout_t *self) {
+net_model_spring_force(net_model_t *self) {
     if (!self->root) return;
 
     wire_iter_t *iter = wire_iter_new(self->root);
@@ -107,9 +107,9 @@ net_layout_spring_force(net_layout_t *self) {
             wire->opposite->node)
         {
             node_model_t *node_model1 =
-                net_layout_find_node_model(self, wire->node);
+                net_model_find_node_model(self, wire->node);
             node_model_t *node_model2 =
-                net_layout_find_node_model(self, wire->opposite->node);
+                net_model_find_node_model(self, wire->opposite->node);
 
             vec2_t force = spring_force(
                 (vec2_t) { .x = node_model1->x, .y = node_model1->y },
@@ -121,7 +121,7 @@ net_layout_spring_force(net_layout_t *self) {
             node_model2->force.x -= force.x;
             node_model2->force.y -= force.y;
 
-            // printf("[net_layout_spring_force] force.x %f, force.y: %f\n",
+            // printf("[net_model_spring_force] force.x %f, force.y: %f\n",
             //        force.x, force.y);
         }
 
@@ -131,17 +131,17 @@ net_layout_spring_force(net_layout_t *self) {
 }
 
 void
-net_layout_evolve(net_layout_t *self) {
+net_model_evolve(net_model_t *self) {
     if (self->evolving_step > self->max_evolving_step)
         return;
 
     self->evolving_step++;
 
-    (void) net_layout_electrical_force;
-    (void) net_layout_spring_force;
+    (void) net_model_electrical_force;
+    (void) net_model_spring_force;
 
-    net_layout_spring_force(self);
-    net_layout_electrical_force(self);
+    net_model_spring_force(self);
+    net_model_electrical_force(self);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
     node_model_t *node_model = list_first(self->node_model_list);
