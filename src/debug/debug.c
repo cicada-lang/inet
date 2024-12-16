@@ -156,7 +156,11 @@ draw_net(debug_t *self, canvas_t *canvas) {
     node_physics_system_t *node_physics_system = self->node_physics_system;
     if (!node_physics_system->root)
         return;
-    node_physics_system_evolve(node_physics_system);
+
+    node_physics_system_evolve(
+        node_physics_system,
+        node_physics_system->node_model_hash);
+
     draw_net_border(self, canvas);
 
     wire_iter_t *iter = wire_iter_new(node_physics_system->root);

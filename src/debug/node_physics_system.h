@@ -16,4 +16,4 @@ node_physics_system_t *node_physics_system_new(size_t x, size_t y, size_t width,
 void node_physics_system_destroy(node_physics_system_t **self_pointer);
 
 void node_physics_system_update(node_physics_system_t *self);
-void node_physics_system_evolve(node_physics_system_t *self);
+void node_physics_system_evolve(node_physics_system_t *self, hash_t *node_model_hash);
