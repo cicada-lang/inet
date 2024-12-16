@@ -19,17 +19,3 @@ node_model_destroy(node_model_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
-
-void
-node_model_apply_force(node_model_t *self, double cooling) {
-    double dx = self->force.x * cooling;
-    double dy = self->force.y * cooling;
-
-    double x = self->position.x + dx;
-    double y = self->position.y + dy;
-
-    self->position.x = x > 0 ? x : 0;
-    self->position.y = y > 0 ? y : 0;
-
-    self->force = (vec2_t) { .x = 0, .y = 0 };
-}

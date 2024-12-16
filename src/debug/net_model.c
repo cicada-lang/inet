@@ -145,7 +145,16 @@ net_model_evolve(net_model_t *self) {
     double cooling = pow(self->cooling_factor, self->evolving_step);
     node_model_t *node_model = hash_first(self->node_model_hash);
     while (node_model) {
-        node_model_apply_force(node_model, cooling);
+        node_model->position.x += node_model->force.x * cooling;
+        node_model->position.y += node_model->force.y * cooling;
+
+        node_model->force = (vec2_t) { .x = 0, .y = 0 };
+
+        if (node_model->position.x < 0)
+            node_model->position.x = 0;
+
+        if (node_model->position.y < 0)
+            node_model->position.y = 0;
 
         if (node_model->position.x > self->width)
             node_model->position.x = self->width;

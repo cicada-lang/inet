@@ -9,5 +9,3 @@ struct node_model_t {
 
 node_model_t *node_model_new(const node_t *node, vec2_t position);
 void node_model_destroy(node_model_t **self_pointer);
-
-void node_model_apply_force(node_model_t *self, double cooling);
