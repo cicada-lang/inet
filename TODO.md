@@ -4,7 +4,6 @@
 
 # debug
 
-[debug] extract `apply_all_forces` from `node_physics_simulate`
 [debug] `node_physics_simulate` -- clear `force` for every `node_model`
 [debug] `node_physics_fake_simulate` -- clear `velocity` for every `node_model`
 
