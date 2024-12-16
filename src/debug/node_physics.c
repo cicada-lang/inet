@@ -40,7 +40,7 @@ node_physics_add_more_nodes(node_physics_t *self, hash_t *node_hash, hash_t *nod
 }
 
 static void
-node_physics_spring_force(node_physics_t *self, hash_t *node_model_hash) {
+node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
     if (!self->root) return;
 
     wire_iter_t *iter = wire_iter_new(self->root);
@@ -65,7 +65,7 @@ node_physics_spring_force(node_physics_t *self, hash_t *node_model_hash) {
             node_model2->force.x -= force.x;
             node_model2->force.y -= force.y;
 
-            // printf("[node_physics_spring_force] force.x %f, force.y: %f\n",
+            // printf("[node_fake_spring_force] force.x %f, force.y: %f\n",
             //        force.x, force.y);
         }
 
@@ -81,11 +81,11 @@ node_physics_simulate(node_physics_t *self, hash_t *node_model_hash) {
 
     self->evolving_step++;
 
-    (void) node_physics_electrical_force;
-    (void) node_physics_spring_force;
+    (void) node_fake_electrical_force;
+    (void) node_fake_spring_force;
 
-    node_physics_spring_force(self, node_model_hash);
-    node_physics_electrical_force(self, node_model_hash);
+    node_fake_spring_force(self, node_model_hash);
+    node_fake_electrical_force(self, node_model_hash);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
     node_model_t *node_model = hash_first(node_model_hash);

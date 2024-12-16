@@ -27,7 +27,7 @@ electrical_force(vec2_t first, vec2_t second) {
 }
 
 void
-node_physics_electrical_force(node_physics_t *self, hash_t *node_model_hash) {
+node_fake_electrical_force(node_physics_t *self, hash_t *node_model_hash) {
     (void) self;
 
     list_t *node_model_list = hash_value_list(node_model_hash);
