@@ -1,20 +1,11 @@
 # debug
-find . | ag net_layout
-[debug] `node_model_t` has `position` and `velocity`
 
-```c
-struct node_state_t {
-    vec2_t position;
-    vec2_t velocity;
-    vec2_t force;
-};
-```
+[debug] `net_model` has `node_model_hash`
+[debug] [maybe] `net_model` and `node_hash` and remove `node` from `node_model`
 
 [debug] `net_model` should have a `force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
-
-[debug] `net_model` has `node_model_hash` and `node_hash`
 
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
 [core] rename function with "run" to other names -- to rename `interact` to `run`

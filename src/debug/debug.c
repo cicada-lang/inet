@@ -75,8 +75,8 @@ draw_node(debug_t *self, canvas_t *canvas, node_model_t *node_model) {
     size_t x_padding = TILE / 2;
     size_t y_padding = 2;
 
-    size_t x = self->net_model->x + node_model->x - (text_width / 2);
-    size_t y = self->net_model->y + node_model->y - (text_height / 2);
+    size_t x = self->net_model->x + node_model->position.x - (text_width / 2);
+    size_t y = self->net_model->y + node_model->position.y - (text_height / 2);
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
@@ -123,10 +123,10 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     if (node_model1 && node_model2) {
         canvas_draw_line(
             canvas,
-            net_model->x + node_model1->x,
-            net_model->y + node_model1->y,
-            net_model->x + node_model2->x,
-            net_model->y + node_model2->y,
+            net_model->x + node_model1->position.x,
+            net_model->y + node_model1->position.y,
+            net_model->x + node_model2->position.x,
+            net_model->y + node_model2->position.y,
             canvas->palette[AP_COLOR]);
     }
 }

@@ -58,7 +58,7 @@ net_model_update(net_model_t *self) {
         } else {
             size_t x = self->width * ((double) rand() / RAND_MAX);
             size_t y = self->height * ((double) rand() / RAND_MAX);
-            node_model_t *node_model = node_model_new(node, x, y);
+            node_model_t *node_model = node_model_new(node, (vec2_t) { .x = x, y = y });
             list_push(new_list, node_model);
         }
 
@@ -79,8 +79,8 @@ net_model_electrical_force(net_model_t *self) {
         while (node_model2) {
             if (node_model2 != node_model) {
                 vec2_t force = electrical_force(
-                    (vec2_t) { .x = node_model->x, .y = node_model->y },
-                    (vec2_t) { .x = node_model2->x, .y = node_model2->y });
+                    (vec2_t) { .x = node_model->position.x, .y = node_model->position.y },
+                    (vec2_t) { .x = node_model2->position.x, .y = node_model2->position.y });
 
                 node_model->force.x += force.x;
                 node_model->force.y += force.y;
@@ -112,8 +112,8 @@ net_model_spring_force(net_model_t *self) {
                 net_model_find_node_model(self, wire->opposite->node);
 
             vec2_t force = spring_force(
-                (vec2_t) { .x = node_model1->x, .y = node_model1->y },
-                (vec2_t) { .x = node_model2->x, .y = node_model2->y });
+                (vec2_t) { .x = node_model1->position.x, .y = node_model1->position.y },
+                (vec2_t) { .x = node_model2->position.x, .y = node_model2->position.y });
 
             node_model1->force.x += force.x;
             node_model1->force.y += force.y;
@@ -148,11 +148,11 @@ net_model_evolve(net_model_t *self) {
     while (node_model) {
         node_model_apply_force(node_model, cooling);
 
-        if (node_model->x > self->width)
-            node_model->x = self->width;
+        if (node_model->position.x > self->width)
+            node_model->position.x = self->width;
 
-        if (node_model->y > self->height)
-            node_model->y = self->height;
+        if (node_model->position.y > self->height)
+            node_model->position.y = self->height;
 
         node_model = list_next(self->node_model_list);
     }
