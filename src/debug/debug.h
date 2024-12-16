@@ -3,6 +3,7 @@
 struct debug_t {
     worker_t *worker;
     canvas_t *canvas;
+    bool step_button_is_pressed;
     hash_t *node_hash;
     hash_t *node_model_hash;
     node_physics_t *node_physics;

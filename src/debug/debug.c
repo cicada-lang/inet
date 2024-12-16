@@ -43,10 +43,10 @@ debug_destroy(debug_t **self_pointer) {
 
 static void
 init_canvas_theme(canvas_t *canvas) {
-    canvas->palette[BG_COLOR] = 0xffffffff;
-    canvas->palette[SL_COLOR] = 0xffff8888;
-    canvas->palette[FG_COLOR] = 0xffffffff;
-    canvas->palette[AP_COLOR] = 0xff000000;
+    canvas->palette[BG_COLOR] = 0xff000000;
+    canvas->palette[SL_COLOR] = 0xffcd2e3a;
+    canvas->palette[FG_COLOR] = 0xff000000;
+    canvas->palette[AP_COLOR] = 0xffffffff;
 }
 
 static void
@@ -78,12 +78,13 @@ static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
 
-    canvas->window->background_pixel = canvas->palette[BG_COLOR];
-    canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[BG_COLOR]);
+    canvas->window->background_pixel = canvas->palette[AP_COLOR];
+    canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[AP_COLOR]);
     canvas_clear_clickable_area(canvas);
 
     draw_background_grid(self, canvas, false);
     draw_net(self, canvas);
+    draw_step_button(self, canvas);
 }
 
 static void

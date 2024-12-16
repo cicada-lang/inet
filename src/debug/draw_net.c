@@ -22,7 +22,7 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
         y - y_padding,
         width,
         height + y_padding * 2,
-        canvas->palette[FG_COLOR],
+        canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
 
     size_t thickness = 1;
@@ -33,11 +33,11 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
         width,
         height + y_padding * 2,
         thickness,
-        canvas->palette[AP_COLOR],
+        canvas->palette[FG_COLOR],
         SM_ROUNDNESS);
 
     size_t scale = 1;
-    canvas_draw_text(canvas, x, y, text, scale, BG_AP_BLENDING);
+    canvas_draw_text(canvas, x, y, text, scale, AP_FG_BLENDING);
     text_destroy(&text);
 }
 
@@ -60,7 +60,7 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
             self->node_physics->y + node_model1->position.y,
             self->node_physics->x + node_model2->position.x,
             self->node_physics->y + node_model2->position.y,
-            canvas->palette[AP_COLOR]);
+            canvas->palette[FG_COLOR]);
     }
 }
 
@@ -76,7 +76,7 @@ draw_net_border(debug_t *self, canvas_t *canvas, bool really) {
         self->node_physics->width,
         self->node_physics->height,
         thickness,
-        canvas->palette[AP_COLOR],
+        canvas->palette[FG_COLOR],
         SM_ROUNDNESS);
 }
 

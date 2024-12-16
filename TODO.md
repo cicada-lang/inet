@@ -1,7 +1,10 @@
 # debug
 
-[debug] `draw_step_button.c`
+[debug] debug has `width` and `height` -- no need `#define`
+[debug] `draw_step_button.c` -- fix position
 [debug] `draw_run_button.c`
+
+[debug] `draw_cursor.c`
 
 [debug] `step` button -- call `worker_net_step`
 [debug] `run` button -- call `worker_net_run`
