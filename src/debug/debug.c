@@ -62,27 +62,12 @@ init_canvas_font(canvas_t *canvas) {
 }
 
 static void
-draw_background_grid(debug_t *self, canvas_t *canvas, bool really) {
-    if (!really) return;
-
-    (void) self;
-
-    for (size_t i = 0; i < canvas->width / TILE; i++) {
-        for (size_t j = 0; j < canvas->height / TILE; j++) {
-            canvas_draw_pixel(canvas, i * TILE, j * TILE, 0xffff0000);
-        }
-    }
-}
-
-static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
 
-    canvas->window->background_pixel = canvas->palette[AP_COLOR];
-    canvas_fill_bottom_right(canvas, 0, 0, canvas->palette[AP_COLOR]);
     canvas_clear_clickable_area(canvas);
 
-    draw_background_grid(self, canvas, false);
+    draw_background(self, canvas, false);
     draw_net(self, canvas);
     draw_toolbar(self, canvas);
 }

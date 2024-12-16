@@ -1,7 +1,5 @@
 # debug
 
-[debug] extract `draw_background_grid.c`
-
 [debug] `draw_cursor.c`
 
 [debug] `step` button -- call `worker_net_step`
