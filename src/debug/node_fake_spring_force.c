@@ -3,9 +3,7 @@
 static vec2_t
 spring_force(vec2_t first, vec2_t second) {
     vec2_t delta = vec2_sub(second, first);
-
-    double distance_sqared = delta.x * delta.x + delta.y * delta.y;
-    double distance = sqrt(distance_sqared);
+    double distance = vec2_length(delta);
 
     double C = 0.03;
     double spring_length = 5;

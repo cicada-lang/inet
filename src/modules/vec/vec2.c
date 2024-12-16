@@ -36,3 +36,13 @@ double
 vec2_dot(vec2_t v1, vec2_t v2) {
     return v1.x * v2.x + v1.y * v2.y;
 }
+
+double
+vec2_square(vec2_t v) {
+    return vec2_dot(v, v);
+}
+
+double
+vec2_length(vec2_t v) {
+    return sqrt(vec2_square(v));
+}

@@ -1,6 +1,5 @@
-[vec] `vec2_square`
-[vec] `vec2_length`
-
+[vec] `vec2_add_scalar`
+[vec] `vec2_mul_scalar`
 [vec] `vec2_map`
 
 # debug
