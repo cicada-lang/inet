@@ -5,7 +5,7 @@ struct debug_t {
     canvas_t *canvas;
     hash_t *node_hash;
     hash_t *node_model_hash;
-    node_physics_system_t *node_physics_system;
+    node_physics_t *node_physics;
 };
 
 debug_t *debug_new(worker_t *worker);

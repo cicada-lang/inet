@@ -1,7 +1,7 @@
 # debug
 
 [debug] `node_force_t`
-[debug] `node_physics_system` should have a `node_force_list`
+[debug] `node_physics` should have a `node_force_list`
 
 - so that we can switch from one group of forces to another by clicking a button
 

@@ -17,7 +17,7 @@ debug_new(worker_t *worker) {
     self->node_hash = hash_new();
     self->node_model_hash = hash_new();
     hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
-    self->node_physics_system = node_physics_system_new(
+    self->node_physics = node_physics_new(
         15 * TILE,
         10 * TILE,
         60 * TILE,
@@ -81,8 +81,8 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
     size_t x_padding = TILE / 2;
     size_t y_padding = 2;
 
-    size_t x = self->node_physics_system->x + node_model->position.x - (text_width / 2);
-    size_t y = self->node_physics_system->y + node_model->position.y - (text_height / 2);
+    size_t x = self->node_physics->x + node_model->position.x - (text_width / 2);
+    size_t y = self->node_physics->y + node_model->position.y - (text_height / 2);
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
@@ -127,10 +127,10 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
     if (node_model1 && node_model2) {
         canvas_draw_line(
             canvas,
-            self->node_physics_system->x + node_model1->position.x,
-            self->node_physics_system->y + node_model1->position.y,
-            self->node_physics_system->x + node_model2->position.x,
-            self->node_physics_system->y + node_model2->position.y,
+            self->node_physics->x + node_model1->position.x,
+            self->node_physics->y + node_model1->position.y,
+            self->node_physics->x + node_model2->position.x,
+            self->node_physics->y + node_model2->position.y,
             canvas->palette[AP_COLOR]);
     }
 }
@@ -140,10 +140,10 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        self->node_physics_system->x,
-        self->node_physics_system->y,
-        self->node_physics_system->width,
-        self->node_physics_system->height,
+        self->node_physics->x,
+        self->node_physics->y,
+        self->node_physics->width,
+        self->node_physics->height,
         thickness,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
@@ -151,18 +151,18 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
 
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
-    assert(self->node_physics_system);
+    assert(self->node_physics);
 
-    if (!self->node_physics_system->root)
+    if (!self->node_physics->root)
         return;
 
-    node_physics_system_evolve(
-        self->node_physics_system,
+    node_physics_evolve(
+        self->node_physics,
         self->node_model_hash);
 
     draw_net_border(self, canvas);
 
-    wire_iter_t *iter = wire_iter_new(self->node_physics_system->root);
+    wire_iter_t *iter = wire_iter_new(self->node_physics->root);
     wire_t *wire = wire_iter_first(iter);
 
     while (wire) {
@@ -210,14 +210,14 @@ init_node_hash(debug_t *self) {
 }
 
 static void
-init_node_physics_system(debug_t *self) {
+init_node_physics(debug_t *self) {
     if (stack_is_empty(self->worker->value_stack))
         return;
 
     wire_t *wire = stack_top(self->worker->value_stack);
-    self->node_physics_system->root = wire;
-    node_physics_system_add_node_models(
-        self->node_physics_system,
+    self->node_physics->root = wire;
+    node_physics_add_node_models(
+        self->node_physics,
         self->node_hash,
         self->node_model_hash);
 }
@@ -228,7 +228,7 @@ debug_start(worker_t *worker) {
 
     debug_t *self = debug_new(worker);
     init_node_hash(self);
-    init_node_physics_system(self);
+    init_node_physics(self);
 
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);
