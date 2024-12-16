@@ -88,22 +88,31 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     draw_step_button(self, canvas);
 }
 
-static void
-init_node_hash(debug_t *self) {
-    hash_purge(self->node_hash);
+hash_t *
+debug_new_node_hash(debug_t *self) {
+    hash_t *node_hash = hash_new();
 
     wire_t *root = stack_top(self->worker->value_stack);
-    if (!root) return;
-    if (!root->opposite) return;
-    if (!root->opposite->node) return;
+    if (!root ||
+        !root->opposite ||
+        !root->opposite->node)
+        return NULL;
 
     node_iter_t *iter = node_iter_new(root->opposite->node);
     node_t *node = node_iter_first(iter);
     while (node) {
-        hash_set(self->node_hash, (void *) node->id, node);
+        hash_set(node_hash, (void *) node->id, node);
         node = node_iter_next(iter);
     }
+
     node_iter_destroy(&iter);
+    return node_hash;
+}
+
+static void
+init_node_hash(debug_t *self) {
+    hash_destroy(&self->node_hash);
+    self->node_hash = debug_new_node_hash(self);
 }
 
 static void

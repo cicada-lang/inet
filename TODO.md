@@ -1,8 +1,5 @@
 # debug
 
-[debug] delete `node_model_hash` by `node_hash` diff
-
-[debug] `draw_step_button.c` -- handle click
 [debug] `draw_run_button.c` -- handle click
 [debug] extract `draw_toolbar.c`
 
