@@ -217,7 +217,7 @@ init_node_physics_system(debug_t *self) {
 
     wire_t *wire = stack_top(self->worker->value_stack);
     self->node_physics_system->root = wire;
-    node_physics_system_update(
+    node_physics_system_add_node_models(
         self->node_physics_system,
         self->node_hash,
         self->node_physics_system->node_model_hash);

@@ -28,7 +28,7 @@ node_physics_system_destroy(node_physics_system_t **self_pointer) {
 }
 
 void
-node_physics_system_update(node_physics_system_t *self, hash_t *node_hash, hash_t *node_model_hash) {
+node_physics_system_add_node_models(node_physics_system_t *self, hash_t *node_hash, hash_t *node_model_hash) {
     node_t *node = hash_first(node_hash);
     while (node) {
         node_model_t *found = hash_get(node_model_hash, (void *) (size_t) node->id);
