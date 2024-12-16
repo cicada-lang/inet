@@ -72,6 +72,8 @@ static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
 
+    node_physics_fake_simulate(self->node_physics, self->node_model_hash);
+
     canvas_clear_clickable_area(canvas);
 
     draw_background(self, canvas, false);

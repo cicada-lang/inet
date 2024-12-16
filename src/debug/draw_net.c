@@ -82,15 +82,6 @@ draw_net_border(debug_t *self, canvas_t *canvas, bool really) {
 
 void
 draw_net(debug_t *self, canvas_t *canvas) {
-    assert(self->node_physics);
-
-    if (!self->node_physics->root)
-        return;
-
-    node_physics_fake_simulate(
-        self->node_physics,
-        self->node_model_hash);
-
     draw_net_border(self, canvas, false);
 
     wire_iter_t *iter = wire_iter_new(self->node_physics->root);
