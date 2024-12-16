@@ -20,8 +20,8 @@ debug_new(worker_t *worker) {
     self->node_model_hash = hash_new();
     hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
 
-    size_t padding_x = 2 * TILE;
-    size_t padding_y = 2 * TILE;
+    size_t padding_x = 4 * TILE;
+    size_t padding_y = 4 * TILE;
     self->node_physics = node_physics_new(
         padding_x,
         padding_y,
@@ -69,8 +69,8 @@ draw_background_grid(debug_t *self, canvas_t *canvas, bool really) {
 
     (void) self;
 
-    for (size_t i = 0; i < self->width / TILE; i++) {
-        for (size_t j = 0; j < self->height / TILE; j++) {
+    for (size_t i = 0; i < canvas->width / TILE; i++) {
+        for (size_t j = 0; j < canvas->height / TILE; j++) {
             canvas_draw_pixel(canvas, i * TILE, j * TILE, 0xffff0000);
         }
     }

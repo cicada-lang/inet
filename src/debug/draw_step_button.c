@@ -15,10 +15,8 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
 
 void
 draw_step_button(debug_t *self, canvas_t *canvas) {
-    (void) self;
-
-    size_t x = 3 * TILE;
-    size_t y = 3 * TILE;
+    size_t x = self->canvas->width - 5 * TILE;
+    size_t y = self->canvas->height - 5 * TILE;
 
     if (self->step_button_is_pressed) {
         canvas_draw_image_button(

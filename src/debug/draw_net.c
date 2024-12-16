@@ -7,31 +7,31 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
     text_t *text = text_from_string(node->spec->name);
     size_t text_width = font_text_width(canvas->font, text);
     size_t text_height = 16;
-    size_t x_padding = TILE / 2;
-    size_t y_padding = 2;
+    size_t padding_x = TILE / 2;
+    size_t padding_y = 2;
 
     size_t x = self->node_physics->x + node_model->position.x - (text_width / 2);
     size_t y = self->node_physics->y + node_model->position.y - (text_height / 2);
 
-    size_t width = text_width + x_padding * 2;
+    size_t width = text_width + padding_x * 2;
     size_t height = 2 * TILE;
 
     canvas_fiil_rect_round(
         canvas,
-        x - x_padding,
-        y - y_padding,
+        x - padding_x,
+        y - padding_y,
         width,
-        height + y_padding * 2,
+        height + padding_y * 2,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
 
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        x - x_padding,
-        y - y_padding,
+        x - padding_x,
+        y - padding_y,
         width,
-        height + y_padding * 2,
+        height + padding_y * 2,
         thickness,
         canvas->palette[FG_COLOR],
         SM_ROUNDNESS);
@@ -91,7 +91,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
         self->node_physics,
         self->node_model_hash);
 
-    draw_net_border(self, canvas, false);
+    draw_net_border(self, canvas, false); 
 
     wire_iter_t *iter = wire_iter_new(self->node_physics->root);
     wire_t *wire = wire_iter_first(iter);

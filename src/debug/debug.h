@@ -4,7 +4,6 @@ struct debug_t {
     worker_t *worker;
 
     canvas_t *canvas;
-    size_t width, height, scale;
     bool step_button_is_pressed;
 
     hash_t *node_hash;

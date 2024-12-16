@@ -38,7 +38,7 @@ code_print_context(
     size_t end_lineno = code_lineno_of_index(string, end);
     size_t max_lineno = end_lineno + offset;
 
-    size_t left_padding = uint_decimal_length(max_lineno);
+    size_t padding_left = uint_decimal_length(max_lineno);
     size_t length = strlen(string);
 
     size_t current_lineno = 1;
@@ -51,9 +51,9 @@ code_print_context(
             if (i == 0 || string[i-1] == '\n') {
                 if (start_lineno <= current_lineno &&
                     current_lineno <= end_lineno) {
-                    fprintf(file, "> %*lu|", (int) left_padding, current_lineno);
+                    fprintf(file, "> %*lu|", (int) padding_left, current_lineno);
                 } else {
-                    fprintf(file, "  %*lu|", (int) left_padding, current_lineno);
+                    fprintf(file, "  %*lu|", (int) padding_left, current_lineno);
                 }
             }
 
