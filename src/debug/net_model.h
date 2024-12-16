@@ -5,7 +5,7 @@ struct net_model_t {
     size_t width, height;
 
     wire_t *root;
-    list_t *node_model_list;
+    hash_t *node_model_hash;
 
     uint32_t evolving_step;
     uint32_t max_evolving_step;

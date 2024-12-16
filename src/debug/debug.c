@@ -165,10 +165,10 @@ draw_net(debug_t *self, canvas_t *canvas) {
     }
     wire_iter_destroy(&iter);
 
-    node_model_t *node_model = list_first(net_model->node_model_list);
+    node_model_t *node_model = hash_first(net_model->node_model_hash);
     while (node_model) {
         draw_node(self, canvas, node_model);
-        node_model = list_next(net_model->node_model_list);
+        node_model = hash_next(net_model->node_model_hash);
     }
 }
 

@@ -1,6 +1,5 @@
 # debug
 
-[debug] `net_model` has `node_model_hash`
 [debug] [maybe] `net_model` and `node_hash` and remove `node` from `node_model`
 
 [debug] `net_model` should have a `force_list`

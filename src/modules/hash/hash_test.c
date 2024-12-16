@@ -126,10 +126,24 @@ hash_test(void) {
         assert(hash_set(hash, string_dup("DEADF00D"), string_dup("dead food")));
         assert(hash_length(hash) == 4);
 
-        char *value = hash_first(hash);
-        while (value) {
-            printf("value: %s\n", value);
-            value = hash_next(hash);
+        {
+            list_t *list = hash_value_list(hash);
+            char *value = list_first(list);
+            while (value) {
+                printf("value: %s\n", value);
+                value = list_next(list);
+            }
+            printf("\n");
+            list_destroy(&list);
+        }
+
+        {
+            char *value = hash_first(hash);
+            while (value) {
+                printf("value: %s\n", value);
+                value = hash_next(hash);
+            }
+            printf("\n");
         }
 
         hash_purge(hash);

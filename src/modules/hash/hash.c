@@ -315,6 +315,18 @@ hash_next(hash_t *self) {
     return entry->value;
 }
 
+list_t *
+hash_value_list(hash_t *self) {
+    list_t *list = list_new();
+    void *value = hash_first(self);
+    while (value) {
+        list_push(list, value);
+        value = hash_next(self);
+    }
+
+    return list;
+}
+
 void
 hash_report(const hash_t *self) {
     size_t limit = hash_primes[self->prime_index];
