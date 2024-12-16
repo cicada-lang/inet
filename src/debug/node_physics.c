@@ -39,41 +39,6 @@ node_physics_add_more_nodes(node_physics_t *self, hash_t *node_hash, hash_t *nod
     }
 }
 
-static void
-node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
-    if (!self->root) return;
-
-    wire_iter_t *iter = wire_iter_new(self->root);
-    wire_t *wire = wire_iter_first(iter);
-    while (wire) {
-        if (wire->node &&
-            wire->opposite &&
-            wire->opposite->node)
-        {
-            node_model_t *node_model1 =
-                hash_get(node_model_hash, (void *) (size_t) wire->node->id);
-            node_model_t *node_model2 =
-                hash_get(node_model_hash, (void *) (size_t) wire->opposite->node->id);
-
-            vec2_t force = spring_force(
-                node_model1->position,
-                node_model2->position);
-
-            node_model1->force.x += force.x;
-            node_model1->force.y += force.y;
-
-            node_model2->force.x -= force.x;
-            node_model2->force.y -= force.y;
-
-            // printf("[node_fake_spring_force] force.x %f, force.y: %f\n",
-            //        force.x, force.y);
-        }
-
-        wire = wire_iter_next(iter);
-    }
-    wire_iter_destroy(&iter);
-}
-
 void
 node_physics_simulate(node_physics_t *self, hash_t *node_model_hash) {
     if (self->evolving_step > self->max_evolving_step)

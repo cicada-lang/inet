@@ -1,3 +1,4 @@
 #pragma once
 
-void node_fake_electrical_force(node_physics_t *self, hash_t *node_model_hash);
+node_force_fn_t node_fake_electrical_force;
+node_force_fn_t node_fake_spring_force;

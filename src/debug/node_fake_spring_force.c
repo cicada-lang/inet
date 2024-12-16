@@ -1,0 +1,66 @@
+#include "index.h"
+
+static vec2_t
+spring_force(vec2_t first, vec2_t second) {
+    double delta_x = second.x - first.x;
+    double delta_y = second.y - first.y;
+
+    double distance_sqared = delta_x * delta_x + delta_y * delta_y;
+    double distance = sqrt(distance_sqared);
+
+    double C = 0.03;
+    double spring_length = 5;
+
+    double factor = log(fabs(distance / spring_length));
+
+    double force_x = C * factor * delta_x;
+    double force_y = C * factor * delta_y;
+
+    // printf("[spring_delta] C: %f, factor: %f\n", C, factor);
+    // printf("[spring_delta] delta_x: %f, delta_y: %f\n", delta_x, delta_y);
+    // printf("[spring_force] force_x: %f, force_y: %f\n", force_x, force_y);
+
+    if (isnan(force_x) || isnan(force_y)) {
+        return (vec2_t) { .x = 0, .y = 0 };
+    }
+
+    return (vec2_t) {
+        .x = force_x,
+        .y = force_y,
+    };
+}
+
+void
+node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
+    if (!self->root) return;
+
+    wire_iter_t *iter = wire_iter_new(self->root);
+    wire_t *wire = wire_iter_first(iter);
+    while (wire) {
+        if (wire->node &&
+            wire->opposite &&
+            wire->opposite->node)
+        {
+            node_model_t *node_model1 =
+                hash_get(node_model_hash, (void *) (size_t) wire->node->id);
+            node_model_t *node_model2 =
+                hash_get(node_model_hash, (void *) (size_t) wire->opposite->node->id);
+
+            vec2_t force = spring_force(
+                node_model1->position,
+                node_model2->position);
+
+            node_model1->force.x += force.x;
+            node_model1->force.y += force.y;
+
+            node_model2->force.x -= force.x;
+            node_model2->force.y -= force.y;
+
+            // printf("[node_fake_spring_force] force.x %f, force.y: %f\n",
+            //        force.x, force.y);
+        }
+
+        wire = wire_iter_next(iter);
+    }
+    wire_iter_destroy(&iter);
+}
