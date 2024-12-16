@@ -78,8 +78,8 @@ net_model_electrical_force(net_model_t *self) {
         while (node_model2) {
             if (node_model2 != node_model) {
                 vec2_t force = electrical_force(
-                    (vec2_t) { .x = node_model->position.x, .y = node_model->position.y },
-                    (vec2_t) { .x = node_model2->position.x, .y = node_model2->position.y });
+                    node_model->position,
+                    node_model2->position);
 
                 node_model->force.x += force.x;
                 node_model->force.y += force.y;
@@ -111,8 +111,8 @@ net_model_spring_force(net_model_t *self) {
                 net_model_find_node_model(self, wire->opposite->node);
 
             vec2_t force = spring_force(
-                (vec2_t) { .x = node_model1->position.x, .y = node_model1->position.y },
-                (vec2_t) { .x = node_model2->position.x, .y = node_model2->position.y });
+                node_model1->position,
+                node_model2->position);
 
             node_model1->force.x += force.x;
             node_model1->force.y += force.y;

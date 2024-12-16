@@ -1,5 +1,7 @@
 # debug
 
+[debug] inline `node_model_apply_force`
+
 [debug] [maybe] `net_model` and `node_hash` and remove `node` from `node_model`
 
 [debug] `net_model` should have a `force_list`
