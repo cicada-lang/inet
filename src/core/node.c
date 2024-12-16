@@ -1,7 +1,7 @@
 #include "index.h"
 
 node_t *
-node_new(const node_spec_t *spec, node_id_t id) {
+node_new(const node_spec_t *spec, size_t id) {
     node_t *self = new(node_t);
     self->spec = spec;
     self->id = id;

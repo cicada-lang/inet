@@ -7,7 +7,7 @@ struct worker_t {
     list_t *active_wire_list;
     stack_t *value_stack;
     stack_t *return_stack;
-    node_id_t node_id_count;
+    size_t node_id_count;
     size_t log_level;
     file_t *out;
     file_t *err;
