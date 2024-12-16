@@ -1,0 +1,19 @@
+#pragma once
+
+struct node_physics_system_t {
+    size_t x, y;
+    size_t width, height;
+
+    wire_t *root;
+    hash_t *node_model_hash;
+
+    uint32_t evolving_step;
+    uint32_t max_evolving_step;
+    double cooling_factor;
+};
+
+node_physics_system_t *node_physics_system_new(size_t x, size_t y, size_t width, size_t height);
+void node_physics_system_destroy(node_physics_system_t **self_pointer);
+
+void node_physics_system_update(node_physics_system_t *self);
+void node_physics_system_evolve(node_physics_system_t *self);

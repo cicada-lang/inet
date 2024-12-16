@@ -3,7 +3,7 @@
 struct debug_t {
     worker_t *worker;
     canvas_t *canvas;
-    net_model_t *net_model;
+    node_physics_system_t *node_physics_system;
 };
 
 debug_t *debug_new(worker_t *worker);

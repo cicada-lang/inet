@@ -1,8 +1,8 @@
 #include "index.h"
 
-net_model_t *
-net_model_new(size_t x, size_t y, size_t width, size_t height) {
-    net_model_t *self = new(net_model_t);
+node_physics_system_t *
+node_physics_system_new(size_t x, size_t y, size_t width, size_t height) {
+    node_physics_system_t *self = new(node_physics_system_t);
     self->x = x;
     self->y = y;
     self->width = width;
@@ -17,10 +17,10 @@ net_model_new(size_t x, size_t y, size_t width, size_t height) {
 }
 
 void
-net_model_destroy(net_model_t **self_pointer) {
+node_physics_system_destroy(node_physics_system_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        net_model_t *self = *self_pointer;
+        node_physics_system_t *self = *self_pointer;
         hash_destroy(&self->node_model_hash);
         free(self);
         *self_pointer = NULL;
@@ -28,7 +28,7 @@ net_model_destroy(net_model_t **self_pointer) {
 }
 
 void
-net_model_update(net_model_t *self) {
+node_physics_system_update(node_physics_system_t *self) {
     if (!self->root) return;
     if (!self->root->opposite) return;
     if (!self->root->opposite->node) return;
@@ -57,7 +57,7 @@ net_model_update(net_model_t *self) {
 }
 
 static void
-net_model_electrical_force(net_model_t *self) {
+node_physics_system_electrical_force(node_physics_system_t *self) {
     list_t *node_model_list = hash_value_list(self->node_model_hash);
     node_model_t *node_model = hash_first(self->node_model_hash);
     while (node_model) {
@@ -82,7 +82,7 @@ net_model_electrical_force(net_model_t *self) {
 }
 
 static void
-net_model_spring_force(net_model_t *self) {
+node_physics_system_spring_force(node_physics_system_t *self) {
     if (!self->root) return;
 
     wire_iter_t *iter = wire_iter_new(self->root);
@@ -107,7 +107,7 @@ net_model_spring_force(net_model_t *self) {
             node_model2->force.x -= force.x;
             node_model2->force.y -= force.y;
 
-            // printf("[net_model_spring_force] force.x %f, force.y: %f\n",
+            // printf("[node_physics_system_spring_force] force.x %f, force.y: %f\n",
             //        force.x, force.y);
         }
 
@@ -117,17 +117,17 @@ net_model_spring_force(net_model_t *self) {
 }
 
 void
-net_model_evolve(net_model_t *self) {
+node_physics_system_evolve(node_physics_system_t *self) {
     if (self->evolving_step > self->max_evolving_step)
         return;
 
     self->evolving_step++;
 
-    (void) net_model_electrical_force;
-    (void) net_model_spring_force;
+    (void) node_physics_system_electrical_force;
+    (void) node_physics_system_spring_force;
 
-    net_model_spring_force(self);
-    net_model_electrical_force(self);
+    node_physics_system_spring_force(self);
+    node_physics_system_electrical_force(self);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
     node_model_t *node_model = hash_first(self->node_model_hash);

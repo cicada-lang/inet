@@ -14,7 +14,7 @@ debug_new(worker_t *worker) {
     canvas->title = "inet debug";
     self->canvas = canvas;
 
-    self->net_model = net_model_new(
+    self->node_physics_system = node_physics_system_new(
         15 * TILE,
         10 * TILE,
         60 * TILE,
@@ -75,8 +75,8 @@ draw_node(debug_t *self, canvas_t *canvas, node_model_t *node_model) {
     size_t x_padding = TILE / 2;
     size_t y_padding = 2;
 
-    size_t x = self->net_model->x + node_model->position.x - (text_width / 2);
-    size_t y = self->net_model->y + node_model->position.y - (text_height / 2);
+    size_t x = self->node_physics_system->x + node_model->position.x - (text_width / 2);
+    size_t y = self->node_physics_system->y + node_model->position.y - (text_height / 2);
 
     size_t width = text_width + x_padding * 2;
     size_t height = 2 * TILE;
@@ -113,34 +113,34 @@ draw_wire(debug_t *self, canvas_t *canvas, const wire_t *wire) {
         !wire->opposite->node)
         return;
 
-    net_model_t *net_model = self->net_model;
+    node_physics_system_t *node_physics_system = self->node_physics_system;
 
     node_model_t *node_model1 =
-        hash_get(net_model->node_model_hash, (void *) (size_t) wire->node->id);
+        hash_get(node_physics_system->node_model_hash, (void *) (size_t) wire->node->id);
     node_model_t *node_model2 =
-        hash_get(net_model->node_model_hash, (void *) (size_t) wire->opposite->node->id);
+        hash_get(node_physics_system->node_model_hash, (void *) (size_t) wire->opposite->node->id);
 
     if (node_model1 && node_model2) {
         canvas_draw_line(
             canvas,
-            net_model->x + node_model1->position.x,
-            net_model->y + node_model1->position.y,
-            net_model->x + node_model2->position.x,
-            net_model->y + node_model2->position.y,
+            node_physics_system->x + node_model1->position.x,
+            node_physics_system->y + node_model1->position.y,
+            node_physics_system->x + node_model2->position.x,
+            node_physics_system->y + node_model2->position.y,
             canvas->palette[AP_COLOR]);
     }
 }
 
 static void
 draw_net_border(debug_t *self, canvas_t *canvas) {
-    net_model_t *net_model = self->net_model;
+    node_physics_system_t *node_physics_system = self->node_physics_system;
     size_t thickness = 1;
     canvas_draw_rect_round(
         canvas,
-        net_model->x,
-        net_model->y,
-        net_model->width,
-        net_model->height,
+        node_physics_system->x,
+        node_physics_system->y,
+        node_physics_system->width,
+        node_physics_system->height,
         thickness,
         canvas->palette[AP_COLOR],
         SM_ROUNDNESS);
@@ -148,15 +148,15 @@ draw_net_border(debug_t *self, canvas_t *canvas) {
 
 static void
 draw_net(debug_t *self, canvas_t *canvas) {
-    assert(self->net_model);
+    assert(self->node_physics_system);
 
-    net_model_t *net_model = self->net_model;
-    if (!net_model->root)
+    node_physics_system_t *node_physics_system = self->node_physics_system;
+    if (!node_physics_system->root)
         return;
-    net_model_evolve(net_model);
+    node_physics_system_evolve(node_physics_system);
     draw_net_border(self, canvas);
 
-    wire_iter_t *iter = wire_iter_new(net_model->root);
+    wire_iter_t *iter = wire_iter_new(node_physics_system->root);
     wire_t *wire = wire_iter_first(iter);
 
     while (wire) {
@@ -165,10 +165,10 @@ draw_net(debug_t *self, canvas_t *canvas) {
     }
     wire_iter_destroy(&iter);
 
-    node_model_t *node_model = hash_first(net_model->node_model_hash);
+    node_model_t *node_model = hash_first(node_physics_system->node_model_hash);
     while (node_model) {
         draw_node(self, canvas, node_model);
-        node_model = hash_next(net_model->node_model_hash);
+        node_model = hash_next(node_physics_system->node_model_hash);
     }
 }
 
@@ -185,13 +185,13 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 }
 
 static void
-init_net_model(debug_t *self) {
+init_node_physics_system(debug_t *self) {
     if (stack_is_empty(self->worker->value_stack))
         return;
 
     wire_t *wire = stack_top(self->worker->value_stack);
-    self->net_model->root = wire;
-    net_model_update(self->net_model);
+    self->node_physics_system->root = wire;
+    node_physics_system_update(self->node_physics_system);
 }
 
 void
@@ -199,7 +199,7 @@ debug_start(worker_t *worker) {
     srand(time(NULL));
 
     debug_t *self = debug_new(worker);
-    init_net_model(self);
+    init_node_physics_system(self);
 
     init_canvas_theme(self->canvas);
     init_canvas_asset_store(self->canvas);
