@@ -69,8 +69,10 @@ draw_background_grid(debug_t *self, canvas_t *canvas, bool is_on) {
 }
 
 static void
-draw_node(debug_t *self, canvas_t *canvas, node_model_t *node_model) {
-    text_t *text = text_from_string(node_model->node->spec->name);
+draw_node(debug_t *self, canvas_t *canvas, node_id_t node_id, node_model_t *node_model) {
+    node_t *node = hash_get(self->node_hash, (void *) (size_t) node_id);
+    if (!node) return;
+    text_t *text = text_from_string(node->spec->name);
     size_t text_width = font_text_width(canvas->font, text);
     size_t text_height = 16;
     size_t x_padding = TILE / 2;
@@ -168,7 +170,8 @@ draw_net(debug_t *self, canvas_t *canvas) {
 
     node_model_t *node_model = hash_first(node_physics_system->node_model_hash);
     while (node_model) {
-        draw_node(self, canvas, node_model);
+        node_id_t node_id = (node_id_t) (size_t) hash_cursor(node_physics_system->node_model_hash);
+        draw_node(self, canvas, node_id, node_model);
         node_model = hash_next(node_physics_system->node_model_hash);
     }
 }

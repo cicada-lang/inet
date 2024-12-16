@@ -1,6 +1,6 @@
 # debug
 
-[debug] `draw_node` take `node_id`
+ambr node_id_t size_t
 [debug] remove `node` from `node_model`
 [debug] move `node_model_hash` to `debug`
 [debug] `force_t`
