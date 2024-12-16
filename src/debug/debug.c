@@ -62,8 +62,8 @@ init_canvas_font(canvas_t *canvas) {
 }
 
 static void
-draw_background_grid(debug_t *self, canvas_t *canvas, bool is_on) {
-    if (!is_on) return;
+draw_background_grid(debug_t *self, canvas_t *canvas, bool really) {
+    if (!really) return;
 
     (void) self;
 
