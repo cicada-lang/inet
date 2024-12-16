@@ -1,6 +1,5 @@
 # debug
 
-[debug] 显示带有角标的 node
 [debug] 尝试使用真实的物理学来实现 force
 [debug] `node_physics_simulate` -- move by `velocity` and clear `force` for every `node_model`
 [debug] remove `node_physics_fake_simulate`

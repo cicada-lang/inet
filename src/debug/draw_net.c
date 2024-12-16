@@ -4,7 +4,13 @@ static void
 draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_model) {
     node_t *node = hash_get(self->node_hash, (void *) node_id);
     if (!node) return;
-    text_t *text = text_from_string(node->spec->name);
+
+    char *subscript = uint_to_subscript(node->id);
+    char *name = string_append(node->spec->name, subscript);
+    text_t *text = text_from_string(name);
+    free(subscript);
+    free(name);
+
     size_t text_width = font_text_width(canvas->font, text);
     size_t text_height = 16;
     size_t padding_x = TILE / 2;
