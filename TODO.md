@@ -1,4 +1,4 @@
-[vec] setup `modules/vec`
+[vec] setup `vec_text` & `vec2_text`
 [vec] `vec2_add`
 [vec] `vec2_mul`
 
