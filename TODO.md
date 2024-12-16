@@ -1,5 +1,7 @@
 # debug
 
+[debug] delete `node_model_hash` by `node_hash` diff
+
 [debug] `draw_step_button.c` -- handle click
 [debug] `draw_run_button.c` -- handle click
 [debug] extract `draw_toolbar.c`
@@ -9,8 +11,6 @@
 [debug] `step` button -- call `worker_net_step`
 [debug] `run` button -- call `worker_net_run`
 [debug] `run` button as a toggle -- call `worker_net_step` every 0.3s
-
-[debug] delete `node_model_hash` by `node_hash` diff
 
 [debug] 尝试使用真实的物理学来实现 force
 [debug] fake forces should change velocity instead of force

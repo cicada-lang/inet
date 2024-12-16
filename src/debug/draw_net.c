@@ -91,7 +91,7 @@ draw_net(debug_t *self, canvas_t *canvas) {
         self->node_physics,
         self->node_model_hash);
 
-    draw_net_border(self, canvas, false); 
+    draw_net_border(self, canvas, false);
 
     wire_iter_t *iter = wire_iter_new(self->node_physics->root);
     wire_t *wire = wire_iter_first(iter);
