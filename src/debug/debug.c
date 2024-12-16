@@ -7,7 +7,7 @@ debug_new(worker_t *worker) {
 
     size_t width = 90 * TILE;
     size_t height = 60 * TILE;
-    size_t scale = 3;
+    size_t scale = 2;
 
     canvas_t *canvas = canvas_new(width, height, scale);
     canvas->state = self;
@@ -17,6 +17,10 @@ debug_new(worker_t *worker) {
     self->node_hash = hash_new();
     self->node_model_hash = hash_new();
     hash_set_destroy_fn(self->node_model_hash, (destroy_fn_t *) node_model_destroy);
+
+    self->is_running = false;
+    self->running_frame_count = 0;
+    self->running_speed = 3;
 
     size_t padding_x = 4 * TILE;
     size_t padding_y = 4 * TILE;
@@ -71,6 +75,15 @@ init_canvas_font(canvas_t *canvas) {
 static void
 on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     (void) passed;
+
+    if (self->is_running)
+        self->running_frame_count += passed;
+
+    if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
+        worker_net_step(self->worker);
+        debug_update(self);
+        self->running_frame_count = 0;
+    }
 
     node_physics_fake_simulate(self->node_physics, self->node_model_hash);
 

@@ -9,6 +9,8 @@ struct debug_t {
     bool end_button_is_pressed;
 
     bool is_running;
+    size_t running_frame_count;
+    size_t running_speed; // times per second
 
     hash_t *node_hash;
     hash_t *node_model_hash;
