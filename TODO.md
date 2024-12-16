@@ -1,6 +1,6 @@
 # debug
 
-[debug] extract `draw_toolbar.c`
+[debug] extract `draw_background_grid.c`
 
 [debug] `draw_cursor.c`
 
