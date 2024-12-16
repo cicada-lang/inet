@@ -1,6 +1,8 @@
-# debug
+[vec] setup `modules/vec`
+[vec] `vec2_add`
+[vec] `vec2_mul`
 
-[debug] `node_force_fn_t` -- interface
+# debug
 
 [debug] `node_fake_electrical_force`
 [debug] `node_fake_spring_force`
