@@ -1,5 +1,8 @@
 # debug
 
+ambr worker_interact run
+[core] extract run.c
+ambr interact run
 [debug] should `step` and `run` button -- 不要显示 stack（因为未来可能是 lisp）
 [debug] delete `node_model_hash` by `node_hash` diff
 [core] rename function with "run" to other names -- to rename `interact` to `run`
