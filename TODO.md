@@ -1,6 +1,5 @@
 # debug
 
-ambr node_layout node_model
 ambr net_layout net_model
 
 [debug] `node_model_t` has `position` and `velocity`

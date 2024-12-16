@@ -8,8 +8,8 @@ net_layout_new(size_t x, size_t y, size_t width, size_t height) {
     self->width = width;
     self->height = height;
 
-    self->node_layout_list =
-        list_new_with((destroy_fn_t *) node_layout_destroy);
+    self->node_model_list =
+        list_new_with((destroy_fn_t *) node_model_destroy);
 
     self->evolving_step = 0;
     self->max_evolving_step = 1000;
@@ -22,20 +22,20 @@ net_layout_destroy(net_layout_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         net_layout_t *self = *self_pointer;
-        list_destroy(&self->node_layout_list);
+        list_destroy(&self->node_model_list);
         free(self);
         *self_pointer = NULL;
     }
 }
 
-node_layout_t *
-net_layout_find_node_layout(const net_layout_t *self, const node_t *node) {
-    node_layout_t *node_layout = list_first(self->node_layout_list);
-    while (node_layout) {
-        if (node_layout->node == node)
-            return node_layout;
+node_model_t *
+net_layout_find_node_model(const net_layout_t *self, const node_t *node) {
+    node_model_t *node_model = list_first(self->node_model_list);
+    while (node_model) {
+        if (node_model->node == node)
+            return node_model;
 
-        node_layout = list_next(self->node_layout_list);
+        node_model = list_next(self->node_model_list);
     }
 
     return NULL;
@@ -48,48 +48,48 @@ net_layout_update(net_layout_t *self) {
     if (!self->root->opposite->node) return;
 
     node_iter_t *iter = node_iter_new(self->root->opposite->node);
-    list_t *new_list = list_new_with((destroy_fn_t *) node_layout_destroy);
+    list_t *new_list = list_new_with((destroy_fn_t *) node_model_destroy);
     node_t *node = node_iter_first(iter);
     while (node) {
-        node_layout_t *found = net_layout_find_node_layout(self, node);
+        node_model_t *found = net_layout_find_node_model(self, node);
         if (found) {
             list_push(new_list, found);
-            list_remove(self->node_layout_list, found);
+            list_remove(self->node_model_list, found);
         } else {
             size_t x = self->width * ((double) rand() / RAND_MAX);
             size_t y = self->height * ((double) rand() / RAND_MAX);
-            node_layout_t *node_layout = node_layout_new(node, x, y);
-            list_push(new_list, node_layout);
+            node_model_t *node_model = node_model_new(node, x, y);
+            list_push(new_list, node_model);
         }
 
         node = node_iter_next(iter);
     }
     node_iter_destroy(&iter);
 
-    list_destroy(&self->node_layout_list);
-    self->node_layout_list = new_list;
+    list_destroy(&self->node_model_list);
+    self->node_model_list = new_list;
 }
 
 static void
 net_layout_electrical_force(net_layout_t *self) {
-    list_t *copy = list_dup(self->node_layout_list);
-    node_layout_t *node_layout = list_first(self->node_layout_list);
-    while (node_layout) {
-        node_layout_t *node_layout2 = list_first(copy);
-        while (node_layout2) {
-            if (node_layout2 != node_layout) {
+    list_t *copy = list_dup(self->node_model_list);
+    node_model_t *node_model = list_first(self->node_model_list);
+    while (node_model) {
+        node_model_t *node_model2 = list_first(copy);
+        while (node_model2) {
+            if (node_model2 != node_model) {
                 vec2_t force = electrical_force(
-                    (vec2_t) { .x = node_layout->x, .y = node_layout->y },
-                    (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
+                    (vec2_t) { .x = node_model->x, .y = node_model->y },
+                    (vec2_t) { .x = node_model2->x, .y = node_model2->y });
 
-                node_layout->force.x += force.x;
-                node_layout->force.y += force.y;
+                node_model->force.x += force.x;
+                node_model->force.y += force.y;
             }
 
-            node_layout2 = list_next(copy);
+            node_model2 = list_next(copy);
         }
 
-        node_layout = list_next(self->node_layout_list);
+        node_model = list_next(self->node_model_list);
     }
 
     list_destroy(&copy);
@@ -106,20 +106,20 @@ net_layout_spring_force(net_layout_t *self) {
             wire->opposite &&
             wire->opposite->node)
         {
-            node_layout_t *node_layout1 =
-                net_layout_find_node_layout(self, wire->node);
-            node_layout_t *node_layout2 =
-                net_layout_find_node_layout(self, wire->opposite->node);
+            node_model_t *node_model1 =
+                net_layout_find_node_model(self, wire->node);
+            node_model_t *node_model2 =
+                net_layout_find_node_model(self, wire->opposite->node);
 
             vec2_t force = spring_force(
-                (vec2_t) { .x = node_layout1->x, .y = node_layout1->y },
-                (vec2_t) { .x = node_layout2->x, .y = node_layout2->y });
+                (vec2_t) { .x = node_model1->x, .y = node_model1->y },
+                (vec2_t) { .x = node_model2->x, .y = node_model2->y });
 
-            node_layout1->force.x += force.x;
-            node_layout1->force.y += force.y;
+            node_model1->force.x += force.x;
+            node_model1->force.y += force.y;
 
-            node_layout2->force.x -= force.x;
-            node_layout2->force.y -= force.y;
+            node_model2->force.x -= force.x;
+            node_model2->force.y -= force.y;
 
             // printf("[net_layout_spring_force] force.x %f, force.y: %f\n",
             //        force.x, force.y);
@@ -144,16 +144,16 @@ net_layout_evolve(net_layout_t *self) {
     net_layout_electrical_force(self);
 
     double cooling = pow(self->cooling_factor, self->evolving_step);
-    node_layout_t *node_layout = list_first(self->node_layout_list);
-    while (node_layout) {
-        node_layout_apply_force(node_layout, cooling);
+    node_model_t *node_model = list_first(self->node_model_list);
+    while (node_model) {
+        node_model_apply_force(node_model, cooling);
 
-        if (node_layout->x > self->width)
-            node_layout->x = self->width;
+        if (node_model->x > self->width)
+            node_model->x = self->width;
 
-        if (node_layout->y > self->height)
-            node_layout->y = self->height;
+        if (node_model->y > self->height)
+            node_model->y = self->height;
 
-        node_layout = list_next(self->node_layout_list);
+        node_model = list_next(self->node_model_list);
     }
 }
