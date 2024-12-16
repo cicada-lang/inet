@@ -6,6 +6,11 @@ vec2_zeros(void) {
 }
 
 vec2_t
+vec2_ones(void) {
+    return (vec2_t) { .x = 1, .y = 1 };
+}
+
+vec2_t
 vec2_add(vec2_t v1, vec2_t v2) {
     return (vec2_t) {
         .x = v1.x + v2.x,
