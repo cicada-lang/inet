@@ -15,6 +15,8 @@ struct debug_t {
 debug_t *debug_new(worker_t *worker);
 void debug_destroy(debug_t **self_pointer);
 
+bool debug_is_any_button_pressed(debug_t *self);
+
 hash_t *debug_new_node_hash(debug_t *self);
 void debug_update(debug_t *self);
 

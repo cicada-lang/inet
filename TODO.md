@@ -1,7 +1,5 @@
 # debug
 
-[debug] `draw_cursor.c`
-
 [debug] `step` button -- call `worker_net_step`
 [debug] `run` button -- call `worker_net_run`
 [debug] `run` button as a toggle -- call `worker_net_step` every 0.3s

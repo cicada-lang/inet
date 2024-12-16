@@ -41,6 +41,11 @@ debug_destroy(debug_t **self_pointer) {
     }
 }
 
+bool
+debug_is_any_button_pressed(debug_t *self) {
+    return self->step_button_is_pressed || self->run_button_is_pressed;
+}
+
 static void
 init_canvas_theme(canvas_t *canvas) {
     canvas->palette[BG_COLOR] = 0xff000000;
@@ -70,6 +75,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
     draw_background(self, canvas, false);
     draw_net(self, canvas);
     draw_toolbar(self, canvas);
+    draw_cursor(self, canvas);
 }
 
 hash_t *
@@ -124,6 +130,21 @@ init_node_physics(debug_t *self) {
         self->node_model_hash);
 }
 
+static void
+on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
+    (void) canvas;
+
+    // to handle click inside a button,
+    // but release outside the button.
+
+    if (button == 1) {
+        if (is_release) {
+            self->step_button_is_pressed = false;
+            self->run_button_is_pressed = false;
+        }
+    }
+}
+
 void
 debug_start(worker_t *worker) {
     srand(time(NULL));
@@ -136,6 +157,8 @@ debug_start(worker_t *worker) {
     init_canvas_asset_store(self->canvas);
     init_canvas_font(self->canvas);
     self->canvas->on_frame = (on_frame_fn_t *) on_frame;
+    self->canvas->on_click = (on_click_fn_t *) on_click;
+    self->canvas->hide_system_cursor = true;
 
     canvas_open(self->canvas);
 
