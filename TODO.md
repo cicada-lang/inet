@@ -1,4 +1,4 @@
-[vec] `vec2_map`
+[vec] `vec2_test` -- test `vec2_map`
 
 # debug
 

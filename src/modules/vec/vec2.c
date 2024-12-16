@@ -88,3 +88,11 @@ vec2_div_scalar(vec2_t v, double s) {
         .y = v.y / s,
     };
 }
+
+vec2_t
+vec2_map(vec2_t v, double_unary_fn_t* fn) {
+    return (vec2_t) {
+        .x = fn(v.x),
+        .y = fn(v.y),
+    };
+}

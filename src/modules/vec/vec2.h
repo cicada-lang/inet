@@ -18,3 +18,5 @@ vec2_t vec2_add_scalar(vec2_t v, double s);
 vec2_t vec2_sub_scalar(vec2_t v, double s);
 vec2_t vec2_mul_scalar(vec2_t v, double s);
 vec2_t vec2_div_scalar(vec2_t v, double s);
+
+vec2_t vec2_map(vec2_t v, double_unary_fn_t* fn);
