@@ -8,8 +8,6 @@ list_test(void) {
     assert(list);
     assert(list_length(list) == 0);
 
-    assert(list_current(list) == NULL);
-
     assert(list_first(list) == NULL);
     assert(list_last(list) == NULL);
 
@@ -81,7 +79,6 @@ list_test(void) {
         list_unshift(list, bread);
         assert(list_length(list) == 2);
         assert(list_first(list) == bread);
-        assert(list_current(list) == bread);
 
         list_push(list, wine);
         assert(list_length(list) == 3);

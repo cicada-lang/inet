@@ -174,7 +174,7 @@ list_find(list_t *self, const void *value) {
     return NULL;
 }
 
-void *
+static void *
 list_current(const list_t *self) {
     assert(self);
     if (self->cursor)

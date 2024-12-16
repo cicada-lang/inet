@@ -1,5 +1,8 @@
+[hash] `hash_cursor` return current key during iteration
+
 # debug
 
+[debug] `draw_node` take `node_id`
 [debug] remove `node` from `node_model`
 [debug] move `node_model_hash` to `debug`
 [debug] `force_t`
