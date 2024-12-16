@@ -43,7 +43,9 @@ debug_destroy(debug_t **self_pointer) {
 
 bool
 debug_is_any_button_pressed(debug_t *self) {
-    return self->step_button_is_pressed || self->run_button_is_pressed;
+    return (self->step_button_is_pressed ||
+            self->run_button_is_pressed ||
+            self->end_button_is_pressed);
 }
 
 static void
@@ -141,6 +143,7 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
         if (is_release) {
             self->step_button_is_pressed = false;
             self->run_button_is_pressed = false;
+            self->end_button_is_pressed = false;
         }
     }
 }
