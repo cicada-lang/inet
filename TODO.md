@@ -1,4 +1,4 @@
-[vec] setup `vec_text` & `vec2_text`
+[vec] move `vec2_t` from `debug/` to `modules/vec`
 [vec] `vec2_add`
 [vec] `vec2_mul`
 
