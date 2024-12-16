@@ -1,5 +1,3 @@
-[hash] `hash_cursor` return current key during iteration
-
 # debug
 
 [debug] `draw_node` take `node_id`

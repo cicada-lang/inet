@@ -21,6 +21,7 @@ struct hash_t {
 
     size_t cursor_index;
     entry_t *cursor_entry;
+    void *cursor_key;
 
     hash_fn_t *hash_fn;
     destroy_fn_t *destroy_fn;
@@ -150,7 +151,7 @@ hash_rehash(hash_t *self, size_t new_prime_index) {
             size_t new_index = hash_key_index(self, entry->key);
             entry->index = new_index;
             entry_t *top_entry = new_entries[new_index];
-            if (top_entry == NULL)
+            if (!top_entry)
                 self->used_indexes_size++;
 
             entry->next = top_entry;
@@ -295,11 +296,16 @@ hash_first(hash_t *self) {
 }
 
 void *
+hash_cursor(hash_t *self) {
+    return self->cursor_key;
+}
+
+void *
 hash_next(hash_t *self) {
     assert (self);
     // Scan forward from cursor until we find an non empty bucket
     size_t limit = hash_primes[self->prime_index];
-    while (self->cursor_entry == NULL) {
+    while (!self->cursor_entry) {
         if (self->cursor_index < limit - 1)
             self->cursor_index++;
         else
@@ -311,7 +317,8 @@ hash_next(hash_t *self) {
     // We have an entry, so return it, and bump past it
     assert(self->cursor_entry);
     entry_t *entry = self->cursor_entry;
-    self->cursor_entry = self->cursor_entry->next;
+    self->cursor_key = entry->key;
+    self->cursor_entry = entry->next;
     return entry->value;
 }
 
