@@ -1,0 +1,31 @@
+|10 @Console &vector $2 &read $1 &pad $5 &write $1 &error $1
+
+|100
+
+[on-reset] ( -> )
+    'my-string print-text
+    @break
+
+[print-text] ( str* -- )
+    [print-text/while]
+        @dup @load 'console/write @send
+        @inc @dup @load @jci &print-text/while
+    @drop
+    @return
+
+= my-string "Hello World!\n"
+
+
+
+= on-reset ( -> )
+    'my-string print-text
+    BREAK
+
+= print-text ( str* -- )
+    = print-text/while
+        DUP LOAD 'console/write SEND
+        INC DUP LOAD JCI &print-text/while
+    DROP
+    RETURN
+
+= my-string "Hello World!\n"
