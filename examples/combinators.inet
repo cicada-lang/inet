@@ -1,0 +1,9 @@
+* (γ) first second -> value!
+* (δ) !target -> first second
+* (ε) !target ->
+
+(- TODO -)
+
+! (γ)-(γ) (- we can not define rule for the same node yet -)
+! (δ)-(δ)
+! (ε)-(ε)

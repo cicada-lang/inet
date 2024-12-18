@@ -8,8 +8,9 @@
 
 # example
 
-`examples/combinators.inet` -- interaction combinators
-`examples/lambda.inet` -- use interaction combinators
+[example] `examples/combinators.inet` -- interaction combinators
+[example] `examples/lambda.inet` -- use interaction combinators
+[example] `examples/turing.inet` -- coding turing machine
 
 # inet-asm & inet-emu
 
@@ -29,6 +30,9 @@ inet-asm & inet-emu
   - @add/-<>-/add1
   - @add/-<!>-/zero
   - @add/-<!>-/add1
+- name = &name call
+  - where call is builtin
+- &name call-node = &name &name/in-arity curry-node -- this can be done at compile time
 
 # debug
 
