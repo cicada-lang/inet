@@ -1,0 +1,30 @@
+@zero/in 0
+@zero/out 1
+@zero :value!
+
+@add1/in 1
+@add1/out 1
+@add1 :prev :value!
+
+@add/in 2
+@add/out 1
+@add :target! :addend :result
+
+@add/-/zero
+  $addend $result
+  addend result connect end
+
+@add/-/add1
+  $addend $result
+  $prev
+  prev addend &add call-node &add1 call-node
+  result connect end
+
+@two zero &add1 call-node &add1 call-node end
+
+@main
+  two two &add call-node
+  wire-print-net
+  run
+  wire-print-net
+  end

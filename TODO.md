@@ -1,38 +1,25 @@
+# inet-asm & inet-emu
+
+as an extension of xvm
+
+```
+&function-name call
+&node-name call-node
+&node-name &node-name/in fetch curry-node
+```
+
 # study
 
 [study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
 [study] topics/computer-science/interaction-nets/2006-proof-nets-and-the-identity-of-proofs--straßburger.pdf
 [study] projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
-
-[maybe] persons/jean-yves-girard/proof-nets--the-parallel-syntax-for-proof-theory--1995.pdf
+[study] [maybe] persons/jean-yves-girard/proof-nets--the-parallel-syntax-for-proof-theory--1995.pdf
 
 # example
 
 [example] `examples/combinators.inet` -- interaction combinators
 [example] `examples/lambda.inet` -- use interaction combinators
 [example] `examples/turing.inet` -- coding turing machine
-
-# inet-asm & inet-emu
-
-inet-asm & inet-emu
-
-应该是 xvm 的一个扩展
-
-- 尝试看看把 inet 当作 xvm 的扩展时，byte code 是如何的
-- 利用 uxn 中带有子 nametable 的 nametable
-  - @add
-  - @add/in-arity
-  - @add/!/zero
-  - @add/!/add1
-  - @add/-/zero
-  - @add/-/add1
-  - @add/-<>-/zero
-  - @add/-<>-/add1
-  - @add/-<!>-/zero
-  - @add/-<!>-/add1
-- name = &name call
-  - where call is builtin
-- &name call-node = &name &name/in-arity curry-node -- this can be done at compile time
 
 # debug
 
@@ -42,15 +29,9 @@ inet-asm & inet-emu
 
 # module system
 
-use `module/name` syntax
-
-- we already using use name such as `wire-pair`,
-  thus module syntax should just map name like `module/name` to value.
-
 在 inet-asm & inet-emu 的想法之后，
-用 `module/name` 这种语法来处理模块系统，
-就要在汇编语言的层次考虑了，
-或者说，就要在可执行文件的层次考虑了。
+就不应该用 `module/name` 这种语法来处理模块系统了。
+应该支持简单的 import name，同时支持修改 name 以避免冲突。
 
 # primitive value
 
@@ -89,7 +70,6 @@ learn linux thread
 
 keep a single thread debug mode, which record all the allocated nodes.
 
-# inet-vm & inet-asm
+# inet-lisp
 
-making postfix language inet-asm,
 do a inet-lisp for scalable syntax.
