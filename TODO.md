@@ -8,6 +8,12 @@ as an extension of xvm
 &node-name &node-name/in fetch curry-node
 ```
 
+# main
+
+图灵机作为 inet 的例子 -> 读 2008-the-annotated-turing.djvu
+inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
+理解 HVM -> 读 projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
+
 # study
 
 [study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
