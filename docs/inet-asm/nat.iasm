@@ -18,13 +18,13 @@
   $addend $result
   $prev
   prev addend &add call-node &add1 call-node
-  result connect end
+  result connect END
 
-@two zero &add1 call-node &add1 call-node end
+@two zero &add1 call-node &add1 call-node END
 
 @main
   two two &add call-node
   wire-print-net
   run
   wire-print-net
-  end
+  END
