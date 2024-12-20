@@ -10,7 +10,7 @@ blob_test(void) {
         blob_bytes(blob)[1] = 'b';
         blob_bytes(blob)[2] = 'c';
 
-        assert(blob_length(blob) == 3);
+        assert(blob_size(blob) == 3);
         assert(string_equal(blob_string(blob), "abc"));
 
         blob_destroy(&blob);

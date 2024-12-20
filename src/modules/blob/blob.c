@@ -27,7 +27,7 @@ blob_destroy(blob_t **self_pointer) {
 }
 
 size_t
-blob_length(blob_t *self) {
+blob_size(blob_t *self) {
     return self->length;
 }
 

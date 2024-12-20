@@ -63,5 +63,5 @@ file_read_blob(file_t *file) {
 
 void
 file_write_blob(file_t *file, blob_t *blob) {
-    fwrite(blob_bytes(blob), 1, blob_length(blob), file);
+    fwrite(blob_bytes(blob), 1, blob_size(blob), file);
 }
