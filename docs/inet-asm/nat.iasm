@@ -1,14 +1,14 @@
 @zero/in 0
 @zero/out 1
-@zero :value!
+@zero/node :value!
 
 @add1/in 1
 @add1/out 1
-@add1 :prev :value!
+@add1/node :prev :value!
 
 @add/in 2
 @add/out 1
-@add :target! :addend :result
+@add/node :target! :addend :result
 
 @add/-/zero
   $addend $result
