@@ -102,7 +102,7 @@ glyph_decode_hex(const char* string) {
     int colon_index = string_find_index(string, ':');
     assert(colon_index != -1);
 
-    code_point_t code_point = string_parse_hex(string);
+    code_point_t code_point = string_parse_uint_base_16(string);
     string += colon_index + 1;
 
     int newline_index = string_find_index(string, '\n');

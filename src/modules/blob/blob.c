@@ -27,18 +27,28 @@ blob_destroy(blob_t **self_pointer) {
 }
 
 size_t
-blob_size(blob_t *self) {
+blob_size(const blob_t *self) {
     return self->size;
 }
 
 uint8_t *
-blob_bytes(blob_t *self) {
+blob_bytes(const blob_t *self) {
     return self->bytes;
 }
 
 char *
-blob_string(blob_t *self) {
+blob_string(const blob_t *self) {
     return (char *) self->bytes;
+}
+
+void
+blob_copy_from(blob_t *self, const uint8_t *bytes) {
+    memcpy(self->bytes, bytes, self->size);
+}
+
+void
+blob_copy_into(const blob_t *self, uint8_t *bytes) {
+    memcpy(bytes, self->bytes, self->size);
 }
 
 bool
