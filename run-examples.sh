@@ -1,16 +1,19 @@
 #!/usr/bin/env bash
 
-for example in $(find examples -name '*.inet' -not -name '*.test.inet' -not -name '*.error.inet' -not -name '*.play.inet'); do
+app=inet
+ext=inet
+
+for example in $(find examples -name "*.${ext}" -not -name "*.test.${ext}" -not -name "*.error.${ext}" -not -name "*.play.${ext}"); do
     echo "[run] $example"
-    ./bin/inet run $example
+    ./bin/${app} run $example
 done
 
-for example in $(find examples -name '*.test.inet'); do
+for example in $(find examples -name "*.test.${ext}"); do
     echo "[test] $example"
-    ./bin/inet run $example > $example.out
+    ./bin/${app} run $example > $example.out
 done
 
-for example in $(find examples -name '*.error.inet'); do
+for example in $(find examples -name "*.error.${ext}"); do
     echo "[error] $example"
-    ./bin/inet run $example 2> $example.err || true
+    ./bin/${app} run $example 2> $example.err || true
 done
