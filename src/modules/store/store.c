@@ -2,14 +2,15 @@
 
 struct store_t {
     const char *base;
-    dict_t *cached_blob_dict;
+    hash_t *cached_blob_hash;
 };
 
 store_t *
 store_new(const char *base) {
     store_t *self = new(store_t);
     self->base = base;
-    self->cached_blob_dict = dict_new_with((destroy_fn_t *) blob_destroy);
+    self->cached_blob_hash = hash_new_of_string_key();
+    hash_set_destroy_fn(self->cached_blob_hash, (destroy_fn_t *) blob_destroy);
     return self;
 }
 
@@ -18,7 +19,7 @@ store_destroy(store_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         store_t *self = *self_pointer;
-        dict_destroy(&self->cached_blob_dict);
+        hash_destroy(&self->cached_blob_hash);
         free(self);
         *self_pointer = NULL;
     }
@@ -31,22 +32,24 @@ store_base(store_t *self) {
 
 void
 store_purge_cache(store_t *self) {
-    dict_purge(self->cached_blob_dict);
+    hash_purge(self->cached_blob_hash);
 }
 
 size_t
-store_cache_size(store_t *self) {
-    return dict_length(self->cached_blob_dict);
+store_cache_length(store_t *self) {
+    return hash_length(self->cached_blob_hash);
 }
 
 blob_t *
 store_get_cache(store_t *self, const char* path) {
-    return dict_get(self->cached_blob_dict, path);
+    return hash_get(self->cached_blob_hash, path);
 }
 
 void
 store_set_cache(store_t *self, const char* path, blob_t *blob) {
-    dict_set(self->cached_blob_dict, path, blob);
+    char *key = string_dup(path);
+    bool ok = hash_set(self->cached_blob_hash, key, blob);
+    if (!ok) string_destroy(&key);
 }
 
 blob_t *

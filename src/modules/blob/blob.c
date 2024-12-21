@@ -3,15 +3,15 @@
 // with an extra ending '\0' to be viewed as string.
 
 struct blob_t {
-    size_t length;
+    size_t size;
     uint8_t *bytes;
 };
 
 blob_t *
-blob_new(size_t length) {
+blob_new(size_t size) {
     blob_t *self = new(blob_t);
-    self->length = length;
-    self->bytes = allocate(length + 1);
+    self->size = size;
+    self->bytes = allocate(size + 1);
     return self;
 }
 
@@ -28,7 +28,7 @@ blob_destroy(blob_t **self_pointer) {
 
 size_t
 blob_size(blob_t *self) {
-    return self->length;
+    return self->size;
 }
 
 uint8_t *
@@ -46,18 +46,18 @@ blob_equal(blob_t *left, blob_t *right) {
     if (left == right)
         return true;
 
-    if (left->length != right->length)
+    if (left->size != right->size)
         return false;
 
     return memcmp(
         left->bytes,
         right->bytes,
-        left->length) == 0;
+        left->size) == 0;
 }
 
 blob_t *
 blob_dup(blob_t *self) {
-    blob_t *blob = blob_new(self->length);
-    memcpy(blob->bytes, self->bytes, self->length);
+    blob_t *blob = blob_new(self->size);
+    memcpy(blob->bytes, self->bytes, self->size);
     return blob;
 }

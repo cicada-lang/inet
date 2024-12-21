@@ -9,6 +9,8 @@ void hash_set_destroy_fn(hash_t *self, destroy_fn_t *destroy_fn);
 void hash_set_key_destroy_fn(hash_t *self, destroy_fn_t *key_destroy_fn);
 void hash_set_key_equal_fn(hash_t *self, equal_fn_t *key_equal_fn);
 
+hash_t *hash_new_of_string_key(void);
+
 size_t hash_length(const hash_t *self);
 
 void *hash_get(hash_t *self, const void *key);

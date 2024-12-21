@@ -85,6 +85,15 @@ hash_set_key_equal_fn(hash_t *self, equal_fn_t *key_equal_fn) {
     self->key_equal_fn = key_equal_fn;
 }
 
+hash_t *
+hash_new_of_string_key(void) {
+    hash_t* self = hash_new();
+    hash_set_key_destroy_fn(self, (destroy_fn_t *) string_destroy);
+    hash_set_key_equal_fn(self, (equal_fn_t *) string_equal);
+    hash_set_hash_fn(self, (hash_fn_t *) string_bernstein_hash);    
+    return self;
+}
+
 static void hash_delete_entry(hash_t *self, entry_t *entry);
 
 static void

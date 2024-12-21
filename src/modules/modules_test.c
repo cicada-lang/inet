@@ -8,7 +8,6 @@ modules_test(void) {
     string_test();
     list_test();
     hash_test();
-    dict_test();
     vec_test();
     blob_test();
     file_test();

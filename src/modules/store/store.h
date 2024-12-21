@@ -7,7 +7,7 @@ void store_destroy(store_t **self_pointer);
 
 const char *store_base(store_t *self);
 void store_purge_cache(store_t *self);
-size_t store_cache_size(store_t *self);
+size_t store_cache_length(store_t *self);
 
 blob_t *store_get_cache(store_t *self, const char* path);
 void store_set_cache(store_t *self, const char* path, blob_t *blob);

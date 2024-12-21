@@ -9,14 +9,14 @@ store_test(void) {
 
     printf("store base: %s\n", store_base(store));
 
-    assert(store_cache_size(store) == 0);
+    assert(store_cache_length(store) == 0);
 
     assert(store_has(store, "abc.txt"));
     assert(store_has(store, "123.txt"));
     assert(!store_has(store, "xyz.txt"));
     assert(!store_has(store, "456.txt"));
 
-    assert(store_cache_size(store) == 2);
+    assert(store_cache_length(store) == 2);
 
     {
         blob_t *blob = store_get(store, "abc.txt");
@@ -32,9 +32,9 @@ store_test(void) {
         assert(blob_bytes(blob)[2] == '3');
     }
 
-    assert(store_cache_size(store) == 2);
+    assert(store_cache_length(store) == 2);
     store_purge_cache(store);
-    assert(store_cache_size(store) == 0);
+    assert(store_cache_length(store) == 0);
 
     {
         blob_t *blob = store_get(store, "abc.txt");
@@ -50,7 +50,7 @@ store_test(void) {
         assert(blob_bytes(blob)[2] == '3');
     }
 
-    assert(store_cache_size(store) == 2);
+    assert(store_cache_length(store) == 2);
 
     store_destroy(&store);
 
