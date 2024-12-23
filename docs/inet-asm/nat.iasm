@@ -11,19 +11,19 @@
 @add/node :target! :addend :result
 
 @add/-/zero
-  $addend $result
-  addend result connect end
+  $result $addend
+  addend result connect END
 
 @add/-/add1
-  $addend $result
   $prev
-  prev addend &add call-node &add1 call-node
+  $result $addend
+  prev addend add add1
   result connect END
 
-@two zero &add1 call-node &add1 call-node END
+@two zero add1 add1 END
 
 @main
-  two two &add call-node
+  two two add
   wire-print-net
   run
   wire-print-net
