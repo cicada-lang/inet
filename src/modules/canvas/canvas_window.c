@@ -127,8 +127,8 @@ canvas_window_init_input(canvas_window_t *self) {
 void
 canvas_window_init_title(canvas_window_t *self) {
     XClassHint *class_hint = XAllocClassHint();
-    class_hint->res_name = string_dup("bifer");
-    class_hint->res_class = string_dup("canvas");
+    class_hint->res_name = string_copy("bifer");
+    class_hint->res_class = string_copy("canvas");
     XSetClassHint(self->display, self->window, class_hint);
 
     if (self->canvas->title)

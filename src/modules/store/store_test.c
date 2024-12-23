@@ -4,7 +4,7 @@ void
 store_test(void) {
     printf("<store_test>\n");
 
-    char *base = dirname(string_dup(__FILE__));
+    char *base = dirname(string_copy(__FILE__));
     store_t *store = store_new(base);
 
     printf("store base: %s\n", store_base(store));

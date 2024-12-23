@@ -62,7 +62,7 @@ init_canvas_theme(canvas_t *canvas) {
 
 static void
 init_canvas_asset_store(canvas_t *canvas) {
-    char *root = dirname(dirname(dirname(string_dup(__FILE__))));
+    char *root = dirname(dirname(dirname(string_copy(__FILE__))));
     canvas_init_asset_store(canvas, string_append(root, "/assets"));
 }
 

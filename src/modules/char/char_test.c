@@ -29,5 +29,19 @@ char_test(void) {
     assert(char_to_hex('E') == 0xE);
     assert(char_to_hex('F') == 0xF);
 
+    assert(char_is_digit('0'));
+    assert(char_is_digit('1'));
+    assert(char_is_digit('2'));
+    assert(char_is_digit('3'));
+    assert(char_is_digit('4'));
+    assert(char_is_digit('5'));
+    assert(char_is_digit('6'));
+    assert(char_is_digit('7'));
+    assert(char_is_digit('8'));
+    assert(char_is_digit('9'));
+
+    assert(!char_is_digit('a'));
+    assert(!char_is_digit('A'));
+
     printf("</char_test>\n");
 }

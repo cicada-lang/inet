@@ -11,9 +11,9 @@ stack_test(void) {
     assert(stack_length(stack) == 0);
     assert(stack_is_empty(stack));
 
-    char *cheese = string_dup("boursin");
-    char *bread = string_dup("baguette");
-    char *wine = string_dup("bordeaux");
+    char *cheese = string_copy("boursin");
+    char *bread = string_copy("baguette");
+    char *wine = string_copy("bordeaux");
 
     stack_push(stack, cheese);
     assert(stack_top(stack) == cheese);

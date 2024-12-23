@@ -18,7 +18,7 @@ char *
 uint_to_string(uint64_t self) {
     char *buffer = allocate(MAX_STRING_LENGTH);
     sprintf(buffer, "%lu", self);
-    char *string = string_dup(buffer);
+    char *string = string_copy(buffer);
     free(buffer);
     return string;
 }
@@ -46,7 +46,7 @@ uint_to_subscript(uint64_t self) {
 
     }
 
-    char *subscript_string = string_dup(buffer);
+    char *subscript_string = string_copy(buffer);
     free(buffer);
     return subscript_string;
 }
@@ -74,7 +74,7 @@ uint_to_superscript(uint64_t self) {
         }
     }
 
-    char *superscript_string = string_dup(buffer);
+    char *superscript_string = string_copy(buffer);
     free(buffer);
     return superscript_string;
 }

@@ -261,7 +261,7 @@ parser_parse_define_program_stmt(parser_t *self) {
 
     token_t *head_token = list_shift(self->token_list);
     check_program_name_format(self, head_token);
-    char *name = string_dup(head_token->string);
+    char *name = string_copy(head_token->string);
 
     list_t *token_list = list_new_with((destroy_fn_t *) token_destroy);
     while (!list_is_empty(self->token_list)) {

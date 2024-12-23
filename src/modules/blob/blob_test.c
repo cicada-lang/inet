@@ -44,7 +44,7 @@ blob_test(void) {
         blob_bytes(blob_1)[1] = 'b';
         blob_bytes(blob_1)[2] = 'c';
 
-        blob_t *blob_2 = blob_dup(blob_1);
+        blob_t *blob_2 = blob_copy(blob_1);
 
         assert(blob_1 != blob_2);
         assert(blob_equal(blob_1, blob_2));

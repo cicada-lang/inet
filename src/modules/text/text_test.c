@@ -30,8 +30,8 @@ text_test(void) {
 
     {
         text_t *text = text_from_string("中文");
-        assert(text_dup(text) != text);
-        assert(text_equal(text_dup(text), text));
+        assert(text_copy(text) != text);
+        assert(text_equal(text_copy(text), text));
     }
 
     {

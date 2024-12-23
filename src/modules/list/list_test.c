@@ -19,9 +19,9 @@ list_test(void) {
 
     //  Three values we'll use as test data
     //  List values are void *, not particularly strings
-    char *cheese = string_dup("cheese");
-    char *bread = string_dup("bread");
-    char *wine = string_dup("wine");
+    char *cheese = string_copy("cheese");
+    char *bread = string_copy("bread");
+    char *wine = string_copy("wine");
 
     {
         list_push(list, cheese);
@@ -157,9 +157,9 @@ list_test(void) {
     }
 
     {
-        char *a = string_dup("a");
-        char *b = string_dup("b");
-        char *c = string_dup("c");
+        char *a = string_copy("a");
+        char *b = string_copy("b");
+        char *c = string_copy("c");
 
         list_t *list = list_new_with((destroy_fn_t *) string_destroy);
 
@@ -216,23 +216,23 @@ list_test(void) {
 
 
     {
-        assert(list_dup(NULL) == NULL);
+        assert(list_copy(NULL) == NULL);
     }
 
     {
-        char *a = string_dup("a");
-        char *b = string_dup("b");
-        char *c = string_dup("c");
+        char *a = string_copy("a");
+        char *b = string_copy("b");
+        char *c = string_copy("c");
 
         list_t *list = list_new_with((destroy_fn_t *) string_destroy);
         list_set_equal_fn(list, (equal_fn_t *) string_equal_mod_case);
-        list_set_dup_fn(list, (dup_fn_t *) string_dup);
+        list_set_copy_fn(list, (copy_fn_t *) string_copy);
 
         list_push(list, a);
         list_push(list, b);
         list_push(list, c);
 
-        list_t *copy = list_dup(list);
+        list_t *copy = list_copy(list);
         list_set_destroy_fn(copy, (destroy_fn_t *) string_destroy);
         list_set_equal_fn(copy, (equal_fn_t *) string_equal_mod_case);
 
@@ -253,9 +253,9 @@ list_test(void) {
     {
         // list_remove with destroy_fn
 
-        char *a = string_dup("a");
-        char *b = string_dup("b");
-        char *c = string_dup("c");
+        char *a = string_copy("a");
+        char *b = string_copy("b");
+        char *c = string_copy("c");
 
         list_t *list = list_new();
         list_set_destroy_fn(list, (destroy_fn_t *) string_destroy);

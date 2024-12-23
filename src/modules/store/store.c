@@ -47,7 +47,7 @@ store_get_cache(store_t *self, const char* path) {
 
 void
 store_set_cache(store_t *self, const char* path, blob_t *blob) {
-    char *key = string_dup(path);
+    char *key = string_copy(path);
     bool ok = hash_set(self->cached_blob_hash, key, blob);
     if (!ok) string_destroy(&key);
 }

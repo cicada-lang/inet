@@ -7,7 +7,7 @@ string_test(void) {
     assert(string_equal("abc", "abc"));
     assert(!string_equal("abc", "abd"));
 
-    char *abc = string_dup("abc");
+    char *abc = string_copy("abc");
     assert(string_equal("abc", abc));
 
     assert(string_length("") == 0);
@@ -18,21 +18,63 @@ string_test(void) {
     string_destroy(&abc);
     assert(abc == NULL);
 
-    assert(string_is_int("123"));
-    assert(!string_is_int("a123"));
+    {
+        assert(string_is_int_of_base("123", 10));
+        assert(string_is_int_of_base("-123", 10));
 
-    assert(string_parse_int_base_10("") == 0);
-    assert(string_parse_int_base_10("-") == 0);
-    assert(string_parse_int_base_10("-1") == -1);
-    assert(string_parse_int_base_10("123") == 123);
-    assert(string_parse_int_base_10("-123") == -123);
+        assert(!string_is_int_of_base("123", 3));
+        assert(!string_is_int_of_base("-123", 3));
+    }
 
-    assert(string_parse_uint_base_16("") == 0);
-    assert(string_parse_uint_base_16("f") == 15);
-    assert(string_parse_uint_base_16("F") == 15);
-    assert(string_parse_uint_base_16("ff") == 255);
-    assert(string_parse_uint_base_16("FF") == 255);
-    assert(string_parse_uint_base_16("FF:123") == 255);
+    {
+        assert(string_is_int("123"));
+        assert(string_is_int("-123"));
+        assert(string_is_int("+123"));
+        assert(!string_is_int("a123"));
+        assert(!string_is_int("123a"));
+
+        assert(!string_is_int("0x123z"));
+        assert(string_is_int("0x123a"));
+        assert(string_is_int("0x123A"));
+        assert(string_is_int("-0x123a"));
+        assert(!string_is_int("--0x123A"));
+
+        // 0b and 0o is not handled by c.
+
+        assert(!string_is_int("0b10"));
+        assert(!string_is_int("0o10"));
+    }
+
+    {
+        assert(string_parse_int("", 10) == 0);
+        assert(string_parse_int("-", 10) == 0);
+        assert(string_parse_int("-1", 10) == -1);
+        assert(string_parse_int("123", 10) == 123);
+        assert(string_parse_int("+123", 10) == 123);
+        assert(string_parse_int("-123", 10) == -123);
+
+        assert(string_parse_int("0x10", 16) == 16);
+        assert(string_parse_int("+0x10", 16) == 16);
+        assert(string_parse_int("-0x10", 16) == -16);
+
+        assert(string_parse_int("010", 8) == 8);
+        assert(string_parse_int("-010", 8) == -8);
+
+        assert(string_parse_int("10", 8) == 8);
+        assert(string_parse_int("-10", 8) == -8);
+
+        assert(string_parse_int("10", 2) == 2);
+        assert(string_parse_int("-10", 2) == -2);
+    }
+
+    {
+        assert(string_parse_uint("", 16) == 0);
+        assert(string_parse_uint("f", 16) == 15);
+        assert(string_parse_uint("F", 16) == 15);
+        assert(string_parse_uint("ff", 16) == 255);
+        assert(string_parse_uint("FF", 16) == 255);
+        assert(string_parse_uint("FF:123", 16) == 255);
+    }
 
     char *abc123 = string_append("abc", "123");
     assert(string_equal(abc123, "abc123"));
@@ -117,6 +159,66 @@ string_test(void) {
         }
     }
 
+    {
+        assert(string_is_xint("0b10"));
+        assert(string_is_xint("+0b10"));
+        assert(string_is_xint("-0b10"));
+        assert(!string_is_xint("0b12"));
+        assert(!string_is_xint("++0b10"));
+        assert(!string_is_xint("--0b11"));
+    }
+
+    {
+        assert(string_parse_xint("0b10") == 2);
+        assert(string_parse_xint("+0b10") == 2);
+        assert(string_parse_xint("-0b10") == -2);
+
+        assert(string_parse_xint("0o10") == 8);
+        assert(string_parse_xint("+0o10") == 8);
+        assert(string_parse_xint("-0o10") == -8);
+
+        assert(string_parse_xint("0x10") == 16);
+        assert(string_parse_xint("+0x10") == 16);
+        assert(string_parse_xint("-0x10") == -16);
+
+        assert(string_parse_xint("10") == 10);
+        assert(string_parse_xint("+10") == 10);
+        assert(string_parse_xint("-10") == -10);
+    }
+
+    {
+        assert(string_is_double("0"));
+        assert(string_is_double("0.1"));
+        assert(string_is_double(".1"));
+        assert(string_is_double("0.0"));
+
+        assert(string_is_double("+0"));
+        assert(string_is_double("+0.1"));
+        assert(string_is_double("+.1"));
+        assert(string_is_double("+0.0"));
+
+        assert(string_is_double("-0"));
+        assert(string_is_double("-0.1"));
+        assert(string_is_double("-.1"));
+        assert(string_is_double("-0.0"));
+    }
+
+    {
+        assert(string_parse_double("0") == 0);
+        assert(string_parse_double("0.1") == 0.1);
+        assert(string_parse_double(".1") == 0.1);
+        assert(string_parse_double("0.0") == 0);
+
+        assert(string_parse_double("+0") == 0);
+        assert(string_parse_double("+0.1") == 0.1);
+        assert(string_parse_double("+.1") == 0.1);
+        assert(string_parse_double("+0.0") == 0);
+
+        assert(string_parse_double("-0") == 0);
+        assert(string_parse_double("-0.1") == -0.1);
+        assert(string_parse_double("-.1") == -0.1);
+        assert(string_parse_double("-0.0") == 0);
+    }
 
     printf("</string_test>\n");
 }

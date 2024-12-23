@@ -12,9 +12,9 @@ array_test(void) {
     assert(array_length(array) == 0);
     assert(array_is_empty(array));
 
-    char *cheese = string_dup("boursin");
-    char *bread = string_dup("baguette");
-    char *wine = string_dup("bordeaux");
+    char *cheese = string_copy("boursin");
+    char *bread = string_copy("baguette");
+    char *wine = string_copy("bordeaux");
 
     array_push(array, cheese);
     assert(array_length(array) == 1);
@@ -56,9 +56,9 @@ array_test(void) {
     assert(array == NULL);
 
     {
-        char *cheese = string_dup("boursin");
-        char *bread = string_dup("baguette");
-        char *wine = string_dup("bordeaux");
+        char *cheese = string_copy("boursin");
+        char *bread = string_copy("baguette");
+        char *wine = string_copy("bordeaux");
 
         array_t *array = array_new_with(
             3, (destroy_fn_t *) string_destroy);

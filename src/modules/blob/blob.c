@@ -66,7 +66,7 @@ blob_equal(blob_t *left, blob_t *right) {
 }
 
 blob_t *
-blob_dup(blob_t *self) {
+blob_copy(blob_t *self) {
     blob_t *blob = blob_new(self->size);
     memcpy(blob->bytes, self->bytes, self->size);
     return blob;

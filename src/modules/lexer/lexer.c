@@ -108,7 +108,7 @@ lexer_lex_word(lexer_t *self) {
         if (isspace(c) || lexer_is_finished(self)) {
             size_t start = self->cursor;
             size_t end = self->cursor + strlen(self->buffer);
-            char *string = string_dup(self->buffer);
+            char *string = string_copy(self->buffer);
             token_t *token = token_new(string, start, end);
             list_push(self->token_list, token);
             self->buffer[0] = '\0';

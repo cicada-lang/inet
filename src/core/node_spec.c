@@ -3,7 +3,7 @@
 port_spec_t *
 port_spec_new(const char *name, bool is_principal) {
     port_spec_t *self = new(port_spec_t);
-    self->name = string_dup(name);
+    self->name = string_copy(name);
     self->is_principal = is_principal;
     return self;
 }
@@ -26,7 +26,7 @@ node_spec_new(
 ) {
     node_spec_t *self = new(node_spec_t);
     self->tag = NODE_SPEC;
-    self->name = string_dup(name);
+    self->name = string_copy(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;
     self->arity = input_arity + output_arity;

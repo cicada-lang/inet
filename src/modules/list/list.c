@@ -15,7 +15,7 @@ struct list_t {
     size_t length;
     destroy_fn_t *destroy_fn;
     equal_fn_t *equal_fn;
-    dup_fn_t *dup_fn;
+    copy_fn_t *copy_fn;
 };
 
 list_t *
@@ -65,8 +65,8 @@ list_set_equal_fn(list_t *self, equal_fn_t *equal_fn) {
 }
 
 void
-list_set_dup_fn(list_t *self, dup_fn_t *dup_fn) {
-    self->dup_fn = dup_fn;
+list_set_copy_fn(list_t *self, copy_fn_t *copy_fn) {
+    self->copy_fn = copy_fn;
 }
 
 list_t *
@@ -77,14 +77,14 @@ list_new_with(destroy_fn_t *destroy_fn) {
 }
 
 list_t *
-list_dup(list_t *self) {
+list_copy(list_t *self) {
     if (!self) return NULL;
 
     list_t *list = list_new();
     void *value = list_first(self);
     while (value) {
-        if (self->dup_fn) {
-            list_push(list, self->dup_fn(value));
+        if (self->copy_fn) {
+            list_push(list, self->copy_fn(value));
         } else {
             list_push(list, value);
         }

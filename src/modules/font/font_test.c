@@ -12,7 +12,7 @@ font_test(void) {
     }
 
     {
-        char *base = dirname(string_dup(__FILE__));
+        char *base = dirname(string_copy(__FILE__));
         char *file_name = string_append(base, "/unifont-ascii.hex");
         file_t *file = file_open_or_fail(file_name, "r");
         font_t *font = font_from_hex_file(file);
@@ -31,7 +31,7 @@ font_test(void) {
     }
 
     {
-        char *base = dirname(string_dup(__FILE__));
+        char *base = dirname(string_copy(__FILE__));
         char *file_name = string_append(base, "/unifont-ascii.hex");
         file_t *file = file_open_or_fail(file_name, "r");
         font_t *font = font_from_hex_file(file);

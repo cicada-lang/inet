@@ -11,3 +11,8 @@ char_to_hex(char c) {
     fprintf(stderr, "[char_to_hex] unknown char: %c\n", c);
     exit(1);
 }
+
+bool
+char_is_digit(char c) {
+    return ('0' <= c && c <= '9');
+}

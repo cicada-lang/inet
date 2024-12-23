@@ -11,7 +11,7 @@ string_destroy(char **self_pointer) {
 }
 
 char*
-string_dup(const char *self) {
+string_copy(const char *self) {
     size_t length = strlen(self);
     char *string = malloc(length + 1);
     assert(string);
@@ -48,23 +48,45 @@ string_bernstein_hash(const char *self) {
 }
 
 bool
+string_is_int_of_base(const char *self, size_t base) {
+    char *end = NULL;
+    strtol(self, &end, base);
+    if (end == self) return false;
+    return *end == '\0';
+}
+
+bool
 string_is_int(const char *self) {
-    char *int_end = NULL;
-    strtol(self, &int_end, 0);
-    if (int_end == self) return false;
-    return *int_end == '\0';
+    char *end = NULL;
+    strtol(self, &end, 0);
+    if (end == self) return false;
+    return *end == '\0';
 }
 
 int64_t
-string_parse_int_base_10(const char *self) {
-    char *int_end = NULL;
-    return strtol(self, &int_end, 0);
+string_parse_int(const char *self, size_t base) {
+    char *end = NULL;
+    return strtol(self, &end, base);
 }
 
 uint64_t
-string_parse_uint_base_16(const char *self) {
-    char *int_end = NULL;
-    return strtoul(self, &int_end, 16);
+string_parse_uint(const char *self, size_t base) {
+    char *end = NULL;
+    return strtoul(self, &end, base);
+}
+
+bool
+string_is_double(const char *self) {
+    char *end = NULL;
+    strtod(self, &end);
+    if (end == self) return false;
+    return *end == '\0';
+}
+
+double
+string_parse_double(const char *self) {
+    char *end = NULL;
+    return strtod(self, &end);
 }
 
 bool
@@ -148,7 +170,7 @@ string_count_substring(const char *self, const char* substring) {
 
 char *
 string_to_lower_case(const char *self) {
-    char *result = string_dup(self);
+    char *result = string_copy(self);
     for (size_t i = 0; i < string_length(result); i++) {
         result[i] = tolower((unsigned char) result[i]);
     }
@@ -158,7 +180,7 @@ string_to_lower_case(const char *self) {
 
 char *
 string_to_upper_case(const char *self) {
-    char *result = string_dup(self);
+    char *result = string_copy(self);
     for (size_t i = 0; i < string_length(result); i++) {
         result[i] = toupper((unsigned char) result[i]);
     }
@@ -191,4 +213,91 @@ string_next_line(const char *self) {
         return NULL;
 
     return next_line;
+}
+
+bool
+string_is_xint(const char *self) {
+    size_t length = string_length(self);
+
+    if (string_starts_with(self, "-") ||
+        string_starts_with(self, "+"))
+    {
+
+        char *substring = string_slice(self, 1, length);
+        if (string_starts_with(substring, "-") ||
+            string_starts_with(substring, "+"))
+        {
+            free(substring);
+            return false;
+        }
+
+        bool result = string_is_xint(substring);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0x")) {
+        char *substring = string_slice(self, 2, length);
+        bool result = string_is_int_of_base(substring, 16);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0o")) {
+        char *substring = string_slice(self, 2, length);
+        bool result = string_is_int_of_base(substring, 8);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0b")) {
+        char *substring = string_slice(self, 2, length);
+        bool result = string_is_int_of_base(substring, 2);
+        free(substring);
+        return result;
+    }
+
+    return string_is_int_of_base(self, 10);
+}
+
+int64_t
+string_parse_xint(const char *self) {
+    size_t length = string_length(self);
+
+    if (string_starts_with(self, "-")) {
+        char *substring = string_slice(self, 1, length);
+        int64_t result = string_parse_xint(substring);
+        free(substring);
+        return -result;
+    }
+
+    if (string_starts_with(self, "+")) {
+        char *substring = string_slice(self, 1, length);
+        int64_t result = string_parse_xint(substring);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0x")) {
+        char *substring = string_slice(self, 2, length);
+        int64_t result = string_parse_int(substring, 16);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0o")) {
+        char *substring = string_slice(self, 2, length);
+        int64_t result = string_parse_int(substring, 8);
+        free(substring);
+        return result;
+    }
+
+    if (string_starts_with(self, "0b")) {
+        char *substring = string_slice(self, 2, length);
+        int64_t result = string_parse_int(substring, 2);
+        free(substring);
+        return result;
+    }
+
+    return string_parse_int(self, 10);
 }

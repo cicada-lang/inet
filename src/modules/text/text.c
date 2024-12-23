@@ -66,7 +66,7 @@ text_equal(const text_t *left, const text_t *right) {
 }
 
 text_t *
-text_dup(const text_t *self) {
+text_copy(const text_t *self) {
     text_t *text = text_new(self->length);
 
     memcpy(
@@ -120,7 +120,7 @@ text_to_string(text_t *self) {
         cursor += utf8_char_length(dest[cursor]);
     }
 
-    char *string = string_dup(dest);
+    char *string = string_copy(dest);
     free(dest);
     return string;
 }
