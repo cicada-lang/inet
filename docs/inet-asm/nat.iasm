@@ -1,14 +1,14 @@
 @zero/in 0
 @zero/out 1
-@zero/node :value!
+@zero/node :value! END
 
 @add1/in 1
 @add1/out 1
-@add1/node :prev :value!
+@add1/node :prev :value! END
 
 @add/in 2
 @add/out 1
-@add/node :target! :addend :result
+@add/node :target! :addend :result END
 
 @add/-/zero
   $result $addend
@@ -26,5 +26,4 @@
   two two add
   wire-print-net
   run
-  wire-print-net
-  END
+  wire-print-net END
