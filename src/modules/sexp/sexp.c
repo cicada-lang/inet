@@ -22,7 +22,7 @@ list_sexp_t *
 list_sexp_new(void) {
     list_sexp_t *self = new(list_sexp_t);
     self->kind = LIST_SEXP;
-    self->sexp_list = list_new();
+    self->sexp_list = list_new_with((destroy_fn_t *) sexp_destroy);
     return self;
 }
 
