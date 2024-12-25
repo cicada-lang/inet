@@ -1,8 +1,3 @@
-# sexp
-
-[sexp] sexp_test -- test sexp_parse by sexp_print
-
-[sexp] atom_sexp_print -- handle \n and other \chars
 # net
 
 [net] move net out of vm
@@ -17,6 +12,10 @@
 [example] `examples/combinators.inet` -- interaction combinators
 [example] `examples/lambda.inet` -- use interaction combinators
 [example] `examples/turing.inet` -- coding turing machine
+
+# sexp
+
+[sexp] atom_sexp_print -- handle \n and other \chars
 
 # primitive value
 

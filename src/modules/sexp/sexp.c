@@ -138,9 +138,13 @@ static void
 list_sexp_print(const list_sexp_t *list_sexp, file_t *file) {
     fprintf(file, "(");
     sexp_t *sexp = list_first(list_sexp->sexp_list);
+    size_t count = 0;
     while (sexp) {
         sexp_print(sexp, file);
+        if (count != list_length(list_sexp->sexp_list) - 1)
+            fprintf(file, " ");
         sexp = list_next(list_sexp->sexp_list);
+        count++;
     }
     fprintf(file, ")");
 }
