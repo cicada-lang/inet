@@ -1,4 +1,4 @@
-<worker>
+<vm>
 <active-wire-list length="0">
 </active-wire-list>
 <return-stack length="0">
@@ -6,5 +6,5 @@
 <value-stack length="1">
 (sole₁)-value!-<>-
 </value-stack>
-</worker>
+</vm>
 

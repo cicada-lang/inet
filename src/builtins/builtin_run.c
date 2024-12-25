@@ -1,6 +1,6 @@
 #include "index.h"
 
 void
-builtin_run(worker_t *worker) {
-    worker_net_run(worker);
+builtin_run(vm_t *vm) {
+    vm_net_run(vm);
 }

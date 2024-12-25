@@ -15,7 +15,7 @@ import_builtins(mod_t *mod) {
     define_builtin(mod, "wire-pair", builtin_wire_pair);
 
     define_builtin(mod, "run", builtin_run);
-    define_builtin(mod, "print-worker", builtin_print_worker);
+    define_builtin(mod, "print-vm", builtin_print_vm);
     define_builtin(mod, "print-value-stack", builtin_print_value_stack);
     define_builtin(mod, "print-return-stack", builtin_print_return_stack);
 

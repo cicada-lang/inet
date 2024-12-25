@@ -1,9 +1,9 @@
 #include "index.h"
 
 debug_t *
-debug_new(worker_t *worker) {
+debug_new(vm_t *vm) {
     debug_t *self = new(debug_t);
-    self->worker = worker;
+    self->vm = vm;
 
     size_t width = 90 * TILE;
     size_t height = 60 * TILE;
@@ -80,7 +80,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count += passed;
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
-        worker_net_step(self->worker);
+        vm_net_step(self->vm);
         debug_update(self);
         self->running_frame_count = 0;
     }
@@ -99,7 +99,7 @@ hash_t *
 debug_new_node_hash(debug_t *self) {
     hash_t *node_hash = hash_new();
 
-    wire_t *root = stack_top(self->worker->value_stack);
+    wire_t *root = stack_top(self->vm->value_stack);
     if (!root ||
         !root->opposite ||
         !root->opposite->node)
@@ -136,10 +136,10 @@ init_node_hash(debug_t *self) {
 
 static void
 init_node_physics(debug_t *self) {
-    if (stack_is_empty(self->worker->value_stack))
+    if (stack_is_empty(self->vm->value_stack))
         return;
 
-    wire_t *wire = stack_top(self->worker->value_stack);
+    wire_t *wire = stack_top(self->vm->value_stack);
     self->node_physics->root = wire;
     node_physics_add_nodes(
         self->node_physics,
@@ -164,10 +164,10 @@ on_click(debug_t *self, canvas_t *canvas, uint8_t button, bool is_release) {
 }
 
 void
-debug_start(worker_t *worker) {
+debug_start(vm_t *vm) {
     srand(time(NULL));
 
-    debug_t *self = debug_new(worker);
+    debug_t *self = debug_new(vm);
     init_node_hash(self);
     init_node_physics(self);
 

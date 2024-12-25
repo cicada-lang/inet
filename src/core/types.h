@@ -23,7 +23,7 @@ typedef struct wire_t wire_t;
 typedef struct wire_iter_t wire_iter_t;
 typedef struct mod_t mod_t;
 typedef struct frame_t frame_t;
-typedef struct worker_t worker_t;
+typedef struct vm_t vm_t;
 typedef struct op_t op_t;
 typedef struct call_builtin_op_t call_builtin_op_t;
 typedef struct call_program_op_t call_program_op_t;

@@ -1,16 +1,16 @@
 #include "index.h"
 
 static void compile_token(
-    const worker_t *worker,
+    const vm_t *vm,
     program_t *program,
     const token_t *token);
 
 program_t *
-compile(const worker_t *worker, list_t *token_list) {
+compile(const vm_t *vm, list_t *token_list) {
     program_t *program = program_new();
     token_t *token = list_first(token_list);
     while (token) {
-        compile_token(worker, program, token);
+        compile_token(vm, program, token);
         token = list_next(token_list);
     }
 
@@ -28,24 +28,24 @@ static char *parse_reversed_free_wire_ref_node_name(const char *word);
 static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
 void
-compile_token(const worker_t *worker, program_t *program, const token_t *token) {
-    mod_t *mod = worker->mod;
+compile_token(const vm_t *vm, program_t *program, const token_t *token) {
+    mod_t *mod = vm->mod;
     char *word = token->string;
 
     if (is_free_wire_ref(word)) {
         char *node_name = parse_free_wire_ref_node_name(word);
         char *port_name = parse_free_wire_ref_port_name(word);
-        check_node_name_defined(worker, node_name, token);
-        check_port_name_defined(worker, node_name, port_name, token);
+        check_node_name_defined(vm, node_name, token);
+        check_port_name_defined(vm, node_name, port_name, token);
         emit_use_free_wire(mod, program, node_name, port_name);
     } else if (is_reversed_free_wire_ref(word)) {
         char *node_name = parse_reversed_free_wire_ref_node_name(word);
         char *port_name = parse_reversed_free_wire_ref_port_name(word);
-        check_node_name_defined(worker, node_name, token);
-        check_port_name_defined(worker, node_name, port_name, token);
+        check_node_name_defined(vm, node_name, token);
+        check_port_name_defined(vm, node_name, port_name, token);
         emit_reconnect_free_wire(mod, program, node_name, port_name);
     } else {
-        check_name_defined(worker, word, token);
+        check_name_defined(vm, word, token);
         emit_call(mod, program, word);
     }
 }

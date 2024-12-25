@@ -18,7 +18,7 @@ run(commander_t *commander) {
 
     modules_test();
 
-    worker_test();
+    vm_test();
     parser_test();
 
     printf("</self_test>\n");

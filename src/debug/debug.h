@@ -1,7 +1,7 @@
 #pragma once
 
 struct debug_t {
-    worker_t *worker;
+    vm_t *vm;
 
     canvas_t *canvas;
     bool step_button_is_pressed;
@@ -17,7 +17,7 @@ struct debug_t {
     node_physics_t *node_physics;
 };
 
-debug_t *debug_new(worker_t *worker);
+debug_t *debug_new(vm_t *vm);
 void debug_destroy(debug_t **self_pointer);
 
 bool debug_is_any_button_pressed(debug_t *self);
@@ -25,4 +25,4 @@ bool debug_is_any_button_pressed(debug_t *self);
 hash_t *debug_new_node_hash(debug_t *self);
 void debug_update(debug_t *self);
 
-void debug_start(worker_t *worker);
+void debug_start(vm_t *vm);

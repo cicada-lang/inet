@@ -1,8 +1,8 @@
 #include "index.h"
 
-worker_t *
-worker_new(mod_t *mod) {
-    worker_t *self = new(worker_t);
+vm_t *
+vm_new(mod_t *mod) {
+    vm_t *self = new(vm_t);
     self->mod = mod;
     self->active_wire_list = list_new();
     self->value_stack = stack_new_with((destroy_fn_t *) wire_destroy);
@@ -15,10 +15,10 @@ worker_new(mod_t *mod) {
 }
 
 void
-worker_destroy(worker_t **self_pointer) {
+vm_destroy(vm_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        worker_t *self = *self_pointer;
+        vm_t *self = *self_pointer;
         list_destroy(&self->active_wire_list);
         stack_destroy(&self->value_stack);
         stack_destroy(&self->return_stack);
@@ -28,14 +28,14 @@ worker_destroy(worker_t **self_pointer) {
 }
 
 void
-worker_net_run(worker_t *self) {
+vm_net_run(vm_t *self) {
     while (!list_is_empty(self->active_wire_list)) {
-        worker_net_step(self);
+        vm_net_step(self);
     }
 }
 
 void
-worker_net_step(worker_t *self) {
+vm_net_step(vm_t *self) {
     wire_t *active_wire = list_pop(self->active_wire_list);
     if (!active_wire) return;
 
@@ -49,28 +49,28 @@ worker_net_step(worker_t *self) {
     frame_t *frame = frame_new(rule->program);
     frame_collect_free_wires(frame, active_wire);
     stack_push(self->return_stack, frame);
-    worker_run_until(self, base_length);
+    vm_run_until(self, base_length);
 }
 
 void
-worker_run_until(worker_t *self, size_t base_length) {
+vm_run_until(vm_t *self, size_t base_length) {
     if (self->log_level > 0) {
-        worker_print(self, self->out);
+        vm_print(self, self->out);
         fprintf(self->out, "\n");
     }
 
     while (stack_length(self->return_stack) > base_length) {
-        worker_step(self);
+        vm_step(self);
 
         if (self->log_level > 0) {
-            worker_print(self, self->out);
+            vm_print(self, self->out);
             fprintf(self->out, "\n");
         }
     }
 }
 
 void
-worker_step(worker_t *self) {
+vm_step(vm_t *self) {
     if (stack_is_empty(self->return_stack)) return;
 
     frame_t *frame = stack_pop(self->return_stack);
@@ -85,8 +85,8 @@ worker_step(worker_t *self) {
 }
 
 void
-worker_print(const worker_t *self, file_t *file) {
-    fprintf(file, "<worker>\n");
+vm_print(const vm_t *self, file_t *file) {
+    fprintf(file, "<vm>\n");
 
     size_t active_wire_list_length = list_length(self->active_wire_list);
     fprintf(file, "<active-wire-list length=\"%lu\">\n", active_wire_list_length);
@@ -98,14 +98,14 @@ worker_print(const worker_t *self, file_t *file) {
     }
     fprintf(file, "</active-wire-list>\n");
 
-    worker_print_return_stack(self, file);
-    worker_print_value_stack(self, file);
+    vm_print_return_stack(self, file);
+    vm_print_value_stack(self, file);
 
-    fprintf(file, "</worker>\n");
+    fprintf(file, "</vm>\n");
 }
 
 void
-worker_print_return_stack(const worker_t *self, file_t *file) {
+vm_print_return_stack(const vm_t *self, file_t *file) {
     size_t return_stack_length = stack_length(self->return_stack);
     fprintf(file, "<return-stack length=\"%lu\">\n", return_stack_length);
     for (size_t i = 0; i < return_stack_length; i++) {
@@ -117,7 +117,7 @@ worker_print_return_stack(const worker_t *self, file_t *file) {
 }
 
 void
-worker_print_value_stack(const worker_t *self, file_t *file) {
+vm_print_value_stack(const vm_t *self, file_t *file) {
     size_t value_stack_length = stack_length(self->value_stack);
     fprintf(file, "<value-stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
@@ -130,21 +130,21 @@ worker_print_value_stack(const worker_t *self, file_t *file) {
 }
 
 void
-worker_connect_top_wire_pair(worker_t *worker) {
-    wire_t *second_wire = stack_pop(worker->value_stack);
-    wire_t *first_wire = stack_pop(worker->value_stack);
+vm_connect_top_wire_pair(vm_t *vm) {
+    wire_t *second_wire = stack_pop(vm->value_stack);
+    wire_t *first_wire = stack_pop(vm->value_stack);
 
     wire_t *first_opposite = wire_connect(second_wire, first_wire);
 
-    worker_maybe_add_active_wire(
-        worker,
+    vm_maybe_add_active_wire(
+        vm,
         first_opposite,
         first_opposite->opposite);
 }
 
 void
-worker_maybe_add_active_wire(
-    worker_t *worker,
+vm_maybe_add_active_wire(
+    vm_t *vm,
     wire_t *first_wire,
     wire_t *second_wire
 ) {
@@ -152,6 +152,6 @@ worker_maybe_add_active_wire(
         assert(first_wire->opposite == second_wire);
         assert(second_wire->opposite == first_wire);
 
-        list_push(worker->active_wire_list, first_wire);
+        list_push(vm->active_wire_list, first_wire);
     }
 }

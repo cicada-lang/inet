@@ -1,10 +1,10 @@
-<worker>
+<vm>
 <active-wire-list length="0">
 </active-wire-list>
 <return-stack length="1">
 <frame>
 <program>
-. print-worker <<< sole print-worker sole print-worker 
+. print-vm <<< sole print-vm sole print-vm 
 </program>
 <local-free-wires>
 </local-free-wires>
@@ -12,15 +12,15 @@
 </return-stack>
 <value-stack length="0">
 </value-stack>
-</worker>
+</vm>
 
-<worker>
+<vm>
 <active-wire-list length="0">
 </active-wire-list>
 <return-stack length="1">
 <frame>
 <program>
-. print-worker sole print-worker <<< sole print-worker 
+. print-vm sole print-vm <<< sole print-vm 
 </program>
 <local-free-wires>
 </local-free-wires>
@@ -29,9 +29,9 @@
 <value-stack length="1">
 (sole₁)-value!-<>-
 </value-stack>
-</worker>
+</vm>
 
-<worker>
+<vm>
 <active-wire-list length="0">
 </active-wire-list>
 <return-stack length="0">
@@ -40,5 +40,5 @@
 (sole₁)-value!-<>-
 (sole₂)-value!-<>-
 </value-stack>
-</worker>
+</vm>
 

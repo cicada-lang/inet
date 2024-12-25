@@ -1,6 +1,6 @@
 #pragma once
 
-typedef void (builtin_fn_t)(worker_t *worker);
+typedef void (builtin_fn_t)(vm_t *vm);
 
 struct builtin_spec_t {
     spec_tag_t tag;

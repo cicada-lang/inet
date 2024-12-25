@@ -1,2 +1,2 @@
 . wire-pair
-  print-worker
+  print-vm

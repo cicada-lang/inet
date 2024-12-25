@@ -1,9 +1,9 @@
 #include "index.h"
 
 void
-builtin_debug(worker_t *worker) {
-    fprintf(worker->out, "[debug] debug start\n");
-    debug_start(worker);
-    fprintf(worker->out, "[debug] debug end\n");
-    fprintf(worker->out, "\n");    
+builtin_debug(vm_t *vm) {
+    fprintf(vm->out, "[debug] debug start\n");
+    debug_start(vm);
+    fprintf(vm->out, "[debug] debug end\n");
+    fprintf(vm->out, "\n");    
 }

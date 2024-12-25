@@ -3,13 +3,13 @@
 static void mod_import_nat(mod_t *mod);
 
 void
-worker_test(void) {
-    printf("<worker_test>\n");
+vm_test(void) {
+    printf("<vm_test>\n");
 
-    mod_t *mod = mod_new("worker_test", "");
+    mod_t *mod = mod_new("vm_test", "");
     mod_import_nat(mod);
 
-    worker_t *worker = worker_new(mod);
+    vm_t *vm = vm_new(mod);
 
     program_t *program = program_new();
     emit_call(mod, program, "zero");
@@ -22,16 +22,16 @@ worker_test(void) {
     program_build(program);
 
     frame_t *frame = frame_new(program);
-    stack_push(worker->return_stack, frame);
+    stack_push(vm->return_stack, frame);
 
-    worker->log_level = 1;
-    worker_run_until(worker, 0);
-    worker_net_run(worker);
+    vm->log_level = 1;
+    vm_run_until(vm, 0);
+    vm_net_run(vm);
 
-    worker_destroy(&worker);
+    vm_destroy(&vm);
     mod_destroy(&mod);
 
-    printf("</worker_test>\n");
+    printf("</vm_test>\n");
 }
 
 void
