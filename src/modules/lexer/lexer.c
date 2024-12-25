@@ -39,6 +39,24 @@ current_char(const lexer_t *self) {
     return self->string[self->cursor];
 }
 
+static const char*
+current_substring(const lexer_t *self) {
+    return self->string + self->cursor;
+}
+
+const char*
+match_delimiter(const lexer_t *self) {
+    const char *delimiter = list_first(self->delimiter_list);
+    while (delimiter) {
+        if (string_starts_with(current_substring(self), delimiter))
+            return delimiter;
+
+        delimiter = list_next(self->delimiter_list);
+    }
+
+    return NULL;
+}
+
 static void
 step(lexer_t *self) {
     assert(!is_finished(self));
@@ -93,9 +111,7 @@ ignore_comment(lexer_t *self) {
     if (!self->line_comment)
         return false;
 
-    if (!string_starts_with(
-            self->string + self->cursor,
-            self->line_comment))
+    if (!string_starts_with(current_substring(self), self->line_comment))
         return false;
 
     forward(self, strlen(self->line_comment));

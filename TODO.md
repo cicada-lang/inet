@@ -1,6 +1,7 @@
+[lexer] lexer_add_delimiter
 [lexer] collect_delimiter -- for exmaples () [] {}
-[lexer] collect_int
-[lexer] collect_float
+[lexer] collect_int -- post processing
+[lexer] collect_float -- post processing
 [lexer] collect_string
 
 # sexp
