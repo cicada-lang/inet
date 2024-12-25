@@ -8,6 +8,16 @@ symbol_sexp_new(const token_t *token) {
     return self;
 }
 
+void
+symbol_sexp_destroy(symbol_sexp_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        symbol_sexp_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
 list_sexp_t *
 list_sexp_new(void) {
     list_sexp_t *self = new(list_sexp_t);

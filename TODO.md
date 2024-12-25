@@ -3,9 +3,7 @@
 
 # sexp
 
-[sexp] symbol_sexp_destroy
 [sexp] list_sexp_destroy
-
 [sexp] sexp_destroy
 
 [sexp] list_sexp_new -- list_new_with call sexp_destroy
