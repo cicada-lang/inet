@@ -118,8 +118,20 @@ sexp_parse(const char *string) {
 
 static void
 atom_sexp_print(const atom_sexp_t *atom_sexp, file_t *file) {
-    (void) atom_sexp;
-    (void) file;
+    switch (atom_sexp->token->kind) {
+    case GENERIC_TOKEN:
+    case DELIMITER_TOKEN:
+    case INT_TOKEN:
+    case FLOAT_TOKEN: {
+        fprintf(file, "%s", atom_sexp->token->string);
+        return;
+    }
+
+    case STRING_TOKEN: {
+        fprintf(file, "\"%s\"", atom_sexp->token->string);
+        return;
+    }
+    }
 }
 
 static void

@@ -1,6 +1,5 @@
 # sexp
 
-[sexp] atom_sexp_print
 [sexp] sexp_test -- test sexp_parse by sexp_print
 
 [sexp] atom_sexp_print -- handle \n and other \chars
