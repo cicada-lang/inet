@@ -25,3 +25,14 @@ list_sexp_new(void) {
     self->sexp_list = list_new();
     return self;
 }
+
+void
+list_sexp_destroy(list_sexp_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        list_sexp_t *self = *self_pointer;
+        list_destroy(&self->sexp_list);
+        free(self);
+        *self_pointer = NULL;
+    }
+}
