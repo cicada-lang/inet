@@ -1,8 +1,7 @@
 # sexp
 
-[sexp] parse_list
-[sexp] parse_sexp
-[sexp] sexp_test -- test sexp_parse
+[sexp] sexp_print
+[sexp] sexp_test -- test sexp_parse by sexp_print
 
 # net
 
