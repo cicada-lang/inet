@@ -44,7 +44,7 @@ current_substring(const lexer_t *self) {
     return self->string + self->cursor;
 }
 
-const char*
+static const char*
 match_delimiter(const lexer_t *self) {
     const char *delimiter = list_first(self->delimiter_list);
     while (delimiter) {
@@ -135,7 +135,7 @@ collect_generic(lexer_t *self) {
     while (true) {
         char c = current_char(self);
 
-        if (isspace(c) || is_finished(self)) {
+        if (isspace(c) || match_delimiter(self) || is_finished(self)) {
             size_t start = self->cursor;
             size_t end = self->cursor + strlen(self->buffer);
             char *string = string_copy(self->buffer);
