@@ -19,6 +19,7 @@ modules_test(void) {
     text_test();
     font_test();
     lexer_test();
+    sexp_test();
     canvas_test();
     image_test();
     store_test();

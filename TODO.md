@@ -1,6 +1,5 @@
 # sexp
 
-[sexp] setup sexp_test
 [sexp] sexp_t -- tagged pointer
 
 [sexp] symbol_sexp_t

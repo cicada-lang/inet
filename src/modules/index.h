@@ -16,6 +16,7 @@
 #include "text/index.h"
 #include "font/index.h"
 #include "lexer/index.h"
+#include "sexp/index.h"
 #include "file/index.h"
 #include "image/index.h"
 #include "store/index.h"
