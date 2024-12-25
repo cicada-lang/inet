@@ -1,7 +1,5 @@
 # sexp
 
-[sexp] sexp_t -- tagged pointer
-
 [sexp] symbol_sexp_t
 [sexp] symbol_sexp_new
 [sexp] symbol_sexp_destroy
