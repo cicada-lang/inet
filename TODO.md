@@ -1,4 +1,3 @@
-[lexer] token_t as kind
 [lexer] token has row and col (index from 0)
 [lexer] support () [] {}
 

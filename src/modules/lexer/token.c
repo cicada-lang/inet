@@ -1,9 +1,10 @@
 #include "index.h"
 
 token_t *
-token_new(char *string, size_t start, size_t end) {
+token_new(char *string, token_kind_t kind, size_t start, size_t end) {
     token_t *self = new(token_t);
     self->string = string;
+    self->kind = kind;
     self->start = start;
     self->end = end;
     return self;

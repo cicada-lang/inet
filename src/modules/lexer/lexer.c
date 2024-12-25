@@ -93,7 +93,7 @@ collect_generic(lexer_t *self) {
             size_t start = self->cursor;
             size_t end = self->cursor + strlen(self->buffer);
             char *string = string_copy(self->buffer);
-            token_t *token = token_new(string, start, end);
+            token_t *token = token_new(string, GENERIC_TOKEN, start, end);
             list_push(self->token_list, token);
             self->buffer[0] = '\0';
             self->buffer_length = 0;
