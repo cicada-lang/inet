@@ -1,6 +1,5 @@
 # sexp
 
-[sexp] atom_sexp -- use anonymous union
 [sexp] sexp_parse
 [sexp] sexp_test
 
