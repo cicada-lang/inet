@@ -3,7 +3,7 @@
 atom_sexp_t *
 atom_sexp_new(const token_t *token) {
     atom_sexp_t *self = new(atom_sexp_t);
-    self->kind = SYMBOL_SEXP;
+    self->kind = ATOM_SEXP;
     self->token = token;
     return self;
 }
@@ -43,7 +43,7 @@ sexp_destroy(sexp_t **self_pointer) {
     if (*self_pointer) {
         sexp_t *self = *self_pointer;
         switch (self->kind) {
-        case SYMBOL_SEXP: {
+        case ATOM_SEXP: {
             atom_sexp_destroy((atom_sexp_t **) self_pointer);
             return;
         }
