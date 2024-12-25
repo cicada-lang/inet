@@ -1,12 +1,11 @@
-[lexer] collect_int -- post processing
-[lexer] collect_float -- post processing
+[lexer] lexer_enable_int and lexer_enable_int
+[lexer] lexer_add_line_comment
+[lexer] string_token_t
 [lexer] collect_string
 
 # sexp
 
-[sexp] cons_sexp & null_sexp -- remove list_sexp
 [sexp] int_sexp & float_sexp & string_sexp
-
 [sexp] sexp_parse
 [sexp] sexp_test
 

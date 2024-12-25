@@ -1,5 +1,9 @@
 #pragma once
 
+// we do not handle (car . cdr)
+// because it is only one way of
+// interpreting a list of symbols.
+
 struct sexp_t { sexp_kind_t kind; };
 struct symbol_sexp_t { sexp_kind_t kind; const token_t *token; };
 struct list_sexp_t { sexp_kind_t kind; list_t *sexp_list; };

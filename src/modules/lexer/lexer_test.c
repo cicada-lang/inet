@@ -113,5 +113,29 @@ lexer_test(void) {
         token_destroy(&c);
     }
 
+    {
+        lexer->string = "1 1.0";
+        // lexer_enable_int(lexer);
+        // lexer_enable_float(lexer);
+
+        lexer_run(lexer);
+        list_t *token_list = lexer->token_list;
+        assert(list_length(token_list) == 2);
+
+        token_t *a = list_shift(token_list);
+        assert(string_equal(a->string, "1"));
+        assert(a->kind == INT_TOKEN);
+        assert(a->int_value == 1);
+        token_t *b = list_shift(token_list);
+        assert(string_equal(b->string, "1.0"));
+        assert(b->float_value == 1.0);
+
+        list_destroy(&token_list);
+        token_destroy(&a);
+        token_destroy(&b);
+    }
+
+    lexer_destroy(&lexer);
+
     printf("</lexer_test>\n");
 }

@@ -197,6 +197,33 @@ lexer_step(lexer_t *self) {
     collect_generic(self);
 }
 
+static void
+postprocess_int(lexer_t *self) {
+    token_t *token = list_first(self->token_list);
+    while (token) {
+        if (token->kind == GENERIC_TOKEN && string_is_xint(token->string)) {
+            token->kind = INT_TOKEN;
+            token->int_value = string_parse_xint(token->string);
+        }
+
+        token = list_next(self->token_list);
+    }
+}
+
+static void
+postprocess_float(lexer_t *self) {
+    token_t *token = list_first(self->token_list);
+    while (token) {
+        if (token->kind == GENERIC_TOKEN && string_is_double(token->string)) {
+            token->kind = FLOAT_TOKEN;
+            token->float_value = string_parse_double(token->string);
+        }
+
+        token = list_next(self->token_list);
+    }
+}
+
+
 void
 lexer_run(lexer_t *self) {
     assert(self->string);
@@ -209,4 +236,7 @@ lexer_run(lexer_t *self) {
     while (!is_finished(self)) {
         lexer_step(self);
     }
+
+    postprocess_int(self);
+    postprocess_float(self);
 }
