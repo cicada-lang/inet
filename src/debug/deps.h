@@ -2,5 +2,5 @@
 
 #include "../deps.h"
 #include "../config.h"
-#include "../core/index.h"
+#include "../vm/index.h"
 #include "../lang/index.h"
