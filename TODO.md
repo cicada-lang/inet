@@ -4,11 +4,11 @@
 # sexp
 
 [sexp] symbol_sexp_destroy
-
-[sexp] list_sexp_new
 [sexp] list_sexp_destroy
 
 [sexp] sexp_destroy
+
+[sexp] list_sexp_new -- list_new_with call sexp_destroy
 
 [sexp] sexp_parse
 [sexp] sexp_test
