@@ -3,9 +3,10 @@
 
 # sexp
 
-[sexp] sexp_destroy
-
 [sexp] list_sexp_new -- list_new_with call sexp_destroy
+
+rename op_tag to op_kind
+rename spec_tag to spec_kind
 
 [sexp] sexp_parse
 [sexp] sexp_test

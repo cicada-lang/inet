@@ -9,3 +9,5 @@ void symbol_sexp_destroy(symbol_sexp_t **self_pointer);
 
 list_sexp_t *list_sexp_new(void);
 void list_sexp_destroy(list_sexp_t **self_pointer);
+
+void sexp_destroy(sexp_t **self_pointer);

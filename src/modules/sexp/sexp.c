@@ -36,3 +36,22 @@ list_sexp_destroy(list_sexp_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+void
+sexp_destroy(sexp_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        sexp_t *self = *self_pointer;
+        switch (self->kind) {
+        case SYMBOL_SEXP: {
+            symbol_sexp_destroy((symbol_sexp_t **) self_pointer);
+            return;
+        }
+
+        case LIST_SEXP: {
+            list_sexp_destroy((list_sexp_t **) self_pointer);
+            return;
+        }
+        }
+    }
+}
