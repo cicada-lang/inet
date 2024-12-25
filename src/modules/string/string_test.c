@@ -39,9 +39,9 @@ string_test(void) {
         assert(string_is_int("-0x123a"));
         assert(!string_is_int("--0x123A"));
 
-        // 0b and 0o is not handled by c.
-
-        assert(!string_is_int("0b10"));
+        // 0b is handled by c32.
+        assert(string_is_int("0b10"));
+        // 0o is not handled by c.
         assert(!string_is_int("0o10"));
     }
 
