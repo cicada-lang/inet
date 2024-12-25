@@ -58,8 +58,16 @@ ignore_space(lexer_t *self) {
     return true;
 }
 
-static void
+static bool
 ignore_comment(lexer_t *self) {
+    if (!self->line_comment_start)
+        return false;
+
+    if (!string_starts_with(
+            self->string + self->cursor,
+            self->line_comment_start))
+        return false;
+
     self->cursor += strlen(self->line_comment_start);
 
     while (!is_finished(self)) {
@@ -67,11 +75,13 @@ ignore_comment(lexer_t *self) {
 
         if (c == '\n') {
             self->cursor++;
-            return;
+            break;
         } else {
             self->cursor++;
         }
     }
+
+    return true;
 }
 
 static void
@@ -99,16 +109,9 @@ void
 lexer_step(lexer_t *self) {
     if (current_char(self) == '\0') return;
     if (ignore_space(self)) return;
+    if (ignore_comment(self)) return;
 
-    if (self->line_comment_start &&
-               string_starts_with(
-                   self->string + self->cursor,
-                   self->line_comment_start)
-        ) {
-        ignore_comment(self);
-    } else {
-        collect_word(self);
-    }
+    collect_word(self);
 }
 
 void
