@@ -160,6 +160,43 @@ collect_char(lexer_t *self, char c) {
     assert(self->buffer_length <= MAX_TOKEN_LENGTH);
 }
 
+static bool
+collect_string(lexer_t *self) {
+    if (current_char(self) != '\"')
+        return false;
+
+    // self->buffer[0] = '\0';
+    // self->buffer_length = 0;
+
+    // step(self);
+
+    // while (true) {
+    //     char c = current_char(self);
+
+    //     if (c == '\"') {
+    //         size_t start = self->cursor;
+    //         size_t end = self->cursor + string_length(self->buffer);
+    //         char *string = string_copy(self->buffer);
+    //         token_t *token = token_new(
+    //             string,
+    //             GENERIC_TOKEN,
+    //             start, end,
+    //             self->lineno,
+    //             self->column);
+    //         list_push(self->token_list, token);
+
+    //         self->buffer[0] = '\0';
+    //         self->buffer_length = 0;
+    //         return;
+    //     } else {
+    //         collect_char(self, c);
+    //         step(self);
+    //     }
+    // }
+
+    return true;
+}
+
 static void
 collect_generic(lexer_t *self) {
     self->buffer[0] = '\0';
@@ -169,8 +206,8 @@ collect_generic(lexer_t *self) {
         char c = current_char(self);
 
         if (isspace(c) || match_delimiter(self) || is_finished(self)) {
-            size_t start = self->cursor;
-            size_t end = self->cursor + string_length(self->buffer);
+            size_t end = self->cursor;
+            size_t start = end - string_length(self->buffer);
             char *string = string_copy(self->buffer);
             token_t *token = token_new(
                 string,
@@ -195,6 +232,7 @@ lexer_step(lexer_t *self) {
     if (ignore_space(self)) return;
     if (ignore_comment(self)) return;
     if (collect_delimiter(self)) return;
+    if (collect_string(self)) return;
 
     collect_generic(self);
 }

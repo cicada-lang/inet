@@ -1,4 +1,3 @@
-[lexer] string_token_t
 [lexer] collect_string
 
 # sexp
