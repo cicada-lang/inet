@@ -15,6 +15,7 @@ lexer_new(void) {
     self->delimiter_list = list_new();
     self->enable_int = false;
     self->enable_float = false;
+    self->enable_string = false;
     lexer_init(self);
     return self;
 }
@@ -165,36 +166,60 @@ collect_string(lexer_t *self) {
     if (current_char(self) != '\"')
         return false;
 
-    // self->buffer[0] = '\0';
-    // self->buffer_length = 0;
+    self->buffer[0] = '\0';
+    self->buffer_length = 0;
 
-    // step(self);
+    step(self);
 
-    // while (true) {
-    //     char c = current_char(self);
+    while (true) {
+        if (is_finished(self)) {
+            assert(false && "double qouted string mismatch");
+        }
 
-    //     if (c == '\"') {
-    //         size_t start = self->cursor;
-    //         size_t end = self->cursor + string_length(self->buffer);
-    //         char *string = string_copy(self->buffer);
-    //         token_t *token = token_new(
-    //             string,
-    //             GENERIC_TOKEN,
-    //             start, end,
-    //             self->lineno,
-    //             self->column);
-    //         list_push(self->token_list, token);
+        char c = current_char(self);
 
-    //         self->buffer[0] = '\0';
-    //         self->buffer_length = 0;
-    //         return;
-    //     } else {
-    //         collect_char(self, c);
-    //         step(self);
-    //     }
-    // }
+        if (c == '\\') {
+            step(self);
 
-    return true;
+            char c = current_char(self);
+
+            // escape char form: https://www.json.org/json-en.html
+            if (c == 'n') collect_char(self, '\n');
+            else if (c == 't') collect_char(self, '\t');
+            else if (c == 'b') collect_char(self, '\b');
+            else if (c == 'f') collect_char(self, '\f');
+            else if (c == 'r') collect_char(self, '\r');
+            else if (c == '0') collect_char(self, '\0');
+            else if (c == '"') collect_char(self, '\"');
+            else if (c == '\\') collect_char(self, '\\');
+            else assert(false && "unknown escape char");
+
+            step(self);
+            continue;
+        }
+
+        if (c == '\"') {
+            size_t end = self->cursor;
+            size_t start = end - string_length(self->buffer);
+            char *string = string_copy(self->buffer);
+            token_t *token = token_new(
+                string,
+                STRING_TOKEN,
+                start, end,
+                self->lineno,
+                self->column);
+            list_push(self->token_list, token);
+
+            self->buffer[0] = '\0';
+            self->buffer_length = 0;
+
+            step(self);
+            return true;
+        }
+
+        collect_char(self, c);
+        step(self);
+    }
 }
 
 static void
@@ -220,10 +245,10 @@ collect_generic(lexer_t *self) {
             self->buffer[0] = '\0';
             self->buffer_length = 0;
             return;
-        } else {
-            collect_char(self, c);
-            step(self);
         }
+
+        collect_char(self, c);
+        step(self);
     }
 }
 
@@ -232,7 +257,7 @@ lexer_step(lexer_t *self) {
     if (ignore_space(self)) return;
     if (ignore_comment(self)) return;
     if (collect_delimiter(self)) return;
-    if (collect_string(self)) return;
+    if (self->enable_string && collect_string(self)) return;
 
     collect_generic(self);
 }

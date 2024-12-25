@@ -1,5 +1,3 @@
-[lexer] collect_string
-
 # sexp
 
 [sexp] int_sexp & float_sexp & string_sexp

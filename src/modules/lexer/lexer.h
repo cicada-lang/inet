@@ -18,6 +18,7 @@ struct lexer_t {
 
     bool enable_int;
     bool enable_float;
+    bool enable_string;
 };
 
 lexer_t *lexer_new(void);
