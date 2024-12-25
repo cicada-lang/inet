@@ -3,7 +3,7 @@
 typedef void (builtin_fn_t)(vm_t *vm);
 
 struct builtin_spec_t {
-    spec_tag_t tag;
+    spec_kind_t kind;
     char *name;
     builtin_fn_t *builtin_fn;
 };

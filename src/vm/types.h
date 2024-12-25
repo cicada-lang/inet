@@ -7,7 +7,7 @@ typedef enum {
     PROGRAM_SPEC,
     NODE_SPEC,
     BUILTIN_SPEC,
-} spec_tag_t;
+} spec_kind_t;
 
 typedef enum {
     CALL_BUILTIN_OP,
@@ -15,7 +15,7 @@ typedef enum {
     CALL_NODE_OP,
     CONNECT_OP,
     GET_FREE_WIRE_OP,
-} op_tag_t;
+} op_kind_t;
 
 typedef struct node_t node_t;
 typedef struct node_iter_t node_iter_t;

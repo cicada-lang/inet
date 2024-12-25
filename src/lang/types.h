@@ -5,7 +5,7 @@ typedef enum {
     DEFINE_RULE_STMT,
     DEFINE_PROGRAM_STMT,
     RUN_PROGRAM_STMT,
-} stmt_tag_t;
+} stmt_kind_t;
 
 typedef struct stmt_t stmt_t;
 typedef struct define_node_stmt_t define_node_stmt_t;

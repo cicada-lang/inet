@@ -9,7 +9,7 @@ port_spec_t *port_spec_new(const char *name, bool is_principal);
 void port_spec_destroy(port_spec_t **self_pointer);
 
 struct node_spec_t {
-    spec_tag_t tag;
+    spec_kind_t kind;
     char *name;
     port_index_t input_arity;
     port_index_t output_arity;

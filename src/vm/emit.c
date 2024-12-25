@@ -6,7 +6,7 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
 
     assert(unknown_spec && "[emit_call] unknown name");
 
-    switch (unknown_spec->tag) {
+    switch (unknown_spec->kind) {
     case BUILTIN_SPEC: {
         const builtin_spec_t *spec = (builtin_spec_t *) unknown_spec;
         program_add_op(program, (op_t *) call_builtin_op_new(spec));

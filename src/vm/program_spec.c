@@ -3,7 +3,7 @@
 program_spec_t *
 program_spec_new(const char *name, program_t *program) {
     program_spec_t *self = new(program_spec_t);
-    self->tag = PROGRAM_SPEC;
+    self->kind = PROGRAM_SPEC;
     self->name = string_copy(name);
     self->program = program;
     return self;
@@ -24,6 +24,6 @@ program_spec_destroy(program_spec_t **self_pointer) {
 const program_spec_t *
 program_spec_cast(const spec_t *spec) {
     assert(spec);
-    assert(spec->tag == PROGRAM_SPEC);
+    assert(spec->kind == PROGRAM_SPEC);
     return (program_spec_t *)spec;
 }

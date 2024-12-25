@@ -1,7 +1,7 @@
 #pragma once
 
 struct program_spec_t {
-    spec_tag_t tag;
+    spec_kind_t kind;
     char *name;
     program_t *program;
 };

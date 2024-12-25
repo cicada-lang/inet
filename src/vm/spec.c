@@ -5,7 +5,7 @@ spec_destroy(spec_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         spec_t *self = *self_pointer;
-        switch (self->tag) {
+        switch (self->kind) {
         case NODE_SPEC: {
             node_spec_destroy((node_spec_t **) self_pointer);
             return;
@@ -26,7 +26,7 @@ spec_destroy(spec_t **self_pointer) {
 
 const char *
 spec_name(spec_t *unknown_spec) {
-    switch (unknown_spec->tag) {
+    switch (unknown_spec->kind) {
     case NODE_SPEC: {
         node_spec_t *spec = (node_spec_t *) unknown_spec;
         return spec->name;
@@ -47,8 +47,8 @@ spec_name(spec_t *unknown_spec) {
 }
 
 const char *
-spec_tag_name(spec_tag_t tag) {
-    switch (tag) {
+spec_kind_name(spec_kind_t kind) {
+    switch (kind) {
     case NODE_SPEC: {
         return "node";
     }
@@ -67,7 +67,7 @@ spec_tag_name(spec_tag_t tag) {
 
 void
 spec_print(const spec_t *unknown_spec, file_t *file) {
-    switch (unknown_spec->tag) {
+    switch (unknown_spec->kind) {
     case NODE_SPEC: {
         node_spec_t *spec = (node_spec_t *) unknown_spec;
         fprintf(file, "* (%s) ", spec->name);

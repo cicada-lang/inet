@@ -1,6 +1,6 @@
 #pragma once
 
-struct stmt_t { stmt_tag_t tag; };
+struct stmt_t { stmt_kind_t kind; };
 
 // * -- define_node_stmt_t
 // ! -- define_rule_stmt_t
@@ -8,7 +8,7 @@ struct stmt_t { stmt_tag_t tag; };
 // . -- run_program_stmt_t
 
 struct define_node_stmt_t {
-    stmt_tag_t tag;
+    stmt_kind_t kind;
     token_t *head_token;
     char *name;
     list_t *input_token_list;
@@ -16,7 +16,7 @@ struct define_node_stmt_t {
 };
 
 struct define_rule_stmt_t {
-    stmt_tag_t tag;
+    stmt_kind_t kind;
     token_t *head_token;
     char *first_name;
     char *second_name;
@@ -24,14 +24,14 @@ struct define_rule_stmt_t {
 };
 
 struct define_program_stmt_t {
-    stmt_tag_t tag;
+    stmt_kind_t kind;
     token_t *head_token;
     char *name;
     list_t *token_list;
 };
 
 struct run_program_stmt_t {
-    stmt_tag_t tag;
+    stmt_kind_t kind;
     list_t *token_list;
 };
 

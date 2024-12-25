@@ -25,7 +25,7 @@ node_spec_new(
     port_index_t output_arity
 ) {
     node_spec_t *self = new(node_spec_t);
-    self->tag = NODE_SPEC;
+    self->kind = NODE_SPEC;
     self->name = string_copy(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;
@@ -55,7 +55,7 @@ node_spec_destroy(node_spec_t **self_pointer) {
 const node_spec_t *
 node_spec_cast(const spec_t *spec) {
     assert(spec);
-    assert(spec->tag == NODE_SPEC);
+    assert(spec->kind == NODE_SPEC);
     return (node_spec_t *)spec;
 }
 

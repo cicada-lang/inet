@@ -3,7 +3,7 @@
 call_builtin_op_t *
 call_builtin_op_new(const builtin_spec_t *builtin_spec) {
     call_builtin_op_t *self = new(call_builtin_op_t);
-    self->tag = CALL_BUILTIN_OP;
+    self->kind = CALL_BUILTIN_OP;
     self->builtin_spec = builtin_spec;
     return self;
 }
@@ -11,7 +11,7 @@ call_builtin_op_new(const builtin_spec_t *builtin_spec) {
 call_program_op_t *
 call_program_op_new(const program_spec_t *program_spec) {
     call_program_op_t *self = new(call_program_op_t);
-    self->tag = CALL_PROGRAM_OP;
+    self->kind = CALL_PROGRAM_OP;
     self->program_spec = program_spec;
     return self;
 }
@@ -19,7 +19,7 @@ call_program_op_new(const program_spec_t *program_spec) {
 call_node_op_t *
 call_node_op_new(const node_spec_t *node_spec) {
     call_node_op_t *self = new(call_node_op_t);
-    self->tag = CALL_NODE_OP;
+    self->kind = CALL_NODE_OP;
     self->node_spec = node_spec;
     return self;
 }
@@ -27,14 +27,14 @@ call_node_op_new(const node_spec_t *node_spec) {
 connect_op_t *
 connect_op_new(void) {
     connect_op_t *self = new(connect_op_t);
-    self->tag = CONNECT_OP;
+    self->kind = CONNECT_OP;
     return self;
 }
 
 use_free_wire_op_t *
 use_free_wire_op_new(const node_spec_t *node_spec, port_index_t index) {
     use_free_wire_op_t *self = new(use_free_wire_op_t);
-    self->tag = GET_FREE_WIRE_OP;
+    self->kind = GET_FREE_WIRE_OP;
     self->node_spec = node_spec;
     self->index = index;
     return self;
@@ -95,7 +95,7 @@ op_destroy(op_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         op_t *self = *self_pointer;
-        switch (self->tag) {
+        switch (self->kind) {
         case CALL_BUILTIN_OP: {
             call_builtin_op_destroy((call_builtin_op_t **) self_pointer);
             return;
@@ -126,7 +126,7 @@ op_destroy(op_t **self_pointer) {
 
 void
 op_print(const op_t *unknown_op, file_t *file) {
-    switch (unknown_op->tag) {
+    switch (unknown_op->kind) {
     case CALL_BUILTIN_OP: {
         call_builtin_op_t *op = (call_builtin_op_t *) unknown_op;
         fprintf(file, "%s", op->builtin_spec->name);

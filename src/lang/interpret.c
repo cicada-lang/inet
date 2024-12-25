@@ -12,7 +12,7 @@ compile_port_spec(const char *word) {
 
 void
 interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
-    switch (unknown_stmt->tag) {
+    switch (unknown_stmt->kind) {
     case DEFINE_NODE_STMT: {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);

@@ -3,7 +3,7 @@
 define_node_stmt_t *
 define_node_stmt_new(token_t *head_token, char *name) {
     define_node_stmt_t *self = new(define_node_stmt_t);
-    self->tag = DEFINE_NODE_STMT;
+    self->kind = DEFINE_NODE_STMT;
 
     self->head_token = head_token;
     self->name = name;
@@ -36,7 +36,7 @@ define_rule_stmt_new(
     list_t *token_list
 ) {
     define_rule_stmt_t *self = new(define_rule_stmt_t);
-    self->tag = DEFINE_RULE_STMT;
+    self->kind = DEFINE_RULE_STMT;
     self->head_token = head_token;
     self->first_name = first_name;
     self->second_name = second_name;
@@ -61,7 +61,7 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
 define_program_stmt_t *
 define_program_stmt_new(token_t *head_token, char *name, list_t *token_list) {
     define_program_stmt_t *self = new(define_program_stmt_t);
-    self->tag = DEFINE_PROGRAM_STMT;
+    self->kind = DEFINE_PROGRAM_STMT;
     self->head_token = head_token;
     self->name = name;
     self->token_list = token_list;
@@ -84,7 +84,7 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
 run_program_stmt_t *
 run_program_stmt_new(list_t *token_list) {
     run_program_stmt_t *self = new(run_program_stmt_t);
-    self->tag = RUN_PROGRAM_STMT;
+    self->kind = RUN_PROGRAM_STMT;
     self->token_list = token_list;
     return self;
 }
@@ -105,7 +105,7 @@ stmt_destroy(stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         stmt_t *self = *self_pointer;
-        switch (self->tag) {
+        switch (self->kind) {
         case DEFINE_NODE_STMT: {
             define_node_stmt_destroy((define_node_stmt_t **) self_pointer);
             return;

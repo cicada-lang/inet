@@ -1,28 +1,28 @@
 #pragma once
 
-struct op_t { op_tag_t tag; };
+struct op_t { op_kind_t kind; };
 
 struct call_builtin_op_t {
-    op_tag_t tag;
+    op_kind_t kind;
     const builtin_spec_t *builtin_spec;
 };
 
 struct call_program_op_t {
-    op_tag_t tag;
+    op_kind_t kind;
     const program_spec_t *program_spec;
 };
 
 struct call_node_op_t {
-    op_tag_t tag;
+    op_kind_t kind;
     const node_spec_t *node_spec;
 };
 
 struct connect_op_t {
-    op_tag_t tag;
+    op_kind_t kind;
 };
 
 struct use_free_wire_op_t {
-    op_tag_t tag;
+    op_kind_t kind;
     const node_spec_t *node_spec;
     port_index_t index;
 };
