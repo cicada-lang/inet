@@ -84,8 +84,8 @@ ignore_comment(lexer_t *self) {
     return true;
 }
 
-static void
-collect_word(lexer_t *self) {
+static bool
+collect_symbol(lexer_t *self) {
     while (true) {
         char c = current_char(self);
 
@@ -97,7 +97,7 @@ collect_word(lexer_t *self) {
             list_push(self->token_list, token);
             self->buffer[0] = '\0';
             self->buffer_length = 0;
-            return;
+            return true;
         } else {
             collect_char(self, c);
             self->cursor++;
@@ -107,11 +107,11 @@ collect_word(lexer_t *self) {
 
 void
 lexer_step(lexer_t *self) {
-    if (current_char(self) == '\0') return;
     if (ignore_space(self)) return;
     if (ignore_comment(self)) return;
+    if (collect_symbol(self)) return;
 
-    collect_word(self);
+    assert(false);
 }
 
 void

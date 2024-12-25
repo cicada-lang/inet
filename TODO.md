@@ -1,4 +1,4 @@
-[lexer] collect_word -- return bool
+[lexer] token_t as kind
 [lexer] support () [] {}
 [lexer] token has row and col -- index from 0
 [lexer] handle int and float
