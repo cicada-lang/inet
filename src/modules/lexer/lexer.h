@@ -9,7 +9,7 @@ struct lexer_t {
     char *buffer;
     size_t buffer_length;
     list_t *token_list;
-    const char *line_comment_start;
+    const char *line_comment;
     list_t *delimiter_list;
 };
 

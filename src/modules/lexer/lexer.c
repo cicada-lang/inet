@@ -61,15 +61,15 @@ ignore_space(lexer_t *self) {
 
 static bool
 ignore_comment(lexer_t *self) {
-    if (!self->line_comment_start)
+    if (!self->line_comment)
         return false;
 
     if (!string_starts_with(
             self->string + self->cursor,
-            self->line_comment_start))
+            self->line_comment))
         return false;
 
-    self->cursor += strlen(self->line_comment_start);
+    self->cursor += strlen(self->line_comment);
 
     while (!is_finished(self)) {
         char c = current_char(self);

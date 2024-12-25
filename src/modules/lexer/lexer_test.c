@@ -47,7 +47,7 @@ lexer_test(void) {
     }
 
     {
-        lexer->line_comment_start = "//";
+        lexer->line_comment = "//";
         lexer->string = "a b //x\n c";
         lexer_run(lexer);
         list_t *token_list = lexer->token_list;
@@ -67,7 +67,7 @@ lexer_test(void) {
     }
 
     {
-        lexer->line_comment_start = "--";
+        lexer->line_comment = "--";
         lexer->string = "a b --x\n c";
         lexer_run(lexer);
         list_t *token_list = lexer->token_list;

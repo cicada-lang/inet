@@ -83,7 +83,7 @@ void
 interpret_mod(vm_t *vm) {
     parser_t *parser = parser_new();
     parser->lexer = lexer_new();
-    parser->lexer->line_comment_start = "--";
+    parser->lexer->line_comment = "--";
     parser->src = vm->mod->src;
     parser->string = vm->mod->string;
     parser->err = vm->err;
