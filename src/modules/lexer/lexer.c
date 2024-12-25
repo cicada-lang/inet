@@ -84,8 +84,8 @@ ignore_comment(lexer_t *self) {
     return true;
 }
 
-static bool
-collect_symbol(lexer_t *self) {
+static void
+collect_generic(lexer_t *self) {
     while (true) {
         char c = current_char(self);
 
@@ -97,7 +97,7 @@ collect_symbol(lexer_t *self) {
             list_push(self->token_list, token);
             self->buffer[0] = '\0';
             self->buffer_length = 0;
-            return true;
+            return;
         } else {
             collect_char(self, c);
             self->cursor++;
@@ -109,9 +109,8 @@ void
 lexer_step(lexer_t *self) {
     if (ignore_space(self)) return;
     if (ignore_comment(self)) return;
-    if (collect_symbol(self)) return;
 
-    assert(false);
+    collect_generic(self);
 }
 
 void

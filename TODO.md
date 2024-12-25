@@ -1,6 +1,7 @@
 [lexer] token_t as kind
+[lexer] token has row and col (index from 0)
 [lexer] support () [] {}
-[lexer] token has row and col -- index from 0
+
 [lexer] handle int and float
 [lexer] handle string -- doublequoted
 
