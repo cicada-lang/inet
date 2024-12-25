@@ -1,7 +1,12 @@
 [lexer] support () [] {}
 [lexer] token has row and col -- index from 0
+[lexer] handle int and float
+[lexer] handle string -- doublequoted
 
 # sexp
+
+[sexp] cons_sexp & null_sexp -- remove list_sexp
+[sexp] int_sexp & float_sexp & string_sexp
 
 [sexp] sexp_parse
 [sexp] sexp_test

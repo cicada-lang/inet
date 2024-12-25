@@ -15,4 +15,4 @@ struct lexer_t {
 lexer_t *lexer_new(void);
 void lexer_destroy(lexer_t **self_pointer);
 
-void lexer_lex(lexer_t *self);
+void lexer_run(lexer_t *self);

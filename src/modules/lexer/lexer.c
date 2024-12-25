@@ -41,12 +41,12 @@ lexer_collect_char(lexer_t *self, char c) {
 
 // dispatch over current char in a loop.
 
-static void lexer_lex_ignore_space(lexer_t *self);
-static void lexer_lex_ignore_comment(lexer_t *self);
-static void lexer_lex_word(lexer_t *self);
+static void lexer_run_ignore_space(lexer_t *self);
+static void lexer_run_ignore_comment(lexer_t *self);
+static void lexer_run_word(lexer_t *self);
 
 void
-lexer_lex(lexer_t *self) {
+lexer_run(lexer_t *self) {
     assert(self->string);
 
     self->cursor = 0;
@@ -59,21 +59,21 @@ lexer_lex(lexer_t *self) {
         if (c == '\0') {
             return;
         } else if (isspace(c)) {
-            lexer_lex_ignore_space(self);
+            lexer_run_ignore_space(self);
         } else if (self->line_comment_start &&
                    string_starts_with(
                      self->string + self->cursor,
                      self->line_comment_start)
             ) {
-            lexer_lex_ignore_comment(self);
+            lexer_run_ignore_comment(self);
         } else {
-            lexer_lex_word(self);
+            lexer_run_word(self);
         }
     }
 }
 
 void
-lexer_lex_ignore_space(lexer_t *self) {
+lexer_run_ignore_space(lexer_t *self) {
     while (!lexer_is_finished(self)) {
         char c = lexer_current_char(self);
 
@@ -85,7 +85,7 @@ lexer_lex_ignore_space(lexer_t *self) {
 }
 
 void
-lexer_lex_ignore_comment(lexer_t *self) {
+lexer_run_ignore_comment(lexer_t *self) {
     self->cursor += strlen(self->line_comment_start);
 
     while (!lexer_is_finished(self)) {
@@ -101,7 +101,7 @@ lexer_lex_ignore_comment(lexer_t *self) {
 }
 
 void
-lexer_lex_word(lexer_t *self) {
+lexer_run_word(lexer_t *self) {
     while (true) {
         char c = lexer_current_char(self);
 

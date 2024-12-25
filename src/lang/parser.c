@@ -48,7 +48,7 @@ parser_parse(parser_t *self) {
     assert(self->lexer);
 
     self->lexer->string = self->string;
-    lexer_lex(self->lexer);
+    lexer_run(self->lexer);
     self->token_list = self->lexer->token_list;
 
     self->stmt_list = list_new_with((destroy_fn_t *) stmt_destroy);
