@@ -1,5 +1,6 @@
+ambr line_comment_start line_comment
 [lexer] token has row and col (index from 0)
-[lexer] support () [] {}
+[lexer] collect_delimiter -- for exmaples () [] {}
 
 [lexer] handle int and float
 [lexer] handle string -- doublequoted

@@ -6,6 +6,7 @@ lexer_new(void) {
     self->cursor = 0;
     self->buffer_length = 0;
     self->buffer = allocate(MAX_TOKEN_LENGTH + 1);
+    self->delimiter_list = list_new_with((destroy_fn_t *) string_destroy);
     return self;
 }
 
