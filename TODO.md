@@ -1,3 +1,4 @@
+[lexer] step functions return bool
 [lexer] support () [] {}
 [lexer] token has row and col -- index from 0
 [lexer] handle int and float
