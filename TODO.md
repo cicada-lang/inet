@@ -1,11 +1,16 @@
 # net
 
 [net] move net out of vm
+
 [vm] remove opcode -- use builtin functions
+
+- opcode 和 builtin （definition）之间的关系是什么？
+  传统的 forth 解决过这个问题了，read POL。
+  最好的 read POL 的方式，可能就是实现 xforth。
 
 # lang
 
-[lang] change to lisp syntax for scalable syntax.
+[lang] change to lisp syntax
 
 # example
 
