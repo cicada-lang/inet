@@ -114,3 +114,36 @@ sexp_parse(const char *string) {
     list_destroy(&sexp_list);
     return sexp;
 }
+
+
+static void
+atom_sexp_print(const atom_sexp_t *atom_sexp, file_t *file) {
+    (void) atom_sexp;
+    (void) file;
+}
+
+static void
+list_sexp_print(const list_sexp_t *list_sexp, file_t *file) {
+    fprintf(file, "(");
+    sexp_t *sexp = list_first(list_sexp->sexp_list);
+    while (sexp) {
+        sexp_print(sexp, file);
+        sexp = list_next(list_sexp->sexp_list);
+    }
+    fprintf(file, ")");
+}
+
+void
+sexp_print(const sexp_t *self, file_t *file) {
+    switch (self->kind) {
+    case ATOM_SEXP: {
+        atom_sexp_print((atom_sexp_t *) self, file);
+        return;
+    }
+
+    case LIST_SEXP: {
+        list_sexp_print((list_sexp_t *) self, file);
+        return;
+    }
+    }
+}

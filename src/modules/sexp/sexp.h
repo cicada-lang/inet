@@ -28,3 +28,5 @@ void sexp_destroy(sexp_t **self_pointer);
 
 list_t *sexp_parse_list(const char *string);
 sexp_t *sexp_parse(const char *string);
+
+void sexp_print(const sexp_t *self, file_t *file);
