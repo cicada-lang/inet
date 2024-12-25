@@ -5,7 +5,7 @@ rule_new(
     const node_spec_t *first_node_spec,
     const node_spec_t *second_node_spec,
     program_t *program
-    ) {
+) {
     rule_t *self = new(rule_t);
     self->first_node_spec = first_node_spec;
     self->second_node_spec = second_node_spec;

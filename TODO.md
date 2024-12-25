@@ -1,5 +1,5 @@
 [lexer] support () [] {}
-[lexer] token has row and col
+[lexer] token has row and col -- index from 0
 
 # sexp
 
@@ -9,6 +9,7 @@
 # net
 
 [net] move net out of vm
+[vm] remove opcode -- use builtin functions
 
 # lang
 
