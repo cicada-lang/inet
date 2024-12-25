@@ -59,13 +59,13 @@ sexp_destroy(sexp_t **self_pointer) {
 }
 
 static sexp_t *
-sexp_parse_token_list(list_t *token_list) {
+sexp_list(list_t *token_list) {
     (void) token_list;
     return NULL;
 }
 
-sexp_t *
-sexp_parse(const char *string) {
+list_t *
+sexp_parse_list(const char *string) {
     lexer_t *lexer = lexer_new();
     lexer->line_comment = ";";
     lexer->enable_int = true;
@@ -75,7 +75,15 @@ sexp_parse(const char *string) {
     lexer->string = string;
     lexer_run(lexer);
 
-    sexp_t *result = sexp_parse_token_list(lexer->token_list);
+    sexp_t *result = sexp_list(lexer->token_list);
     lexer_destroy(&lexer);
     return result;
+}
+
+sexp_t *
+sexp_parse(const char *string) {
+    list_t *sexp_list = sexp_parse_list(string);
+    sexp_t *sexp = list_shift(sexp_list);
+    list_destroy(&sexp_list);
+    return sexp;
 }

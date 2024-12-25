@@ -26,4 +26,5 @@ void list_sexp_destroy(list_sexp_t **self_pointer);
 
 void sexp_destroy(sexp_t **self_pointer);
 
+list_t *sexp_parse_list(const char *string);
 sexp_t *sexp_parse(const char *string);
