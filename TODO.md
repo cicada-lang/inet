@@ -1,10 +1,8 @@
 # sexp
 
-[sexp] symbol_sexp_t
 [sexp] symbol_sexp_new
 [sexp] symbol_sexp_destroy
 
-[sexp] list_sexp_t
 [sexp] list_sexp_new
 [sexp] list_sexp_destroy
 
