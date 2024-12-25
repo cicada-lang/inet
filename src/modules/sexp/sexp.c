@@ -57,3 +57,25 @@ sexp_destroy(sexp_t **self_pointer) {
         }
     }
 }
+
+static sexp_t *
+sexp_parse_token_list(list_t *token_list) {
+    (void) token_list;
+    return NULL;
+}
+
+sexp_t *
+sexp_parse(const char *string) {
+    lexer_t *lexer = lexer_new();
+    lexer->line_comment = ";";
+    lexer->enable_int = true;
+    lexer->enable_float = true;
+    lexer->enable_string = true;
+
+    lexer->string = string;
+    lexer_run(lexer);
+
+    sexp_t *result = sexp_parse_token_list(lexer->token_list);
+    lexer_destroy(&lexer);
+    return result;
+}

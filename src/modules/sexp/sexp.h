@@ -25,3 +25,5 @@ list_sexp_t *list_sexp_new(const token_t *start_token, const token_t *end_token)
 void list_sexp_destroy(list_sexp_t **self_pointer);
 
 void sexp_destroy(sexp_t **self_pointer);
+
+sexp_t *sexp_parse(const char *string);

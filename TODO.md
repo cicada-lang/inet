@@ -1,7 +1,7 @@
 # sexp
 
-[sexp] sexp_parse
-[sexp] sexp_test
+[sexp] sexp_parse_token_list
+[sexp] sexp_test -- test sexp_parse
 
 # net
 
