@@ -13,6 +13,8 @@ lexer_new(void) {
     lexer_t *self = new(lexer_t);
     self->buffer = allocate(MAX_TOKEN_LENGTH + 1);
     self->delimiter_list = list_new();
+    self->enable_int = false;
+    self->enable_float = false;
     lexer_init(self);
     return self;
 }
@@ -237,6 +239,9 @@ lexer_run(lexer_t *self) {
         lexer_step(self);
     }
 
-    postprocess_int(self);
-    postprocess_float(self);
+    if (self->enable_int)
+        postprocess_int(self);
+
+    if (self->enable_float)
+        postprocess_float(self);
 }

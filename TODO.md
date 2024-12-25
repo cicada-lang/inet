@@ -1,5 +1,3 @@
-[lexer] lexer_enable_int and lexer_enable_int
-[lexer] lexer_add_line_comment
 [lexer] string_token_t
 [lexer] collect_string
 

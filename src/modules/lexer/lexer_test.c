@@ -115,8 +115,8 @@ lexer_test(void) {
 
     {
         lexer->string = "1 1.0";
-        // lexer_enable_int(lexer);
-        // lexer_enable_float(lexer);
+        lexer->enable_int = true;
+        lexer->enable_float = true;
 
         lexer_run(lexer);
         list_t *token_list = lexer->token_list;
