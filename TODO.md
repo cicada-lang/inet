@@ -1,5 +1,3 @@
-[lexer] collect_delimiter -- for exmaples () [] {}
-[lexer] lexer_add_delimiter
 [lexer] collect_int -- post processing
 [lexer] collect_float -- post processing
 [lexer] collect_string
