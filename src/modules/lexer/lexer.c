@@ -45,7 +45,7 @@ step(lexer_t *self) {
 
     if (current_char(self) == '\n') {
         self->lineno++;
-        self->column = 0;
+        self->column = 1;
     } else {
         self->column++;
     }

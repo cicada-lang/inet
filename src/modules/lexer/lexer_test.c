@@ -55,10 +55,15 @@ lexer_test(void) {
 
         token_t *a = list_shift(token_list);
         assert(string_equal(a->string, "a"));
+        assert(a->lineno == 1);
+        assert(a->column == 2);
         token_t *b = list_shift(token_list);
-        assert(string_equal(b->string, "b"));
+        assert(b->lineno == 1);
+        assert(b->column == 4);
         token_t *c = list_shift(token_list);
         assert(string_equal(c->string, "c"));
+        assert(c->lineno == 2);
+        assert(c->column == 3);
 
         list_destroy(&token_list);
         token_destroy(&a);

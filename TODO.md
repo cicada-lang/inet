@@ -1,4 +1,3 @@
-[lexer] token_test -- test lineno and column (index from 1)
 [lexer] collect_delimiter -- for exmaples () [] {}
 [lexer] collect_int
 [lexer] collect_float
