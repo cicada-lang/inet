@@ -2,23 +2,13 @@
 
 > change to lisp syntax for scalable syntax.
 
+# example
+
+[example] `examples/combinators.inet` -- interaction combinators
+[example] `examples/lambda.inet` -- use interaction combinators
+[example] `examples/turing.inet` -- coding turing machine
+
 # primitive value
-
-[question] how to find rule?
-
-- [maybe] by type -- `(node)-[primitive-value: type]`
-  - can not use type, because type is complicated compound data.
-
-- [maybe] by predicate `(node)-[primitive-value: predicate?]`
-
-  - the builtin primitive functions + builtin primitive datatypes,
-    (without interaction nets) forms a forth-like language.
-
-  - a primitive function is generic in the sense that,
-    if it is applied to a wire (not-yet-value in NbE),
-    it will build a eliminatior node.
-
-[question] is it possible to have a generic `dup` that can dup any net with a root wire?
 
 `value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
@@ -33,7 +23,6 @@
 
 [question] is it possible to have a generic `dup` that can dup any net with a root wire?
 
-
 # main
 
 图灵机作为 inet 的例子 -> 读 2008-the-annotated-turing.djvu
@@ -46,12 +35,6 @@ inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
 [study] topics/computer-science/interaction-nets/2006-proof-nets-and-the-identity-of-proofs--straßburger.pdf
 [study] projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
 [study] [maybe] persons/jean-yves-girard/proof-nets--the-parallel-syntax-for-proof-theory--1995.pdf
-
-# example
-
-[example] `examples/combinators.inet` -- interaction combinators
-[example] `examples/lambda.inet` -- use interaction combinators
-[example] `examples/turing.inet` -- coding turing machine
 
 # debug
 
