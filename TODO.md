@@ -1,18 +1,16 @@
+[lexer] support () [] {}
+[lexer] token has row and col
+
 # sexp
 
-[sexp] symbol_sexp_new
 [sexp] symbol_sexp_destroy
 
 [sexp] list_sexp_new
 [sexp] list_sexp_destroy
 
-[lexer] support () [] {}
-[lexer] token has row and col
-
-[sexp] sexp_parse
-
 [sexp] sexp_destroy
 
+[sexp] sexp_parse
 [sexp] sexp_test
 
 # net
