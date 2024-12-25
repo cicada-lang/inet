@@ -1,8 +1,8 @@
-[lexer] token has row and col (index from 0)
+[lexer] token_test -- test lineno and column (index from 1)
 [lexer] collect_delimiter -- for exmaples () [] {}
-
-[lexer] handle int and float
-[lexer] handle string -- doublequoted
+[lexer] collect_int
+[lexer] collect_float
+[lexer] collect_string
 
 # sexp
 

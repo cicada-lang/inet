@@ -5,7 +5,11 @@
 struct lexer_t {
     const char *string;
     size_t length;
+
     size_t cursor;
+    size_t lineno; // index from 1
+    size_t column; // index from 1
+
     char *buffer;
     size_t buffer_length;
     list_t *token_list;

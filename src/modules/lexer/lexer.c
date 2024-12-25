@@ -1,12 +1,19 @@
 #include "index.h"
 
+static void
+lexer_init(lexer_t *self) {
+    self->cursor = 0;
+    self->lineno = 1;
+    self->column = 1;
+    self->buffer_length = 0;
+}
+
 lexer_t *
 lexer_new(void) {
     lexer_t *self = new(lexer_t);
-    self->cursor = 0;
-    self->buffer_length = 0;
     self->buffer = allocate(MAX_TOKEN_LENGTH + 1);
     self->delimiter_list = list_new_with((destroy_fn_t *) string_destroy);
+    lexer_init(self);
     return self;
 }
 
@@ -33,6 +40,28 @@ current_char(const lexer_t *self) {
 }
 
 static void
+step(lexer_t *self) {
+    assert(!is_finished(self));
+
+    if (current_char(self) == '\n') {
+        self->lineno++;
+        self->column = 0;
+    } else {
+        self->column++;
+    }
+
+    self->cursor++;
+}
+
+static void
+forward(lexer_t *self, size_t length) {
+    while (length > 0) {
+        step(self);
+        length--;
+    }
+}
+
+static void
 collect_char(lexer_t *self, char c) {
     self->buffer[self->buffer_length] = c;
     self->buffer[self->buffer_length + 1] = '\0';
@@ -50,7 +79,7 @@ ignore_space(lexer_t *self) {
         char c = current_char(self);
 
         if (isspace(c)) {
-            self->cursor++;
+            step(self);
         } else {
             break;
         }
@@ -69,16 +98,16 @@ ignore_comment(lexer_t *self) {
             self->line_comment))
         return false;
 
-    self->cursor += strlen(self->line_comment);
+    forward(self, strlen(self->line_comment));
 
     while (!is_finished(self)) {
         char c = current_char(self);
 
         if (c == '\n') {
-            self->cursor++;
+            step(self);
             break;
         } else {
-            self->cursor++;
+            step(self);
         }
     }
 
@@ -94,14 +123,19 @@ collect_generic(lexer_t *self) {
             size_t start = self->cursor;
             size_t end = self->cursor + strlen(self->buffer);
             char *string = string_copy(self->buffer);
-            token_t *token = token_new(string, GENERIC_TOKEN, start, end);
+            token_t *token = token_new(
+                string,
+                GENERIC_TOKEN,
+                start, end,
+                self->lineno,
+                self->column);
             list_push(self->token_list, token);
             self->buffer[0] = '\0';
             self->buffer_length = 0;
             return;
         } else {
             collect_char(self, c);
-            self->cursor++;
+            step(self);
         }
     }
 }
@@ -118,8 +152,8 @@ void
 lexer_run(lexer_t *self) {
     assert(self->string);
 
-    self->cursor = 0;
-    self->buffer_length = 0;
+    lexer_init(self);
+
     self->length = strlen(self->string);
     self->token_list = list_new_with((destroy_fn_t *) token_destroy);
 
