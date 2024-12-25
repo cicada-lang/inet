@@ -4,8 +4,6 @@
 
 # primitive value
 
-copy value/ from xvm/
-
 [question] how to find rule?
 
 - [maybe] by type -- `(node)-[primitive-value: type]`
