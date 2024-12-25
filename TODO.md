@@ -1,6 +1,32 @@
-# lisp syntax
+# sexp
 
-> change to lisp syntax for scalable syntax.
+[sexp] setup sexp_test
+[sexp] sexp_t -- tagged pointer
+
+[sexp] symbol_sexp_t
+[sexp] symbol_sexp_new
+[sexp] symbol_sexp_destroy
+
+[sexp] list_sexp_t
+[sexp] list_sexp_new
+[sexp] list_sexp_destroy
+
+[lexer] support () [] {}
+[lexer] token has row and col
+
+[sexp] sexp_parse
+
+[sexp] sexp_destroy
+
+[sexp] sexp_test
+
+# net
+
+[net] move net out of vm
+
+# lang
+
+[lang] change to lisp syntax for scalable syntax.
 
 # example
 
