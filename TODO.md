@@ -8,6 +8,10 @@
   传统的 forth 解决过这个问题了，read POL。
   最好的 read POL 的方式，可能就是实现 xforth。
 
+- 也许应该用 dictionary 和 definition 这两个概念
+
+  - rename spec to definition
+
 # lang
 
 [lang] change to lisp syntax
