@@ -1,12 +1,12 @@
 #include "index.h"
 
-static port_spec_t *
-compile_port_spec(const char *word) {
+static port_def_t *
+compile_port_def(const char *word) {
     if (string_ends_with(word, "!")) {
         word = string_slice(word, 0, strlen(word) - 1);
-        return port_spec_new(word, true);
+        return port_def_new(word, true);
     } else {
-        return port_spec_new(word, false);
+        return port_def_new(word, false);
     }
 }
 
@@ -17,8 +17,8 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);
 
-        node_spec_t *spec =
-            node_spec_new(
+        node_def_t *def =
+            node_def_new(
                 stmt->name,
                 list_length(stmt->input_token_list),
                 list_length(stmt->output_token_list));
@@ -27,19 +27,19 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
 
         token_t *input_token = list_first(stmt->input_token_list);
         while (input_token) {
-            spec->port_specs[index] = compile_port_spec(input_token->string);
+            def->port_defs[index] = compile_port_def(input_token->string);
             input_token = list_next(stmt->input_token_list);
             index++;
         }
 
         token_t *output_token = list_first(stmt->output_token_list);
         while (output_token) {
-            spec->port_specs[index] = compile_port_spec(output_token->string);
+            def->port_defs[index] = compile_port_def(output_token->string);
             output_token = list_next(stmt->output_token_list);
             index++;
         }
 
-        mod_define(vm->mod, (spec_t *) spec);
+        mod_define(vm->mod, (def_t *) def);
         return;
     }
 
@@ -60,8 +60,8 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);
         program_t *program = compile(vm, stmt->token_list);
-        program_spec_t *spec = program_spec_new(stmt->name, program);
-        mod_define(vm->mod, (spec_t *) spec);
+        program_def_t *def = program_def_new(stmt->name, program);
+        mod_define(vm->mod, (def_t *) def);
         return;
     }
 

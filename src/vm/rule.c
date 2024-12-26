@@ -2,13 +2,13 @@
 
 rule_t *
 rule_new(
-    const node_spec_t *first_node_spec,
-    const node_spec_t *second_node_spec,
+    const node_def_t *first_node_def,
+    const node_def_t *second_node_def,
     program_t *program
 ) {
     rule_t *self = new(rule_t);
-    self->first_node_spec = first_node_spec;
-    self->second_node_spec = second_node_spec;
+    self->first_node_def = first_node_def;
+    self->second_node_def = second_node_def;
     self->program = program;
     return self;
 }
@@ -30,16 +30,16 @@ rule_match_wire_pair(
     const wire_t *first_wire,
     const wire_t *second_wire
 ) {
-    return (((self->first_node_spec == first_wire->node->spec) &&
-             (self->second_node_spec == second_wire->node->spec)) ||
-            ((self->first_node_spec == second_wire->node->spec) &&
-             (self->second_node_spec == first_wire->node->spec)));
+    return (((self->first_node_def == first_wire->node->def) &&
+             (self->second_node_def == second_wire->node->def)) ||
+            ((self->first_node_def == second_wire->node->def) &&
+             (self->second_node_def == first_wire->node->def)));
 }
 
 void
 rule_print(const rule_t *self, file_t *file) {
     fprintf(file, "! (%s)-(%s) ",
-            self->first_node_spec->name,
-            self->second_node_spec->name);
+            self->first_node_def->name,
+            self->second_node_def->name);
     program_print(self->program, file);
 }

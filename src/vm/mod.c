@@ -7,7 +7,7 @@ mod_new(const char *src, const char *string) {
     self->src = src;
     self->string = string;
 
-    self->spec_list = list_new_with((destroy_fn_t *) spec_destroy);
+    self->def_list = list_new_with((destroy_fn_t *) def_destroy);
     self->rule_list = list_new_with((destroy_fn_t *) rule_destroy);
 
     return self;
@@ -18,19 +18,19 @@ mod_destroy(mod_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         mod_t *self = *self_pointer;
-        list_destroy(&self->spec_list);
+        list_destroy(&self->def_list);
         list_destroy(&self->rule_list);
         free(self);
         *self_pointer = NULL;
     }
 }
 
-const spec_t *
-mod_find_spec(const mod_t *self, const char *name) {
-    spec_t *spec = list_first(self->spec_list);
-    while (spec) {
-        if (string_equal(spec_name(spec), name)) return spec;
-        spec = list_next(self->spec_list);
+const def_t *
+mod_find_def(const mod_t *self, const char *name) {
+    def_t *def = list_first(self->def_list);
+    while (def) {
+        if (string_equal(def_name(def), name)) return def;
+        def = list_next(self->def_list);
     }
 
     return NULL;
@@ -52,8 +52,8 @@ mod_find_rule(
 }
 
 void
-mod_define(mod_t *self, spec_t *spec) {
-    list_push(self->spec_list, spec);
+mod_define(mod_t *self, def_t *def) {
+    list_push(self->def_list, def);
 }
 
 void
@@ -63,26 +63,26 @@ mod_define_rule(
     const char *second_name,
     program_t *program
 ) {
-    const node_spec_t *first_node_spec =
-        node_spec_cast(mod_find_spec(self, first_name));
-    const node_spec_t *second_node_spec =
-        node_spec_cast(mod_find_spec(self, second_name));
+    const node_def_t *first_node_def =
+        node_def_cast(mod_find_def(self, first_name));
+    const node_def_t *second_node_def =
+        node_def_cast(mod_find_def(self, second_name));
 
-    rule_t *rule = rule_new(first_node_spec, second_node_spec, program);
+    rule_t *rule = rule_new(first_node_def, second_node_def, program);
     list_push(self->rule_list, rule);
 }
 
 void
 mod_print(const mod_t *self, file_t *file) {
-    fprintf(file, "<mod spec-count=\"%lu\" rule-count=\"%lu\">\n",
-            list_length(self->spec_list),
+    fprintf(file, "<mod def-count=\"%lu\" rule-count=\"%lu\">\n",
+            list_length(self->def_list),
             list_length(self->rule_list));
 
-    spec_t *spec = list_first(self->spec_list);
-    while (spec) {
-        spec_print(spec, file);
+    def_t *def = list_first(self->def_list);
+    while (def) {
+        def_print(def, file);
         fprintf(file, "\n");
-        spec = list_next(self->spec_list);
+        def = list_next(self->def_list);
     }
 
     rule_t *rule = list_first(self->rule_list);

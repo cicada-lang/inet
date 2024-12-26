@@ -52,7 +52,7 @@ wire_t *
 wire_iter_next(wire_iter_t *self) {
     if (!self->node) return NULL;
 
-    while (self->index < self->node->spec->arity) {
+    while (self->index < self->node->def->arity) {
         port_index_t i = self->index++;
         wire_t *wire = self->node->wires[i];
 

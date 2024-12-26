@@ -13,15 +13,15 @@ struct frame_t {
 };
 
 struct free_wire_group_t {
-    const node_spec_t *node_spec;
+    const node_def_t *node_def;
     wire_t **wires;
 };
 
 static free_wire_group_t *
-free_wire_group_new(const node_spec_t *node_spec) {
+free_wire_group_new(const node_def_t *node_def) {
     free_wire_group_t *self = new(free_wire_group_t);
-    self->node_spec = node_spec;
-    self->wires = allocate_pointers(node_spec->arity);
+    self->node_def = node_def;
+    self->wires = allocate_pointers(node_def->arity);
     return self;
 }
 
@@ -59,8 +59,8 @@ frame_destroy(frame_t **self_pointer) {
 
 static free_wire_group_t *
 collect_free_wires_from_node(node_t *node) {
-    free_wire_group_t *free_wire_group = free_wire_group_new(node->spec);
-    for (port_index_t i = 0; i < node->spec->arity; i++) {
+    free_wire_group_t *free_wire_group = free_wire_group_new(node->def);
+    for (port_index_t i = 0; i < node->def->arity; i++) {
         if (wire_is_principal(node->wires[i])) {
             free_wire_group->wires[i] = NULL;
         } else {
@@ -89,16 +89,16 @@ frame_collect_free_wires(frame_t *self, wire_t *wire) {
 wire_t *
 frame_use_free_wire(
     frame_t *self,
-    const node_spec_t *node_spec,
+    const node_def_t *node_def,
     port_index_t index
 ) {
-    if (node_spec == self->first_free_wire_group->node_spec) {
+    if (node_def == self->first_free_wire_group->node_def) {
         wire_t *free_wire = self->first_free_wire_group->wires[index];
         self->first_free_wire_group->wires[index] = NULL;
         if (!free_wire) {
             fprintf(stderr,
                     "[frame_use_free_wire] (%s) no wire at index: %i",
-                    node_spec->name,
+                    node_def->name,
                     index);
             assert(free_wire);
         }
@@ -106,13 +106,13 @@ frame_use_free_wire(
         return free_wire;
     }
 
-    if (node_spec == self->second_free_wire_group->node_spec) {
+    if (node_def == self->second_free_wire_group->node_def) {
         wire_t *free_wire = self->second_free_wire_group->wires[index];
         self->second_free_wire_group->wires[index] = NULL;
         if (!free_wire) {
             fprintf(stderr,
                     "[frame_use_free_wire] (%s) no wire at index: %i",
-                    node_spec->name,
+                    node_def->name,
                     index);
             assert(free_wire);
         }
@@ -137,13 +137,13 @@ frame_fetch_op(frame_t *self) {
 
 static void
 free_wire_group_print(const free_wire_group_t *free_wire_group, file_t *file) {
-    for (port_index_t i = 0; i < free_wire_group->node_spec->arity; i++) {
+    for (port_index_t i = 0; i < free_wire_group->node_def->arity; i++) {
         wire_t *free_wire = free_wire_group->wires[i];
         if (!free_wire) continue;
 
         fprintf(file, "(%s)-%s => ",
-                free_wire_group->node_spec->name,
-                free_wire_group->node_spec->port_specs[i]->name);
+                free_wire_group->node_def->name,
+                free_wire_group->node_def->port_defs[i]->name);
         wire_print_reverse(free_wire, file);
         fprintf(file, "\n");
     }

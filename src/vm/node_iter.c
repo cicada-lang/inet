@@ -34,7 +34,7 @@ node_iter_first(node_iter_t *self) {
     node_t *node = self->root;
     list_push(self->occurred_node_list, node);
 
-    for (port_index_t i = 0; i < node->spec->arity; i++) {
+    for (port_index_t i = 0; i < node->def->arity; i++) {
         wire_t *wire = node->wires[i];
         if (wire->opposite && wire->opposite->node) {
             if (list_has(self->occurred_node_list, wire->opposite->node) ||
@@ -55,7 +55,7 @@ node_iter_next(node_iter_t *self) {
 
     list_push(self->occurred_node_list, node);
 
-    for (port_index_t i = 0; i < node->spec->arity; i++) {
+    for (port_index_t i = 0; i < node->def->arity; i++) {
         wire_t *wire = node->wires[i];
         if (wire->opposite && wire->opposite->node) {
             if (list_has(self->occurred_node_list, wire->opposite->node) ||

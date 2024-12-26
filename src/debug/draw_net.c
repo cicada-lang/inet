@@ -6,7 +6,7 @@ draw_node(debug_t *self, canvas_t *canvas, size_t node_id, node_model_t *node_mo
     if (!node) return;
 
     char *subscript = uint_to_subscript(node->id);
-    char *name = string_append(node->spec->name, subscript);
+    char *name = string_append(node->def->name, subscript);
     text_t *text = text_from_string(name);
     free(subscript);
     free(name);

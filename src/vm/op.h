@@ -4,17 +4,17 @@ struct op_t { op_kind_t kind; };
 
 struct call_builtin_op_t {
     op_kind_t kind;
-    const builtin_spec_t *builtin_spec;
+    const builtin_def_t *builtin_def;
 };
 
 struct call_program_op_t {
     op_kind_t kind;
-    const program_spec_t *program_spec;
+    const program_def_t *program_def;
 };
 
 struct call_node_op_t {
     op_kind_t kind;
-    const node_spec_t *node_spec;
+    const node_def_t *node_def;
 };
 
 struct connect_op_t {
@@ -23,15 +23,15 @@ struct connect_op_t {
 
 struct use_free_wire_op_t {
     op_kind_t kind;
-    const node_spec_t *node_spec;
+    const node_def_t *node_def;
     port_index_t index;
 };
 
-call_builtin_op_t *call_builtin_op_new(const builtin_spec_t *builtin_spec);
-call_program_op_t *call_program_op_new(const program_spec_t *program_spec);
-call_node_op_t *call_node_op_new(const node_spec_t *node_spec);
+call_builtin_op_t *call_builtin_op_new(const builtin_def_t *builtin_def);
+call_program_op_t *call_program_op_new(const program_def_t *program_def);
+call_node_op_t *call_node_op_new(const node_def_t *node_def);
 connect_op_t *connect_op_new(void);
-use_free_wire_op_t *use_free_wire_op_new(const node_spec_t *node_spec, port_index_t index);
+use_free_wire_op_t *use_free_wire_op_new(const node_def_t *node_def, port_index_t index);
 
 void call_builtin_op_destroy(call_builtin_op_t **self_pointer);
 void call_program_op_destroy(call_program_op_t **self_pointer);

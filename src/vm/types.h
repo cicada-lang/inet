@@ -4,10 +4,10 @@ typedef int8_t port_index_t;
 
 typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum {
-    PROGRAM_SPEC,
-    NODE_SPEC,
-    BUILTIN_SPEC,
-} spec_kind_t;
+    PROGRAM_DEF,
+    NODE_DEF,
+    BUILTIN_DEF,
+} def_kind_t;
 
 typedef enum {
     CALL_BUILTIN_OP,
@@ -32,8 +32,8 @@ typedef struct connect_op_t connect_op_t;
 typedef struct use_free_wire_op_t use_free_wire_op_t;
 typedef struct program_t program_t;
 typedef struct rule_t rule_t;
-typedef struct spec_t spec_t;
-typedef struct node_spec_t node_spec_t;
-typedef struct port_spec_t port_spec_t;
-typedef struct builtin_spec_t builtin_spec_t;
-typedef struct program_spec_t program_spec_t;
+typedef struct def_t def_t;
+typedef struct node_def_t node_def_t;
+typedef struct port_def_t port_def_t;
+typedef struct builtin_def_t builtin_def_t;
+typedef struct program_def_t program_def_t;

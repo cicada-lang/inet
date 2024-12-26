@@ -2,26 +2,26 @@
 
 void
 emit_call(const mod_t *mod, program_t *program, const char *name) {
-    const spec_t *unknown_spec = mod_find_spec(mod, name);
+    const def_t *unknown_def = mod_find_def(mod, name);
 
-    assert(unknown_spec && "[emit_call] unknown name");
+    assert(unknown_def && "[emit_call] unknown name");
 
-    switch (unknown_spec->kind) {
-    case BUILTIN_SPEC: {
-        const builtin_spec_t *spec = (builtin_spec_t *) unknown_spec;
-        program_add_op(program, (op_t *) call_builtin_op_new(spec));
+    switch (unknown_def->kind) {
+    case BUILTIN_DEF: {
+        const builtin_def_t *def = (builtin_def_t *) unknown_def;
+        program_add_op(program, (op_t *) call_builtin_op_new(def));
         return;
     }
 
-    case PROGRAM_SPEC: {
-        const program_spec_t *spec = (program_spec_t *) unknown_spec;
-        program_add_op(program, (op_t *) call_program_op_new(spec));
+    case PROGRAM_DEF: {
+        const program_def_t *def = (program_def_t *) unknown_def;
+        program_add_op(program, (op_t *) call_program_op_new(def));
         return;
     }
 
-    case NODE_SPEC: {
-        const node_spec_t *spec = (node_spec_t *) unknown_spec;
-        program_add_op(program, (op_t *) call_node_op_new(spec));
+    case NODE_DEF: {
+        const node_def_t *def = (node_def_t *) unknown_def;
+        program_add_op(program, (op_t *) call_node_op_new(def));
         return;
     }
     }
@@ -40,9 +40,9 @@ emit_use_free_wire(
     const char *node_name,
     const char *port_name
 ) {
-    const node_spec_t *node_spec = node_spec_cast(mod_find_spec(mod, node_name));
-    port_index_t index = node_spec_find_port_index(node_spec, port_name);
-    program_add_op(program, (op_t *) use_free_wire_op_new(node_spec, index));
+    const node_def_t *node_def = node_def_cast(mod_find_def(mod, node_name));
+    port_index_t index = node_def_find_port_index(node_def, port_name);
+    program_add_op(program, (op_t *) use_free_wire_op_new(node_def, index));
 }
 
 void
