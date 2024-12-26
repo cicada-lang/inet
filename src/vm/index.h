@@ -17,5 +17,5 @@
 #include "rule.h"
 #include "def.h"
 #include "node_def.h"
-#include "builtin_def.h"
+#include "primitive_def.h"
 #include "program_def.h"

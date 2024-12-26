@@ -17,7 +17,7 @@ run_file(const char *path, size_t log_level) {
     fclose(file);
 
     mod_t *mod = mod_new(path, string);
-    import_builtins(mod);
+    import_primitives(mod);
 
     vm_t *vm = vm_new(mod);
     vm->log_level = log_level;

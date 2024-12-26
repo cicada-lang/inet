@@ -6,9 +6,9 @@ static void node_return_output_ports(vm_t *vm, node_t *node);
 void
 execute(vm_t *vm, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->kind) {
-    case CALL_BUILTIN_OP: {
-        call_builtin_op_t *op = (call_builtin_op_t *) unknown_op;
-        op->builtin_def->builtin_fn(vm);
+    case CALL_PRIMITIVE_OP: {
+        call_primitive_op_t *op = (call_primitive_op_t *) unknown_op;
+        op->primitive_def->primitive_fn(vm);
         return;
     }
 

@@ -16,8 +16,8 @@ def_destroy(def_t **self_pointer) {
             return;
         }
 
-        case BUILTIN_DEF: {
-            builtin_def_destroy((builtin_def_t **) self_pointer);
+        case PRIMITIVE_DEF: {
+            primitive_def_destroy((primitive_def_t **) self_pointer);
             return;
         }
         }
@@ -37,8 +37,8 @@ def_name(def_t *unknown_def) {
         return def->name;
     }
 
-    case BUILTIN_DEF: {
-        builtin_def_t *def = (builtin_def_t *) unknown_def;
+    case PRIMITIVE_DEF: {
+        primitive_def_t *def = (primitive_def_t *) unknown_def;
         return def->name;
     }
     }
@@ -57,8 +57,8 @@ def_kind_name(def_kind_t kind) {
         return "program";
     }
 
-    case BUILTIN_DEF: {
-        return "builtin";
+    case PRIMITIVE_DEF: {
+        return "primitive";
     }
     }
 
@@ -102,8 +102,8 @@ def_print(const def_t *unknown_def, file_t *file) {
         return;
     }
 
-    case BUILTIN_DEF: {
-        builtin_def_t *def = (builtin_def_t *) unknown_def;
+    case PRIMITIVE_DEF: {
+        primitive_def_t *def = (primitive_def_t *) unknown_def;
         fprintf(file, "%s", def->name);
         return;
     }

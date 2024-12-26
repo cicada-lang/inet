@@ -7,9 +7,9 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
     assert(unknown_def && "[emit_call] unknown name");
 
     switch (unknown_def->kind) {
-    case BUILTIN_DEF: {
-        const builtin_def_t *def = (builtin_def_t *) unknown_def;
-        program_add_op(program, (op_t *) call_builtin_op_new(def));
+    case PRIMITIVE_DEF: {
+        const primitive_def_t *def = (primitive_def_t *) unknown_def;
+        program_add_op(program, (op_t *) call_primitive_op_new(def));
         return;
     }
 

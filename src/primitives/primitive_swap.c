@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-builtin_swap(vm_t *vm) {
+primitive_swap(vm_t *vm) {
     wire_t *second = stack_pop(vm->value_stack);
     wire_t *first = stack_pop(vm->value_stack);
 

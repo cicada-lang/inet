@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-builtin_wire_pair(vm_t *vm) {
+primitive_wire_pair(vm_t *vm) {
     wire_t *first_wire = wire_new();
     wire_t *second_wire = wire_new();
 
