@@ -6,25 +6,9 @@ emit_call(const mod_t *mod, program_t *program, const char *name) {
 
     assert(unknown_def && "[emit_call] unknown name");
 
-    switch (unknown_def->kind) {
-    case PRIMITIVE_DEF: {
-        const primitive_def_t *def = (primitive_def_t *) unknown_def;
-        program_add_op(program, (op_t *) call_primitive_op_new(def));
-        return;
-    }
-
-    case PROGRAM_DEF: {
-        const program_def_t *def = (program_def_t *) unknown_def;
-        program_add_op(program, (op_t *) call_program_op_new(def));
-        return;
-    }
-
-    case NODE_DEF: {
-        const node_def_t *def = (node_def_t *) unknown_def;
-        program_add_op(program, (op_t *) call_node_op_new(def));
-        return;
-    }
-    }
+    const def_t *def = (def_t *) unknown_def;
+    program_add_op(program, (op_t *) call_op_new(def));
+    return;
 }
 
 void

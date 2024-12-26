@@ -3,27 +3,38 @@
 static void node_apply_input_ports(vm_t *vm, node_t *node);
 static void node_return_output_ports(vm_t *vm, node_t *node);
 
-void
-execute(vm_t *vm, frame_t *frame, op_t *unknown_op) {
-    switch (unknown_op->kind) {
-    case CALL_PRIMITIVE_OP: {
-        call_primitive_op_t *op = (call_primitive_op_t *) unknown_op;
-        op->primitive_def->primitive_fn(vm);
+static void
+call(vm_t *vm, const def_t *unknown_def) {
+    switch (unknown_def->kind) {
+    case PRIMITIVE_DEF: {
+        primitive_def_t *def = (primitive_def_t *) unknown_def;
+        def->primitive_fn(vm);
         return;
     }
 
-    case CALL_PROGRAM_OP: {
-        call_program_op_t *op = (call_program_op_t *) unknown_op;
-        frame_t *frame = frame_new(op->program_def->program);
+    case PROGRAM_DEF: {
+        program_def_t *def = (program_def_t *) unknown_def;
+        frame_t *frame = frame_new(def->program);
         stack_push(vm->return_stack, frame);
         return;
     }
 
-    case CALL_NODE_OP: {
-        call_node_op_t *op = (call_node_op_t *) unknown_op;        
-        node_t *node = node_new(op->node_def, ++vm->node_id_count);
+    case NODE_DEF: {
+        node_def_t *def = (node_def_t *) unknown_def;
+        node_t *node = node_new(def, ++vm->node_id_count);
         node_apply_input_ports(vm, node);
         node_return_output_ports(vm, node);
+        return;
+    }
+    }
+}
+
+void
+execute(vm_t *vm, frame_t *frame, op_t *unknown_op) {
+    switch (unknown_op->kind) {
+    case CALL_OP: {
+        call_op_t *op = (call_op_t *) unknown_op;
+        call(vm, op->def);
         return;
     }
 

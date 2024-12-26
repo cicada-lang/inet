@@ -1,6 +1,3 @@
-[vm] rename op to instruction
-[vm] merge three call instructions to one call instruction
-
 # net
 
 [net] move net out of vm

@@ -1,26 +1,10 @@
 #include "index.h"
 
-call_primitive_op_t *
-call_primitive_op_new(const primitive_def_t *primitive_def) {
-    call_primitive_op_t *self = new(call_primitive_op_t);
-    self->kind = CALL_PRIMITIVE_OP;
-    self->primitive_def = primitive_def;
-    return self;
-}
-
-call_program_op_t *
-call_program_op_new(const program_def_t *program_def) {
-    call_program_op_t *self = new(call_program_op_t);
-    self->kind = CALL_PROGRAM_OP;
-    self->program_def = program_def;
-    return self;
-}
-
-call_node_op_t *
-call_node_op_new(const node_def_t *node_def) {
-    call_node_op_t *self = new(call_node_op_t);
-    self->kind = CALL_NODE_OP;
-    self->node_def = node_def;
+call_op_t *
+call_op_new(const def_t *def) {
+    call_op_t *self = new(call_op_t);
+    self->kind = CALL_OP;
+    self->def = def;
     return self;
 }
 
@@ -41,30 +25,10 @@ use_free_wire_op_new(const node_def_t *node_def, port_index_t index) {
 }
 
 void
-call_primitive_op_destroy(call_primitive_op_t **self_pointer) {
+call_op_destroy(call_op_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        call_primitive_op_t *self = *self_pointer;
-        free(self);
-        *self_pointer = NULL;
-    }
-}
-
-void
-call_program_op_destroy(call_program_op_t **self_pointer) {
-    assert(self_pointer);
-    if (*self_pointer) {
-        call_program_op_t *self = *self_pointer;
-        free(self);
-        *self_pointer = NULL;
-    }
-}
-
-void
-call_node_op_destroy(call_node_op_t **self_pointer) {
-    assert(self_pointer);
-    if (*self_pointer) {
-        call_node_op_t *self = *self_pointer;
+        call_op_t *self = *self_pointer;
         free(self);
         *self_pointer = NULL;
     }
@@ -96,18 +60,8 @@ op_destroy(op_t **self_pointer) {
     if (*self_pointer) {
         op_t *self = *self_pointer;
         switch (self->kind) {
-        case CALL_PRIMITIVE_OP: {
-            call_primitive_op_destroy((call_primitive_op_t **) self_pointer);
-            return;
-        }
-
-        case CALL_PROGRAM_OP: {
-            call_program_op_destroy((call_program_op_t **) self_pointer);
-            return;
-        }
-
-        case CALL_NODE_OP: {
-            call_node_op_destroy((call_node_op_t **) self_pointer);
+        case CALL_OP: {
+            call_op_destroy((call_op_t **) self_pointer);
             return;
         }
 
@@ -127,21 +81,9 @@ op_destroy(op_t **self_pointer) {
 void
 op_print(const op_t *unknown_op, file_t *file) {
     switch (unknown_op->kind) {
-    case CALL_PRIMITIVE_OP: {
-        call_primitive_op_t *op = (call_primitive_op_t *) unknown_op;
-        fprintf(file, "%s", op->primitive_def->name);
-        return;
-    }
-
-    case CALL_PROGRAM_OP: {
-        call_program_op_t *op = (call_program_op_t *) unknown_op;
-        fprintf(file, "%s", op->program_def->name);
-        return;
-    }
-
-    case CALL_NODE_OP: {
-        call_node_op_t *op = (call_node_op_t *) unknown_op;
-        fprintf(file, "%s", op->node_def->name);
+    case CALL_OP: {
+        call_op_t *op = (call_op_t *) unknown_op;
+        fprintf(file, "%s", def_name(op->def));
         return;
     }
 

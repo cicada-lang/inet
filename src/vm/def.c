@@ -25,7 +25,7 @@ def_destroy(def_t **self_pointer) {
 }
 
 const char *
-def_name(def_t *unknown_def) {
+def_name(const def_t *unknown_def) {
     switch (unknown_def->kind) {
     case NODE_DEF: {
         node_def_t *def = (node_def_t *) unknown_def;
