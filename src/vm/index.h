@@ -2,10 +2,6 @@
 
 #include "deps.h"
 #include "types.h"
-#include "node.h"
-#include "node_iter.h"
-#include "wire.h"
-#include "wire_iter.h"
 #include "emit.h"
 #include "mod.h"
 #include "frame.h"
@@ -16,6 +12,5 @@
 #include "program.h"
 #include "rule.h"
 #include "def.h"
-#include "node_def.h"
 #include "primitive_def.h"
 #include "program_def.h"

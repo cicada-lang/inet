@@ -52,13 +52,6 @@ node_def_destroy(node_def_t **self_pointer) {
     }
 }
 
-const node_def_t *
-node_def_cast(const def_t *def) {
-    assert(def);
-    assert(def->kind == NODE_DEF_KIND);
-    return (node_def_t *)def;
-}
-
 port_index_t
 node_def_find_port_index(
     const node_def_t *node_def,

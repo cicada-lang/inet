@@ -1,7 +1,3 @@
-# net
-
-[net] move net out of vm
-
 # lang
 
 [lang] change to lisp syntax

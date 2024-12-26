@@ -2,6 +2,7 @@
 
 struct def_t { const def_kind_t kind; };
 
+const node_def_t *node_def_cast(const def_t *def);
 void def_destroy(def_t **self_pointer);
 
 const char *def_name(const def_t *self);

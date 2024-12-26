@@ -1,5 +1,12 @@
 #include "index.h"
 
+const node_def_t *
+node_def_cast(const def_t *def) {
+    assert(def);
+    assert(def->kind == NODE_DEF_KIND);
+    return (node_def_t *)def;
+}
+
 void
 def_destroy(def_t **self_pointer) {
     assert(self_pointer);
