@@ -1,6 +1,6 @@
 #pragma once
 
-#define PROGRAM_DEF_KIND ((uint8_t) 1)
+#define PROGRAM_DEF ((uint8_t) 1)
 
 struct program_def_t {
     def_kind_t kind;

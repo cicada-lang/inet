@@ -1,6 +1,6 @@
 #pragma once
 
-#define PRIMITIVE_DEF_KIND ((uint8_t) 0)
+#define PRIMITIVE_DEF ((uint8_t) 0)
 
 typedef void (primitive_fn_t)(vm_t *vm);
 

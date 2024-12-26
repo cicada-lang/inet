@@ -25,7 +25,7 @@ node_def_new(
     port_index_t output_arity
 ) {
     node_def_t *self = new(node_def_t);
-    self->kind = NODE_DEF_KIND;
+    self->kind = NODE_DEF;
     self->name = string_copy(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;

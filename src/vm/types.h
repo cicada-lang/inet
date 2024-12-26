@@ -3,9 +3,9 @@
 typedef uint8_t def_kind_t;
 
 typedef enum {
-    CALL_OP_KIND,
-    CONNECT_OP_KIND,
-    GET_FREE_WIRE_OP_KIND,
+    CALL_OP,
+    CONNECT_OP,
+    GET_FREE_WIRE_OP,
 } op_kind_t;
 
 typedef struct mod_t mod_t;

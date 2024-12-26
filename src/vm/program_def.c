@@ -3,7 +3,7 @@
 program_def_t *
 program_def_new(const char *name, program_t *program) {
     program_def_t *self = new(program_def_t);
-    self->kind = PROGRAM_DEF_KIND;
+    self->kind = PROGRAM_DEF;
     self->name = string_copy(name);
     self->program = program;
     return self;

@@ -1,6 +1,6 @@
 #pragma once
 
-#define NODE_DEF_KIND ((uint8_t) 2)
+#define NODE_DEF ((uint8_t) 2)
 
 struct port_def_t {
     char *name;
