@@ -3,7 +3,6 @@
 void
 emit_call(const mod_t *mod, program_t *program, const char *name) {
     const def_t *unknown_def = mod_find_def(mod, name);
-
     assert(unknown_def && "[emit_call] unknown name");
 
     const def_t *def = (def_t *) unknown_def;
