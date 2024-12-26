@@ -3,15 +3,15 @@
 typedef int8_t port_index_t;
 
 typedef enum {
-    PROGRAM_DEF,
-    NODE_DEF,
-    PRIMITIVE_DEF,
+    PROGRAM_DEF_KIND,
+    NODE_DEF_KIND,
+    PRIMITIVE_DEF_KIND,
 } def_kind_t;
 
 typedef enum {
-    CALL_OP,
-    CONNECT_OP,
-    GET_FREE_WIRE_OP,
+    CALL_OP_KIND,
+    CONNECT_OP_KIND,
+    GET_FREE_WIRE_OP_KIND,
 } op_kind_t;
 
 typedef struct node_t node_t;

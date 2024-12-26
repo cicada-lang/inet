@@ -3,7 +3,7 @@
 program_def_t *
 program_def_new(const char *name, program_t *program) {
     program_def_t *self = new(program_def_t);
-    self->kind = PROGRAM_DEF;
+    self->kind = PROGRAM_DEF_KIND;
     self->name = string_copy(name);
     self->program = program;
     return self;
@@ -24,6 +24,6 @@ program_def_destroy(program_def_t **self_pointer) {
 const program_def_t *
 program_def_cast(const def_t *def) {
     assert(def);
-    assert(def->kind == PROGRAM_DEF);
+    assert(def->kind == PROGRAM_DEF_KIND);
     return (program_def_t *)def;
 }

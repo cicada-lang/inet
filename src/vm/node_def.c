@@ -25,7 +25,7 @@ node_def_new(
     port_index_t output_arity
 ) {
     node_def_t *self = new(node_def_t);
-    self->kind = NODE_DEF;
+    self->kind = NODE_DEF_KIND;
     self->name = string_copy(name);
     self->input_arity = input_arity;
     self->output_arity = output_arity;
@@ -55,7 +55,7 @@ node_def_destroy(node_def_t **self_pointer) {
 const node_def_t *
 node_def_cast(const def_t *def) {
     assert(def);
-    assert(def->kind == NODE_DEF);
+    assert(def->kind == NODE_DEF_KIND);
     return (node_def_t *)def;
 }
 

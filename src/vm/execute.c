@@ -6,20 +6,20 @@ static void node_return_output_ports(vm_t *vm, node_t *node);
 static void
 call(vm_t *vm, const def_t *unknown_def) {
     switch (unknown_def->kind) {
-    case PRIMITIVE_DEF: {
+    case PRIMITIVE_DEF_KIND: {
         primitive_def_t *def = (primitive_def_t *) unknown_def;
         def->primitive_fn(vm);
         return;
     }
 
-    case PROGRAM_DEF: {
+    case PROGRAM_DEF_KIND: {
         program_def_t *def = (program_def_t *) unknown_def;
         frame_t *frame = frame_new(def->program);
         stack_push(vm->return_stack, frame);
         return;
     }
 
-    case NODE_DEF: {
+    case NODE_DEF_KIND: {
         node_def_t *def = (node_def_t *) unknown_def;
         node_t *node = node_new(def, ++vm->node_id_count);
         node_apply_input_ports(vm, node);
@@ -32,18 +32,18 @@ call(vm_t *vm, const def_t *unknown_def) {
 void
 execute(vm_t *vm, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->kind) {
-    case CALL_OP: {
+    case CALL_OP_KIND: {
         call_op_t *op = (call_op_t *) unknown_op;
         call(vm, op->def);
         return;
     }
 
-    case CONNECT_OP: {
+    case CONNECT_OP_KIND: {
         vm_connect_top_wire_pair(vm);
         return;
     }
 
-    case GET_FREE_WIRE_OP: {
+    case GET_FREE_WIRE_OP_KIND: {
         use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
         wire_t *free_wire = frame_use_free_wire(frame, op->node_def, op->index);
         assert(free_wire);

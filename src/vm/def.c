@@ -6,17 +6,17 @@ def_destroy(def_t **self_pointer) {
     if (*self_pointer) {
         def_t *self = *self_pointer;
         switch (self->kind) {
-        case NODE_DEF: {
+        case NODE_DEF_KIND: {
             node_def_destroy((node_def_t **) self_pointer);
             return;
         }
 
-        case PROGRAM_DEF: {
+        case PROGRAM_DEF_KIND: {
             program_def_destroy((program_def_t **) self_pointer);
             return;
         }
 
-        case PRIMITIVE_DEF: {
+        case PRIMITIVE_DEF_KIND: {
             primitive_def_destroy((primitive_def_t **) self_pointer);
             return;
         }
@@ -27,17 +27,17 @@ def_destroy(def_t **self_pointer) {
 const char *
 def_name(const def_t *unknown_def) {
     switch (unknown_def->kind) {
-    case NODE_DEF: {
+    case NODE_DEF_KIND: {
         node_def_t *def = (node_def_t *) unknown_def;
         return def->name;
     }
 
-    case PROGRAM_DEF: {
+    case PROGRAM_DEF_KIND: {
         program_def_t *def = (program_def_t *) unknown_def;
         return def->name;
     }
 
-    case PRIMITIVE_DEF: {
+    case PRIMITIVE_DEF_KIND: {
         primitive_def_t *def = (primitive_def_t *) unknown_def;
         return def->name;
     }
@@ -49,15 +49,15 @@ def_name(const def_t *unknown_def) {
 const char *
 def_kind_name(def_kind_t kind) {
     switch (kind) {
-    case NODE_DEF: {
+    case NODE_DEF_KIND: {
         return "node";
     }
 
-    case PROGRAM_DEF: {
+    case PROGRAM_DEF_KIND: {
         return "program";
     }
 
-    case PRIMITIVE_DEF: {
+    case PRIMITIVE_DEF_KIND: {
         return "primitive";
     }
     }
@@ -68,7 +68,7 @@ def_kind_name(def_kind_t kind) {
 void
 def_print(const def_t *unknown_def, file_t *file) {
     switch (unknown_def->kind) {
-    case NODE_DEF: {
+    case NODE_DEF_KIND: {
         node_def_t *def = (node_def_t *) unknown_def;
         fprintf(file, "* (%s) ", def->name);
         for (port_index_t i = 0; i < def->input_arity; i++) {
@@ -95,14 +95,14 @@ def_print(const def_t *unknown_def, file_t *file) {
         return;
     }
 
-    case PROGRAM_DEF: {
+    case PROGRAM_DEF_KIND: {
         program_def_t *def = (program_def_t *) unknown_def;
         fprintf(file, "= %s ", def->name);
         program_print(def->program, file);
         return;
     }
 
-    case PRIMITIVE_DEF: {
+    case PRIMITIVE_DEF_KIND: {
         primitive_def_t *def = (primitive_def_t *) unknown_def;
         fprintf(file, "%s", def->name);
         return;

@@ -1,5 +1,7 @@
 # net
 
+def_kind_t should be uint8_t -- instead of enum
+
 [net] move net out of vm
 
 # lang
