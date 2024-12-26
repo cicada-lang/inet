@@ -1,4 +1,5 @@
 [vm] rename spec to definition
+[vm] rename builtin to primitive
 [vm] rename op to instruction
 [vm] merge three call instructions to one call instruction
 
