@@ -20,10 +20,3 @@ program_def_destroy(program_def_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
-
-const program_def_t *
-program_def_cast(const def_t *def) {
-    assert(def);
-    assert(def->kind == PROGRAM_DEF_KIND);
-    return (program_def_t *)def;
-}

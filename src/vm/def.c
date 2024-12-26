@@ -1,5 +1,19 @@
 #include "index.h"
 
+const primitive_def_t *
+primitive_def_cast(const def_t *def) {
+    assert(def);
+    assert(def->kind == PRIMITIVE_DEF_KIND);
+    return (primitive_def_t *)def;
+}
+
+const program_def_t *
+program_def_cast(const def_t *def) {
+    assert(def);
+    assert(def->kind == PROGRAM_DEF_KIND);
+    return (program_def_t *)def;
+}
+
 const node_def_t *
 node_def_cast(const def_t *def) {
     assert(def);

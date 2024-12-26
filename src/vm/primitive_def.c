@@ -19,10 +19,3 @@ primitive_def_destroy(primitive_def_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
-
-const primitive_def_t *
-primitive_def_cast(const def_t *def) {
-    assert(def);
-    assert(def->kind == PRIMITIVE_DEF_KIND);
-    return (primitive_def_t *)def;
-}
