@@ -2,7 +2,6 @@
 
 typedef int8_t port_index_t;
 
-typedef enum { POSITIVE_SIGN, NEGATIVE_SIGN } sign_t;
 typedef enum {
     PROGRAM_DEF,
     NODE_DEF,
