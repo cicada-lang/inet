@@ -1,5 +1,7 @@
 #pragma once
 
+#define NODE_DEF_KIND ((uint8_t) 2)
+
 struct port_def_t {
     char *name;
     bool is_principal;

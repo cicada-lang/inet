@@ -1,12 +1,7 @@
 #pragma once
 
 typedef int8_t port_index_t;
-
-typedef enum {
-    PROGRAM_DEF_KIND,
-    NODE_DEF_KIND,
-    PRIMITIVE_DEF_KIND,
-} def_kind_t;
+typedef uint8_t def_kind_t;
 
 typedef enum {
     CALL_OP_KIND,
