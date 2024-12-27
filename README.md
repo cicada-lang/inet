@@ -288,29 +288,29 @@ Dependencies:
 Compile:
 
 ```
-git clone https://github.com/cicada-lang/inet
-cd inet
+git clone https://github.com/cicada-lang/inet-forth
+cd inet-forth
 make -j
 make test
 ```
 
-The compiled binary `./bin/inet` is the command-line program.
+The compiled binary `./bin/inet-forth` is the command-line program.
 
 ```sh
-$ ./bin/inet
-inet 0.1.0
+$ ./bin/inet-forth
+inet-forth 0.1.0
 
 commands:
   run -- run files
-  help -- print help message
-  version -- print version
   self-test -- run self test
+  version -- print version
+  help -- print help message
 ```
 
 For examples:
 
 ```sh
-./bin/inet run examples/nat.inet
+./bin/inet-forth run examples/nat.fth
 ```
 
 ## Development
@@ -324,8 +324,8 @@ make clean    # clean up compiled files
 
 ## Other Implementations
 
-- [iNet Cute](https://github.com/cicada-lang/inet-cute)
-- [iNet JS](https://github.com/cicada-lang/inet-js)
+- [inet-cute](https://github.com/cicada-lang/inet-cute)
+- [inet-js](https://github.com/cicada-lang/inet-js)
 
 ## References
 
