@@ -81,19 +81,19 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
     }
 }
 
-run_program_stmt_t *
-run_program_stmt_new(list_t *token_list) {
-    run_program_stmt_t *self = new(run_program_stmt_t);
-    self->kind = RUN_PROGRAM_STMT;
+begin_program_stmt_t *
+begin_program_stmt_new(list_t *token_list) {
+    begin_program_stmt_t *self = new(begin_program_stmt_t);
+    self->kind = BEGIN_PROGRAM_STMT;
     self->token_list = token_list;
     return self;
 }
 
 void
-run_program_stmt_destroy(run_program_stmt_t **self_pointer) {
+begin_program_stmt_destroy(begin_program_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        run_program_stmt_t *self = *self_pointer;
+        begin_program_stmt_t *self = *self_pointer;
         list_destroy(&self->token_list);
         free(self);
         *self_pointer = NULL;
@@ -121,8 +121,8 @@ stmt_destroy(stmt_t **self_pointer) {
             return;
         }
 
-        case RUN_PROGRAM_STMT: {
-            run_program_stmt_destroy((run_program_stmt_t **) self_pointer);
+        case BEGIN_PROGRAM_STMT: {
+            begin_program_stmt_destroy((begin_program_stmt_t **) self_pointer);
             return;
         }
         }

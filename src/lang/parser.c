@@ -27,7 +27,7 @@ static void maybe_ignore_inline_comment(parser_t *self);
 static void parse_define_node_stmt(parser_t *self);
 static void parse_define_rule_stmt(parser_t *self);
 static void parse_define_program_stmt(parser_t *self);
-static void parse_run_program_stmt(parser_t *self);
+static void parse_begin_program_stmt(parser_t *self);
 
 static bool
 token_is_end(const token_t *token) {
@@ -57,7 +57,7 @@ parser_parse(parser_t *self) {
         else if (string_equal(token->string, "define"))
             parse_define_program_stmt(self);
         else if (string_equal(token->string, "begin"))
-            parse_run_program_stmt(self);
+            parse_begin_program_stmt(self);
         else {
             fprintf(self->err, "[parser-error] unknown starting token: %s\n", token->string);
             fprintf(self->err, "[src] %s\n", self->src);
@@ -192,7 +192,7 @@ parse_define_program_stmt(parser_t *self) {
 }
 
 void
-parse_run_program_stmt(parser_t *self) {
+parse_begin_program_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
@@ -208,5 +208,5 @@ parse_run_program_stmt(parser_t *self) {
     }
 
     list_push(self->stmt_list,
-              run_program_stmt_new(token_list));
+              begin_program_stmt_new(token_list));
 }

@@ -65,8 +65,8 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         return;
     }
 
-    case RUN_PROGRAM_STMT: {
-        run_program_stmt_t *stmt = (run_program_stmt_t *)unknown_stmt;
+    case BEGIN_PROGRAM_STMT: {
+        begin_program_stmt_t *stmt = (begin_program_stmt_t *)unknown_stmt;
         program_t *program = compile(vm, stmt->token_list);
         size_t base_length = stack_length(vm->return_stack);
         stack_push(vm->return_stack, frame_new(program));
