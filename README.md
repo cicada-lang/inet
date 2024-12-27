@@ -210,9 +210,9 @@ The whole program with test:
   null sole cons sole cons sole cons
   append
 
-  @wire-print-net
-  @interact
-  @wire-print-net
+  wire-print-net
+  run
+  wire-print-net
 ```
 
 <details>
