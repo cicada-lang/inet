@@ -4,10 +4,6 @@
 [example] `examples/lambda.inet` -- use interaction combinators
 [example] `examples/turing.inet` -- coding turing machine
 
-# sexp
-
-[sexp] atom_sexp_print -- handle \n and other \chars
-
 # primitive value
 
 `value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer

@@ -128,6 +128,7 @@ atom_sexp_print(const atom_sexp_t *atom_sexp, file_t *file) {
     }
 
     case STRING_TOKEN: {
+        // TODO handle \n and other \chars
         fprintf(file, "\"%s\"", atom_sexp->token->string);
         return;
     }
