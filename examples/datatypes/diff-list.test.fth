@@ -1,6 +1,6 @@
-* (diff) front -> back value! end
-* (diff-append) target! rest -> result end
-* (diff-open) new-back target! -> old-back end
+* diff front -> back value! end
+* diff-append target! rest -> result end
+* diff-open new-back target! -> old-back end
 
 (- plug the front of the `target` to the back of `rest` -)
 
@@ -16,9 +16,9 @@ end
 
 (- list.inet -)
 
-* (null) -> value! end
-* (cons) tail head -> value! end
-* (append) target! rest -> result end
+* null -> value! end
+* cons tail head -> value! end
+* append target! rest -> result end
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -31,7 +31,7 @@ end
 
 (- test -)
 
-* (sole) -> value! end
+* sole -> value! end
 
 = sole-diff-list
   wire-pair
@@ -48,4 +48,4 @@ end
   wire-print-net
   run
   wire-print-net
-  end
+end

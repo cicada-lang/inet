@@ -1,6 +1,6 @@
-* (null) -> value! end
-* (cons) tail head -> value! end
-* (append) target! rest -> result end
+* null -> value! end
+* cons tail head -> value! end
+* append target! rest -> result end
 
 ! (null)-(append)
   (append)-rest result-(append)
@@ -13,7 +13,7 @@ end
 
 (- test -)
 
-* (sole) -> value! end
+* sole -> value! end
 
 . null sole cons sole cons sole cons
   null sole cons sole cons sole cons

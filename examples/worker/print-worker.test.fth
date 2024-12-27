@@ -1,4 +1,4 @@
-* (sole) -> value! end
+* sole -> value! end
 
 . print-vm
   sole

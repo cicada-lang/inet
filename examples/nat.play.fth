@@ -1,6 +1,6 @@
-* (zero) -> value! end
-* (add1) prev -> value! end
-* (add) target! addend -> result end
+* zero -> value! end
+* add1 prev -> value! end
+* add target! addend -> result end
 
 ! (zero)-(add)
   (add)-addend result-(add)

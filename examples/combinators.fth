@@ -1,6 +1,6 @@
-* (γ) first second -> value! end
-* (δ) target! -> first second end
-* (ε) target! -> end
+* γ first second -> value! end
+* δ target! -> first second end
+* ε target! -> end
 
 (- TODO -)
 

@@ -97,36 +97,13 @@ maybe_ignore_inline_comment(parser_t *self) {
         maybe_ignore_inline_comment(self);
 }
 
-static void
-check_node_name_format(parser_t *self, const token_t *token) {
-    char *string = token->string;
-
-    if (!(string_starts_with(string, "(") &&
-          string_ends_with(string, ")") &&
-          string_count_char(string, '(') == 1 &&
-          string_count_char(string, ')') == 1))
-    {
-        fprintf(self->err, "[parser-error] a node name must be like (<name>)\n");
-        fprintf(self->err, "[src] %s\n", self->src);
-        code_print_context(self->err, self->string, token->start, token->end);
-        exit(1);
-    }
-}
-
-static char *
-parse_node_name(parser_t *self, const token_t *token) {
-    check_node_name_format(self, token);
-    int i = string_find_index(token->string, ')');
-    return string_slice(token->string, 1, i);
-}
-
 void
 parse_define_node_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
     token_t *head_token = list_shift(self->token_list);
-    char *name = parse_node_name(self, head_token);
+    char *name = head_token->string;
 
     define_node_stmt_t *stmt = define_node_stmt_new(head_token, name);
 

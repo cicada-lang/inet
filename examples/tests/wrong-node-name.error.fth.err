@@ -1,3 +1,0 @@
-[parser-error] a node name must be like (<name>)
-[src] examples/tests/wrong-node-name.error.fth
-> 1|* sole -> value! end

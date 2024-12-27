@@ -1,4 +1,4 @@
-* (sole) -> value! end
+* sole -> value! end
 
 . sole sole sole
   print-value-stack
