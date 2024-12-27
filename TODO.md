@@ -1,3 +1,17 @@
+[lang] require end in statement
+[lang] simplify syntax -- no ascii art
+[lang] change syntax away from rune
+
+# local variable
+
+[vm] frame support local variables
+[vm] use local instead fo frame support local variables
+[lang] $name for local variables
+
+# xforth
+
+use xforth-like parsing
+
 # example
 
 [example] `examples/combinators.fth` -- interaction combinators
