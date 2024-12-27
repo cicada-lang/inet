@@ -1,5 +1,6 @@
 # lang
 
+[lang] remove parser_test
 [lang] change to lisp syntax
 
 # example
