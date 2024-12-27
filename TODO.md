@@ -1,5 +1,3 @@
-[vm] def should be tagged union
-
 # lang
 
 [lang] change to lisp syntax

@@ -1,9 +1,6 @@
 #pragma once
 
-#define NODE_DEF ((uint8_t) 2)
-
 struct node_def_t {
-    uint8_t kind;
     char *name;
     port_index_t input_arity;
     port_index_t output_arity;

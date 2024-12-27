@@ -3,7 +3,6 @@
 primitive_def_t *
 primitive_def_new(const char *name, primitive_fn_t *primitive_fn) {
     primitive_def_t *self = new(primitive_def_t);
-    self->kind = PRIMITIVE_DEF;
     self->name = string_copy(name);
     self->primitive_fn = primitive_fn;
     return self;

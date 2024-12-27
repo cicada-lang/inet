@@ -68,7 +68,7 @@ check_port_name_defined(
     check_node_name_defined(vm, node_name, token);
     mod_t *mod = vm->mod;
     const def_t *found = mod_find_def(mod, node_name);
-    const node_def_t *def = (node_def_t *) found;
+    const node_def_t *def = def_as_node_def(found);
     for (port_index_t i = 0; i < def->arity; i++) {
         port_def_t *port_def = def->port_defs[i];
         if (string_equal(port_def->name, port_name)) return;

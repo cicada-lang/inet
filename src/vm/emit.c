@@ -2,10 +2,8 @@
 
 void
 emit_call(const mod_t *mod, program_t *program, const char *name) {
-    const def_t *unknown_def = mod_find_def(mod, name);
-    assert(unknown_def && "[emit_call] unknown name");
-
-    const def_t *def = (def_t *) unknown_def;
+    const def_t *def = mod_find_def(mod, name);
+    assert(def && "[emit_call] unknown name");
     program_add_op(program, (op_t *) call_op_new(def));
     return;
 }
@@ -23,7 +21,7 @@ emit_use_free_wire(
     const char *node_name,
     const char *port_name
 ) {
-    const node_def_t *node_def = node_def_cast(mod_find_def(mod, node_name));
+    const node_def_t *node_def = def_as_node_def(mod_find_def(mod, node_name));
     port_index_t index = node_def_find_port_index(node_def, port_name);
     program_add_op(program, (op_t *) use_free_wire_op_new(node_def, index));
 }

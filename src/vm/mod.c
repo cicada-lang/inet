@@ -64,9 +64,9 @@ mod_define_rule(
     program_t *program
 ) {
     const node_def_t *first_node_def =
-        node_def_cast(mod_find_def(self, first_name));
+        def_as_node_def(mod_find_def(self, first_name));
     const node_def_t *second_node_def =
-        node_def_cast(mod_find_def(self, second_name));
+        def_as_node_def(mod_find_def(self, second_name));
 
     rule_t *rule = rule_new(first_node_def, second_node_def, program);
     list_push(self->rule_list, rule);

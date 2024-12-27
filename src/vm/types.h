@@ -1,7 +1,5 @@
 #pragma once
 
-typedef uint8_t def_kind_t;
-
 typedef enum {
     CALL_OP,
     CONNECT_OP,

@@ -41,24 +41,24 @@ mod_import_nat(mod_t *mod) {
     // * (add) addend target! -> result
 
     {
-        node_def_t *def = node_def_new("zero", 0, 1);
-        def->port_defs[0] = port_def_new("value", true);
-        mod_define(mod, (def_t *) def);
+        def_t *def = def_from_node_def(node_def_new("zero", 0, 1));
+        def->as_node_def->port_defs[0] = port_def_new("value", true);
+        mod_define(mod, def);
     }
 
     {
-        node_def_t *def = node_def_new("add1", 1, 1);
-        def->port_defs[0] = port_def_new("prev", false);
-        def->port_defs[1] = port_def_new("value", true);
-        mod_define(mod, (def_t *) def);
+        def_t *def = def_from_node_def(node_def_new("add1", 1, 1));
+        def->as_node_def->port_defs[0] = port_def_new("prev", false);
+        def->as_node_def->port_defs[1] = port_def_new("value", true);
+        mod_define(mod, def);
     }
 
     {
-        node_def_t *def = node_def_new("add", 2, 1);
-        def->port_defs[0] = port_def_new("addend", false);
-        def->port_defs[1] = port_def_new("target", true);
-        def->port_defs[2] = port_def_new("result", false);
-        mod_define(mod, (def_t *) def);
+        def_t *def = def_from_node_def(node_def_new("add", 2, 1));
+        def->as_node_def->port_defs[0] = port_def_new("addend", false);
+        def->as_node_def->port_defs[1] = port_def_new("target", true);
+        def->as_node_def->port_defs[2] = port_def_new("result", false);
+        mod_define(mod, def);
     }
 
     // ! (zero)-(add)

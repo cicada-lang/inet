@@ -17,29 +17,29 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         define_node_stmt_t *stmt = (define_node_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);
 
-        node_def_t *def =
-            node_def_new(
+        def_t *def =
+            def_from_node_def(node_def_new(
                 stmt->name,
                 list_length(stmt->input_token_list),
-                list_length(stmt->output_token_list));
+                list_length(stmt->output_token_list)));
 
         port_index_t index = 0;
 
         token_t *input_token = list_first(stmt->input_token_list);
         while (input_token) {
-            def->port_defs[index] = compile_port_def(input_token->string);
+            def->as_node_def->port_defs[index] = compile_port_def(input_token->string);
             input_token = list_next(stmt->input_token_list);
             index++;
         }
 
         token_t *output_token = list_first(stmt->output_token_list);
         while (output_token) {
-            def->port_defs[index] = compile_port_def(output_token->string);
+            def->as_node_def->port_defs[index] = compile_port_def(output_token->string);
             output_token = list_next(stmt->output_token_list);
             index++;
         }
 
-        mod_define(vm->mod, (def_t *) def);
+        mod_define(vm->mod, def);
         return;
     }
 
@@ -60,8 +60,8 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);
         program_t *program = compile(vm, stmt->token_list);
-        program_def_t *def = program_def_new(stmt->name, program);
-        mod_define(vm->mod, (def_t *) def);
+        def_t *def = def_from_program_def(program_def_new(stmt->name, program));
+        mod_define(vm->mod, def);
         return;
     }
 
@@ -88,7 +88,7 @@ interpret_mod(vm_t *vm) {
     parser->string = vm->mod->string;
     parser->err = vm->err;
     parser_parse(parser);
-    
+
     list_t *stmt_list = parser->stmt_list;
     parser_destroy(&parser);
 
