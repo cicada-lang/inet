@@ -2,11 +2,11 @@
 * add1 prev -> value! end
 * add target! addend -> result end
 
-! (zero)-(add)
+! zero add
   (add)-addend result-(add)
 end
 
-! (add1)-(add)
+! add1 add
   (add1)-prev (add)-addend add
   add1 result-(add)
 end
@@ -31,21 +31,21 @@ end
 
 * nat-erase target! -> end
 
-! (zero)-(nat-erase)
+! zero nat-erase
 end
 
-! (add1)-(nat-erase)
+! add1 nat-erase
   (add1)-prev nat-erase
 end
 
 * nat-dup target! -> first second end
 
-! (zero)-(nat-dup)
+! zero nat-dup
   zero first-(nat-dup)
   zero second-(nat-dup)
 end
 
-! (add1)-(nat-dup)
+! add1 nat-dup
   (add1)-prev nat-dup
   (- first second -) add1 second-(nat-dup)
   (- first -) add1 first-(nat-dup)
@@ -53,12 +53,12 @@ end
 
 * mul target! mulend -> result end
 
-! (zero)-(mul)
+! zero mul
   (mul)-mulend nat-erase
   zero result-(mul)
 end
 
-! (add1)-(mul)
+! add1 mul
   (mul)-mulend nat-dup
   (- first second -) (add1)-prev swap mul
   (- first almost -) add result-(mul)
@@ -76,27 +76,26 @@ end
 * max first! second -> result end
 * max-aux first second! -> result end
 
-! (zero)-(max)
+! zero max
   (max)-second result-(max)
 end
 
-! (add1)-(max)
+! add1 max
   (add1)-prev (max)-second max-aux
   result-(max)
 end
 
-! (zero)-(max-aux)
+! zero max-aux
   (max-aux)-first add1
   result-(max-aux)
 end
 
-! (add1)-(max-aux)
+! add1 max-aux
   (max-aux)-first (add1)-prev max
   add1 result-(max-aux)
 end
 
 . one two max
-
   wire-print-net
   run
   wire-print-net

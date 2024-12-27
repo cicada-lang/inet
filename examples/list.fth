@@ -2,11 +2,11 @@
 * cons tail head -> value! end
 * append target! rest -> result end
 
-! (null)-(append)
+! null append
   (append)-rest result-(append)
 end
 
-! (cons)-(append)
+! cons append
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
   end

@@ -133,45 +133,16 @@ parse_define_node_stmt(parser_t *self) {
     list_push(self->stmt_list, stmt);
 }
 
-static void
-check_rule_name_format(parser_t *self, const token_t *token) {
-    char *string = token->string;
-
-    if (!(string_starts_with(string, "(") &&
-          string_ends_with(string, ")") &&
-          string_count_char(string, '(') == 2 &&
-          string_count_char(string, ')') == 2 &&
-          string_count_substring(string, ")-(") == 1))
-    {
-        fprintf(self->err, "[parser-error] a rule name must be like (<name>)-(<name>)\n");
-        fprintf(self->err, "[src] %s\n", self->src);
-        code_print_context(self->err, self->string, token->start, token->end);
-        exit(1);
-    }
-}
-
-static char *
-parse_rule_first_name(parser_t *self, const token_t *token) {
-    check_rule_name_format(self, token);
-    int i = string_find_index(token->string, ')');
-    return string_slice(token->string, 1, i);
-}
-
-static char *
-parse_rule_second_name(parser_t *self, const token_t *token) {
-    check_rule_name_format(self, token);
-    int i = string_find_index(token->string, ')');
-    return string_slice(token->string, i+3, strlen(token->string) - 1);
-}
-
 void
 parse_define_rule_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
-    token_t *head_token = list_shift(self->token_list);
-    char *first_name = parse_rule_first_name(self, head_token);
-    char *second_name = parse_rule_second_name(self, head_token);
+    token_t *first_token = list_shift(self->token_list);
+    token_t *second_token = list_shift(self->token_list);
+
+    char *first_name = first_token->string;
+    char *second_name = second_token->string;
 
     list_t *token_list = list_new_with((destroy_fn_t *) token_destroy);
     while (true) {
@@ -188,7 +159,7 @@ parse_define_rule_stmt(parser_t *self) {
 
     list_push(self->stmt_list,
               define_rule_stmt_new(
-                  head_token,
+                  first_token,
                   first_name,
                   second_name,
                   token_list));

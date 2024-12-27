@@ -1,4 +1,3 @@
-[lang] define rule -- simplify syntax -- no ascii art
 [lang] get free wire -- simplify syntax -- no ascii art
 [lang] change syntax away from rune
 

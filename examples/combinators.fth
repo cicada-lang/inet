@@ -4,11 +4,11 @@
 
 (- TODO -)
 
-! (γ)-(γ) (- we can not define rule for the same node yet -)
+! γ γ (- we can not define rule for the same node yet -)
 end
 
-! (δ)-(δ)
+! δ δ
 end
 
-! (ε)-(ε)
+! ε ε
 end

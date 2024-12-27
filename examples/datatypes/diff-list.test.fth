@@ -4,12 +4,12 @@
 
 (- plug the front of the `target` to the back of `rest` -)
 
-! (diff)-(diff-append)
+! diff diff-append
   (diff)-front diff result-(diff-append)
   (diff-append)-rest diff-open back-(diff)
 end
 
-! (diff)-(diff-open)
+! diff diff-open
   (diff)-back new-back-(diff-open)
   (diff)-front old-back-(diff-open)
 end
@@ -20,11 +20,11 @@ end
 * cons tail head -> value! end
 * append target! rest -> result end
 
-! (null)-(append)
+! null append
   (append)-rest result-(append)
 end
 
-! (cons)-(append)
+! cons append
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 end
