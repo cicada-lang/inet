@@ -229,38 +229,12 @@ parser_parse_define_rule_stmt(parser_t *self) {
                   token_list));
 }
 
-static void
-check_program_name_format(parser_t *self, const token_t *token) {
-    char *string = token->string;
-
-    if (token_is_rune(token)) {
-        fprintf(self->err, "[parser-error] program name can not be a rune: %s\n", string);
-        fprintf(self->err, "[src] %s\n", self->src);
-        code_print_context(self->err, self->string, token->start, token->end);
-        exit(1);
-    }
-
-    if (string_has_char(string, '{') ||
-        string_has_char(string, '}') ||
-        string_has_char(string, '[') ||
-        string_has_char(string, ']') ||
-        string_has_char(string, '(') ||
-        string_has_char(string, ')'))
-    {
-        fprintf(self->err, "[parser-error] invalid program name: %s\n", string);
-        fprintf(self->err, "[src] %s\n", self->src);
-        code_print_context(self->err, self->string, token->start, token->end);
-        exit(1);
-    }
-}
-
 void
 parser_parse_define_program_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
     token_t *head_token = list_shift(self->token_list);
-    check_program_name_format(self, head_token);
     char *name = string_copy(head_token->string);
 
     list_t *token_list = list_new_with((destroy_fn_t *) token_destroy);
