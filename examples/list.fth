@@ -1,21 +1,21 @@
-* null -> value! end
-* cons tail head -> value! end
-* append target! rest -> result end
+define-node null -> value! end
+define-node cons tail head -> value! end
+define-node append target! rest -> result end
 
-! null append
+define-rule null append
   (append)-rest result-(append)
 end
 
-! cons append
+define-rule cons append
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
   end
 
 (- test -)
 
-* sole -> value! end
+define-node sole -> value! end
 
-. null sole cons sole cons sole cons
+begin null sole cons sole cons sole cons
   null sole cons sole cons sole cons
   append
 

@@ -1,5 +1,5 @@
+[lang] quit using top level begin and end, be like forth
 [lang] get free wire -- simplify syntax -- no ascii art
-[lang] change syntax away from rune
 
 # local variable
 

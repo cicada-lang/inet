@@ -50,13 +50,13 @@ parser_parse(parser_t *self) {
         if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_first(self->token_list);
-        if (string_equal(token->string, "*"))
+        if (string_equal(token->string, "define-node"))
             parse_define_node_stmt(self);
-        else if (string_equal(token->string, "!"))
+        else if (string_equal(token->string, "define-rule"))
             parse_define_rule_stmt(self);
-        else if (string_equal(token->string, "="))
+        else if (string_equal(token->string, "define"))
             parse_define_program_stmt(self);
-        else if (string_equal(token->string, "."))
+        else if (string_equal(token->string, "begin"))
             parse_run_program_stmt(self);
         else {
             fprintf(self->err, "[parser-error] unknown starting token: %s\n", token->string);

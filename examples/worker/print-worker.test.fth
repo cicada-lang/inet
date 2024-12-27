@@ -1,6 +1,6 @@
-* sole -> value! end
+define-node sole -> value! end
 
-. print-vm
+begin print-vm
   sole
   print-vm
   sole

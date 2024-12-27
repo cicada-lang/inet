@@ -1,5 +1,5 @@
-* sole -> value! end
+define-node sole -> value! end
 
-. wire-pair sole connect
+begin wire-pair sole connect
   print-vm
 end

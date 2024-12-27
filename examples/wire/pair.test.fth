@@ -1,3 +1,3 @@
-. wire-pair
+begin wire-pair
   print-vm
 end

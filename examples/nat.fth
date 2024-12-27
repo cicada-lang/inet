@@ -1,19 +1,19 @@
-* zero -> value! end
-* add1 prev -> value! end
-* add target! addend -> result end
+define-node zero -> value! end
+define-node add1 prev -> value! end
+define-node add target! addend -> result end
 
-! zero add
+define-rule zero add
   (add)-addend result-(add)
 end
 
-! add1 add
+define-rule add1 add
   (add1)-prev (add)-addend add
   add1 result-(add)
 end
 
 (- test -)
 
-. zero add1 add1
+begin zero add1 add1
   zero add1 add1
   add
 

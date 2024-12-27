@@ -1,14 +1,14 @@
-* γ first second -> value! end
-* δ target! -> first second end
-* ε target! -> end
+define-node γ first second -> value! end
+define-node δ target! -> first second end
+define-node ε target! -> end
 
 (- TODO -)
 
-! γ γ (- we can not define rule for the same node yet -)
+define-rule γ γ (- we can not define rule for the same node yet -)
 end
 
-! δ δ
+define-rule δ δ
 end
 
-! ε ε
+define-rule ε ε
 end

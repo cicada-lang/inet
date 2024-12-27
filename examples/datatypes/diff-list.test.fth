@@ -1,39 +1,39 @@
-* diff front -> back value! end
-* diff-append target! rest -> result end
-* diff-open new-back target! -> old-back end
+define-node diff front -> back value! end
+define-node diff-append target! rest -> result end
+define-node diff-open new-back target! -> old-back end
 
 (- plug the front of the `target` to the back of `rest` -)
 
-! diff diff-append
+define-rule diff diff-append
   (diff)-front diff result-(diff-append)
   (diff-append)-rest diff-open back-(diff)
 end
 
-! diff diff-open
+define-rule diff diff-open
   (diff)-back new-back-(diff-open)
   (diff)-front old-back-(diff-open)
 end
 
 (- list.inet -)
 
-* null -> value! end
-* cons tail head -> value! end
-* append target! rest -> result end
+define-node null -> value! end
+define-node cons tail head -> value! end
+define-node append target! rest -> result end
 
-! null append
+define-rule null append
   (append)-rest result-(append)
 end
 
-! cons append
+define-rule cons append
   (cons)-tail (append)-rest append
   (cons)-head cons result-(append)
 end
 
 (- test -)
 
-* sole -> value! end
+define-node sole -> value! end
 
-= sole-diff-list
+define sole-diff-list
   wire-pair
   (- wire wire -) diff
   (- wire back value -) swap
@@ -43,7 +43,7 @@ end
   (- value -)
 end
 
-. sole-diff-list sole-diff-list diff-append
+begin sole-diff-list sole-diff-list diff-append
 
   wire-print-net
   run

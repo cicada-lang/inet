@@ -1,6 +1,6 @@
-* sole -> value! end
+define-node sole -> value! end
 
-. sole sole sole
+begin sole sole sole
   print-value-stack
   sole sole sole
 end
