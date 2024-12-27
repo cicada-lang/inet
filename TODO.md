@@ -1,6 +1,3 @@
-[vm] extract call_primitive
-[vm] extract call_program
-
 [net] extract port_def
 
 [vm] def should be tagged union
