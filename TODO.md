@@ -1,7 +1,5 @@
 # lang
 
-[lang] setup exp
-[lang] stmt has exp
 [lang] change to lisp syntax
 
 # example

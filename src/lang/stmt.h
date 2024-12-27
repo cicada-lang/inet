@@ -1,12 +1,5 @@
 #pragma once
 
-typedef enum {
-    DEFINE_NODE_STMT,
-    DEFINE_RULE_STMT,
-    DEFINE_PROGRAM_STMT,
-    RUN_PROGRAM_STMT,
-} stmt_kind_t;
-
 struct stmt_t { stmt_kind_t kind; };
 
 // * -- define_node_stmt_t
