@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-bin=./bin/inet
+bin=./bin/inet-forth
 ext=inet
 
 for example in $(find examples -name "*.${ext}" -not -name "*.test.${ext}" -not -name "*.error.${ext}" -not -name "*.play.${ext}"); do

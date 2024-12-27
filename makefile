@@ -5,7 +5,7 @@ cflags = -g -Wall -Wwrite-strings -Wextra -Werror -Wpedantic -O3 -std=c2x -D_POS
 src = $(shell find src -name '*.c')
 headers = $(shell find src -name '*.h')
 lib = $(patsubst src/%,lib/%,$(patsubst %.c,%.o,$(src)))
-app = inet
+app = inet-forth
 bin = bin/$(app)
 
 .PHONY: all

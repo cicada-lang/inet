@@ -1,3 +1,3 @@
 #pragma once
 
-#define INET_VERSION "0.1.0"
+#define INET_FORTH_VERSION "0.1.0"
