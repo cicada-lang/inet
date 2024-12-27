@@ -1,5 +1,5 @@
 [compiler-error] undefined node name: add
-[src] examples/tests/undefined-name.error.inet
+[src] examples/tests/undefined-name.error.fth
   1|! (zero)-(add)
 > 2|  (add)-addend result-(add)
   3|

@@ -1,10 +1,8 @@
-rename .inet to .ifth
-
 # example
 
-[example] `examples/combinators.ifth` -- interaction combinators
-[example] `examples/lambda.ifth` -- use interaction combinators
-[example] `examples/turing.ifth` -- coding turing machine
+[example] `examples/combinators.fth` -- interaction combinators
+[example] `examples/lambda.fth` -- use interaction combinators
+[example] `examples/turing.fth` -- coding turing machine
 
 # primitive value
 
