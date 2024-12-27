@@ -1,10 +1,10 @@
-[lang] get free wire -- simplify syntax -- no ascii art
-
 # local variable
 
 [vm] frame support local variables
-[vm] use local instead fo frame support local variables
-[lang] $name for local variables
+[lang] ( x y ) for local variables
+
+[lang] remove get-free-wire syntax
+[lang] free wire group from frame
 
 # xforth
 
