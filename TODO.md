@@ -1,6 +1,4 @@
-# lang
-
-[lang] change to lisp syntax
+rename project to inet-forth
 
 # example
 
