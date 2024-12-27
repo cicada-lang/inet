@@ -1,5 +1,3 @@
-[net] extract port_def
-
 [vm] def should be tagged union
 
 # lang

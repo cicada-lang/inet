@@ -2,14 +2,6 @@
 
 #define NODE_DEF ((uint8_t) 2)
 
-struct port_def_t {
-    char *name;
-    bool is_principal;
-};
-
-port_def_t *port_def_new(const char *name, bool is_principal);
-void port_def_destroy(port_def_t **self_pointer);
-
 struct node_def_t {
     uint8_t kind;
     char *name;
