@@ -1,4 +1,3 @@
-[vm] extract call_node
 [vm] extract call_primitive
 [vm] extract call_program
 
