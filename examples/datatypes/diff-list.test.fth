@@ -43,9 +43,7 @@ define sole-diff-list
   (- value -)
 end
 
-begin sole-diff-list sole-diff-list diff-append
-
-  wire-print-net
-  run
-  wire-print-net
-end
+sole-diff-list sole-diff-list diff-append
+wire-print-net
+run
+wire-print-net

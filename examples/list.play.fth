@@ -15,7 +15,6 @@ end
 
 define-node sole -> value! end
 
-begin null sole cons sole cons sole cons
-  null sole cons sole cons sole cons
-  append debug
-end
+null sole cons sole cons sole cons
+null sole cons sole cons sole cons
+append debug

@@ -15,7 +15,6 @@ end
 
 define two zero add1 add1 end
 
-begin two two add
-  two two add
-  add debug
-end
+two two add
+two two add
+add debug

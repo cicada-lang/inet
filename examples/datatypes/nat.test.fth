@@ -18,14 +18,13 @@ define two one one add end
 define three two one add end
 define four two two add end
 
-begin two two add
-  two two add
-  add
+two two add
+two two add
+add
 
-  wire-print-net
-  run
-  wire-print-net
-end
+wire-print-net
+run
+wire-print-net
 
 (- to define `mul`, we first need `nat-erase` and `nat-dup` -)
 
@@ -64,12 +63,12 @@ define-rule add1 mul
   (- first almost -) add result-(mul)
 end
 
-begin two two mul
+two two mul
 
-  wire-print-net
-  run
-  wire-print-net
-end
+wire-print-net
+run
+wire-print-net
+
 
 (- to define `max`, we need `max-aux` -)
 
@@ -95,8 +94,8 @@ define-rule add1 max-aux
   add1 result-(max-aux)
 end
 
-begin one two max
-  wire-print-net
-  run
-  wire-print-net
-end
+one two max
+
+wire-print-net
+run
+wire-print-net

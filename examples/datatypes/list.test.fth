@@ -15,11 +15,10 @@ end
 
 define-node sole -> value! end
 
-begin null sole cons sole cons sole cons
-  null sole cons sole cons sole cons
-  append
+null sole cons sole cons sole cons
+null sole cons sole cons sole cons
+append
 
-  wire-print-net
-  run
-  wire-print-net
-end
+wire-print-net
+run
+wire-print-net

@@ -71,7 +71,6 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
         size_t base_length = stack_length(vm->return_stack);
         stack_push(vm->return_stack, frame_new(program));
         vm_run_until(vm, base_length);
-        vm_net_run(vm);
         return;
     }
     }

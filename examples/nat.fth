@@ -13,11 +13,10 @@ end
 
 (- test -)
 
-begin zero add1 add1
-  zero add1 add1
-  add
+zero add1 add1
+zero add1 add1
+add
 
-  wire-print-net
-  run
-  wire-print-net
-end
+wire-print-net
+run
+wire-print-net
