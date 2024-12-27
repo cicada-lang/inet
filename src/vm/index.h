@@ -5,6 +5,7 @@
 #include "emit.h"
 #include "mod.h"
 #include "frame.h"
+#include "call.h"
 #include "execute.h"
 #include "vm.h"
 #include "vm_test.h"
