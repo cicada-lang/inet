@@ -29,17 +29,9 @@ static void parser_parse_define_rule_stmt(parser_t *self);
 static void parser_parse_define_program_stmt(parser_t *self);
 static void parser_parse_run_program_stmt(parser_t *self);
 
-static bool token_is_rune(const token_t *token) {
-    if (string_equal(token->string, "*"))
-        return true;
-    else if (string_equal(token->string, "!"))
-        return true;
-    else if (string_equal(token->string, "="))
-        return true;
-    else if (string_equal(token->string, "."))
-        return true;
-    else
-        return false;
+static bool
+token_is_end(const token_t *token) {
+    return string_equal(token->string, "end");
 }
 
 void
@@ -145,10 +137,8 @@ parser_parse_define_node_stmt(parser_t *self) {
         if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_shift(self->token_list);
-        if (token_is_rune(token)) {
-            list_unshift(self->token_list, token);
+        if (token_is_end(token))
             break;
-        }
 
         if (string_equal(token->string, "->")) {
             output_flag = true;
@@ -213,10 +203,8 @@ parser_parse_define_rule_stmt(parser_t *self) {
         if (list_is_empty(self->token_list)) break;
 
         token_t *token = list_shift(self->token_list);
-        if (token_is_rune(token)) {
-            list_unshift(self->token_list, token);
+        if (token_is_end(token))
             break;
-        }
 
         list_push(token_list, token);
     }
@@ -242,10 +230,8 @@ parser_parse_define_program_stmt(parser_t *self) {
         parser_maybe_ignore_inline_comment(self);
 
         token_t *token = list_shift(self->token_list);
-        if (token_is_rune(token)) {
-            list_unshift(self->token_list, token);
+        if (token_is_end(token))
             break;
-        }
 
         list_push(token_list, token);
     }
@@ -267,10 +253,8 @@ parser_parse_run_program_stmt(parser_t *self) {
         parser_maybe_ignore_inline_comment(self);
 
         token_t *token = list_shift(self->token_list);
-        if (token_is_rune(token)) {
-            list_unshift(self->token_list, token);
+        if (token_is_end(token))
             break;
-        }
 
         list_push(token_list, token);
     }

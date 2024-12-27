@@ -2,6 +2,6 @@
 [src] examples/tests/undefined-name.error.fth
   1|! (zero)-(add)
 > 2|  (add)-addend result-(add)
-  3|
-  4|! (add1)-(add)
-  5|  (add1)-prev (add)-addend add
+  3|end
+  4|
+  5|! (add1)-(add)

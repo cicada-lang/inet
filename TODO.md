@@ -1,4 +1,3 @@
-[lang] require end in statement
 [lang] simplify syntax -- no ascii art
 [lang] change syntax away from rune
 
