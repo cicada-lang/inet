@@ -13,6 +13,7 @@ port_def_destroy(port_def_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         port_def_t *self = *self_pointer;
+        free(self->name);
         free(self);
         *self_pointer = NULL;
     }

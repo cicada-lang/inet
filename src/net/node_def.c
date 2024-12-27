@@ -29,6 +29,7 @@ node_def_destroy(node_def_t **self_pointer) {
         }
 
         free(self->port_defs);
+        free(self->name);
         free(self);
         *self_pointer = NULL;
     }
