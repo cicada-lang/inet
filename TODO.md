@@ -1,5 +1,3 @@
-rename project to inet-forth
-
 # example
 
 [example] `examples/combinators.inet` -- interaction combinators
