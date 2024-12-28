@@ -13,10 +13,9 @@ define-rule add add1
   result connect
 end
 
-zero add1 add1
-zero add1 add1
-add
+define two zero add1 add1 end
 
-wire-print-net
-run
+two two add
+
+wire-print-net run
 wire-print-net

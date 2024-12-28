@@ -13,10 +13,10 @@ run_command(commander_t *runner) {
 void
 run_file(const char *path, size_t log_level) {
     file_t *file = file_open_or_fail(path, "r");
-    const char *string = file_read_string(file);
+    const char *code = file_read_string(file);
     fclose(file);
 
-    mod_t *mod = mod_new(path, string);
+    mod_t *mod = mod_new(path, code);
     import_primitives(mod);
 
     vm_t *vm = vm_new(mod);

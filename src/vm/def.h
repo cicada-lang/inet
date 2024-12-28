@@ -1,9 +1,9 @@
 #pragma once
 
 typedef enum {
-    NODE_DEF,
-    FUNCTION_DEF,
     PRIMITIVE_DEF,
+    FUNCTION_DEF,
+    NODE_DEF,
 } def_kind_t;
 
 struct def_t {
