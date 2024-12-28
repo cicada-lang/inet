@@ -1,11 +1,11 @@
 #include "index.h"
 
 mod_t *
-mod_new(const char *src, const char *string) {
+mod_new(const char *src, const char *code) {
     mod_t *self = new(mod_t);
 
     self->src = src;
-    self->code = string;
+    self->code = code;
 
     self->def_list = list_new_with((destroy_fn_t *) def_destroy);
     self->rule_list = list_new_with((destroy_fn_t *) rule_destroy);
