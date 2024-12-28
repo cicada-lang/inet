@@ -5,7 +5,7 @@
 
 struct mod_t {
     const char *src;
-    const char *string;
+    const char *code;
     list_t *def_list;
     list_t *rule_list;
 };

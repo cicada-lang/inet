@@ -5,7 +5,7 @@ mod_new(const char *src, const char *string) {
     mod_t *self = new(mod_t);
 
     self->src = src;
-    self->string = string;
+    self->code = string;
 
     self->def_list = list_new_with((destroy_fn_t *) def_destroy);
     self->rule_list = list_new_with((destroy_fn_t *) rule_destroy);

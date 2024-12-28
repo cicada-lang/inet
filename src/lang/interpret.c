@@ -84,7 +84,7 @@ interpret_mod(vm_t *vm) {
     parser->lexer = lexer_new();
     parser->lexer->line_comment = "--";
     parser->src = vm->mod->src;
-    parser->string = vm->mod->string;
+    parser->string = vm->mod->code;
     parser->err = vm->err;
     parser_parse(parser);
 
