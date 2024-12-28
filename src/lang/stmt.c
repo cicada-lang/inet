@@ -58,10 +58,10 @@ define_rule_stmt_destroy(define_rule_stmt_t **self_pointer) {
     }
 }
 
-define_program_stmt_t *
-define_program_stmt_new(token_t *head_token, char *name, list_t *token_list) {
-    define_program_stmt_t *self = new(define_program_stmt_t);
-    self->kind = DEFINE_PROGRAM_STMT;
+define_function_stmt_t *
+define_function_stmt_new(token_t *head_token, char *name, list_t *token_list) {
+    define_function_stmt_t *self = new(define_function_stmt_t);
+    self->kind = DEFINE_FUNCTION_STMT;
     self->head_token = head_token;
     self->name = name;
     self->token_list = token_list;
@@ -69,10 +69,10 @@ define_program_stmt_new(token_t *head_token, char *name, list_t *token_list) {
 }
 
 void
-define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
+define_function_stmt_destroy(define_function_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        define_program_stmt_t *self = *self_pointer;
+        define_function_stmt_t *self = *self_pointer;
         token_destroy(&self->head_token);
         free(self->name);
         list_destroy(&self->token_list);
@@ -81,19 +81,19 @@ define_program_stmt_destroy(define_program_stmt_t **self_pointer) {
     }
 }
 
-begin_program_stmt_t *
-begin_program_stmt_new(list_t *token_list) {
-    begin_program_stmt_t *self = new(begin_program_stmt_t);
-    self->kind = BEGIN_PROGRAM_STMT;
+begin_function_stmt_t *
+begin_function_stmt_new(list_t *token_list) {
+    begin_function_stmt_t *self = new(begin_function_stmt_t);
+    self->kind = BEGIN_FUNCTION_STMT;
     self->token_list = token_list;
     return self;
 }
 
 void
-begin_program_stmt_destroy(begin_program_stmt_t **self_pointer) {
+begin_function_stmt_destroy(begin_function_stmt_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
-        begin_program_stmt_t *self = *self_pointer;
+        begin_function_stmt_t *self = *self_pointer;
         list_destroy(&self->token_list);
         free(self);
         *self_pointer = NULL;
@@ -116,13 +116,13 @@ stmt_destroy(stmt_t **self_pointer) {
             return;
         }
 
-        case DEFINE_PROGRAM_STMT: {
-            define_program_stmt_destroy((define_program_stmt_t **) self_pointer);
+        case DEFINE_FUNCTION_STMT: {
+            define_function_stmt_destroy((define_function_stmt_t **) self_pointer);
             return;
         }
 
-        case BEGIN_PROGRAM_STMT: {
-            begin_program_stmt_destroy((begin_program_stmt_t **) self_pointer);
+        case BEGIN_FUNCTION_STMT: {
+            begin_function_stmt_destroy((begin_function_stmt_t **) self_pointer);
             return;
         }
         }

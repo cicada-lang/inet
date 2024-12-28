@@ -11,17 +11,17 @@ vm_test(void) {
 
     vm_t *vm = vm_new(mod);
 
-    program_t *program = program_new();
-    emit_call(mod, program, "zero");
-    emit_call(mod, program, "add1");
-    emit_call(mod, program, "add1");
-    emit_call(mod, program, "zero");
-    emit_call(mod, program, "add1");
-    emit_call(mod, program, "add1");
-    emit_call(mod, program, "add");
-    program_build(program);
+    function_t *function = function_new();
+    emit_call(mod, function, "zero");
+    emit_call(mod, function, "add1");
+    emit_call(mod, function, "add1");
+    emit_call(mod, function, "zero");
+    emit_call(mod, function, "add1");
+    emit_call(mod, function, "add1");
+    emit_call(mod, function, "add");
+    function_build(function);
 
-    frame_t *frame = frame_new(program);
+    frame_t *frame = frame_new(function);
     stack_push(vm->return_stack, frame);
 
     vm->log_level = 1;
@@ -69,21 +69,21 @@ mod_import_nat(mod_t *mod) {
     //   add1 result-(add)
 
     {
-        program_t *program = program_new();
-        emit_use_free_wire(mod, program, "add", "addend");
-        emit_reconnect_free_wire(mod, program, "add", "result");
-        program_build(program);
-        mod_define_rule(mod, "zero", "add", program);
+        function_t *function = function_new();
+        emit_use_free_wire(mod, function, "add", "addend");
+        emit_reconnect_free_wire(mod, function, "add", "result");
+        function_build(function);
+        mod_define_rule(mod, "zero", "add", function);
     }
 
     {
-        program_t *program = program_new();
-        emit_use_free_wire(mod, program, "add", "addend");
-        emit_use_free_wire(mod, program, "add1", "prev");
-        emit_call(mod, program, "add");
-        emit_call(mod, program, "add1");
-        emit_reconnect_free_wire(mod, program, "add", "result");
-        program_build(program);
-        mod_define_rule(mod, "add1", "add", program);
+        function_t *function = function_new();
+        emit_use_free_wire(mod, function, "add", "addend");
+        emit_use_free_wire(mod, function, "add1", "prev");
+        emit_call(mod, function, "add");
+        emit_call(mod, function, "add1");
+        emit_reconnect_free_wire(mod, function, "add", "result");
+        function_build(function);
+        mod_define_rule(mod, "add1", "add", function);
     }
 }

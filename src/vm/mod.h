@@ -19,6 +19,6 @@ const rule_t *mod_find_rule(
     const wire_t *first_wire,
     const wire_t *second_wire);
 void mod_define(mod_t *self, def_t *def);
-void mod_define_rule(mod_t *self, const char *first_name, const char *second_name, program_t *program);
+void mod_define_rule(mod_t *self, const char *first_name, const char *second_name, function_t *function);
 
 void mod_print(const mod_t *self, file_t *file);

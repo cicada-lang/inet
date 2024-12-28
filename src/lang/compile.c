@@ -2,20 +2,20 @@
 
 static void compile_token(
     const vm_t *vm,
-    program_t *program,
+    function_t *function,
     const token_t *token);
 
-program_t *
+function_t *
 compile(const vm_t *vm, list_t *token_list) {
-    program_t *program = program_new();
+    function_t *function = function_new();
     token_t *token = list_first(token_list);
     while (token) {
-        compile_token(vm, program, token);
+        compile_token(vm, function, token);
         token = list_next(token_list);
     }
 
-    program_build(program);
-    return program;
+    function_build(function);
+    return function;
 }
 
 static bool is_free_wire_ref(const char *word);
@@ -28,7 +28,7 @@ static char *parse_reversed_free_wire_ref_node_name(const char *word);
 static char *parse_reversed_free_wire_ref_port_name(const char *word);
 
 void
-compile_token(const vm_t *vm, program_t *program, const token_t *token) {
+compile_token(const vm_t *vm, function_t *function, const token_t *token) {
     mod_t *mod = vm->mod;
     char *word = token->string;
 
@@ -37,16 +37,16 @@ compile_token(const vm_t *vm, program_t *program, const token_t *token) {
         char *port_name = parse_free_wire_ref_port_name(word);
         check_node_name_defined(vm, node_name, token);
         check_port_name_defined(vm, node_name, port_name, token);
-        emit_use_free_wire(mod, program, node_name, port_name);
+        emit_use_free_wire(mod, function, node_name, port_name);
     } else if (is_reversed_free_wire_ref(word)) {
         char *node_name = parse_reversed_free_wire_ref_node_name(word);
         char *port_name = parse_reversed_free_wire_ref_port_name(word);
         check_node_name_defined(vm, node_name, token);
         check_port_name_defined(vm, node_name, port_name, token);
-        emit_reconnect_free_wire(mod, program, node_name, port_name);
+        emit_reconnect_free_wire(mod, function, node_name, port_name);
     } else {
         check_name_defined(vm, word, token);
-        emit_call(mod, program, word);
+        emit_call(mod, function, word);
     }
 }
 

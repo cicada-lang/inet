@@ -46,7 +46,7 @@ vm_net_step(vm_t *self) {
     if (!rule) return;
 
     size_t base_length = stack_length(self->return_stack);
-    frame_t *frame = frame_new(rule->program);
+    frame_t *frame = frame_new(rule->function);
     frame_collect_free_wires(frame, active_wire);
     stack_push(self->return_stack, frame);
     vm_run_until(self, base_length);

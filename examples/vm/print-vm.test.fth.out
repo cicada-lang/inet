@@ -3,9 +3,9 @@
 </active-wire-list>
 <return-stack length="1">
 <frame>
-<program>
+<function>
 . print-vm <<< sole print-vm sole print-vm 
-</program>
+</function>
 <local-free-wires>
 </local-free-wires>
 </frame>
@@ -19,9 +19,9 @@
 </active-wire-list>
 <return-stack length="1">
 <frame>
-<program>
+<function>
 . print-vm sole print-vm <<< sole print-vm 
-</program>
+</function>
 <local-free-wires>
 </local-free-wires>
 </frame>

@@ -1,6 +1,6 @@
 #pragma once
 
-frame_t *frame_new(const program_t *program);
+frame_t *frame_new(const function_t *function);
 void frame_destroy(frame_t **self_pointer);
 
 void frame_collect_free_wires(frame_t *self, wire_t *wire);

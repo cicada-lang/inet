@@ -1,8 +1,8 @@
 <return-stack length="1">
 <frame>
-<program>
+<function>
 . print-return-stack <<< print-return-stack print-return-stack 
-</program>
+</function>
 <local-free-wires>
 </local-free-wires>
 </frame>
@@ -10,9 +10,9 @@
 
 <return-stack length="1">
 <frame>
-<program>
+<function>
 . print-return-stack print-return-stack <<< print-return-stack 
-</program>
+</function>
 <local-free-wires>
 </local-free-wires>
 </frame>

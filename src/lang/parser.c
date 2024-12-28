@@ -26,8 +26,8 @@ parser_destroy(parser_t **self_pointer) {
 static void maybe_ignore_inline_comment(parser_t *self);
 static void parse_define_node_stmt(parser_t *self);
 static void parse_define_rule_stmt(parser_t *self);
-static void parse_define_program_stmt(parser_t *self);
-static void parse_begin_program_stmt(parser_t *self);
+static void parse_define_function_stmt(parser_t *self);
+static void parse_begin_function_stmt(parser_t *self);
 static void parse_word(parser_t *self);
 
 static bool
@@ -56,9 +56,9 @@ parser_parse(parser_t *self) {
         else if (string_equal(token->string, "define-rule"))
             parse_define_rule_stmt(self);
         else if (string_equal(token->string, "define"))
-            parse_define_program_stmt(self);
+            parse_define_function_stmt(self);
         else if (string_equal(token->string, "begin"))
-            parse_begin_program_stmt(self);
+            parse_begin_function_stmt(self);
         else
             parse_word(self);
     }
@@ -163,7 +163,7 @@ parse_define_rule_stmt(parser_t *self) {
 }
 
 void
-parse_define_program_stmt(parser_t *self) {
+parse_define_function_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
@@ -182,14 +182,14 @@ parse_define_program_stmt(parser_t *self) {
     }
 
     list_push(self->stmt_list,
-              define_program_stmt_new(
+              define_function_stmt_new(
                   head_token,
                   name,
                   token_list));
 }
 
 void
-parse_begin_program_stmt(parser_t *self) {
+parse_begin_function_stmt(parser_t *self) {
     token_t *rune_token = list_shift(self->token_list);
     token_destroy(&rune_token);
 
@@ -205,7 +205,7 @@ parse_begin_program_stmt(parser_t *self) {
     }
 
     list_push(self->stmt_list,
-              begin_program_stmt_new(token_list));
+              begin_function_stmt_new(token_list));
 }
 
 void
@@ -215,5 +215,5 @@ parse_word(parser_t *self) {
     list_t *token_list = list_new_with((destroy_fn_t *) token_destroy);
     token_t *token = list_shift(self->token_list);
     list_push(token_list, token);
-    list_push(self->stmt_list, begin_program_stmt_new(token_list));
+    list_push(self->stmt_list, begin_function_stmt_new(token_list));
 }

@@ -1,3 +1,7 @@
+# xforth
+
+use xforth-like parsing -- tidy first
+
 # local variable
 
 [vm] frame support local variables
@@ -5,10 +9,6 @@
 
 [lang] remove get-free-wire syntax
 [lang] free wire group from frame
-
-# xforth
-
-use xforth-like parsing
 
 # example
 

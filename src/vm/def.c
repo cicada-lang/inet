@@ -7,11 +7,11 @@ def_as_primitive_def(const def_t *def) {
     return def->as_primitive_def;
 }
 
-const program_def_t *
-def_as_program_def(const def_t *def) {
+const function_def_t *
+def_as_function_def(const def_t *def) {
     assert(def);
-    assert(def->kind == PROGRAM_DEF);
-    return def->as_program_def;
+    assert(def->kind == FUNCTION_DEF);
+    return def->as_function_def;
 }
 
 const node_def_t *
@@ -30,10 +30,10 @@ def_from_primitive_def(primitive_def_t *primitive_def) {
 }
 
 def_t *
-def_from_program_def(program_def_t *program_def) {
+def_from_function_def(function_def_t *function_def) {
     def_t *self = new(def_t);
-    self->kind = PROGRAM_DEF;
-    self->as_program_def = program_def;
+    self->kind = FUNCTION_DEF;
+    self->as_function_def = function_def;
     return self;
 }
 
@@ -58,8 +58,8 @@ def_destroy(def_t **self_pointer) {
             break;
         }
 
-        case PROGRAM_DEF: {
-            program_def_destroy(&self->as_program_def);
+        case FUNCTION_DEF: {
+            function_def_destroy(&self->as_function_def);
             break;
         }
 
@@ -81,8 +81,8 @@ def_name(const def_t *def) {
         return def->as_node_def->name;
     }
 
-    case PROGRAM_DEF: {
-        return def->as_program_def->name;
+    case FUNCTION_DEF: {
+        return def->as_function_def->name;
     }
 
     case PRIMITIVE_DEF: {
@@ -100,8 +100,8 @@ def_kind_name(def_kind_t kind) {
         return "node";
     }
 
-    case PROGRAM_DEF: {
-        return "program";
+    case FUNCTION_DEF: {
+        return "function";
     }
 
     case PRIMITIVE_DEF: {
@@ -141,9 +141,9 @@ def_print(const def_t *def, file_t *file) {
         return;
     }
 
-    case PROGRAM_DEF: {
-        fprintf(file, "= %s ", def->as_program_def->name);
-        program_print(def->as_program_def->program, file);
+    case FUNCTION_DEF: {
+        fprintf(file, "= %s ", def->as_function_def->name);
+        function_print(def->as_function_def->function, file);
         return;
     }
 

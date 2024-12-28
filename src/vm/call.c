@@ -8,8 +8,8 @@ call(vm_t *vm, const def_t *def) {
         return;
     }
 
-    case PROGRAM_DEF: {
-        call_program(vm, def->as_program_def);
+    case FUNCTION_DEF: {
+        call_function(vm, def->as_function_def);
         return;
     }
 

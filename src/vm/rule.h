@@ -3,13 +3,13 @@
 struct rule_t {
     const node_def_t *first_node_def;
     const node_def_t *second_node_def;
-    program_t *program;
+    function_t *function;
 };
 
 rule_t *rule_new(
     const node_def_t *first_node_def,
     const node_def_t *second_node_def,
-    program_t *program);
+    function_t *function);
 void rule_destroy(rule_t **self_pointer);
 bool rule_match_wire_pair(
     const rule_t *self,

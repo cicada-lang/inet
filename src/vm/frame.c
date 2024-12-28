@@ -6,8 +6,8 @@
 typedef struct free_wire_group_t free_wire_group_t;
 
 struct frame_t {
-    size_t program_counter;
-    const program_t *program;
+    size_t function_counter;
+    const function_t *function;
     free_wire_group_t *first_free_wire_group;
     free_wire_group_t *second_free_wire_group;
 };
@@ -38,10 +38,10 @@ free_wire_group_destroy(free_wire_group_t **self_pointer) {
 }
 
 frame_t *
-frame_new(const program_t *program) {
+frame_new(const function_t *function) {
     frame_t *self = new(frame_t);
-    self->program_counter = 0;
-    self->program = program;
+    self->function_counter = 0;
+    self->function = function;
     return self;
 }
 
@@ -125,13 +125,13 @@ frame_use_free_wire(
 
 bool
 frame_is_finished(const frame_t *self) {
-    return self->program_counter == program_length(self->program);
+    return self->function_counter == function_length(self->function);
 }
 
 op_t *
 frame_fetch_op(frame_t *self) {
-    op_t *op = program_get_op(self->program, self->program_counter);
-    self->program_counter++;
+    op_t *op = function_get_op(self->function, self->function_counter);
+    self->function_counter++;
     return op;
 }
 
@@ -153,11 +153,11 @@ void
 frame_print(const frame_t *self, file_t *file) {
     fprintf(file, "<frame>\n");
 
-    fprintf(file, "<program>\n");
+    fprintf(file, "<function>\n");
     fprintf(file, ". ");
-    program_print_with_program_counter(self->program, file, self->program_counter);
+    function_print_with_function_counter(self->function, file, self->function_counter);
     fprintf(file, "\n");
-    fprintf(file, "</program>\n");
+    fprintf(file, "</function>\n");
 
     fprintf(file, "<local-free-wires>\n");
     if (self->first_free_wire_group)

@@ -45,31 +45,31 @@ interpret_stmt(vm_t *vm, stmt_t *unknown_stmt) {
 
     case DEFINE_RULE_STMT: {
         define_rule_stmt_t *stmt = (define_rule_stmt_t *)unknown_stmt;
-        program_t *program = compile(vm, stmt->token_list);
+        function_t *function = compile(vm, stmt->token_list);
         check_node_name_defined(vm, stmt->first_name, stmt->head_token);
         check_node_name_defined(vm, stmt->second_name, stmt->head_token);
         mod_define_rule(
             vm->mod,
             stmt->first_name,
             stmt->second_name,
-            program);
+            function);
         return;
     }
 
-    case DEFINE_PROGRAM_STMT: {
-        define_program_stmt_t *stmt = (define_program_stmt_t *)unknown_stmt;
+    case DEFINE_FUNCTION_STMT: {
+        define_function_stmt_t *stmt = (define_function_stmt_t *)unknown_stmt;
         check_name_not_defined(vm, stmt->name, stmt->head_token);
-        program_t *program = compile(vm, stmt->token_list);
-        def_t *def = def_from_program_def(program_def_new(stmt->name, program));
+        function_t *function = compile(vm, stmt->token_list);
+        def_t *def = def_from_function_def(function_def_new(stmt->name, function));
         mod_define(vm->mod, def);
         return;
     }
 
-    case BEGIN_PROGRAM_STMT: {
-        begin_program_stmt_t *stmt = (begin_program_stmt_t *)unknown_stmt;
-        program_t *program = compile(vm, stmt->token_list);
+    case BEGIN_FUNCTION_STMT: {
+        begin_function_stmt_t *stmt = (begin_function_stmt_t *)unknown_stmt;
+        function_t *function = compile(vm, stmt->token_list);
         size_t base_length = stack_length(vm->return_stack);
-        stack_push(vm->return_stack, frame_new(program));
+        stack_push(vm->return_stack, frame_new(function));
         vm_run_until(vm, base_length);
         return;
     }
