@@ -92,12 +92,18 @@ array_push(array_t *self, void *value) {
 
 void *
 array_get(array_t *self, size_t index) {
-    assert(index < self->cursor);
+    assert(index < self->size);        
     return self->values[index];
+}
+
+void
+array_set(array_t *self, size_t index, void *value) {
+    assert(index < self->size);    
+    self->values[index] = value;
 }
 
 void *
 array_pick(array_t *self, size_t index) {
-    assert(index < self->cursor);
+    assert(index < self->size);
     return self->values[self->cursor - 1 - index];
 }

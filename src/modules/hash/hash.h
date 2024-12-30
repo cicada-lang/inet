@@ -13,6 +13,7 @@ hash_t *hash_new_of_string_key(void);
 
 size_t hash_length(const hash_t *self);
 
+bool hash_has(hash_t *self, const void *key);
 void *hash_get(hash_t *self, const void *key);
 bool hash_set(hash_t *self, void *key, void *value);
 void hash_put(hash_t *self, void *key, void *value);

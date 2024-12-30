@@ -17,4 +17,5 @@ void *array_pop(array_t *self);
 void array_push(array_t *self, void *value);
 
 void *array_get(array_t *self, size_t index);
+void array_set(array_t *self, size_t index, void *value);
 void *array_pick(array_t *self, size_t index);

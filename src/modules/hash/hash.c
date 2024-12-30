@@ -197,6 +197,12 @@ hash_get_entry(hash_t *self, const void *key) {
     return NULL;
 }
 
+bool
+hash_has(hash_t *self, const void *key) {
+    entry_t *entry = hash_get_entry(self, key);
+    return entry != NULL;
+}
+
 void *
 hash_get(hash_t *self, const void *key) {
     entry_t *entry = hash_get_entry(self, key);
