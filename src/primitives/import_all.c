@@ -6,7 +6,7 @@ define_primitive(mod_t *mod, const char *name, primitive_vm_fn_t *primitive) {
 }
 
 void
-import_primitives(mod_t *mod) {
+import_all(mod_t *mod) {
     define_primitive(mod, "swap", primitive_swap);
     define_primitive(mod, "rot", primitive_rot);
 
