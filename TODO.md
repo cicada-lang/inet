@@ -1,5 +1,3 @@
-test -- int, float
-
 [value] object_spec_t
 [value] xobject -- has address to object_spec_t as kind
 
