@@ -1,4 +1,4 @@
-[lang] call_constant
+remove def_as_primitive_def def_as_function_def def_as_node_def
 
 [primitive] import_all -- fix define_constant
 [primitive] import_all -- int, float -- [maybe] use full prefix

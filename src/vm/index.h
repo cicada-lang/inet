@@ -14,3 +14,4 @@
 #include "function_def.h"
 #include "def.h"
 #include "define_primitive.h"
+#include "define_constant.h"
