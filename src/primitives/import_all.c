@@ -24,6 +24,10 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "over", x_over);
     define_primitive_vm_fn(mod, "tuck", x_tuck);
 
+    // testing
+
+    define_primitive_vm_fn(mod, "ok", x_ok);
+
     // net
 
     define_primitive_vm_fn(mod, "connect", x_connect);

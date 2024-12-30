@@ -1,4 +1,4 @@
-[primitive] import_all -- int, float -- [maybe] use full prefix
+[primitive] import_all -- int, float
 
 [lang] execute_int
 [lang] execute_float
