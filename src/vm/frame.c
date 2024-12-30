@@ -6,7 +6,7 @@
 typedef struct free_wire_group_t free_wire_group_t;
 
 struct frame_t {
-    size_t function_counter;
+    size_t cursor;
     const function_t *function;
     free_wire_group_t *first_free_wire_group;
     free_wire_group_t *second_free_wire_group;
@@ -40,7 +40,7 @@ free_wire_group_destroy(free_wire_group_t **self_pointer) {
 frame_t *
 frame_new(const function_t *function) {
     frame_t *self = new(frame_t);
-    self->function_counter = 0;
+    self->cursor = 0;
     self->function = function;
     return self;
 }
@@ -125,13 +125,13 @@ frame_use_free_wire(
 
 bool
 frame_is_finished(const frame_t *self) {
-    return self->function_counter == function_length(self->function);
+    return self->cursor == function_length(self->function);
 }
 
 op_t *
 frame_fetch_op(frame_t *self) {
-    op_t *op = function_get_op(self->function, self->function_counter);
-    self->function_counter++;
+    op_t *op = function_get_op(self->function, self->cursor);
+    self->cursor++;
     return op;
 }
 
@@ -155,7 +155,7 @@ frame_print(const frame_t *self, file_t *file) {
 
     fprintf(file, "<function>\n");
     fprintf(file, ". ");
-    function_print_with_function_counter(self->function, file, self->function_counter);
+    function_print_with_cursor(self->function, file, self->cursor);
     fprintf(file, "\n");
     fprintf(file, "</function>\n");
 
