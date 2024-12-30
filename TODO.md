@@ -1,4 +1,5 @@
-[primitive] testing -- ok
+[primitive] import_all -- null, bool, value, testing
+[primitive] import_all -- int, float -- [maybe] use full prefix
 
 [lang] execute_int
 [lang] execute_float
