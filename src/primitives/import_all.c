@@ -28,6 +28,24 @@ import_all(mod_t *mod) {
 
     define_primitive_vm_fn(mod, "ok", x_ok);
 
+    // int
+
+    define_primitive_2_fn(mod, "add", xint_add);
+    define_primitive_2_fn(mod, "sub", xint_sub);
+    define_primitive_2_fn(mod, "mul", xint_mul);
+    define_primitive_2_fn(mod, "div", xint_div);
+    define_primitive_2_fn(mod, "mod", xint_mod);
+    define_primitive_1_fn(mod, "int-to-float", xint_to_xfloat);
+
+    // float
+
+    define_primitive_2_fn(mod, "fadd", xfloat_add);
+    define_primitive_2_fn(mod, "fsub", xfloat_sub);
+    define_primitive_2_fn(mod, "fmul", xfloat_mul);
+    define_primitive_2_fn(mod, "fdiv", xfloat_div);
+    define_primitive_2_fn(mod, "fmod", xfloat_mod);
+    define_primitive_1_fn(mod, "float-to-int", xfloat_to_xint);
+
     // net
 
     define_primitive_vm_fn(mod, "connect", x_connect);

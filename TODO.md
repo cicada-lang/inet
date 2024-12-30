@@ -1,7 +1,7 @@
-[primitive] import_all -- int, float
-
 [lang] execute_int
 [lang] execute_float
+
+test -- int, float
 
 [vm] value_stack has value instead of only wire
 
