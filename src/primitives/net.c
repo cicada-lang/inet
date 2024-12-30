@@ -37,7 +37,7 @@ x_debug(vm_t *vm) {
     fprintf(stdout, "\n");
 }
 
-void
+static void
 define_node(mod_t *mod, const char *name, list_t *input_token_list, list_t *output_token_list) {
     // check_name_not_defined(vm, name, head_token);
 
@@ -70,6 +70,40 @@ define_node(mod_t *mod, const char *name, list_t *input_token_list, list_t *outp
 
 void
 x_define_node(vm_t *vm) {
-    (void) vm;
-    fprintf(stdout, "x_define_node\n");
+    token_t *head_token = list_shift(vm->token_list);
+    char *name = head_token->string;
+
+    list_t *input_token_list = list_new_with((destroy_fn_t *) token_destroy);
+    list_t *output_token_list = list_new_with((destroy_fn_t *) token_destroy);
+
+    bool output_flag = false;
+    while (true) {
+        // maybe_ignore_inline_comment(vm);
+
+        assert(!list_is_empty(vm->token_list));
+
+        token_t *token = list_shift(vm->token_list);
+        if (string_equal(token->string, "end")) {
+            token_destroy(&token);
+            break;
+        }
+
+        if (string_equal(token->string, "->")) {
+            output_flag = true;
+            token_destroy(&token);
+            continue;
+        }
+
+        if (output_flag) {
+            list_push(output_token_list, token);
+        } else {
+            list_push(input_token_list, token);
+        }
+    }
+
+    define_node(vm->mod, name, input_token_list, output_token_list);
+
+    token_destroy(&head_token);
+    list_destroy(&input_token_list);
+    list_destroy(&output_token_list);
 }

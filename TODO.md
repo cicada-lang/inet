@@ -1,5 +1,3 @@
-[primitive] net -- x_define_node
-
 [primitive] net -- define-rule
 [lang] step_net -- prepare local variables
 
@@ -8,6 +6,11 @@
 [lang] remove free_wire_group_t
 
 [primitive] net -- define_node -- check_name_not_defined
+
+[mabye] support maybe_ignore_inline_comment
+
+- x_define_node
+- compile_function
 
 [lang] remove old/
 
