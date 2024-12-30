@@ -7,3 +7,5 @@ struct port_def_t {
 
 port_def_t *port_def_new(const char *name, bool is_principal);
 void port_def_destroy(port_def_t **self_pointer);
+
+port_def_t *port_def_from_name(const char *name);

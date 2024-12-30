@@ -1,10 +1,13 @@
-[primitive] net -- define-node
+[primitive] net -- x_define_node
+
 [primitive] net -- define-rule
 [lang] step_net -- prepare local variables
 
 [lang] remove GET_FREE_WIRE_OP
 [lang] remove CONNECT_OP
 [lang] remove free_wire_group_t
+
+[primitive] net -- define_node -- check_name_not_defined
 
 [lang] remove old/
 

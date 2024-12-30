@@ -18,3 +18,14 @@ port_def_destroy(port_def_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+
+port_def_t *
+port_def_from_name(const char *name) {
+    if (string_ends_with(name, "!")) {
+        name = string_slice(name, 0, strlen(name) - 1);
+        return port_def_new(name, true);
+    } else {
+        return port_def_new(name, false);
+    }
+}
