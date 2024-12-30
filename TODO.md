@@ -1,6 +1,3 @@
-[lang] compile_int
-[lang] compile_float
-
 [vm] frame has `local_array`
 
 [lang] compile_generic -- handled local variable

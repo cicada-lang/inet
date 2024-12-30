@@ -9,6 +9,12 @@ execute_operation(vm_t *vm, frame_t *frame, op_t *unknown_op) {
         return;
     }
 
+    case LITERAL_OP: {
+        literal_op_t *op = (literal_op_t *) unknown_op;
+        stack_push(vm->value_stack, op->value);
+        return;
+    }
+
     case CONNECT_OP: {
         vm_connect_top_wire_pair(vm);
         return;
