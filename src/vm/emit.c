@@ -21,7 +21,8 @@ emit_use_free_wire(
     const char *node_name,
     const char *port_name
 ) {
-    const node_def_t *node_def = def_as_node_def(mod_find_def(mod, node_name));
+    const def_t *def = mod_find_def(mod, node_name);
+    const node_def_t *node_def = def->as_node_def;
     port_index_t index = node_def_find_port_index(node_def, port_name);
     function_add_op(function, (op_t *) use_free_wire_op_new(node_def, index));
 }

@@ -17,10 +17,6 @@ struct def_t {
     };
 };
 
-const primitive_def_t *def_as_primitive_def(const def_t *def);
-const function_def_t *def_as_function_def(const def_t *def);
-const node_def_t *def_as_node_def(const def_t *def);
-
 def_t *def_from_primitive_def(primitive_def_t *primitive_def);
 def_t *def_from_function_def(function_def_t *function_def);
 def_t *def_from_constant_def(constant_def_t *constant_def);

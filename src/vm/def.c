@@ -1,26 +1,5 @@
 #include "index.h"
 
-const primitive_def_t *
-def_as_primitive_def(const def_t *def) {
-    assert(def);
-    assert(def->kind == PRIMITIVE_DEF);
-    return def->as_primitive_def;
-}
-
-const function_def_t *
-def_as_function_def(const def_t *def) {
-    assert(def);
-    assert(def->kind == FUNCTION_DEF);
-    return def->as_function_def;
-}
-
-const node_def_t *
-def_as_node_def(const def_t *def) {
-    assert(def);
-    assert(def->kind == NODE_DEF);
-    return def->as_node_def;
-}
-
 def_t *
 def_from_primitive_def(primitive_def_t *primitive_def) {
     def_t *self = new(def_t);
