@@ -53,3 +53,13 @@ value_t
 xfloat_mod(value_t x, value_t y) {
     return xfloat(fmod(to_double(x), to_double(y)));
 }
+
+value_t
+xfloat_to_xint(value_t x) {
+    if (!is_xfloat(x)) {
+        fprintf(stderr, "[xfloat_to_xint] type mismatch\n");
+        exit(1);
+    }
+
+    return xint((uint64_t) to_double(x));
+}

@@ -9,3 +9,4 @@ value_t xfloat_sub(value_t x, value_t y);
 value_t xfloat_mul(value_t x, value_t y);
 value_t xfloat_div(value_t x, value_t y);
 value_t xfloat_mod(value_t x, value_t y);
+value_t xfloat_to_xint(value_t x);
