@@ -1,5 +1,4 @@
 [primitive] testing -- ok
-[primitive] value -- eq
 
 [lang] execute_int
 [lang] execute_float
