@@ -1,5 +1,3 @@
-[primitive] move print functions to console
-
 setup new lang/
 
 # xforth
