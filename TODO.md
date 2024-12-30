@@ -1,8 +1,9 @@
-[lang] step_net -- prepare local variables
-
-[lang] remove GET_FREE_WIRE_OP
-[lang] remove CONNECT_OP
 [lang] remove free_wire_group_t
+
+- remove CONNECT_OP
+- remove GET_FREE_WIRE_OP
+
+[lang] step_net -- prepare local variables
 
 [primitive] net -- define_node -- check_name_not_defined
 
@@ -10,8 +11,6 @@
 
 - x_define_node
 - compile_function
-
-[lang] remove old/
 
 # value
 
