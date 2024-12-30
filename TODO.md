@@ -1,5 +1,3 @@
-[primitive] print and newline
-
 [vm] define_function
 
 [vm] frame has `local_array`
