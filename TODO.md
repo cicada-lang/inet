@@ -1,4 +1,3 @@
-[lang] setup new lang/
 [lang] move execute from vm/ to lang/
 [lang] move functions about run to lang/
 
