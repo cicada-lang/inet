@@ -1,6 +1,8 @@
-# xforth
+[lang] execute_step
+[lang] execute_vm
 
-use xforth-like parsing -- tidy first
+[lang] compile_step
+[lang] compile_function
 
 # local variable
 
@@ -10,11 +12,17 @@ use xforth-like parsing -- tidy first
 [lang] remove get-free-wire syntax
 [lang] free wire group from frame
 
+[lang] remove old/
+
 # example
 
 [example] `examples/combinators.fth` -- interaction combinators
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
+
+# define-constant
+
+support define-constant
 
 # primitive value
 
