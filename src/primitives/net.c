@@ -36,3 +36,9 @@ x_debug(vm_t *vm) {
     fprintf(stdout, "[debug] debug end\n");
     fprintf(stdout, "\n");
 }
+
+void
+x_define_node(vm_t *vm) {
+    (void) vm;
+    fprintf(stdout, "x_define_node\n");
+}

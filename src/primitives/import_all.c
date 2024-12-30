@@ -53,6 +53,7 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "wire-pair", x_wire_pair);
     define_primitive_vm_fn(mod, "run", x_run);
     define_primitive_vm_fn(mod, "debug", x_debug);
+    define_primitive_vm_fn(mod, "define-node", x_define_node);
 
     // console
 

@@ -1,18 +1,21 @@
-# local variable
+[primitive] net -- define-node
+[primitive] net -- define-rule
+[lang] step_net -- prepare local variables
 
-[lang] remove get-free-wire syntax
-[lang] free wire group from frame
+[lang] remove GET_FREE_WIRE_OP
+[lang] remove CONNECT_OP
+[lang] remove free_wire_group_t
 
 [lang] remove old/
 
-# extending x-forth
+# value
 
 [value] object_spec_t
 [value] xobject -- has address to object_spec_t as kind
 
-[net] wire_t as xobject
+# extending x-forth
 
-`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
+[net] wire_t as xobject
 
 # example
 
