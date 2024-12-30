@@ -1,6 +1,6 @@
 # example
 
-[example] examples/combinators.fth -- interaction combinators
+[example] examples/combinators.play.fth
 
 [example] recover tests/
 [primitive] x_begin -- compile function and run
