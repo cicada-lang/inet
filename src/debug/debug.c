@@ -80,7 +80,7 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count += passed;
 
     if (self->running_frame_count > canvas->frame_rate / self->running_speed) {
-        vm_net_step(self->vm);
+        step_net(self->vm);
         debug_update(self);
         self->running_frame_count = 0;
     }

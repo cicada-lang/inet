@@ -30,12 +30,12 @@ vm_destroy(vm_t **self_pointer) {
 void
 run_net(vm_t *self) {
     while (!list_is_empty(self->active_wire_list)) {
-        vm_net_step(self);
+        step_net(self);
     }
 }
 
 void
-vm_net_step(vm_t *self) {
+step_net(vm_t *self) {
     wire_t *active_wire = list_pop(self->active_wire_list);
     if (!active_wire) return;
 

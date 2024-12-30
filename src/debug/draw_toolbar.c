@@ -7,7 +7,7 @@ on_click_step_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_re
     if (button == 1) {
         if (is_release) {
             self->step_button_is_pressed = false;
-            vm_net_step(self->vm);
+            step_net(self->vm);
             debug_update(self);
         } else {
             self->step_button_is_pressed = true;

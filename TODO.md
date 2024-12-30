@@ -1,5 +1,3 @@
-ambr vm_net_step step_net
-
 [lang] setup new lang/
 [lang] move execute from vm/ to lang/
 [lang] move functions about run to lang/
