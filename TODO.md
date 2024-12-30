@@ -1,9 +1,4 @@
-[lang] execute_int
-[lang] execute_float
-
 test -- int, float
-
-[vm] value_stack has value instead of only wire
 
 [value] object_spec_t
 [value] xobject -- has address to object_spec_t as kind
