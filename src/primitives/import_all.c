@@ -54,6 +54,7 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "run", x_run);
     define_primitive_vm_fn(mod, "debug", x_debug);
     define_primitive_vm_fn(mod, "define-node", x_define_node);
+    define_primitive_vm_fn(mod, "define-rule", x_define_rule);
 
     // console
 

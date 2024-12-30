@@ -1,4 +1,5 @@
-[primitive] net -- define-rule
+[primitive] net -- x_define_rule -- like x_define_function
+
 [lang] step_net -- prepare local variables
 
 [lang] remove GET_FREE_WIRE_OP

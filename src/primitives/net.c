@@ -107,3 +107,9 @@ x_define_node(vm_t *vm) {
     list_destroy(&input_token_list);
     list_destroy(&output_token_list);
 }
+
+void
+x_define_rule(vm_t *vm) {
+    (void) vm;
+    printf("[x_define_rule]\n");
+}

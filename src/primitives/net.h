@@ -6,3 +6,4 @@ primitive_vm_fn_t x_wire_pair;
 primitive_vm_fn_t x_run;
 primitive_vm_fn_t x_debug;
 primitive_vm_fn_t x_define_node;
+primitive_vm_fn_t x_define_rule;
