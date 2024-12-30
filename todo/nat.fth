@@ -2,20 +2,21 @@ define-node zero -> value! end
 define-node add1 prev -> value! end
 define-node add target! addend -> result end
 
-define-rule add zero
-  ( addend result )
-  addend result connect
+define-rule zero add
+  (add)-addend result-(add)
 end
 
-define-rule add add1
-  ( addend result ) ( prev )
-  prev addend add add1
-  result connect
+define-rule add1 add
+  (add1)-prev (add)-addend add
+  add1 result-(add)
 end
 
-define two zero add1 add1 end
+(- test -)
 
-two two add
+zero add1 add1
+zero add1 add1
+add
 
-wire-print-net run
+wire-print-net
+run
 wire-print-net

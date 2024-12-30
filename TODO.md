@@ -1,4 +1,8 @@
 [lang] execute_one
+[lang] execute_generic
+[lang] execute_int
+[lang] execute_float
+
 [lang] execute_all
 
 [lang] compile_one
