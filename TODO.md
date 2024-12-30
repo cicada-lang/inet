@@ -1,6 +1,3 @@
-[lang] move execute from vm/ to lang/
-[lang] move functions about run to lang/
-
 # xforth
 
 use xforth-like parsing -- tidy first
