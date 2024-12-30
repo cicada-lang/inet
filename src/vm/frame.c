@@ -5,9 +5,12 @@
 
 typedef struct free_wire_group_t free_wire_group_t;
 
+#define LOCAL_ARRAY_SIZE 64
+
 struct frame_t {
     size_t cursor;
     const function_t *function;
+    array_t *local_array;
     free_wire_group_t *first_free_wire_group;
     free_wire_group_t *second_free_wire_group;
 };
@@ -42,6 +45,7 @@ frame_new(const function_t *function) {
     frame_t *self = new(frame_t);
     self->cursor = 0;
     self->function = function;
+    self->local_array = array_new(LOCAL_ARRAY_SIZE);
     return self;
 }
 
@@ -50,6 +54,7 @@ frame_destroy(frame_t **self_pointer) {
     assert(self_pointer);
     if (*self_pointer) {
         frame_t *self = *self_pointer;
+        array_destroy(&self->local_array);
         free_wire_group_destroy(&self->first_free_wire_group);
         free_wire_group_destroy(&self->second_free_wire_group);
         free(self);
@@ -167,4 +172,14 @@ frame_print(const frame_t *self, file_t *file) {
     fprintf(file, "</local-free-wires>\n");
 
     fprintf(file, "</frame>\n");
+}
+
+value_t
+frame_local_get(const frame_t *self, size_t index) {
+    return array_get(self->local_array, index);
+}
+
+void
+frame_local_set(frame_t *self, size_t index, value_t value) {
+    array_set(self->local_array, index, value);
 }

@@ -1,5 +1,3 @@
-[vm] frame has `local_array`
-
 [lang] compile_generic -- handled local variable
 
 [lang] compile_local_set_many
