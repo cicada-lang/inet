@@ -1,5 +1,3 @@
-ambr vm_step step_vm
-
 ambr vm_net_run run_net
 ambr vm_net_step step_net
 

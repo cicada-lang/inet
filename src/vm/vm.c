@@ -60,7 +60,7 @@ run_vm_until_until(vm_t *self, size_t base_length) {
     }
 
     while (stack_length(self->return_stack) > base_length) {
-        vm_step(self);
+        step_vm(self);
 
         if (self->log_level > 0) {
             vm_print(self, self->out);
@@ -70,7 +70,7 @@ run_vm_until_until(vm_t *self, size_t base_length) {
 }
 
 void
-vm_step(vm_t *self) {
+step_vm(vm_t *self) {
     if (stack_is_empty(self->return_stack)) return;
 
     frame_t *frame = stack_pop(self->return_stack);
