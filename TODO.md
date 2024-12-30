@@ -1,11 +1,7 @@
 [lang] compile_one
-
 [lang] execute_generic -- deps on compile_one
-
 [lang] execute_int
 [lang] execute_float
-
-[lang] execute_all -- called be run_command
 
 some new examples as tests
 

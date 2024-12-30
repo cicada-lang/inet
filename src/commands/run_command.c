@@ -22,7 +22,7 @@ run_file(const char *path, size_t log_level) {
     vm_t *vm = vm_new(mod);
     vm->log_level = log_level;
 
-    interpret_mod(vm);
+    execute_all(vm);
 
     mod_destroy(&mod);
     vm_destroy(&vm);
@@ -43,7 +43,7 @@ run(commander_t *commander) {
     paths = commander_rest_argv(commander);
     while (*paths) {
         char *path = *paths++;
-        if (string_starts_with(path, "--")) 
+        if (string_starts_with(path, "--"))
             continue;
 
         if (string_ends_with(path, ".fth")) {
