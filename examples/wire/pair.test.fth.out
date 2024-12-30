@@ -3,8 +3,9 @@
 </active-wire-list>
 <return-stack length="0">
 </return-stack>
-<value-stack length="1">
-(sole₁)-value!-<>-
+<value-stack length="2">
+<0x61505152f740>
+<0x61505152f760>
 </value-stack>
 </vm>
 

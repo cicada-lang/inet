@@ -3,7 +3,6 @@
 [example] recover datatypes/
 [example] recover tests/
 [example] recover vm/
-[example] recover wire/
 
 [example] recover combinators.fth
 
