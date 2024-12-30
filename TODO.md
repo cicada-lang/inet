@@ -1,12 +1,18 @@
 # example
 
-[example] recover datatypes/
-[example] recover tests/
-[example] recover vm/
+[example] recover datatypes/list
+[example] recover datatypes/diff-list
 
 [example] recover combinators.fth
 
 [example] `examples/combinators.fth` -- interaction combinators
+
+# example
+
+[example] recover tests/
+[primitive] x_begin -- compile function and run
+[example] recover vm/
+
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
 

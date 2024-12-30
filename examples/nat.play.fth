@@ -17,8 +17,8 @@ nzero nadd1 nadd1
 nzero nadd1 nadd1
 nadd
 
-define ntwo nzero nadd1 nadd1 end
+define two nzero nadd1 nadd1 end
 
-ntwo ntwo nadd
-ntwo ntwo nadd
+two two nadd
+two two nadd
 nadd debug
