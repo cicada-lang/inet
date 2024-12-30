@@ -1,5 +1,4 @@
 [primitive] move print functions to console
-[primitive] move wire functions to net
 
 setup new lang/
 
