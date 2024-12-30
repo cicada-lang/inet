@@ -1,4 +1,3 @@
-[lang] compile_one
 [lang] execute_generic -- deps on compile_one
 [lang] execute_int
 [lang] execute_float
@@ -14,7 +13,13 @@ some new examples as tests
 
 `value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
-[lang] compile_one
+[vm] frame has `local_array`
+
+[lang] compile_generic -- handled local variable
+[lang] compile_int
+[lang] compile_float
+[lang] compile_local_set_many
+
 [lang] compile_function
 
 # local variable
