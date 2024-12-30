@@ -1,8 +1,5 @@
 #pragma once
 
-primitive_vm_fn_t x_swap;
-primitive_vm_fn_t x_rot;
-
 primitive_vm_fn_t x_connect;
 primitive_vm_fn_t x_wire_print_net;
 primitive_vm_fn_t x_wire_pair;

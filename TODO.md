@@ -1,7 +1,7 @@
-setup new lang/
-[primitive] merge stack functions like swap and rot to value.c
 [primitive] move print functions to console
 [primitive] move wire functions to net
+
+setup new lang/
 
 # xforth
 
