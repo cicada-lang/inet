@@ -1,5 +1,3 @@
-[vm] define_function -- call compile_function
-
 # local variable
 
 [lang] remove get-free-wire syntax
