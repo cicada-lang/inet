@@ -11,8 +11,6 @@ define-rule cons append
   (cons)-head cons result-(append)
   end
 
-(- test -)
-
 define-node sole -> value! end
 
 null sole cons sole cons sole cons

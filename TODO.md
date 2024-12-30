@@ -1,3 +1,26 @@
+# example
+
+[example] recover list.fth
+[example] recover list.play.fth
+
+[example] recover datatypes/
+[example] recover tests/
+[example] recover vm/
+[example] recover wire/
+
+[example] recover combinators.fth
+
+[example] `examples/combinators.fth` -- interaction combinators
+[example] `examples/lambda.fth` -- use interaction combinators
+[example] `examples/turing.fth` -- coding turing machine
+
+# docs
+
+[docs] update README.md
+[docs] update docs/articles
+
+# later
+
 [primitive] net -- define_node -- check_name_not_defined
 
 [mabye] support maybe_ignore_inline_comment
@@ -13,12 +36,6 @@
 # extending x-forth
 
 [net] wire_t as xobject
-
-# example
-
-[example] `examples/combinators.fth` -- interaction combinators
-[example] `examples/lambda.fth` -- use interaction combinators
-[example] `examples/turing.fth` -- coding turing machine
 
 # primitive value
 
