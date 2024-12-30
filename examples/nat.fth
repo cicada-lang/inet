@@ -11,6 +11,17 @@ define-node add target! addend -> result end
 --   add1 result-(add)
 -- end
 
+define-rule zero add
+  ( addend result )
+  addend result connect
+end
+
+define-rule add1 add
+  ( addend result ) ( prev )
+  prev addend add
+  add1 result connect
+end
+
 -- zero add1 add1
 -- zero add1 add1
 -- add
