@@ -62,7 +62,7 @@ on_click_end_button(debug_t *self, canvas_t *canvas, uint8_t button, bool is_rel
     if (button == 1) {
         if (is_release) {
             self->end_button_is_pressed = false;
-            vm_net_run(self->vm);
+            run_net(self->vm);
             debug_update(self);
         } else {
             self->end_button_is_pressed = true;

@@ -1,4 +1,3 @@
-ambr vm_net_run run_net
 ambr vm_net_step step_net
 
 [lang] setup new lang/

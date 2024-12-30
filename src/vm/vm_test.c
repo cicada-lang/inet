@@ -26,7 +26,7 @@ vm_test(void) {
 
     vm->log_level = 1;
     run_vm_until_until(vm, 0);
-    vm_net_run(vm);
+    run_net(vm);
 
     vm_destroy(&vm);
     mod_destroy(&mod);

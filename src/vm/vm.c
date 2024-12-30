@@ -28,7 +28,7 @@ vm_destroy(vm_t **self_pointer) {
 }
 
 void
-vm_net_run(vm_t *self) {
+run_net(vm_t *self) {
     while (!list_is_empty(self->active_wire_list)) {
         vm_net_step(self);
     }

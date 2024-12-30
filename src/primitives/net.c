@@ -26,7 +26,7 @@ x_wire_pair(vm_t *vm) {
 
 void
 x_run(vm_t *vm) {
-    vm_net_run(vm);
+    run_net(vm);
 }
 
 void
