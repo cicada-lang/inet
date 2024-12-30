@@ -1,3 +1,7 @@
+[primitive] merge stack functions like swap and rot to value.c
+[primitive] move print functions to console
+[primitive] move wire functions to net
+
 # xforth
 
 use xforth-like parsing -- tidy first
