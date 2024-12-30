@@ -1,3 +1,5 @@
+[vm] vm has token_list
+
 [lang] execute_step
 [lang] execute_vm
 

@@ -85,7 +85,7 @@ interpret_mod(vm_t *vm) {
     parser->lexer->line_comment = "--";
     parser->src = vm->mod->src;
     parser->string = vm->mod->code;
-    parser->err = vm->err;
+    parser->err = stderr;
     parser_parse(parser);
 
     list_t *stmt_list = parser->stmt_list;

@@ -9,8 +9,6 @@ struct vm_t {
     stack_t *return_stack;
     size_t node_id_count;
     size_t log_level;
-    file_t *out;
-    file_t *err;
 };
 
 vm_t *vm_new(mod_t *mod);

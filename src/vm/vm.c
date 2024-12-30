@@ -9,8 +9,6 @@ vm_new(mod_t *mod) {
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
     self->node_id_count = 0;
     self->log_level = 0;
-    self->out = stdout;
-    self->err = stderr;
     return self;
 }
 

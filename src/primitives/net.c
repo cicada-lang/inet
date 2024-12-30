@@ -8,8 +8,8 @@ x_connect(vm_t *vm) {
 void
 x_wire_print_net(vm_t *vm) {
     wire_t *wire = stack_top(vm->value_stack);
-    wire_print_net(wire, vm->out);
-    fprintf(vm->out, "\n");
+    wire_print_net(wire, stdout);
+    fprintf(stdout, "\n");
 }
 
 void
@@ -31,8 +31,8 @@ x_run(vm_t *vm) {
 
 void
 x_debug(vm_t *vm) {
-    fprintf(vm->out, "[debug] debug start\n");
+    fprintf(stdout, "[debug] debug start\n");
     debug_start(vm);
-    fprintf(vm->out, "[debug] debug end\n");
-    fprintf(vm->out, "\n");
+    fprintf(stdout, "[debug] debug end\n");
+    fprintf(stdout, "\n");
 }
