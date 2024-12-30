@@ -55,48 +55,48 @@ compile_generic(vm_t *vm, function_t *function, function_ctx_t *ctx) {
     return true;
 }
 
-// static bool
-// compile_local_set_many(vm_t *vm, function_t *function, function_ctx_t *ctx) {
-//     token_t *token = list_first(vm->token_list);
-//     if (!string_equal(token->string, "(")) return false;
-//     (void) list_shift(vm->token_list);
-//     token_destroy(&token);
+static bool
+compile_local_set_many(vm_t *vm, function_t *function, function_ctx_t *ctx) {
+    token_t *token = list_first(vm->token_list);
+    if (!string_equal(token->string, "(")) return false;
+    (void) list_shift(vm->token_list);
+    token_destroy(&token);
 
-//     list_t *local_token_list = list_new();
-//     while (true) {
-//         token_t *token = list_first(vm->token_list);
-//         if (string_equal(token->string, ")")) {
-//             (void) list_shift(vm->token_list);
-//             token_destroy(&token);
-//             break;
-//         }
+    list_t *local_token_list = list_new();
+    while (true) {
+        token_t *token = list_first(vm->token_list);
+        if (string_equal(token->string, ")")) {
+            (void) list_shift(vm->token_list);
+            token_destroy(&token);
+            break;
+        }
 
-//         (void) list_shift(vm->token_list);
-//         list_push(local_token_list, token);
-//     }
+        (void) list_shift(vm->token_list);
+        list_push(local_token_list, token);
+    }
 
-//     size_t index = hash_length(ctx->local_index_hash);
-//     while (!list_is_empty(local_token_list)) {
-//         token_t *token = list_pop(local_token_list);
-//         if (hash_has(ctx->local_index_hash, token->string)) {
-//             size_t old_index = (size_t) hash_get(ctx->local_index_hash, token->string);
-//             function_add_op(function, (op_t *) local_set_op_new(old_index));
-//         } else {
-//             hash_set(ctx->local_index_hash, token->string, (void *) index);
-//             function_add_op(function, (op_t *) local_set_op_new(index));
-//             index++;
-//         }
-//     }
+    size_t index = hash_length(ctx->local_index_hash);
+    while (!list_is_empty(local_token_list)) {
+        token_t *token = list_pop(local_token_list);
+        if (hash_has(ctx->local_index_hash, token->string)) {
+            size_t old_index = (size_t) hash_get(ctx->local_index_hash, token->string);
+            function_add_op(function, (op_t *) local_set_op_new(old_index));
+        } else {
+            hash_set(ctx->local_index_hash, token->string, (void *) index);
+            function_add_op(function, (op_t *) local_set_op_new(index));
+            index++;
+        }
+    }
 
-//     list_destroy(&local_token_list);
-//     return true;
-// }
+    list_destroy(&local_token_list);
+    return true;
+}
 
 void
 compile_one(vm_t *vm, function_t *function, function_ctx_t *ctx) {
     if (compile_int(vm, function, ctx)) return;
     if (compile_float(vm, function, ctx)) return;
-    // if (compile_local_set_many(vm, function, ctx)) return;
+    if (compile_local_set_many(vm, function, ctx)) return;
     if (compile_generic(vm, function, ctx)) return;
 
     token_t *token = list_first(vm->token_list);
