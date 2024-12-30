@@ -18,7 +18,7 @@ void vm_destroy(vm_t **self_pointer);
 
 void vm_net_run(vm_t *self);
 void vm_net_step(vm_t *self);
-void vm_run_until(vm_t *self, size_t base_length);
+void run_vm_until_until(vm_t *self, size_t base_length);
 void vm_step(vm_t *self);
 
 void vm_print_return_stack(const vm_t *self, file_t *file);

@@ -1,4 +1,11 @@
-setup new lang/
+ambr vm_step step_vm
+
+ambr vm_net_run run_net
+ambr vm_net_step step_net
+
+[lang] setup new lang/
+[lang] move execute from vm/ to lang/
+[lang] move functions about run to lang/
 
 # xforth
 

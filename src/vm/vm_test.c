@@ -25,7 +25,7 @@ vm_test(void) {
     stack_push(vm->return_stack, frame);
 
     vm->log_level = 1;
-    vm_run_until(vm, 0);
+    run_vm_until_until(vm, 0);
     vm_net_run(vm);
 
     vm_destroy(&vm);

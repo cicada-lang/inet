@@ -49,11 +49,11 @@ vm_net_step(vm_t *self) {
     frame_t *frame = frame_new(rule->function);
     frame_collect_free_wires(frame, active_wire);
     stack_push(self->return_stack, frame);
-    vm_run_until(self, base_length);
+    run_vm_until_until(self, base_length);
 }
 
 void
-vm_run_until(vm_t *self, size_t base_length) {
+run_vm_until_until(vm_t *self, size_t base_length) {
     if (self->log_level > 0) {
         vm_print(self, self->out);
         fprintf(self->out, "\n");
