@@ -53,6 +53,6 @@ step_vm(vm_t *self) {
     // proper tail-call = do not push finished frame.
     bool finished = frame_is_finished(frame);
     if (!finished) stack_push(self->return_stack, frame);
-    execute(self, frame, op);
+    execute_operation(self, frame, op);
     if (finished) frame_destroy(&frame);
 }

@@ -1,7 +1,7 @@
 #include "index.h"
 
 void
-execute(vm_t *vm, frame_t *frame, op_t *unknown_op) {
+execute_operation(vm_t *vm, frame_t *frame, op_t *unknown_op) {
     switch (unknown_op->kind) {
     case CALL_OP: {
         call_op_t *op = (call_op_t *) unknown_op;
