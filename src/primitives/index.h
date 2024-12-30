@@ -6,4 +6,5 @@
 #include "testing.h"
 #include "net.h"
 #include "console.h"
+#include "constant.h"
 #include "import_all.h"

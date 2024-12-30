@@ -59,4 +59,8 @@ import_all(mod_t *mod) {
     define_primitive_vm_fn(mod, "print-vm", x_print_vm);
     define_primitive_vm_fn(mod, "print-value-stack", x_print_value_stack);
     define_primitive_vm_fn(mod, "print-return-stack", x_print_return_stack);
+
+    // constant
+
+    define_primitive_vm_fn(mod, "define-constant", x_define_constant);
 }

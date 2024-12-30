@@ -1,9 +1,6 @@
-[value] object_spec_t
-[value] xobject -- has address to object_spec_t as kind
+[primitive] print and newline
 
-[net] wire_t as xobject
-
-`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
+[vm] define_function
 
 [vm] frame has `local_array`
 
@@ -24,15 +21,20 @@
 
 [lang] remove old/
 
+# extending x-forth
+
+[value] object_spec_t
+[value] xobject -- has address to object_spec_t as kind
+
+[net] wire_t as xobject
+
+`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
+
 # example
 
 [example] `examples/combinators.fth` -- interaction combinators
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
-
-# define-constant
-
-support define-constant
 
 # primitive value
 
