@@ -1,4 +1,3 @@
-[lang] compile_generic -- handled local variable
 [lang] compile_function
 
 [vm] define_function -- call compile_function

@@ -35,13 +35,13 @@ compile_generic(vm_t *vm, function_t *function, function_ctx_t *ctx) {
     (void) ctx;
 
     token_t *token = list_first(vm->token_list);
-    // if (hash_has(ctx->local_index_hash, token->string)) {
-    //     (void) list_shift(vm->token_list);
-    //     size_t index = (size_t) hash_get(ctx->local_index_hash, token->string);
-    //     function_add_op(function, (op_t *) local_get_op_new(index));
-    //     token_destroy(&token);
-    //     return true;
-    // }
+    if (hash_has(ctx->local_index_hash, token->string)) {
+        (void) list_shift(vm->token_list);
+        size_t index = (size_t) hash_get(ctx->local_index_hash, token->string);
+        function_add_op(function, (op_t *) local_get_op_new(index));
+        token_destroy(&token);
+        return true;
+    }
 
     const def_t *def = mod_find_def(vm->mod, token->string);
     if (def == NULL) {
