@@ -2,7 +2,6 @@
 
 #include "deps.h"
 #include "types.h"
-#include "emit.h"
 #include "mod.h"
 #include "frame.h"
 #include "vm.h"

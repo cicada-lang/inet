@@ -22,16 +22,6 @@ struct local_set_op_t {
     size_t index;
 };
 
-struct connect_op_t {
-    op_kind_t kind;
-};
-
-struct use_free_wire_op_t {
-    op_kind_t kind;
-    const node_def_t *node_def;
-    port_index_t index;
-};
-
 call_op_t *call_op_new(const def_t *def);
 void call_op_destroy(call_op_t **self_pointer);
 
@@ -43,12 +33,6 @@ void local_get_op_destroy(local_get_op_t **self_pointer);
 
 local_set_op_t *local_set_op_new(size_t index);
 void local_set_op_destroy(local_set_op_t **self_pointer);
-
-connect_op_t *connect_op_new(void);
-void connect_op_destroy(connect_op_t **self_pointer);
-
-use_free_wire_op_t *use_free_wire_op_new(const node_def_t *node_def, port_index_t index);
-void use_free_wire_op_destroy(use_free_wire_op_t **self_pointer);
 
 void op_destroy(op_t **self_pointer);
 

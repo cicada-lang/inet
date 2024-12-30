@@ -20,7 +20,9 @@ step_net(vm_t *vm) {
 
     size_t base_length = stack_length(vm->return_stack);
     frame_t *frame = frame_new(rule->function);
-    frame_collect_free_wires(frame, active_wire);
+
+    // TODO prepare local variable by rule
+
     stack_push(vm->return_stack, frame);
     run_vm_until(vm, base_length);
 }

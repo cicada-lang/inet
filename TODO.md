@@ -1,8 +1,3 @@
-[lang] remove free_wire_group_t
-
-- remove CONNECT_OP
-- remove GET_FREE_WIRE_OP
-
 [lang] step_net -- prepare local variables
 
 [primitive] net -- define_node -- check_name_not_defined

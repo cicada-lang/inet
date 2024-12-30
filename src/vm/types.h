@@ -5,8 +5,6 @@ typedef enum {
     LITERAL_OP,
     LOCAL_GET_OP,
     LOCAL_SET_OP,
-    CONNECT_OP,
-    GET_FREE_WIRE_OP,
 } op_kind_t;
 
 typedef struct mod_t mod_t;

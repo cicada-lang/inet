@@ -72,42 +72,6 @@ local_set_op_destroy(local_set_op_t **self_pointer) {
     }
 }
 
-connect_op_t *
-connect_op_new(void) {
-    connect_op_t *self = new(connect_op_t);
-    self->kind = CONNECT_OP;
-    return self;
-}
-
-void
-connect_op_destroy(connect_op_t **self_pointer) {
-    assert(self_pointer);
-    if (*self_pointer) {
-        connect_op_t *self = *self_pointer;
-        free(self);
-        *self_pointer = NULL;
-    }
-}
-
-use_free_wire_op_t *
-use_free_wire_op_new(const node_def_t *node_def, port_index_t index) {
-    use_free_wire_op_t *self = new(use_free_wire_op_t);
-    self->kind = GET_FREE_WIRE_OP;
-    self->node_def = node_def;
-    self->index = index;
-    return self;
-}
-
-void
-use_free_wire_op_destroy(use_free_wire_op_t **self_pointer) {
-    assert(self_pointer);
-    if (*self_pointer) {
-        use_free_wire_op_t *self = *self_pointer;
-        free(self);
-        *self_pointer = NULL;
-    }
-}
-
 void
 op_destroy(op_t **self_pointer) {
     assert(self_pointer);
@@ -131,16 +95,6 @@ op_destroy(op_t **self_pointer) {
 
         case LOCAL_SET_OP: {
             local_set_op_destroy((local_set_op_t **) self_pointer);
-            return;
-        }
-
-        case CONNECT_OP: {
-            connect_op_destroy((connect_op_t **) self_pointer);
-            return;
-        }
-
-        case GET_FREE_WIRE_OP: {
-            use_free_wire_op_destroy((use_free_wire_op_t **) self_pointer);
             return;
         }
         }
@@ -172,19 +126,6 @@ op_print(const op_t *unknown_op, file_t *file) {
     case LOCAL_SET_OP: {
         local_set_op_t *op = (local_set_op_t *) unknown_op;
         fprintf(file, "LOCAL-SET %ld", op->index);
-        return;
-    }
-
-    case CONNECT_OP: {
-        fprintf(file, "CONNECT");
-        return;
-    }
-
-    case GET_FREE_WIRE_OP: {
-        use_free_wire_op_t *op = (use_free_wire_op_t *) unknown_op;
-        fprintf(file, "(%s)", op->node_def->name);
-        port_def_t *port_def = op->node_def->port_defs[op->index];
-        fprintf(file, "-%s", port_def->name);
         return;
     }
     }
