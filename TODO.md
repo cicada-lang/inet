@@ -1,8 +1,5 @@
 # example
 
-[example] recover list.fth
-[example] recover list.play.fth
-
 [example] recover datatypes/
 [example] recover tests/
 [example] recover vm/
