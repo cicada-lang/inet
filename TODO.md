@@ -1,7 +1,8 @@
+[primitive] testing -- ok
+[primitive] value -- eq
+
 [lang] execute_int
 [lang] execute_float
-
-some new examples as tests
 
 [vm] value_stack has value instead of only wire
 
