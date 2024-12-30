@@ -17,7 +17,7 @@ typedef void *value_t;
 
 typedef enum {
     XOBJECT      = 0, // 0b000
-    XADDRESS     = 1, // 0b001
+    // TODO      = 1, // 0b001
     XINT         = 2, // 0b010
     XFLOAT       = 3, // 0b011
     // TODO      = 4, // 0b100
