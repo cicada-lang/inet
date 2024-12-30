@@ -1,10 +1,23 @@
 # example
 
-[example] examples/combinators.play.fth
+[primitive] rename debug to wire-debug
 
-[example] recover tests/
+[example] recover tests/ -- empty-file
+[example] recover tests/ -- line-comment
+
 [primitive] x_begin -- compile function and run
-[example] recover vm/
+[example] recover vm/ -- need x_begin
+
+[primitive] wire should use managed memory -- some net have no root
+[primitive] debug -- should use global wires -- instead of the wire at the top of the stack
+
+[example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
+
+# later
+
+[example] [maybe] recover tests/ -- inline-comment
+[example] recover tests/ -- undefined-name.error
+[example] recover tests/ -- wrong-node-name.error
 
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
