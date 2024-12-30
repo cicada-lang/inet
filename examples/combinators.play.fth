@@ -39,8 +39,7 @@ end
 
 define forever
   wire-pair ( x0 x1 )
-  wire-pair ε
-  x0 γ
+  wire-pair ε x0 γ
   δ ( first second )
   x1 first connect
   second dup ε
