@@ -41,6 +41,6 @@ value_print(value_t value, file_t *file) {
         return;
     }
 
-    fprintf(file, "<0x%lx>", (uint64_t) value);
+    fprintf(file, "unknown-value");
     return;
 }

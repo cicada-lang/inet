@@ -33,6 +33,8 @@
 
 [net] wire_t as xobject
 
+[net] fix value_print for wire_t
+
 # primitive value
 
 [design] write `list-map` as example
