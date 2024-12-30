@@ -59,7 +59,7 @@ void
 function_print(const function_t *self, file_t *file) {
     for (size_t i = 0; i < self->length; i++) {
         op_print(self->ops[i], file);
-        fprintf(file, " ");
+        fprintf(file, "\n");
     }
 }
 

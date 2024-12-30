@@ -21,7 +21,8 @@ vm_new(mod_t *mod) {
     self->mod = mod;
     self->token_list = lex_code(mod->code);
     self->active_wire_list = list_new();
-    self->value_stack = stack_new_with((destroy_fn_t *) wire_destroy);
+    // TODO We should use value_destroy to create value_stack.
+    self->value_stack = stack_new();
     self->return_stack = stack_new_with((destroy_fn_t *) frame_destroy);
     self->node_id_count = 0;
     self->log_level = 0;

@@ -9,3 +9,25 @@ false
 3.2999999999999972
 1.0
 2.0
+[x_print_value_stack] 1
+<value-stack length="3">
+1
+2
+3
+</value-stack>
+[x_print_value_stack] 2
+<return-stack length="1">
+<frame>
+<function>
+LITERAL 1
+LITERAL 2
+LITERAL 3
+CALL print-return-stack
+LITERAL 4 <<<
+LITERAL 5
+LITERAL 6
+</function>
+<local-free-wires>
+</local-free-wires>
+</frame>
+</return-stack>

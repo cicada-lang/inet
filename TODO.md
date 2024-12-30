@@ -1,5 +1,3 @@
-fix print-value-stack
-
 # local variable
 
 [lang] remove get-free-wire syntax
