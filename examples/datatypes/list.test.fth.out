@@ -9,13 +9,13 @@
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
+(nil₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 (cons₅)-value!-<>-tail-(cons₇)
 (sole₆)-value!-<>-head-(cons₇)
 (cons₃)-value!-<>-tail-(cons₅)
 (sole₄)-value!-<>-head-(cons₅)
-(null₁)-value!-<>-tail-(cons₃)
+(nil₁)-value!-<>-tail-(cons₃)
 (sole₂)-value!-<>-head-(cons₃)
 </body>
 </net>
@@ -35,7 +35,7 @@
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
+(nil₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 </body>
 </net>

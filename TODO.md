@@ -1,6 +1,5 @@
 # example
 
-[example] recover datatypes/list
 [example] recover datatypes/diff-list
 
 [example] recover combinators.fth
