@@ -1,5 +1,3 @@
-[lang] compile_function
-
 [vm] define_function -- call compile_function
 
 # local variable
