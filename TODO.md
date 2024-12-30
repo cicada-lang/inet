@@ -1,3 +1,4 @@
+[primitive] primitive should have a union
 [primitive] merge stack functions like swap and rot to value.c
 [primitive] move print functions to console
 [primitive] move wire functions to net

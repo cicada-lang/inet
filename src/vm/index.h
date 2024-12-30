@@ -14,4 +14,5 @@
 #include "rule.h"
 #include "def.h"
 #include "primitive_def.h"
+#include "define_primitive.h"
 #include "function_def.h"
