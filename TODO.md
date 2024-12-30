@@ -1,4 +1,3 @@
-[lang] execute_generic -- deps on compile_one
 [lang] execute_int
 [lang] execute_float
 

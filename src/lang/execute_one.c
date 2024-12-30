@@ -26,30 +26,30 @@
 //     return true;
 // }
 
-// static bool
-// execute_generic(vm_t *vm) {
-//     token_t *token = list_first(vm->token_list);
-//     if (token->kind != GENERIC_TOKEN) return false;
+static bool
+execute_generic(vm_t *vm) {
+    token_t *token = list_first(vm->token_list);
+    if (token->kind != GENERIC_TOKEN) return false;
 
-//     function_t *function = function_new();
-//     function_ctx_t *ctx = function_ctx_new();
-//     compile_one(vm, function, ctx);
-//     function_build(function);
+    function_t *function = function_new();
+    function_ctx_t *ctx = function_ctx_new();
+    compile_one(vm, function, ctx);
+    function_build(function);
 
-//     size_t base_length = stack_length(vm->return_stack);
-//     stack_push(vm->return_stack, frame_new(function));
-//     run_vm_until(vm, base_length);
+    size_t base_length = stack_length(vm->return_stack);
+    stack_push(vm->return_stack, frame_new(function));
+    run_vm_until(vm, base_length);
 
-//     function_ctx_destroy(&ctx);
-//     function_destroy(&function);
-//     return true;
-// }
+    function_ctx_destroy(&ctx);
+    function_destroy(&function);
+    return true;
+}
 
 void
 execute_one(vm_t *vm) {
     // if (execute_int(vm)) return;
     // if (execute_float(vm)) return;
-    // if (execute_generic(vm)) return;
+    if (execute_generic(vm)) return;
 
     token_t *token = list_first(vm->token_list);
     fprintf(stderr, "[execute_one] unknown token: %s\n", token->string);

@@ -22,11 +22,11 @@ step_net(vm_t *vm) {
     frame_t *frame = frame_new(rule->function);
     frame_collect_free_wires(frame, active_wire);
     stack_push(vm->return_stack, frame);
-    run_vm_until_until(vm, base_length);
+    run_vm_until(vm, base_length);
 }
 
 void
-run_vm_until_until(vm_t *vm, size_t base_length) {
+run_vm_until(vm_t *vm, size_t base_length) {
     if (vm->log_level > 0) {
         vm_print(vm, stdout);
         fprintf(stdout, "\n");
