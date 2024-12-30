@@ -15,6 +15,7 @@ typedef struct connect_op_t connect_op_t;
 typedef struct use_free_wire_op_t use_free_wire_op_t;
 typedef struct function_t function_t;
 typedef struct rule_t rule_t;
-typedef struct def_t def_t;
 typedef struct primitive_def_t primitive_def_t;
 typedef struct function_def_t function_def_t;
+typedef struct constant_def_t constant_def_t;
+typedef struct def_t def_t;

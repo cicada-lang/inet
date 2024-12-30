@@ -1,4 +1,3 @@
-[vm] constant_def
 [lang] call_constant
 
 [primitive] import_all -- fix define_constant
