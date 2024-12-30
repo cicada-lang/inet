@@ -1,7 +1,7 @@
-[lang] execute_step
-[lang] execute_vm
+[lang] execute_one
+[lang] execute_all
 
-[lang] compile_step
+[lang] compile_one
 [lang] compile_function
 
 # local variable
