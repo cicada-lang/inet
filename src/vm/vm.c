@@ -79,8 +79,8 @@ vm_print_value_stack(const vm_t *self, file_t *file) {
     size_t value_stack_length = stack_length(self->value_stack);
     fprintf(file, "<value-stack length=\"%lu\">\n", value_stack_length);
     for (size_t i = 0; i < value_stack_length; i++) {
-        wire_t *wire = stack_get(self->value_stack, i);
-        wire_print(wire, file);
+        value_t value = stack_get(self->value_stack, i);
+        value_print(value, file);
         fprintf(file, "\n");
     }
 

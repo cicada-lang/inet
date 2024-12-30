@@ -56,6 +56,8 @@ import_all(mod_t *mod) {
 
     // console
 
+    define_primitive_1_fn(mod, "print", x_print);
+    define_primitive_0_fn(mod, "newline", x_newline);
     define_primitive_vm_fn(mod, "print-vm", x_print_vm);
     define_primitive_vm_fn(mod, "print-value-stack", x_print_value_stack);
     define_primitive_vm_fn(mod, "print-return-stack", x_print_return_stack);

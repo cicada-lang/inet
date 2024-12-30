@@ -159,9 +159,7 @@ frame_print(const frame_t *self, file_t *file) {
     fprintf(file, "<frame>\n");
 
     fprintf(file, "<function>\n");
-    fprintf(file, ". ");
     function_print_with_cursor(self->function, file, self->cursor);
-    fprintf(file, "\n");
     fprintf(file, "</function>\n");
 
     fprintf(file, "<local-free-wires>\n");
