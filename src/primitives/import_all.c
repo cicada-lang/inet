@@ -63,4 +63,8 @@ import_all(mod_t *mod) {
     // constant
 
     define_primitive_vm_fn(mod, "define-constant", x_define_constant);
+
+    // function
+
+    define_primitive_vm_fn(mod, "define", x_define_function);
 }

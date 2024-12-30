@@ -1,18 +1,17 @@
-[vm] define_function
+[lang] compile_int
+[lang] compile_float
 
 [vm] frame has `local_array`
 
 [lang] compile_generic -- handled local variable
-[lang] compile_int
-[lang] compile_float
+
 [lang] compile_local_set_many
 
 [lang] compile_function
 
-# local variable
+[vm] define_function -- call compile_function
 
-[vm] frame support local variables
-[lang] ( x y ) for local variables
+# local variable
 
 [lang] remove get-free-wire syntax
 [lang] free wire group from frame
