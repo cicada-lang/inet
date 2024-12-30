@@ -1,9 +1,22 @@
-[lang] execute_one
-[lang] execute_generic
+[lang] compile_one
+
+[lang] execute_generic -- deps on compile_one
+
 [lang] execute_int
 [lang] execute_float
 
-[lang] execute_all
+[lang] execute_all -- called be run_command
+
+some new examples as tests
+
+[vm] value_stack has value instead of only wire
+
+[value] object_spec_t
+[value] xobject -- has address to object_spec_t as kind
+
+[net] wire_t as xobject
+
+`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
 [lang] compile_one
 [lang] compile_function
@@ -29,8 +42,6 @@
 support define-constant
 
 # primitive value
-
-`value_t` as sumtype with `WIRE_VALUE` -- every value is under a pointer
 
 [design] write `list-map` as example
 
