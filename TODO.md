@@ -1,4 +1,7 @@
-[primitive] import_all -- null, bool, value, testing
+[vm] constant_def
+[lang] call_constant
+
+[primitive] import_all -- fix define_constant
 [primitive] import_all -- int, float -- [maybe] use full prefix
 
 [lang] execute_int
