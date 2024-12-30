@@ -12,6 +12,16 @@ struct literal_op_t {
     value_t value;
 };
 
+struct local_get_op_t {
+    op_kind_t kind;
+    size_t index;
+};
+
+struct local_set_op_t {
+    op_kind_t kind;
+    size_t index;
+};
+
 struct connect_op_t {
     op_kind_t kind;
 };
@@ -27,6 +37,12 @@ void call_op_destroy(call_op_t **self_pointer);
 
 literal_op_t *literal_op_new(value_t value);
 void literal_op_destroy(literal_op_t **self_pointer);
+
+local_get_op_t *local_get_op_new(size_t index);
+void local_get_op_destroy(local_get_op_t **self_pointer);
+
+local_set_op_t *local_set_op_new(size_t index);
+void local_set_op_destroy(local_set_op_t **self_pointer);
 
 connect_op_t *connect_op_new(void);
 void connect_op_destroy(connect_op_t **self_pointer);

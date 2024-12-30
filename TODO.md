@@ -1,5 +1,3 @@
-LOCAL_GET_OP & LOCAL_SET_OP
-
 [lang] compile_generic -- handled local variable
 [lang] compile_local_set_many
 [lang] compile_function

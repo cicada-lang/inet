@@ -36,6 +36,42 @@ literal_op_destroy(literal_op_t **self_pointer) {
     }
 }
 
+local_get_op_t *
+local_get_op_new(size_t index) {
+    local_get_op_t *self = new(local_get_op_t);
+    self->kind = LOCAL_GET_OP;
+    self->index = index;
+    return self;
+}
+
+void
+local_get_op_destroy(local_get_op_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        local_get_op_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
+local_set_op_t *
+local_set_op_new(size_t index) {
+    local_set_op_t *self = new(local_set_op_t);
+    self->kind = LOCAL_SET_OP;
+    self->index = index;
+    return self;
+}
+
+void
+local_set_op_destroy(local_set_op_t **self_pointer) {
+    assert(self_pointer);
+    if (*self_pointer) {
+        local_set_op_t *self = *self_pointer;
+        free(self);
+        *self_pointer = NULL;
+    }
+}
+
 connect_op_t *
 connect_op_new(void) {
     connect_op_t *self = new(connect_op_t);
@@ -88,6 +124,16 @@ op_destroy(op_t **self_pointer) {
             return;
         }
 
+        case LOCAL_GET_OP: {
+            local_get_op_destroy((local_get_op_t **) self_pointer);
+            return;
+        }
+
+        case LOCAL_SET_OP: {
+            local_set_op_destroy((local_set_op_t **) self_pointer);
+            return;
+        }
+
         case CONNECT_OP: {
             connect_op_destroy((connect_op_t **) self_pointer);
             return;
@@ -106,7 +152,7 @@ op_print(const op_t *unknown_op, file_t *file) {
     switch (unknown_op->kind) {
     case CALL_OP: {
         call_op_t *op = (call_op_t *) unknown_op;
-        fprintf(file, "%s", def_name(op->def));
+        fprintf(file, "CALL %s", def_name(op->def));
         return;
     }
 
@@ -117,8 +163,20 @@ op_print(const op_t *unknown_op, file_t *file) {
         return;
     }
 
+    case LOCAL_GET_OP: {
+        local_get_op_t *op = (local_get_op_t *) unknown_op;
+        fprintf(file, "LOCAL-GET %ld", op->index);
+        return;
+    }
+
+    case LOCAL_SET_OP: {
+        local_set_op_t *op = (local_set_op_t *) unknown_op;
+        fprintf(file, "LOCAL-SET %ld", op->index);
+        return;
+    }
+
     case CONNECT_OP: {
-        fprintf(file, "connect");
+        fprintf(file, "CONNECT");
         return;
     }
 
