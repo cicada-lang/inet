@@ -1,6 +1,5 @@
 # example
 
-[set] set_t -- use hash_t
 [set] set_new
 [set] set_destroy
 [set] set_add
