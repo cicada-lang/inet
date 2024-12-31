@@ -1,6 +1,6 @@
 # docs
 
-[docs] docs/articles -- update to new syntax
+[docs] docs/articles/programming-with-interaction-nets.md -- update to new syntax
 
 # later
 

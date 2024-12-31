@@ -30,8 +30,7 @@ wire-print-net
 
 define-node nat-erase target! -> end
 
-define-rule nzero nat-erase
-end
+define-rule nzero nat-erase end
 
 define-rule nadd1 nat-erase
   ( prev )

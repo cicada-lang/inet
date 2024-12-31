@@ -52,7 +52,7 @@ We use a node with three ports to represent naddition.
      /   \
 ```
 
-The two ports below represent the input `target` number and the `naddend`,
+The two ports below represent the input `target` number and the `addend`,
 the port above represent the output `value`.
 
 ```
@@ -60,7 +60,7 @@ the port above represent the output `value`.
        |
      (nadd)
      /   \
- target  naddend
+ target  addend
 ```
 
 We can represent 0 + 1 as the following:
@@ -92,14 +92,14 @@ we can do naddition.
 
 When the `target` port of `(nadd)`is connected with `(nzero)`,
 delete `(nzero)` and `(nadd)`,
-and connect the `value` of `(nadd)` with the `naddend` of `(nadd)` directly.
+and connect the `value` of `(nadd)` with the `addend` of `(nadd)` directly.
 
 ```
      value           value
        |               |
      (nadd)     =>      |
      /   \              \
-(nzero)   naddend        naddend
+(nzero)   addend        addend
 ```
 
 When the `target` port of `(nadd)` is connected with `(nadd1)`,
@@ -110,9 +110,9 @@ move `(nadd1)` above `(nadd)`.
        |               |
      (nadd)     =>    (nadd1)
      /   \             |
-(nadd1)   naddend      (nadd)
+(nadd1)   addend      (nadd)
   |                  /   \
-prev              prev   naddend
+prev              prev   addend
 ```
 
 By these two interaction rules, the graph representing 2 + 2
@@ -155,7 +155,7 @@ Every port has a name.
 (nadd1)-value  -- the value of +1
 
 (nadd)-target  -- target number
-(nadd)-naddend  -- the number to be nadded
+(nadd)-addend  -- the number to be nadded
 (nadd)-result  -- result of naddition
 ```
 
@@ -168,7 +168,7 @@ There are two kinds of ports -- input ports and output ports.
 (nadd1)-value   -- output port
 
 (nadd)-target   -- input port
-(nadd)-naddend   -- input port
+(nadd)-addend   -- input port
 (nadd)-result   -- output port
 ```
 
@@ -199,7 +199,7 @@ connected through two principal ports.
 (nadd1)-value!   -- principal port
 
 (nadd)-target!   -- principal port
-(nadd)-naddend
+(nadd)-addend
 (nadd)-result
 ```
 
@@ -232,9 +232,9 @@ Let's review the interaction rule between `(nadd1)` and `(nadd)`:
        |               |
      (nadd)     =>    (nadd1)
      /   \             |
-(nadd1)   naddend      (nadd)
+(nadd1)   addend      (nadd)
   |                  /   \
-prev            target   naddend
+prev            target   addend
 ```
 
 We can see that, the so called interaction can be viewed as:
@@ -264,7 +264,7 @@ The the rule between `(nadd1)` and `(nadd)` as an example:
 
 ```
 ! (nadd1)-(nadd)
-  (nadd1)-prev (nadd)-naddend nadd
+  (nadd1)-prev (nadd)-addend nadd
   nadd1 result-(nadd)
 ```
 
@@ -275,10 +275,10 @@ and newly generated connections at each step.
 
 - For the newly generated nodes by calling a node name,
   we nadd subscripts to them to distinguish them from each other.
-- Note that, the `(nadd)-naddend` without subscript
-  does not represent the `naddend` port of `(nadd)`,
+- Note that, the `(nadd)-addend` without subscript
+  does not represent the `addend` port of `(nadd)`,
   but represent the exposed port caused by
-  removing the `naddend` port of `(nadd)`.
+  removing the `addend` port of `(nadd)`.
 
 ```
   stack: [ ]
@@ -287,9 +287,9 @@ and newly generated connections at each step.
 
   stack: [ (nadd1)-prev ]
 
-(nadd)-naddend
+(nadd)-addend
 
-  stack: [ (nadd1)-prev, (nadd)-naddend ]
+  stack: [ (nadd1)-prev, (nadd)-addend ]
 
 nadd
 
@@ -297,7 +297,7 @@ nadd
 
   new connections:
     (nadd1)-prev target-(nadd₂)
-    (nadd)-naddend naddend-(nadd₂)
+    (nadd)-addend addend-(nadd₂)
 
   stack: [ (nadd₂)-result ]
 
@@ -321,7 +321,7 @@ it does not introduce any new nodes.
 
 ```
 ! nzero nadd
-  (nadd)-naddend result-(nadd)
+  (nadd)-addend result-(nadd)
 ```
 
 # 6
@@ -336,13 +336,13 @@ and use `.` to run program.
 ```
 * (nzero) -> value!
 * (nadd1) prev -> value!
-* (nadd) target! naddend -> result
+* (nadd) target! addend -> result
 
 ! (nzero)-(nadd)
-  (nadd)-naddend result-(nadd)
+  (nadd)-addend result-(nadd)
 
 ! (nadd1)-(nadd)
-  (nadd1)-prev (nadd)-naddend nadd
+  (nadd1)-prev (nadd)-addend nadd
   nadd1 result-(nadd)
 
 (- test -)
@@ -622,14 +622,14 @@ there will be no complicated syntax preventing us from doing so.
   (- first second -) nadd1 second-(nat-dup)
   (- first -) nadd1 first-(nat-dup)
 
-* (nmul) target! nmulend -> result
+* (nmul) target! mulend -> result
 
 ! (nzero)-(nmul)
-  (nmul)-nmulend nat-erase
+  (nmul)-mulend nat-erase
   nzero result-(nmul)
 
 ! (nadd1)-(nmul)
-  (nmul)-nmulend nat-dup
+  (nmul)-mulend nat-dup
   (- first second -) (nadd1)-prev @swap nmul
   (- first almost -) nadd result-(nmul)
 
@@ -649,11 +649,11 @@ The difference is that the `(nadd1)` of natural number only nadd one node,
 while the `(cons)` of list nadd one node and link to an extra node.
 
 ```
-* (null) -> value!
+* (nil) -> value!
 * (cons) tail head -> value!
 * (append) target! rest -> result
 
-! (null)-(append)
+! (nil)-(append)
   (append)-rest result-(append)
 
 ! (cons)-(append)
@@ -664,8 +664,8 @@ while the `(cons)` of list nadd one node and link to an extra node.
 
 * (sole) -> value!
 
-. null sole cons sole cons sole cons
-  null sole cons sole cons sole cons
+. nil sole cons sole cons sole cons
+  nil sole cons sole cons sole cons
   append
 ```
 

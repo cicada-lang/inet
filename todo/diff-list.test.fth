@@ -10,7 +10,9 @@ define sole-diff-list
   value
 end
 
-sole-diff-list sole-diff-list diff-append
+sole-diff-list
+sole-diff-list
+diff-append
 
 wire-print-net
 run
