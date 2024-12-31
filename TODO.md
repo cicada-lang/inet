@@ -2,9 +2,6 @@
 
 [primitive] rename debug to wire-debug
 
-[example] recover tests/ -- empty-file
-[example] recover tests/ -- line-comment
-
 [primitive] x_begin -- compile function and run
 [example] recover vm/ -- need x_begin
 
