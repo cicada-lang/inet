@@ -1,7 +1,3 @@
-# docs
-
-[docs] docs/articles/programming-with-interaction-nets.md -- update to new syntax
-
 # later
 
 [primitive] net -- define_node -- check_name_not_defined

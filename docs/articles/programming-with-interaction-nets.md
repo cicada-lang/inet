@@ -69,7 +69,7 @@ We can represent 0 + 1 as the following:
        |
      (nadd)
      /   \
-(nzero)   (nadd1)
+(nzero)  (nadd1)
            |
          (nzero)
 ```
@@ -80,11 +80,11 @@ and 2 + 2 as the following:
        |
      (nadd)
      /   \
-(nadd1)   (nadd1)
+(nadd1)  (nadd1)
   |        |
-(nadd1)   (nadd1)
+(nadd1)  (nadd1)
   |        |
-(nzero)   (nzero)
+(nzero)  (nzero)
 ```
 
 By defining the interaction rules between `(nadd)` and neighbor nodes,
@@ -97,7 +97,7 @@ and connect the `value` of `(nadd)` with the `addend` of `(nadd)` directly.
 ```
      value           value
        |               |
-     (nadd)     =>      |
+     (nadd)     =>     |
      /   \              \
 (nzero)   addend        addend
 ```
@@ -108,9 +108,9 @@ move `(nadd1)` above `(nadd)`.
 ```
      value           value
        |               |
-     (nadd)     =>    (nadd1)
+     (nadd)     =>   (nadd1)
      /   \             |
-(nadd1)   addend      (nadd)
+(nadd1)   addend     (nadd)
   |                  /   \
 prev              prev   addend
 ```
@@ -120,17 +120,17 @@ will become 4 through the following interaction:
 
 ```
        |                  |                 |            |
-     (nadd)              (nadd1)            (nadd1)       (nadd1)
+     (nadd)            (nadd1)           (nadd1)      (nadd1)
      /   \                |                 |            |
-(nadd1)   (nadd1)         (nadd)             (nadd1)       (nadd1)
+(nadd1) (nadd1)        (nadd)            (nadd1)      (nadd1)
   |        |    =>      /   \      =>       |       =>   |
-(nadd1)   (nadd1)    (nadd1)   (nadd1)        (nadd)        (nadd1)
+(nadd1) (nadd1)   (nadd1)  (nadd1)        (nadd)      (nadd1)
   |        |         |        |           /   \          |
-(nzero)   (nzero)    (nzero)   (nadd1)   (nzero)   (nadd1)   (nadd1)
+(nzero) (nzero)   (nzero)  (nadd1)   (nzero) (nadd1)  (nadd1)
                               |                 |        |
-                            (nzero)            (nadd1)   (nzero)
+                           (nzero)           (nadd1)  (nzero)
                                                 |
-                                              (nzero)
+                                             (nzero)
 ```
 
 # 4
@@ -205,20 +205,16 @@ connected through two principal ports.
 
 We design the statement to define node as follows:
 
-- The statement starts with `*`,
-  follows the name of the node.
-- Use a dividing line to distinguish the input ports from the output ports.
-  - Above the dividing line are the input ports.
-  - Below the dividing line are the output ports.
-  - The dividing can be as long as wish, at least two characters `--`.
-- For principal port, nadd `!` as suffix.
+- The statement starts with `define-node`, follows the name of the node.
+- Use `->` to distinguish the input ports from the output ports.
+- Use `!` suffix to mark principal port.
 
 The aforementioned nodes are defined as follows:
 
 ```
-* (nzero) -> value!
-* (nadd1) prev -> value!
-* (nadd) target! prev -> result
+define-node nzero -> value! end
+define-node nadd1 prev -> value! end
+define-node nadd target! addend -> result end
 ```
 
 # 5
@@ -230,9 +226,9 @@ Let's review the interaction rule between `(nadd1)` and `(nadd)`:
 ```
      result          value
        |               |
-     (nadd)     =>    (nadd1)
+     (nadd)     =>  (nadd1)
      /   \             |
-(nadd1)   addend      (nadd)
+(nadd1)  addend      (nadd)
   |                  /   \
 prev            target   addend
 ```
@@ -246,73 +242,17 @@ We can see that, the so called interaction can be viewed as:
 
 We design the statement for defining rule as follows:
 
-- The statement starts with `!`,
-  follows the name of two ports.
-- Use a stack for temporarily saving the ports.
-- Use the word `(node)-port`
-  to reference a exposed port caused by removing a port of a node,
-  and put the exposed port on the stack.
-- Use the word `port-(node)`
-  also to reference a exposed port caused by removing a port of a node,
-  and connect the exposed port with the port at the top of the stack.
-- Use the word `node` to call a node,
-  and connect the input ports of this node with the ports at the top
-  of the stack in order, and then put the output ports of this node
-  back into the stack in order.
+- The statement starts with `define-rule`, follows the name of two ports.
+- Put the disconnected wires to the stack.
 
 The the rule between `(nadd1)` and `(nadd)` as an example:
 
 ```
-! (nadd1)-(nadd)
-  (nadd1)-prev (nadd)-addend nadd
-  nadd1 result-(nadd)
-```
-
-Let's analyze the above definition,
-show the stack at each step,
-also show the newly generated node
-and newly generated connections at each step.
-
-- For the newly generated nodes by calling a node name,
-  we nadd subscripts to them to distinguish them from each other.
-- Note that, the `(nadd)-addend` without subscript
-  does not represent the `addend` port of `(nadd)`,
-  but represent the exposed port caused by
-  removing the `addend` port of `(nadd)`.
-
-```
-  stack: [ ]
-
-(nadd1)-prev
-
-  stack: [ (nadd1)-prev ]
-
-(nadd)-addend
-
-  stack: [ (nadd1)-prev, (nadd)-addend ]
-
-nadd
-
-  new node: (nadd₂)
-
-  new connections:
-    (nadd1)-prev target-(nadd₂)
-    (nadd)-addend addend-(nadd₂)
-
-  stack: [ (nadd₂)-result ]
-
-nadd1
-
-  new node: (nadd1₂)
-
-  new connections:
-    (nadd₂)-result prev-(nadd1₂)
-
-  stack: [ (nadd1₂)-value ]
-
-result-(nadd)
-
-  stack: [ ]
+define-rule nadd1 nadd
+  ( addend result ) ( prev )
+  prev addend nadd
+  nadd1 result connect
+end
 ```
 
 The rule between `(nzero)` and `(nadd)` is a little special,
@@ -320,8 +260,10 @@ because during reconnecting the exposed ports,
 it does not introduce any new nodes.
 
 ```
-! nzero nadd
-  (nadd)-addend result-(nadd)
+define-rule nzero nadd
+  ( addend result )
+  addend result connect
+end
 ```
 
 # 6
@@ -329,32 +271,35 @@ it does not introduce any new nodes.
 Using the statements designed above,
 we can write a complete code example.
 
-In which we will use `=` to define new words,
-use `(- ... -)` to write comments,
-and use `.` to run program.
+In which we will use `define` to define new words,
+and use `--` to comment a line.
 
 ```
-* (nzero) -> value!
-* (nadd1) prev -> value!
-* (nadd) target! addend -> result
+define-node nzero -> value! end
+define-node nadd1 prev -> value! end
+define-node nadd target! addend -> result end
 
-! (nzero)-(nadd)
-  (nadd)-addend result-(nadd)
+define-rule nzero nadd
+  ( addend result )
+  addend result connect
+end
 
-! (nadd1)-(nadd)
-  (nadd1)-prev (nadd)-addend nadd
-  nadd1 result-(nadd)
+define-rule nadd1 nadd
+  ( addend result ) ( prev )
+  prev addend nadd
+  nadd1 result connect
+end
 
-(- test -)
+-- test
 
-= one nzero nadd1
-= two one one nadd
-= three two one nadd
-= four two two nadd
+define one nzero nadd1 end
+define two one one nadd end
+define three two one nadd end
+define four two two nadd end
 
-. two two nadd
-  two two nadd
-  nadd
+two two nadd
+two two nadd
+nadd
 ```
 
 # 7
@@ -428,7 +373,7 @@ Let's introduce a node `(nat-max)` for this function.
 ```
      result
        |
-     (nat-max)
+   (nat-max)
      /    \
 first!   second
 ```
@@ -436,7 +381,7 @@ first!   second
 Node definition:
 
 ```
-* (nat-max) first! second -> result
+define-node nat-max first! second -> result end
 ```
 
 The interaction between `(nzero)` and `(nzero)` is simple:
@@ -444,7 +389,7 @@ The interaction between `(nzero)` and `(nzero)` is simple:
 ```
      result         result
        |              |
-     (nat-max)      =>    |
+   (nat-max)      =>  |
      /    \            \
 (nzero)   second       second
 ```
@@ -452,8 +397,10 @@ The interaction between `(nzero)` and `(nzero)` is simple:
 Rule definition:
 
 ```
-! (nzero)-(nat-max)
-  (nat-max)-second result-(nat-max)
+define-rule nzero nat-max
+  ( second result )
+  second result connect
+end
 ```
 
 For the `(nadd1)` and `(nzero)`,
@@ -463,9 +410,9 @@ we can imagine the following interaction:
 ```
      result           result
        |                |
-     (nat-max)      =>    (nadd1)
+   (nat-max)    =>   (nadd1)
      /    \             |
-(nadd1)    (nadd1)      (nat-max)
+(nadd1)  (nadd1)    (nat-max)
    |        |         /   \
  prev      prev    prev   prev
 ```
@@ -479,7 +426,7 @@ We call the auxiliary node `(nat-max-aux)`.
 ```
      result
        |
-    (nat-max-aux)
+  (nat-max-aux)
      /    \
 first    second!
 ```
@@ -487,18 +434,18 @@ first    second!
 Node definition:
 
 ```
-* (nat-max-aux) first second! -> result
+define-node nat-max-aux first second! -> result end
 ```
 
 Using the auxiliary node to define
 the rule between `(nadd1)` and `(nat-max)`:
 
 ```
-     result            result
-       |                 |
-     (nat-max)      =>    (nat-max-aux)
-     /    \            /   \
-(nadd1)   second     prev   second
+     result             result
+       |                  |
+   (nat-max)     => (nat-max-aux)
+     /    \             /   \
+(nadd1)   second      prev   second
    |
  prev
 ```
@@ -506,9 +453,10 @@ the rule between `(nadd1)` and `(nat-max)`:
 Rule definition:
 
 ```
-! (nadd1)-(nat-max)
-  (nadd1)-prev (nat-max)-second nat-max-aux
-  result-(nat-max)
+define-rule nadd1 nat-max
+  ( second result ) ( prev )
+  prev second nat-max-aux result connect
+end
 ```
 
 The rule between `(nzero)` and `(nat-max-aux)`:
@@ -516,17 +464,18 @@ The rule between `(nzero)` and `(nat-max-aux)`:
 ```
      result            result
        |                 |
-    (nat-max-aux)     =>   (nadd1)
+ (nat-max-aux)    =>  (nadd1)
      /    \              |
- first   (nzero)        first
+ first   (nzero)       first
 ```
 
 Rule definition:
 
 ```
-! (nzero)-(nat-max-aux)
-  (nat-max-aux)-first nadd1
-  result-(nat-max-aux)
+define-rule nzero nat-max-aux
+  ( first result )
+  first nadd1 result connect
+end
 ```
 
 The rule between `(nadd1)` and `(nat-max-aux)`:
@@ -534,42 +483,49 @@ The rule between `(nadd1)` and `(nat-max-aux)`:
 ```
      result            result
        |                 |
-    (nat-max-aux)     =>   (nadd1)
+ (nat-max-aux)   =>   (nadd1)
      /    \              |
- first   (nadd1)        (nat-max)
+ first  (nadd1)      (nat-max)
            |           /   \
           prev     first   prev
 ```
 
 Rule definition:
 
+```
+define-rule nadd1 nat-max-aux
+  ( first result ) ( prev )
+  first prev nat-max
+  nadd1 result connect
+end
+```
 
 ```
-! (nadd1)-(nat-max-aux)
-  (nat-max-aux)-first (nadd1)-prev nat-max
-  nadd1 result-(nat-max-aux)
-```
+define-node nat-max first! second -> result end
+define-node nat-max-aux first second! -> result end
 
-```
-* (nat-max) first! second -> result
-* (nat-max-aux) first second! -> result
+define-rule nzero nat-max
+  ( second result )
+  second result connect
+end
 
-! (nzero)-(nat-max)
-  (nat-max)-second result-(nat-max)
+define-rule nadd1 nat-max
+  ( second result ) ( prev )
+  prev second nat-max-aux result connect
+end
 
-! (nadd1)-(nat-max)
-  (nadd1)-prev (nat-max)-second nat-max-aux
-  result-(nat-max)
+define-rule nzero nat-max-aux
+  ( first result )
+  first nadd1 result connect
+end
 
-! (nzero)-(nat-max-aux)
-  (nat-max-aux)-first nadd1
-  result-(nat-max-aux)
+define-rule nadd1 nat-max-aux
+  ( first result ) ( prev )
+  first prev nat-max
+  nadd1 result connect
+end
 
-! (nadd1)-(nat-max-aux)
-  (nat-max-aux)-first (nadd1)-prev nat-max
-  nadd1 result-(nat-max-aux)
-
-. one two nat-max
+one two nat-max
 ```
 
 # 9
@@ -604,36 +560,48 @@ Thus when we want to factor out a subsequence from a sequence of words,
 there will be no complicated syntax preventing us from doing so.
 
 ```
-* (nat-erase) target! ->
+define-node nat-erase target! -> end
 
-! (nzero)-(nat-erase)
+define-rule nzero nat-erase end
 
-! (nadd1)-(nat-erase)
-  (nadd1)-prev nat-erase
+define-rule nadd1 nat-erase
+  ( prev )
+  prev nat-erase
+end
 
-* (nat-dup) target! -> first second
+define-node nat-dup target! -> first second end
 
-! (nzero)-(nat-dup)
-  nzero first-(nat-dup)
-  nzero second-(nat-dup)
+define-rule nzero nat-dup
+  ( first second )
+  nzero first connect
+  nzero second connect
+end
 
-! (nadd1)-(nat-dup)
-  (nadd1)-prev nat-dup
-  (- first second -) nadd1 second-(nat-dup)
-  (- first -) nadd1 first-(nat-dup)
+define-rule nadd1 nat-dup
+  ( first second ) ( prev )
+  prev nat-dup
+  ( prev-first prev-second )
+  prev-second nadd1 second connect
+  prev-first nadd1 first connect
+end
 
-* (nmul) target! mulend -> result
+define-node nmul target! mulend -> result end
 
-! (nzero)-(nmul)
-  (nmul)-mulend nat-erase
-  nzero result-(nmul)
+define-rule nzero nmul
+  ( mulend result )
+  mulend nat-erase
+  nzero result connect
+end
 
-! (nadd1)-(nmul)
-  (nmul)-mulend nat-dup
-  (- first second -) (nadd1)-prev @swap nmul
-  (- first almost -) nadd result-(nmul)
+define-rule nadd1 nmul
+  ( mulend result ) ( prev )
+  mulend nat-dup
+  ( mulend-first mulend-second )
+  prev mulend-second swap nmul
+  mulend-first nadd result connect
+end
 
-. two two nmul
+two two nmul
 ```
 
 # 10
@@ -649,29 +617,33 @@ The difference is that the `(nadd1)` of natural number only nadd one node,
 while the `(cons)` of list nadd one node and link to an extra node.
 
 ```
-* (nil) -> value!
-* (cons) tail head -> value!
-* (append) target! rest -> result
+define-node nil -> value! end
+define-node cons tail head -> value! end
+define-node append target! rest -> result end
 
-! (nil)-(append)
-  (append)-rest result-(append)
+define-rule nil append
+  ( rest result )
+  rest result connect
+end
 
-! (cons)-(append)
-  (cons)-tail (append)-rest append
-  (cons)-head cons result-(append)
+define-rule cons append
+  ( rest result ) ( tail head )
+  tail rest append
+  head cons result connect
+end
 
-(- test -)
+-- test
 
-* (sole) -> value!
+define-node sole -> value! end
 
-. nil sole cons sole cons sole cons
-  nil sole cons sole cons sole cons
-  append
+nil sole cons sole cons sole cons
+nil sole cons sole cons sole cons
+append
 ```
 
 # 11
 
-If we want to use `(append)` to append two `List`s,
+If we want to use `(append)` to append two lists,
 we must traverse the `target` of `(append)`,
 while building a new list step by step,
 and appending it to the front of the `rest` of `(append)`.
@@ -682,10 +654,10 @@ Is there a way to directly connect the end of the first list
 to the start of the second list?
 Which only requires fixed number of steps to append two lists.
 
-We can define a new type `DiffList`,
+We can define a new type diff-list,
 and a new node `(diff)`，
 this node can be used to hold the front and the back of a list.
-If we want to append two `DiffList`s,
+If we want to append two diff-lists,
 we can simply connect the back held by the first `(diff)`,
 to the front held by the second `(diff)`.
 
@@ -697,32 +669,37 @@ But in interaction nets,
 the relationship between all nodes is symmetric.
 
 ```
-* (diff) front -> back value!
-* (diff-append) target! rest -> result
-* (diff-open) new-back target! -> old-back
+define-node diff front -> back value! end
+define-node diff-append target! rest -> result end
+define-node diff-open new-back target! -> old-back end
 
-! (diff)-(diff-append)
-  (diff)-front diff result-(diff-append)
-  (diff-append)-rest diff-open back-(diff)
+define-rule diff diff-append
+  ( rest result ) ( front back )
+  front diff result connect
+  rest diff-open back connect
+end
 
-! (diff)-(diff-open)
-  (diff)-back new-back-(diff-open)
-  (diff)-front old-back-(diff-open)
+define-rule diff diff-open
+  ( new-back old-back ) ( front back )
+  back new-back connect
+  front old-back connect
+end
 
-(- test -)
+-- test
 
-* (sole) -> value!
+define-node sole -> value! end
 
-= sole-diff-list
-  @wire-pair
-  (- wire wire -) diff
-  (- wire back value -) @swap
-  (- wire value back -) sole cons sole cons
-  (- wire value list -) @rot
-  (- value list wire -) @connect
-  (- value -)
+define sole-diff-list
+  wire-pair ( front front-op )
+  front diff ( back value )
+  back sole cons sole cons
+  front-op connect
+  value
+end
 
-. sole-diff-list sole-diff-list diff-append
+sole-diff-list
+sole-diff-list
+diff-append
 ```
 
 # 12
