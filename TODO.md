@@ -1,8 +1,3 @@
-[vm] vm_add_wire & vm_delete_wire -- take vm as arg
-
-- replace wire_new -- lang/call_node.c primitives/net.c
-- replace wire_destroy -- vm_wire_connect
-
 # example
 
 [primitive] debug -- should use vm->wire_set -- instead of the wire at the top of the stack
