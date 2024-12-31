@@ -1,13 +1,7 @@
 # example
 
-[vm] vm -- has wire_set and node_set -- map pointer to value
-
-- wire and node should use managed memory -- because some nets have no root
-
 [vm] wire_new wire_destroy node_destroy wire_connect node_new -- take vm as arg
-
 [primitive] debug -- should use vm->wire_set -- instead of the wire at the top of the stack
-
 [example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
 
 # later
