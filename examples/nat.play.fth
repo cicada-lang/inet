@@ -21,4 +21,4 @@ define two nzero nadd1 nadd1 end
 
 two two nadd
 two two nadd
-nadd debug
+nadd wire-debug

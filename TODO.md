@@ -1,7 +1,5 @@
 # example
 
-[primitive] rename debug to wire-debug
-
 [primitive] x_begin -- compile function and run
 [example] recover vm/ -- need x_begin
 

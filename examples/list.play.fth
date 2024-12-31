@@ -17,4 +17,4 @@ define-node sole -> value! end
 
 nil sole cons sole cons sole cons
 nil sole cons sole cons sole cons
-append debug
+append wire-debug

@@ -30,10 +30,10 @@ x_run(vm_t *vm) {
 }
 
 void
-x_debug(vm_t *vm) {
-    fprintf(stdout, "[debug] debug start\n");
+x_wire_debug(vm_t *vm) {
+    fprintf(stdout, "[wire-debug] debug start\n");
     debug_start(vm);
-    fprintf(stdout, "[debug] debug end\n");
+    fprintf(stdout, "[wire-debug] debug end\n");
     fprintf(stdout, "\n");
 }
 
