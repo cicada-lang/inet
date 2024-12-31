@@ -76,7 +76,6 @@ wire-print-net
 run
 wire-print-net
 
-
 -- to define `nat-max`, we need `nat-max-aux`
 
 define-node nat-max first! second -> result end

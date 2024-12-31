@@ -26,14 +26,14 @@ Suppose we want to encode the simplest data -- natural number.
 We can mimic the ancient knot counting, using node to do the counting.
 
 ```
-0  (zero)-
-1  (zero)-(add1)-
-2  (zero)-(add1)-(add1)-
-3  (zero)-(add1)-(add1)-(add1)-
+0  (nzero)-
+1  (nzero)-(nadd1)-
+2  (nzero)-(nadd1)-(nadd1)-
+3  (nzero)-(nadd1)-(nadd1)-(nadd1)-
 ```
 
-The node representing 0 `(zero)-` has one port,
-the node representing +1 `-(add1)-` has two ports,
+The node representing 0 `(nzero)-` has one port,
+the node representing +1 `-(nadd1)-` has two ports,
 we can encode natural number
 by connecting these nodes through the ports.
 
@@ -41,78 +41,78 @@ by connecting these nodes through the ports.
 
 How to use graph to represent functions that operate on natural numbers?
 
-Take addition as an example, we need to introduce a new node to represent addition,
+Take naddition as an example, we need to introduce a new node to represent naddition,
 and to define interaction rules between this node and other nodes.
 
-We use a node with three ports to represent addition.
+We use a node with three ports to represent naddition.
 
 ```
        |
-     (add)
+     (nadd)
      /   \
 ```
 
-The two ports below represent the input `target` number and the `addend`,
+The two ports below represent the input `target` number and the `naddend`,
 the port above represent the output `value`.
 
 ```
      value
        |
-     (add)
+     (nadd)
      /   \
- target  addend
+ target  naddend
 ```
 
 We can represent 0 + 1 as the following:
 
 ```
        |
-     (add)
+     (nadd)
      /   \
-(zero)   (add1)
+(nzero)   (nadd1)
            |
-         (zero)
+         (nzero)
 ```
 
 and 2 + 2 as the following:
 
 ```
        |
-     (add)
+     (nadd)
      /   \
-(add1)   (add1)
+(nadd1)   (nadd1)
   |        |
-(add1)   (add1)
+(nadd1)   (nadd1)
   |        |
-(zero)   (zero)
+(nzero)   (nzero)
 ```
 
-By defining the interaction rules between `(add)` and neighbor nodes,
-we can do addition.
+By defining the interaction rules between `(nadd)` and neighbor nodes,
+we can do naddition.
 
-When the `target` port of `(add)`is connected with `(zero)`,
-delete `(zero)` and `(add)`,
-and connect the `value` of `(add)` with the `addend` of `(add)` directly.
+When the `target` port of `(nadd)`is connected with `(nzero)`,
+delete `(nzero)` and `(nadd)`,
+and connect the `value` of `(nadd)` with the `naddend` of `(nadd)` directly.
 
 ```
      value           value
        |               |
-     (add)     =>      |
+     (nadd)     =>      |
      /   \              \
-(zero)   addend        addend
+(nzero)   naddend        naddend
 ```
 
-When the `target` port of `(add)` is connected with `(add1)`,
-move `(add1)` above `(add)`.
+When the `target` port of `(nadd)` is connected with `(nadd1)`,
+move `(nadd1)` above `(nadd)`.
 
 ```
      value           value
        |               |
-     (add)     =>    (add1)
+     (nadd)     =>    (nadd1)
      /   \             |
-(add1)   addend      (add)
+(nadd1)   naddend      (nadd)
   |                  /   \
-prev              prev   addend
+prev              prev   naddend
 ```
 
 By these two interaction rules, the graph representing 2 + 2
@@ -120,17 +120,17 @@ will become 4 through the following interaction:
 
 ```
        |                  |                 |            |
-     (add)              (add1)            (add1)       (add1)
+     (nadd)              (nadd1)            (nadd1)       (nadd1)
      /   \                |                 |            |
-(add1)   (add1)         (add)             (add1)       (add1)
+(nadd1)   (nadd1)         (nadd)             (nadd1)       (nadd1)
   |        |    =>      /   \      =>       |       =>   |
-(add1)   (add1)    (add1)   (add1)        (add)        (add1)
+(nadd1)   (nadd1)    (nadd1)   (nadd1)        (nadd)        (nadd1)
   |        |         |        |           /   \          |
-(zero)   (zero)    (zero)   (add1)   (zero)   (add1)   (add1)
+(nzero)   (nzero)    (nzero)   (nadd1)   (nzero)   (nadd1)   (nadd1)
                               |                 |        |
-                            (zero)            (add1)   (zero)
+                            (nzero)            (nadd1)   (nzero)
                                                 |
-                                              (zero)
+                                              (nzero)
 ```
 
 # 4
@@ -141,35 +141,35 @@ to program this computation model.
 In our language each node has fixed number of ports.
 
 ```
-(zero) -- has one port
-(add1) -- has two ports
-(add)  -- has three ports
+(nzero) -- has one port
+(nadd1) -- has two ports
+(nadd)  -- has three ports
 ```
 
 Every port has a name.
 
 ```
-(zero)-value  -- the value of 0
+(nzero)-value  -- the value of 0
 
-(add1)-prev   -- previous number
-(add1)-value  -- the value of +1
+(nadd1)-prev   -- previous number
+(nadd1)-value  -- the value of +1
 
-(add)-target  -- target number
-(add)-addend  -- the number to be added
-(add)-result  -- result of addition
+(nadd)-target  -- target number
+(nadd)-naddend  -- the number to be nadded
+(nadd)-result  -- result of naddition
 ```
 
 There are two kinds of ports -- input ports and output ports.
 
 ```
-(zero)-value   -- output port
+(nzero)-value   -- output port
 
-(add1)-prev    -- input port
-(add1)-value   -- output port
+(nadd1)-prev    -- input port
+(nadd1)-value   -- output port
 
-(add)-target   -- input port
-(add)-addend   -- input port
-(add)-result   -- output port
+(nadd)-target   -- input port
+(nadd)-naddend   -- input port
+(nadd)-result   -- output port
 ```
 
 Two nodes can be connected through ports.
@@ -177,15 +177,15 @@ Two nodes can be connected through ports.
 Take the graph representing 2 as an example:
 
 ```
-(zero)-(add1)-(add1)-
+(nzero)-(nadd1)-(nadd1)-
 ```
 
 The detailed connections are the following:
 
 ```
-(zero)-value-<>-prev-(add1)
-(add1)-value-<>-prev-(add1)
-(add1)-value-<>-
+(nzero)-value-<>-prev-(nadd1)
+(nadd1)-value-<>-prev-(nadd1)
+(nadd1)-value-<>-
 ```
 
 Each node has one and only one principal port,
@@ -193,14 +193,14 @@ two nodes can interact only when they are
 connected through two principal ports.
 
 ```
-(zero)-value!   -- principal port
+(nzero)-value!   -- principal port
 
-(add1)-prev
-(add1)-value!   -- principal port
+(nadd1)-prev
+(nadd1)-value!   -- principal port
 
-(add)-target!   -- principal port
-(add)-addend
-(add)-result
+(nadd)-target!   -- principal port
+(nadd)-naddend
+(nadd)-result
 ```
 
 We design the statement to define node as follows:
@@ -211,30 +211,30 @@ We design the statement to define node as follows:
   - Above the dividing line are the input ports.
   - Below the dividing line are the output ports.
   - The dividing can be as long as wish, at least two characters `--`.
-- For principal port, add `!` as suffix.
+- For principal port, nadd `!` as suffix.
 
 The aforementioned nodes are defined as follows:
 
 ```
-* (zero) -> value!
-* (add1) prev -> value!
-* (add) target! prev -> result
+* (nzero) -> value!
+* (nadd1) prev -> value!
+* (nadd) target! prev -> result
 ```
 
 # 5
 
 Given two nodes, we can define an interaction rule for them.
 
-Let's review the interaction rule between `(add1)` and `(add)`:
+Let's review the interaction rule between `(nadd1)` and `(nadd)`:
 
 ```
      result          value
        |               |
-     (add)     =>    (add1)
+     (nadd)     =>    (nadd1)
      /   \             |
-(add1)   addend      (add)
+(nadd1)   naddend      (nadd)
   |                  /   \
-prev            target   addend
+prev            target   naddend
 ```
 
 We can see that, the so called interaction can be viewed as:
@@ -260,12 +260,12 @@ We design the statement for defining rule as follows:
   of the stack in order, and then put the output ports of this node
   back into the stack in order.
 
-The the rule between `(add1)` and `(add)` as an example:
+The the rule between `(nadd1)` and `(nadd)` as an example:
 
 ```
-! (add1)-(add)
-  (add1)-prev (add)-addend add
-  add1 result-(add)
+! (nadd1)-(nadd)
+  (nadd1)-prev (nadd)-naddend nadd
+  nadd1 result-(nadd)
 ```
 
 Let's analyze the above definition,
@@ -274,54 +274,54 @@ also show the newly generated node
 and newly generated connections at each step.
 
 - For the newly generated nodes by calling a node name,
-  we add subscripts to them to distinguish them from each other.
-- Note that, the `(add)-addend` without subscript
-  does not represent the `addend` port of `(add)`,
+  we nadd subscripts to them to distinguish them from each other.
+- Note that, the `(nadd)-naddend` without subscript
+  does not represent the `naddend` port of `(nadd)`,
   but represent the exposed port caused by
-  removing the `addend` port of `(add)`.
+  removing the `naddend` port of `(nadd)`.
 
 ```
   stack: [ ]
 
-(add1)-prev
+(nadd1)-prev
 
-  stack: [ (add1)-prev ]
+  stack: [ (nadd1)-prev ]
 
-(add)-addend
+(nadd)-naddend
 
-  stack: [ (add1)-prev, (add)-addend ]
+  stack: [ (nadd1)-prev, (nadd)-naddend ]
 
-add
+nadd
 
-  new node: (add₂)
-
-  new connections:
-    (add1)-prev target-(add₂)
-    (add)-addend addend-(add₂)
-
-  stack: [ (add₂)-result ]
-
-add1
-
-  new node: (add1₂)
+  new node: (nadd₂)
 
   new connections:
-    (add₂)-result prev-(add1₂)
+    (nadd1)-prev target-(nadd₂)
+    (nadd)-naddend naddend-(nadd₂)
 
-  stack: [ (add1₂)-value ]
+  stack: [ (nadd₂)-result ]
 
-result-(add)
+nadd1
+
+  new node: (nadd1₂)
+
+  new connections:
+    (nadd₂)-result prev-(nadd1₂)
+
+  stack: [ (nadd1₂)-value ]
+
+result-(nadd)
 
   stack: [ ]
 ```
 
-The rule between `(zero)` and `(add)` is a little special,
+The rule between `(nzero)` and `(nadd)` is a little special,
 because during reconnecting the exposed ports,
 it does not introduce any new nodes.
 
 ```
-! zero add
-  (add)-addend result-(add)
+! nzero nadd
+  (nadd)-naddend result-(nadd)
 ```
 
 # 6
@@ -334,27 +334,27 @@ use `(- ... -)` to write comments,
 and use `.` to run program.
 
 ```
-* (zero) -> value!
-* (add1) prev -> value!
-* (add) target! addend -> result
+* (nzero) -> value!
+* (nadd1) prev -> value!
+* (nadd) target! naddend -> result
 
-! (zero)-(add)
-  (add)-addend result-(add)
+! (nzero)-(nadd)
+  (nadd)-naddend result-(nadd)
 
-! (add1)-(add)
-  (add1)-prev (add)-addend add
-  add1 result-(add)
+! (nadd1)-(nadd)
+  (nadd1)-prev (nadd)-naddend nadd
+  nadd1 result-(nadd)
 
 (- test -)
 
-= one zero add1
-= two one one add
-= three two one add
-= four two two add
+= one nzero nadd1
+= two one one nadd
+= three two one nadd
+= four two two nadd
 
-. two two add
-  two two add
-  add
+. two two nadd
+  two two nadd
+  nadd
 ```
 
 # 7
@@ -371,7 +371,7 @@ principal ports, either we can not find a rule for these two nodes,
 then the two nodes can not interact; or we can find one and only one
 rule, the two nodes will interact according to this rule.
 
-This constraint excluded the case of finding multiple rules,
+This constraint excluded the case of finding nmultiple rules,
 and need to making choice between them.
 
 The second constraint is, each node has one and only one principal port.
@@ -410,8 +410,8 @@ then in interaction nets, not only the result of the computation
 is unique, the process of computation is also unique!
 
 When implementing interaction nets,
-if the computer as multiple cores,
-we can start multiple threads,
+if the computer as nmultiple cores,
+we can start nmultiple threads,
 sharing the same memory,
 do the interactions at different place in parallel,
 the threads will not interfere with each other.
@@ -423,12 +423,12 @@ this constraint can bring good properties to our computation model,
 but it also make programming inconvenient.
 
 The max function of natural number is an example of such inconvenience.
-Let's introduce a node `(max)` for this function.
+Let's introduce a node `(nat-max)` for this function.
 
 ```
      result
        |
-     (max)
+     (nat-max)
      /    \
 first!   second
 ```
@@ -436,36 +436,36 @@ first!   second
 Node definition:
 
 ```
-* (max) first! second -> result
+* (nat-max) first! second -> result
 ```
 
-The interaction between `(zero)` and `(zero)` is simple:
+The interaction between `(nzero)` and `(nzero)` is simple:
 
 ```
      result         result
        |              |
-     (max)      =>    |
+     (nat-max)      =>    |
      /    \            \
-(zero)   second       second
+(nzero)   second       second
 ```
 
 Rule definition:
 
 ```
-! (zero)-(max)
-  (max)-second result-(max)
+! (nzero)-(nat-max)
+  (nat-max)-second result-(nat-max)
 ```
 
-For the `(add1)` and `(zero)`,
+For the `(nadd1)` and `(nzero)`,
 if there is no single-principal-port constraint,
 we can imagine the following interaction:
 
 ```
      result           result
        |                |
-     (max)      =>    (add1)
+     (nat-max)      =>    (nadd1)
      /    \             |
-(add1)    (add1)      (max)
+(nadd1)    (nadd1)      (nat-max)
    |        |         /   \
  prev      prev    prev   prev
 ```
@@ -474,12 +474,12 @@ But because of single-principal-port constraint,
 we have to introduce an auxiliary node and some auxiliary rules,
 to explicitly choose between two interactable edges.
 
-We call the auxiliary node `(max-aux)`.
+We call the auxiliary node `(nat-max-aux)`.
 
 ```
      result
        |
-    (max-aux)
+    (nat-max-aux)
      /    \
 first    second!
 ```
@@ -487,18 +487,18 @@ first    second!
 Node definition:
 
 ```
-* (max-aux) first second! -> result
+* (nat-max-aux) first second! -> result
 ```
 
 Using the auxiliary node to define
-the rule between `(add1)` and `(max)`:
+the rule between `(nadd1)` and `(nat-max)`:
 
 ```
      result            result
        |                 |
-     (max)      =>    (max-aux)
+     (nat-max)      =>    (nat-max-aux)
      /    \            /   \
-(add1)   second     prev   second
+(nadd1)   second     prev   second
    |
  prev
 ```
@@ -506,37 +506,37 @@ the rule between `(add1)` and `(max)`:
 Rule definition:
 
 ```
-! (add1)-(max)
-  (add1)-prev (max)-second max-aux
-  result-(max)
+! (nadd1)-(nat-max)
+  (nadd1)-prev (nat-max)-second nat-max-aux
+  result-(nat-max)
 ```
 
-The rule between `(zero)` and `(max-aux)`:
+The rule between `(nzero)` and `(nat-max-aux)`:
 
 ```
      result            result
        |                 |
-    (max-aux)     =>   (add1)
+    (nat-max-aux)     =>   (nadd1)
      /    \              |
- first   (zero)        first
+ first   (nzero)        first
 ```
 
 Rule definition:
 
 ```
-! (zero)-(max-aux)
-  (max-aux)-first add1
-  result-(max-aux)
+! (nzero)-(nat-max-aux)
+  (nat-max-aux)-first nadd1
+  result-(nat-max-aux)
 ```
 
-The rule between `(add1)` and `(max-aux)`:
+The rule between `(nadd1)` and `(nat-max-aux)`:
 
 ```
      result            result
        |                 |
-    (max-aux)     =>   (add1)
+    (nat-max-aux)     =>   (nadd1)
      /    \              |
- first   (add1)        (max)
+ first   (nadd1)        (nat-max)
            |           /   \
           prev     first   prev
 ```
@@ -545,40 +545,40 @@ Rule definition:
 
 
 ```
-! (add1)-(max-aux)
-  (max-aux)-first (add1)-prev max
-  add1 result-(max-aux)
+! (nadd1)-(nat-max-aux)
+  (nat-max-aux)-first (nadd1)-prev nat-max
+  nadd1 result-(nat-max-aux)
 ```
 
 ```
-* (max) first! second -> result
-* (max-aux) first second! -> result
+* (nat-max) first! second -> result
+* (nat-max-aux) first second! -> result
 
-! (zero)-(max)
-  (max)-second result-(max)
+! (nzero)-(nat-max)
+  (nat-max)-second result-(nat-max)
 
-! (add1)-(max)
-  (add1)-prev (max)-second max-aux
-  result-(max)
+! (nadd1)-(nat-max)
+  (nadd1)-prev (nat-max)-second nat-max-aux
+  result-(nat-max)
 
-! (zero)-(max-aux)
-  (max-aux)-first add1
-  result-(max-aux)
+! (nzero)-(nat-max-aux)
+  (nat-max-aux)-first nadd1
+  result-(nat-max-aux)
 
-! (add1)-(max-aux)
-  (max-aux)-first (add1)-prev max
-  add1 result-(max-aux)
+! (nadd1)-(nat-max-aux)
+  (nat-max-aux)-first (nadd1)-prev nat-max
+  nadd1 result-(nat-max-aux)
 
-. one two max
+. one two nat-max
 ```
 
 # 9
 
-We have already analyzed the node representing addition `(add)`,
-now we analyze the node representing multiplication `(mul)`.
+We have already analyzed the node representing naddition `(nadd)`,
+now we analyze the node representing nmultiplication `(nmul)`.
 
-We will find that, to define the interaction rule between `(mul)` and
-`(zero)` or `(mul)` and `(add1)`, we need to introduce auxiliary nodes
+We will find that, to define the interaction rule between `(nmul)` and
+`(nzero)` or `(nmul)` and `(nadd1)`, we need to introduce auxiliary nodes
 again:
 
 - `(nat-erase)` to erase a natural number.
@@ -588,13 +588,13 @@ These two nodes are different from all aforementioned nodes,
 because all aforementioned nodes has one output port,
 but:
 
-- `(nat-erase)` has zero output ports.
+- `(nat-erase)` has nzero output ports.
 - `(nat-dup)` has two output ports.
 
 This is the main reason why we use stack to build net.
 
 The good thing about using stack to pass arguments is that,
-it can naturally handles zero-return-value and multiple-return-values,
+it can naturally handles nzero-return-value and nmultiple-return-values,
 we do not need to design new special syntax for these cases.
 
 After decide to use stack to build net,
@@ -606,34 +606,34 @@ there will be no complicated syntax preventing us from doing so.
 ```
 * (nat-erase) target! ->
 
-! (zero)-(nat-erase)
+! (nzero)-(nat-erase)
 
-! (add1)-(nat-erase)
-  (add1)-prev nat-erase
+! (nadd1)-(nat-erase)
+  (nadd1)-prev nat-erase
 
 * (nat-dup) target! -> first second
 
-! (zero)-(nat-dup)
-  zero first-(nat-dup)
-  zero second-(nat-dup)
+! (nzero)-(nat-dup)
+  nzero first-(nat-dup)
+  nzero second-(nat-dup)
 
-! (add1)-(nat-dup)
-  (add1)-prev nat-dup
-  (- first second -) add1 second-(nat-dup)
-  (- first -) add1 first-(nat-dup)
+! (nadd1)-(nat-dup)
+  (nadd1)-prev nat-dup
+  (- first second -) nadd1 second-(nat-dup)
+  (- first -) nadd1 first-(nat-dup)
 
-* (mul) target! mulend -> result
+* (nmul) target! nmulend -> result
 
-! (zero)-(mul)
-  (mul)-mulend nat-erase
-  zero result-(mul)
+! (nzero)-(nmul)
+  (nmul)-nmulend nat-erase
+  nzero result-(nmul)
 
-! (add1)-(mul)
-  (mul)-mulend nat-dup
-  (- first second -) (add1)-prev @swap mul
-  (- first almost -) add result-(mul)
+! (nadd1)-(nmul)
+  (nmul)-nmulend nat-dup
+  (- first second -) (nadd1)-prev @swap nmul
+  (- first almost -) nadd result-(nmul)
 
-. two two mul
+. two two nmul
 ```
 
 # 10
@@ -644,9 +644,9 @@ we introduce the second simplest data -- list.
 The goal is to implement `append` function.
 
 The `(append)` of list
-is very similar to the `(add)` of natural number.
-The difference is that the `(add1)` of natural number only add one node,
-while the `(cons)` of list add one node and link to an extra node.
+is very similar to the `(nadd)` of natural number.
+The difference is that the `(nadd1)` of natural number only nadd one node,
+while the `(cons)` of list nadd one node and link to an extra node.
 
 ```
 * (null) -> value!

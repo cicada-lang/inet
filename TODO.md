@@ -1,6 +1,6 @@
 # docs
 
-[docs] update docs/articles
+[docs] docs/articles -- update to new syntax
 
 # later
 
