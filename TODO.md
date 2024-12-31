@@ -7,10 +7,6 @@
 
 # later
 
-[example] [maybe] recover tests/ -- inline-comment
-[example] recover tests/ -- undefined-name.error
-[example] recover tests/ -- wrong-node-name.error
-
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
 
@@ -22,11 +18,8 @@
 # later
 
 [primitive] net -- define_node -- check_name_not_defined
-
-[mabye] support maybe_ignore_inline_comment
-
-- x_define_node
-- compile_function
+[example] recover tests/ -- undefined-name.error
+[example] recover tests/ -- wrong-node-name.error
 
 # value
 

@@ -78,8 +78,6 @@ x_define_node(vm_t *vm) {
 
     bool output_flag = false;
     while (true) {
-        // maybe_ignore_inline_comment(vm);
-
         assert(!list_is_empty(vm->token_list));
 
         token_t *token = list_shift(vm->token_list);
