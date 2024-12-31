@@ -5,6 +5,7 @@
 #include "value.h"
 #include "testing.h"
 #include "net.h"
+#include "vm.h"
 #include "console.h"
 #include "constant.h"
 #include "function.h"
