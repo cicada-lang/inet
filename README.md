@@ -11,147 +11,122 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 ## Syntax
 
 ```xml
--- line comment
-(- inline comment -)
-* (<name>) <inputs> -> <outputs>  -- define node
-! (<name>)-(<name>) <program>     -- define rule
-= <name> <program>                -- define program
-. <program>                       -- run program
+define-node <name> <inputs> -> <outputs> end
+define-rule <name> <name> ... end
+define <name> ... end
 ```
-
-<details>
-<summary>full grammar</summary>
-
-```xml
-<inputs> := <ports>
-<outputs> := <ports>
-<ports> := <port> | <port> <ports>
-
-<port> := <auxiliary-port> | <principle-port>
-  <auxiliary-port> := <name>
-  <principle-port> := <name>!
-
-<program> := <word> | <word> <program>
-
-<word> := <call> | <use-free-port> | <reconnect-free-port>
-  <call> := <name>
-  <use-free-port> := (<name>)-<name>
-  <reconnect-free-port> := <name>-(<name>)
-
-<name> := <alphanumeric>
-```
-
-</details>
 
 ## Examples
 
 ### Natural Number
 
-Define nodes:
-
 ```
-* (zero) -> value!
-* (add1) prev -> value!
-* (add) target! addend -> result
+define-node nzero -> value! end
+define-node nadd1 prev -> value! end
+define-node nadd target! addend -> result end
 ```
 
-The rule between `(zero)` and `(add)` as ASCII art:
-
-```
-     value          value         value
-       |              |             |
-     (add)     =>             =>    |
-     /   \              \            \
-(zero)   addend         addend       addend
-```
-
-Define the rule between `(zero)` and `(add)`:
-
-```
-! (zero)-(add)
-  (add)-addend result-(add)
-```
-
-Explanation of the above rule definition:
-
-- Disconnect and delete `(zero)-(add)`.
-- Reconnect newly exposed wires:
-  - `(add)-addend`
-    - push the corresponding wire to the stack.
-  - `result-(add)`
-    - connect the corresponding wire with the wire on top of the stack.
-
-The rule between `(add1)` and `(add)` as ASCII art:
+The rule between `(nadd1)` and `(nadd)` as ASCII art:
 
 ```
      value             value            value
        |                 |                |
-     (add)     =>                =>     (add1)
+    (nadd)     =>                =>    (nadd1)
      /   \                 \              |
-(add1)   addend            addend       (add)
+(nadd1)   addend           addend       (nadd)
    |                 |                  /   \
  prev              prev              prev   addend
 ```
 
-Define the rule between `(add1)` and `(add)`:
+Define the rule between `(nadd1)` and `(nadd)`:
 
 ```
-! (add1)-(add)
-  (add1)-prev (add)-addend add
-  add1 result-(add)
+define-rule nadd1 nadd
+  ( addend result ) ( prev )
+  prev addend nadd
+  nadd1 result connect
+end
 ```
 
-Explanation of the above rule definition:
+To apply this rule is to disconnect and delete `(nadd1)` and `(nadd)` and reconnect newly exposed wires:
 
-- Disconnect and delete `(add1)-(add)`.
-- Reconnect newly exposed wires:
-  - `(add1)-prev`
-  - `(add)-addend`
-     - push the corresponding wire to the stack.
-  - `add`
-  - `add1`
-    - create new node by applying it like a Forth function:
-      - wires from the stack and connect them to the node's input ports,
-      - then return free wires connected to the node's output ports.
-  - `result-(add)`
-     - connect the corresponding wire with the wire on top of the stack.
+- `( addend result )` save the wires that were connected to `(nadd)` to local variable `addend` and `result`.
+- `( prev )` save the wire that was connected to `(nadd1)` to local variable `prev`.
+- `prev` push local variables to the stack.
+- `addend` push local variables to the stack.
+- `nadd` take two arguments from the stack and create a new `(nadd)` node.
+- `nadd1` take one argument from the stack and create a new `(nadd1)` node.
+- `result` push local variable to the stack.
+- `connect` take two wires from the stack and connect them.
+
+The rule between `(nzero)` and `(nadd)` as ASCII art:
+
+```
+     value          value         value
+       |              |             |
+     (nadd)     =>             =>   |
+     /   \              \            \
+(nzero)   addend        addend       addend
+```
+
+Define the rule between `(nzero)` and `(nadd)`:
+
+```
+define-rule nzero nadd
+  ( addend result )
+  addend result connect
+end
+```
+
+To apply this rule is to disconnect and delete `(nzero)` and `(nadd)` and reconnect newly exposed wires:
+
+- `( addend result )` save the wires that were connected to `(nadd)` to local variable `addend` and `result`.
+- `addend` push local variables to the stack.
+- `result` push local variables to the stack.
+- `connect` take two wires from the stack and connect them.
 
 Example interaction:
 
 ```
-       |                  |                 |            |
-     (add)              (add1)            (add1)       (add1)
-     /   \                |                 |            |
-(add1)   (add1)         (add)             (add1)       (add1)
-  |        |    =>      /   \      =>       |       =>   |
-(add1)   (add1)    (add1)   (add1)        (add)        (add1)
-  |        |         |        |           /   \          |
-(zero)   (zero)    (zero)   (add1)   (zero)   (add1)   (add1)
-                              |                 |        |
-                            (zero)            (add1)   (zero)
-                                                |
-                                              (zero)
+       |                   |                   |              |
+    (nadd)              (nadd1)             (nadd1)        (nadd1)
+     /   \                 |                   |              |
+(nadd1)  (nadd1)        (nadd)              (nadd1)        (nadd1)
+   |        |    =>      /   \       =>        |        =>    |
+(nadd1)  (nadd1)    (nadd1)  (nadd1)         (nadd)        (nadd1)
+   |        |          |        |            /   \            |
+(nzero)  (nzero)    (nzero)  (nadd1)    (nzero) (nadd1)    (nadd1)
+                                |                  |          |
+                             (nzero)            (nadd1)    (nzero)
+                                                   |
+                                                (nzero)
 ```
 
 The whole program with test:
 
 ```
-* (zero) -> value!
-* (add1) prev -> value!
-* (add) target! addend -> result
+define-node nzero -> value! end
+define-node nadd1 prev -> value! end
+define-node nadd target! addend -> result end
 
-! (zero)-(add)
-  (add)-addend result-(add)
+define-rule nzero nadd
+  ( addend result )
+  addend result connect
+end
 
-! (add1)-(add)
-  (add1)-prev (add)-addend add
-  add1 result-(add)
+define-rule nadd1 nadd
+  ( addend result ) ( prev )
+  prev addend nadd
+  nadd1 result connect
+end
 
-(- test -)
+define two
+  nzero nadd1 nadd1
+end
 
-. zero add1 add1
-  zero add1 add1
-  add
+wire-print-net
+run
+wire-print-net
 ```
 
 <details>
@@ -160,27 +135,27 @@ The whole program with test:
 ```xml
 <net>
 <root>
-(add₇)-result-<>-
+(nadd₇)-result-<>-
 </root>
 <body>
-(add1₃)-value!-<>-!target-(add₇)
-(add1₆)-value!-<>-addend-(add₇)
-(add1₅)-value!-<>-prev-(add1₆)
-(zero₄)-value!-<>-prev-(add1₅)
-(add1₂)-value!-<>-prev-(add1₃)
-(zero₁)-value!-<>-prev-(add1₂)
+(nadd1₃)-value!-<>-!target-(nadd₇)
+(nadd1₆)-value!-<>-addend-(nadd₇)
+(nadd1₅)-value!-<>-prev-(nadd1₆)
+(nzero₄)-value!-<>-prev-(nadd1₅)
+(nadd1₂)-value!-<>-prev-(nadd1₃)
+(nzero₁)-value!-<>-prev-(nadd1₂)
 </body>
 </net>
 
 <net>
 <root>
-(add1₉)-value!-<>-
+(nadd1₉)-value!-<>-
 </root>
 <body>
-(add1₁₁)-value!-<>-prev-(add1₉)
-(add1₆)-value!-<>-prev-(add1₁₁)
-(add1₅)-value!-<>-prev-(add1₆)
-(zero₄)-value!-<>-prev-(add1₅)
+(nadd1₁₁)-value!-<>-prev-(nadd1₉)
+(nadd1₆)-value!-<>-prev-(nadd1₁₁)
+(nadd1₅)-value!-<>-prev-(nadd1₆)
+(nzero₄)-value!-<>-prev-(nadd1₅)
 </body>
 </net>
 ```
@@ -190,28 +165,30 @@ The whole program with test:
 ### List
 
 ```
-* (null) -> value!
-* (cons) tail head -> value!
-* (append) target! rest -> result
+define-node nil -> value! end
+define-node cons tail head -> value! end
+define-node append target! rest -> result end
 
-! (null)-(append)
-  (append)-rest result-(append)
+define-rule nil append
+  ( rest result )
+  rest result connect
+end
 
-! (cons)-(append)
-  (cons)-tail (append)-rest append
-  (cons)-head cons result-(append)
+define-rule cons append
+  ( rest result ) ( tail head )
+  tail rest append
+  head cons result connect
+end
 
-(- test -)
+define-node sole -> value! end
 
-* (sole) -> value!
+nil sole cons sole cons sole cons
+nil sole cons sole cons sole cons
+append
 
-. null sole cons sole cons sole cons
-  null sole cons sole cons sole cons
-  append
-
-  wire-print-net
-  run
-  wire-print-net
+wire-print-net
+run
+wire-print-net
 ```
 
 <details>
@@ -229,13 +206,13 @@ The whole program with test:
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
+(nil₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 (cons₅)-value!-<>-tail-(cons₇)
 (sole₆)-value!-<>-head-(cons₇)
 (cons₃)-value!-<>-tail-(cons₅)
 (sole₄)-value!-<>-head-(cons₅)
-(null₁)-value!-<>-tail-(cons₃)
+(nil₁)-value!-<>-tail-(cons₃)
 (sole₂)-value!-<>-head-(cons₃)
 </body>
 </net>
@@ -255,7 +232,7 @@ The whole program with test:
 (sole₁₃)-value!-<>-head-(cons₁₄)
 (cons₁₀)-value!-<>-tail-(cons₁₂)
 (sole₁₁)-value!-<>-head-(cons₁₂)
-(null₈)-value!-<>-tail-(cons₁₀)
+(nil₈)-value!-<>-tail-(cons₁₀)
 (sole₉)-value!-<>-head-(cons₁₀)
 </body>
 </net>
@@ -336,10 +313,6 @@ make clean    # clean up compiled files
 **Inspirations**:
 
 - [forth](https://en.wikipedia.org/wiki/Forth_(programming_language))
-- [uxn](https://100r.co/site/uxn.html)
-  - [tote](https://wiki.xxiivv.com/site/tote.html)
-- [modal](https://git.sr.ht/~rabbits/modal)
-- [fractran](https://git.sr.ht/~rabbits/fractran)
 
 **Books**:
 

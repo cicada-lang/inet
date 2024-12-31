@@ -1,6 +1,5 @@
 # docs
 
-[docs] update README.md
 [docs] update docs/articles
 
 # later

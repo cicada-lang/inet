@@ -13,9 +13,11 @@ define-rule nadd1 nadd
   nadd1 result connect
 end
 
-nzero nadd1 nadd1
-nzero nadd1 nadd1
-nadd
+define two
+  nzero nadd1 nadd1
+end
+
+two two nadd
 
 wire-print-net
 run
