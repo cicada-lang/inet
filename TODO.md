@@ -1,6 +1,12 @@
+# debug
+
+[debug] node_fake_spring_force -- use node_hash instead of root
+[debug] node_physics -- should not have root -- used by node_fake_spring_force
+[debug] debug -- has optional root wire -- if no root wire use vm->node_set and vm->wire_set
+
 # example
 
-[primitive] debug -- should use vm->wire_set -- instead of the wire at the top of the stack
+[primitive] x_debug -- should use vm->wire_set -- instead of the wire at the top of the stack
 [example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
 
 # later
@@ -64,8 +70,7 @@ inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
 
 # module system
 
-在 inet-asm & inet-emu 的想法之后，
-就不应该用 `module/name` 这种语法来处理模块系统了。
+也许不应该用 `module/name` 这种语法来处理模块系统。
 应该支持简单的 import name，同时支持修改 name 以避免冲突。
 
 # parallelism

@@ -18,7 +18,9 @@ spring_force(vec2_t first, vec2_t second) {
 }
 
 void
-node_fake_spring_force(node_physics_t *self, hash_t *node_model_hash) {
+node_fake_spring_force(node_physics_t *self, hash_t *node_hash, hash_t *node_model_hash) {
+    (void) node_hash;
+
     if (!self->root) return;
 
     wire_iter_t *iter = wire_iter_new(self->root);

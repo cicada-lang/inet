@@ -85,7 +85,10 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
         self->running_frame_count = 0;
     }
 
-    node_physics_fake_simulate(self->node_physics, self->node_model_hash);
+    node_physics_fake_simulate(
+        self->node_physics,
+        self->node_hash,
+        self->node_model_hash);
 
     canvas_clear_clickable_area(canvas);
 
