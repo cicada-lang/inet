@@ -45,4 +45,4 @@ define forever
   second dup ε
 end
 
--- forever wire-debug
+forever debug

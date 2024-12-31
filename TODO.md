@@ -1,10 +1,3 @@
-# debug
-
-[debug] debug -- if no root wire use vm->node_set and vm->wire_set
-
-# example
-
-[primitive] x_debug -- should use vm->wire_set -- instead of the wire at the top of the stack
 [example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
 
 # later
