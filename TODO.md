@@ -1,7 +1,5 @@
 # example
 
-[set] set_destroy
-
 [set] set_set_destroy_fn
 [set] set_set_equal_fn
 
