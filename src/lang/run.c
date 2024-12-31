@@ -22,7 +22,7 @@ collect_free_wires_from_node(vm_t *vm, node_t *node) {
 
 void
 step_net(vm_t *vm) {
-    wire_t *active_wire = list_pop(vm->active_wire_list);
+    wire_t *active_wire = list_shift(vm->active_wire_list);
     if (!active_wire) return;
 
     const rule_t *rule = mod_find_rule(

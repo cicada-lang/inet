@@ -36,10 +36,10 @@
 (nadd1₄₃)-value!-<>-prev-(nadd1₃₉)
 (nadd1₄₅)-value!-<>-prev-(nadd1₄₃)
 (nadd1₄₇)-value!-<>-prev-(nadd1₄₅)
-(nadd1₂₉)-value!-<>-prev-(nadd1₄₇)
-(nadd1₃₁)-value!-<>-prev-(nadd1₂₉)
-(nadd1₂₅)-value!-<>-prev-(nadd1₃₁)
-(nadd1₂₀)-value!-<>-prev-(nadd1₂₅)
+(nadd1₃₅)-value!-<>-prev-(nadd1₄₇)
+(nadd1₄₁)-value!-<>-prev-(nadd1₃₅)
+(nadd1₃₁)-value!-<>-prev-(nadd1₄₁)
+(nadd1₂₀)-value!-<>-prev-(nadd1₃₁)
 (nzero₁₉)-value!-<>-prev-(nadd1₂₀)
 </body>
 </net>
@@ -69,8 +69,8 @@
 <body>
 (nadd1₁₀₂)-value!-<>-prev-(nadd1₁₀₀)
 (nadd1₆₈)-value!-<>-prev-(nadd1₁₀₂)
-(nadd1₇₄)-value!-<>-prev-(nadd1₆₈)
-(nzero₇₅)-value!-<>-prev-(nadd1₇₄)
+(nadd1₇₁)-value!-<>-prev-(nadd1₆₈)
+(nzero₇₅)-value!-<>-prev-(nadd1₇₁)
 </body>
 </net>
 

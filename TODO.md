@@ -1,5 +1,3 @@
-[example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
-
 # later
 
 [example] `examples/lambda.fth` -- use interaction combinators
