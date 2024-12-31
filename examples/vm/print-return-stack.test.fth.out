@@ -1,0 +1,20 @@
+<return-stack length="1">
+<frame>
+<function>
+CALL print-return-stack
+CALL print-return-stack <<<
+CALL print-return-stack
+</function>
+</frame>
+</return-stack>
+<return-stack length="1">
+<frame>
+<function>
+CALL print-return-stack
+CALL print-return-stack
+CALL print-return-stack <<<
+</function>
+</frame>
+</return-stack>
+<return-stack length="0">
+</return-stack>

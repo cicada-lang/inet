@@ -1,9 +1,11 @@
 define-node sole -> value! end
 
-begin
+define main
   print-vm
   sole
   print-vm
   sole
   print-vm
 end
+
+main

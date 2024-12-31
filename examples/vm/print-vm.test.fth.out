@@ -4,10 +4,12 @@
 <return-stack length="1">
 <frame>
 <function>
-. print-vm <<< sole print-vm sole print-vm 
+CALL print-vm
+CALL sole <<<
+CALL print-vm
+CALL sole
+CALL print-vm
 </function>
-<local-free-wires>
-</local-free-wires>
 </frame>
 </return-stack>
 <value-stack length="0">
@@ -20,14 +22,16 @@
 <return-stack length="1">
 <frame>
 <function>
-. print-vm sole print-vm <<< sole print-vm 
+CALL print-vm
+CALL sole
+CALL print-vm
+CALL sole <<<
+CALL print-vm
 </function>
-<local-free-wires>
-</local-free-wires>
 </frame>
 </return-stack>
 <value-stack length="1">
-(sole₁)-value!-<>-
+unknown-value
 </value-stack>
 </vm>
 
@@ -37,8 +41,8 @@
 <return-stack length="0">
 </return-stack>
 <value-stack length="2">
-(sole₁)-value!-<>-
-(sole₂)-value!-<>-
+unknown-value
+unknown-value
 </value-stack>
 </vm>
 

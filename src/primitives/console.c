@@ -18,9 +18,7 @@ x_print_vm(vm_t *vm) {
 
 void
 x_print_value_stack(vm_t *vm) {
-    printf("[x_print_value_stack] 1\n");
     vm_print_value_stack(vm, stdout);
-    printf("[x_print_value_stack] 2\n");
 }
 
 void

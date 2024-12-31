@@ -1,8 +1,5 @@
 # example
 
-[primitive] x_begin -- compile function and run
-[example] recover vm/ -- need x_begin
-
 [primitive] wire should use managed memory -- some net have no root
 [primitive] debug -- should use global wires -- instead of the wire at the top of the stack
 
