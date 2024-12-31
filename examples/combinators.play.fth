@@ -37,8 +37,6 @@ define-rule γ δ
   car-second cdr-second γ second connect
 end
 
-define-node sole -> value! end
-
 define ε-value wire-pair ε end
 
 define forever
