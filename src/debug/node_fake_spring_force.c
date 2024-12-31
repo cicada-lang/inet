@@ -19,30 +19,32 @@ spring_force(vec2_t first, vec2_t second) {
 
 void
 node_fake_spring_force(node_physics_t *self, hash_t *node_hash, hash_t *node_model_hash) {
-    (void) node_hash;
+    (void) self;
 
-    if (!self->root) return;
+    node_t *node = hash_first(node_hash);
+    while (node) {
+        for (port_index_t i = 0; i < node->def->arity; i++) {
+            wire_t *wire = node->wires[i];
+            if (wire &&
+                wire->node &&
+                wire->opposite &&
+                wire->opposite->node)
+            {
+                node_model_t *node_model1 = hash_get(node_model_hash, (void *) wire->node->id);
+                node_model_t *node_model2 = hash_get(node_model_hash, (void *) wire->opposite->node->id);
 
-    wire_iter_t *iter = wire_iter_new(self->root);
-    wire_t *wire = wire_iter_first(iter);
-    while (wire) {
-        if (wire->node &&
-            wire->opposite &&
-            wire->opposite->node)
-        {
-            node_model_t *node_model1 = hash_get(node_model_hash, (void *) wire->node->id);
-            node_model_t *node_model2 = hash_get(node_model_hash, (void *) wire->opposite->node->id);
+                vec2_t force = spring_force(node_model1->position, node_model2->position);
 
-            vec2_t force = spring_force(node_model1->position, node_model2->position);
+                node_model1->force.x += force.x / 2;
+                node_model1->force.y += force.y / 2;
 
-            node_model1->force.x += force.x;
-            node_model1->force.y += force.y;
-
-            node_model2->force.x -= force.x;
-            node_model2->force.y -= force.y;
+                node_model2->force.x -= force.x / 2;
+                node_model2->force.y -= force.y / 2;
+            }
         }
 
-        wire = wire_iter_next(iter);
+        node = hash_next(node_hash);
     }
-    wire_iter_destroy(&iter);
+
+;
 }
