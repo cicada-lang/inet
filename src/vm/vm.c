@@ -134,17 +134,28 @@ vm_delete_node(vm_t* self, node_t *node) {
 }
 
 wire_t *
-vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
-    (void) self;
+vm_add_wire(vm_t* self) {
+    wire_t *wire = wire_new();
+    set_add(self->wire_set, wire);
+    return wire;
+}
 
+void
+vm_delete_wire(vm_t* self, wire_t *wire) {
+    set_delete(self->wire_set, wire);
+    wire_destroy(&wire);
+}
+
+wire_t *
+vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
     wire_t *first_opposite = first_wire->opposite;
     wire_t *second_opposite = second_wire->opposite;
 
     first_opposite->opposite = second_opposite;
     second_opposite->opposite = first_opposite;
 
-    wire_destroy(&first_wire);
-    wire_destroy(&second_wire);
+    vm_delete_wire(self, first_wire);
+    vm_delete_wire(self, second_wire);
 
     return first_opposite;
 }
