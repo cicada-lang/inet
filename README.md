@@ -4,7 +4,6 @@ An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interactio
 as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 [concatenative programming language](https://en.wikipedia.org/wiki/Concatenative_programming_language).
 
-- Untyped, i.e. no static type checking.
 - Using a concatenative stack-based low-layer language to build nets.
 - Programming with interaction nets directly (no compilation via combinators).
 
