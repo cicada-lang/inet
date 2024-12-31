@@ -48,8 +48,6 @@ x_debug(vm_t *vm) {
 
 static void
 define_node(mod_t *mod, const char *name, list_t *input_token_list, list_t *output_token_list) {
-    // check_name_not_defined(vm, name, head_token);
-
     size_t input_arity = list_length(input_token_list);
     size_t output_arity = list_length(output_token_list);
     node_def_t *node_def = node_def_new(name, input_arity, output_arity);
@@ -81,6 +79,8 @@ void
 x_define_node(vm_t *vm) {
     token_t *head_token = list_shift(vm->token_list);
     char *name = head_token->string;
+
+    check_name_not_defined(vm, name, head_token);
 
     list_t *input_token_list = list_new_with((destroy_fn_t *) token_destroy);
     list_t *output_token_list = list_new_with((destroy_fn_t *) token_destroy);
