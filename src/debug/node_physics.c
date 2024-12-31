@@ -59,6 +59,8 @@ node_physics_update_nodes(
     }
 
     node_physics_add_nodes(self, new_node_hash, node_model_hash);
+
+    self->evolving_step = 0;
 }
 
 static void
