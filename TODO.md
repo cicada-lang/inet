@@ -1,8 +1,3 @@
-# later
-
-[example] `examples/lambda.fth` -- use interaction combinators
-[example] `examples/turing.fth` -- coding turing machine
-
 # docs
 
 [docs] update README.md
@@ -22,8 +17,12 @@
 # extending x-forth
 
 [net] wire_t as xobject
-
 [net] fix value_print for wire_t
+
+# later
+
+[example] `examples/lambda.fth` -- use interaction combinators
+[example] `examples/turing.fth` -- coding turing machine
 
 # primitive value
 
@@ -33,9 +32,7 @@
 - use `{ ... }` for un-named program -- just program, no closure over linear variables
 
 [design] node ports can store any value -- not only wire, but also primitive values
-
 [example] polish parsing (from 1990-interaction-nets) as an example -- need primitive string type
-
 [question] is it possible to have a generic `dup` that can dup any net with a root wire?
 
 # main
