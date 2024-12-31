@@ -2,7 +2,6 @@
 
 struct node_physics_t {
     size_t x, y, width, height; // rect within the canvas
-    wire_t *root; // to query relation between nodes.
     uint32_t evolving_step;
     uint32_t max_evolving_step;
     double cooling_factor;

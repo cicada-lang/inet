@@ -94,14 +94,15 @@ void
 draw_net(debug_t *self, canvas_t *canvas) {
     draw_net_border(self, canvas, false);
 
-    wire_iter_t *iter = wire_iter_new(self->node_physics->root);
-    wire_t *wire = wire_iter_first(iter);
+    node_t *node = hash_first(self->node_hash);
+    while (node) {
+        for (port_index_t i = 0; i < node->def->arity; i++) {
+            wire_t *wire = node->wires[i];
+            draw_wire(self, canvas, wire);
+        }
 
-    while (wire) {
-        draw_wire(self, canvas, wire);
-        wire = wire_iter_next(iter);
+        node = hash_next(self->node_hash);
     }
-    wire_iter_destroy(&iter);
 
     node_model_t *node_model = hash_first(self->node_model_hash);
     while (node_model) {
