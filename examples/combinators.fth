@@ -1,38 +1,38 @@
-define-node γ car cdr -> value! end
-define-node δ target! -> first second end
-define-node ε target! -> end
+define-node C car cdr -> value! end
+define-node D target! -> first second end
+define-node E target! -> end
 
-define-rule γ γ
+define-rule C C
   ( top-car top-cdr )
   ( lower-car lower-cdr )
   top-car lower-cdr connect
   top-cdr lower-car connect
 end
 
-define-rule δ δ
+define-rule D D
   ( top-first top-second )
   ( lower-first lower-second )
   top-first lower-first connect
   top-second lower-second connect
 end
 
-define-rule ε ε end
+define-rule E E end
 
-define-rule ε γ
+define-rule E C
   ( car cdr )
-  car ε cdr ε
+  car E cdr E
 end
 
-define-rule ε δ
+define-rule E D
   ( first second )
-  first ε second ε
+  first E second E
 end
 
-define-rule γ δ
+define-rule C D
   ( first second )
   ( car cdr )
-  car δ ( car-first car-second )
-  cdr δ ( cdr-first cdr-second )
-  car-first cdr-first γ first connect
-  car-second cdr-second γ second connect
+  car D ( car-first car-second )
+  cdr D ( cdr-first cdr-second )
+  car-first cdr-first C first connect
+  car-second cdr-second C second connect
 end
