@@ -123,8 +123,8 @@ x_define_rule(vm_t *vm) {
     char *first_name = first_token->string;
     char *second_name = second_token->string;
 
-    // check_node_name_defined(vm, stmt->first_name, stmt->head_token);
-    // check_node_name_defined(vm, stmt->second_name, stmt->head_token);
+    check_node_name_defined(vm, first_name, first_token);
+    check_node_name_defined(vm, second_name, second_token);
 
     function_t *function = compile_function(vm);
     mod_define_rule(vm->mod, first_name, second_name, function);

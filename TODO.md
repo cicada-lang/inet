@@ -1,6 +1,7 @@
 # later
 
-[primitive] net -- define_node -- check_name_not_defined
+[primitive] net -- x_define_node -- check_name_not_defined
+
 [example] recover tests/ -- undefined-name.error
 [example] recover tests/ -- wrong-node-name.error
 
