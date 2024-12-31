@@ -1,16 +1,18 @@
-+ diff diff-append "diff-list.inet"
-+ sole "trivial.inet"
+import diff diff-append "diff-list.fth"
+import nil cons "list.fth"
+import sole "trivial.fth"
 
-= one-two-soles
-  (diff) spread $front sole cons front connect
-  (diff) spread $front sole cons sole cons front connect
-  diff-append
+define sole-diff-list
+  wire-pair -- wire wire
+  diff -- wire back value
+  swap -- wire value back
+  sole cons sole cons -- wire value list
+  rot -- value list wire
+  connect -- value
+end
 
-. one-two-soles
+sole-diff-list sole-diff-list diff-append
 
-= two-two-soles
-  (diff) spread $front sole cons sole cons front connect
-  (diff) spread $front sole cons sole cons front connect
-  diff-append
-
-. two-two-soles
+wire-print-net
+run
+wire-print-net

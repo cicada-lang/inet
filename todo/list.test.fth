@@ -1,6 +1,6 @@
-+ null cons append "list.inet"
-+ sole "trivial.inet"
+import nil cons append "list.fth"
+import sole "trivial.fth"
 
-. null sole cons sole cons sole cons
-  null sole cons sole cons sole cons
-  append
+nil sole cons sole cons sole cons
+nil sole cons sole cons sole cons
+append

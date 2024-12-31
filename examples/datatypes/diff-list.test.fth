@@ -16,7 +16,7 @@ define-rule diff diff-open
   front old-back connect
 end
 
--- list.inet
+-- import nil cons append "list.fth"
 
 define-node nil -> value! end
 define-node cons tail head -> value! end
@@ -47,6 +47,7 @@ define sole-diff-list
 end
 
 sole-diff-list sole-diff-list diff-append
+
 wire-print-net
 run
 wire-print-net

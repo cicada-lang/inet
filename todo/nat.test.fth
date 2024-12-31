@@ -1,10 +1,10 @@
-+ zero add1 add "nat.inet"
+import nzero nadd1 nadd "nat.fth"
 
-= one zero add1
-= two one one add
-= three two one add
-= four two two add
+define one nzero nadd1 end
+define two one one nadd end
+define three two one nadd end
+define four two two nadd end
 
-. two two add
-  two two add
-  add
+two two nadd
+two two nadd
+nadd
