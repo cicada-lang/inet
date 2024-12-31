@@ -1,7 +1,5 @@
 # example
 
-[set] setup set_test
-
 [set] set_t -- use hash_t
 [set] set_new
 [set] set_destroy
