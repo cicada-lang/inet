@@ -1,6 +1,5 @@
 # example
 
-[set] set_has
 [set] set_delete
 
 [vm] vm -- has wire_set and node_set -- map pointer to value

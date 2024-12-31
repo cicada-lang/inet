@@ -49,3 +49,8 @@ bool
 set_add(set_t *self, void *value) {
     return hash_set(self->value_hash, value, value);
 }
+
+bool
+set_has(set_t *self, void *value) {
+    return hash_has(self->value_hash, value);
+}
