@@ -93,21 +93,21 @@ vm_print_value_stack(const vm_t *self, file_t *file) {
 }
 
 void
-vm_connect_top_wire_pair(vm_t *vm) {
-    wire_t *second_wire = stack_pop(vm->value_stack);
-    wire_t *first_wire = stack_pop(vm->value_stack);
+vm_connect_top_wire_pair(vm_t *self) {
+    wire_t *second_wire = stack_pop(self->value_stack);
+    wire_t *first_wire = stack_pop(self->value_stack);
 
     wire_t *first_opposite = wire_connect(second_wire, first_wire);
 
     vm_maybe_add_active_wire(
-        vm,
+        self,
         first_opposite,
         first_opposite->opposite);
 }
 
 void
 vm_maybe_add_active_wire(
-    vm_t *vm,
+    vm_t *self,
     wire_t *first_wire,
     wire_t *second_wire
 ) {
@@ -115,6 +115,6 @@ vm_maybe_add_active_wire(
         assert(first_wire->opposite == second_wire);
         assert(second_wire->opposite == first_wire);
 
-        list_push(vm->active_wire_list, first_wire);
+        list_push(self->active_wire_list, first_wire);
     }
 }
