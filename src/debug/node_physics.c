@@ -83,6 +83,7 @@ keep_node_model_in_box(node_physics_t *self, node_model_t *node_model) {
 void
 node_physics_fake_simulate(node_physics_t *self, hash_t *node_hash, hash_t *node_model_hash) {
     if (self->evolving_step > self->max_evolving_step) return;
+
     self->evolving_step++;
 
     node_fake_spring_force(self, node_hash, node_model_hash);

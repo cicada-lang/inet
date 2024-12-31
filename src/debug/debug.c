@@ -149,9 +149,6 @@ init_node_hash(debug_t *self) {
 
 static void
 init_node_physics(debug_t *self) {
-    if (stack_is_empty(self->vm->value_stack))
-        return;
-
     node_physics_add_nodes(
         self->node_physics,
         self->node_hash,

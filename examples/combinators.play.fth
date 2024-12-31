@@ -37,12 +37,16 @@ define-rule γ δ
   car-second cdr-second γ second connect
 end
 
+define-node sole -> value! end
+
+define ε-value wire-pair ε end
+
 define forever
-  wire-pair ( x0 x1 )
-  wire-pair ε x0 γ
+  wire-pair ( car car-op )
+  car ε-value γ
   δ ( first second )
-  x1 first connect
-  second dup ε
+  first ε
+  car-op second connect
 end
 
 forever debug
