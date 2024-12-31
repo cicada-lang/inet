@@ -97,7 +97,7 @@ vm_connect_top_wire_pair(vm_t *self) {
     wire_t *second_wire = stack_pop(self->value_stack);
     wire_t *first_wire = stack_pop(self->value_stack);
 
-    wire_t *first_opposite = wire_connect(second_wire, first_wire);
+    wire_t *first_opposite = vm_wire_connect(self, second_wire, first_wire);
 
     vm_maybe_add_active_wire(
         self,
@@ -131,4 +131,20 @@ void
 vm_delete_node(vm_t* self, node_t *node) {
     set_delete(self->node_set, node);
     node_destroy(&node);
+}
+
+wire_t *
+vm_wire_connect(vm_t* self, wire_t *first_wire, wire_t *second_wire) {
+    (void) self;
+
+    wire_t *first_opposite = first_wire->opposite;
+    wire_t *second_opposite = second_wire->opposite;
+
+    first_opposite->opposite = second_opposite;
+    second_opposite->opposite = first_opposite;
+
+    wire_destroy(&first_wire);
+    wire_destroy(&second_wire);
+
+    return first_opposite;
 }
