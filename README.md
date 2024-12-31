@@ -11,9 +11,9 @@ as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
 ## Syntax
 
 ```xml
-define-node <name> <inputs> -> <outputs> end
-define-rule <name> <name> ... end
-define <name> ... end
+define-node <name> <input-ports> -> <output-ports> end
+define-rule <name> <name> <function-body> end
+define <name> <function-body> end
 ```
 
 ## Examples
