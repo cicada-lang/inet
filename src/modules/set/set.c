@@ -33,6 +33,13 @@ set_set_equal_fn(set_t *self, equal_fn_t *equal_fn) {
     hash_set_key_equal_fn(self->value_hash, equal_fn);
 }
 
+set_t *
+set_new_with(destroy_fn_t *destroy_fn) {
+    set_t *self = set_new();
+    set_set_destroy_fn(self, destroy_fn);
+    return self;
+}
+
 size_t
 set_length(const set_t *self) {
     return hash_length(self->value_hash);
