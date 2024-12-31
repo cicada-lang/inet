@@ -9,3 +9,11 @@ void set_set_equal_fn(set_t *self, equal_fn_t *equal_fn);
 set_t *set_new_with(destroy_fn_t *destroy_fn);
 
 size_t set_length(const set_t *self);
+
+// add successes if the value is not already exist.
+bool set_add(set_t *self, void *value);
+
+bool set_has(set_t *self, void *value);
+
+// return successful deleted or not.
+bool set_delete(set_t *self, void *value);

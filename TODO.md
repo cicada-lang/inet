@@ -1,6 +1,5 @@
 # example
 
-[set] set_add -- if have destroy_fn, remove the old value
 [set] set_has
 [set] set_delete
 

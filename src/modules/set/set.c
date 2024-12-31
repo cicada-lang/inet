@@ -44,3 +44,8 @@ size_t
 set_length(const set_t *self) {
     return hash_length(self->value_hash);
 }
+
+bool
+set_add(set_t *self, void *value) {
+    return hash_set(self->value_hash, value, value);
+}
