@@ -183,7 +183,7 @@ collect_string(lexer_t *self) {
 
             char c = current_char(self);
 
-            // escape char form: https://www.json.org/json-en.html
+            // escape char from: https://www.json.org/json-en.html
             if (c == 'n') collect_char(self, '\n');
             else if (c == 't') collect_char(self, '\t');
             else if (c == 'b') collect_char(self, '\b');
