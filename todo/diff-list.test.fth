@@ -3,12 +3,11 @@ import nil cons "list.fth"
 import sole "trivial.fth"
 
 define sole-diff-list
-  wire-pair -- wire wire
-  diff -- wire back value
-  swap -- wire value back
-  sole cons sole cons -- wire value list
-  rot -- value list wire
-  connect -- value
+  wire-pair ( front front-op )
+  front diff ( back value )
+  back sole cons sole cons
+  front-op connect
+  value
 end
 
 sole-diff-list sole-diff-list diff-append
