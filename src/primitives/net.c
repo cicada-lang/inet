@@ -32,7 +32,8 @@ x_run(vm_t *vm) {
 void
 x_wire_debug(vm_t *vm) {
     fprintf(stdout, "[wire-debug] debug start\n");
-    debug_start(vm);
+    wire_t *root = stack_top(vm->value_stack);
+    debug_start_with_root_wire(vm, root);
     fprintf(stdout, "[wire-debug] debug end\n");
     fprintf(stdout, "\n");
 }

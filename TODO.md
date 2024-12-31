@@ -1,6 +1,6 @@
 # debug
 
-[debug] debug -- has optional root wire -- if no root wire use vm->node_set and vm->wire_set
+[debug] debug -- if no root wire use vm->node_set and vm->wire_set
 
 # example
 

@@ -2,6 +2,7 @@
 
 struct debug_t {
     vm_t *vm;
+    wire_t *root;
 
     canvas_t *canvas;
     bool step_button_is_pressed;
@@ -25,4 +26,5 @@ bool debug_is_any_button_pressed(debug_t *self);
 hash_t *debug_new_node_hash(debug_t *self);
 void debug_update(debug_t *self);
 
+void debug_start_with_root_wire(vm_t *vm, wire_t *root);
 void debug_start(vm_t *vm);
