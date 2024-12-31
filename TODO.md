@@ -2,9 +2,8 @@
 
 [set] set_set_destroy_fn
 [set] set_set_equal_fn
-
 [set] set_new_with
-[set] set_length
+
 [set] set_add -- if have destroy_fn, remove the old value
 [set] set_has
 [set] set_delete

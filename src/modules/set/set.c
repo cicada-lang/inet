@@ -21,3 +21,8 @@ set_destroy(set_t **self_pointer) {
         *self_pointer = NULL;
     }
 }
+
+size_t
+set_length(const set_t *self) {
+    return hash_length(self->value_hash);
+}
