@@ -1,7 +1,21 @@
 # example
 
-[primitive] wire should use managed memory -- some net have no root
-[primitive] debug -- should use global wires -- instead of the wire at the top of the stack
+[set] setup set_test
+
+[set] set_t -- use hash_t
+[set] set_new
+[set] set_destroy
+[set] set_add
+[set] set_has
+[set] set_delete
+
+[vm] vm -- has wire_set and node_set -- map pointer to value
+
+- wire and node should use managed memory -- because some nets have no root
+
+[vm] wire_new wire_destroy node_destroy wire_connect node_new -- take vm as arg
+
+[primitive] debug -- should use vm->wire_set -- instead of the wire at the top of the stack
 
 [example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net
 
