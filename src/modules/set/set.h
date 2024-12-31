@@ -17,3 +17,6 @@ bool set_has(set_t *self, void *value);
 
 // return successful deleted or not.
 bool set_delete(set_t *self, void *value);
+
+void *set_first(set_t *self);
+void *set_next(set_t *self);

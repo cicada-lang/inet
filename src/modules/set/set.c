@@ -59,3 +59,13 @@ bool
 set_delete(set_t *self, void *value) {
     return hash_delete(self->value_hash, value);
 }
+
+void *
+set_first(set_t *self) {
+    return hash_first(self->value_hash);
+}
+
+void *
+set_next(set_t *self) {
+    return hash_next(self->value_hash);
+}

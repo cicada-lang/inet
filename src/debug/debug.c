@@ -101,7 +101,6 @@ on_frame(debug_t *self, canvas_t *canvas, uint64_t passed) {
 hash_t *
 debug_new_node_hash(debug_t *self) {
     hash_t *node_hash = hash_new();
-
     wire_t *root = self->root;
     if (!root ||
         !root->opposite ||
