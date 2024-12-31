@@ -1,7 +1,5 @@
 # example
 
-[set] set_delete
-
 [vm] vm -- has wire_set and node_set -- map pointer to value
 
 - wire and node should use managed memory -- because some nets have no root

@@ -54,3 +54,8 @@ bool
 set_has(set_t *self, void *value) {
     return hash_has(self->value_hash, value);
 }
+
+bool
+set_delete(set_t *self, void *value) {
+    return hash_delete(self->value_hash, value);
+}
