@@ -1,0 +1,6 @@
+[compiler-error] undefined node name: nzero
+[src] examples/tests/undefined-node.error.fth
+> 1|define-rule nzero nadd
+  2|  ( addend result )
+  3|  addend result connect
+  4|end

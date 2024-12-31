@@ -1,8 +1,3 @@
-# later
-
-[example] recover tests/ -- undefined-name.error
-[example] recover tests/ -- wrong-node-name.error
-
 # value
 
 [value] object_spec_t
