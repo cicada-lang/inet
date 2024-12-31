@@ -1,10 +1,5 @@
 # example
 
-[vm] vm_add_node & vm_delete_node -- take vm as arg
-
-- replace node_destroy in ./lang/run.c
-- replace node_new in ./lang/call_node.c
-
 [vm] wire_new & wire_destroy & wire_connect -- take vm as arg
 [primitive] debug -- should use vm->wire_set -- instead of the wire at the top of the stack
 [example] examples/combinators.play.fth -- fix debug -- be able to handle rootless net

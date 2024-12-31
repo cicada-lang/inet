@@ -17,7 +17,7 @@ collect_free_wires_from_node(vm_t *vm, node_t *node) {
         }
     }
 
-    node_destroy(&node);
+    vm_delete_node(vm, node);
 }
 
 void

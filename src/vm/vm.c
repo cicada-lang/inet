@@ -118,3 +118,17 @@ vm_maybe_add_active_wire(
         list_push(self->active_wire_list, first_wire);
     }
 }
+
+
+node_t *
+vm_add_node(vm_t* self, const node_def_t *def) {
+    node_t *node = node_new(def, ++self->node_id_count);
+    set_add(self->node_set, node);
+    return node;
+}
+
+void
+vm_delete_node(vm_t* self, node_t *node) {
+    set_delete(self->node_set, node);
+    node_destroy(&node);
+}
