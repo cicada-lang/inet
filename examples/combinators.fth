@@ -1,3 +1,7 @@
+-- C: construct
+-- D: duplicate
+-- E: erase
+
 define-node C car cdr -> value! end
 define-node D target! -> first second end
 define-node E target! -> end
