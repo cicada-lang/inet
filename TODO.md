@@ -8,13 +8,6 @@
 [net] wire_t as xobject
 [net] fix value_print for wire_t
 
-# study
-
-[study] persons/yves-lafont/papers/1995-from-proof-nets-to-interaction-nets.pdf
-[study] topics/computer-science/interaction-nets/2006-proof-nets-and-the-identity-of-proofs--straßburger.pdf
-[study] projects/others/HigherOrderCO/HVM/paper/HVM2.pdf
-[study] [maybe] persons/jean-yves-girard/proof-nets--the-parallel-syntax-for-proof-theory--1995.pdf
-
 # main
 
 图灵机作为 inet 的例子 -> 读 2008-the-annotated-turing.djvu
