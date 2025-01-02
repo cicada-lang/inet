@@ -1,3 +1,5 @@
+change comment to //
+
 # value
 
 [value] object_spec_t
@@ -7,6 +9,19 @@
 
 [net] wire_t as xobject
 [net] fix value_print for wire_t
+
+# vm
+
+[vm] mod -- change def_list to def_hash
+[vm] mod -- change rule_list to rule_hash
+
+[vm] rename active_wire_list to activity_list
+[vm] activity_t -- has wire and rule
+[vm] activity_list has activity_t
+
+# curry
+
+use name/n to do explicit curry
 
 # main
 
@@ -18,17 +33,18 @@ inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
 
 [example] `examples/lambda.fth` -- use interaction combinators
 [example] `examples/turing.fth` -- coding turing machine
+[example] polish parsing (from 1990-interaction-nets) as an example -- need primitive string type
 
 # primitive value
 
+[design] node ports can store any value -- not only wire, but also primitive values
+
 [design] write `list-map` as example
 
-- use explicit `dup` -- keep linear variable like simple
+- use explicit `copy` -- keep linear variable like simple
 - use `{ ... }` for un-named program -- just program, no closure over linear variables
 
-[design] node ports can store any value -- not only wire, but also primitive values
-[example] polish parsing (from 1990-interaction-nets) as an example -- need primitive string type
-[question] is it possible to have a generic `dup` that can dup any net with a root wire?
+[question] is it possible to have a generic `copy` that can copy any net with a root wire?
 
 # graph layout
 
@@ -38,8 +54,7 @@ inet -- 实现 combinators and lambda -> 重读 1997-interaction-combinators.pdf
 
 # module system
 
-也许不应该用 `module/name` 这种语法来处理模块系统。
-应该支持简单的 import name，同时支持修改 name 以避免冲突。
+支持简单的 import name，同时支持修改 name 以避免冲突
 
 # parallelism
 
