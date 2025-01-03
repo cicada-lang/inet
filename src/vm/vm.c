@@ -6,7 +6,7 @@ lex_code(const char *code) {
     lexer->enable_int = true;
     lexer->enable_float = true;
     lexer->enable_string = true;
-    lexer->line_comment = "--";
+    lexer->line_comment = "//";
     lexer->string = code;
     lexer_run(lexer);
 

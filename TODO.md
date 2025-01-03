@@ -1,5 +1,3 @@
-change comment to //
-
 # value
 
 [value] object_spec_t

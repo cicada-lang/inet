@@ -26,7 +26,7 @@ wire-print-net
 run
 wire-print-net
 
--- to define `nmul`, we first need `nat-erase` and `nat-dup`
+// to define `nmul`, we first need `nat-erase` and `nat-dup`
 
 define-node nat-erase target! -> end
 
@@ -75,7 +75,7 @@ wire-print-net
 run
 wire-print-net
 
--- to define `nat-max`, we need `nat-max-aux`
+// to define `nat-max`, we need `nat-max-aux`
 
 define-node nat-max first! second -> result end
 define-node nat-max-aux first second! -> result end

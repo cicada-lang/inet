@@ -2,7 +2,7 @@ define-node diff front -> back value! end
 define-node diff-append target! rest -> result end
 define-node diff-open new-back target! -> old-back end
 
--- plug the front of the `target` to the back of `rest`.
+// plug the front of the `target` to the back of `rest`.
 
 define-rule diff diff-append
   ( rest result ) ( front back )
@@ -16,7 +16,7 @@ define-rule diff diff-open
   front old-back connect
 end
 
--- import nil cons append "list.fth"
+// import nil cons append "list.fth"
 
 define-node nil -> value! end
 define-node cons tail head -> value! end
@@ -33,7 +33,7 @@ define-rule cons append
   head cons result connect
 end
 
--- test
+// test
 
 define-node sole -> value! end
 
