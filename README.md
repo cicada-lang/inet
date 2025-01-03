@@ -1,10 +1,10 @@
 # inet
 
 An implementation of [interaction nets](https://en.wikipedia.org/wiki/Interaction_nets)
-as a [forth-like](https://en.wikipedia.org/wiki/Forth_(programming_language))
-[concatenative programming language](https://en.wikipedia.org/wiki/Concatenative_programming_language).
+as a [forth-like language](https://en.wikipedia.org/wiki/Forth_(programming_language)).
 
-- Using a concatenative stack-based low-layer language to build nets.
+- Untyped.
+- Using a stack-based meta language to build nets.
 - Programming with interaction nets directly (no compilation via combinators).
 
 ## Syntax
