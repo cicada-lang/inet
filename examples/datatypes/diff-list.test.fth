@@ -1,6 +1,6 @@
-define-node diff front -> back value! end
-define-node diff-append target! rest -> result end
-define-node diff-open new-back target! -> old-back end
+define-node diff front -- back value! end
+define-node diff-append target! rest -- result end
+define-node diff-open new-back target! -- old-back end
 
 // plug the front of the `target` to the back of `rest`.
 
@@ -18,9 +18,9 @@ end
 
 // import nil cons append "list.fth"
 
-define-node nil -> value! end
-define-node cons tail head -> value! end
-define-node append target! rest -> result end
+define-node nil -- value! end
+define-node cons tail head -- value! end
+define-node append target! rest -- result end
 
 define-rule nil append
   ( rest result )
@@ -35,7 +35,7 @@ end
 
 // test
 
-define-node sole -> value! end
+define-node sole -- value! end
 
 define sole-diff-list
   wire-pair ( front front-op )

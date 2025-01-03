@@ -1,6 +1,6 @@
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 
 define-rule nzero nadd
   ( addend result )

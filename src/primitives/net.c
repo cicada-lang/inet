@@ -95,7 +95,7 @@ x_define_node(vm_t *vm) {
             break;
         }
 
-        if (string_equal(token->string, "->")) {
+        if (string_equal(token->string, "--")) {
             output_flag = true;
             token_destroy(&token);
             continue;

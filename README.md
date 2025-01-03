@@ -10,7 +10,7 @@ as a [forth-like language](https://en.wikipedia.org/wiki/Forth_(programming_lang
 ## Syntax
 
 ```xml
-define-node <name> <input-ports> -> <output-ports> end
+define-node <name> <input-ports> -- <output-ports> end
 define-rule <name> <name> <function-body> end
 define <name> <function-body> end
 ```
@@ -20,9 +20,9 @@ define <name> <function-body> end
 ### Natural Number
 
 ```
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 ```
 
 The rule between `(nadd1)` and `(nadd)` as ASCII art:
@@ -104,9 +104,9 @@ Example interaction:
 The whole program with test:
 
 ```
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 
 define-rule nzero nadd
   ( addend result )
@@ -164,9 +164,9 @@ wire-print-net
 ### List
 
 ```
-define-node nil -> value! end
-define-node cons tail head -> value! end
-define-node append target! rest -> result end
+define-node nil -- value! end
+define-node cons tail head -- value! end
+define-node append target! rest -- result end
 
 define-rule nil append
   ( rest result )
@@ -179,7 +179,7 @@ define-rule cons append
   head cons result connect
 end
 
-define-node sole -> value! end
+define-node sole -- value! end
 
 nil sole cons sole cons sole cons
 nil sole cons sole cons sole cons

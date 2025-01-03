@@ -212,9 +212,9 @@ We design the statement to define node as follows:
 The aforementioned nodes are defined as follows:
 
 ```
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 ```
 
 # 5
@@ -275,9 +275,9 @@ In which we will use `define` to define new words,
 and use `--` to comment a line.
 
 ```
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 
 define-rule nzero nadd
   ( addend result )
@@ -381,7 +381,7 @@ first!   second
 Node definition:
 
 ```
-define-node nat-max first! second -> result end
+define-node nat-max first! second -- result end
 ```
 
 The interaction between `(nzero)` and `(nzero)` is simple:
@@ -434,7 +434,7 @@ first    second!
 Node definition:
 
 ```
-define-node nat-max-aux first second! -> result end
+define-node nat-max-aux first second! -- result end
 ```
 
 Using the auxiliary node to define
@@ -501,8 +501,8 @@ end
 ```
 
 ```
-define-node nat-max first! second -> result end
-define-node nat-max-aux first second! -> result end
+define-node nat-max first! second -- result end
+define-node nat-max-aux first second! -- result end
 
 define-rule nzero nat-max
   ( second result )
@@ -560,7 +560,7 @@ Thus when we want to factor out a subsequence from a sequence of words,
 there will be no complicated syntax preventing us from doing so.
 
 ```
-define-node nat-erase target! -> end
+define-node nat-erase target! -- end
 
 define-rule nzero nat-erase end
 
@@ -569,7 +569,7 @@ define-rule nadd1 nat-erase
   prev nat-erase
 end
 
-define-node nat-dup target! -> first second end
+define-node nat-dup target! -- first second end
 
 define-rule nzero nat-dup
   ( first second )
@@ -585,7 +585,7 @@ define-rule nadd1 nat-dup
   prev-first nadd1 first connect
 end
 
-define-node nmul target! mulend -> result end
+define-node nmul target! mulend -- result end
 
 define-rule nzero nmul
   ( mulend result )
@@ -617,9 +617,9 @@ The difference is that the `(nadd1)` of natural number only nadd one node,
 while the `(cons)` of list nadd one node and link to an extra node.
 
 ```
-define-node nil -> value! end
-define-node cons tail head -> value! end
-define-node append target! rest -> result end
+define-node nil -- value! end
+define-node cons tail head -- value! end
+define-node append target! rest -- result end
 
 define-rule nil append
   ( rest result )
@@ -634,7 +634,7 @@ end
 
 -- test
 
-define-node sole -> value! end
+define-node sole -- value! end
 
 nil sole cons sole cons sole cons
 nil sole cons sole cons sole cons
@@ -669,9 +669,9 @@ But in interaction nets,
 the relationship between all nodes is symmetric.
 
 ```
-define-node diff front -> back value! end
-define-node diff-append target! rest -> result end
-define-node diff-open new-back target! -> old-back end
+define-node diff front -- back value! end
+define-node diff-append target! rest -- result end
+define-node diff-open new-back target! -- old-back end
 
 define-rule diff diff-append
   ( rest result ) ( front back )
@@ -687,7 +687,7 @@ end
 
 -- test
 
-define-node sole -> value! end
+define-node sole -- value! end
 
 define sole-diff-list
   wire-pair ( front front-op )

@@ -1,4 +1,4 @@
-define-node sole -> value! end
+define-node sole -- value! end
 
 sole sole sole
 print-value-stack

@@ -1,4 +1,4 @@
-define-node sole -> value! end
+define-node sole -- value! end
 
 define main
   print-vm

@@ -1,6 +1,6 @@
-define-node nzero -> value! end
-define-node nadd1 prev -> value! end
-define-node nadd target! addend -> result end
+define-node nzero -- value! end
+define-node nadd1 prev -- value! end
+define-node nadd target! addend -- result end
 
 define-rule nzero nadd
   ( addend result )
@@ -28,7 +28,7 @@ wire-print-net
 
 // to define `nmul`, we first need `nat-erase` and `nat-dup`
 
-define-node nat-erase target! -> end
+define-node nat-erase target! -- end
 
 define-rule nzero nat-erase end
 
@@ -37,7 +37,7 @@ define-rule nadd1 nat-erase
   prev nat-erase
 end
 
-define-node nat-dup target! -> first second end
+define-node nat-dup target! -- first second end
 
 define-rule nzero nat-dup
   ( first second )
@@ -53,7 +53,7 @@ define-rule nadd1 nat-dup
   prev-first nadd1 first connect
 end
 
-define-node nmul target! mulend -> result end
+define-node nmul target! mulend -- result end
 
 define-rule nzero nmul
   ( mulend result )
@@ -77,8 +77,8 @@ wire-print-net
 
 // to define `nat-max`, we need `nat-max-aux`
 
-define-node nat-max first! second -> result end
-define-node nat-max-aux first second! -> result end
+define-node nat-max first! second -- result end
+define-node nat-max-aux first second! -- result end
 
 define-rule nzero nat-max
   ( second result )
